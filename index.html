@@ -49,16 +49,36 @@
   <main id="top">
 
     <!-- 1. HERO 섹션 (테라스/뷰 풀스크린) -->
-    <section id="hero" class="relative h-screen min-h-[640px] overflow-hidden">
-      <!-- 배경 사진: 나중에 호텔 사진으로 교체 -->
-      <img
-        src="https://images.unsplash.com/photo-1520256862855-398228c41684?q=80&w=1600&auto=format&fit=crop"
-        alt="roof terrace"
-        class="absolute inset-0 w-full h-full object-cover"
-      />
-      <!-- 살짝 어둡게 하고 싶으면 아래 주석 해제 -->
-      <!-- <div class="absolute inset-0 bg-black/10"></div> -->
-    </section>
+    <!-- Hero 슬라이드쇼 -->
+<section id="hero" class="relative h-screen min-h-[640px] overflow-hidden">
+
+<img src="hero1.jpg" class="slide absolute inset-0 w-full h-full object-cover opacity-100 transition-opacity duration-[1500ms]" />
+<img src="hero2.jpg" class="slide absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-[1500ms]" />
+<img src="hero3.jpg" class="slide absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-[1500ms]" />
+<img src="hero4.jpg" class="slide absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-[1500ms]" />
+  </div>
+
+  <!-- 어두운 투명 오버레이 -->
+  <div class="absolute inset-0 bg-black/30"></div>
+
+  <!-- Hero 텍스트 (원하면 나중에 추가 가능) -->
+  <div class="relative z-10 text-white px-6"></div>
+</section>
+
+<!-- 슬라이드 자동재생 스크립트 -->
+<script>
+  let index = 0;
+  const slides = document.querySelectorAll(".slide");
+
+  function showNextSlide() {
+    slides[index].style.opacity = 0;
+    index = (index + 1) % slides.length;
+    slides[index].style.opacity = 1;
+  }
+
+  setInterval(showNextSlide, 4000);
+</script>
+
 
     <!-- 2. 오렌지 키워드 섹션 -->
     <section id="about" class="relative bg-orange-500 text-white py-14 overflow-hidden">
@@ -195,4 +215,5 @@
 
 </body>
 </html>
+
 
