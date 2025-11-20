@@ -27,7 +27,7 @@
     <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
       <!-- 로고 (원본처럼 g/ue 느낌) -->
       <a href="#top" class="flex items-center gap-1 text-white drop-shadow">
-        <span class="text-2xl font-semibold tracking-tight">Insta Hotel - mainbranch</span>
+        <span class="text-2xl font-semibold tracking-tight text-white">Insta hotel - mainbranch</span>
       </a>
 
       <!-- 메뉴 -->
@@ -39,7 +39,7 @@
         <a href="#contact" class="hover:text-orange-300">contact</a>
 
         <!-- 언어 버튼 -->
-        <button class="flex items-center gap-1 text-xs border border-white/80 rounded-full px-3 py-1 bg-white/10">
+        <button class="flex items-center gap-1 text-xs text-white border border-white/80 rounded-full px-3 py-1 bg-white/10">
           KR ▾
         </button>
       </nav>
@@ -215,39 +215,27 @@
     class="fixed bottom-6 right-6 z-40 flex items-center justify-center w-16 h-16 rounded-full bg-yellow-400 shadow-xl text-sm font-medium hover:bg-yellow-300"
   >
     문의
-  </a>
+
 <script>
 const header = document.getElementById("header");
 
 window.addEventListener("scroll", () => {
-  if (window.scrollY > 50) {
-
-    // 스크롤 내렸을 때 → 오렌지색 배경 + 검정 글씨
-    header.classList.add("bg-[#ff6900]", "shadow-lg");
-    header.classList.remove("bg-transparent");
-
-    // 메뉴 글자 색 검정으로 변경
-    header.querySelectorAll("a, span").forEach(el => {
-      el.classList.remove("text-white");
-      el.classList.add("text-black");
-    });
-
-  } else {
-
-    // 맨 위 → 투명 + 흰색 글씨
-    header.classList.remove("bg-[#ff6900]", "shadow-lg");
-    header.classList.add("bg-transparent");
-
-    header.querySelectorAll("a, span").forEach(el => {
-      el.classList.remove("text-black");
-      el.classList.add("text-white");
-    });
-  }
+    if (window.scrollY > 50) {
+        // 스크롤 시 = 오렌지 배경 + 그림자
+        header.classList.add("bg-[#ff6900]", "shadow-lg");
+        header.classList.remove("bg-transparent");
+    } else {
+        // 맨 위에서는 = 투명
+        header.classList.remove("bg-[#ff6900]", "shadow-lg");
+        header.classList.add("bg-transparent");
+    }
 });
 </script>
 
+    
 </body>
 </html>
+
 
 
 
