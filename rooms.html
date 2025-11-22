@@ -1,259 +1,121 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rooms – Insta Hotel - mainbranch</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rooms – Insta Hotel mainbranch</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Tailwind CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-
-  <style>
-    html { scroll-behavior: smooth; }
-  </style>
+    <style>
+        html { scroll-behavior: smooth; }
+    </style>
 </head>
+
 <body class="bg-white text-slate-900">
 
-  <!-- ============================ -->
-  <!-- 상단 네비게이션 (index와 동일) -->
-  <!-- ============================ -->
-  <header id="header"
-          class="fixed top-0 left-0 right-0 z-30 transition-colors duration-300 bg-transparent text-white">
+<!-- 🔶 상단 네비게이션 (항상 주황색 고정) -->
+<header id="header"
+        class="fixed top-0 left-0 right-0 z-30 bg-[#ff6900] text-white shadow-lg">
     <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-      <!-- 로고 -->
-      <a href="index.html" class="flex items-center gap-1 drop-shadow">
-        <span class="text-2xl font-semibold tracking-tight">
-          Insta Hotel - mainbranch
-        </span>
-      </a>
 
-      <!-- 메뉴 -->
-      <nav class="hidden md:flex items-center gap-8 text-sm font-medium drop-shadow">
-        <a href="about.html" class="hover:text-orange-300">about</a>
-        <a href="rooms.html" class="hover:text-orange-300">rooms</a>
-        <a href="reservation.html" class="hover:text-orange-300">reservation</a>
-        <a href="bluerain lounge.html" class="hover:text-orange-300">bluerain lounge</a>
-        <a href="contact.html" class="hover:text-orange-300">contact</a>
-      </nav>
+        <!-- 로고 -->
+        <a href="index.html" class="flex items-center gap-1 drop-shadow">
+            <span class="text-2xl font-semibold tracking-tight">
+                Insta Hotel - mainbranch
+            </span>
+        </a>
 
-      <!-- 언어 버튼 (모양만 유지) -->
-      <button
-        class="flex items-center gap-1 text-xs border border-white/80 rounded-full px-3 py-1 bg-white/10">
-        KR ▾
-      </button>
+        <!-- 메뉴 -->
+        <nav class="hidden md:flex items-center gap-8 text-sm font-medium drop-shadow">
+            <a href="about.html" class="hover:text-orange-200">about</a>
+            <a href="rooms.html" class="hover:text-orange-200 underline">rooms</a>
+            <a href="reservation.html" class="hover:text-orange-200">reservation</a>
+            <a href="bluerain lounge.html" class="hover:text-orange-200">bluerain lounge</a>
+            <a href="contact.html" class="hover:text-orange-200">contact</a>
+        </nav>
+
+        <!-- 언어 선택 -->
+        <button class="flex items-center gap-1 text-xs border border-white/80 rounded-full px-3 py-1 bg-white/10">
+            KR ▾
+        </button>
     </div>
-  </header>
+</header>
 
-  <!-- 본문 전체는 헤더 높이만큼 여백 -->
-  <main class="pt-24 pb-24">
+<!-- 상단바 여백 확보 -->
+<div class="h-24"></div>
 
-    <!-- ========================= -->
-    <!-- 1. 페이지 타이틀 + 인트로 -->
-    <!-- ========================= -->
-    <section class="max-w-5xl mx-auto px-4 lg:px-0">
-      <!-- 작은 오렌지 라인 + 타이틀 -->
-      <div class="mb-10">
-        <p class="text-[28px] font-semibold text-orange-500 mb-4">
-          glue’s room
-        </p>
-      </div>
-
-      <!-- 왼쪽 텍스트 + 오른쪽 메인 이미지 -->
-      <div class="grid lg:grid-cols-2 gap-10 items-start">
-        <!-- 텍스트 영역 -->
-        <div class="text-sm leading-relaxed space-y-2">
-          <p>글루호텔의 객실은 각기 다른 감성과 전망을 자랑합니다.</p>
-          <p>고요한 휴식, 프라이빗한 시간, 감각적인 인테리어가 어우러진 공간에서 하루를 보낼 수 있습니다.</p>
-          <p>객실 타입에 따라 다양한 뷰와 구성이 준비되어 있으며,</p>
-          <p>도심 속에서 느낄 수 있는 여유와 영감을 동시에 제공합니다.</p>
-          <p>각 객실은 세심하게 고른 가구와 조명, 패브릭으로 꾸며져 있으며,</p>
-          <p>편안함과 감성을 모두 담은 공간이 되도록 구성하였습니다.</p>
-          <p>모든 객실에는 넷플릭스, 디즈니플러스, 티빙, 유튜브 시청이 가능한 스마트 TV와</p>
-          <p>무료 Wi-Fi, 깔끔한 욕실 어메니티가 제공됩니다.</p>
-          <p>당신의 여행과 하루가 조금 더 특별해지는 공간,</p>
-          <p>그곳이 glue의 room 입니다.</p>
+<!-- 🔶 PAGE TITLE -->
+<section class="max-w-6xl mx-auto px-4 py-10">
+    <h1 class="text-3xl font-semibold mb-6 text-[#ff6900]">Insta’s Room</h1>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+        <div class="leading-relaxed text-slate-700 space-y-3 text-[15px]">
+            <p>인스타는 ‘하루의 순간을 머물게 하는 공간’입니다.</p>
+            <p>여행자와 도시, 여행자와 경험, 여행자와 사람들, <br>그리고 ‘나와 나의 하루’가 조용히 연결되는 곳, 그곳이 Insta입니다.</p>
+            <p>이곳에서는 누구나 잠시 멈춰 서서 자신만의 속도로 쉬고, 느끼고, 기록할 수 있습니다.</p>
+            <p>Insta는 특별한 장식을 더하지 않아도, 머무는 순간들이 자연스럽게 따뜻해지는 공간을 지향합니다.</p>
+            <p>서로 다른 사람들이 남긴 이야기와 하루의 온기가 우연히 스며들어 또 다른 감성을 만들어냅니다.</p>
+            <p>우리는 그런 ‘우연히도 따뜻한 순간들’이 쌓여 여행의 의미가 완성된다고 믿습니다.</p>
         </div>
 
-        <!-- 메인 이미지 -->
-        <div class="w-full">
-          <!-- 여기 이미지 파일 이름을 실제 파일로 교체 -->
-          <img src="room-hero.jpg" alt="room main view"
-               class="w-full h-auto object-cover shadow-md" />
-        </div>
-      </div>
-    </section>
+        <img src="hero1.jpg" class="rounded-md w-full object-cover shadow" />
+    </div>
+</section>
 
-    <!-- 간격 -->
-    <div class="h-16"></div>
+<!-- 🔶 SUITE ROOM -->
+<section class="max-w-6xl mx-auto px-4 py-10">
+    <h2 class="text-xl font-semibold mb-3 text-[#ff6900]">Suite Room</h2>
+    <div class="space-y-6">
+        <img src="room1.jpg" class="rounded-md w-full object-cover" />
+        <img src="room2.jpg" class="rounded-md w-full object-cover" />
+    </div>
+</section>
 
-    <!-- ========================= -->
-    <!-- 2. Suite Room 섹션 -->
-    <!-- ========================= -->
-    <section class="max-w-5xl mx-auto px-4 lg:px-0 space-y-6">
-      <h2 class="text-xl font-semibold tracking-tight">Suite Room</h2>
+<!-- 🔶 DELUXE & STANDARD -->
+<section class="max-w-6xl mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-2 gap-10">
 
-      <!-- 큰 객실 사진 -->
-      <div class="w-full">
-        <img src="suite-01.jpg" alt="Suite room"
-             class="w-full h-auto object-cover shadow-md" />
-      </div>
+    <div>
+        <h2 class="text-xl font-semibold mb-3 text-[#ff6900]">Deluxe Twin</h2>
+        <img src="room3.jpg" class="rounded-md w-full object-cover">
+    </div>
 
-      <!-- 테라스 / 뷰 사진 -->
-      <div class="w-full">
-        <img src="suite-terrace.jpg" alt="Suite room terrace"
-             class="w-full h-auto object-cover shadow-md" />
-      </div>
-    </section>
+    <div>
+        <h2 class="text-xl font-semibold mb-3 text-[#ff6900]">Deluxe Double</h2>
+        <img src="room4.jpg" class="rounded-md w-full object-cover">
+    </div>
 
-    <!-- 간격 -->
-    <div class="h-16"></div>
+    <div>
+        <h2 class="text-xl font-semibold mb-3 text-[#ff6900]">Superior Double</h2>
+        <img src="room5.jpg" class="rounded-md w-full object-cover">
+    </div>
 
-    <!-- ========================= -->
-    <!-- 3. Deluxe Twin / Deluxe Double -->
-    <!-- ========================= -->
-    <section class="max-w-5xl mx-auto px-4 lg:px-0 space-y-6">
-      <div class="grid md:grid-cols-2 gap-10">
-        <!-- Deluxe Twin -->
-        <div class="space-y-3">
-          <h3 class="text-sm font-semibold">Deluxe Twin</h3>
-          <p class="text-[11px] text-slate-500">
-            침대 2개 / 여유로운 구성으로 친구, 가족과 함께 머물기 좋은 객실 타입입니다.
-          </p>
-          <img src="deluxe-twin.jpg" alt="Deluxe Twin"
-               class="w-full h-auto object-cover shadow-md" />
-        </div>
+    <div>
+        <h2 class="text-xl font-semibold mb-3 text-[#ff6900]">Standard Double</h2>
+        <img src="room6.jpg" class="rounded-md w-full object-cover">
+    </div>
+</section>
 
-        <!-- Deluxe Double -->
-        <div class="space-y-3">
-          <h3 class="text-sm font-semibold">Deluxe Double</h3>
-          <p class="text-[11px] text-slate-500">
-            더블 침대 1개 / 따뜻한 조명과 감성적인 인테리어가 돋보이는 객실입니다.
-          </p>
-          <img src="deluxe-double.jpg" alt="Deluxe Double"
-               class="w-full h-auto object-cover shadow-md" />
-        </div>
-      </div>
-    </section>
+<!-- 🔶 AMENITIES -->
+<section class="max-w-6xl mx-auto px-4 py-16">
+    <h2 class="text-xl font-semibold mb-5 text-[#ff6900]">Amenities</h2>
 
-    <!-- 간격 -->
-    <div class="h-16"></div>
+    <p class="text-[14px] text-slate-600 leading-relaxed mb-6">
+        다양한 어메니티와 편안한 시설들을 제공합니다.
+    </p>
 
-    <!-- ========================= -->
-    <!-- 4. Superior / Standard Double -->
-    <!-- ========================= -->
-    <section class="max-w-5xl mx-auto px-4 lg:px-0 space-y-6">
-      <div class="grid md:grid-cols-2 gap-10">
-        <!-- Superior Double -->
-        <div class="space-y-3">
-          <h3 class="text-sm font-semibold">Superior Double</h3>
-          <p class="text-[11px] text-slate-500">
-            아늑한 크기의 객실로, 조용한 휴식을 원하는 여행자에게 적합한 타입입니다.
-          </p>
-          <img src="superior-double.jpg" alt="Superior Double"
-               class="w-full h-auto object-cover shadow-md" />
-        </div>
+    <div class="space-y-6">
+        <img src="amen1.jpg" class="rounded-md w-full object-cover" />
+        <img src="amen2.jpg" class="rounded-md w-full object-cover" />
+    </div>
+</section>
 
-        <!-- Standard Double -->
-        <div class="space-y-3">
-          <h3 class="text-sm font-semibold">Standard Double</h3>
-          <p class="text-[11px] text-slate-500">
-            합리적인 가격과 기본에 충실한 구성의 더블 객실입니다.
-          </p>
-          <img src="standard-double.jpg" alt="Standard Double"
-               class="w-full h-auto object-cover shadow-md" />
-        </div>
-      </div>
-    </section>
+<!-- 🔶 FOOTER -->
+<footer class="w-full py-10 text-center text-xs text-slate-500">
+    ⓒ Insta Hotel Mainbranch<br>
+    Business License 176-24-01388
+</footer>
 
-    <!-- 간격 -->
-    <div class="h-16"></div>
-
-    <!-- ========================= -->
-    <!-- 5. amenities 섹션 -->
-    <!-- ========================= -->
-    <section class="max-w-5xl mx-auto px-4 lg:px-0 space-y-6">
-      <h2 class="text-xl font-semibold tracking-tight">amenities</h2>
-
-      <div class="text-[11px] leading-relaxed text-slate-700 space-y-1">
-        <p>객실마다 기본적으로 준비된 어메니티와 편의 시설이 제공됩니다.</p>
-        <p>샴푸, 컨디셔너, 바디워시, 치약, 칫솔 등 1회용 어메니티가 제공되며,</p>
-        <p>헤어드라이어, 슬리퍼, 생수, 커피/티 등이 비치되어 있습니다.</p>
-        <p>호텔 사정에 따라 일부 구성은 변경될 수 있습니다.</p>
-      </div>
-
-      <!-- 어메니티 사진 두 장 -->
-      <div class="grid md:grid-cols-2 gap-6">
-        <img src="amenities-01.jpg" alt="amenities 1"
-             class="w-full h-auto object-cover shadow-md" />
-        <img src="amenities-02.jpg" alt="amenities 2"
-             class="w-full h-auto object-cover shadow-md" />
-      </div>
-
-      <!-- 욕실/샤워 공간 사진 -->
-      <div class="mt-8">
-        <img src="bathroom-01.jpg" alt="bathroom"
-             class="w-full h-auto object-cover shadow-md" />
-      </div>
-    </section>
-
-    <!-- 간격 -->
-    <div class="h-16"></div>
-
-    <!-- ========================= -->
-    <!-- 6. LP / Vinyl & 라운지 이미지 -->
-    <!-- ========================= -->
-    <section class="max-w-5xl mx-auto px-4 lg:px-0 space-y-6">
-      <div class="text-[11px] leading-relaxed text-slate-700 space-y-1">
-        <p>1층 블루레인 라운지에서는 LP 플레이어와 다양한 바이닐을 자유롭게 이용하실 수 있습니다.</p>
-        <p>운영 시간 내에 방문하시면, 원하시는 음악을 직원에게 요청해 주세요.</p>
-      </div>
-
-      <div class="space-y-6">
-        <!-- LP / Vinyl 선반 -->
-        <img src="vinyl-01.jpg" alt="vinyl collection"
-             class="w-full h-auto object-cover shadow-md" />
-
-        <!-- 라운지 / 데코 사진 -->
-        <img src="lounge-01.jpg" alt="lounge view"
-             class="w-full h-auto object-cover shadow-md" />
-      </div>
-    </section>
-
-    <!-- 간격 -->
-    <div class="h-24"></div>
-
-    <!-- ========================= -->
-    <!-- 7. 하단 작은 풋터 (간단 버전) -->
-    <!-- ========================= -->
-    <footer class="border-t border-slate-200 pt-6 mt-10">
-      <div class="max-w-5xl mx-auto px-4 text-center text-[10px] text-slate-500 space-y-1">
-        <p>insta hotel mainbranch, Korea</p>
-        <p>(주)호텔인스타 | 대표자 : 이영한</p>
-        <p>통신판매업 신고번호: 2023-수원영통-1696호</p>
-        <p>수원시 영통구 영통로 94-6 | Tel 031-203-4301</p>
-      </div>
-    </footer>
-
-  </main>
-
-  <!-- ========================= -->
-  <!-- 스크롤 시 헤더 색 변경 스크립트 -->
-  <!-- ========================= -->
-  <script>
-    const header = document.getElementById("header");
-
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 50) {
-        // 스크롤 내리면 → 주황색 배경 + 그림자
-        header.classList.add("bg-[#ff6900]", "shadow-lg");
-        header.classList.remove("bg-transparent");
-      } else {
-        // 맨 위로 올라가면 → 투명
-        header.classList.remove("bg-[#ff6900]", "shadow-lg");
-        header.classList.add("bg-transparent");
-      }
-    });
-  </script>
 </body>
 </html>
+
 
