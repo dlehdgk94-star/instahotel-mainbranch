@@ -22,70 +22,69 @@
 </head>
 <body class="text-slate-900">
 
-  <!-- 상단 네비게이션 (투명, 상단 고정) -->
-  <header id="header" class="fixed top-0 left-0 right-0 z-30 transition-colors duration-300 bg-transparent text-white">
+   <!-- 상단 네비게이션 (투명, 상단 고정) -->
+  <header
+    id="header"
+    class="fixed top-0 left-0 right-0 z-30 transition-colors duration-300 bg-transparent text-white"
+  >
     <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-      <!-- 로고 (원본처럼 g/ue 느낌) -->
+      <!-- 로고 -->
       <a href="#top" class="flex items-center gap-1 drop-shadow">
-        <span class="text-2xl font-semibold tracking-tight">Insta hotel - mainbranch</span>
+        <span class="text-2xl font-semibold tracking-tight">
+          Insta hotel - mainbranch
+        </span>
       </a>
 
-      <!-- 메뉴 -->
+      <!-- 메인 메뉴 -->
       <nav class="hidden md:flex items-center gap-8 text-sm font-medium drop-shadow">
         <a href="about.html" class="hover:text-orange-300">about</a>
-          <!-- 메뉴 -->
-    <nav class="hidden md:flex items-center gap-8 text-sm font-medium drop-shadow">
-      <!-- about -->
-      <a href="about.html" class="hover:text-orange-300">about</a>
 
-      <!-- rooms 드롭다운 -->
-      <div class="relative inline-block group">
-        <!-- 버튼 -->
-        <button
-          type="button"
-          class="flex items-center gap-1 hover:text-orange-300"
-        >
-          <span>rooms</span>
-          <span class="text-[10px] leading-none">▾</span>
-        </button>
+        <!-- rooms 드롭다운 -->
+        <div class="relative inline-block group">
+          <!-- 버튼 -->
+          <button
+            type="button"
+            class="flex items-center gap-1 hover:text-orange-300"
+          >
+            <span>rooms</span>
+            <span class="text-[10px] leading-none">▾</span>
+          </button>
 
-        <!-- 드롭다운 메뉴 -->
-       <div
-  class="absolute left-1/2 -translate-x-1/2 mt-1 w-48 bg-white text-slate-900 rounded-lg shadow-lg
-           opacity-0 invisible group-hover:opacity-100 group-hover:visible
-           transition duration-200 z-50"
->
-          <a href="room-suite.html"
-             class="block px-4 py-2 text-sm hover:bg-slate-100">Special room</a>
-          <a href="room-twin.html"
-             class="block px-4 py-2 text-sm hover:bg-slate-100">Twin room</a>
-          <a href="room-double.html"
-             class="block px-4 py-2 text-sm hover:bg-slate-100">Luxury room</a>
-          <a href="room-superior.html"
-             class="block px-4 py-2 text-sm hover:bg-slate-100">Premium room</a>
-          <a href="room-standard.html"
-             class="block px-4 py-2 text-sm hover:bg-slate-100">Standard room</a>
-          <a href="room-standard.html"
-             class="block px-4 py-2 text-sm hover:bg-slate-100">Long stay</a>
+          <!-- 드롭다운 메뉴 -->
+          <div
+            class="absolute left-1/2 -translate-x-1/2 mt-2 w-48 bg-white text-slate-900 rounded-lg shadow-lg
+                   opacity-0 invisible group-hover:opacity-100 group-hover:visible
+                   transition duration-200 z-50"
+          >
+            <a href="room-suite.html"
+               class="block px-4 py-2 text-sm hover:bg-slate-100">Special room</a>
+            <a href="room-twin.html"
+               class="block px-4 py-2 text-sm hover:bg-slate-100">Twin room</a>
+            <a href="room-double.html"
+               class="block px-4 py-2 text-sm hover:bg-slate-100">Luxury room</a>
+            <a href="room-superior.html"
+               class="block px-4 py-2 text-sm hover:bg-slate-100">Premium room</a>
+            <a href="room-standard.html"
+               class="block px-4 py-2 text-sm hover:bg-slate-100">Standard room</a>
+            <a href="room-standard.html"
+               class="block px-4 py-2 text-sm hover:bg-slate-100">Long stay</a>
+          </div>
         </div>
-      </div>
 
-      <!-- 나머지 메뉴 -->
-      <a href="#reservation" class="hover:text-orange-300">reservation</a>
-      <a href="#lounge" class="hover:text-orange-300">bluerain lounge</a>
-      <a href="#contact" class="hover:text-orange-300">contact</a>
-    </nav>
-
-    <!-- 언어 버튼 -->
-    <button
-      class="flex items-center gap-1 text-xs border border-white/80 rounded-full px-3 py-1 bg-white/10"
-    >
-      KR ▾
-    </button>
-
+        <a href="#reservation" class="hover:text-orange-300">reservation</a>
+        <a href="#lounge" class="hover:text-orange-300">bluerain lounge</a>
+        <a href="#contact" class="hover:text-orange-300">contact</a>
       </nav>
+
+      <!-- 언어 버튼 -->
+      <button
+        class="flex items-center gap-1 text-xs border border-white/80 rounded-full px-3 py-1 bg-white/10"
+      >
+        KR ▾
+      </button>
     </div>
   </header>
+
   
 
     <!-- 1. HERO 섹션 (테라스/뷰 풀스크린) -->
@@ -277,6 +276,7 @@ window.addEventListener("scroll", () => {
     
 </body>
 </html>
+
 
 
 
