@@ -33,39 +33,80 @@
       <!-- 메뉴 -->
       <nav class="hidden md:flex items-center gap-8 text-sm font-medium drop-shadow">
         <a href="about.html" class="hover:text-orange-300">about</a>
+             <!-- 메뉴 -->
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-white drop-shadow">
+        <!-- about -->
+        <a href="about.html" class="hover:text-orange-300">about</a>
+
+        <!-- rooms 드롭다운 -->
         <div class="relative group">
-  <div class="relative group">
-       <!-- rooms 드롭다운 -->
-      <div class="relative inline-block group">
-        <!-- rooms 버튼 -->
-        <button
-          type="button"
-          class="hover:text-orange-300 flex items-center gap-1"
-        >
-          <span>rooms</span>
-        </button>
+          <!-- rooms 버튼 -->
+          <button
+            type="button"
+            class="flex items-center gap-1 hover:text-orange-300"
+          >
+            <span>rooms</span>
+            <span class="text-[10px] leading-none">▾</span>
+          </button>
 
-        <!-- 드롭다운 메뉴 -->
-        <div
-          class="absolute left-0 top-full mt-2 w-40 bg-white text-slate-900 rounded-lg shadow-lg
-                 opacity-0 pointer-events-none
-                 group-hover:opacity-100 group-hover:pointer-events-auto
-                 transition duration-200 z-50"
-        >
-          <a href="rooms.html#suite" class="block px-4 py-2 hover:bg-slate-100">Special room</a>
-          <a href="rooms.html#twin" class="block px-4 py-2 hover:bg-slate-100">Twin room</a>
-          <a href="rooms.html#double" class="block px-4 py-2 hover:bg-slate-100">Luxury room</a>
-          <a href="rooms.html#superior" class="block px-4 py-2 hover:bg-slate-100">Premium room</a>
-          <a href="room-standard.html" class="block px-4 py-2 hover:bg-slate-100">Standard room</a>
-          <a href="room-standard.html" class="block px-4 py-2 hover:bg-slate-100">Long stay</a>
+          <!-- 드롭다운 메뉴 -->
+          <div
+            class="absolute left-1/2 -translate-x-1/2 mt-2 w-48 bg-white text-slate-900 rounded-lg shadow-lg
+                       opacity-0 pointer-events-none
+                       group-hover:opacity-100 group-hover:pointer-events-auto
+                       transition duration-200 z-50"
+          >
+            <a
+              href="rooms.html#suite"
+              class="block px-4 py-2 text-sm hover:bg-slate-100"
+            >
+              Special room
+            </a>
+            <a
+              href="rooms.html#twin"
+              class="block px-4 py-2 text-sm hover:bg-slate-100"
+            >
+              Twin room
+            </a>
+            <a
+              href="rooms.html#double"
+              class="block px-4 py-2 text-sm hover:bg-slate-100"
+            >
+              Luxury room
+            </a>
+            <a
+              href="rooms.html#superior"
+              class="block px-4 py-2 text-sm hover:bg-slate-100"
+            >
+              Premium room
+            </a>
+            <a
+              href="room-standard.html"
+              class="block px-4 py-2 text-sm hover:bg-slate-100"
+            >
+              Standard room
+            </a>
+            <a
+              href="room-standard.html"
+              class="block px-4 py-2 text-sm hover:bg-slate-100"
+            >
+              Long stay
+            </a>
+          </div>
         </div>
-      </div>
 
-</div>
-
+        <!-- 기존 나머지 메뉴들 -->
         <a href="#reservation" class="hover:text-orange-300">reservation</a>
         <a href="#lounge" class="hover:text-orange-300">bluerain lounge</a>
         <a href="#contact" class="hover:text-orange-300">contact</a>
+      </nav>
+
+      <!-- 언어 버튼 -->
+      <button
+        class="flex items-center gap-1 text-xs border border-white/80 rounded-full px-3 py-1 bg-white/10"
+      >
+        KR ▾
+      </button>
 
         <!-- 언어 버튼 -->
         <button class="flex items-center gap-1 text-xs border border-white/80 rounded-full px-3 py-1 bg-white/10">
@@ -265,6 +306,7 @@ window.addEventListener("scroll", () => {
     
 </body>
 </html>
+
 
 
 
