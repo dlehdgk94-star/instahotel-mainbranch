@@ -35,28 +35,31 @@
         <a href="about.html" class="hover:text-orange-300">about</a>
         <div class="relative group">
   <div class="relative group">
-  <!-- rooms 버튼 -->
-  <button 
-    onclick="location.href='rooms.html'" 
-    class="hover:text-orange-300 flex items-center gap-1"
-  >
-    rooms
-    <span>▾</span>
-  </button>
+       <!-- rooms 드롭다운 -->
+      <div class="relative inline-block group">
+        <!-- rooms 버튼 -->
+        <button
+          type="button"
+          class="hover:text-orange-300 flex items-center gap-1"
+        >
+          <span>rooms</span>
+        </button>
 
-  <!-- 드롭다운 메뉴 -->
-  <div
-    class="absolute left-0 mt-2 w-40 bg-white text-slate-900 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-200 z-50"
-  >
-    <a href="rooms.html#suite" class="block px-4 py-2 hover:bg-slate-100">Special room</a>
-    <a href="rooms.html#twin" class="block px-4 py-2 hover:bg-slate-100">Twin room</a>
-    <a href="rooms.html#double" class="block px-4 py-2 hover:bg-slate-100">Luxery room</a>
-    <a href="rooms.html#superior" class="block px-4 py-2 hover:bg-slate-100">Premium room</a>
-    <a href="rooms.html#standard" class="block px-4 py-2 hover:bg-slate-100">Deluxe room</a>
-    <a href="room-standard.html" class="block px-4 py-2 hover:bg-slate-100">Standard room</a>
-    <a href="rooms.html#standard" class="block px-4 py-2 hover:bg-slate-100">Long stay</a>
-  </div>
-</div>
+        <!-- 드롭다운 메뉴 -->
+        <div
+          class="absolute left-0 top-full mt-2 w-40 bg-white text-slate-900 rounded-lg shadow-lg
+                 opacity-0 pointer-events-none
+                 group-hover:opacity-100 group-hover:pointer-events-auto
+                 transition duration-200 z-50"
+        >
+          <a href="rooms.html#suite" class="block px-4 py-2 hover:bg-slate-100">Special room</a>
+          <a href="rooms.html#twin" class="block px-4 py-2 hover:bg-slate-100">Twin room</a>
+          <a href="rooms.html#double" class="block px-4 py-2 hover:bg-slate-100">Luxury room</a>
+          <a href="rooms.html#superior" class="block px-4 py-2 hover:bg-slate-100">Premium room</a>
+          <a href="room-standard.html" class="block px-4 py-2 hover:bg-slate-100">Standard room</a>
+          <a href="room-standard.html" class="block px-4 py-2 hover:bg-slate-100">Long stay</a>
+        </div>
+      </div>
 
 </div>
 
@@ -262,6 +265,7 @@ window.addEventListener("scroll", () => {
     
 </body>
 </html>
+
 
 
 
