@@ -21,28 +21,44 @@
 </head>
 <body class="bg-white text-slate-900">
 
-  <!-- 상단 네비 -->
-  <header class="sticky top-0 z-30 bg-[var(--brand-orange)] text-white">
-    <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 md:px-6">
-      <a href="index.html" class="flex items-center space-x-2">
-        <span class="text-2xl font-bold tracking-tight">Insta Hotel - mainbranch</span>
+ <!-- 상단 네비게이션 -->
+<header class="sticky top-0 z-30 bg-[#ff6900]">
+  <div class="mx-auto flex max-w-6xl items-center justify-between px-6 h-20">
+    
+    <!-- 로고 텍스트 -->
+    <a href="index.html" class="text-white text-2xl font-semibold tracking-tight">
+      Insta Hotel - mainbranch
+    </a>
+
+    <!-- 네비게이션 메뉴 -->
+    <nav class="hidden md:flex items-center gap-10">
+      <a href="about.html" class="text-white text-sm font-medium tracking-wide hover:opacity-80">
+        about
       </a>
+      <a href="rooms.html" class="text-white text-sm font-medium tracking-wide hover:opacity-80">
+        rooms
+      </a>
+      <a href="reservation.html" class="text-white text-sm font-medium tracking-wide hover:opacity-80">
+        reservation
+      </a>
+      <a href="bluerain.html" class="text-white text-sm font-medium tracking-wide hover:opacity-80">
+        bluerain lounge
+      </a>
+      <a href="contact.html" class="text-white text-sm font-medium tracking-wide hover:opacity-80">
+        contact
+      </a>
+    </nav>
 
-      <nav class="hidden gap-8 text-sm font-semibold uppercase tracking-wide md:flex">
-        <a href="about.html" class="hover:text-slate-900">about</a>
-        <a href="rooms.html" class="hover:text-slate-900">rooms</a>
-        <a href="reservation.html" class="hover:text-slate-900">reservation</a>
-        <a href="bluerain.html" class="hover:text-slate-900">bluerain lounge</a>
-        <a href="contact.html" class="hover:text-slate-900">contact</a>
-      </nav>
-
-      <div class="hidden md:block">
-        <button class="flex items-center rounded-full border border-white/70 bg-white/10 px-3 py-1 text-xs font-semibold tracking-wide backdrop-blur hover:bg-white/20">
-          KR ▾
-        </button>
-      </div>
+    <!-- 언어 선택 -->
+    <div class="hidden md:block">
+      <button class="text-white text-sm font-medium tracking-wide border border-white/60 px-3 py-1 rounded-full hover:bg-white/10">
+        KR ▾
+      </button>
     </div>
-  </header>
+
+  </div>
+</header>
+
 
   <!-- 메인 컨텐츠 -->
   <main class="mx-auto max-w-6xl px-4 pb-20 pt-10 md:px-6 md:pt-16">
