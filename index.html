@@ -50,12 +50,17 @@
           </button>
 
           <!-- 드롭다운 메뉴 -->
-          <div
-            class="absolute left-1/2 -translate-x-1/2 mt-2 w-48 bg-white text-slate-900 rounded-lg shadow-lg
-                       opacity-0 pointer-events-none
-                       group-hover:opacity-100 group-hover:pointer-events-auto
-                       transition duration-200 z-50"
-          >
+     <div class="relative group inline-block">
+    <button type="button" class="flex items-center gap-1 hover:text-orange-300">
+        <span>rooms</span>
+        <span class="text-[10px] leading-none">▾</span>
+    </button>
+
+    <div
+     class="absolute left-1/2 -translate-x-1/2 w-48 bg-white text-slate-900 rounded-lg shadow-lg
+         opacity-0 invisible
+         group-hover:opacity-100 group-hover:visible
+         transition duration-200 z-50">
             <a
               href="rooms.html#suite"
               class="block px-4 py-2 text-sm hover:bg-slate-100"
@@ -306,6 +311,7 @@ window.addEventListener("scroll", () => {
     
 </body>
 </html>
+
 
 
 
