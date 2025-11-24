@@ -2,166 +2,186 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  />
-  <title>Standard Double – Insta Hotel - mainbranch</title>
-
+  <title>Suite Room | Insta Hotel - mainbranch</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- 지금까지 써온 Poppins 폰트 (영문 타이틀용) -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-    rel="stylesheet"
-  />
-
   <style>
-    .insta-english-title {
-      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont,
-        "Segoe UI", sans-serif;
-      letter-spacing: 0.03em;
+    html { scroll-behavior: smooth; }
+    /* 상단 오렌지 라인 아래 스트라이프 */
+    .stripe-bg {
+      background-image: repeating-linear-gradient(
+        135deg,
+        rgba(255,255,255,0.4) 0,
+        rgba(255,255,255,0.4) 1px,
+        transparent 1px,
+        transparent 18px
+      );
+    }
+    /* 부드러운 그림자 */
+    .soft-shadow {
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.18);
     }
   </style>
 </head>
-
 <body class="bg-white text-slate-900">
-  <!-- 상단 네비게이션 (rooms.html과 동일한 오렌지 헤더) -->
-  <header
-    id="header"
-    class="fixed top-0 left-0 right-0 z-30 bg-[#ff6900] text-white drop-shadow"
-  >
-    <div
-      class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between"
-    >
-      <!-- 로고 / 호텔 이름 -->
-      <a
-        href="index.html"
-        class="flex items-center gap-1 text-white drop-shadow"
-      >
-        <span
-          class="text-2xl font-semibold tracking-tight insta-english-title"
-        >
-          Insta Hotel - mainbranch
-        </span>
+
+  <!-- 상단 오렌지 네비게이션 -->
+  <header class="sticky top-0 z-30 bg-orange-500 text-white">
+    <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 md:px-6">
+      <!-- 로고 -->
+      <a href="index.html" class="flex items-center space-x-2">
+        <span class="text-2xl font-bold tracking-tight">Insta Hotel - mainbranch</span>
       </a>
 
       <!-- 메뉴 -->
-      <nav
-        class="hidden md:flex items-center gap-8 text-sm font-medium text-white drop-shadow"
-      >
-        <a href="about.html" class="hover:text-orange-300">about</a>
-        <a href="rooms.html" class="hover:text-orange-300">rooms</a>
-        <a href="reservation.html" class="hover:text-orange-300"
-          >reservation</a
-        >
-        <a href="lounge.html" class="hover:text-orange-300"
-          >bluerain lounge</a
-        >
-        <a href="contact.html" class="hover:text-orange-300">contact</a>
+      <nav class="hidden gap-8 text-sm font-semibold uppercase tracking-wide md:flex">
+        <a href="about.html" class="hover:text-slate-900">about</a>
+        <a href="rooms.html" class="hover:text-slate-900">rooms</a>
+        <a href="reservation.html" class="hover:text-slate-900">reservation</a>
+        <a href="bluerain.html" class="hover:text-slate-900">bluerain lounge</a>
+        <a href="contact.html" class="hover:text-slate-900">contact</a>
       </nav>
 
-      <!-- 언어 선택 버튼 -->
-      <button
-        class="flex items-center gap-1 text-xs border border-white/80 rounded-full px-3 py-1 bg-white/10"
-      >
-        KR ▾
-      </button>
+      <!-- 언어 선택 -->
+      <div class="hidden md:block">
+        <button
+          class="flex items-center rounded-full border border-white/70 bg-white/10 px-3 py-1 text-xs font-semibold tracking-wide backdrop-blur hover:bg-white/20"
+        >
+          KR ▾
+        </button>
+      </div>
     </div>
   </header>
 
-  <!-- 메인 컨텐츠 -->
-  <main class="pt-24 bg-white">
-    <!-- 상단 여백 스트라이프 느낌 살짝 -->
-    <div class="w-full h-[40px] bg-slate-50 border-b border-slate-200"></div>
+  <!-- 상단 스트라이프 장식 -->
+  <div class="stripe-bg h-16 w-full bg-orange-500/80"></div>
 
-    <section class="max-w-6xl mx-auto px-4 py-10 md:py-12">
-      <!-- TYPE 라벨 -->
-      <p
-        class="text-xs md:text-sm text-orange-500 tracking-wide font-semibold uppercase mb-2"
-      >
-        TYPE 5 / 스탠다드 더블
-      </p>
+  <!-- 메인 컨테이너 -->
+  <main class="mx-auto max-w-6xl px-4 pb-20 pt-10 md:px-6 md:pt-16">
+    <!-- 타입 / 소제목 -->
+    <p class="text-xs font-bold uppercase tracking-[0.2em] text-orange-500 mb-2">
+      TYPE 1 / 인스타 스위트룸
+    </p>
 
-      <!-- 룸 이름 -->
-      <h1
-        class="insta-english-title text-3xl md:text-4xl font-semibold text-slate-900 mb-3"
-      >
-        Standard Double
-      </h1>
+    <!-- 룸 이름 -->
+    <h1 class="mb-2 text-3xl font-bold md:text-4xl">
+      Suite Room
+    </h1>
 
-      <!-- 서브 설명 (스펙) -->
-      <p class="text-sm md:text-base text-slate-600 mb-8">
-        LG LED 49&quot; TV, Samsung Air Conditioner, Safe Box, Mini-Refrigerator
-      </p>
+    <!-- 짧은 설명 라인 -->
+    <p class="mb-10 text-[11px] font-medium uppercase tracking-[0.24em] text-slate-500">
+      Beam Projector, LG Air Conditioner, Refrigerator, Rooftop Terrace
+    </p>
 
-      <!-- 메인 큰 이미지 -->
-      <!-- 👉 나중에 너 사진 파일명으로만 바꾸면 됨 (예: standard-main.jpg) -->
-      <div class="mb-10">
+    <!-- 메인 이미지 -->
+    <section class="mb-16">
+      <div class="overflow-hidden rounded-lg bg-slate-100 soft-shadow">
+        <!-- 여기 이미지 파일 이름을 너 파일로 교체 -->
         <img
-          src="standard-main.jpg"
-          alt="Standard Double main view"
-          class="w-full h-auto object-cover rounded-lg shadow-md"
+          src="hero-suite-main.jpg"
+          alt="Suite Room main view"
+          class="h-auto w-full object-cover"
         />
-      </div>
-
-      <!-- 2장짜리 가로 사진 그리드 -->
-      <div class="grid md:grid-cols-2 gap-6 mb-10">
-        <img
-          src="standard-sub-1.jpg"
-          alt="Standard Double sub image 1"
-          class="w-full h-auto object-cover rounded-lg shadow-md"
-        />
-        <img
-          src="standard-sub-2.jpg"
-          alt="Standard Double sub image 2"
-          class="w-full h-auto object-cover rounded-lg shadow-md"
-        />
-      </div>
-
-      <!-- 설명 텍스트 (한국어) -->
-      <div class="space-y-3 text-sm md:text-base leading-relaxed mb-8">
-        <p>
-          인스타호텔 스탠다드 더블 객실은 여행의 피로를 편안하게 풀 수 있도록
-          구성된 기본 객실 타입입니다. 국내산 프리미엄 매트리스를 사용하여
-          푹신하면서도 탄탄한 숙면을 제공합니다.
-        </p>
-        <p>
-          넓은 창을 통해 수원 도심의 풍경을 감상할 수 있으며, 심플하지만
-          따뜻한 조명의 조합으로 아늑한 분위기를 느끼실 수 있습니다.
-        </p>
-        <p>
-          장기 투숙 고객님도 불편함 없도록 미니 냉장고, 개별 냉난방, 금고 등
-          기본 편의시설을 모두 갖추고 있습니다.
-        </p>
-      </div>
-
-      <!-- 영어 간단 설명 (선택) -->
-      <div class="text-xs md:text-sm text-slate-500 leading-relaxed">
-        <p>
-          Standard Double is designed as a cozy base for both business and
-          leisure travelers. A premium mattress and clean bedding help you rest
-          comfortably after a long day.
-        </p>
       </div>
     </section>
 
-    <!-- 하단 작은 푸터 -->
-    <section
-      class="border-t border-slate-200 py-8 mt-8 text-center text-[11px] text-slate-500"
-    >
-      <div class="space-y-1">
-        <div class="flex justify-center gap-2">
-          <span>Insta Hotel - mainbranch</span>
-          <span>|</span>
-          <span>경기도 수원시 영통구 영통로 94-6</span>
-        </div>
-        <div>
-          Business License 176-24-01388 · Tel 031-203-4301
-        </div>
+    <!-- 오렌지 타이틀 텍스트 + 설명 -->
+    <section class="mb-16 space-y-6">
+      <h2 class="text-2xl font-bold leading-snug text-orange-500 md:text-3xl">
+        Enjoy the scenery of Suwon<br />
+        just for you.
+      </h2>
+
+      <p class="text-sm leading-relaxed text-slate-700">
+        전 객실은 넓은 창과 따뜻한 조명으로 수원의 분위기를 느끼며 쉴 수 있도록
+        감성적인 인테리어로 준비되어 있습니다.<br />
+        여유로운 침대와 테라스에서의 휴식으로 여행의 피로를 충분히 풀어보세요.<br />
+        조용한 분위기 속에서 편안한 숙박을 원하는 출장·여행 고객님께 특히 추천드립니다.
+      </p>
+    </section>
+
+    <!-- 두 번째 큰 사진 -->
+    <section class="mb-16">
+      <div class="overflow-hidden rounded-lg bg-slate-100 soft-shadow">
+        <img
+          src="hero-suite-02.jpg"
+          alt="Suite Room wide view"
+          class="h-auto w-full object-cover"
+        />
       </div>
     </section>
+
+    <!-- 2열 이미지 그리드 -->
+    <section class="mb-16 grid gap-6 md:grid-cols-2">
+      <div class="overflow-hidden rounded-lg bg-slate-100 soft-shadow">
+        <img
+          src="hero-suite-03.jpg"
+          alt="Suite rooftop terrace"
+          class="h-auto w-full object-cover"
+        />
+      </div>
+      <div class="overflow-hidden rounded-lg bg-slate-100 soft-shadow">
+        <img
+          src="hero-suite-04.jpg"
+          alt="Suite bathroom"
+          class="h-auto w-full object-cover"
+        />
+      </div>
+    </section>
+
+    <!-- 침구 / 객실 설명 텍스트 -->
+    <section class="mb-16 space-y-4 text-sm leading-relaxed text-slate-700">
+      <p>
+        Insta Hotel - mainbranch의 모든 침대는 장기간 머무르셔도 편안한 휴식을
+        느끼실 수 있도록 국내산 매트리스를 사용하고 있습니다.
+      </p>
+      <p>
+        항상 청결하게 관리되는 침구와 포근한 베딩을 통해 여행과 업무로 지친 몸과
+        마음을 충분히 회복해 보세요. 고객님이 머무시는 동안 내 집처럼 편안한
+        시간을 보내실 수 있도록 세심하게 준비했습니다.
+      </p>
+    </section>
+
+    <!-- 하단 베개(쿠션) 이미지 -->
+    <section class="mb-16">
+      <div class="overflow-hidden rounded-lg bg-slate-100 soft-shadow">
+        <img
+          src="hero-suite-05.jpg"
+          alt="Suite room bed detail"
+          class="h-auto w-full object-cover"
+        />
+      </div>
+    </section>
+
+    <!-- 푸터 -->
+    <footer class="border-t border-slate-200 pt-10 pb-16 text-center text-[11px] leading-relaxed text-slate-500">
+      <!-- 아이콘 영역 (임시) -->
+      <div class="mb-4 flex items-center justify-center space-x-3 text-slate-400">
+        <span class="h-1.5 w-1.5 rounded-full bg-slate-300"></span>
+        <span class="h-1.5 w-1.5 rounded-full bg-slate-300"></span>
+        <span class="h-1.5 w-1.5 rounded-full bg-slate-300"></span>
+      </div>
+
+      <p class="font-semibold text-slate-600">
+        Insta Hotel - mainbranch, Suwon, Korea
+      </p>
+      <p>
+        경기도 수원시 영통구 망포동 ○○-○○<br />
+        Tel. 031-203-4301 &nbsp; | &nbsp; E-mail. yhl5258@naver.com
+      </p>
+      <p class="mt-3">
+        사업자등록번호 000-00-00000 &nbsp; | &nbsp; 대표자 홍길동
+      </p>
+    </footer>
   </main>
+
+  <!-- 우측 하단 문의 버튼 (예: 카카오톡 느낌) -->
+  <button
+    class="fixed bottom-6 right-6 flex h-14 w-14 items-center justify-center rounded-full bg-yellow-400 text-sm font-bold text-slate-900 shadow-lg shadow-yellow-400/40 hover:bg-yellow-300"
+  >
+    문의
+  </button>
 </body>
 </html>
+
