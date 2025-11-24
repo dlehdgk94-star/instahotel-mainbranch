@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+  <title>Standard Double – Insta Hotel - mainbranch</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- 지금까지 써온 Poppins 폰트 (영문 타이틀용) -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    .insta-english-title {
+      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+      letter-spacing: 0.03em;
+    }
+  </style>
+</head>
+
+<body class="bg-white text-slate-900">
+  <!-- 상단 네비게이션 (rooms.html과 동일한 오렌지 헤더) -->
+  <header
+    id="header"
+    class="fixed top-0 left-0 right-0 z-30 bg-[#ff6900] text-white drop-shadow"
+  >
+    <div
+      class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between"
+    >
+      <!-- 로고 / 호텔 이름 -->
+      <a
+        href="index.html"
+        class="flex items-center gap-1 text-white drop-shadow"
+      >
+        <span
+          class="text-2xl font-semibold tracking-tight insta-english-title"
+        >
+          Insta Hotel - mainbranch
+        </span>
+      </a>
+
+      <!-- 메뉴 -->
+      <nav
+        class="hidden md:flex items-center gap-8 text-sm font-medium text-white drop-shadow"
+      >
+        <a href="about.html" class="hover:text-orange-300">about</a>
+        <a href="rooms.html" class="hover:text-orange-300">rooms</a>
+        <a href="reservation.html" class="hover:text-orange-300"
+          >reservation</a
+        >
+        <a href="lounge.html" class="hover:text-orange-300"
+          >bluerain lounge</a
+        >
+        <a href="contact.html" class="hover:text-orange-300">contact</a>
+      </nav>
+
+      <!-- 언어 선택 버튼 -->
+      <button
+        class="flex items-center gap-1 text-xs border border-white/80 rounded-full px-3 py-1 bg-white/10"
+      >
+        KR ▾
+      </button>
+    </div>
+  </header>
+
+  <!-- 메인 컨텐츠 -->
+  <main class="pt-24 bg-white">
+    <!-- 상단 여백 스트라이프 느낌 살짝 -->
+    <div class="w-full h-[40px] bg-slate-50 border-b border-slate-200"></div>
+
+    <section class="max-w-6xl mx-auto px-4 py-10 md:py-12">
+      <!-- TYPE 라벨 -->
+      <p
+        class="text-xs md:text-sm text-orange-500 tracking-wide font-semibold uppercase mb-2"
+      >
+        TYPE 5 / 스탠다드 더블
+      </p>
+
+      <!-- 룸 이름 -->
+      <h1
+        class="insta-english-title text-3xl md:text-4xl font-semibold text-slate-900 mb-3"
+      >
+        Standard Double
+      </h1>
+
+      <!-- 서브 설명 (스펙) -->
+      <p class="text-sm md:text-base text-slate-600 mb-8">
+        LG LED 49&quot; TV, Samsung Air Conditioner, Safe Box, Mini-Refrigerator
+      </p>
+
+      <!-- 메인 큰 이미지 -->
+      <!-- 👉 나중에 너 사진 파일명으로만 바꾸면 됨 (예: standard-main.jpg) -->
+      <div class="mb-10">
+        <img
+          src="standard-main.jpg"
+          alt="Standard Double main view"
+          class="w-full h-auto object-cover rounded-lg shadow-md"
+        />
+      </div>
+
+      <!-- 2장짜리 가로 사진 그리드 -->
+      <div class="grid md:grid-cols-2 gap-6 mb-10">
+        <img
+          src="standard-sub-1.jpg"
+          alt="Standard Double sub image 1"
+          class="w-full h-auto object-cover rounded-lg shadow-md"
+        />
+        <img
+          src="standard-sub-2.jpg"
+          alt="Standard Double sub image 2"
+          class="w-full h-auto object-cover rounded-lg shadow-md"
+        />
+      </div>
+
+      <!-- 설명 텍스트 (한국어) -->
+      <div class="space-y-3 text-sm md:text-base leading-relaxed mb-8">
+        <p>
+          인스타호텔 스탠다드 더블 객실은 여행의 피로를 편안하게 풀 수 있도록
+          구성된 기본 객실 타입입니다. 국내산 프리미엄 매트리스를 사용하여
+          푹신하면서도 탄탄한 숙면을 제공합니다.
+        </p>
+        <p>
+          넓은 창을 통해 수원 도심의 풍경을 감상할 수 있으며, 심플하지만
+          따뜻한 조명의 조합으로 아늑한 분위기를 느끼실 수 있습니다.
+        </p>
+        <p>
+          장기 투숙 고객님도 불편함 없도록 미니 냉장고, 개별 냉난방, 금고 등
+          기본 편의시설을 모두 갖추고 있습니다.
+        </p>
+      </div>
+
+      <!-- 영어 간단 설명 (선택) -->
+      <div class="text-xs md:text-sm text-slate-500 leading-relaxed">
+        <p>
+          Standard Double is designed as a cozy base for both business and
+          leisure travelers. A premium mattress and clean bedding help you rest
+          comfortably after a long day.
+        </p>
+      </div>
+    </section>
+
+    <!-- 하단 작은 푸터 -->
+    <section
+      class="border-t border-slate-200 py-8 mt-8 text-center text-[11px] text-slate-500"
+    >
+      <div class="space-y-1">
+        <div class="flex justify-center gap-2">
+          <span>Insta Hotel - mainbranch</span>
+          <span>|</span>
+          <span>경기도 수원시 영통구 영통로 94-6</span>
+        </div>
+        <div>
+          Business License 176-24-01388 · Tel 031-203-4301
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
