@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rooms – Insta Hotel - mainbranch</title>
+ <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,600;1,600;1,700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white text-slate-900">
+  <!-- 상단 네비게이션 (오렌지색 고정) -->
+  <header
+    id="header"
+    class="fixed top-0 left-0 right-0 z-30 bg-[#ff6900] text-white drop-shadow"
+  >
+    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+      <!-- 로고 / 호텔 이름 -->
+      <a href="index.html" class="flex items-center gap-1 text-white drop-shadow">
+        <span class="text-2xl font-semibold tracking-tight">
+          Insta Hotel - mainbranch
+        </span>
+      </a>
+
+      <!-- 메뉴 -->
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-white drop-shadow">
+        <a href="about.html" class="hover:text-orange-300">about</a>
+        <a href="rooms.html" class="hover:text-orange-300">rooms</a>
+        <a href="#reservation" class="hover:text-orange-300">reservation</a>
+        <a href="#lounge" class="hover:text-orange-300">bluerain lounge</a>
+        <a href="#contact" class="hover:text-orange-300">contact</a>
+      </nav>
+
+      <!-- 언어 선택 버튼 -->
+      <button
+        class="flex items-center gap-1 text-xs border border-white/80 rounded-full px-3 py-1 bg-white/10"
+      >
+        KR ▾
+      </button>
+    </div>
+  </header>
+
+  <!-- 메인 컨텐츠 -->
+  <main class="mx-auto max-w-6xl px-4 pb-20 pt-10 md:px-6 md:pt-16"> 
+  
+  <section class="max-w-6xl mx-auto px-4 py-10 border-t border-slate-200">
+      <p class="text-xs text-orange-500 tracking-wide font-bold uppercase italic mb-1">
+        TYPE 3 / 인스타 럭셔리
+      </p>
+      <h2 class="text-xl md:text-4xl font-bold mb-4">Luxery Room</h2>
+<!-- 설명 문장 (glue의 Suite Room처럼) -->
+<p class="text-sm text-bold text-slate-600 mb-6">
+   Free wi-fi, LG Air Conditioner, Air Purifier, Refrigerator, Full-body bath, Three Bed
+</p>
+      <div class="space-y-6">
+    <!-- 메인 이미지 -->
+    <section class="mb-16">
+      <div class="overflow-hidden rounded-lg bg-slate-100 soft-shadow">
+        <img src="hero17.png" alt="Suite Room main view" class="w-full h-auto object-cover" />
+      </div>
+    </section>
+
+    <!-- 오렌지 타이틀 + 텍스트 -->
+    <section class="mb-16 space-y-6">
+      <h2 class="text-2xl font-bold leading-snug text-orange-500 md:text-3xl">
+        Enjoy the scenery of Suwon<br />just for you.
+      </h2>
+
+      <p class="text-sm leading-relaxed text-slate-700">
+        전 객실은 넓은 창과 따뜻한 조명으로 수원의 분위기를 느끼며 쉴 수 있도록
+        감성적인 인테리어로 준비되어 있습니다. <br />
+        여유로운 침대와 테라스에서의 휴식으로 여행의 피로를 충분히 풀어보세요. <br />
+        조용한 분위기 속에서 편안한 숙박을 원하는 출장·여행 고객님께 특히 추천드립니다.
+      </p>
+    </section>
+
+    <!-- 두 번째 큰 사진 -->
+    <section class="mb-16">
+      <div class="overflow-hidden rounded-lg bg-slate-100 soft-shadow">
+        <img src="hero16.png" alt="Suite Room view" class="w-full h-auto object-cover" />
+      </div>
+    </section>
+
+    <!-- 그리드 2열 -->
+    <section class="mb-16 grid gap-6 md:grid-cols-2">
+      <div class="overflow-hidden rounded-lg bg-slate-100 soft-shadow">
+        <img src="hero15.png" alt="Suite terrace" class="w-full h-auto object-cover" />
+      </div>
+
+      <div class="overflow-hidden rounded-lg bg-slate-100 soft-shadow">
+        <img src="hero19.jpg" alt="Suite bathroom" class="w-full h-auto object-cover" />
+      </div>
+    </section>
+
+    <!-- 텍스트 설명 -->
+    <section class="mb-16 space-y-4 text-sm leading-relaxed text-slate-700">
+      <p>
+        insta hotel의 모든 침대는 지친 여행길에 객실에서 편히 쉴 수 있도록
+      </p>
+      
+      <p>  
+         국내 최고급 ACE 침대를 사용하였으며, 
+      </p>
+     
+      <p>  
+        침구류도 면 사용률을 높여 편안함을 제공하려고 노력하였습니다.
+      </p>
+      
+      <p>
+        All beds at Insta Hotel are equipped with the finest domestic ACE mattresses to ensure a comfortable rest during your weary travels. 
+      </p> 
+     
+      <p>  
+      We strive to provide comfort by using high-quality cotton bedding to enhance relaxation.
+      </p>
+    </section>
+
+    <!-- 마지막 이미지 -->
+    <section class="mb-16">
+      <div class="overflow-hidden rounded-lg bg-slate-100 soft-shadow">
+        <img src="hero18.jpg" alt="Suite Room detail" class="w-full h-auto object-cover" />
+      </div>
+    </section>
+
+     <!-- 6. Footer + 사업자 정보 -->
+    <section id="contact" class="pt-10 pb-12 bg-white border-t border-slate-200">
+      <div class="max-w-4xl mx-auto px-4 text-center text-xs text-slate-600 space-y-3">
+        <!-- SNS 아이콘 줄 -->
+        <div class="flex justify-center gap-4 text-lg">
+          <span>📷</span>
+          <span>🅝</span>
+          <span>💬</span>
+          <span>📘</span>
+        </div>
+
+        <!-- 사업자 / 주소 정보 (원본 형태만 맞춘 예시) -->
+        <div class="space-y-1">
+          <p>insta hotel mainbranch, Korea</p>
+          <p>(주)호텔인스타</p>
+          <p>대표자 : 이영환</p>
+          <p>통신판매업 신고번호: 2023-수원영통-1696호</p>
+          <p>수원시 영통구 영통로 94-6</p>
+          <p>Business License 176-24-01388 | Tel 031-203-4301</p>
+        </div>
+
+        <div class="flex justify-center gap-4 pt-2">
+          <a href="#" class="hover:underline">이용약관</a>
+          <a href="#" class="hover:underline">개인정보처리방침</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 오른쪽 아래 노란 "문의" 버튼 -->
+  <a
+    href="#contact"
+    class="fixed bottom-6 right-6 z-40 flex items-center justify-center w-16 h-16 rounded-full bg-yellow-400 shadow-xl text-sm font-medium hover:bg-yellow-300"
+  >
+    문의
+  </main>
+
+</body>
+</html>
