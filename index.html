@@ -8,7 +8,6 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     html { scroll-behavior: smooth; }
-
     /* 오렌지 섹션 스트라이프 배경 */
     .stripe-bg {
       background-image: repeating-linear-gradient(
@@ -26,73 +25,69 @@
   <!-- 상단 네비게이션 (투명, 상단 고정) -->
   <header id="header" class="fixed top-0 left-0 right-0 z-30 transition-colors duration-300 bg-transparent text-white">
     <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-      <!-- 로고 -->
+      <!-- 로고 (원본처럼 g/ue 느낌) -->
       <a href="#top" class="flex items-center gap-1 drop-shadow">
-        <span class="text-2xl font-semibold tracking-tight" data-i18n="logo">
-          Insta hotel - mainbranch
-        </span>
+        <span class="text-2xl font-semibold tracking-tight">Insta hotel - mainbranch</span>
       </a>
 
       <!-- 메뉴 -->
       <nav class="hidden md:flex items-center gap-8 text-sm font-medium drop-shadow">
-        <a href="about.html" class="hover:text-orange-300" data-i18n="nav.about">about</a>
-        <a href="rooms.html" class="hover:text-orange-300" data-i18n="nav.rooms">rooms</a>
-        <a href="reservation.html" class="hover:text-orange-300" data-i18n="nav.reservation">reservation</a>
-        <a href="#lounge" class="hover:text-orange-300" data-i18n="nav.lounge">bluerain lounge</a>
-        <a href="contact.html" class="hover:text-orange-300" data-i18n="nav.contact">contact</a>
+        <a href="about.html" class="hover:text-orange-300">about</a>
+        <a href="rooms.html" class="hover:text-orange-300">rooms</a>
+        <a href="reservation.html" class="hover:text-orange-300">reservation</a>
+        <a href="#lounge" class="hover:text-orange-300">bluerain lounge</a>
+        <a href="contact.html" class="hover:text-orange-300">contact</a>
 
-        <!-- 언어 버튼 + 드롭다운 -->
-        <div class="relative">
-          <button
-            id="langToggle"
-            class="flex items-center gap-1 text-xs border border-white/80 rounded-full px-3 py-1 bg-white/10"
-          >
-            <span id="langLabel">KR</span> ▾
-          </button>
-          <div
-            id="langMenu"
-            class="absolute right-0 mt-2 w-24 bg-white text-slate-800 rounded-lg shadow-lg text-xs hidden"
-          >
-            <button class="block w-full text-left px-3 py-2 hover:bg-slate-100" data-lang="ko">KR</button>
-            <button class="block w-full text-left px-3 py-2 hover:bg-slate-100" data-lang="en">EN</button>
-            <button class="block w-full text-left px-3 py-2 hover:bg-slate-100" data-lang="ja">JP</button>
-            <button class="block w-full text-left px-3 py-2 hover:bg-slate-100" data-lang="zh">CN</button>
-          </div>
-        </div>
+        <!-- 언어 버튼 -->
+        <button class="flex items-center gap-1 text-xs border border-white/80 rounded-full px-3 py-1 bg-white/10">
+          KR ▾
+        </button>
       </nav>
     </div>
   </header>
+  
 
-  <main id="top" class="pt-16">
+    <!-- 1. HERO 섹션 (테라스/뷰 풀스크린) -->
+    <!-- Hero 슬라이드쇼 -->
+<section id="hero" class="relative h-screen min-h-[640px] overflow-hidden">
 
-    <!-- 1. HERO 섹션 (풀스크린 슬라이드쇼) -->
-    <section id="hero" class="relative h-screen min-h-[640px] overflow-hidden">
-      <!-- 슬라이드 이미지들 -->
-      <img src="hero1.jpg" class="slide absolute inset-0 w-full h-full object-cover opacity-100 transition-opacity duration-[1500ms]" />
-      <img src="hero2.jpg" class="slide absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-[1500ms]" />
-      <img src="hero3.jpg" class="slide absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-[1500ms]" />
-      <img src="hero4.jpg" class="slide absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-[1500ms]" />
+<img src="hero1.jpg" class="slide absolute inset-0 w-full h-full object-cover opacity-100 transition-opacity duration-[1500ms]" />
+<img src="hero2.jpg" class="slide absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-[1500ms]" />
+<img src="hero3.jpg" class="slide absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-[1500ms]" />
+<img src="hero4.jpg" class="slide absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-[1500ms]" />
+  </div>
 
-      <!-- 어두운 투명 오버레이 -->
-      <div class="absolute inset-0 bg-black/30"></div>
+  <!-- 어두운 투명 오버레이 -->
+  <div class="absolute inset-0 bg-black/30"></div>
 
-      <!-- Hero 텍스트 (필요하면 나중에 문구 추가) -->
-      <div class="relative z-10 text-white px-6 flex items-center h-full">
-        <!-- 예시 문구 (언어 변환 가능) -->
-        <div class="max-w-xl space-y-4">
-          <h1 class="text-3xl md:text-5xl font-semibold" data-i18n="hero.title">
-            수원 도심 속 감성 휴식, 인스타호텔 본점
-          </h1>
-          <p class="text-sm md:text-base leading-relaxed" data-i18n="hero.subtitle">
-            출장, 여행, 데이트까지 모두 편안하게 머무를 수 있는 공간입니다.
-          </p>
-        </div>
-      </div>
-    </section>
+  <!-- Hero 텍스트 (원하면 나중에 추가 가능) -->
+  <div class="relative z-10 text-white px-6"></div>
+</section>
+    
+<!-- ==========================
+      ABOUT SECTION
+=========================== -->
+<section id="about" class="relative bg-white">
+ 
+
+<!-- 슬라이드 자동재생 스크립트 -->
+<script>
+  let index = 0;
+  const slides = document.querySelectorAll(".slide");
+
+  function showNextSlide() {
+    slides[index].style.opacity = 0;
+    index = (index + 1) % slides.length;
+    slides[index].style.opacity = 1;
+  }
+
+  setInterval(showNextSlide, 4000);
+</script>
+
 
     <!-- 2. 오렌지 키워드 섹션 -->
     <section id="about" class="relative text-white py-14 overflow-hidden" style="background-color: #ff6900">
-      <div class="absolute inset-0 stripe-bg opacity-60 pointer-events-none"></div>
+     <div class="absolute inset-0 stripe-bg opacity-60 pointer-events-none"></div>
 
       <div class="relative max-w-6xl mx-auto px-4">
         <div class="flex flex-wrap items-center gap-4 md:gap-6 text-xl md:text-3xl font-medium leading-relaxed">
@@ -121,7 +116,7 @@
           <img src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?q=80&w=201&auto=format&fit=crop"
                alt="" class="w-10 h-10 md:w-14 md:h-14 rounded-full object-cover border-[3px] border-white/80" />
           <span>, Street Suwon-Insta, Korea</span>
-          <img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?q=80&w=800&auto=format&fit=crop"
+         <img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?q=80&w=800&auto=format&fit=crop"
                alt="" class="w-10 h-10 md:w-14 md:h-14 rounded-full object-cover border-[3px] border-white/80" />
           <span>, Scent</span>
           <img src="https://images.unsplash.com/photo-1601042879364-f6df1b5c5147?q=80&w=800&auto=format&fit=crop"
@@ -134,16 +129,16 @@
     <!-- 3. 건물 외관 풀 이미지 -->
     <section id="rooms" class="bg-white">
       <img
-        src="hero6.jpg"
-        alt="building"
-        class="w-full max-h-[720px] object-cover"
+       src="hero6.jpg"
+  alt="building"
+  class="w-full max-h-[720px] object-cover"
       />
     </section>
 
     <!-- 4. 가운데 About 문장 -->
     <section id="lounge" class="py-16 bg-white">
       <div class="max-w-3xl mx-auto px-4 text-center">
-        <p class="text-xl md:text-2xl text-slate-800 italic leading-relaxed" data-i18n="about.center">
+        <p class="text-xl md:text-2xl text-slate-800 italic leading-relaxed">
           insta is a group of people that aspire to<br />
           ‘insta’ people, society, culture, and art together.
         </p>
@@ -154,7 +149,7 @@
     <section id="instagram" class="pb-16 bg-white">
       <div class="max-w-6xl mx-auto px-4">
         <p class="mb-4">
-          <span class="italic font-semibold" data-i18n="insta.title">insta hotel Instagram</span>
+          <span class="italic font-semibold">insta hotel Instagram</span>
           <span class="ml-1 text-slate-800">@instahotel_mainbranch</span>
         </p>
 
@@ -179,7 +174,7 @@
         </div>
 
         <div class="text-center">
-          <button class="px-6 py-2 border border-slate-400 text-sm bg-white hover:bg-slate-50" data-i18n="insta.more">
+          <button class="px-6 py-2 border border-slate-400 text-sm bg-white hover:bg-slate-50">
             더보기
           </button>
         </div>
@@ -197,7 +192,7 @@
           <span>📘</span>
         </div>
 
-        <!-- 사업자 / 주소 정보 -->
+        <!-- 사업자 / 주소 정보 (원본 형태만 맞춘 예시) -->
         <div class="space-y-1">
           <p>insta hotel mainbranch, Korea</p>
           <p>(주)호텔인스타</p>
@@ -208,8 +203,8 @@
         </div>
 
         <div class="flex justify-center gap-4 pt-2">
-          <a href="#" class="hover:underline" data-i18n="footer.terms">이용약관</a>
-          <a href="#" class="hover:underline" data-i18n="footer.privacy">개인정보처리방침</a>
+          <a href="#" class="hover:underline">이용약관</a>
+          <a href="#" class="hover:underline">개인정보처리방침</a>
         </div>
       </div>
     </section>
@@ -221,141 +216,24 @@
     class="fixed bottom-6 right-6 z-40 flex items-center justify-center w-16 h-16 rounded-full bg-yellow-400 shadow-xl text-sm font-medium hover:bg-yellow-300"
   >
     문의
-  </a>
 
-  <!-- ====== 스크립트들 ====== -->
-  <script>
-    // 헤더 스크롤 시 배경 전환
-    const header = document.getElementById("header");
+<script>
+const header = document.getElementById("header");
 
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 50) {
+window.addEventListener("scroll", () => {
+    if (window.scrollY > 50) {
+        // 스크롤 시 = 오렌지 배경 + 그림자
         header.classList.add("bg-[#ff6900]", "shadow-lg");
         header.classList.remove("bg-transparent");
-      } else {
+    } else {
+        // 맨 위에서는 = 투명
         header.classList.remove("bg-[#ff6900]", "shadow-lg");
         header.classList.add("bg-transparent");
-      }
-    });
-
-    // Hero 슬라이드쇼
-    const slides = document.querySelectorAll(".slide");
-    let slideIndex = 0;
-
-    function showNextSlide() {
-      slides[slideIndex].style.opacity = 0;
-      slideIndex = (slideIndex + 1) % slides.length;
-      slides[slideIndex].style.opacity = 1;
     }
+});
+</script>
 
-    if (slides.length > 1) {
-      setInterval(showNextSlide, 4000);
-    }
-
-    // 다국어 데이터
-    const i18n = {
-      ko: {
-        logo: "Insta hotel - mainbranch",
-        "nav.about": "about",
-        "nav.rooms": "rooms",
-        "nav.reservation": "reservation",
-        "nav.lounge": "bluerain lounge",
-        "nav.contact": "contact",
-        "hero.title": "수원 도심 속 감성 휴식, 인스타호텔 본점",
-        "hero.subtitle": "출장, 여행, 데이트까지 모두 편안하게 머무를 수 있는 공간입니다.",
-        "about.center": "insta는 사람·도시·문화·예술이 함께 어우러지는 공간을 지향합니다.",
-        "insta.title": "insta hotel Instagram",
-        "insta.more": "더보기",
-        "footer.terms": "이용약관",
-        "footer.privacy": "개인정보처리방침",
-      },
-      en: {
-        logo: "Insta Hotel - Main Branch",
-        "nav.about": "about",
-        "nav.rooms": "rooms",
-        "nav.reservation": "reservation",
-        "nav.lounge": "bluerain lounge",
-        "nav.contact": "contact",
-        "hero.title": "Cozy urban stay in Suwon, Insta Hotel",
-        "hero.subtitle": "Perfect for business trips, city breaks, and couple getaways.",
-        "about.center": "Insta is a group of people that brings together people, city, culture and art.",
-        "insta.title": "Insta Hotel Instagram",
-        "insta.more": "View more",
-        "footer.terms": "Terms of Use",
-        "footer.privacy": "Privacy Policy",
-      },
-      ja: {
-        logo: "インスタホテル 本店",
-        "nav.about": "about",
-        "nav.rooms": "rooms",
-        "nav.reservation": "reservation",
-        "nav.lounge": "bluerain lounge",
-        "nav.contact": "contact",
-        "hero.title": "水原の街中でくつろげる、インスタホテル本店",
-        "hero.subtitle": "出張・旅行・カップル旅行まで、快適にお過ごしいただけます。",
-        "about.center": "Insta は、人・街・文化・アートをつなぐホテルです。",
-        "insta.title": "インスタホテル公式インスタグラム",
-        "insta.more": "もっと見る",
-        "footer.terms": "利用規約",
-        "footer.privacy": "個人情報保護方針",
-      },
-      zh: {
-        logo: "Insta酒店 本店",
-        "nav.about": "about",
-        "nav.rooms": "rooms",
-        "nav.reservation": "reservation",
-        "nav.lounge": "bluerain lounge",
-        "nav.contact": "contact",
-        "hero.title": "水原市中心的温馨休憩空间 Insta Hotel 本店",
-        "hero.subtitle": "无论是商务出差还是旅行约会，都能在这里舒适入住。",
-        "about.center": "Insta 是把人、城市、文化与艺术连结在一起的空间。",
-        "insta.title": "Insta Hotel 官方 Instagram",
-        "insta.more": "查看更多",
-        "footer.terms": "使用条款",
-        "footer.privacy": "隐私政策",
-      },
-    };
-
-    function setLanguage(lang) {
-      document.documentElement.lang = lang;
-      const dict = i18n[lang];
-      if (!dict) return;
-
-      document.querySelectorAll("[data-i18n]").forEach((el) => {
-        const key = el.getAttribute("data-i18n");
-        if (dict[key]) {
-          el.innerText = dict[key];
-        }
-      });
-
-      const label = document.getElementById("langLabel");
-      if (label) {
-        label.textContent = lang.toUpperCase();
-      }
-    }
-
-    // 언어 드롭다운 동작
-    const langToggle = document.getElementById("langToggle");
-    const langMenu = document.getElementById("langMenu");
-
-    if (langToggle && langMenu) {
-      langToggle.addEventListener("click", () => {
-        langMenu.classList.toggle("hidden");
-      });
-
-      langMenu.querySelectorAll("button[data-lang]").forEach((btn) => {
-        btn.addEventListener("click", () => {
-          const lang = btn.getAttribute("data-lang");
-          setLanguage(lang);
-          langMenu.classList.add("hidden");
-        });
-      });
-
-      // 기본 언어: 한국어
-      setLanguage("ko");
-    }
-  </script>
-
+    
 </body>
 </html>
 
