@@ -4,45 +4,100 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>contact – Insta Hotel - mainbranch</title>
- <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,600;1,600;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,600;1,600;1,700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html { scroll-behavior: smooth; }
+  </style>
 </head>
-<body class="bg-white text-slate-900">
-  <!-- 상단 네비게이션 (오렌지색 고정) -->
-  <header
-    id="header"
-    class="fixed top-0 left-0 right-0 z-30 bg-[#ff6900] text-white drop-shadow"
-  >
+<body class="bg-white text-slate-900 font-sans">
+
+  <header id="header" class="fixed top-0 left-0 right-0 z-30 bg-[#ff6900] text-white shadow-md">
     <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-      <!-- 로고 / 호텔 이름 -->
+      
+      <button id="mobile-menu-btn" class="md:hidden text-2xl drop-shadow">
+        ☰
+      </button>
+
       <a href="index.html" class="flex items-center gap-1 text-white drop-shadow">
-        <span class="text-2xl font-semibold tracking-tight">
+        <span class="text-xl md:text-2xl font-semibold tracking-tight">
           Insta Hotel - mainbranch
         </span>
       </a>
 
-      <!-- 메뉴 -->
-      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-white drop-shadow">
-        <a href="about.html" class="hover:text-orange-300">about</a>
-        <a href="rooms.html" class="hover:text-orange-300">rooms</a>
-        <a href="reservation.html" class="hover:text-orange-300">reservation</a>
-        <a href="#lounge" class="hover:text-orange-300">bluerain lounge</a>
-        <a href="contact.html" class="hover:text-orange-300">contact</a>
+      <nav id="desktop-nav" class="hidden md:flex items-center gap-8 text-sm font-medium drop-shadow">
+        <a href="about.html" class="hover:text-orange-200 transition-colors">about</a>
+        <a href="rooms.html" class="hover:text-orange-200 transition-colors">rooms</a>
+        <a href="reservation.html" class="hover:text-orange-200 transition-colors">reservation</a>
+        <a href="#lounge" class="hover:text-orange-200 transition-colors">bluerain lounge</a>
+        <a href="contact.html" class="hover:text-orange-200 transition-colors">contact</a>
+        
+        <select id="langSelect" class="text-xs bg-white/20 text-white border border-white/80 rounded-full px-2 py-1 outline-none cursor-pointer hover:bg-white/30">
+          <option value="ko" class="text-slate-900">KR</option>
+          <option value="en" class="text-slate-900">EN</option>
+          <option value="ja" class="text-slate-900">JP</option>
+          <option value="zh" class="text-slate-900">CN</option>
+        </select>
       </nav>
 
-      <!-- 언어 선택 버튼 -->
-      <button
-        class="flex items-center gap-1 text-xs border border-white/80 rounded-full px-3 py-1 bg-white/10"
-      >
-        KR ▾
-      </button>
+      <div class="md:hidden">
+         <select id="langSelectMobileTop" class="text-lg bg-transparent border-none outline-none text-white drop-shadow">
+          <option value="ko" class="text-black">🇰🇷</option>
+          <option value="en" class="text-black">🇺🇸</option>
+          <option value="ja" class="text-black">🇯🇵</option>
+          <option value="zh" class="text-black">🇨🇳</option>
+        </select>
+      </div>
     </div>
   </header>
-  <!-- WRAPPER -->
+
+  <div id="drawer-overlay" class="fixed inset-0 bg-black/50 z-40 hidden transition-opacity duration-300"></div>
+  
+  <nav id="mobile-drawer" class="fixed top-0 left-0 w-[75%] max-w-sm h-full z-50 bg-white shadow-xl text-slate-900 transform -translate-x-full transition-transform duration-300 ease-in-out overflow-y-auto">
+    <div class="p-6">
+      <button id="mobile-menu-close-btn" class="absolute top-4 right-4 text-3xl font-light hover:text-[#ff6900]">&times;</button>
+      <div class="mt-2 mb-8">
+        <span class="text-xl font-bold tracking-tight text-[#ff6900]">Insta Hotel</span>
+      </div>
+      
+      <ul class="flex flex-col space-y-4 text-lg font-medium">
+        <li><a href="about.html" class="block hover:text-[#ff6900]">about</a></li>
+        
+        <li>
+            <div class="flex justify-between items-center cursor-pointer hover:text-[#ff6900]" id="rooms-toggle">
+                <span>rooms</span> <span class="text-sm">▼</span>
+            </div>
+            <ul id="rooms-submenu" class="hidden mt-3 ml-4 space-y-3 border-l-2 border-slate-100 pl-4">
+                <li><a href="rooms.html" class="block text-sm text-slate-600 hover:text-[#ff6900]">Twin</a></li>
+                <li><a href="rooms.html" class="block text-sm text-slate-600 hover:text-[#ff6900]">Special</a></li>
+                <li><a href="rooms.html" class="block text-sm text-slate-600 hover:text-[#ff6900]">Luxury</a></li>
+                <li><a href="rooms.html" class="block text-sm text-slate-600 hover:text-[#ff6900]">Premium</a></li>
+                <li><a href="rooms.html" class="block text-sm text-slate-600 hover:text-[#ff6900]">Deluxe</a></li>
+                <li><a href="rooms.html" class="block text-sm text-slate-600 hover:text-[#ff6900]">Standard</a></li>
+                <li><a href="reservation.html" class="block text-sm text-slate-600 hover:text-[#ff6900] font-semibold">Long Stay</a></li>
+            </ul>
+        </li>
+
+        <li><a href="reservation.html" class="block hover:text-[#ff6900]">reservation</a></li>
+        <li><a href="#lounge" class="block hover:text-[#ff6900]">bluerain lounge</a></li>
+        <li><a href="contact.html" class="block hover:text-[#ff6900]">contact</a></li>
+      </ul>
+
+      <div class="mt-8 border-t pt-4">
+          <p class="text-sm text-slate-400 mb-2">Language</p>
+          <select id="langSelectMobile" class="w-full p-2 border rounded text-slate-700 bg-slate-50">
+              <option value="ko">Korean</option>
+              <option value="en">English</option>
+              <option value="ja">Japanese</option>
+              <option value="zh">Chinese</option>
+          </select>
+      </div>
+    </div>
+  </nav>
+
   <div class="max-w-5xl mx-auto px-4 md:px-8 pt-24 pb-28">
 
-    <!-- 🔶 parking information -->
-    <h1 class="text-3xl md:text-4xl font-semibold italic text-[#ff6900] mb-8">
+    <h1 class="text-3xl md:text-4xl font-semibold italic text-[#ff6900] mb-8 mt-8">
       parking information
     </h1>
 
@@ -51,76 +106,114 @@
       무료 주차가 가능하며, 주차가 어려우신 분들은 무료 발렛도 해드립니다. 미리 주차도 가능하십니다.😊
     </p>
 
-    <!-- 🔶 Please ask me questions. -->
     <h2 class="text-3xl md:text-4xl font-semibold italic text-[#ff6900] mb-8">
       Please ask me questions.
     </h2>
 
-    <!-- Korean Section -->
     <div class="text-[15px] leading-relaxed mb-10">
       문의는 오로로 하단 카카오채널 ‘인스타호텔’ 혹은 031-203-4301으로 연락부탁드립니다😊 <br>
       <span class="font-semibold">예약 및 이용 관련 문의 :</span> yhl5258@naver.com <br>
       <span class="font-semibold">단체/숙박/행사 및 제휴 관련 문의 :</span> yhl5258@naver.com
     </div>
 
-    <!-- English Section -->
     <div class="text-[15px] leading-relaxed mb-10">
       Please contact the lower right Kakao channel ‘insta Hotel’ or yhl5258@naver.com 😊 <br>
       Reservation and Usage Inquiries : yhl5258@naver.com <br>
       Inquiries regarding sponsorship and partnerships : yhl5258@naver.com
     </div>
 
-    <!-- Japanese Section -->
     <div class="text-[15px] leading-relaxed mb-10">
       お問い合わせは右下のカカオチャンネル「Insta Hotel」または yhl5258@naver.com までご連絡ください。😊 <br>
       予約及びご利用のお問い合わせ : yhl5258@naver.com <br>
       協賛及び提携に関するお問い合わせ : yhl5258@naver.com
     </div>
 
-    <!-- Warning Section -->
     <div class="text-[15px] leading-relaxed mb-20">
       최근 호텔 예약사이트 링크로 사칭해 메일을 보내는 스팸메일이 유행중이며, 호텔 관련 메일 내용을 잘 살펴보신 후에 클릭 부탁드립니다. <br><br>
       Recently, there has been a trend of spam emails impersonating hotel reservation site links. <br>
       Please carefully review any hotel-related email content before clicking on any links. <br><br>
       最近、ホテル予約サイトのリンクを模倣したスパムメールが流行していますので、ホテル関連のメール内容をよく確認の上、クリックしてください。
     </div>
+  </div>
 
-    <!-- 6. Footer + 사업자 정보 -->
-    <section id="contact" class="pt-10 pb-12 bg-white border-t border-slate-200">
-      <div class="max-w-4xl mx-auto px-4 text-center text-xs text-slate-600 space-y-3">
-        <!-- SNS 아이콘 줄 -->
-        <div class="flex justify-center gap-4 text-lg">
-          <span>📷</span>
-          <span>🅝</span>
-          <span>💬</span>
-          <span>📘</span>
-        </div>
-
-        <!-- 사업자 / 주소 정보 (원본 형태만 맞춘 예시) -->
-        <div class="space-y-1">
-          <p>insta hotel mainbranch, Korea</p>
-          <p>(주)호텔인스타</p>
-          <p>대표자 : 이영환</p>
-          <p>통신판매업 신고번호: 2023-수원영통-1696호</p>
-          <p>수원시 영통구 영통로 94-6</p>
-          <p>Business License 176-24-01388 | Tel 031-203-4301</p>
-        </div>
-
-        <div class="flex justify-center gap-4 pt-2">
-          <a href="#" class="hover:underline">이용약관</a>
-          <a href="#" class="hover:underline">개인정보처리방침</a>
-        </div>
+  <section id="footer" class="pt-10 pb-12 bg-white border-t border-slate-200">
+    <div class="max-w-4xl mx-auto px-4 text-center text-xs text-slate-600 space-y-3">
+      <div class="flex justify-center gap-4 text-lg">
+        <span>📷</span>
+        <span>🅝</span>
+        <span>💬</span>
+        <span>📘</span>
       </div>
-    </section>
-  </main>
 
-  <!-- 오른쪽 아래 노란 "문의" 버튼 -->
+      <div class="space-y-1">
+        <p>insta hotel mainbranch, Korea</p>
+        <p>(주)호텔인스타</p>
+        <p>대표자 : 이영환</p>
+        <p>통신판매업 신고번호: 2023-수원영통-1696호</p>
+        <p>수원시 영통구 영통로 94-6</p>
+        <p>Business License 176-24-01388 | Tel 031-203-4301</p>
+      </div>
+
+      <div class="flex justify-center gap-4 pt-2">
+        <a href="#" class="hover:underline">이용약관</a>
+        <a href="#" class="hover:underline">개인정보처리방침</a>
+      </div>
+    </div>
+  </section>
+
   <a
     href="#contact"
     class="fixed bottom-6 right-6 z-40 flex items-center justify-center w-16 h-16 rounded-full bg-yellow-400 shadow-xl text-sm font-medium hover:bg-yellow-300"
   >
     문의
-  </main>
+  </a>
 
+  <script>
+    // 1. 모바일 드로어 메뉴 (Code B 로직 적용)
+    const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+    const mobileDrawer = document.getElementById("mobile-drawer");
+    const drawerOverlay = document.getElementById("drawer-overlay");
+    const mobileCloseBtn = document.getElementById("mobile-menu-close-btn");
+
+    function openMenu() {
+        mobileDrawer.classList.remove("-translate-x-full");
+        drawerOverlay.classList.remove("hidden");
+        document.body.style.overflow = "hidden"; 
+    }
+    function closeMenu() {
+        mobileDrawer.classList.add("-translate-x-full");
+        drawerOverlay.classList.add("hidden");
+        document.body.style.overflow = ""; 
+    }
+
+    mobileMenuBtn.addEventListener("click", openMenu);
+    mobileCloseBtn.addEventListener("click", closeMenu);
+    drawerOverlay.addEventListener("click", closeMenu);
+
+    // 1-1. 모바일 드로어 내부 Rooms 토글
+    const roomsToggle = document.getElementById("rooms-toggle");
+    const roomsSubmenu = document.getElementById("rooms-submenu");
+    roomsToggle.addEventListener("click", () => {
+        roomsSubmenu.classList.toggle("hidden");
+    });
+
+
+    // 2. 다국어 선택 동기화 (간단한 예시)
+    // 실제 텍스트 변경 로직은 필요에 따라 추가하시면 됩니다. Code B의 로직을 유지합니다.
+    const langSelect = document.getElementById("langSelect");
+    const langSelectMobileTop = document.getElementById("langSelectMobileTop");
+    const langSelectMobile = document.getElementById("langSelectMobile");
+
+    function syncLanguage(lang) {
+        if(langSelect) langSelect.value = lang;
+        if(langSelectMobileTop) langSelectMobileTop.value = lang;
+        if(langSelectMobile) langSelectMobile.value = lang;
+        // 여기에 페이지 텍스트를 바꾸는 함수(applyLanguage)를 호출할 수 있습니다.
+    }
+
+    if(langSelect) langSelect.addEventListener("change", (e) => syncLanguage(e.target.value));
+    if(langSelectMobileTop) langSelectMobileTop.addEventListener("change", (e) => syncLanguage(e.target.value));
+    if(langSelectMobile) langSelectMobile.addEventListener("change", (e) => syncLanguage(e.target.value));
+  </script>
 </body>
 </html>
