@@ -20,9 +20,10 @@
     }
   </style>
 </head>
+
 <body class="text-slate-900">
 
-  <!-- 상단 네비게이션 (투명, 상단 고정) -->
+  <!-- 상단 네비게이션 -->
   <header id="header" class="fixed top-0 left-0 right-0 z-30 transition-colors duration-300 bg-transparent text-white">
     <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
       <!-- 로고 -->
@@ -38,7 +39,7 @@
         <a href="#lounge" class="hover:text-orange-300">bluerain lounge</a>
         <a href="contact.html" class="hover:text-orange-300">contact</a>
 
-        <!-- 언어 선택 (KR / EN / JP / CN) -->
+        <!-- 언어 선택 -->
         <select
           id="langSelect"
           class="text-xs bg-white text-slate-800 border border-white/80 rounded-full px-2 py-1 outline-none"
@@ -52,91 +53,79 @@
     </div>
   </header>
 
-  <!-- 1. HERO 섹션 (테라스/뷰 풀스크린) -->
-  <!-- Hero 슬라이드쇼 -->
-  <section id="hero" class="relative h-screen min-h-[640px] overflow-hidden">
+
+  <!-- 1. HERO 섹션 (모바일 최적화) -->
+  <section
+    id="hero"
+    class="relative min-h-[100vh] overflow-hidden flex items-center justify-center"
+  >
     <img src="hero1.jpg" class="slide absolute inset-0 w-full h-full object-cover opacity-100 transition-opacity duration-[1500ms]" />
     <img src="hero2.jpg" class="slide absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-[1500ms]" />
     <img src="hero3.jpg" class="slide absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-[1500ms]" />
     <img src="hero4.jpg" class="slide absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-[1500ms]" />
 
-    <!-- 어두운 투명 오버레이 -->
     <div class="absolute inset-0 bg-black/30"></div>
 
-    <!-- Hero 텍스트 (원하면 나중에 추가 가능) -->
-    <div class="relative z-10 text-white px-6"></div>
+    <!-- Hero 텍스트(원하면 나중에 추가 가능) -->
+    <div class="relative z-10 text-white px-6 pt-24 md:pt-0 text-center"></div>
   </section>
 
-  <!-- ==========================
-        ABOUT SECTION
-  =========================== -->
-  <section id="about" class="relative bg-white">
-    <!-- 슬라이드 자동재생 스크립트 -->
-    <script>
-      let index = 0;
-      const slides = document.querySelectorAll(".slide");
 
-      function showNextSlide() {
-        slides[index].style.opacity = 0;
-        index = (index + 1) % slides.length;
-        slides[index].style.opacity = 1;
-      }
+  <!-- 슬라이드쇼 스크립트 -->
+  <script>
+    let index = 0;
+    const slides = document.querySelectorAll(".slide");
 
-      setInterval(showNextSlide, 4000);
-    </script>
+    function showNextSlide() {
+      slides[index].style.opacity = 0;
+      index = (index + 1) % slides.length;
+      slides[index].style.opacity = 1;
+    }
 
-    <!-- 2. 오렌지 키워드 섹션 -->
-    <section id="about-inner" class="relative text-white py-14 overflow-hidden" style="background-color: #ff6900">
-      <div class="absolute inset-0 stripe-bg opacity-60 pointer-events-none"></div>
+    setInterval(showNextSlide, 4000);
+  </script>
 
-      <div class="relative max-w-6xl mx-auto px-4">
-        <div class="flex flex-wrap items-center gap-4 md:gap-6 text-xl md:text-3xl font-medium leading-relaxed">
-          <span>People</span>
-          <img src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?q=80&w=200&auto=format&fit=crop"
-               alt="" class="w-10 h-10 md:w-14 md:h-14 rounded-full object-cover border-[3px] border-white/80" />
-          <span>, Village</span>
-          <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=200&auto=format&fit=crop"
-               alt="" class="w-10 h-10 md:w-14 md:h-14 rounded-full object-cover border-[3px] border-white/80" />
-          <span>, Local Artist</span>
-          <img src="https://images.unsplash.com/photo-1500534314211-0a24cd03f2c0?q=80&w=200&auto=format&fit=crop"
-               alt="" class="w-10 h-10 md:w-14 md:h-14 rounded-full object-cover border-[3px] border-white/80" />
-          <span>, Food</span>
-          <img src="https://images.unsplash.com/photo-1504753793650-d4a2b783c15e?q=80&w=200&auto=format&fit=crop"
-               alt="" class="w-10 h-10 md:w-14 md:h-14 rounded-full object-cover border-[3px] border-white/80" />
-          <span>, Suwon-Insta Music</span>
-          <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=200&auto=format&fit=crop"
-               alt="" class="w-10 h-10 md:w-14 md:h-14 rounded-full object-cover border-[3px] border-white/80" />
-          <span>, Tourist</span>
-          <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?q=80&w=200&auto=format&fit=crop"
-               alt="" class="w-10 h-10 md:w-14 md:h-14 rounded-full object-cover border-[3px] border-white/80" />
-          <span>, Book</span>
-          <img src="https://images.unsplash.com/photo-1495446815901-a7297e633e8d?q=80&w=200&auto=format&fit=crop"
-               alt="" class="w-10 h-10 md:w-14 md:h-14 rounded-full object-cover border-[3px] border-white/80" />
-          <span>, Culture, Play, Design</span>
-          <img src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?q=80&w=201&auto=format&fit=crop"
-               alt="" class="w-10 h-10 md:w-14 md:h-14 rounded-full object-cover border-[3px] border-white/80" />
-          <span>, Street Suwon-Insta, Korea</span>
-          <img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?q=80&w=800&auto=format&fit=crop"
-               alt="" class="w-10 h-10 md:w-14 md:h-14 rounded-full object-cover border-[3px] border-white/80" />
-          <span>, Scent</span>
-          <img src="https://images.unsplash.com/photo-1601042879364-f6df1b5c5147?q=80&w=800&auto=format&fit=crop"
-               alt="" class="w-10 h-10 md:w-14 md:h-14 rounded-full object-cover border-[3px] border-white/80" />
-          <span>, Memories, Art, Night</span>
-        </div>
+
+  <!-- 2. 오렌지 키워드 섹션 -->
+  <section id="about-inner" class="relative text-white py-14 overflow-hidden" style="background-color: #ff6900">
+    <div class="absolute inset-0 stripe-bg opacity-60 pointer-events-none"></div>
+
+    <div class="relative max-w-6xl mx-auto px-4">
+      <div class="flex flex-wrap items-center gap-4 md:gap-6 text-xl md:text-3xl font-medium leading-relaxed">
+        <span>People</span>
+        <img src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?q=80&w=200&auto=format&fit=crop"
+             class="w-10 h-10 md:w-14 md:h-14 rounded-full object-cover border-[3px] border-white/80"/>
+        <span>, Village</span>
+        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=200&auto=format&fit=crop"
+             class="w-10 h-10 md:w-14 md:h-14 rounded-full object-cover border-[3px] border-white/80"/>
+        <span>, Local Artist</span>
+        <img src="https://images.unsplash.com/photo-1500534314211-0a24cd03f2c0?q=80&w=200&auto=format&fit=crop"
+             class="w-10 h-10 md:w-14 md:h-14 rounded-full object-cover border-[3px] border-white/80"/>
+        <span>, Food</span>
+        <img src="https://images.unsplash.com/photo-1504753793650-d4a2b783c15e?q=80&w=200&auto=format&fit=crop"
+             class="w-10 h-10 md:w-14 md:h-14 rounded-full object-cover border-[3px] border-white/80"/>
+        <span>, Suwon-Insta Music</span>
+        <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=200&auto=format&fit=crop"
+             class="w-10 h-10 md:w-14 md:h-14 rounded-full object-cover border-[3px] border-white/80"/>
+        <span>, Tourist</span>
+        <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603e6f?q=80&w=200&auto=format&fit=crop"
+             class="w-10 h-10 md:w-14 md:h-14 rounded-full object-cover border-[3px] border-white/80"/>
+        <span>, Book</span>
+        <img src="https://images.unsplash.com/photo-1495446815901-a7297e633e8d?q=80&w=200&auto=format&fit=crop"
+             class="w-10 h-10 md:w-14 md:h-14 rounded-full object-cover border-[3px] border-white/80"/>
+        <span>, Culture, Play, Design</span>
       </div>
-    </section>
+    </div>
   </section>
 
-  <!-- 3. 건물 외관 풀 이미지 -->
+
+  <!-- 3. 건물 외관 이미지 -->
   <section id="rooms" class="bg-white">
-    <img
-      src="hero6.jpg"
-      alt="building"
-      class="w-full max-h-[720px] object-cover"
-    />
+    <img src="hero6.jpg" alt="building" class="w-full max-h-[720px] object-cover" />
   </section>
 
-  <!-- 4. 가운데 About 문장 -->
+
+  <!-- 4. About 문장 -->
   <section id="lounge" class="py-16 bg-white">
     <div class="max-w-3xl mx-auto px-4 text-center">
       <p class="text-xl md:text-2xl text-slate-800 italic leading-relaxed">
@@ -146,7 +135,8 @@
     </div>
   </section>
 
-  <!-- 5. Instagram 그리드 -->
+
+  <!-- 5. Instagram Grid -->
   <section id="instagram" class="pb-16 bg-white">
     <div class="max-w-6xl mx-auto px-4">
       <p class="mb-4">
@@ -155,27 +145,25 @@
       </p>
 
       <div class="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 mb-8">
-        <!-- 실제 인스타 이미지로 교체 가능 -->
         <img src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?q=80&w=600&auto=format&fit=crop"
-             alt="" class="w-full aspect-square object-cover" />
+             class="w-full aspect-square object-cover"/>
         <img src="https://images.unsplash.com/photo-1520256862855-398228c41684?q=80&w=601&auto=format&fit=crop"
-             alt="" class="w-full aspect-square object-cover" />
+             class="w-full aspect-square object-cover"/>
         <img src="https://images.unsplash.com/photo-1551907234-9c56277263ca?q=80&w=602&auto=format&fit=crop"
-             alt="" class="w-full aspect-square object-cover" />
+             class="w-full aspect-square object-cover"/>
         <img src="https://images.unsplash.com/photo-1537726044900-b3b8c19c87e4?q=80&w=603&auto=format&fit=crop"
-             alt="" class="w-full aspect-square object-cover" />
+             class="w-full aspect-square object-cover"/>
         <img src="https://images.unsplash.com/photo-1500534314211-0a24cd03f2c0?q=80&w=604&auto=format&fit=crop"
-             alt="" class="w-full aspect-square object-cover" />
+             class="w-full aspect-square object-cover"/>
         <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=605&auto=format&fit=crop"
-             alt="" class="w-full aspect-square object-cover" />
+             class="w-full aspect-square object-cover"/>
         <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=606&auto=format&fit=crop"
-             alt="" class="w-full aspect-square object-cover" />
+             class="w-full aspect-square object-cover"/>
         <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=607&auto=format&fit=crop"
-             alt="" class="w-full aspect-square object-cover" />
+             class="w-full aspect-square object-cover"/>
       </div>
 
       <div class="text-center">
-        <!-- 한국어 텍스트: "더보기" -->
         <button id="btnMore" class="px-6 py-2 border border-slate-400 text-sm bg-white hover:bg-slate-50">
           더보기
         </button>
@@ -183,10 +171,11 @@
     </div>
   </section>
 
-  <!-- 6. Footer + 사업자 정보 -->
+
+  <!-- 6. Footer -->
   <section id="contact" class="pt-10 pb-12 bg-white border-t border-slate-200">
     <div class="max-w-4xl mx-auto px-4 text-center text-xs text-slate-600 space-y-3">
-      <!-- SNS 아이콘 줄 -->
+
       <div class="flex justify-center gap-4 text-lg">
         <span>📷</span>
         <span>🅝</span>
@@ -194,7 +183,6 @@
         <span>📘</span>
       </div>
 
-      <!-- 사업자 / 주소 정보 -->
       <div class="space-y-1">
         <p>insta hotel mainbranch, Korea</p>
         <p id="companyName">(주)호텔인스타</p>
@@ -208,36 +196,42 @@
         <a href="#" id="termsLink" class="hover:underline">이용약관</a>
         <a href="#" id="privacyLink" class="hover:underline">개인정보처리방침</a>
       </div>
+
     </div>
   </section>
 
-  <!-- 오른쪽 아래 노란 "문의" 버튼 -->
+
+  <!-- 오른쪽 아래 문의 버튼 -->
   <a
     href="#contact"
     id="inquiryBtn"
-    class="fixed bottom-6 right-6 z-40 flex items-center justify-center w-16 h-16 rounded-full bg-yellow-400 shadow-xl text-sm font-medium hover:bg-yellow-300"
+    class="fixed bottom-6 right-4 md:bottom-8 md:right-8
+           z-40 flex items-center justify-center
+           w-16 h-16 md:w-20 md:h-20
+           rounded-full bg-yellow-400 shadow-xl
+           text-sm md:text-base font-medium hover:bg-yellow-300"
   >
     문의
   </a>
 
-  <!-- 헤더 스크롤 색 변경 스크립트 -->
+
+  <!-- 헤더 스크롤 색 변경 -->
   <script>
     const header = document.getElementById("header");
 
     window.addEventListener("scroll", () => {
       if (window.scrollY > 50) {
-        // 스크롤 시 = 오렌지 배경 + 그림자
         header.classList.add("bg-[#ff6900]", "shadow-lg");
         header.classList.remove("bg-transparent");
       } else {
-        // 맨 위에서는 = 투명
         header.classList.remove("bg-[#ff6900]", "shadow-lg");
         header.classList.add("bg-transparent");
       }
     });
   </script>
 
-  <!-- 다국어 변환 스크립트 (한국어만 나라별로 번역) -->
+
+  <!-- 다국어 변환 -->
   <script>
     const translations = {
       ko: {
@@ -287,10 +281,8 @@
     function applyLanguage(lang) {
       const t = translations[lang] || translations.ko;
 
-      // html lang 속성 변경
       document.documentElement.lang = lang;
 
-      // 각 요소에 텍스트 적용
       document.getElementById("btnMore").textContent = t.btnMore;
       document.getElementById("companyName").textContent = t.companyName;
       document.getElementById("ceoName").textContent = t.ceoName;
@@ -301,17 +293,15 @@
       document.getElementById("inquiryBtn").textContent = t.inquiryBtn;
     }
 
-    // 언어 선택 변경 시
-    langSelect.addEventListener("change", (e) => {
-      applyLanguage(e.target.value);
-    });
+    langSelect.addEventListener("change", (e) => applyLanguage(e.target.value));
 
-    // 최초 로드 시 한국어 적용
     applyLanguage("ko");
   </script>
 
 </body>
 </html>
+
+
 
 
 
