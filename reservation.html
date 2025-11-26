@@ -5,51 +5,108 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Reservation – Insta Hotel - mainbranch</title>
   <script src="https://cdn.tailwindcss.com"></script>
- <!-- 🔥 무한 슬라이드 애니메이션 선언 -->
   <style>
+    html { scroll-behavior: smooth; }
+    
+    /* 🔥 무한 슬라이드 애니메이션 (기존 예약 페이지 스타일 유지) */
     @keyframes slideInfinite {
-      0%   { transform: translateX(0); }
-      100% { transform: translateX(-50%); } /* 전체의 절반만큼 이동 */
+      0%    { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    
+    /* 슬라이드 트랙 애니메이션 적용 클래스 */
+    .animate-slide {
+        animation: slideInfinite 30s linear infinite;
     }
   </style>
 </head>
-<body class="bg-white text-slate-900">
+<body class="bg-white text-slate-900 font-sans">
 
-  <!-- 상단 네비게이션 (글루처럼 투명 → 스크롤 시 오렌지) -->
-  <header
-    id="header"
-    class="fixed top-0 left-0 right-0 z-30 bg-transparent text-white transition-colors duration-300"
-  >
-    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-      <!-- 로고 / 호텔 이름 -->
+  <header id="header" class="fixed top-0 left-0 right-0 z-30 transition-colors duration-300 bg-transparent text-white">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      
+      <button id="mobile-menu-btn" class="md:hidden text-2xl drop-shadow">
+        ☰
+      </button>
+
       <a href="index.html" class="flex items-center gap-1 drop-shadow">
-        <span class="text-2xl font-semibold tracking-tight">
+        <span class="text-xl md:text-2xl font-semibold tracking-tight">
           Insta Hotel - mainbranch
         </span>
       </a>
 
-      <!-- 메뉴 -->
-      <nav class="hidden md:flex items-center gap-8 text-sm font-medium drop-shadow">
+      <nav id="desktop-nav" class="hidden md:flex items-center gap-8 text-sm font-medium drop-shadow">
         <a href="about.html" class="hover:text-orange-300">about</a>
         <a href="rooms.html" class="hover:text-orange-300">rooms</a>
         <a href="reservation.html" class="hover:text-orange-300">reservation</a>
         <a href="#lounge" class="hover:text-orange-300">bluerain lounge</a>
         <a href="contact.html" class="hover:text-orange-300">contact</a>
+        <select id="langSelect" class="text-xs bg-white text-slate-800 border border-white/80 rounded-full px-2 py-1 outline-none">
+          <option value="ko">KR</option>
+          <option value="en">EN</option>
+          <option value="ja">JP</option>
+          <option value="zh">CN</option>
+        </select>
       </nav>
 
-      <!-- 언어 버튼 -->
-      <button
-        class="flex items-center gap-1 text-xs border border-white/80 rounded-full px-3 py-1 bg-white/10"
-      >
-        KR ▾
-      </button>
+      <div class="md:hidden">
+         <select id="langSelectMobileTop" class="text-lg bg-transparent border-none outline-none text-white drop-shadow">
+          <option value="ko" class="text-black">🇰🇷</option>
+          <option value="en" class="text-black">🇺🇸</option>
+          <option value="ja" class="text-black">🇯🇵</option>
+          <option value="zh" class="text-black">🇨🇳</option>
+        </select>
+      </div>
     </div>
   </header>
 
+  <div id="drawer-overlay" class="fixed inset-0 bg-black/50 z-40 hidden md:hidden transition-opacity duration-300"></div>
+  
+  <nav id="mobile-drawer" class="fixed top-0 left-0 w-[75%] max-w-sm h-full z-50 bg-white shadow-xl text-slate-900 md:hidden transform -translate-x-full transition-transform duration-300 ease-in-out">
+    <div class="p-6">
+      <button id="mobile-menu-close-btn" class="absolute top-4 right-4 text-3xl font-light hover:text-[#ff6900]">&times;</button>
+      <div class="mt-2 mb-8">
+        <span class="text-xl font-bold tracking-tight text-[#ff6900]">Insta hotel</span>
+      </div>
+      
+      <ul class="flex flex-col space-y-4 text-lg font-medium">
+        <li><a href="about.html" class="block hover:text-[#ff6900]">about</a></li>
+        
+        <li>
+            <div class="flex justify-between items-center cursor-pointer hover:text-[#ff6900]" id="rooms-toggle">
+                <span>rooms</span> <span class="text-sm">▼</span>
+            </div>
+            <ul id="rooms-submenu" class="hidden mt-3 ml-4 space-y-3 border-l-2 border-slate-100 pl-4">
+                <li><a href="rooms.html" class="block text-sm text-slate-600 hover:text-[#ff6900]">Twin</a></li>
+                <li><a href="rooms.html" class="block text-sm text-slate-600 hover:text-[#ff6900]">Special</a></li>
+                <li><a href="rooms.html" class="block text-sm text-slate-600 hover:text-[#ff6900]">Luxury</a></li>
+                <li><a href="rooms.html" class="block text-sm text-slate-600 hover:text-[#ff6900]">Premium</a></li>
+                <li><a href="rooms.html" class="block text-sm text-slate-600 hover:text-[#ff6900]">Deluxe</a></li>
+                <li><a href="rooms.html" class="block text-sm text-slate-600 hover:text-[#ff6900]">Standard</a></li>
+                <li><a href="reservation.html" class="block text-sm text-slate-600 hover:text-[#ff6900] font-semibold">Long Stay</a></li>
+            </ul>
+        </li>
+
+        <li><a href="reservation.html" class="block hover:text-[#ff6900]">reservation</a></li>
+        <li><a href="#lounge" class="block hover:text-[#ff6900]">bluerain lounge</a></li>
+        <li><a href="contact.html" class="block hover:text-[#ff6900]">contact</a></li>
+      </ul>
+
+      <div class="mt-8 border-t pt-4">
+          <p class="text-sm text-slate-400 mb-2">Language</p>
+          <select id="langSelectMobile" class="w-full p-2 border rounded text-slate-700 bg-slate-50">
+              <option value="ko">Korean</option>
+              <option value="en">English</option>
+              <option value="ja">Japanese</option>
+              <option value="zh">Chinese</option>
+          </select>
+      </div>
+    </div>
+  </nav>
+
+
   <main class="pt-0">
 
-    <!-- HERO 상단 큰 사진 -->
-    <!-- ★ hero 이미지 파일 이름만 바꿔서 사용 -->
     <section class="relative h-[360px] md:h-[460px] overflow-hidden">
       <img
         src="hero6.jpg"
@@ -59,197 +116,102 @@
       <div class="absolute inset-0 bg-black/10"></div>
     </section>
 
-    <!-- 본문 컨텐츠 -->
     <section class="max-w-6xl mx-auto px-4 py-12 md:py-16">
-      <!-- 타이틀 -->
       <h1 class="text-lg md:text-xl font-semibold mb-10">
         Room Reservation
       </h1>
 
-      <!-- 상단 원형 패키지 3개 -->
       <div class="grid md:grid-cols-3 gap-10 mb-12">
-        <!-- 패키지 1 -->
         <div class="text-center">
-          <a href="https://www.booking.com/hotel/kr/hotelinsta-main-branch.ko.html?label=gen173bo-10CAsofUIWaG90ZWxpbnN0YS1tYWluLWJyYW5jaEgzWANofYgBAZgBM7gBF8gBDNgBA-gBAfgBAYgCAZgCBqgCAbgCt4-ayQbAAgHSAiQyMDkwYWQ3ZS1hNTQxLTRlM2MtOTgwMi1jODJlMmEwMGI5Y2XYAgHgAgE&sid=ad479fb49ef246459991c105af7a6931&dist=0&sb_price_type=total&type=total&" class="block">
-          <img
-            src="hero7.jpg"
-            alt="패키지 1"
-            class="w-44 h-44 mx-auto rounded-full object-cover shadow-md font-bold"
-          />
-          <p class="mt-4 text-sm">
-            Friends & Fun
-          </p>
+          <a href="https://www.booking.com/hotel/kr/hotelinsta-main-branch.ko.html" class="block">
+          <img src="hero7.jpg" alt="패키지 1" class="w-44 h-44 mx-auto rounded-full object-cover shadow-md font-bold" />
+          <p class="mt-4 text-sm">Friends & Fun</p>
         </a>
         </div>
-
-        <!-- 패키지 2 -->
         <div class="text-center">
-          <a href="https://www.agoda.com/ko-kr/ko-kr/suwon-hue/hotel/seoul-kr.html?ds=FU9Et1YznuSjxjIP" class="block">
-          <img
-            src="럭셔리5.png"
-            alt="패키지 2"
-            class="w-44 h-44 mx-auto rounded-full object-cover shadow-md font-bold"
-          />
-          <p class="mt-4 text-sm">
-            Stylish Retreat
-          </p>
+          <a href="https://www.agoda.com/ko-kr/ko-kr/suwon-hue/hotel/seoul-kr.html" class="block">
+          <img src="럭셔리5.png" alt="패키지 2" class="w-44 h-44 mx-auto rounded-full object-cover shadow-md font-bold" />
+          <p class="mt-4 text-sm">Stylish Retreat</p>
         </a>
         </div>
-
-        <!-- 패키지 3 -->
         <div class="text-center">
-          <a href="https://www.agoda.com/ko-kr/ko-kr/suwon-hue/hotel/seoul-kr.html?ds=FU9Et1YznuSjxjIP" class="block">
-          <img
-            src="hero9.png"
-            alt="패키지 3"
-            class="w-44 h-44 mx-auto rounded-full object-cover shadow-md font-bold"
-          />
-          <p class="mt-4 text-sm">
-            Relax & Recharge
-          </p>
+          <a href="https://www.agoda.com/ko-kr/ko-kr/suwon-hue/hotel/seoul-kr.html" class="block">
+          <img src="hero9.png" alt="패키지 3" class="w-44 h-44 mx-auto rounded-full object-cover shadow-md font-bold" />
+          <p class="mt-4 text-sm">Relax & Recharge</p>
         </a>
         </div>
       </div>
 
-      <!-- 왼쪽 안내문 / 오른쪽 예약버튼 -->
       <div class="grid md:grid-cols-4 gap-10 items-start mb-12">
-        <!-- 안내 텍스트 -->
         <div class="md:col-span-3 text-[15px] leading-relaxed space-y-1 text-[#ff6900] font-semibold">
-          <p>
-            • 예약 및 호텔 이용 관련 : yhl5258@naver.com
-          </p>
-          <p>
-            • 제휴사이트(아고다, 트립닷컴, 부킹닷컴, 익스피디아아 등)에서 예약부탁드립니다.
-          </p>
+          <p>• 예약 및 호텔 이용 관련 : yhl5258@naver.com</p>
+          <p>• 제휴사이트(아고다, 트립닷컴, 부킹닷컴, 익스피디아 등)에서 예약부탁드립니다.</p>
         </div>
-
-        <!-- 예약 버튼 -->
         <div class="flex md:justify-end items-center">
-  <a 
-    href="https://www.booking.com/hotel/kr/hotelinsta-main-branch.ko.html?label=gen173bo-10CAsofUIWaG90ZWxpbnN0YS1tYWluLWJyYW5jaEgzWANofYgBAZgBM7gBF8gBDNgBA-gBAfgBAYgCAZgCBqgCAbgCt4-ayQbAAgHSAiQyMDkwYWQ3ZS1hNTQxLTRlM2MtOTgwMi1jODJlMmEwMGI5Y2XYAgHgAgE&sid=ad479fb49ef246459991c105af7a6931&dist=0&sb_price_type=total&type=total&" 
-    target="_blank" 
-    class="w-full md:w-56 py-3 bg-[#ff6900] text-white text-sm font-semibold rounded-full shadow-md hover:bg-orange-500 transition text-center"
-  >
-    예약하기
-  </a>
-</div>
+          <a href="https://www.booking.com/hotel/kr/hotelinsta-main-branch.ko.html" target="_blank" class="w-full md:w-56 py-3 bg-[#ff6900] text-white text-sm font-semibold rounded-full shadow-md hover:bg-orange-500 transition text-center">
+            예약하기
+          </a>
+        </div>
       </div>
 
-    <!-- 🔶 장기 투숙 안내 섹션 -->
-    <section class="max-w-5xl mx-auto px-4 pt-10 pb-12 text-sm leading-relaxed">
-      <!-- 작은 상단 제목 -->
-      <p class="text-orange-500 font-semibold mb-2">
-        장기숙박 관련 안내
-      </p>
-
-      <!-- 큰 제목 -->
-      <h2 class="text-2xl md:text-3xl font-bold mb-4">
-       인스타호텔 장기 투숙 안내 (Long-term stay announcement)
-      </h2>
-
-      <!-- 오렌지색 강조 문장 -->
-      <p class="text-orange-500 font-semibold mb-1">
-        인스타호텔에서 보증금 없이<br />
-        특별한 가격으로 일상을 여행하는 삶을 경험해보세요!
-      </p>
-
-      <p class="text-orange-500 font-semibold mt-4 mb-6">
-        Experience the life of traveling daily at a special price without a deposit at the Insta Hotel!
-      </p>
-
-      <!-- 한국어 정보 리스트 -->
-      <div class="space-y-1 mb-6">
-        <p>▶ 주소 : 경기도 수원시 영통구 영통로 94-6, 인스타호텔 본점</p>
-        <p>▶ 거 림 : 최소 1개월 이상</p>
-        <p>▶ 방 형태 : 룸 1개, 화장실 1개</p>
-        <p>▶ 옵션 : TV, WiFi, 침대, 냉장고, 에어컨, 공기청정기, 자동비데, 욕조(일부 객실) 등</p>
-        <p>▶ 관리비 : 없음</p>
-        <p>▶ 층 수 : 객실별 상이</p>
-        <p>▶ 난 방 : 개별 난방</p>
-        <p>▶ 주차 : 무료</p>
-        <p>▶ 입주일 : 즉시 가능</p>
-        <p>▶ 문의 : 카카오톡 플러스친구 [인스타호텔] / 인스타그램 @instahotel_mainbranch / 전화 031-203-4301</p>
-      </div>
-
-      <!-- 영어 정보 리스트 -->
-      <div class="space-y-1">
-        <p>▶ Address : 94-6, Yeongtong-ro, Yeongtong-gu, Suwon-si, Gyeonggi-do, Republic of Korea (Insta Hotel mainbranch)</p>
-        <p>▶ Period : At least 1 month</p>
-        <p>▶ Room type : Whole room and 1 bathroom</p>
-        <p>▶ Options : TV, WiFi, bed, refrigerator, air conditioner, air purifier, automatic bidet, bathtub (some rooms), etc.</p>
-        <p>▶ Management fee : None</p>
-        <p>▶ Number of floors : Vary by rooms</p>
-        <p>▶ Heating : Individual Heating</p>
-        <p>▶ Parking : For free.</p>
-        <p>▶ Date of Occupancy : Immediate Availability</p>
-        <p>
-          ▶ Contact : Kakao Talk ‘인스타호텔’ / Instagram @instahotel_mainbranch / Call 031-203-4301
+      <section class="max-w-5xl mx-auto px-4 pt-10 pb-12 text-sm leading-relaxed border-t border-slate-100 mt-10">
+        <p class="text-orange-500 font-semibold mb-2">장기숙박 관련 안내</p>
+        <h2 class="text-2xl md:text-3xl font-bold mb-4">인스타호텔 장기 투숙 안내 (Long-term stay announcement)</h2>
+        <p class="text-orange-500 font-semibold mb-1">
+          인스타호텔에서 보증금 없이<br />특별한 가격으로 일상을 여행하는 삶을 경험해보세요!
         </p>
+        <p class="text-orange-500 font-semibold mt-4 mb-6">
+          Experience the life of traveling daily at a special price without a deposit at the Insta Hotel!
+        </p>
+
+        <div class="space-y-1 mb-6">
+          <p>▶ 주소 : 경기도 수원시 영통구 영통로 94-6, 인스타호텔 본점</p>
+          <p>▶ 거주기간 : 최소 1개월 이상</p>
+          <p>▶ 방 형태 : 룸 1개, 화장실 1개</p>
+          <p>▶ 옵션 : TV, WiFi, 침대, 냉장고, 에어컨, 공기청정기, 자동비데, 욕조(일부 객실) 등</p>
+          <p>▶ 관리비 : 없음</p>
+          <p>▶ 입주일 : 즉시 가능</p>
+          <p>▶ 문의 : 카카오톡 플러스친구 [인스타호텔] / 인스타그램 @instahotel_mainbranch / 전화 031-203-4301</p>
+        </div>
+        <div class="space-y-1 text-slate-500">
+          <p>▶ Address : 94-6, Yeongtong-ro, Yeongtong-gu, Suwon-si, Gyeonggi-do (Insta Hotel mainbranch)</p>
+          <p>▶ Period : At least 1 month</p>
+          <p>▶ Contact : Kakao Talk ‘인스타호텔’ / Instagram @instahotel_mainbranch / Call 031-203-4301</p>
+        </div>
+      </section>
+    </section>
+
+    <section class="max-w-6xl mx-auto px-4 pt-10 pb-16">
+      <div class="relative w-full max-w-5xl mx-auto h-[180px] md:h-[420px] overflow-hidden rounded shadow-md mt-10">
+        <div id="slideTrack" class="flex h-full gap-3 w-[200%] animate-slide">
+          <img src="hero7.jpg" class="w-[16.6667%] h-full object-cover flex-shrink-0" alt="Room 1" />
+          <img src="hero8.png" class="w-[16.6667%] h-full object-cover flex-shrink-0" alt="Room 2" />
+          <img src="hero5.jpg" class="w-[16.6667%] h-full object-cover flex-shrink-0" alt="Room 3" />
+          <img src="조식.jpg"   class="w-[16.6667%] h-full object-cover flex-shrink-0" alt="Room 4" />
+          <img src="hero2.jpg"  class="w-[16.6667%] h-full object-cover flex-shrink-0" alt="Room 5" />
+          <img src="조식.png"  class="w-[16.6667%] h-full object-cover flex-shrink-0" alt="Room 6" />
+          <img src="hero7.jpg" class="w-[16.6667%] h-full object-cover flex-shrink-0" alt="Room 1 copy" />
+          <img src="hero8.png" class="w-[16.6667%] h-full object-cover flex-shrink-0" alt="Room 2 copy" />
+          <img src="hero5.jpg" class="w-[16.6667%] h-full object-cover flex-shrink-0" alt="Room 3 copy" />
+          <img src="조식.jpg"   class="w-[16.6667%] h-full object-cover flex-shrink-0" alt="Room 4 copy" />
+          <img src="hero2.jpg"  class="w-[16.6667%] h-full object-cover flex-shrink-0" alt="Room 5 copy" />
+          <img src="조식.png"  class="w-[16.6667%] h-full object-cover flex-shrink-0" alt="Room 6 copy" />
+        </div>
       </div>
     </section>
 
- <!-- 🔸 하단 가로 슬라이드 (무한 루프) -->
-<section class="max-w-6xl mx-auto px-4 pt-10 pb-16">
-  <div class="relative w-full max-w-5xl mx-auto h-[180px] md:h-[420px] overflow-hidden rounded shadow-md mt-10">
-    <!-- 흐르는 이미지 트랙 -->
-    <div id="slideTrack"
-     class="flex h-full gap-3 w-[200%] [animation:slideInfinite_30s_linear_infinite]">
-
-  <!-- 1세트 (원본 6장) -->
-  <img src="hero7.jpg"  alt="Room detail 1"
-       class="w-[16.6667%] h-full object-cover flex-shrink-0" />
-  <img src="hero8.png"  alt="Room detail 2"
-       class="w-[16.6667%] h-full object-cover flex-shrink-0" />
-  <img src="hero5.jpg"  alt="Room detail 3"
-       class="w-[16.6667%] h-full object-cover flex-shrink-0" />
-  <img src="조식.jpg"   alt="Room detail 4"
-       class="w-[16.6667%] h-full object-cover flex-shrink-0" />
-  <img src="hero2.jpg"  alt="Room detail 5"
-       class="w-[16.6667%] h-full object-cover flex-shrink-0" />
-  <img src="조식.png"  alt="Room detail 6"
-       class="w-[16.6667%] h-full object-cover flex-shrink-0" />
-
-  <!-- 2세트 (복제 6장) -->
-  <img src="hero7.jpg"  alt="Room detail 1 copy"
-       class="w-[16.6667%] h-full object-cover flex-shrink-0" />
-  <img src="hero8.png"  alt="Room detail 2 copy"
-       class="w-[16.6667%] h-full object-cover flex-shrink-0" />
-  <img src="hero5.jpg"  alt="Room detail 3 copy"
-       class="w-[16.6667%] h-full object-cover flex-shrink-0" />
-  <img src="조식.jpg"   alt="Room detail 4 copy"
-       class="w-[16.6667%] h-full object-cover flex-shrink-0" />
-  <img src="hero2.jpg"  alt="Room detail 5 copy"
-       class="w-[16.6667%] h-full object-cover flex-shrink-0" />
-  <img src="조식.png"  alt="Room detail 6 copy"
-       class="w-[16.6667%] h-full object-cover flex-shrink-0" />
-</div>
-  </div>
-</section>
-
-
-
-
-   <!-- 6. Footer + 사업자 정보 -->
     <section id="contact" class="pt-10 pb-12 bg-white border-t border-slate-200">
       <div class="max-w-4xl mx-auto px-4 text-center text-xs text-slate-600 space-y-3">
-        <!-- SNS 아이콘 줄 -->
         <div class="flex justify-center gap-4 text-lg">
-          <span>📷</span>
-          <span>🅝</span>
-          <span>💬</span>
-          <span>📘</span>
+          <span>📷</span><span>🅝</span><span>💬</span><span>📘</span>
         </div>
-
-        <!-- 사업자 / 주소 정보 (원본 형태만 맞춘 예시) -->
         <div class="space-y-1">
           <p>insta hotel mainbranch, Korea</p>
-          <p>(주)호텔인스타</p>
-          <p>대표자 : 이영환</p>
+          <p>(주)호텔인스타 | 대표자 : 이영환</p>
           <p>통신판매업 신고번호: 2023-수원영통-1696호</p>
           <p>수원시 영통구 영통로 94-6</p>
           <p>Business License 176-24-01388 | Tel 031-203-4301</p>
         </div>
-
         <div class="flex justify-center gap-4 pt-2">
           <a href="#" class="hover:underline">이용약관</a>
           <a href="#" class="hover:underline">개인정보처리방침</a>
@@ -258,31 +220,70 @@
     </section>
   </main>
 
-  <!-- 오른쪽 아래 노란 "문의" 버튼 -->
-  <a
-    href="#contact"
-    class="fixed bottom-6 right-6 z-40 flex items-center justify-center w-16 h-16 rounded-full bg-yellow-400 shadow-xl text-sm font-medium hover:bg-yellow-300"
-  >
+  <a href="#contact" class="fixed bottom-6 right-6 z-40 flex items-center justify-center w-16 h-16 rounded-full bg-yellow-400 shadow-xl text-sm font-medium hover:bg-yellow-300">
     문의
-  </main>
   </a>
 
- <!-- 스크롤 시 헤더 색 변경 스크립트 -->
-<script>
-  const header = document.getElementById("header");
+  <script>
+    // 1. 헤더 색상 변경 (스크롤 시 오렌지색)
+    const header = document.getElementById("header");
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 50) {
+        header.classList.add("bg-[#ff6900]", "shadow-lg");
+        header.classList.remove("bg-transparent");
+      } else {
+        header.classList.remove("bg-[#ff6900]", "shadow-lg");
+        header.classList.add("bg-transparent");
+      }
+    });
 
-  window.addEventListener("scroll", () => {
-    if (window.scrollY > 50) {
-      header.classList.add("bg-[#ff6900]", "shadow-lg");
-      header.classList.remove("bg-transparent");
-    } else {
-      header.classList.remove("bg-[#ff6900]", "shadow-lg");
-      header.classList.add("bg-transparent");
+    // 2. 모바일 드로어 메뉴 제어
+    const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+    const mobileDrawer = document.getElementById("mobile-drawer");
+    const drawerOverlay = document.getElementById("drawer-overlay");
+    const mobileCloseBtn = document.getElementById("mobile-menu-close-btn");
+
+    function openMenu() {
+        mobileDrawer.classList.remove("-translate-x-full");
+        drawerOverlay.classList.remove("hidden");
+        document.body.style.overflow = "hidden"; // 스크롤 방지
     }
-  });
-</script>
+    function closeMenu() {
+        mobileDrawer.classList.add("-translate-x-full");
+        drawerOverlay.classList.add("hidden");
+        document.body.style.overflow = ""; 
+    }
+
+    if(mobileMenuBtn) mobileMenuBtn.addEventListener("click", openMenu);
+    if(mobileCloseBtn) mobileCloseBtn.addEventListener("click", closeMenu);
+    if(drawerOverlay) drawerOverlay.addEventListener("click", closeMenu);
+
+    // 2-1. 드로어 하위 메뉴(Rooms) 토글
+    const roomsToggle = document.getElementById("rooms-toggle");
+    const roomsSubmenu = document.getElementById("rooms-submenu");
+    if(roomsToggle && roomsSubmenu){
+        roomsToggle.addEventListener("click", () => {
+            roomsSubmenu.classList.toggle("hidden");
+        });
+    }
+
+    // 3. 다국어 로직 (동기화)
+    const langSelect = document.getElementById("langSelect");
+    const langSelectMobileTop = document.getElementById("langSelectMobileTop");
+    const langSelectMobile = document.getElementById("langSelectMobile");
+
+    function syncLanguage(lang) {
+        if(langSelect) langSelect.value = lang;
+        if(langSelectMobileTop) langSelectMobileTop.value = lang;
+        if(langSelectMobile) langSelectMobile.value = lang;
+        // 실제 번역 적용 로직은 필요시 여기에 추가
+    }
+
+    if(langSelect) langSelect.addEventListener("change", (e) => syncLanguage(e.target.value));
+    if(langSelectMobileTop) langSelectMobileTop.addEventListener("change", (e) => syncLanguage(e.target.value));
+    if(langSelectMobile) langSelectMobile.addEventListener("change", (e) => syncLanguage(e.target.value));
+  </script>
 
 </body>
 </html>
-
 
