@@ -4,34 +4,100 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About – Insta Hotel MainBranch</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,600;1,600;1,700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html { scroll-behavior: smooth; }
+  </style>
 </head>
 
-<body class="bg-white text-slate-800">
+<body class="bg-white text-slate-900 font-sans">
 
-  <!-- HEADER (index와 동일) -->
-  <header class="fixed top-0 left-0 right-0 z-30 bg-[#ff6900] text-white shadow-lg">
+  <header id="header" class="fixed top-0 left-0 right-0 z-30 bg-[#ff6900] text-white shadow-md">
     <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+      
+      <button id="mobile-menu-btn" class="md:hidden text-2xl drop-shadow">
+        ☰
+      </button>
+
       <a href="index.html" class="flex items-center gap-1 text-white drop-shadow">
-        <span class="text-2xl font-semibold tracking-tight">Insta Hotel - mainbranch</span>
+        <span class="text-xl md:text-2xl font-semibold tracking-tight">
+          Insta Hotel - mainbranch
+        </span>
       </a>
-      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-white drop-shadow">
-        <a href="about.html" class="hover:text-orange-300">about</a>
-        <a href="rooms.html" class="hover:text-orange-300">rooms</a>
-        <a href="reservation.html" class="hover:text-orange-300">reservation</a>
-        <a href="#" class="hover:text-orange-300">bluerain lounge</a>
-        <a href="contact.html" class="hover:text-orange-300">contact</a>
+
+      <nav id="desktop-nav" class="hidden md:flex items-center gap-8 text-sm font-medium drop-shadow">
+        <a href="about.html" class="hover:text-orange-200 transition-colors">about</a>
+        <a href="rooms.html" class="hover:text-orange-200 transition-colors">rooms</a>
+        <a href="reservation.html" class="hover:text-orange-200 transition-colors">reservation</a>
+        <a href="#lounge" class="hover:text-orange-200 transition-colors">bluerain lounge</a>
+        <a href="contact.html" class="hover:text-orange-200 transition-colors">contact</a>
+        
+        <select id="langSelect" class="text-xs bg-white/20 text-white border border-white/80 rounded-full px-2 py-1 outline-none cursor-pointer hover:bg-white/30">
+          <option value="ko" class="text-slate-900">KR</option>
+          <option value="en" class="text-slate-900">EN</option>
+          <option value="ja" class="text-slate-900">JP</option>
+          <option value="zh" class="text-slate-900">CN</option>
+        </select>
       </nav>
 
-      <button class="flex items-center gap-1 text-xs border border-white/80 rounded-full px-3 py-1 bg-white/10 text-white">
-        KR ▾
-      </button>
+      <div class="md:hidden">
+         <select id="langSelectMobileTop" class="text-lg bg-transparent border-none outline-none text-white drop-shadow">
+          <option value="ko" class="text-black">🇰🇷</option>
+          <option value="en" class="text-black">🇺🇸</option>
+          <option value="ja" class="text-black">🇯🇵</option>
+          <option value="zh" class="text-black">🇨🇳</option>
+        </select>
+      </div>
     </div>
   </header>
 
+  <div id="drawer-overlay" class="fixed inset-0 bg-black/50 z-40 hidden transition-opacity duration-300"></div>
+  
+  <nav id="mobile-drawer" class="fixed top-0 left-0 w-[75%] max-w-sm h-full z-50 bg-white shadow-xl text-slate-900 transform -translate-x-full transition-transform duration-300 ease-in-out overflow-y-auto">
+    <div class="p-6">
+      <button id="mobile-menu-close-btn" class="absolute top-4 right-4 text-3xl font-light hover:text-[#ff6900]">&times;</button>
+      <div class="mt-2 mb-8">
+        <span class="text-xl font-bold tracking-tight text-[#ff6900]">Insta Hotel</span>
+      </div>
+      
+      <ul class="flex flex-col space-y-4 text-lg font-medium">
+        <li><a href="about.html" class="block hover:text-[#ff6900]">about</a></li>
+        
+        <li>
+            <div class="flex justify-between items-center cursor-pointer hover:text-[#ff6900]" id="rooms-toggle">
+                <span>rooms</span> <span class="text-sm">▼</span>
+            </div>
+            <ul id="rooms-submenu" class="hidden mt-3 ml-4 space-y-3 border-l-2 border-slate-100 pl-4">
+                <li><a href="rooms.html" class="block text-sm text-slate-600 hover:text-[#ff6900]">Twin</a></li>
+                <li><a href="rooms.html" class="block text-sm text-slate-600 hover:text-[#ff6900]">Special</a></li>
+                <li><a href="rooms.html" class="block text-sm text-slate-600 hover:text-[#ff6900]">Luxury</a></li>
+                <li><a href="rooms.html" class="block text-sm text-slate-600 hover:text-[#ff6900]">Premium</a></li>
+                <li><a href="rooms.html" class="block text-sm text-slate-600 hover:text-[#ff6900]">Deluxe</a></li>
+                <li><a href="rooms.html" class="block text-sm text-slate-600 hover:text-[#ff6900]">Standard</a></li>
+                <li><a href="reservation.html" class="block text-sm text-slate-600 hover:text-[#ff6900] font-semibold">Long Stay</a></li>
+            </ul>
+        </li>
+
+        <li><a href="reservation.html" class="block hover:text-[#ff6900]">reservation</a></li>
+        <li><a href="#lounge" class="block hover:text-[#ff6900]">bluerain lounge</a></li>
+        <li><a href="contact.html" class="block hover:text-[#ff6900]">contact</a></li>
+      </ul>
+
+      <div class="mt-8 border-t pt-4">
+          <p class="text-sm text-slate-400 mb-2">Language</p>
+          <select id="langSelectMobile" class="w-full p-2 border rounded text-slate-700 bg-slate-50">
+              <option value="ko">Korean</option>
+              <option value="en">English</option>
+              <option value="ja">Japanese</option>
+              <option value="zh">Chinese</option>
+          </select>
+      </div>
+    </div>
+  </nav>
+
   <main class="pt-24">
 
-    <!-- ABOUT TITLE -->
     <section class="relative bg-white py-24">
       <div class="max-w-6xl mx-auto px-6 md:px-8 lg:px-10">
         
@@ -41,7 +107,6 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mt-12 items-start">
 
-          <!-- LEFT TEXT -->
           <div class="leading-relaxed text-[15px] md:text-[16px] text-slate-700 space-y-4">
 
             <p>insta는 “붙이는 것” 그리고 “연결”하는 공간입니다.</p>
@@ -73,7 +138,6 @@
 
           </div>
 
-          <!-- RIGHT IMAGE -->
           <div>
             <img src="hero7.jpg"
                  class="w-full h-auto object-cover rounded"
@@ -82,7 +146,6 @@
 
         </div>
 
-        <!-- ORANGE STRIPE -->
         <div class="mt-16">
           <div class="w-full h-[5px] bg-[url('stripe.png')] bg-repeat-x opacity-60"></div>
         </div>
@@ -90,10 +153,8 @@
       </div>
     </section>
 
-    <!-- 6. Footer + 사업자 정보 -->
     <section id="contact" class="pt-10 pb-12 bg-white border-t border-slate-200">
       <div class="max-w-4xl mx-auto px-4 text-center text-xs text-slate-600 space-y-3">
-        <!-- SNS 아이콘 줄 -->
         <div class="flex justify-center gap-4 text-lg">
           <span>📷</span>
           <span>🅝</span>
@@ -101,7 +162,6 @@
           <span>📘</span>
         </div>
 
-        <!-- 사업자 / 주소 정보 (원본 형태만 맞춘 예시) -->
         <div class="space-y-1">
           <p>insta hotel mainbranch, Korea</p>
           <p>(주)호텔인스타</p>
@@ -119,13 +179,60 @@
     </section>
   </main>
 
-  <!-- 오른쪽 아래 노란 "문의" 버튼 -->
   <a
     href="#contact"
     class="fixed bottom-6 right-6 z-40 flex items-center justify-center w-16 h-16 rounded-full bg-yellow-400 shadow-xl text-sm font-medium hover:bg-yellow-300"
   >
     문의
-  </main>
+  </a>
+
+  <script>
+    // 1. 모바일 드로어 메뉴 로직
+    const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+    const mobileDrawer = document.getElementById("mobile-drawer");
+    const drawerOverlay = document.getElementById("drawer-overlay");
+    const mobileCloseBtn = document.getElementById("mobile-menu-close-btn");
+
+    function openMenu() {
+        mobileDrawer.classList.remove("-translate-x-full");
+        drawerOverlay.classList.remove("hidden");
+        document.body.style.overflow = "hidden"; 
+    }
+    function closeMenu() {
+        mobileDrawer.classList.add("-translate-x-full");
+        drawerOverlay.classList.add("hidden");
+        document.body.style.overflow = ""; 
+    }
+
+    if(mobileMenuBtn) mobileMenuBtn.addEventListener("click", openMenu);
+    if(mobileCloseBtn) mobileCloseBtn.addEventListener("click", closeMenu);
+    if(drawerOverlay) drawerOverlay.addEventListener("click", closeMenu);
+
+    // 1-1. 모바일 드로어 내부 Rooms 토글
+    const roomsToggle = document.getElementById("rooms-toggle");
+    const roomsSubmenu = document.getElementById("rooms-submenu");
+    if(roomsToggle) {
+        roomsToggle.addEventListener("click", () => {
+            roomsSubmenu.classList.toggle("hidden");
+        });
+    }
+
+    // 2. 다국어 선택 동기화 로직
+    const langSelect = document.getElementById("langSelect");
+    const langSelectMobileTop = document.getElementById("langSelectMobileTop");
+    const langSelectMobile = document.getElementById("langSelectMobile");
+
+    function syncLanguage(lang) {
+        if(langSelect) langSelect.value = lang;
+        if(langSelectMobileTop) langSelectMobileTop.value = lang;
+        if(langSelectMobile) langSelectMobile.value = lang;
+        // 필요시 여기에 페이지 텍스트 변경 함수 호출
+    }
+
+    if(langSelect) langSelect.addEventListener("change", (e) => syncLanguage(e.target.value));
+    if(langSelectMobileTop) langSelectMobileTop.addEventListener("change", (e) => syncLanguage(e.target.value));
+    if(langSelectMobile) langSelectMobile.addEventListener("change", (e) => syncLanguage(e.target.value));
+  </script>
 
 </body>
 </html>
