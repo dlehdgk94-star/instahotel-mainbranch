@@ -7,6 +7,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     html { scroll-behavior: smooth; }
+    
     /* 오렌지 섹션 스트라이프 배경 */
     .stripe-bg {
       background-image: repeating-linear-gradient(
@@ -17,14 +18,19 @@
         transparent 18px
       );
     }
-    /* 가로 스크롤바 숨기기 (크롬, 사파리, 오페라, 엣지) */
-    .scrollbar-hide::-webkit-scrollbar {
-      display: none;
-    }
-    /* 가로 스크롤바 숨기기 (IE, 파이어폭스) */
-    .scrollbar-hide {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
+
+    /* 모바일(768px 이하)에서만 작동하는 무한 스크롤 애니메이션 */
+    @media (max-width: 768px) {
+      @keyframes infinite-scroll {
+        from { transform: translateX(0); }
+        to { transform: translateX(-50%); }
+      }
+      
+      .mobile-scroll-only {
+        display: flex;
+        width: max-content;
+        animation: infinite-scroll 40s linear infinite;
+      }
     }
   </style>
 </head>
@@ -75,22 +81,30 @@
       <div class="mt-2 mb-8">
         <span class="text-xl font-bold tracking-tight text-[#ff6900]">Insta hotel</span>
       </div>
+      
       <ul class="flex flex-col space-y-4 text-lg font-medium">
         <li><a href="about.html" class="block hover:text-[#ff6900]">about</a></li>
+        
         <li>
-            <div class="flex justify-between items-center cursor-pointer" id="rooms-toggle">
+            <div class="flex justify-between items-center cursor-pointer hover:text-[#ff6900]" id="rooms-toggle">
                 <span>rooms</span> <span class="text-sm">▼</span>
             </div>
-            <ul id="rooms-submenu" class="hidden mt-2 ml-4 text-base text-slate-600 space-y-2">
-                <li><a href="#">Standard</a></li>
-                <li><a href="#">Deluxe</a></li>
-                <li><a href="#">Suite</a></li>
+            <ul id="rooms-submenu" class="hidden mt-3 ml-4 space-y-3 border-l-2 border-slate-100 pl-4">
+                <li><a href="rooms.html" class="block text-sm text-slate-600 hover:text-[#ff6900]">Twin</a></li>
+                <li><a href="rooms.html" class="block text-sm text-slate-600 hover:text-[#ff6900]">Special</a></li>
+                <li><a href="rooms.html" class="block text-sm text-slate-600 hover:text-[#ff6900]">Luxury</a></li>
+                <li><a href="rooms.html" class="block text-sm text-slate-600 hover:text-[#ff6900]">Premium</a></li>
+                <li><a href="rooms.html" class="block text-sm text-slate-600 hover:text-[#ff6900]">Deluxe</a></li>
+                <li><a href="rooms.html" class="block text-sm text-slate-600 hover:text-[#ff6900]">Standard</a></li>
+                <li><a href="reservation.html" class="block text-sm text-slate-600 hover:text-[#ff6900] font-semibold">Long Stay</a></li>
             </ul>
         </li>
+
         <li><a href="reservation.html" class="block hover:text-[#ff6900]">reservation</a></li>
         <li><a href="#lounge" class="block hover:text-[#ff6900]">bluerain lounge</a></li>
         <li><a href="contact.html" class="block hover:text-[#ff6900]">contact</a></li>
       </ul>
+
       <div class="mt-8 border-t pt-4">
          <p class="text-sm text-slate-400 mb-2">Language</p>
          <select id="langSelectMobile" class="w-full p-2 border rounded text-slate-700 bg-slate-50">
@@ -113,53 +127,111 @@
     <div class="absolute inset-0 bg-black/20"></div>
     
     <div class="absolute bottom-6 left-0 right-0 flex justify-center gap-2 z-10">
-        <span class="w-1.5 h-1.5 rounded-full bg-white opacity-100"></span>
-        <span class="w-1.5 h-1.5 rounded-full bg-white opacity-50"></span>
-        <span class="w-1.5 h-1.5 rounded-full bg-white opacity-50"></span>
-        <span class="w-1.5 h-1.5 rounded-full bg-white opacity-50"></span>
+        <span class="w-1.5 h-1.5 rounded-full bg-white opacity-100 dot"></span>
+        <span class="w-1.5 h-1.5 rounded-full bg-white opacity-50 dot"></span>
+        <span class="w-1.5 h-1.5 rounded-full bg-white opacity-50 dot"></span>
+        <span class="w-1.5 h-1.5 rounded-full bg-white opacity-50 dot"></span>
     </div>
   </section>
 
   <script>
     let index = 0;
     const slides = document.querySelectorAll(".slide");
+    const dots = document.querySelectorAll(".dot");
+
+    function updateDots() {
+      dots.forEach((dot, i) => {
+        if(i === index) {
+            dot.classList.remove('opacity-50');
+            dot.classList.add('opacity-100');
+        } else {
+            dot.classList.remove('opacity-100');
+            dot.classList.add('opacity-50');
+        }
+      });
+    }
+
     function showNextSlide() {
       slides[index].style.opacity = 0;
       index = (index + 1) % slides.length;
       slides[index].style.opacity = 1;
+      updateDots();
     }
     setInterval(showNextSlide, 4000);
   </script>
 
 
-  <section id="about-inner" class="relative text-white py-3 overflow-hidden" style="background-color: #ff6900">
+  <section id="about-inner" class="relative text-white py-3 md:py-14 overflow-hidden" style="background-color: #ff6900">
     <div class="absolute inset-0 stripe-bg opacity-60 pointer-events-none"></div>
 
-    <div class="relative w-full overflow-x-auto scrollbar-hide">
-      <div class="flex flex-nowrap items-center gap-3 px-4 min-w-max text-sm md:text-xl font-medium">
+    <div class="relative w-full overflow-hidden md:max-w-6xl md:mx-auto md:px-4 md:overflow-visible">
+      
+      <div class="mobile-scroll-only flex items-center gap-8 md:animate-none md:flex-wrap md:justify-center md:gap-6 md:w-full">
         
-        <span class="flex-shrink-0">People</span>
-        <img src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?q=80&w=100&auto=format&fit=crop" class="w-6 h-6 rounded-full object-cover border-2 border-white/80" />
-        
-        <span class="flex-shrink-0">Village</span>
-        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=100&auto=format&fit=crop" class="w-6 h-6 rounded-full object-cover border-2 border-white/80" />
-        
-        <span class="flex-shrink-0">Local Artist</span>
-        <img src="https://images.unsplash.com/photo-1500534314211-0a24cd03f2c0?q=80&w=100&auto=format&fit=crop" class="w-6 h-6 rounded-full object-cover border-2 border-white/80" />
-        
-        <span class="flex-shrink-0">Food</span>
-        <img src="https://images.unsplash.com/photo-1504753793650-d4a2b783c15e?q=80&w=100&auto=format&fit=crop" class="w-6 h-6 rounded-full object-cover border-2 border-white/80" />
-        
-        <span class="flex-shrink-0">Suwon-Insta Music</span>
-        <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=100&auto=format&fit=crop" class="w-6 h-6 rounded-full object-cover border-2 border-white/80" />
-        
-        <span class="flex-shrink-0">Tourist</span>
-        <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?q=80&w=100&auto=format&fit=crop" class="w-6 h-6 rounded-full object-cover border-2 border-white/80" />
-        
-        <span class="flex-shrink-0">Book</span>
-        <img src="https://images.unsplash.com/photo-1495446815901-a7297e633e8d?q=80&w=100&auto=format&fit=crop" class="w-6 h-6 rounded-full object-cover border-2 border-white/80" />
-        
-        <span class="flex-shrink-0">Culture, Play</span>
+        <div class="flex items-center gap-3 text-sm font-medium whitespace-nowrap md:contents md:text-3xl md:leading-relaxed">
+            <span>People</span>
+            <img src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?q=80&w=200&auto=format&fit=crop" 
+                 class="w-6 h-6 rounded-full object-cover border-2 border-white/80 md:w-14 md:h-14 md:border-4" />
+            
+            <span>Village</span>
+            <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=200&auto=format&fit=crop" 
+                 class="w-6 h-6 rounded-full object-cover border-2 border-white/80 md:w-14 md:h-14 md:border-4" />
+            
+            <span>Local Artist</span>
+            <img src="https://images.unsplash.com/photo-1500534314211-0a24cd03f2c0?q=80&w=200&auto=format&fit=crop" 
+                 class="w-6 h-6 rounded-full object-cover border-2 border-white/80 md:w-14 md:h-14 md:border-4" />
+            
+            <span>Food</span>
+            <img src="https://images.unsplash.com/photo-1504753793650-d4a2b783c15e?q=80&w=200&auto=format&fit=crop" 
+                 class="w-6 h-6 rounded-full object-cover border-2 border-white/80 md:w-14 md:h-14 md:border-4" />
+            
+            <span>Suwon-Insta Music</span>
+            <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=200&auto=format&fit=crop" 
+                 class="w-6 h-6 rounded-full object-cover border-2 border-white/80 md:w-14 md:h-14 md:border-4" />
+            
+            <span>Tourist</span>
+            <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?q=80&w=200&auto=format&fit=crop" 
+                 class="w-6 h-6 rounded-full object-cover border-2 border-white/80 md:w-14 md:h-14 md:border-4" />
+            
+            <span>Book</span>
+            <img src="https://images.unsplash.com/photo-1495446815901-a7297e633e8d?q=80&w=200&auto=format&fit=crop" 
+                 class="w-6 h-6 rounded-full object-cover border-2 border-white/80 md:w-14 md:h-14 md:border-4" />
+            
+            <span>Culture, Play</span>
+        </div>
+
+        <div class="flex items-center gap-3 text-sm font-medium whitespace-nowrap md:hidden">
+            <span>People</span>
+            <img src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?q=80&w=200&auto=format&fit=crop" 
+                 class="w-6 h-6 rounded-full object-cover border-2 border-white/80" />
+            
+            <span>Village</span>
+            <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=200&auto=format&fit=crop" 
+                 class="w-6 h-6 rounded-full object-cover border-2 border-white/80" />
+            
+            <span>Local Artist</span>
+            <img src="https://images.unsplash.com/photo-1500534314211-0a24cd03f2c0?q=80&w=200&auto=format&fit=crop" 
+                 class="w-6 h-6 rounded-full object-cover border-2 border-white/80" />
+            
+            <span>Food</span>
+            <img src="https://images.unsplash.com/photo-1504753793650-d4a2b783c15e?q=80&w=200&auto=format&fit=crop" 
+                 class="w-6 h-6 rounded-full object-cover border-2 border-white/80" />
+            
+            <span>Suwon-Insta Music</span>
+            <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=200&auto=format&fit=crop" 
+                 class="w-6 h-6 rounded-full object-cover border-2 border-white/80" />
+            
+            <span>Tourist</span>
+            <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?q=80&w=200&auto=format&fit=crop" 
+                 class="w-6 h-6 rounded-full object-cover border-2 border-white/80" />
+            
+            <span>Book</span>
+            <img src="https://images.unsplash.com/photo-1495446815901-a7297e633e8d?q=80&w=200&auto=format&fit=crop" 
+                 class="w-6 h-6 rounded-full object-cover border-2 border-white/80" />
+            
+            <span>Culture, Play</span>
+        </div>
+
       </div>
     </div>
   </section>
@@ -269,7 +341,7 @@
       }
     });
 
-    // 2. 모바일 드로어 메뉴 (열기/닫기)
+    // 2. 모바일 드로어 메뉴
     const mobileMenuBtn = document.getElementById("mobile-menu-btn");
     const mobileDrawer = document.getElementById("mobile-drawer");
     const drawerOverlay = document.getElementById("drawer-overlay");
@@ -278,19 +350,19 @@
     function openMenu() {
         mobileDrawer.classList.remove("-translate-x-full");
         drawerOverlay.classList.remove("hidden");
-        document.body.style.overflow = "hidden"; // 스크롤 막기
+        document.body.style.overflow = "hidden"; 
     }
     function closeMenu() {
         mobileDrawer.classList.add("-translate-x-full");
         drawerOverlay.classList.add("hidden");
-        document.body.style.overflow = ""; // 스크롤 허용
+        document.body.style.overflow = ""; 
     }
 
     mobileMenuBtn.addEventListener("click", openMenu);
     mobileCloseBtn.addEventListener("click", closeMenu);
     drawerOverlay.addEventListener("click", closeMenu);
 
-    // 2-1. 드로어 내부 하위 메뉴 토글
+    // 2-1. 드로어 하위 메뉴 토글
     const roomsToggle = document.getElementById("rooms-toggle");
     const roomsSubmenu = document.getElementById("rooms-submenu");
     roomsToggle.addEventListener("click", () => {
@@ -298,7 +370,7 @@
     });
 
 
-    // 3. 다국어 로직 (동기화)
+    // 3. 다국어 로직
     const translations = {
       ko: { btnMore: "더보기", companyName: "(주)호텔인스타", ceoName: "대표자 : 이영환", bizNumber: "통신판매업 신고번호: 2023-수원영통-1696호", address: "수원시 영통구 영통로 94-6", termsLink: "이용약관", privacyLink: "개인정보처리방침", inquiryBtn: "문의" },
       en: { btnMore: "View more", companyName: "Insta Hotel Co., Ltd.", ceoName: "CEO: Lee Young Hwan", bizNumber: "Mail-order business registration: 2023-Suwon Yeongtong-1696", address: "94-6, Yeongtong-ro, Yeongtong-gu, Suwon-si", termsLink: "Terms of Use", privacyLink: "Privacy Policy", inquiryBtn: "Contact" },
@@ -306,9 +378,9 @@
       zh: { btnMore: "查看更多", companyName: "Insta Hotel有限公司", ceoName: "代表：李永焕", bizNumber: "通信销售业申报编号：2023-水原灵通-1696号", address: "水原市 灵通区 灵通路94-6", termsLink: "使用条款", privacyLink: "隐私政策", inquiryBtn: "咨询" },
     };
 
-    const langSelect = document.getElementById("langSelect"); // 데스크톱
-    const langSelectMobileTop = document.getElementById("langSelectMobileTop"); // 모바일 상단
-    const langSelectMobile = document.getElementById("langSelectMobile"); // 모바일 드로어 내부
+    const langSelect = document.getElementById("langSelect");
+    const langSelectMobileTop = document.getElementById("langSelectMobileTop");
+    const langSelectMobile = document.getElementById("langSelectMobile");
 
     function applyLanguage(lang) {
       const t = translations[lang] || translations.ko;
@@ -335,11 +407,11 @@
     if(langSelectMobileTop) langSelectMobileTop.addEventListener("change", (e) => syncLanguage(e.target.value));
     if(langSelectMobile) langSelectMobile.addEventListener("change", (e) => syncLanguage(e.target.value));
 
-    // 초기값
     applyLanguage("ko");
   </script>
 </body>
 </html>
+
 
 
 
