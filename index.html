@@ -52,27 +52,41 @@
     </div>
   </header>
 
-  <nav id="mobile-menu" class="fixed top-[68px] left-0 right-0 z-20 hidden bg-[#ff6900] text-white shadow-lg md:hidden">
-    <ul class="flex flex-col text-center text-lg font-medium py-4">
-      <li><a href="about.html" class="block py-3 hover:bg-white/10">about</a></li>
-      <li><a href="rooms.html" class="block py-3 hover:bg-white/10">rooms</a></li>
-      <li><a href="reservation.html" class="block py-3 hover:bg-white/10">reservation</a></li>
-      <li><a href="#lounge" class="block py-3 hover:bg-white/10">bluerain lounge</a></li>
-      <li><a href="contact.html" class="block py-3 hover:bg-white/10">contact</a></li>
-      <li class="mt-4">
-        <select id="langSelectMobile" class="text-sm bg-white text-slate-800 border-none rounded-full px-4 py-1 outline-none">
-          <option value="ko">KR</option>
-          <option value="en">EN</option>
-          <option value="ja">JP</option>
-          <option value="zh">CN</option>
-        </select>
-      </li>
-    </ul>
+  <nav 
+    id="mobile-menu" 
+    class="fixed top-0 left-0 right-0 bottom-0 z-40 hidden 
+           bg-white/95 backdrop-blur-sm text-slate-900 
+           md:hidden transition-all duration-300"
+  >
+    <div class="h-full flex flex-col justify-center items-center">
+      <button 
+        id="mobile-menu-close-btn" 
+        class="absolute top-4 right-4 text-4xl font-light hover:text-[#ff6900]"
+      >
+        &times; </button>
+
+      <ul class="flex flex-col text-center text-2xl font-semibold space-y-4">
+        <li><a href="about.html" class="block py-2 hover:text-[#ff6900]">about</a></li>
+        <li><a href="rooms.html" class="block py-2 hover:text-[#ff6900]">rooms</a></li>
+        <li><a href="reservation.html" class="block py-2 hover:text-[#ff6900]">reservation</a></li>
+        <li><a href="#lounge" class="block py-2 hover:text-[#ff6900]">bluerain lounge</a></li>
+        <li><a href="contact.html" class="block py-2 hover:text-[#ff6900]">contact</a></li>
+        
+        <li class="mt-8">
+          <select id="langSelectMobile" class="text-base bg-transparent border-b-2 border-slate-900/50 px-4 py-1 outline-none">
+            <option value="ko">KR</option>
+            <option value="en">EN</option>
+            <option value="ja">JP</option>
+            <option value="zh">CN</option>
+          </select>
+        </li>
+      </ul>
+    </div>
   </nav>
 
   <section
     id="hero"
-    class="relative min-h-[100vh] overflow-hidden flex items-center justify-center"
+    class="relative min-h-[85vh] md:min-h-[100vh] overflow-hidden flex items-center justify-center"
   >
     <img src="hero1.jpg" class="slide absolute inset-0 w-full h-full object-cover opacity-100 transition-opacity duration-[1500ms]" />
     <img src="hero2.jpg" class="slide absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-[1500ms]" />
@@ -132,7 +146,11 @@
 
 
   <section id="rooms" class="bg-white">
-    <img src="hero6.jpg" alt="building" class="w-full max-h-[720px] object-cover" />
+    <img 
+        src="hero6.jpg" 
+        alt="building" 
+        class="w-full max-h-[480px] sm:max-h-[720px] object-cover" 
+    />
   </section>
 
 
@@ -226,6 +244,7 @@
     const header = document.getElementById("header");
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
+    const mobileMenuCloseBtn = document.getElementById('mobile-menu-close-btn'); 
 
     // 1. 헤더 스크롤 색 변경
     window.addEventListener("scroll", () => {
@@ -240,13 +259,20 @@
 
     // 2. 햄버거 메뉴 토글
     mobileMenuBtn.addEventListener('click', () => {
-      mobileMenu.classList.toggle('hidden');
+      mobileMenu.classList.remove('hidden'); 
+      document.body.style.overflow = 'hidden'; 
     });
+    
+    // 2-1. 닫기 버튼 클릭 로직 추가
+    mobileMenuCloseBtn.addEventListener('click', () => {
+      mobileMenu.classList.add('hidden'); 
+      document.body.style.overflow = ''; 
+    });
+
 
     // 3. 다국어 변환
     const translations = {
       ko: {
-        // ... (생략된 번역 데이터 유지)
         btnMore: "더보기",
         companyName: "(주)호텔인스타",
         ceoName: "대표자 : 이영환",
@@ -308,16 +334,17 @@
 
     // 데스크톱 선택기 이벤트
     langSelect.addEventListener("change", (e) => {
-      langSelectMobile.value = e.target.value; // 모바일 선택기 동기화
+      langSelectMobile.value = e.target.value; 
       applyLanguage(e.target.value);
     });
 
     // 모바일 선택기 이벤트
     if (langSelectMobile) {
         langSelectMobile.addEventListener("change", (e) => {
-            langSelect.value = e.target.value; // 데스크톱 선택기 동기화
+            langSelect.value = e.target.value; 
             applyLanguage(e.target.value);
-            mobileMenu.classList.add('hidden'); // 메뉴 닫기
+            mobileMenu.classList.add('hidden'); 
+            document.body.style.overflow = ''; 
         });
     }
 
