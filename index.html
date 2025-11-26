@@ -25,7 +25,7 @@
   <!-- 상단 네비게이션 (투명, 상단 고정) -->
   <header id="header" class="fixed top-0 left-0 right-0 z-30 transition-colors duration-300 bg-transparent text-white">
     <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-      <!-- 로고 (원본처럼 g/ue 느낌) -->
+      <!-- 로고 -->
       <a href="#top" class="flex items-center gap-1 drop-shadow">
         <span class="text-2xl font-semibold tracking-tight">Insta hotel - mainbranch</span>
       </a>
@@ -38,56 +38,56 @@
         <a href="#lounge" class="hover:text-orange-300">bluerain lounge</a>
         <a href="contact.html" class="hover:text-orange-300">contact</a>
 
-        <!-- 언어 버튼 -->
-        <button class="flex items-center gap-1 text-xs border border-white/80 rounded-full px-3 py-1 bg-white/10">
-          KR ▾
-        </button>
+        <!-- 언어 선택 (KR / EN / JP / CN) -->
+        <select
+          id="langSelect"
+          class="text-xs bg-white/10 border border-white/80 rounded-full px-2 py-1 outline-none"
+        >
+          <option value="ko">KR</option>
+          <option value="en">EN</option>
+          <option value="ja">JP</option>
+          <option value="zh">CN</option>
+        </select>
       </nav>
     </div>
   </header>
-  
 
-    <!-- 1. HERO 섹션 (테라스/뷰 풀스크린) -->
-    <!-- Hero 슬라이드쇼 -->
-<section id="hero" class="relative h-screen min-h-[640px] overflow-hidden">
+  <!-- 1. HERO 섹션 (테라스/뷰 풀스크린) -->
+  <!-- Hero 슬라이드쇼 -->
+  <section id="hero" class="relative h-screen min-h-[640px] overflow-hidden">
+    <img src="hero1.jpg" class="slide absolute inset-0 w-full h-full object-cover opacity-100 transition-opacity duration-[1500ms]" />
+    <img src="hero2.jpg" class="slide absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-[1500ms]" />
+    <img src="hero3.jpg" class="slide absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-[1500ms]" />
+    <img src="hero4.jpg" class="slide absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-[1500ms]" />
 
-<img src="hero1.jpg" class="slide absolute inset-0 w-full h-full object-cover opacity-100 transition-opacity duration-[1500ms]" />
-<img src="hero2.jpg" class="slide absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-[1500ms]" />
-<img src="hero3.jpg" class="slide absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-[1500ms]" />
-<img src="hero4.jpg" class="slide absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-[1500ms]" />
-  </div>
+    <!-- 어두운 투명 오버레이 -->
+    <div class="absolute inset-0 bg-black/30"></div>
 
-  <!-- 어두운 투명 오버레이 -->
-  <div class="absolute inset-0 bg-black/30"></div>
+    <!-- Hero 텍스트 (원하면 나중에 추가 가능) -->
+    <div class="relative z-10 text-white px-6"></div>
+  </section>
 
-  <!-- Hero 텍스트 (원하면 나중에 추가 가능) -->
-  <div class="relative z-10 text-white px-6"></div>
-</section>
-    
-<!-- ==========================
-      ABOUT SECTION
-=========================== -->
-<section id="about" class="relative bg-white">
- 
+  <!-- ==========================
+        ABOUT SECTION
+  =========================== -->
+  <section id="about" class="relative bg-white">
+    <!-- 슬라이드 자동재생 스크립트 -->
+    <script>
+      let index = 0;
+      const slides = document.querySelectorAll(".slide");
 
-<!-- 슬라이드 자동재생 스크립트 -->
-<script>
-  let index = 0;
-  const slides = document.querySelectorAll(".slide");
+      function showNextSlide() {
+        slides[index].style.opacity = 0;
+        index = (index + 1) % slides.length;
+        slides[index].style.opacity = 1;
+      }
 
-  function showNextSlide() {
-    slides[index].style.opacity = 0;
-    index = (index + 1) % slides.length;
-    slides[index].style.opacity = 1;
-  }
-
-  setInterval(showNextSlide, 4000);
-</script>
-
+      setInterval(showNextSlide, 4000);
+    </script>
 
     <!-- 2. 오렌지 키워드 섹션 -->
-    <section id="about" class="relative text-white py-14 overflow-hidden" style="background-color: #ff6900">
-     <div class="absolute inset-0 stripe-bg opacity-60 pointer-events-none"></div>
+    <section id="about-inner" class="relative text-white py-14 overflow-hidden" style="background-color: #ff6900">
+      <div class="absolute inset-0 stripe-bg opacity-60 pointer-events-none"></div>
 
       <div class="relative max-w-6xl mx-auto px-4">
         <div class="flex flex-wrap items-center gap-4 md:gap-6 text-xl md:text-3xl font-medium leading-relaxed">
@@ -116,7 +116,7 @@
           <img src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?q=80&w=201&auto=format&fit=crop"
                alt="" class="w-10 h-10 md:w-14 md:h-14 rounded-full object-cover border-[3px] border-white/80" />
           <span>, Street Suwon-Insta, Korea</span>
-         <img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?q=80&w=800&auto=format&fit=crop"
+          <img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?q=80&w=800&auto=format&fit=crop"
                alt="" class="w-10 h-10 md:w-14 md:h-14 rounded-full object-cover border-[3px] border-white/80" />
           <span>, Scent</span>
           <img src="https://images.unsplash.com/photo-1601042879364-f6df1b5c5147?q=80&w=800&auto=format&fit=crop"
@@ -125,117 +125,195 @@
         </div>
       </div>
     </section>
+  </section>
 
-    <!-- 3. 건물 외관 풀 이미지 -->
-    <section id="rooms" class="bg-white">
-      <img
-       src="hero6.jpg"
-  alt="building"
-  class="w-full max-h-[720px] object-cover"
-      />
-    </section>
+  <!-- 3. 건물 외관 풀 이미지 -->
+  <section id="rooms" class="bg-white">
+    <img
+      src="hero6.jpg"
+      alt="building"
+      class="w-full max-h-[720px] object-cover"
+    />
+  </section>
 
-    <!-- 4. 가운데 About 문장 -->
-    <section id="lounge" class="py-16 bg-white">
-      <div class="max-w-3xl mx-auto px-4 text-center">
-        <p class="text-xl md:text-2xl text-slate-800 italic leading-relaxed">
-          insta is a group of people that aspire to<br />
-          ‘insta’ people, society, culture, and art together.
-        </p>
+  <!-- 4. 가운데 About 문장 -->
+  <section id="lounge" class="py-16 bg-white">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <p class="text-xl md:text-2xl text-slate-800 italic leading-relaxed">
+        insta is a group of people that aspire to<br />
+        ‘insta’ people, society, culture, and art together.
+      </p>
+    </div>
+  </section>
+
+  <!-- 5. Instagram 그리드 -->
+  <section id="instagram" class="pb-16 bg-white">
+    <div class="max-w-6xl mx-auto px-4">
+      <p class="mb-4">
+        <span class="italic font-semibold">insta hotel Instagram</span>
+        <span class="ml-1 text-slate-800">@instahotel_mainbranch</span>
+      </p>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 mb-8">
+        <!-- 실제 인스타 이미지로 교체 가능 -->
+        <img src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?q=80&w=600&auto=format&fit=crop"
+             alt="" class="w-full aspect-square object-cover" />
+        <img src="https://images.unsplash.com/photo-1520256862855-398228c41684?q=80&w=601&auto=format&fit=crop"
+             alt="" class="w-full aspect-square object-cover" />
+        <img src="https://images.unsplash.com/photo-1551907234-9c56277263ca?q=80&w=602&auto=format&fit=crop"
+             alt="" class="w-full aspect-square object-cover" />
+        <img src="https://images.unsplash.com/photo-1537726044900-b3b8c19c87e4?q=80&w=603&auto=format&fit=crop"
+             alt="" class="w-full aspect-square object-cover" />
+        <img src="https://images.unsplash.com/photo-1500534314211-0a24cd03f2c0?q=80&w=604&auto=format&fit=crop"
+             alt="" class="w-full aspect-square object-cover" />
+        <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=605&auto=format&fit=crop"
+             alt="" class="w-full aspect-square object-cover" />
+        <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=606&auto=format&fit=crop"
+             alt="" class="w-full aspect-square object-cover" />
+        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=607&auto=format&fit=crop"
+             alt="" class="w-full aspect-square object-cover" />
       </div>
-    </section>
 
-    <!-- 5. Instagram 그리드 -->
-    <section id="instagram" class="pb-16 bg-white">
-      <div class="max-w-6xl mx-auto px-4">
-        <p class="mb-4">
-          <span class="italic font-semibold">insta hotel Instagram</span>
-          <span class="ml-1 text-slate-800">@instahotel_mainbranch</span>
-        </p>
-
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 mb-8">
-          <!-- 실제 인스타 이미지로 교체 가능 -->
-          <img src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?q=80&w=600&auto=format&fit=crop"
-               alt="" class="w-full aspect-square object-cover" />
-          <img src="https://images.unsplash.com/photo-1520256862855-398228c41684?q=80&w=601&auto=format&fit=crop"
-               alt="" class="w-full aspect-square object-cover" />
-          <img src="https://images.unsplash.com/photo-1551907234-9c56277263ca?q=80&w=602&auto=format&fit=crop"
-               alt="" class="w-full aspect-square object-cover" />
-          <img src="https://images.unsplash.com/photo-1537726044900-b3b8c19c87e4?q=80&w=603&auto=format&fit=crop"
-               alt="" class="w-full aspect-square object-cover" />
-          <img src="https://images.unsplash.com/photo-1500534314211-0a24cd03f2c0?q=80&w=604&auto=format&fit=crop"
-               alt="" class="w-full aspect-square object-cover" />
-          <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=605&auto=format&fit=crop"
-               alt="" class="w-full aspect-square object-cover" />
-          <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=606&auto=format&fit=crop"
-               alt="" class="w-full aspect-square object-cover" />
-          <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=607&auto=format&fit=crop"
-               alt="" class="w-full aspect-square object-cover" />
-        </div>
-
-        <div class="text-center">
-          <button class="px-6 py-2 border border-slate-400 text-sm bg-white hover:bg-slate-50">
-            더보기
-          </button>
-        </div>
+      <div class="text-center">
+        <!-- 한국어 텍스트: "더보기" -->
+        <button id="btnMore" class="px-6 py-2 border border-slate-400 text-sm bg-white hover:bg-slate-50">
+          더보기
+        </button>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- 6. Footer + 사업자 정보 -->
-    <section id="contact" class="pt-10 pb-12 bg-white border-t border-slate-200">
-      <div class="max-w-4xl mx-auto px-4 text-center text-xs text-slate-600 space-y-3">
-        <!-- SNS 아이콘 줄 -->
-        <div class="flex justify-center gap-4 text-lg">
-          <span>📷</span>
-          <span>🅝</span>
-          <span>💬</span>
-          <span>📘</span>
-        </div>
-
-        <!-- 사업자 / 주소 정보 (원본 형태만 맞춘 예시) -->
-        <div class="space-y-1">
-          <p>insta hotel mainbranch, Korea</p>
-          <p>(주)호텔인스타</p>
-          <p>대표자 : 이영환</p>
-          <p>통신판매업 신고번호: 2023-수원영통-1696호</p>
-          <p>수원시 영통구 영통로 94-6</p>
-          <p>Business License 176-24-01388 | Tel 031-203-4301</p>
-        </div>
-
-        <div class="flex justify-center gap-4 pt-2">
-          <a href="#" class="hover:underline">이용약관</a>
-          <a href="#" class="hover:underline">개인정보처리방침</a>
-        </div>
+  <!-- 6. Footer + 사업자 정보 -->
+  <section id="contact" class="pt-10 pb-12 bg-white border-t border-slate-200">
+    <div class="max-w-4xl mx-auto px-4 text-center text-xs text-slate-600 space-y-3">
+      <!-- SNS 아이콘 줄 -->
+      <div class="flex justify-center gap-4 text-lg">
+        <span>📷</span>
+        <span>🅝</span>
+        <span>💬</span>
+        <span>📘</span>
       </div>
-    </section>
-  </main>
+
+      <!-- 사업자 / 주소 정보 -->
+      <div class="space-y-1">
+        <p>insta hotel mainbranch, Korea</p>
+        <p id="companyName">(주)호텔인스타</p>
+        <p id="ceoName">대표자 : 이영환</p>
+        <p id="bizNumber">통신판매업 신고번호: 2023-수원영통-1696호</p>
+        <p id="address">수원시 영통구 영통로 94-6</p>
+        <p>Business License 176-24-01388 | Tel 031-203-4301</p>
+      </div>
+
+      <div class="flex justify-center gap-4 pt-2">
+        <a href="#" id="termsLink" class="hover:underline">이용약관</a>
+        <a href="#" id="privacyLink" class="hover:underline">개인정보처리방침</a>
+      </div>
+    </div>
+  </section>
 
   <!-- 오른쪽 아래 노란 "문의" 버튼 -->
   <a
     href="#contact"
+    id="inquiryBtn"
     class="fixed bottom-6 right-6 z-40 flex items-center justify-center w-16 h-16 rounded-full bg-yellow-400 shadow-xl text-sm font-medium hover:bg-yellow-300"
   >
     문의
+  </a>
 
-<script>
-const header = document.getElementById("header");
+  <!-- 헤더 스크롤 색 변경 스크립트 -->
+  <script>
+    const header = document.getElementById("header");
 
-window.addEventListener("scroll", () => {
-    if (window.scrollY > 50) {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 50) {
         // 스크롤 시 = 오렌지 배경 + 그림자
         header.classList.add("bg-[#ff6900]", "shadow-lg");
         header.classList.remove("bg-transparent");
-    } else {
+      } else {
         // 맨 위에서는 = 투명
         header.classList.remove("bg-[#ff6900]", "shadow-lg");
         header.classList.add("bg-transparent");
-    }
-});
-</script>
+      }
+    });
+  </script>
 
-    
+  <!-- 다국어 변환 스크립트 (한국어만 나라별로 번역) -->
+  <script>
+    const translations = {
+      ko: {
+        btnMore: "더보기",
+        companyName: "(주)호텔인스타",
+        ceoName: "대표자 : 이영환",
+        bizNumber: "통신판매업 신고번호: 2023-수원영통-1696호",
+        address: "수원시 영통구 영통로 94-6",
+        termsLink: "이용약관",
+        privacyLink: "개인정보처리방침",
+        inquiryBtn: "문의",
+      },
+      en: {
+        btnMore: "View more",
+        companyName: "Insta Hotel Co., Ltd.",
+        ceoName: "CEO: Lee Young Hwan",
+        bizNumber: "Mail-order business registration: 2023-Suwon Yeongtong-1696",
+        address: "94-6, Yeongtong-ro, Yeongtong-gu, Suwon-si",
+        termsLink: "Terms of Use",
+        privacyLink: "Privacy Policy",
+        inquiryBtn: "Contact",
+      },
+      ja: {
+        btnMore: "もっと見る",
+        companyName: "インスタホテル株式会社",
+        ceoName: "代表者 : イ・ヨンファン",
+        bizNumber: "通信販売業申告番号: 2023-水原ヨントン-1696号",
+        address: "水原市 永東区 永東路 94-6",
+        termsLink: "利用規約",
+        privacyLink: "個人情報処理方針",
+        inquiryBtn: "お問い合わせ",
+      },
+      zh: {
+        btnMore: "查看更多",
+        companyName: "Insta Hotel有限公司",
+        ceoName: "代表：李永焕",
+        bizNumber: "通信销售业申报编号：2023-水原灵通-1696号",
+        address: "水原市 灵通区 灵通路94-6",
+        termsLink: "使用条款",
+        privacyLink: "隐私政策",
+        inquiryBtn: "咨询",
+      },
+    };
+
+    const langSelect = document.getElementById("langSelect");
+
+    function applyLanguage(lang) {
+      const t = translations[lang] || translations.ko;
+
+      // html lang 속성 변경
+      document.documentElement.lang = lang;
+
+      // 각 요소에 텍스트 적용
+      document.getElementById("btnMore").textContent = t.btnMore;
+      document.getElementById("companyName").textContent = t.companyName;
+      document.getElementById("ceoName").textContent = t.ceoName;
+      document.getElementById("bizNumber").textContent = t.bizNumber;
+      document.getElementById("address").textContent = t.address;
+      document.getElementById("termsLink").textContent = t.termsLink;
+      document.getElementById("privacyLink").textContent = t.privacyLink;
+      document.getElementById("inquiryBtn").textContent = t.inquiryBtn;
+    }
+
+    // 언어 선택 변경 시
+    langSelect.addEventListener("change", (e) => {
+      applyLanguage(e.target.value);
+    });
+
+    // 최초 로드 시 한국어 적용
+    applyLanguage("ko");
+  </script>
+
 </body>
 </html>
+
+
 
 
 
