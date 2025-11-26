@@ -4,183 +4,143 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Reservation – Insta Hotel - mainbranch</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
 <body class="bg-white text-slate-900">
 
-  <!-- 상단 네비게이션 (글루처럼 투명 → 스크롤 시 오렌지) -->
-  <header
-    id="header"
-    class="fixed top-0 left-0 right-0 z-30 bg-transparent text-white transition-colors duration-300"
-  >
-    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-      <!-- 로고 / 호텔 이름 -->
-      <a href="index.html" class="flex items-center gap-1 drop-shadow">
-        <span class="text-2xl font-semibold tracking-tight">
-          Insta Hotel - mainbranch
-        </span>
-      </a>
+<!-- 상단 네비게이션 (오렌지색 고정) -->
+<header class="fixed top-0 left-0 right-0 z-30 bg-[#ff6900] text-white drop-shadow">
+  <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-1 text-white">
+      <span class="text-2xl font-semibold tracking-tight">Insta Hotel - mainbranch</span>
+    </a>
 
-      <!-- 메뉴 -->
-      <nav class="hidden md:flex items-center gap-8 text-sm font-medium drop-shadow">
-        <a href="about.html" class="hover:text-orange-300">about</a>
-        <a href="rooms.html" class="hover:text-orange-300">rooms</a>
-        <a href="reservation.html" class="hover:text-orange-300">reservation</a>
-        <a href="#lounge" class="hover:text-orange-300">bluerain lounge</a>
-        <a href="#contact" class="hover:text-orange-300">contact</a>
-      </nav>
+    <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-white">
+      <a href="about.html" class="hover:text-orange-300">about</a>
+      <a href="rooms.html" class="hover:text-orange-300">rooms</a>
+      <a href="reservation.html" class="hover:text-orange-300">reservation</a>
+      <a href="lounge.html" class="hover:text-orange-300">bluerain lounge</a>
+      <a href="contact.html" class="hover:text-orange-300">contact</a>
+    </nav>
 
-      <!-- 언어 버튼 -->
-      <button
-        class="flex items-center gap-1 text-xs border border-white/80 rounded-full px-3 py-1 bg-white/10"
-      >
-        KR ▾
-      </button>
+    <button class="flex items-center gap-1 text-xs border border-white rounded-full px-3 py-1 bg-white/10">
+      KR ▾
+    </button>
+  </div>
+</header>
+
+<main class="pt-24">
+
+  <!-- ⭐ HERO 자동 슬라이드 -->
+  <section class="relative h-[360px] md:h-[460px] overflow-hidden">
+
+    <!-- 슬라이드 이미지 6장 -->
+    <div class="absolute inset-0 w-full h-full slideshow">
+      <img src="slide1.jpg" class="slide-image opacity-100">
+      <img src="slide2.jpg" class="slide-image opacity-0">
+      <img src="slide3.jpg" class="slide-image opacity-0">
+      <img src="slide4.jpg" class="slide-image opacity-0">
+      <img src="slide5.jpg" class="slide-image opacity-0">
+      <img src="slide6.jpg" class="slide-image opacity-0">
     </div>
-  </header>
 
-  <main class="pt-0">
+    <!-- 어두운 오버레이 -->
+    <div class="absolute inset-0 bg-black/10"></div>
 
-    <!-- HERO 상단 큰 사진 -->
-    <!-- ★ hero 이미지 파일 이름만 바꿔서 사용 -->
-    <section class="relative h-[360px] md:h-[460px] overflow-hidden">
-      <img
-        src="reservation-hero.jpg"
-        alt="Room view"
-        class="absolute inset-0 w-full h-full object-cover"
-      />
-      <div class="absolute inset-0 bg-black/10"></div>
-    </section>
+  </section>
 
-    <!-- 본문 컨텐츠 -->
-    <section class="max-w-6xl mx-auto px-4 py-12 md:py-16">
-      <!-- 타이틀 -->
-      <h1 class="text-lg md:text-xl font-semibold mb-10">
-        Room Reservation
-      </h1>
+  <style>
+    .slideshow { position: relative; }
+    .slide-image {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: opacity 1.4s ease-in-out;
+    }
+  </style>
 
-      <!-- 상단 원형 패키지 3개 -->
-      <div class="grid md:grid-cols-3 gap-10 mb-12">
-        <!-- 패키지 1 -->
-        <div class="text-center">
-          <img
-            src="package-1.jpg"
-            alt="패키지 1"
-            class="w-44 h-44 mx-auto rounded-full object-cover shadow-md"
-          />
-          <p class="mt-4 text-sm">
-            프리미엄 테라스 패키지
-          </p>
-        </div>
-
-        <!-- 패키지 2 -->
-        <div class="text-center">
-          <img
-            src="package-2.jpg"
-            alt="패키지 2"
-            class="w-44 h-44 mx-auto rounded-full object-cover shadow-md"
-          />
-          <p class="mt-4 text-sm">
-            시그니처 과일 및 디저트 패키지
-          </p>
-        </div>
-
-        <!-- 패키지 3 -->
-        <div class="text-center">
-          <img
-            src="package-3.jpg"
-            alt="패키지 3"
-            class="w-44 h-44 mx-auto rounded-full object-cover shadow-md"
-          />
-          <p class="mt-4 text-sm">
-            익선 루프탑 칵테일 사용 30% 할인
-          </p>
-        </div>
-      </div>
-
-      <!-- 왼쪽 안내문 / 오른쪽 예약버튼 -->
-      <div class="grid md:grid-cols-4 gap-10 items-start mb-12">
-        <!-- 안내 텍스트 -->
-        <div class="md:col-span-3 text-[11px] leading-relaxed space-y-1">
-          <p>• 패키지 예약은 전화로 사전 문의 후 예약이 가능합니다.</p>
-          <p>• 각 패키지는 한정 수량으로 조기 마감될 수 있으며, 호텔 사정에 따라 내용이 변경될 수 있습니다.</p>
-          <p>• 예약 변경 및 취소는 체크인 2일 전까지 가능합니다.</p>
-          <p>
-            • 2025년 11월 22일 ~ 12월 31일 기간 중 주중(월~목)에 한하여 적용되며,
-            주말/공휴일에는 적용되지 않습니다.
-          </p>
-        </div>
-
-        <!-- 예약 버튼 -->
-        <div class="flex md:justify-end items-center">
-          <button
-            class="w-full md:w-56 py-3 bg-[#ff6900] text-white text-sm font-semibold rounded-full shadow-md hover:bg-orange-500 transition"
-          >
-            예약하기
-          </button>
-        </div>
-      </div>
-
-      <!-- 하단 사진 3장 그리드 -->
-      <!-- ★ 세로 이미지 3장 파일 이름만 바꿔서 사용 -->
-      <div class="grid md:grid-cols-3 gap-4">
-        <img
-          src="reservation-photo-1.jpg"
-          alt="Room detail 1"
-          class="w-full h-full object-cover rounded shadow-md"
-        />
-        <img
-          src="reservation-photo-2.jpg"
-          alt="Room detail 2"
-          class="w-full h-full object-cover rounded shadow-md"
-        />
-        <img
-          src="reservation-photo-3.jpg"
-          alt="Room detail 3"
-          class="w-full h-full object-cover rounded shadow-md"
-        />
-      </div>
-    </section>
-
-    <!-- FOOTER (가운데 작은 점 아이콘 + 호텔 정보) -->
-    <section id="contact" class="pb-16">
-      <div class="max-w-6xl mx-auto px-4 pt-8 border-t border-slate-200 text-center text-[11px] text-slate-500">
-        <!-- 점 아이콘 4개 -->
-        <div class="flex justify-center gap-2 mb-4">
-          <span class="w-2 h-2 rounded-full bg-slate-400 inline-block"></span>
-          <span class="w-2 h-2 rounded-full bg-slate-400 inline-block"></span>
-          <span class="w-2 h-2 rounded-full bg-slate-400 inline-block"></span>
-          <span class="w-2 h-2 rounded-full bg-slate-400 inline-block"></span>
-        </div>
-
-        <p class="mb-1">Insta Hotel - mainbranch, Korea</p>
-        <p class="mb-1">경기도 수원시 영통구 영통로 94-6</p>
-        <p class="mb-1">Business License 176-24-01388 | Tel 031-203-4301</p>
-      </div>
-    </section>
-  </main>
-
-  <!-- 오른쪽 하단 노란 문의 버튼 -->
-  <a
-    href="#"
-    class="fixed bottom-6 right-6 z-40 flex items-center justify-center w-16 h-16 rounded-full bg-yellow-400 shadow-xl text-sm font-medium hover:bg-yellow-300 transition"
-  >
-    문의
-  </a>
-
-  <!-- 스크롤 시 헤더 색 변경 스크립트 -->
   <script>
-    const header = document.getElementById("header");
+    let slideIndex = 0;
+    const slides = document.querySelectorAll(".slide-image");
 
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 50) {
-        header.classList.add("bg-[#ff6900]", "shadow-lg");
-        header.classList.remove("bg-transparent");
-      } else {
-        header.classList.remove("bg-[#ff6900]", "shadow-lg");
-        header.classList.add("bg-transparent");
-      }
-    });
+    function showSlides() {
+      slides.forEach((slide, idx) => {
+        slide.style.opacity = (idx === slideIndex) ? "1" : "0";
+      });
+      slideIndex = (slideIndex + 1) % slides.length;
+    }
+
+    setInterval(showSlides, 4000); // 4초마다 다음 사진
   </script>
+
+  <!-- Room Reservation 텍스트 영역 -->
+  <section class="max-w-6xl mx-auto px-4 py-14">
+
+    <h2 class="text-center text-2xl font-semibold mb-10">Room Reservation</h2>
+
+    <!-- 상단 원형 이미지 3개 -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-center mb-12">
+
+      <div>
+        <img src="r1.jpg" class="w-48 h-48 mx-auto rounded-full object-cover shadow">
+        <p class="mt-4 font-medium">와인 테이스팅 패키지</p>
+      </div>
+
+      <div>
+        <img src="r2.jpg" class="w-48 h-48 mx-auto rounded-full object-cover shadow">
+        <p class="mt-4 font-medium">시그니처 커플 & 디저트 패키지</p>
+      </div>
+
+      <div>
+        <img src="r3.jpg" class="w-48 h-48 mx-auto rounded-full object-cover shadow">
+        <p class="mt-4 font-medium">연박 투숙 할인 35%</p>
+      </div>
+
+    </div>
+
+    <!-- 안내문 -->
+    <div class="text-sm text-slate-700 leading-relaxed mb-10">
+      <p>* 패키지 혜택은 예약자에 한하여 제공됩니다.</p>
+      <p>* 연박 이벤트는 자동 적용되지 않으며, 반드시 고객센터로 문의 후 혜택 적용 가능합니다.</p>
+      <p>* 예약 진행 후 취소가 어려울 수 있으니 신중히 선택해 주세요.</p>
+    </div>
+
+    <!-- 예약하기 버튼 -->
+    <div class="text-center mb-12">
+      <a href="#" class="inline-block bg-[#ff6900] px-10 py-3 text-white rounded-full font-medium hover:bg-orange-500 transition">
+        예약하기
+      </a>
+    </div>
+
+    <!-- 하단 4장 사진 -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <img src="r4.jpg" class="w-full h-full object-cover rounded shadow">
+      <img src="r5.jpg" class="w-full h-full object-cover rounded shadow">
+      <img src="r6.jpg" class="w-full h-full object-cover rounded shadow">
+      <img src="r7.jpg" class="w-full h-full object-cover rounded shadow">
+    </div>
+
+  </section>
+
+  <!-- Footer -->
+  <footer class="pt-10 pb-12 text-center text-xs text-slate-500 border-t">
+    <div class="space-y-2">
+      <div class="flex justify-center gap-2 text-xs mb-2">
+        <span>© Insta Hotel - mainbranch</span>
+        <span>|</span>
+        <span>경기도 수원시 영통구 영통로 94-6</span>
+      </div>
+      <div class="text-[11px]">
+        Business License 176-24-01388 | Tel 031-203-4301
+      </div>
+    </div>
+  </footer>
+
+</main>
 </body>
 </html>
+
