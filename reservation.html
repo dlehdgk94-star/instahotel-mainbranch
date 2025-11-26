@@ -170,30 +170,42 @@
 
 
 
-    <!-- FOOTER (가운데 작은 점 아이콘 + 호텔 정보) -->
-    <section id="contact" class="pb-16">
-      <div class="max-w-6xl mx-auto px-4 pt-8 border-t border-slate-200 text-center text-[11px] text-slate-500">
-        <!-- 점 아이콘 4개 -->
-        <div class="flex justify-center gap-2 mb-4">
-          <span class="w-2 h-2 rounded-full bg-slate-400 inline-block"></span>
-          <span class="w-2 h-2 rounded-full bg-slate-400 inline-block"></span>
-          <span class="w-2 h-2 rounded-full bg-slate-400 inline-block"></span>
-          <span class="w-2 h-2 rounded-full bg-slate-400 inline-block"></span>
+   <!-- 6. Footer + 사업자 정보 -->
+    <section id="contact" class="pt-10 pb-12 bg-white border-t border-slate-200">
+      <div class="max-w-4xl mx-auto px-4 text-center text-xs text-slate-600 space-y-3">
+        <!-- SNS 아이콘 줄 -->
+        <div class="flex justify-center gap-4 text-lg">
+          <span>📷</span>
+          <span>🅝</span>
+          <span>💬</span>
+          <span>📘</span>
         </div>
 
-        <p class="mb-1">Insta Hotel - mainbranch, Korea</p>
-        <p class="mb-1">경기도 수원시 영통구 영통로 94-6</p>
-        <p class="mb-1">Business License 176-24-01388 | Tel 031-203-4301</p>
+        <!-- 사업자 / 주소 정보 (원본 형태만 맞춘 예시) -->
+        <div class="space-y-1">
+          <p>insta hotel mainbranch, Korea</p>
+          <p>(주)호텔인스타</p>
+          <p>대표자 : 이영환</p>
+          <p>통신판매업 신고번호: 2023-수원영통-1696호</p>
+          <p>수원시 영통구 영통로 94-6</p>
+          <p>Business License 176-24-01388 | Tel 031-203-4301</p>
+        </div>
+
+        <div class="flex justify-center gap-4 pt-2">
+          <a href="#" class="hover:underline">이용약관</a>
+          <a href="#" class="hover:underline">개인정보처리방침</a>
+        </div>
       </div>
     </section>
   </main>
 
-  <!-- 오른쪽 하단 노란 문의 버튼 -->
+  <!-- 오른쪽 아래 노란 "문의" 버튼 -->
   <a
-    href="#"
-    class="fixed bottom-6 right-6 z-40 flex items-center justify-center w-16 h-16 rounded-full bg-yellow-400 shadow-xl text-sm font-medium hover:bg-yellow-300 transition"
+    href="#contact"
+    class="fixed bottom-6 right-6 z-40 flex items-center justify-center w-16 h-16 rounded-full bg-yellow-400 shadow-xl text-sm font-medium hover:bg-yellow-300"
   >
     문의
+  </main>
   </a>
 
  <!-- 스크롤 시 헤더 색 변경 스크립트 -->
