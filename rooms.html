@@ -17,7 +17,6 @@
       
       <button id="mobile-menu-btn" class="md:hidden text-white flex items-center focus:outline-none">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-8 h-8">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5" /> 
           <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
         </svg>
       </button>
@@ -28,19 +27,26 @@
       </a>
 
       <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
-        <a href="about.html" class="hover:text-orange-200">about</a>
-        <a href="rooms.html" class="hover:text-orange-200">rooms</a>
-        <a href="reservation.html" class="hover:text-orange-200">reservation</a>
-        <a href="#lounge" class="hover:text-orange-200">bluerain lounge</a>
-        <a href="contact.html" class="hover:text-orange-200">contact</a>
+        <a href="about.html" class="hover:text-orange-200" data-translate="nav_about">about</a>
+        <a href="rooms.html" class="hover:text-orange-200" data-translate="nav_rooms">rooms</a>
+        <a href="reservation.html" class="hover:text-orange-200" data-translate="nav_reservation">reservation</a>
+        <a href="#lounge" class="hover:text-orange-200" data-translate="nav_lounge">bluerain lounge</a>
+        <a href="contact.html" class="hover:text-orange-200" data-translate="nav_contact">contact</a>
       </nav>
 
-      <div class="flex items-center">
-         <div class="flex items-center gap-1 cursor-pointer">
-            <span class="text-2xl shadow-sm rounded-sm leading-none pt-1">🇰🇷</span>
+      <div class="flex items-center relative">
+         <div class="flex items-center gap-1 cursor-pointer relative">
+            <span id="current-flag-icon" class="text-2xl shadow-sm rounded-sm leading-none pt-1">🇰🇷</span>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-white opacity-90">
               <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
             </svg>
+
+            <select id="header-lang-select" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer appearance-none">
+                <option value="ko">🇰🇷 한국어</option>
+                <option value="en">🇺🇸 English</option>
+                <option value="ja">🇯🇵 日本語</option>
+                <option value="zh">🇨🇳 中文</option>
+            </select>
          </div>
       </div>
 
@@ -58,11 +64,11 @@
       </div>
       
       <ul class="flex flex-col space-y-4 text-lg font-medium">
-        <li><a href="about.html" class="block hover:text-[#ff6900]">about</a></li>
+        <li><a href="about.html" class="block hover:text-[#ff6900]" data-translate="nav_about">about</a></li>
         
         <li>
             <div class="flex justify-between items-center cursor-pointer hover:text-[#ff6900]" id="rooms-toggle">
-                <span>rooms</span> <span class="text-sm">▼</span>
+                <span data-translate="nav_rooms">rooms</span> <span class="text-sm">▼</span>
             </div>
             <ul id="rooms-submenu" class="hidden mt-3 ml-4 space-y-3 border-l-2 border-slate-100 pl-4">
                 <li><a href="rooms.html" class="block text-sm text-slate-600 hover:text-[#ff6900]">Twin</a></li>
@@ -75,14 +81,14 @@
             </ul>
         </li>
 
-        <li><a href="reservation.html" class="block hover:text-[#ff6900]">reservation</a></li>
-        <li><a href="#lounge" class="block hover:text-[#ff6900]">bluerain lounge</a></li>
-        <li><a href="contact.html" class="block hover:text-[#ff6900]">contact</a></li>
+        <li><a href="reservation.html" class="block hover:text-[#ff6900]" data-translate="nav_reservation">reservation</a></li>
+        <li><a href="#lounge" class="block hover:text-[#ff6900]" data-translate="nav_lounge">bluerain lounge</a></li>
+        <li><a href="contact.html" class="block hover:text-[#ff6900]" data-translate="nav_contact">contact</a></li>
       </ul>
 
       <div class="mt-8 border-t pt-4">
          <p class="text-sm text-slate-400 mb-2">Language</p>
-         <select class="w-full p-2 border rounded text-slate-700 bg-slate-50 outline-none">
+         <select id="drawer-lang-select" class="w-full p-2 border rounded text-slate-700 bg-slate-50 outline-none">
              <option value="ko">Korean</option>
              <option value="en">English</option>
              <option value="ja">Japanese</option>
@@ -103,17 +109,17 @@
              insta’s room
           </h1>
 
-          <p>
-            인스타의 객실은 ‘하루의 순간’을 편안하게 머물게 하기 위해
-            설계되었습니다.
+          <p id="intro-text-1">
+            인스타의 객실은 ‘하루의 순간’을 편안하게 머물게 하기 위해 설계되었습니다.
           </p>
-          <p>
-            여행자와 도시, 여행자와 경험, 여행자와 사람들을<br />
-            자연스럽게 연결해 주는 조용한 공간을 지향합니다.
+          <p id="intro-text-2">
+            여행자와 도시, 여행자와 경험, 여행자와 사람들을 자연스럽게 연결해 주는 조용한 공간을 지향합니다.
           </p>
-          <p>
-            방 안에서는 과한 장식 대신 따뜻한 조명과 여유로운 동선을 유지해
-            머무는 동안 온전히 나에게 집중할 수 있도록 돕습니다.
+          <p id="intro-text-3">
+            방 안에서는 과한 장식 대신 따뜻한 조명과 여유로운 동선을 유지해 머무는 동안 온전히 나에게 집중할 수 있도록 돕습니다.
+          </p>
+          <p id="intro-text-4">
+            각 객실에서는 수원 도심과 주변 풍경을 바라볼 수 있으며, 공용 라운지를 통해 또 다른 분위기를 즐길 수 있습니다.
           </p>
         </div>
 
@@ -128,11 +134,9 @@
     </section>
 
     <section class="max-w-6xl mx-auto py-10 border-t border-slate-200">
-      <p class="text-xs text-orange-500 tracking-wide font-bold uppercase italic mb-1">
-        TYPE 1 / 인스타 트윈
-      </p>
+      <p class="text-xs text-orange-500 tracking-wide font-bold uppercase italic mb-1" id="type-twin">TYPE 1 / 인스타 트윈</p>
       <h2 class="text-xl md:text-4xl font-bold mb-4">Twin Room</h2>
-      <p class="text-sm font-bold text-slate-600 mb-6">
+      <p class="text-sm font-bold text-slate-600 mb-6" id="desc-twin">
         Free wi-fi, LG Air Conditioner, Air Purifier, Refrigerator, Full-body bath, Two Bed
       </p>
       
@@ -142,11 +146,9 @@
         </a>
 
         <div>
-            <p class="text-xs text-orange-500 tracking-wide font-bold uppercase italic mb-1">
-              TYPE 2 / 인스타 특실
-            </p>
+            <p class="text-xs text-orange-500 tracking-wide font-bold uppercase italic mb-1" id="type-special">TYPE 2 / 인스타 특실</p>
             <h2 class="text-xl md:text-4xl font-bold mb-4">Special Room</h2>
-            <p class="text-sm font-bold text-slate-600 mb-6">
+            <p class="text-sm font-bold text-slate-600 mb-6" id="desc-special">
               Free wi-fi, LG Air Conditioner, Air Purifier, Refrigerator, Full-body bath, Three Bed
             </p>
             <a href="room-special.html" class="block overflow-hidden rounded-lg bg-slate-100 shadow-sm">
@@ -159,17 +161,17 @@
     <section class="max-w-6xl mx-auto py-10 border-t border-slate-200">
       <div class="grid md:grid-cols-2 gap-10">
         <div>
-          <p class="text-xs text-orange-500 tracking-wide font-bold uppercase italic mb-1">TYPE 3 / 인스타 럭셔리</p>
+          <p class="text-xs text-orange-500 tracking-wide font-bold uppercase italic mb-1" id="type-luxury">TYPE 3 / 인스타 럭셔리</p>
           <h3 class="text-xl md:text-4xl font-bold mb-4">Luxury Room</h3>
-          <p class="text-sm font-bold text-slate-600 mb-6">Free wi-fi, LG Air Conditioner, Air Purifier, Refrigerator, Full-body bath, LED 65"TV</p>
+          <p class="text-sm font-bold text-slate-600 mb-6" id="desc-luxury">Free wi-fi, LG Air Conditioner, Air Purifier, Refrigerator, Full-body bath, LED 65"TV</p>
           <a href="room-luxery.html" class="block overflow-hidden rounded-lg bg-slate-100 shadow-sm">
             <img src="hero1.jpg" alt="Luxury Room" class="w-full h-auto object-cover hover:scale-105 transition-transform duration-500" />
           </a>
         </div>
         <div>
-          <p class="text-xs text-orange-500 tracking-wide font-bold uppercase italic mb-1">TYPE 4 / 인스타 프리미엄</p>
+          <p class="text-xs text-orange-500 tracking-wide font-bold uppercase italic mb-1" id="type-premium">TYPE 4 / 인스타 프리미엄</p>
           <h3 class="text-xl md:text-4xl font-bold mb-4">Premium Room</h3>
-          <p class="text-sm font-bold text-slate-600 mb-6">Free wi-fi, LG Air Conditioner, Air Purifier, Refrigerator, LED 65"TV</p>
+          <p class="text-sm font-bold text-slate-600 mb-6" id="desc-premium">Free wi-fi, LG Air Conditioner, Air Purifier, Refrigerator, LED 65"TV</p>
           <a href="room-premium.html" class="block overflow-hidden rounded-lg bg-slate-100 shadow-sm">
             <img src="hero2.jpg" alt="Premium Room" class="w-full h-auto object-cover hover:scale-105 transition-transform duration-500" />
           </a>
@@ -180,17 +182,17 @@
     <section class="max-w-6xl mx-auto py-10 border-t border-slate-200">
       <div class="grid md:grid-cols-2 gap-10">
         <div>
-          <p class="text-xs text-orange-500 tracking-wide font-bold uppercase italic mb-1">TYPE 5 / 인스타 디럭스</p>
+          <p class="text-xs text-orange-500 tracking-wide font-bold uppercase italic mb-1" id="type-deluxe">TYPE 5 / 인스타 디럭스</p>
           <h3 class="text-xl md:text-4xl font-bold mb-4">Deluxe Room</h3>
-          <p class="text-sm font-bold text-slate-600 mb-6">Free wi-fi, LG Air Conditioner, Air Purifier, Refrigerator, LED 65"TV</p>
+          <p class="text-sm font-bold text-slate-600 mb-6" id="desc-deluxe">Free wi-fi, LG Air Conditioner, Air Purifier, Refrigerator, LED 65"TV</p>
           <a href="room-deluxe.html" class="block overflow-hidden rounded-lg bg-slate-100 shadow-sm">
             <img src="hero12.jpg" alt="Deluxe Room" class="w-full h-auto object-cover hover:scale-105 transition-transform duration-500" />
           </a>
         </div>
         <div>
-          <p class="text-xs text-orange-500 tracking-wide font-bold uppercase italic mb-1">TYPE 6 / 인스타 스탠다드</p>
+          <p class="text-xs text-orange-500 tracking-wide font-bold uppercase italic mb-1" id="type-standard">TYPE 6 / 인스타 스탠다드</p>
           <h3 class="text-xl md:text-4xl font-bold mb-4">Standard Room</h3>
-          <p class="text-sm font-bold text-slate-600 mb-6">Free wi-fi, LG Air Conditioner, Air Purifier, Refrigerator, LED 65"TV</p>
+          <p class="text-sm font-bold text-slate-600 mb-6" id="desc-standard">Free wi-fi, LG Air Conditioner, Air Purifier, Refrigerator, LED 65"TV</p>
           <a href="room-standard.html" class="block overflow-hidden rounded-lg bg-slate-100 shadow-sm">
             <img src="hero11.jpg" alt="Standard Room" class="w-full h-auto object-cover hover:scale-105 transition-transform duration-500" />
           </a>
@@ -201,19 +203,18 @@
     <section class="max-w-6xl mx-auto py-12 border-t border-slate-200">
       <h2 class="text-4xl md:text-5xl font-semibold italic" style="color:#ff6900;">amenities</h2>
       <div class="mt-6 space-y-2">
-        <p class="text-lg leading-relaxed">투숙객들이 편안하게 머무르고 갈 수 있도록 다양한 어메니티를 제공하고 있습니다.</p>
+        <p class="text-lg leading-relaxed" id="amenity-desc-1">투숙객들이 편안하게 머무르고 갈 수 있도록 다양한 어메니티를 제공하고 있습니다.</p>
         <p class="text-lg leading-relaxed text-slate-700">We offer a variety of amenities so that guests can stay comfortably.</p>
       </div>
 
       <div class="mt-10">
-        <p class="text-xl font-semibold" style="color:#ff6900;">화장실 / BATHROOM (전 객실 공통)</p>
-        <p class="text-lg font-medium mt-2">샴푸, 린스, 바디워시, 칫솔, 치약, 클렌징폼, 면도기</p>
+        <p class="text-xl font-semibold" style="color:#ff6900;" id="amenity-sub-1">화장실 / BATHROOM (전 객실 공통)</p>
+        <p class="text-lg font-medium mt-2" id="amenity-list-1">샴푸, 린스, 바디워시, 칫솔, 치약, 클렌징폼, 면도기</p>
       </div>
 
       <div class="mt-6 space-y-2 text-sm text-slate-600">
-        <p>* 칫솔, 치약, 클렌징폼, 비누, 샤워타월, 면도기, 여성청결제, 레이디셋 무상 제공해드립니다.</p>
+        <p id="amenity-note-1">* 칫솔, 치약, 클렌징폼, 비누, 샤워타월, 면도기, 여성청결제, 레이디셋 무상 제공해드립니다.</p>
         <p>* Complimentary amenities include: Toothbrush, toothpaste, cleansing foam, soap, shower towel, razor, feminine wash, and a lady's kit.</p>
-        <p>* 歯ブラシ、歯磨き粉、クレンジングフォーム、石鹸、シャワータオル、カミソリ、女性用ソープ、レディースセットを無料でお使いいただけます。</p>
       </div>
 
       <div class="grid md:grid-cols-2 gap-6 mt-10">
@@ -224,9 +225,9 @@
     </section>
 
     <section class="max-w-6xl mx-auto py-12 border-t border-slate-200" id="lounge">
-      <p class="text-xs text-orange-500 tracking-wide font-semibold uppercase italic mb-1">조식 &amp; 룸서비스</p>
+      <p class="text-xs text-orange-500 tracking-wide font-semibold uppercase italic mb-1" id="lounge-type">조식 &amp; 룸서비스</p>
       <h2 class="text-xl md:text-2xl font-semibold mb-4">Breakfast &amp; Room Service</h2>
-      <p class="text-sm leading-relaxed mb-6">조식 룸서비스를 이용하실 수 있습니다.</p>
+      <p class="text-sm leading-relaxed mb-6" id="lounge-desc">조식 룸서비스를 이용하실 수 있습니다.</p>
 
       <img src="조식 원본인쇄용.jpg" alt="Breakfast Table" class="w-full h-auto object-cover rounded shadow-md mb-6" />
 
@@ -243,27 +244,29 @@
         </div>
         <div class="space-y-1">
           <p>insta hotel mainbranch, Korea</p>
-          <p>(주)호텔인스타</p>
-          <p>대표자 : 이영환</p>
-          <p>통신판매업 신고번호: 2023-수원영통-1696호</p>
-          <p>수원시 영통구 영통로 94-6</p>
+          <p id="companyName">(주)호텔인스타</p>
+          <p id="ceoName">대표자 : 이영환</p>
+          <p id="bizNumber">통신판매업 신고번호: 2023-수원영통-1696호</p>
+          <p id="address">수원시 영통구 영통로 94-6</p>
           <p>Business License 176-24-01388 | Tel 031-203-4301</p>
         </div>
         <div class="flex justify-center gap-4 pt-2">
-          <a href="#" class="hover:underline">이용약관</a>
-          <a href="#" class="hover:underline">개인정보처리방침</a>
+          <a href="#" class="hover:underline" id="terms">이용약관</a>
+          <a href="#" class="hover:underline" id="privacy">개인정보처리방침</a>
         </div>
       </div>
     </section>
 
   </main>
 
-  <a href="#contact" class="fixed bottom-6 right-6 z-40 flex items-center justify-center w-16 h-16 rounded-full bg-yellow-400 shadow-xl text-sm font-medium hover:bg-yellow-300">
+  <a href="#contact" id="inquiryBtn" class="fixed bottom-6 right-6 z-40 flex items-center justify-center w-16 h-16 rounded-full bg-yellow-400 shadow-xl text-sm font-medium hover:bg-yellow-300">
     문의
   </a>
 
   <script>
-    // 모바일 메뉴 열기/닫기 로직
+    /* --------------------------------------
+       1. 모바일 메뉴 (Drawer) 열기/닫기
+    -------------------------------------- */
     const mobileMenuBtn = document.getElementById("mobile-menu-btn");
     const mobileDrawer = document.getElementById("mobile-drawer");
     const drawerOverlay = document.getElementById("drawer-overlay");
@@ -284,13 +287,192 @@
     mobileCloseBtn.addEventListener("click", closeMenu);
     drawerOverlay.addEventListener("click", closeMenu);
 
-    // Rooms 하위 메뉴 토글 로직
     const roomsToggle = document.getElementById("rooms-toggle");
     const roomsSubmenu = document.getElementById("rooms-submenu");
-    
     if(roomsToggle && roomsSubmenu){
         roomsToggle.addEventListener("click", () => {
             roomsSubmenu.classList.toggle("hidden");
+        });
+    }
+
+    /* --------------------------------------
+       2. 다국어 번역 데이터 및 로직
+    -------------------------------------- */
+    const translations = {
+      ko: {
+        flag: "🇰🇷",
+        nav_about: "about", nav_rooms: "rooms", nav_reservation: "reservation", nav_lounge: "bluerain lounge", nav_contact: "contact",
+        intro_1: "인스타의 객실은 ‘하루의 순간’을 편안하게 머물게 하기 위해 설계되었습니다.",
+        intro_2: "여행자와 도시, 여행자와 경험, 여행자와 사람들을 자연스럽게 연결해 주는 조용한 공간을 지향합니다.",
+        intro_3: "방 안에서는 과한 장식 대신 따뜻한 조명과 여유로운 동선을 유지해 머무는 동안 온전히 나에게 집중할 수 있도록 돕습니다.",
+        intro_4: "각 객실에서는 수원 도심과 주변 풍경을 바라볼 수 있으며, 공용 라운지를 통해 또 다른 분위기를 즐길 수 있습니다.",
+        
+        type_twin: "TYPE 1 / 인스타 트윈", desc_twin: "Free wi-fi, LG Air Conditioner, Air Purifier, Refrigerator, Full-body bath, Two Bed",
+        type_special: "TYPE 2 / 인스타 특실", desc_special: "Free wi-fi, LG Air Conditioner, Air Purifier, Refrigerator, Full-body bath, Three Bed",
+        type_luxury: "TYPE 3 / 인스타 럭셔리", desc_luxury: "Free wi-fi, LG Air Conditioner, Air Purifier, Refrigerator, Full-body bath, LED 65\"TV",
+        type_premium: "TYPE 4 / 인스타 프리미엄", desc_premium: "Free wi-fi, LG Air Conditioner, Air Purifier, Refrigerator, LED 65\"TV",
+        type_deluxe: "TYPE 5 / 인스타 디럭스", desc_deluxe: "Free wi-fi, LG Air Conditioner, Air Purifier, Refrigerator, LED 65\"TV",
+        type_standard: "TYPE 6 / 인스타 스탠다드", desc_standard: "Free wi-fi, LG Air Conditioner, Air Purifier, Refrigerator, LED 65\"TV",
+
+        amenity_desc_1: "투숙객들이 편안하게 머무르고 갈 수 있도록 다양한 어메니티를 제공하고 있습니다.",
+        amenity_sub_1: "화장실 / BATHROOM (전 객실 공통)",
+        amenity_list_1: "샴푸, 린스, 바디워시, 칫솔, 치약, 클렌징폼, 면도기",
+        amenity_note_1: "* 칫솔, 치약, 클렌징폼, 비누, 샤워타월, 면도기, 여성청결제, 레이디셋 무상 제공해드립니다.",
+
+        lounge_type: "조식 & 룸서비스", lounge_desc: "조식 룸서비스를 이용하실 수 있습니다.",
+
+        companyName: "(주)호텔인스타", ceoName: "대표자 : 이영환", bizNumber: "통신판매업 신고번호: 2023-수원영통-1696호", address: "수원시 영통구 영통로 94-6",
+        terms: "이용약관", privacy: "개인정보처리방침", inquiryBtn: "문의"
+      },
+      en: {
+        flag: "🇺🇸",
+        nav_about: "about", nav_rooms: "rooms", nav_reservation: "reservation", nav_lounge: "bluerain lounge", nav_contact: "contact",
+        intro_1: "Insta's rooms are designed to make your 'moment of the day' comfortable.",
+        intro_2: "We aim for a quiet space that naturally connects travelers with the city, experiences, and people.",
+        intro_3: "Inside the room, warm lighting and spacious layouts replace excessive decorations, helping you focus entirely on yourself during your stay.",
+        intro_4: "From each room, you can view downtown Suwon and the surrounding scenery, and enjoy a different atmosphere through the shared lounge.",
+        
+        type_twin: "TYPE 1 / Insta Twin", desc_twin: "Free wi-fi, LG Air Conditioner, Air Purifier, Refrigerator, Full-body bath, Two Bed",
+        type_special: "TYPE 2 / Insta Special", desc_special: "Free wi-fi, LG Air Conditioner, Air Purifier, Refrigerator, Full-body bath, Three Bed",
+        type_luxury: "TYPE 3 / Insta Luxury", desc_luxury: "Free wi-fi, LG Air Conditioner, Air Purifier, Refrigerator, Full-body bath, LED 65\"TV",
+        type_premium: "TYPE 4 / Insta Premium", desc_premium: "Free wi-fi, LG Air Conditioner, Air Purifier, Refrigerator, LED 65\"TV",
+        type_deluxe: "TYPE 5 / Insta Deluxe", desc_deluxe: "Free wi-fi, LG Air Conditioner, Air Purifier, Refrigerator, LED 65\"TV",
+        type_standard: "TYPE 6 / Insta Standard", desc_standard: "Free wi-fi, LG Air Conditioner, Air Purifier, Refrigerator, LED 65\"TV",
+
+        amenity_desc_1: "We offer a variety of amenities so that guests can stay comfortably.",
+        amenity_sub_1: "BATHROOM (Common to all rooms)",
+        amenity_list_1: "Shampoo, Conditioner, Body wash, Toothbrush, Toothpaste, Cleansing foam, Razor",
+        amenity_note_1: "* Complimentary amenities include: Toothbrush, toothpaste, cleansing foam, soap, shower towel, razor, feminine wash, and a lady's kit.",
+
+        lounge_type: "Breakfast & Room Service", lounge_desc: "Breakfast room service is available.",
+
+        companyName: "Insta Hotel Co., Ltd.", ceoName: "CEO: Lee Young Hwan", bizNumber: "Registration: 2023-Suwon Yeongtong-1696", address: "94-6, Yeongtong-ro, Yeongtong-gu, Suwon-si",
+        terms: "Terms of Use", privacy: "Privacy Policy", inquiryBtn: "Contact"
+      },
+      ja: {
+        flag: "🇯🇵",
+        nav_about: "about", nav_rooms: "rooms", nav_reservation: "reservation", nav_lounge: "bluerain lounge", nav_contact: "contact",
+        intro_1: "インスタの客室は、「一日の瞬間」を快適に過ごせるように設計されています。",
+        intro_2: "旅行者と都市、経験、そして人々を自然につなぐ静かな空間を目指しています。",
+        intro_3: "部屋の中では、過度な装飾の代わりに暖かい照明とゆったりとした動線を維持し、滞在中に完全に自分自身に集中できるようにします。",
+        intro_4: "各客室からは水原の都心と周辺の風景を眺めることができ、共用ラウンジを通じてまた別の雰囲気を楽しむことができます。",
+
+        type_twin: "TYPE 1 / インスタ・ツイン", desc_twin: "無料Wi-Fi、エアコン、空気清浄機、冷蔵庫、全身浴槽、ベッド2台",
+        type_special: "TYPE 2 / インスタ・スペシャル", desc_special: "無料Wi-Fi、エアコン、空気清浄機、冷蔵庫、全身浴槽、ベッド3台",
+        type_luxury: "TYPE 3 / インスタ・ラグジュアリー", desc_luxury: "無料Wi-Fi、エアコン、空気清浄機、冷蔵庫、全身浴槽、LED 65インチTV",
+        type_premium: "TYPE 4 / インスタ・プレミアム", desc_premium: "無料Wi-Fi、エアコン、空気清浄機、冷蔵庫、LED 65インチTV",
+        type_deluxe: "TYPE 5 / インスタ・デラックス", desc_deluxe: "無料Wi-Fi、エアコン、空気清浄機、冷蔵庫、LED 65インチTV",
+        type_standard: "TYPE 6 / インスタ・スタンダード", desc_standard: "無料Wi-Fi、エアコン、空気清浄機、冷蔵庫、LED 65インチTV",
+
+        amenity_desc_1: "お客様に快適にお過ごしいただけるよう、様々なアメニティをご用意しております。",
+        amenity_sub_1: "バスルーム (全室共通)",
+        amenity_list_1: "シャンプー、コンディショナー、ボディウォッシュ、歯ブラシ、歯磨き粉、洗顔フォーム、カミソリ",
+        amenity_note_1: "* 歯ブラシ、歯磨き粉、洗顔フォーム、石鹸、シャワータオル、カミソリ、女性用清潔剤、レディースセットを無料で提供いたします。",
+
+        lounge_type: "朝食 & ルームサービス", lounge_desc: "朝食ルームサービスをご利用いただけます。",
+
+        companyName: "インスタホテル株式会社", ceoName: "代表者 : イ・ヨンファン", bizNumber: "登録番号: 2023-水原霊通-1696", address: "水原市霊通区霊通路94-6",
+        terms: "利用規約", privacy: "個人情報処理方針", inquiryBtn: "お問い合わせ"
+      },
+      zh: {
+        flag: "🇨🇳",
+        nav_about: "关于", nav_rooms: "客房", nav_reservation: "预订", nav_lounge: "蓝雨休息室", nav_contact: "联系我们",
+        intro_1: "Insta的客房旨在让您舒适地度过“一天的时刻”。",
+        intro_2: "我们要打造一个安静的空间，自然地连接旅行者与城市、体验和人们。",
+        intro_3: "房间内没有过度的装饰，而是保持温暖的照明和宽松的动线，帮助您在逗留期间完全专注于自己。",
+        intro_4: "每间客房都可以眺望水原市中心和周围的风景，并通过共用休息室享受另一种氛围。",
+
+        type_twin: "TYPE 1 / Insta 双床房", desc_twin: "免费Wi-Fi，空调，空气净化器，冰箱，全身浴缸，两张床",
+        type_special: "TYPE 2 / Insta 特色房", desc_special: "免费Wi-Fi，空调，空气净化器，冰箱，全身浴缸，三张床",
+        type_luxury: "TYPE 3 / Insta 豪华房", desc_luxury: "免费Wi-Fi，空调，空气净化器，冰箱，全身浴缸，LED 65英寸电视",
+        type_premium: "TYPE 4 / Insta 高级房", desc_premium: "免费Wi-Fi，空调，空气净化器，冰箱，LED 65英寸电视",
+        type_deluxe: "TYPE 5 / Insta 豪华房", desc_deluxe: "免费Wi-Fi，空调，空气净化器，冰箱，LED 65英寸电视",
+        type_standard: "TYPE 6 / Insta 标准房", desc_standard: "免费Wi-Fi，空调，空气净化器，冰箱，LED 65英寸电视",
+
+        amenity_desc_1: "我们提供各种设施，让客人可以舒适地逗留。",
+        amenity_sub_1: "浴室 (所有客房通用)",
+        amenity_list_1: "洗发水，护发素，沐浴露，牙刷，牙膏，洁面乳，剃须刀",
+        amenity_note_1: "* 免费提供牙刷、牙膏、洁面乳、肥皂、沐浴巾、剃须刀、女性清洁剂、女士套装。",
+
+        lounge_type: "早餐 & 客房服务", lounge_desc: "可以使用早餐客房服务。",
+
+        companyName: "Insta Hotel有限公司", ceoName: "代表：李永焕", bizNumber: "注册号：2023-水原灵通-1696", address: "水原市灵通区灵通路94-6",
+        terms: "使用条款", privacy: "隐私政策", inquiryBtn: "咨询"
+      }
+    };
+
+    const headerSelect = document.getElementById("header-lang-select");
+    const drawerSelect = document.getElementById("drawer-lang-select");
+    const currentFlagIcon = document.getElementById("current-flag-icon");
+
+    function updateLanguage(lang) {
+        const t = translations[lang] || translations.ko;
+
+        // 1. 상단 국기 아이콘 변경
+        if(currentFlagIcon) currentFlagIcon.textContent = t.flag;
+
+        // 2. 텍스트 업데이트 (ID 매칭)
+        // Intro Text
+        document.getElementById("intro-text-1").textContent = t.intro_1;
+        document.getElementById("intro-text-2").textContent = t.intro_2;
+        document.getElementById("intro-text-3").textContent = t.intro_3;
+        document.getElementById("intro-text-4").textContent = t.intro_4;
+
+        // Rooms
+        document.getElementById("type-twin").textContent = t.type_twin;
+        document.getElementById("desc-twin").textContent = t.desc_twin;
+        document.getElementById("type-special").textContent = t.type_special;
+        document.getElementById("desc-special").textContent = t.desc_special;
+        document.getElementById("type-luxury").textContent = t.type_luxury;
+        document.getElementById("desc-luxury").textContent = t.desc_luxury;
+        document.getElementById("type-premium").textContent = t.type_premium;
+        document.getElementById("desc-premium").textContent = t.desc_premium;
+        document.getElementById("type-deluxe").textContent = t.type_deluxe;
+        document.getElementById("desc-deluxe").textContent = t.desc_deluxe;
+        document.getElementById("type-standard").textContent = t.type_standard;
+        document.getElementById("desc-standard").textContent = t.desc_standard;
+
+        // Amenities
+        document.getElementById("amenity-desc-1").textContent = t.amenity_desc_1;
+        document.getElementById("amenity-sub-1").textContent = t.amenity_sub_1;
+        document.getElementById("amenity-list-1").textContent = t.amenity_list_1;
+        document.getElementById("amenity-note-1").textContent = t.amenity_note_1;
+
+        // Lounge
+        document.getElementById("lounge-type").textContent = t.lounge_type;
+        document.getElementById("lounge-desc").textContent = t.lounge_desc;
+
+        // Footer
+        document.getElementById("companyName").textContent = t.companyName;
+        document.getElementById("ceoName").textContent = t.ceoName;
+        document.getElementById("bizNumber").textContent = t.bizNumber;
+        document.getElementById("address").textContent = t.address;
+        document.getElementById("terms").textContent = t.terms;
+        document.getElementById("privacy").textContent = t.privacy;
+        document.getElementById("inquiryBtn").textContent = t.inquiryBtn;
+        
+        // Navigation Text (data-translate 속성 이용)
+        document.querySelectorAll("[data-translate]").forEach(el => {
+            const key = el.getAttribute("data-translate");
+            if(t[key]) el.textContent = t[key];
+        });
+    }
+
+    // 헤더 투명 셀렉트 박스 이벤트
+    if(headerSelect) {
+        headerSelect.addEventListener("change", (e) => {
+            const lang = e.target.value;
+            if(drawerSelect) drawerSelect.value = lang; // 드로어랑 싱크 맞춤
+            updateLanguage(lang);
+        });
+    }
+
+    // 드로어 메뉴 셀렉트 박스 이벤트
+    if(drawerSelect) {
+        drawerSelect.addEventListener("change", (e) => {
+            const lang = e.target.value;
+            if(headerSelect) headerSelect.value = lang; // 헤더랑 싱크 맞춤
+            updateLanguage(lang);
         });
     }
   </script>
