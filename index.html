@@ -17,48 +17,57 @@
         transparent 18px
       );
     }
+    /* 스크롤바 숨기기 (Tailwind에 기본 없음) */
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+    }
+    .scrollbar-hide {
+      -ms-overflow-style: none; /* IE and Edge */
+      scrollbar-width: none; /* Firefox */
+    }
   </style>
 </head>
 
 <body class="text-slate-900">
 
   <header id="header" class="fixed top-0 left-0 right-0 z-30 transition-colors duration-300 bg-transparent text-white">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex flex-col"> 
-      <div class="flex items-center justify-between w-full">
-        <a href="#top" class="flex items-center gap-1 drop-shadow">
-          <span class="text-xl font-semibold tracking-tight">Insta hotel - mainbranch</span>
-        </a>
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      
+      <button id="mobile-menu-btn" class="md:hidden text-3xl drop-shadow">
+        ☰
+      </button>
+      
+      <a href="#top" class="flex items-center gap-1 drop-shadow">
+        <span class="text-2xl font-semibold tracking-tight">g/ue</span> 
+      </a>
 
-        <nav id="desktop-nav" class="hidden md:flex items-center gap-8 text-sm font-medium drop-shadow">
-          <a href="about.html" class="hover:text-orange-300">about</a>
-          <a href="rooms.html" class="hover:text-orange-300">rooms</a>
-          <a href="reservation.html" class="hover:text-orange-300">reservation</a>
-          <a href="#lounge" class="hover:text-orange-300">bluerain lounge</a>
-          <a href="contact.html" class="hover:text-orange-300">contact</a>
-
-          <select
-            id="langSelect"
-            class="text-xs bg-white text-slate-800 border border-white/80 rounded-full px-2 py-1 outline-none"
-          >
-            <option value="ko">KR</option>
-            <option value="en">EN</option>
-            <option value="ja">JP</option>
-            <option value="zh">CN</option>
-          </select>
-        </nav>
-        
-        <button id="mobile-menu-btn" class="md:hidden text-3xl drop-shadow">
-          ☰
-        </button>
-      </div>
-
-      <nav id="mobile-top-nav" class="hidden sm:flex md:hidden items-center justify-center gap-4 text-xs font-medium drop-shadow mt-1">
+      <nav id="desktop-nav" class="hidden md:flex items-center gap-8 text-sm font-medium drop-shadow">
         <a href="about.html" class="hover:text-orange-300">about</a>
         <a href="rooms.html" class="hover:text-orange-300">rooms</a>
         <a href="reservation.html" class="hover:text-orange-300">reservation</a>
-        <a href="#lounge" class="hover:text-orange-300">lounge</a>
+        <a href="#lounge" class="hover:text-orange-300">bluerain lounge</a>
         <a href="contact.html" class="hover:text-orange-300">contact</a>
+
+        <select
+          id="langSelect"
+          class="text-xs bg-white text-slate-800 border border-white/80 rounded-full px-2 py-1 outline-none"
+        >
+          <option value="ko">KR</option>
+          <option value="en">EN</option>
+          <option value="ja">JP</option>
+          <option value="zh">CN</option>
+        </select>
       </nav>
+      
+      <select
+        id="langSelectMobileTop"
+        class="md:hidden text-sm bg-transparent text-white border-none rounded-full px-2 py-1 outline-none drop-shadow"
+      >
+        <option value="ko">🇰🇷</option> 
+        <option value="en">🇺🇸</option>
+        <option value="ja">🇯🇵</option>
+        <option value="zh">🇨🇳</option>
+      </select>
     </div>
   </header>
 
@@ -75,9 +84,10 @@
         id="mobile-menu-close-btn" 
         class="absolute top-4 right-4 text-3xl font-light hover:text-[#ff6900]"
       >
-        &times; </button>
+        &times; 
+      </button>
       
-      <span class="text-xl font-semibold tracking-tight block mb-6">Insta hotel - mainbranch</span>
+      <span class="text-xl font-semibold tracking-tight block mb-6">g/ue</span>
 
 
       <ul class="flex flex-col text-lg font-medium space-y-1">
@@ -112,7 +122,7 @@
 
   <section
     id="hero"
-    class="relative min-h-[70vh] md:min-h-[100vh] overflow-hidden flex items-center justify-center bg-black"
+    class="relative min-h-[50vh] md:min-h-[100vh] overflow-hidden flex items-center justify-center bg-black"
   >
     <img src="hero1.jpg" class="slide absolute inset-0 w-full h-full object-contain opacity-100 transition-opacity duration-[1500ms]" />
     <img src="hero2.jpg" class="slide absolute inset-0 w-full h-full object-contain opacity-0 transition-opacity duration-[1500ms]" />
@@ -122,82 +132,101 @@
     <div class="absolute inset-0 bg-black/30"></div>
 
     <div class="relative z-10 text-white px-6 pt-24 md:pt-0 text-center"></div>
+    
+    <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
+      <span class="w-2 h-2 rounded-full bg-white/80 dot"></span>
+      <span class="w-2 h-2 rounded-full bg-white/40 dot"></span>
+      <span class="w-2 h-2 rounded-full bg-white/40 dot"></span>
+      <span class="w-2 h-2 rounded-full bg-white/40 dot"></span>
+    </div>
   </section>
 
 
   <script>
     let index = 0;
     const slides = document.querySelectorAll(".slide");
+    const dots = document.querySelectorAll(".dot");
+
+    function updateDots() {
+      dots.forEach((dot, i) => {
+        dot.classList.remove('bg-white/80');
+        dot.classList.add('bg-white/40');
+        if (i === index) {
+          dot.classList.add('bg-white/80');
+          dot.classList.remove('bg-white/40');
+        }
+      });
+    }
 
     function showNextSlide() {
       slides[index].style.opacity = 0;
       index = (index + 1) % slides.length;
       slides[index].style.opacity = 1;
+      updateDots(); // 페이지네이션 업데이트 추가
     }
-
+    updateDots();
     setInterval(showNextSlide, 4000);
   </script>
 
 
-  <section id="about-inner" class="relative text-white py-14 overflow-hidden" style="background-color: #ff6900">
+  <section id="about-inner" class="relative text-white py-4 overflow-hidden" style="background-color: #ff6900">
     <div class="absolute inset-0 stripe-bg opacity-60 pointer-events-none"></div>
 
-    <div class="relative max-w-6xl mx-auto px-4">
-      <div class="flex flex-wrap items-center gap-2 md:gap-6 text-base sm:text-lg md:text-3xl font-medium leading-normal md:leading-relaxed">
-        <span>People</span>
+    <div class="relative mx-auto px-4">
+      <div class="flex flex-nowrap items-center gap-4 text-sm font-medium leading-normal overflow-x-auto whitespace-nowrap scrollbar-hide">
+        
+        <span class="flex-shrink-0">People</span>
         <img src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?q=80&w=200&auto=format&fit=crop"
-              class="w-8 h-8 sm:w-10 sm:h-10 md:w-14 md:h-14 rounded-full object-cover border-[3px] border-white/80"/>
-        <span>, Village</span>
+              class="flex-shrink-0 w-6 h-6 rounded-full object-cover border-[2px] border-white/80"/>
+        <span class="flex-shrink-0">, Village</span>
         <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=200&auto=format&fit=crop"
-              class="w-8 h-8 sm:w-10 sm:h-10 md:w-14 md:h-14 rounded-full object-cover border-[3px] border-white/80"/>
-        <span>, Local Artist</span>
+              class="flex-shrink-0 w-6 h-6 rounded-full object-cover border-[2px] border-white/80"/>
+        <span class="flex-shrink-0">, Local Artist</span>
         <img src="https://images.unsplash.com/photo-1500534314211-0a24cd03f2c0?q=80&w=200&auto=format&fit=crop"
-              class="w-8 h-8 sm:w-10 sm:h-10 md:w-14 md:h-14 rounded-full object-cover border-[3px] border-white/80"/>
-        <span>, Food</span>
+              class="flex-shrink-0 w-6 h-6 rounded-full object-cover border-[2px] border-white/80"/>
+        <span class="flex-shrink-0">, Food</span>
         <img src="https://images.unsplash.com/photo-1504753793650-d4a2b783c15e?q=80&w=200&auto=format&fit=crop"
-              class="w-8 h-8 sm:w-10 sm:h-10 md:w-14 md:h-14 rounded-full object-cover border-[3px] border-white/80"/>
-        <span>, Suwon-Insta Music</span>
+              class="flex-shrink-0 w-6 h-6 rounded-full object-cover border-[2px] border-white/80"/>
+        <span class="flex-shrink-0">, Suwon-Insta Music</span>
         <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=200&auto=format&fit=crop"
-              class="w-8 h-8 sm:w-10 sm:h-10 md:w-14 md:h-14 rounded-full object-cover border-[3px] border-white/80"/>
-        <span>, Tourist</span>
+              class="flex-shrink-0 w-6 h-6 rounded-full object-cover border-[2px] border-white/80"/>
+        <span class="flex-shrink-0">, Tourist</span>
         <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603e6f?q=80&w=200&auto=format&fit=crop"
-              class="w-8 h-8 sm:w-10 sm:h-10 md:w-14 md:h-14 rounded-full object-cover border-[3px] border-white/80"/>
-        <span>, Book</span>
+              class="flex-shrink-0 w-6 h-6 rounded-full object-cover border-[2px] border-white/80"/>
+        <span class="flex-shrink-0">, Book</span>
         <img src="https://images.unsplash.com/photo-1495446815901-a7297e633e8d?q=80&w=200&auto=format&fit=crop"
-              class="w-8 h-8 sm:w-10 sm:h-10 md:w-14 md:h-14 rounded-full object-cover border-[3px] border-white/80"/>
-        <span>, Culture, Play, Design</span>
+              class="flex-shrink-0 w-6 h-6 rounded-full object-cover border-[2px] border-white/80"/>
+        <span class="flex-shrink-0">, Culture, Play, Design</span>
       </div>
     </div>
   </section>
 
 
-  <section id="rooms" class="bg-white">
+  <section id="rooms" class="relative bg-white">
+    <div class="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+      <div class="max-w-xs mx-auto px-4 text-center bg-white/50 backdrop-blur-sm p-4 rounded shadow-lg pointer-events-auto">
+        <p class="text-xs md:text-sm text-slate-800 italic leading-snug">
+          insta is a group of people that aspire to<br />
+          ‘insta’ people, society, culture, and art together.
+        </p>
+      </div>
+    </div>
+    
     <img 
-        src="hero6.jpg" 
-        alt="building" 
-        class="w-full max-h-[480px] sm:max-h-[720px] object-cover" 
+      src="hero6.jpg" 
+      alt="building" 
+      class="w-full max-h-[480px] sm:max-h-[720px] object-cover" 
     />
   </section>
 
-
-  <section id="lounge" class="py-16 bg-white">
-    <div class="max-w-3xl mx-auto px-4 text-center">
-      <p class="text-xl md:text-2xl text-slate-800 italic leading-relaxed">
-        insta is a group of people that aspire to<br />
-        ‘insta’ people, society, culture, and art together.
-      </p>
-    </div>
-  </section>
-
-
-  <section id="instagram" class="pb-16 bg-white">
+  <section id="instagram" class="py-8 bg-white">
     <div class="max-w-6xl mx-auto px-4">
       <p class="mb-4">
-        <span class="italic font-semibold">insta hotel Instagram</span>
-        <span class="ml-1 text-slate-800">@instahotel_mainbranch</span>
+        <span class="italic font-semibold">g/ue Instagram</span>
+        <span class="ml-1 text-slate-800">@gluehotel_suwon</span>
       </p>
 
-      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 md:gap-4 mb-8">
+      <div class="grid grid-cols-3 md:grid-cols-4 gap-2 md:gap-4 mb-8">
         <img src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?q=80&w=600&auto=format&fit=crop"
               class="w-full aspect-square object-cover"/>
         <img src="https://images.unsplash.com/photo-1520256862855-398228c41684?q=80&w=601&auto=format&fit=crop"
@@ -227,29 +256,7 @@
 
   <section id="contact" class="pt-10 pb-12 bg-white border-t border-slate-200">
     <div class="max-w-4xl mx-auto px-4 text-center text-xs text-slate-600 space-y-3">
-
-      <div class="flex justify-center gap-6 text-lg">
-        <span>📷</span>
-        <span>🅝</span>
-        <span>💬</span>
-        <span>📘</span>
       </div>
-
-      <div class="space-y-1">
-        <p>insta hotel mainbranch, Korea</p>
-        <p id="companyName">(주)호텔인스타</p>
-        <p id="ceoName">대표자 : 이영환</p>
-        <p id="bizNumber">통신판매업 신고번호: 2023-수원영통-1696호</p>
-        <p id="address">수원시 영통구 영통로 94-6</p>
-        <p>Business License 176-24-01388 | Tel 031-203-4301</p>
-      </div>
-
-      <div class="flex justify-center gap-4 pt-2">
-        <a href="#" id="termsLink" class="hover:underline">이용약관</a>
-        <a href="#" id="privacyLink" class="hover:underline">개인정보처리방침</a>
-      </div>
-
-    </div>
   </section>
 
 
@@ -269,15 +276,15 @@
   <script>
     const header = document.getElementById("header");
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-    const mobileDrawer = document.getElementById('mobile-drawer'); // 드로어 메뉴
+    const mobileDrawer = document.getElementById('mobile-drawer'); 
     const mobileMenuCloseBtn = document.getElementById('mobile-menu-close-btn'); 
-    const drawerOverlay = document.getElementById('drawer-overlay'); // 오버레이 배경
-
-    // Rooms 하위 메뉴 관련 변수
+    const drawerOverlay = document.getElementById('drawer-overlay'); 
     const roomsToggle = document.getElementById('rooms-toggle');
     const roomsSubmenu = document.getElementById('rooms-submenu');
     const roomsIcon = document.getElementById('rooms-icon');
 
+    // 다국어 상단 언어 선택기 추가
+    const langSelectMobileTop = document.getElementById("langSelectMobileTop");
 
     // 1. 헤더 스크롤 색 변경 (유지)
     window.addEventListener("scroll", () => {
@@ -290,76 +297,42 @@
       }
     });
 
-    // 2. 드로어 메뉴 열기/닫기 함수
+    // 2. 드로어 메뉴 열기/닫기 함수 (유지)
     function closeDrawer() {
-        mobileDrawer.classList.add('-translate-x-full'); // 드로어 숨기기
-        drawerOverlay.classList.add('hidden'); // 오버레이 숨기기
-        document.body.style.overflow = ''; // 스크롤 허용
+        mobileDrawer.classList.add('-translate-x-full'); 
+        drawerOverlay.classList.add('hidden'); 
+        document.body.style.overflow = ''; 
     }
-
     function openDrawer() {
-        mobileDrawer.classList.remove('-translate-x-full'); // 드로어 표시
-        drawerOverlay.classList.remove('hidden'); // 오버레이 표시
-        document.body.style.overflow = 'hidden'; // 스크롤 방지
+        mobileDrawer.classList.remove('-translate-x-full'); 
+        drawerOverlay.classList.remove('hidden'); 
+        document.body.style.overflow = 'hidden'; 
     }
-
-
-    // 2-1. 햄버거 버튼 클릭 -> 열기
     mobileMenuBtn.addEventListener('click', openDrawer);
-    
-    // 2-2. 닫기 버튼 또는 오버레이 클릭 -> 닫기
     mobileMenuCloseBtn.addEventListener('click', closeDrawer);
     drawerOverlay.addEventListener('click', closeDrawer);
 
-
-    // 3. Rooms 하위 메뉴 토글 기능
+    // 3. Rooms 하위 메뉴 토글 기능 (유지)
     roomsToggle.addEventListener('click', () => {
         roomsSubmenu.classList.toggle('hidden');
-        roomsIcon.textContent = roomsSubmenu.classList.contains('hidden') ? '⌄' : 'へ'; // 아이콘 변경 
+        roomsIcon.textContent = roomsSubmenu.classList.contains('hidden') ? '⌄' : 'へ'; 
     });
 
 
-    // 4. 다국어 변환 (기존 로직 유지 및 메뉴 닫기 추가)
+    // 4. 다국어 변환
     const translations = {
+      // ... (번역 데이터 유지) ...
       ko: {
-        btnMore: "더보기",
-        companyName: "(주)호텔인스타",
-        ceoName: "대표자 : 이영환",
-        bizNumber: "통신판매업 신고번호: 2023-수원영통-1696호",
-        address: "수원시 영통구 영통로 94-6",
-        termsLink: "이용약관",
-        privacyLink: "개인정보처리방침",
-        inquiryBtn: "문의",
+        btnMore: "더보기", companyName: "(주)호텔인스타", ceoName: "대표자 : 이영환", bizNumber: "통신판매업 신고번호: 2023-수원영통-1696호", address: "수원시 영통구 영통로 94-6", termsLink: "이용약관", privacyLink: "개인정보처리방침", inquiryBtn: "문의",
       },
       en: {
-        btnMore: "View more",
-        companyName: "Insta Hotel Co., Ltd.",
-        ceoName: "CEO: Lee Young Hwan",
-        bizNumber: "Mail-order business registration: 2023-Suwon Yeongtong-1696",
-        address: "94-6, Yeongtong-ro, Yeongtong-gu, Suwon-si",
-        termsLink: "Terms of Use",
-        privacyLink: "Privacy Policy",
-        inquiryBtn: "Contact",
+        btnMore: "View more", companyName: "Insta Hotel Co., Ltd.", ceoName: "CEO: Lee Young Hwan", bizNumber: "Mail-order business registration: 2023-Suwon Yeongtong-1696", address: "94-6, Yeongtong-ro, Yeongtong-gu, Suwon-si", termsLink: "Terms of Use", privacyLink: "Privacy Policy", inquiryBtn: "Contact",
       },
       ja: {
-        btnMore: "もっと見る",
-        companyName: "インスタホテル株式会社",
-        ceoName: "代表者 : イ・ヨンファン",
-        bizNumber: "通信販売業申告番号: 2023-水原ヨントン-1696号",
-        address: "水原市 永東区 永東路 94-6",
-        termsLink: "利用規約",
-        privacyLink: "個人情報処理方針",
-        inquiryBtn: "お問い合わせ",
+        btnMore: "もっと見る", companyName: "インスタホテル株式会社", ceoName: "代表者 : イ・ヨンファン", bizNumber: "通信販売業申告番号: 2023-水原ヨントン-1696号", address: "水原市 永東区 永東路 94-6", termsLink: "利用規約", privacyLink: "個人情報処理方針", inquiryBtn: "お問い合わせ",
       },
       zh: {
-        btnMore: "查看更多",
-        companyName: "Insta Hotel有限公司",
-        ceoName: "代表：李永焕",
-        bizNumber: "通信销售业申报编号：2023-水原灵通-1696号",
-        address: "水原市 灵通区 灵通路94-6",
-        termsLink: "使用条款",
-        privacyLink: "隐私政策",
-        inquiryBtn: "咨询",
+        btnMore: "查看更多", companyName: "Insta Hotel有限公司", ceoName: "代表：李永焕", bizNumber: "通信销售业申报编号：2023-水原灵通-1696号", address: "水原市 灵通区 灵通路94-6", termsLink: "使用条款", privacyLink: "隐私政策", inquiryBtn: "咨询",
       },
     };
 
@@ -383,14 +356,27 @@
 
     // 데스크톱 선택기 이벤트
     langSelect.addEventListener("change", (e) => {
+      // 모바일 드로어 선택기 동기화
       langSelectMobile.value = e.target.value; 
+      // 상단 모바일 국기 선택기 동기화
+      langSelectMobileTop.value = e.target.value; 
       applyLanguage(e.target.value);
     });
 
-    // 모바일 선택기 이벤트
+    // 모바일 드로어 선택기 이벤트
     if (langSelectMobile) {
         langSelectMobile.addEventListener("change", (e) => {
             langSelect.value = e.target.value; 
+            langSelectMobileTop.value = e.target.value; 
+            applyLanguage(e.target.value);
+        });
+    }
+
+    // 상단 모바일 국기 선택기 이벤트
+    if (langSelectMobileTop) {
+        langSelectMobileTop.addEventListener("change", (e) => {
+            langSelect.value = e.target.value; 
+            langSelectMobile.value = e.target.value; 
             applyLanguage(e.target.value);
         });
     }
