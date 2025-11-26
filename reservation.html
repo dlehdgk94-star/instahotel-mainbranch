@@ -121,21 +121,47 @@
         </div>
       </div>
 
-   <!-- ★ 자동 가로 슬라이드 (6장) -->
-<div class="relative w-full h-[320px] md:h-[420px] overflow-hidden rounded shadow-md mt-10">
-
-  <div id="slideTrack"
-       class="flex w-[600%] h-full transition-all duration-700 ease-in-out">
-
-    <img src="hero7.jpg"  class="w-full h-full object-cover" />
-    <img src="hero8.jpg"  class="w-full h-full object-cover" />
-    <img src="hero5.jpg"  class="w-full h-full object-cover" />
-    <img src="조식.jpg"   class="w-full h-full object-cover" />
-    <img src="hero2.jpg"  class="w-full h-full object-cover" />
-    <img src="조식2.png" class="w-full h-full object-cover" />
-
+  <!-- ★ 하단 가로 슬라이드 (6장) -->
+<section class="max-w-6xl mx-auto px-4 pt-10 pb-16">
+  <div
+    class="relative w-full max-w-5xl mx-auto h-[420px] overflow-hidden rounded shadow-md mt-10"
+  >
+    <!-- 한 줄로 이어진 슬라이드 트랙 -->
+    <div id="slideTrack" class="flex h-full">
+      <!-- 각 이미지는 1/3 너비, 총 6장 → 한 번에 3장 보임 -->
+      <img
+        src="hero7.jpg"
+        alt="Room detail 1"
+        class="w-1/3 h-full object-cover flex-shrink-0"
+      />
+      <img
+        src="hero8.jpg"
+        alt="Room detail 2"
+        class="w-1/3 h-full object-cover flex-shrink-0"
+      />
+      <img
+        src="hero5.jpg"
+        alt="Room detail 3"
+        class="w-1/3 h-full object-cover flex-shrink-0"
+      />
+      <img
+        src="조식.jpg"
+        alt="Room detail 4"
+        class="w-1/3 h-full object-cover flex-shrink-0"
+      />
+      <img
+        src="hero2.jpg"
+        alt="Room detail 5"
+        class="w-1/3 h-full object-cover flex-shrink-0"
+      />
+      <img
+        src="조식2.png"
+        alt="Room detail 6"
+        class="w-1/3 h-full object-cover flex-shrink-0"
+      />
+    </div>
   </div>
-</div>
+</section>
 
 
 
@@ -181,19 +207,29 @@
 </script>
 
 <script>
+  // 하단 가로 슬라이드 (3장씩 보이게)
   const track = document.getElementById("slideTrack");
-  const slides = track.children;
+  const slides = track ? track.children : [];
+  const visible = 3; // 한 화면에 보이는 이미지 개수
   let index = 0;
 
   if (slides.length > 0) {
-    track.style.transition = "transform 0.7s ease-in-out"; // 슬라이드 이동 속도
+    // 슬라이드 이동 애니메이션
+    track.style.transition = "transform 0.7s ease-in-out";
 
     function moveSlide() {
-      index = (index + 1) % slides.length;
-      track.style.transform = `translateX(-${index * 100}%)`;
+      // 마지막까지 갔다가 다시 처음으로
+      const maxIndex = slides.length - visible; // 예: 6장 - 3장 = 3
+      index = index + 1;
+      if (index > maxIndex) index = 0;
+
+      // 한 칸 이동할 때마다 33.333%씩 옆으로 밀기
+      const shiftPercent = (100 / visible) * index;
+      track.style.transform = `translateX(-${shiftPercent}%)`;
     }
 
-    setInterval(moveSlide, 3500); // 3.5초마다 이동
+    // 3초마다 한 칸씩 이동
+    setInterval(moveSlide, 3000);
   }
 </script>
 
