@@ -172,42 +172,68 @@
       </div>
     </section>
 
-     <!-- 6. Footer + 사업자 정보 -->
-    <section id="contact" class="pt-10 pb-12 bg-white border-t border-slate-200">
-      <div class="max-w-4xl mx-auto px-4 text-center text-xs text-slate-600 space-y-3">
-        <!-- SNS 아이콘 줄 -->
-        <div class="flex justify-center gap-4 text-lg">
-          <span>📷</span>
-          <span>🅝</span>
-          <span>💬</span>
-          <span>📘</span>
-        </div>
+     <section id="contact" class="pt-10 pb-12 bg-white border-t border-slate-200">
+          <div class="max-w-4xl mx-auto px-4 text-center text-xs text-slate-600 space-y-3">
+            <div class="flex justify-center gap-4 text-lg">
+              <span>📷</span><span>🅝</span><span>💬</span><span>📘</span>
+            </div>
 
-        <!-- 사업자 / 주소 정보 (원본 형태만 맞춘 예시) -->
-        <div class="space-y-1">
-          <p>insta hotel mainbranch, Korea</p>
-          <p>(주)호텔인스타</p>
-          <p>대표자 : 이영환</p>
-          <p>통신판매업 신고번호: 2023-수원영통-1696호</p>
-          <p>수원시 영통구 영통로 94-6</p>
-          <p>Business License 176-24-01388 | Tel 031-203-4301</p>
-        </div>
+            <div class="space-y-1">
+              <p>insta hotel mainbranch, Korea</p>
+              <p>(주)호텔인스타</p>
+              <p>대표자 : 이영환</p>
+              <p>통신판매업 신고번호: 2023-수원영통-1696호</p>
+              <p>수원시 영통구 영통로 94-6</p>
+              <p>Business License 176-24-01388 | Tel 031-203-4301</p>
+            </div>
 
-        <div class="flex justify-center gap-4 pt-2">
-          <a href="#" class="hover:underline">이용약관</a>
-          <a href="#" class="hover:underline">개인정보처리방침</a>
-        </div>
+            <div class="flex justify-center gap-4 pt-2">
+              <a href="#" class="hover:underline">이용약관</a>
+              <a href="#" class="hover:underline">개인정보처리방침</a>
+            </div>
+          </div>
+        </section>
+
       </div>
     </section>
   </main>
 
-  <!-- 오른쪽 아래 노란 "문의" 버튼 -->
-  <a
-    href="#contact"
-    class="fixed bottom-6 right-6 z-40 flex items-center justify-center w-16 h-16 rounded-full bg-yellow-400 shadow-xl text-sm font-medium hover:bg-yellow-300"
-  >
+  <a href="#contact" class="fixed bottom-6 right-6 z-40 flex items-center justify-center w-16 h-16 rounded-full bg-yellow-400 shadow-xl text-sm font-medium hover:bg-yellow-300">
     문의
-  </main>
+  </a>
+
+  <script>
+    // 모바일 메뉴 열기/닫기 로직
+    const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+    const mobileDrawer = document.getElementById("mobile-drawer");
+    const drawerOverlay = document.getElementById("drawer-overlay");
+    const mobileCloseBtn = document.getElementById("mobile-menu-close-btn");
+
+    function openMenu() {
+        mobileDrawer.classList.remove("-translate-x-full");
+        drawerOverlay.classList.remove("hidden");
+        document.body.style.overflow = "hidden"; 
+    }
+    function closeMenu() {
+        mobileDrawer.classList.add("-translate-x-full");
+        drawerOverlay.classList.add("hidden");
+        document.body.style.overflow = ""; 
+    }
+
+    mobileMenuBtn.addEventListener("click", openMenu);
+    mobileCloseBtn.addEventListener("click", closeMenu);
+    drawerOverlay.addEventListener("click", closeMenu);
+
+    // Rooms 하위 메뉴 토글 로직
+    const roomsToggle = document.getElementById("rooms-toggle");
+    const roomsSubmenu = document.getElementById("rooms-submenu");
+    
+    if(roomsToggle && roomsSubmenu){
+        roomsToggle.addEventListener("click", () => {
+            roomsSubmenu.classList.toggle("hidden");
+        });
+    }
+  </script>
 
 </body>
 </html>
