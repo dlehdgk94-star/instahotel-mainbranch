@@ -2,21 +2,42 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <title>Contact – Insta Hotel Main Branch</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <!-- Tailwind -->
+  <title>Rooms – Insta Hotel - mainbranch</title>
+ <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,600;1,600;1,700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <style>
-    body {
-      font-family: 'Inter', 'Noto Sans KR', sans-serif;
-    }
-  </style>
 </head>
+<body class="bg-white text-slate-900">
+  <!-- 상단 네비게이션 (오렌지색 고정) -->
+  <header
+    id="header"
+    class="fixed top-0 left-0 right-0 z-30 bg-[#ff6900] text-white drop-shadow"
+  >
+    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+      <!-- 로고 / 호텔 이름 -->
+      <a href="index.html" class="flex items-center gap-1 text-white drop-shadow">
+        <span class="text-2xl font-semibold tracking-tight">
+          Insta Hotel - mainbranch
+        </span>
+      </a>
 
-<body class="bg-white text-[#333333]">
+      <!-- 메뉴 -->
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-white drop-shadow">
+        <a href="about.html" class="hover:text-orange-300">about</a>
+        <a href="rooms.html" class="hover:text-orange-300">rooms</a>
+        <a href="#reservation" class="hover:text-orange-300">reservation</a>
+        <a href="#lounge" class="hover:text-orange-300">bluerain lounge</a>
+        <a href="#contact" class="hover:text-orange-300">contact</a>
+      </nav>
 
+      <!-- 언어 선택 버튼 -->
+      <button
+        class="flex items-center gap-1 text-xs border border-white/80 rounded-full px-3 py-1 bg-white/10"
+      >
+        KR ▾
+      </button>
+    </div>
+  </header>
   <!-- WRAPPER -->
   <div class="max-w-5xl mx-auto px-4 md:px-8 pt-24 pb-28">
 
