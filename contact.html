@@ -85,33 +85,42 @@
       最近、ホテル予約サイトのリンクを模倣したスパムメールが流行していますので、ホテル関連のメール内容をよく確認の上、クリックしてください。
     </div>
 
-    <!-- Footer -->
-    <footer class="text-center text-[14px] text-[#555] space-y-3">
-      <div class="flex justify-center space-x-4 text-xl">
-        <i class="ri-instagram-line"></i>
-        <i class="ri-facebook-circle-line"></i>
-        <i class="ri-youtube-line"></i>
-        <i class="ri-mail-line"></i>
+    <!-- 6. Footer + 사업자 정보 -->
+    <section id="contact" class="pt-10 pb-12 bg-white border-t border-slate-200">
+      <div class="max-w-4xl mx-auto px-4 text-center text-xs text-slate-600 space-y-3">
+        <!-- SNS 아이콘 줄 -->
+        <div class="flex justify-center gap-4 text-lg">
+          <span>📷</span>
+          <span>🅝</span>
+          <span>💬</span>
+          <span>📘</span>
+        </div>
+
+        <!-- 사업자 / 주소 정보 (원본 형태만 맞춘 예시) -->
+        <div class="space-y-1">
+          <p>insta hotel mainbranch, Korea</p>
+          <p>(주)호텔인스타</p>
+          <p>대표자 : 이영환</p>
+          <p>통신판매업 신고번호: 2023-수원영통-1696호</p>
+          <p>수원시 영통구 영통로 94-6</p>
+          <p>Business License 176-24-01388 | Tel 031-203-4301</p>
+        </div>
+
+        <div class="flex justify-center gap-4 pt-2">
+          <a href="#" class="hover:underline">이용약관</a>
+          <a href="#" class="hover:underline">개인정보처리방침</a>
+        </div>
       </div>
+    </section>
+  </main>
 
-      <p>
-        glue hotel Seoul, Korea <br>
-        (주)제이아이티 <br>
-        동자동 새창로 122-23 타임빌딩 15층 <br>
-        서울시 중구 동자동 122-23 (타임스 105-2) <br>
-        Business License 216-07-20088 | Tel 02-2024-8400
-      </p>
-
-      <p>
-        이용약관&nbsp;&nbsp;&nbsp;&nbsp;개인정보처리방침
-      </p>
-    </footer>
-  </div>
-
-  <!-- 🔶 Floating Inquiry Button -->
-  <a href="#" class="fixed bottom-6 right-6 bg-[#FFD400] text-[#333] shadow-lg px-6 py-3 rounded-full flex items-center space-x-2 text-[15px] font-medium hover:shadow-xl transition">
-    <span>💬 문의</span>
-  </a>
+  <!-- 오른쪽 아래 노란 "문의" 버튼 -->
+  <a
+    href="#contact"
+    class="fixed bottom-6 right-6 z-40 flex items-center justify-center w-16 h-16 rounded-full bg-yellow-400 shadow-xl text-sm font-medium hover:bg-yellow-300"
+  >
+    문의
+  </main>
 
 </body>
 </html>
