@@ -237,19 +237,19 @@
     <section id="contact" class="pt-10 pb-12 bg-white border-t border-slate-200">
       <div class="max-w-4xl mx-auto px-4 text-center text-xs text-slate-600 space-y-3">
        <div class="flex justify-center gap-4 text-lg"> 
-    <a href="https://www.instagram.com/instahotel_mainbranch/" target="_blank">
-        <img src="icons8-인스-타-그램-48.png" alt="인스타그램 아이콘" width="24" height="24">
-    </a>
-    <a href="https://map.naver.com/p/entry/place/1630717211?lng=127.0593432&lat=37.2377787&placePath=/home?from=map&fromPanelNum=1&additionalHeight=76&timestamp=202511271545&locale=ko&svcName=map_pcv5&businessCategory=hotel&entry=plt&searchType=place&c=15.00,0,0,0,dh" target="_blank">
-        <img src="icons8-네이버-64.png" alt="네이버 아이콘" width="24" height="24">
-    </a>
-    <a href="http://pf.kakao.com/_xiITuG" target="_blank">
-        <img src="icons8-카카오-톡-48.png" alt="카카오톡 아이콘" width="24" height="24">
-    </a>
-    <a href="[https://www.facebook.com/VIPdesign2020]" target="_blank">
-        <img src="icons8-페이스-북-48.png" alt="페이스북 아이콘" width="24" height="24">
-    </a>     
-</div>
+        <a href="https://www.instagram.com/instahotel_mainbranch/" target="_blank">
+            <img src="icons8-인스-타-그램-48.png" alt="인스타그램 아이콘" width="24" height="24">
+        </a>
+        <a href="https://map.naver.com/p/entry/place/1630717211" target="_blank">
+            <img src="icons8-네이버-64.png" alt="네이버 아이콘" width="24" height="24">
+        </a>
+        <a href="http://pf.kakao.com/_xiITuG" target="_blank">
+            <img src="icons8-카카오-톡-48.png" alt="카카오톡 아이콘" width="24" height="24">
+        </a>
+        <a href="https://www.facebook.com/VIPdesign2020" target="_blank">
+            <img src="icons8-페이스-북-48.png" alt="페이스북 아이콘" width="24" height="24">
+        </a>      
+       </div>
         <div class="space-y-1">
           <p>insta hotel mainbranch, Korea</p>
           <p id="companyName">(주)호텔인스타</p>
@@ -267,16 +267,17 @@
 
   </main>
 
- <a 
-  href="http://pf.kakao.com/_xiITuG"
-  target="_blank"
-  class="fixed bottom-6 right-6 z-50 flex items-center gap-2 bg-[#FFEB00] text-black px-4 py-2 rounded-full shadow-lg hover:bg-yellow-400 transition-colors font-bold"
->
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
-    <path fill-rule="evenodd" d="M4.804 21.644A6.707 6.707 0 006 21.75a6.721 6.721 0 003.583-1.029c.774.182 1.584.279 2.417.279 5.322 0 9.75-3.97 9.75-9 0-5.03-4.428-9-9.75-9s-9.75 3.97-9.75 9c0 2.409 1.025 4.587 2.674 6.192.232.226.277.428.254.543a3.73 3.73 0 01-.814 1.686.75.75 0 00.44 1.223zM8.25 10.875a1.125 1.125 0 100 2.25 1.125 1.125 0 000-2.25zM10.875 12a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0zm4.875-1.125a1.125 1.125 0 100 2.25 1.125 1.125 0 000-2.25z" clip-rule="evenodd" />
-  </svg>
-  <span class="text-lg">문의</span>
-</a>
+  <a 
+    href="http://pf.kakao.com/_xiITuG"
+    target="_blank"
+    class="fixed bottom-6 right-6 z-50 flex items-center gap-2 bg-[#FFEB00] text-black px-4 py-2 rounded-full shadow-lg hover:bg-yellow-400 transition-colors font-bold"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+      <path fill-rule="evenodd" d="M4.804 21.644A6.707 6.707 0 006 21.75a6.721 6.721 0 003.583-1.029c.774.182 1.584.279 2.417.279 5.322 0 9.75-3.97 9.75-9 0-5.03-4.428-9-9.75-9s-9.75 3.97-9.75 9c0 2.409 1.025 4.587 2.674 6.192.232.226.277.428.254.543a3.73 3.73 0 01-.814 1.686.75.75 0 00.44 1.223zM8.25 10.875a1.125 1.125 0 100 2.25 1.125 1.125 0 000-2.25zM10.875 12a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0zm4.875-1.125a1.125 1.125 0 100 2.25 1.125 1.125 0 000-2.25z" clip-rule="evenodd" />
+    </svg>
+    <span id="inquiryBtn" class="text-lg">문의</span>
+  </a>
+
   <script>
     /* --------------------------------------
        1. 모바일 메뉴 (Drawer) 열기/닫기
@@ -297,9 +298,9 @@
         document.body.style.overflow = ""; 
     }
 
-    mobileMenuBtn.addEventListener("click", openMenu);
-    mobileCloseBtn.addEventListener("click", closeMenu);
-    drawerOverlay.addEventListener("click", closeMenu);
+    if (mobileMenuBtn) mobileMenuBtn.addEventListener("click", openMenu);
+    if (mobileCloseBtn) mobileCloseBtn.addEventListener("click", closeMenu);
+    if (drawerOverlay) drawerOverlay.addEventListener("click", closeMenu);
 
     const roomsToggle = document.getElementById("rooms-toggle");
     const roomsSubmenu = document.getElementById("rooms-submenu");
@@ -319,7 +320,6 @@
         intro_1: "인스타의 객실은 ‘하루의 순간’을 편안하게 머물게 하기 위해 설계되었습니다.",
         intro_2: "여행자와 도시, 여행자와 경험, 여행자와 사람들을 자연스럽게 연결해 주는 조용한 공간을 지향합니다.",
         intro_3: "방 안에서는 과한 장식 대신 따뜻한 조명과 여유로운 동선을 유지해 머무는 동안 온전히 나에게 집중할 수 있도록 돕습니다.",
-        
         
         type_twin: "TYPE 1 / 인스타 트윈", desc_twin: "Free wi-fi, LG Air Conditioner, Air Purifier, Refrigerator, Full-body bath, Two Bed",
         type_special: "TYPE 2 / 인스타 특실", desc_special: "Free wi-fi, LG Air Conditioner, Air Purifier, Refrigerator, Full-body bath, Three Bed",
@@ -345,7 +345,6 @@
         intro_2: "We aim for a quiet space that naturally connects travelers with the city, experiences, and people.",
         intro_3: "Inside the room, warm lighting and spacious layouts replace excessive decorations, helping you focus entirely on yourself during your stay.",
         
-        
         type_twin: "TYPE 1 / Insta Twin", desc_twin: "Free wi-fi, LG Air Conditioner, Air Purifier, Refrigerator, Full-body bath, Two Bed",
         type_special: "TYPE 2 / Insta Special", desc_special: "Free wi-fi, LG Air Conditioner, Air Purifier, Refrigerator, Full-body bath, Three Bed",
         type_luxury: "TYPE 3 / Insta Luxury", desc_luxury: "Free wi-fi, LG Air Conditioner, Air Purifier, Refrigerator, Full-body bath, LED 65\"TV",
@@ -370,7 +369,6 @@
         intro_2: "旅行者と都市、経験、そして人々を自然につなぐ静かな空間を目指しています。",
         intro_3: "部屋の中では、過度な装飾の代わりに暖かい照明とゆったりとした動線を維持し、滞在中に完全に自分自身に集中できるようにします。",
         
-
         type_twin: "TYPE 1 / インスタ・ツイン", desc_twin: "無料Wi-Fi、エアコン、空気清浄機、冷蔵庫、全身浴槽、ベッド2台",
         type_special: "TYPE 2 / インスタ・スペシャル", desc_special: "無料Wi-Fi、エアコン、空気清浄機、冷蔵庫、全身浴槽、ベッド3台",
         type_luxury: "TYPE 3 / インスタ・ラグジュアリー", desc_luxury: "無料Wi-Fi、エアコン、空気清浄機、冷蔵庫、全身浴槽、LED 65インチTV",
@@ -395,7 +393,6 @@
         intro_2: "我们要打造一个安静的空间，自然地连接旅行者与城市、体验和人们。",
         intro_3: "房间内没有过度的装饰，而是保持温暖的照明和宽松的动线，帮助您在逗留期间完全专注于自己。",
         
-
         type_twin: "TYPE 1 / Insta 双床房", desc_twin: "免费Wi-Fi，空调，空气净化器，冰箱，全身浴缸，两张床",
         type_special: "TYPE 2 / Insta 特色房", desc_special: "免费Wi-Fi，空调，空气净化器，冰箱，全身浴缸，三张床",
         type_luxury: "TYPE 3 / Insta 豪华房", desc_luxury: "免费Wi-Fi，空调，空气净化器，冰箱，全身浴缸，LED 65英寸电视",
@@ -426,44 +423,26 @@
         if(currentFlagIcon) currentFlagIcon.textContent = t.flag;
 
         // 2. 텍스트 업데이트 (ID 매칭)
-        // Intro Text
-        document.getElementById("intro-text-1").textContent = t.intro_1;
-        document.getElementById("intro-text-2").textContent = t.intro_2;
-        document.getElementById("intro-text-3").textContent = t.intro_3;
-        document.getElementById("intro-text-4").textContent = t.intro_4;
+        const textIds = [
+            "intro-text-1", "intro-text-2", "intro-text-3",
+            "type-twin", "desc-twin",
+            "type-special", "desc-special",
+            "type-luxury", "desc-luxury",
+            "type-premium", "desc-premium",
+            "type-deluxe", "desc-deluxe",
+            "type-standard", "desc-standard",
+            "amenity-desc-1", "amenity-sub-1", "amenity-list-1", "amenity-note-1",
+            "lounge-type", "lounge-desc",
+            "companyName", "ceoName", "bizNumber", "address",
+            "terms", "privacy", "inquiryBtn"
+        ];
 
-        // Rooms
-        document.getElementById("type-twin").textContent = t.type_twin;
-        document.getElementById("desc-twin").textContent = t.desc_twin;
-        document.getElementById("type-special").textContent = t.type_special;
-        document.getElementById("desc-special").textContent = t.desc_special;
-        document.getElementById("type-luxury").textContent = t.type_luxury;
-        document.getElementById("desc-luxury").textContent = t.desc_luxury;
-        document.getElementById("type-premium").textContent = t.type_premium;
-        document.getElementById("desc-premium").textContent = t.desc_premium;
-        document.getElementById("type-deluxe").textContent = t.type_deluxe;
-        document.getElementById("desc-deluxe").textContent = t.desc_deluxe;
-        document.getElementById("type-standard").textContent = t.type_standard;
-        document.getElementById("desc-standard").textContent = t.desc_standard;
-
-        // Amenities
-        document.getElementById("amenity-desc-1").textContent = t.amenity_desc_1;
-        document.getElementById("amenity-sub-1").textContent = t.amenity_sub_1;
-        document.getElementById("amenity-list-1").textContent = t.amenity_list_1;
-        document.getElementById("amenity-note-1").textContent = t.amenity_note_1;
-
-        // Lounge
-        document.getElementById("lounge-type").textContent = t.lounge_type;
-        document.getElementById("lounge-desc").textContent = t.lounge_desc;
-
-        // Footer
-        document.getElementById("companyName").textContent = t.companyName;
-        document.getElementById("ceoName").textContent = t.ceoName;
-        document.getElementById("bizNumber").textContent = t.bizNumber;
-        document.getElementById("address").textContent = t.address;
-        document.getElementById("terms").textContent = t.terms;
-        document.getElementById("privacy").textContent = t.privacy;
-        document.getElementById("inquiryBtn").textContent = t.inquiryBtn;
+        textIds.forEach(id => {
+            const el = document.getElementById(id);
+            if(el && t[id]) {
+                el.textContent = t[id];
+            }
+        });
         
         // Navigation Text (data-translate 속성 이용)
         document.querySelectorAll("[data-translate]").forEach(el => {
