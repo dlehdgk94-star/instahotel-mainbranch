@@ -27,11 +27,11 @@
       </a>
 
       <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
-        <a href="about.html" class="hover:text-orange-200" data-translate="nav_about">about</a>
-        <a href="rooms.html" class="hover:text-orange-200" data-translate="nav_rooms">rooms</a>
-        <a href="reservation.html" class="hover:text-orange-200" data-translate="nav_reservation">reservation</a>
-        <a href="#lounge" class="hover:text-orange-200" data-translate="nav_lounge">bluerain lounge</a>
-        <a href="contact.html" class="hover:text-orange-200" data-translate="nav_contact">contact</a>
+        <a href="about.html" class="hover:text-orange-200">about</a>
+        <a href="rooms.html" class="hover:text-orange-200">rooms</a>
+        <a href="reservation.html" class="hover:text-orange-200">reservation</a>
+        <a href="#lounge" class="hover:text-orange-200">bluerain lounge</a>
+        <a href="contact.html" class="hover:text-orange-200">contact</a>
       </nav>
 
       <div class="flex items-center relative">
@@ -64,11 +64,11 @@
       </div>
       
       <ul class="flex flex-col space-y-4 text-lg font-medium">
-        <li><a href="about.html" class="block hover:text-[#ff6900]" data-translate="nav_about">about</a></li>
+        <li><a href="about.html" class="block hover:text-[#ff6900]">about</a></li>
         
         <li>
             <div class="flex justify-between items-center cursor-pointer hover:text-[#ff6900]" id="rooms-toggle">
-                <span data-translate="nav_rooms">rooms</span> <span class="text-sm">▼</span>
+                <span>rooms</span> <span class="text-sm">▼</span>
             </div>
             <ul id="rooms-submenu" class="hidden mt-3 ml-4 space-y-3 border-l-2 border-slate-100 pl-4">
                 <li><a href="rooms.html" class="block text-sm text-slate-600 hover:text-[#ff6900]">Twin</a></li>
@@ -81,9 +81,9 @@
             </ul>
         </li>
 
-        <li><a href="reservation.html" class="block hover:text-[#ff6900]" data-translate="nav_reservation">reservation</a></li>
-        <li><a href="#lounge" class="block hover:text-[#ff6900]" data-translate="nav_lounge">bluerain lounge</a></li>
-        <li><a href="contact.html" class="block hover:text-[#ff6900]" data-translate="nav_contact">contact</a></li>
+        <li><a href="reservation.html" class="block hover:text-[#ff6900]">reservation</a></li>
+        <li><a href="#lounge" class="block hover:text-[#ff6900]">bluerain lounge</a></li>
+        <li><a href="contact.html" class="block hover:text-[#ff6900]">contact</a></li>
       </ul>
 
       <div class="mt-8 border-t pt-4">
@@ -104,9 +104,10 @@
       <p class="text-xs text-orange-500 tracking-wide font-bold uppercase italic mb-1" id="room-type-sub">
         TYPE 1 / 인스타 트윈
       </p>
-      <h2 class="text-xl md:text-4xl font-bold mb-4" id="room-title">Twin Room</h2>
       
-      <p class="text-sm font-bold text-slate-600 mb-6" id="room-amenities">
+      <h2 class="text-xl md:text-4xl font-bold mb-4">Twin Room</h2>
+      
+      <p class="text-sm font-bold text-slate-600 mb-6">
         Free wi-fi, LG Air Conditioner, Air Purifier, Refrigerator, Full-body bath, Two Bed
       </p>
 
@@ -118,7 +119,7 @@
         </section>
 
         <section class="mb-16 space-y-6">
-          <h2 class="text-2xl font-bold leading-snug text-orange-500 md:text-3xl" id="desc-title">
+          <h2 class="text-2xl font-bold leading-snug text-orange-500 md:text-3xl">
             Enjoy the scenery of Suwon<br />just for you.
           </h2>
 
@@ -174,10 +175,12 @@
 
             <div class="space-y-1">
               <p>insta hotel mainbranch, Korea</p>
+              
               <p id="companyName">(주)호텔인스타</p>
               <p id="ceoName">대표자 : 이영환</p>
               <p id="bizNumber">통신판매업 신고번호: 2023-수원영통-1696호</p>
               <p id="address">수원시 영통구 영통로 94-6</p>
+              
               <p>Business License 176-24-01388 | Tel 031-203-4301</p>
             </div>
 
@@ -236,21 +239,17 @@
     }
 
     /* --------------------------------------
-       2. 다국어 번역 데이터 및 로직
+       2. 다국어 번역 데이터 (한국어 부분만)
     -------------------------------------- */
+    // 원본에 있던 영어(About, Twin Room, Free wi-fi 등)는 제외함
+    
     const translations = {
       ko: {
         flag: "🇰🇷",
-        // 네비게이션
-        nav_about: "about", nav_rooms: "rooms", nav_reservation: "reservation", nav_lounge: "bluerain lounge", nav_contact: "contact",
         
-        // 객실 정보
         "room-type-sub": "TYPE 1 / 인스타 트윈",
-        "room-title": "Twin Room",
-        "room-amenities": "Free wi-fi, LG Air Conditioner, Air Purifier, Refrigerator, Full-body bath, Two Bed",
         
         // 상세 설명 1 (인테리어, 분위기)
-        "desc-title": "Enjoy the scenery of Suwon<br />just for you.",
         "desc-body-1": `
             <p>전 객실은 따뜻한 조명으로 아늑하고 따뜻한 분위기를 느끼며 쉴 수 있도록</p>
             <p>감성적인 인테리어로 준비되어 있습니다.</p>
@@ -259,7 +258,7 @@
             <p>조용한 분위기 속에서 편안한 숙박을 원하는 출장·여행 고객님께 특히 추천드립니다.</p>
         `,
 
-        // 상세 설명 2 (침대)
+        // 상세 설명 2 (침대) - 하단 영어 텍스트 포함 유지
         "desc-body-2": `
             <p>insta hotel의 모든 침대는 지친 여행길에 객실에서 편히 쉴 수 있도록</p>
             <p>국내 최고급 ACE 침대를 사용하였으며,</p>
@@ -276,13 +275,9 @@
 
       en: {
         flag: "🇺🇸",
-        nav_about: "about", nav_rooms: "rooms", nav_reservation: "reservation", nav_lounge: "bluerain lounge", nav_contact: "contact",
         
         "room-type-sub": "TYPE 1 / INSTA TWIN",
-        "room-title": "Twin Room",
-        "room-amenities": "Free wi-fi, LG Air Conditioner, Air Purifier, Refrigerator, Full-body bath, Two Bed",
         
-        "desc-title": "Enjoy the scenery of Suwon<br />just for you.",
         "desc-body-1": `
             <p>All rooms feature emotional interiors with warm lighting to help you relax in a cozy and inviting atmosphere.</p>
             <br />
@@ -294,6 +289,9 @@
             <p>All beds at Insta Hotel are equipped with Korea's finest ACE mattresses</p>
             <p>to ensure you can rest comfortably during your weary travels.</p>
             <p>We have also maximized the cotton content of our bedding to provide superior comfort.</p>
+            <br>
+            <p class="text-slate-500 text-xs">All beds at Insta Hotel are equipped with the finest domestic ACE mattresses to ensure a comfortable rest during your weary travels.</p> 
+            <p class="text-slate-500 text-xs">We strive to provide comfort by using high-quality cotton bedding to enhance relaxation.</p>
         `,
 
         companyName: "Insta Hotel Co., Ltd.", ceoName: "CEO: Lee Young Hwan", bizNumber: "Registration: 2023-Suwon Yeongtong-1696", address: "94-6, Yeongtong-ro, Yeongtong-gu, Suwon-si",
@@ -302,13 +300,9 @@
 
       ja: {
         flag: "🇯🇵",
-        nav_about: "about", nav_rooms: "rooms", nav_reservation: "reservation", nav_lounge: "bluerain lounge", nav_contact: "contact",
         
         "room-type-sub": "TYPE 1 / インスタ・ツイン",
-        "room-title": "ツインルーム",
-        "room-amenities": "無料Wi-Fi、エアコン、空気清浄機、冷蔵庫、全身浴槽、ベッド2台",
         
-        "desc-title": "あなただけの水原の風景を<br />お楽しみください。",
         "desc-body-1": `
             <p>全客室は暖かい照明で、居心地の良い雰囲気の中で休めるよう、</p>
             <p>感性的なインテリアで準備されています。</p>
@@ -321,6 +315,9 @@
             <p>Insta Hotelのすべてのベッドは、疲れた旅行中に客室でゆっくり休めるよう、</p>
             <p>国内最高級のACEベッドを使用しており、</p>
             <p>寝具類も綿の使用率を高め、快適さを提供するよう努めました。</p>
+            <br>
+            <p class="text-slate-500 text-xs">All beds at Insta Hotel are equipped with the finest domestic ACE mattresses to ensure a comfortable rest during your weary travels.</p> 
+            <p class="text-slate-500 text-xs">We strive to provide comfort by using high-quality cotton bedding to enhance relaxation.</p>
         `,
 
         companyName: "インスタホテル株式会社", ceoName: "代表者 : イ・ヨンファン", bizNumber: "登録番号: 2023-水原霊通-1696", address: "水原市霊通区霊通路94-6",
@@ -329,13 +326,9 @@
 
       zh: {
         flag: "🇨🇳",
-        nav_about: "关于", nav_rooms: "客房", nav_reservation: "预订", nav_lounge: "蓝雨休息室", nav_contact: "联系我们",
         
         "room-type-sub": "TYPE 1 / INSTA 双床房",
-        "room-title": "双床房",
-        "room-amenities": "免费Wi-Fi，空调，空气净化器，冰箱，全身浴缸，两张床",
         
-        "desc-title": "享受专属于您的<br />水原美景。",
         "desc-body-1": `
             <p>所有客房均采用感性内饰，配有暖色调照明，</p>
             <p>为您营造舒适温馨的休息氛围。</p>
@@ -348,6 +341,9 @@
             <p>Insta Hotel的所有床铺均采用韩国顶级的ACE床垫，</p>
             <p>旨在让您在疲惫的旅途中享受舒适的休息。</p>
             <p>床上用品也提高了棉的使用率，致力于为您提供最佳的舒适感。</p>
+            <br>
+            <p class="text-slate-500 text-xs">All beds at Insta Hotel are equipped with the finest domestic ACE mattresses to ensure a comfortable rest during your weary travels.</p> 
+            <p class="text-slate-500 text-xs">We strive to provide comfort by using high-quality cotton bedding to enhance relaxation.</p>
         `,
 
         companyName: "Insta Hotel有限公司", ceoName: "代表：李永焕", bizNumber: "注册号：2023-水原灵通-1696", address: "水原市灵通区灵通路94-6",
@@ -365,10 +361,10 @@
         // 1. 상단 국기 아이콘 변경
         if(currentFlagIcon) currentFlagIcon.textContent = t.flag;
 
-        // 2. 텍스트 업데이트 (ID 매칭 방식)
+        // 2. 텍스트 업데이트 (ID 매칭 방식 - 한국어 부분만 교체)
         const textIds = [
-            "room-type-sub", "room-title", "room-amenities",
-            "desc-title", "desc-body-1", "desc-body-2",
+            "room-type-sub",
+            "desc-body-1", "desc-body-2",
             "companyName", "ceoName", "bizNumber", "address",
             "terms", "privacy", "inquiryBtn"
         ];
@@ -376,15 +372,8 @@
         textIds.forEach(id => {
             const el = document.getElementById(id);
             if(el && t[id]) {
-                // HTML 태그가 포함된 경우를 위해 innerHTML 사용
                 el.innerHTML = t[id];
             }
-        });
-        
-        // 3. 네비게이션 텍스트 (data-translate 속성 이용)
-        document.querySelectorAll("[data-translate]").forEach(el => {
-            const key = el.getAttribute("data-translate");
-            if(t[key]) el.textContent = t[key];
         });
     }
 
@@ -392,7 +381,7 @@
     if(headerSelect) {
         headerSelect.addEventListener("change", (e) => {
             const lang = e.target.value;
-            if(drawerSelect) drawerSelect.value = lang; // 드로어랑 싱크 맞춤
+            if(drawerSelect) drawerSelect.value = lang; 
             updateLanguage(lang);
         });
     }
@@ -401,7 +390,7 @@
     if(drawerSelect) {
         drawerSelect.addEventListener("change", (e) => {
             const lang = e.target.value;
-            if(headerSelect) headerSelect.value = lang; // 헤더랑 싱크 맞춤
+            if(headerSelect) headerSelect.value = lang; 
             updateLanguage(lang);
         });
     }
