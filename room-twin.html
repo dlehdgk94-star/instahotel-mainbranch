@@ -8,6 +8,18 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     html { scroll-behavior: smooth; }
+    /* 드롭다운 스타일 */
+    .lang-select {
+        background: transparent;
+        color: white;
+        border: 1px solid rgba(255,255,255,0.3);
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-size: 0.875rem;
+    }
+    .lang-select option {
+        color: #333;
+    }
   </style>
 </head>
 <body class="bg-white text-slate-900 font-sans">
@@ -27,20 +39,20 @@
       </a>
 
       <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
-        <a href="about.html" class="hover:text-orange-200">about</a>
-        <a href="rooms.html" class="hover:text-orange-200">rooms</a>
-        <a href="reservation.html" class="hover:text-orange-200">reservation</a>
-        <a href="#lounge" class="hover:text-orange-200">bluerain lounge</a>
-        <a href="contact.html" class="hover:text-orange-200">contact</a>
+        <a href="about.html" class="hover:text-orange-200" data-lang-key="nav_about">about</a>
+        <a href="rooms.html" class="hover:text-orange-200" data-lang-key="nav_rooms">rooms</a>
+        <a href="reservation.html" class="hover:text-orange-200" data-lang-key="nav_reservation">reservation</a>
+        <a href="#lounge" class="hover:text-orange-200" data-lang-key="nav_lounge">bluerain lounge</a>
+        <a href="contact.html" class="hover:text-orange-200" data-lang-key="nav_contact">contact</a>
       </nav>
 
-      <div class="flex items-center">
-         <div class="flex items-center gap-1 cursor-pointer">
-            <span class="text-2xl shadow-sm rounded-sm">🇰🇷</span>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-white opacity-80">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-            </svg>
-         </div>
+      <div class="hidden md:flex items-center">
+         <select id="desktop-lang-select" class="lang-select outline-none cursor-pointer">
+             <option value="ko">🇰🇷 KO</option>
+             <option value="en">🇺🇸 EN</option>
+             <option value="ja">🇯🇵 JP</option>
+             <option value="zh">🇨🇳 CN</option>
+         </select>
       </div>
 
     </div>
@@ -57,11 +69,11 @@
       </div>
       
       <ul class="flex flex-col space-y-4 text-lg font-medium">
-        <li><a href="about.html" class="block hover:text-[#ff6900]">about</a></li>
+        <li><a href="about.html" class="block hover:text-[#ff6900]" data-lang-key="nav_about">about</a></li>
         
         <li>
             <div class="flex justify-between items-center cursor-pointer hover:text-[#ff6900]" id="rooms-toggle">
-                <span>rooms</span> <span class="text-sm">▼</span>
+                <span data-lang-key="nav_rooms">rooms</span> <span class="text-sm">▼</span>
             </div>
             <ul id="rooms-submenu" class="hidden mt-3 ml-4 space-y-3 border-l-2 border-slate-100 pl-4">
                 <li><a href="rooms.html" class="block text-sm text-slate-600 hover:text-[#ff6900]">Twin</a></li>
@@ -74,14 +86,14 @@
             </ul>
         </li>
 
-        <li><a href="reservation.html" class="block hover:text-[#ff6900]">reservation</a></li>
-        <li><a href="#lounge" class="block hover:text-[#ff6900]">bluerain lounge</a></li>
-        <li><a href="contact.html" class="block hover:text-[#ff6900]">contact</a></li>
+        <li><a href="reservation.html" class="block hover:text-[#ff6900]" data-lang-key="nav_reservation">reservation</a></li>
+        <li><a href="#lounge" class="block hover:text-[#ff6900]" data-lang-key="nav_lounge">bluerain lounge</a></li>
+        <li><a href="contact.html" class="block hover:text-[#ff6900]" data-lang-key="nav_contact">contact</a></li>
       </ul>
 
       <div class="mt-8 border-t pt-4">
          <p class="text-sm text-slate-400 mb-2">Language</p>
-         <select class="w-full p-2 border rounded text-slate-700 bg-slate-50 outline-none">
+         <select id="mobile-lang-select" class="w-full p-2 border rounded text-slate-700 bg-slate-50 outline-none">
              <option value="ko">Korean</option>
              <option value="en">English</option>
              <option value="ja">Japanese</option>
@@ -94,12 +106,12 @@
 
   <main class="mx-auto max-w-6xl px-4 pb-20 pt-20 md:px-6 md:pt-24"> 
     <section class="max-w-6xl mx-auto px-4 py-6 border-t border-slate-200">
-      <p class="text-xs text-orange-500 tracking-wide font-bold uppercase italic mb-1">
+      <p class="text-xs text-orange-500 tracking-wide font-bold uppercase italic mb-1" data-lang-key="room_type_sub">
         TYPE 1 / 인스타 트윈
       </p>
-      <h2 class="text-xl md:text-4xl font-bold mb-4">Twin Room</h2>
+      <h2 class="text-xl md:text-4xl font-bold mb-4" data-lang-key="room_title">Twin Room</h2>
       
-      <p class="text-sm font-bold text-slate-600 mb-6">
+      <p class="text-sm font-bold text-slate-600 mb-6" data-lang-key="room_amenities">
         Free wi-fi, LG Air Conditioner, Air Purifier, Refrigerator, Full-body bath, Two Bed
       </p>
 
@@ -111,11 +123,11 @@
         </section>
 
         <section class="mb-16 space-y-6">
-          <h2 class="text-2xl font-bold leading-snug text-orange-500 md:text-3xl">
+          <h2 class="text-2xl font-bold leading-snug text-orange-500 md:text-3xl" data-lang-key="desc_title">
             Enjoy the scenery of Suwon<br />just for you.
           </h2>
 
-          <p class="text-sm leading-relaxed text-slate-700">
+          <p class="text-sm leading-relaxed text-slate-700" data-lang-key="desc_body_1">
             전 객실은 따뜻한 조명으로 아늑하고 따뜻한 분위기를 느끼며 쉴 수 있도록
             감성적인 인테리어로 준비되어 있습니다. <br />
             여유로운 침대와 편안한 휴식으로 여행의 피로를 충분히 풀어보세요. <br />
@@ -138,13 +150,13 @@
           </div>
         </section>
 
-        <section class="mb-16 space-y-4 text-sm leading-relaxed text-slate-700">
+        <section class="mb-16 space-y-4 text-sm leading-relaxed text-slate-700" data-lang-key="desc_body_2">
           <p>insta hotel의 모든 침대는 지친 여행길에 객실에서 편히 쉴 수 있도록</p>
           <p>국내 최고급 ACE 침대를 사용하였으며,</p>
           <p>침구류도 면 사용률을 높여 편안함을 제공하려고 노력하였습니다.</p>
           <br>
-          <p>All beds at Insta Hotel are equipped with the finest domestic ACE mattresses to ensure a comfortable rest during your weary travels.</p> 
-          <p>We strive to provide comfort by using high-quality cotton bedding to enhance relaxation.</p>
+          <p class="text-slate-500 text-xs">All beds at Insta Hotel are equipped with the finest domestic ACE mattresses to ensure a comfortable rest during your weary travels.</p> 
+          <p class="text-slate-500 text-xs">We strive to provide comfort by using high-quality cotton bedding to enhance relaxation.</p>
         </section>
 
         <section class="mb-16">
@@ -155,33 +167,33 @@
 
         <section id="contact" class="pt-10 pb-12 bg-white border-t border-slate-200">
           <div class="max-w-4xl mx-auto px-4 text-center text-xs text-slate-600 space-y-3">
-          <div class="flex justify-center gap-4 text-lg"> 
-    <a href="https://www.instagram.com/instahotel_mainbranch/" target="_blank">
-        <img src="icons8-인스-타-그램-48.png" alt="인스타그램 아이콘" width="24" height="24">
-    </a>
-    <a href="https://map.naver.com/p/entry/place/1630717211?lng=127.0593432&lat=37.2377787&placePath=/home?from=map&fromPanelNum=1&additionalHeight=76&timestamp=202511271545&locale=ko&svcName=map_pcv5&businessCategory=hotel&entry=plt&searchType=place&c=15.00,0,0,0,dh" target="_blank">
-        <img src="icons8-네이버-64.png" alt="네이버 아이콘" width="24" height="24">
-    </a>
-    <a href="http://pf.kakao.com/_xiITuG" target="_blank">
-        <img src="icons8-카카오-톡-48.png" alt="카카오톡 아이콘" width="24" height="24">
-    </a>
-    <a href="[https://www.facebook.com/VIPdesign2020]" target="_blank">
-        <img src="icons8-페이스-북-48.png" alt="페이스북 아이콘" width="24" height="24">
-    </a>     
-</div>
+            <div class="flex justify-center gap-4 text-lg"> 
+                <a href="https://www.instagram.com/instahotel_mainbranch/" target="_blank">
+                    <img src="icons8-인스-타-그램-48.png" alt="Instagram" width="24" height="24">
+                </a>
+                <a href="https://map.naver.com/p/entry/place/1630717211?lng=127.0593432&lat=37.2377787" target="_blank">
+                    <img src="icons8-네이버-64.png" alt="Naver" width="24" height="24">
+                </a>
+                <a href="http://pf.kakao.com/_xiITuG" target="_blank">
+                    <img src="icons8-카카오-톡-48.png" alt="KakaoTalk" width="24" height="24">
+                </a>
+                <a href="https://www.facebook.com/VIPdesign2020" target="_blank">
+                    <img src="icons8-페이스-북-48.png" alt="Facebook" width="24" height="24">
+                </a>      
+            </div>
 
             <div class="space-y-1">
-              <p>insta hotel mainbranch, Korea</p>
-              <p>(주)호텔인스타</p>
-              <p>대표자 : 이영환</p>
-              <p>통신판매업 신고번호: 2023-수원영통-1696호</p>
-              <p>수원시 영통구 영통로 94-6</p>
-              <p>Business License 176-24-01388 | Tel 031-203-4301</p>
+              <p data-lang-key="footer_name">insta hotel mainbranch, Korea</p>
+              <p data-lang-key="footer_company">(주)호텔인스타</p>
+              <p data-lang-key="footer_ceo">대표자 : 이영환</p>
+              <p data-lang-key="footer_biz_report">통신판매업 신고번호: 2023-수원영통-1696호</p>
+              <p data-lang-key="footer_address">수원시 영통구 영통로 94-6</p>
+              <p data-lang-key="footer_license">Business License 176-24-01388 | Tel 031-203-4301</p>
             </div>
 
             <div class="flex justify-center gap-4 pt-2">
-              <a href="#" class="hover:underline">이용약관</a>
-              <a href="#" class="hover:underline">개인정보처리방침</a>
+              <a href="#" class="hover:underline" data-lang-key="footer_terms">이용약관</a>
+              <a href="#" class="hover:underline" data-lang-key="footer_privacy">개인정보처리방침</a>
             </div>
           </div>
         </section>
@@ -190,19 +202,135 @@
     </section>
   </main>
 
- <a 
-  href="http://pf.kakao.com/_xiITuG"
-  target="_blank"
-  class="fixed bottom-6 right-6 z-50 flex items-center gap-2 bg-[#FFEB00] text-black px-4 py-2 rounded-full shadow-lg hover:bg-yellow-400 transition-colors font-bold"
->
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
-    <path fill-rule="evenodd" d="M4.804 21.644A6.707 6.707 0 006 21.75a6.721 6.721 0 003.583-1.029c.774.182 1.584.279 2.417.279 5.322 0 9.75-3.97 9.75-9 0-5.03-4.428-9-9.75-9s-9.75 3.97-9.75 9c0 2.409 1.025 4.587 2.674 6.192.232.226.277.428.254.543a3.73 3.73 0 01-.814 1.686.75.75 0 00.44 1.223zM8.25 10.875a1.125 1.125 0 100 2.25 1.125 1.125 0 000-2.25zM10.875 12a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0zm4.875-1.125a1.125 1.125 0 100 2.25 1.125 1.125 0 000-2.25z" clip-rule="evenodd" />
-  </svg>
-  <span class="text-lg">문의</span>
-</a>
+  <a 
+    href="http://pf.kakao.com/_xiITuG"
+    target="_blank"
+    class="fixed bottom-6 right-6 z-50 flex items-center gap-2 bg-[#FFEB00] text-black px-4 py-2 rounded-full shadow-lg hover:bg-yellow-400 transition-colors font-bold"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+      <path fill-rule="evenodd" d="M4.804 21.644A6.707 6.707 0 006 21.75a6.721 6.721 0 003.583-1.029c.774.182 1.584.279 2.417.279 5.322 0 9.75-3.97 9.75-9 0-5.03-4.428-9-9.75-9s-9.75 3.97-9.75 9c0 2.409 1.025 4.587 2.674 6.192.232.226.277.428.254.543a3.73 3.73 0 01-.814 1.686.75.75 0 00.44 1.223zM8.25 10.875a1.125 1.125 0 100 2.25 1.125 1.125 0 000-2.25zM10.875 12a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0zm4.875-1.125a1.125 1.125 0 100 2.25 1.125 1.125 0 000-2.25z" clip-rule="evenodd" />
+    </svg>
+    <span class="text-lg" data-lang-key="btn_inquiry">문의</span>
+  </a>
 
   <script>
-    // 모바일 메뉴 열기/닫기 로직
+    // 1. 번역 데이터 객체
+    const translations = {
+      // 네비게이션
+      "nav_about": {
+        "ko": "about", "en": "about", "ja": "紹介", "zh": "关于我们"
+      },
+      "nav_rooms": {
+        "ko": "rooms", "en": "rooms", "ja": "客室", "zh": "客房"
+      },
+      "nav_reservation": {
+        "ko": "reservation", "en": "reservation", "ja": "予約", "zh": "预订"
+      },
+      "nav_lounge": {
+        "ko": "bluerain lounge", "en": "bluerain lounge", "ja": "ブルーレインラウンジ", "zh": "Bluerain 休息室"
+      },
+      "nav_contact": {
+        "ko": "contact", "en": "contact", "ja": "お問い合わせ", "zh": "联系我们"
+      },
+
+      // 객실 설명
+      "room_type_sub": {
+        "ko": "TYPE 1 / 인스타 트윈",
+        "en": "TYPE 1 / INSTA TWIN",
+        "ja": "TYPE 1 / インスタ・ツイン",
+        "zh": "TYPE 1 / INSTA 双床房"
+      },
+      "room_title": {
+        "ko": "Twin Room", "en": "Twin Room", "ja": "ツインルーム", "zh": "双床房"
+      },
+      "room_amenities": {
+        "ko": "Free wi-fi, LG Air Conditioner, Air Purifier, Refrigerator, Full-body bath, Two Bed",
+        "en": "Free wi-fi, LG Air Conditioner, Air Purifier, Refrigerator, Full-body bath, Two Bed",
+        "ja": "無料Wi-Fi、LGエアコン、空気清浄機、冷蔵庫、バスタブ、ベッド2台",
+        "zh": "免费无线网络，LG空调，空气净化器，冰箱，全身浴缸，两张床"
+      },
+      "desc_title": {
+        "ko": "Enjoy the scenery of Suwon<br />just for you.",
+        "en": "Enjoy the scenery of Suwon<br />just for you.",
+        "ja": "あなただけの水原の風景を<br />お楽しみください。",
+        "zh": "享受专属于您的<br />水原美景。"
+      },
+      "desc_body_1": {
+        "ko": "전 객실은 따뜻한 조명으로 아늑하고 따뜻한 분위기를 느끼며 쉴 수 있도록 감성적인 인테리어로 준비되어 있습니다.<br/>여유로운 침대와 편안한 휴식으로 여행의 피로를 충분히 풀어보세요.<br/>조용한 분위기 속에서 편안한 숙박을 원하는 출장·여행 고객님께 특히 추천드립니다.",
+        "en": "All rooms feature emotional interiors with warm lighting to help you relax in a cozy and inviting atmosphere.<br/>Relieve the fatigue of your journey with spacious beds and comfortable rest.<br/>We highly recommend this for business travelers and tourists seeking a peaceful stay in a quiet environment.",
+        "ja": "全客室は暖かい照明で、居心地の良い雰囲気の中で休めるよう、感性的なインテリアで準備されています。<br/>ゆったりとしたベッドと快適な休息で、旅の疲れを十分に癒してください。<br/>静かな雰囲気の中で快適な宿泊をご希望の出張・旅行のお客様に特におすすめです。",
+        "zh": "所有客房均采用感性内饰，配有暖色调照明，为您营造舒适温馨的休息氛围。<br/>宽敞的床铺和舒适的休息环境将充分缓解您旅途的疲劳。<br/>特别推荐给希望在安静氛围中享受舒适住宿的出差及旅游客人。"
+      },
+      "desc_body_2": {
+        "ko": "<p>insta hotel의 모든 침대는 지친 여행길에 객실에서 편히 쉴 수 있도록</p><p>국내 최고급 ACE 침대를 사용하였으며,</p><p>침구류도 면 사용률을 높여 편안함을 제공하려고 노력하였습니다.</p><br><p class='text-slate-500 text-xs'>All beds at Insta Hotel are equipped with the finest domestic ACE mattresses to ensure a comfortable rest during your weary travels.</p><p class='text-slate-500 text-xs'>We strive to provide comfort by using high-quality cotton bedding to enhance relaxation.</p>",
+        "en": "<p>All beds at Insta Hotel are equipped with Korea's finest ACE mattresses to ensure you can rest comfortably during your weary travels.</p><p>We have also maximized the cotton content of our bedding to provide superior comfort.</p>",
+        "ja": "<p>Insta Hotelのすべてのベッドは、疲れた旅行中に客室でゆっくり休めるよう、</p><p>国内最高級のACEベッドを使用しており、</p><p>寝具類も綿の使用率を高め、快適さを提供するよう努めました。</p>",
+        "zh": "<p>Insta Hotel的所有床铺均采用韩国顶级的ACE床垫，</p><p>旨在让您在疲惫的旅途中享受舒适的休息。</p><p>床上用品也提高了棉的使用率，致力于为您提供最佳的舒适感。</p>"
+      },
+
+      // 푸터 (Footer)
+      "footer_name": {
+        "ko": "insta hotel mainbranch, Korea", "en": "insta hotel mainbranch, Korea", "ja": "Insta Hotel 本店, 韓国", "zh": "Insta Hotel 总店, 韩国"
+      },
+      "footer_company": {
+        "ko": "(주)호텔인스타", "en": "Hotel Insta Co., Ltd.", "ja": "(株)ホテルインスタ", "zh": "(株) Insta Hotel"
+      },
+      "footer_ceo": {
+        "ko": "대표자 : 이영환", "en": "CEO : Young-Hwan Lee", "ja": "代表者 : イ・ヨンファン", "zh": "代表 : 李永焕"
+      },
+      "footer_biz_report": {
+        "ko": "통신판매업 신고번호: 2023-수원영통-1696호", 
+        "en": "E-commerce Registration: 2023-SuwonYeongtong-1696", 
+        "ja": "通信販売業申告番号: 2023-水原霊通-1696号", 
+        "zh": "通信销售业申报号码: 2023-水原灵通-1696号"
+      },
+      "footer_address": {
+        "ko": "수원시 영통구 영통로 94-6", 
+        "en": "94-6, Yeongtong-ro, Yeongtong-gu, Suwon-si, Korea", 
+        "ja": "京畿道 水原市 霊通区 霊通路 94-6", 
+        "zh": "京畿道 水原市 灵通区 灵通路 94-6"
+      },
+      "footer_license": {
+        "ko": "Business License 176-24-01388 | Tel 031-203-4301",
+        "en": "Business License 176-24-01388 | Tel +82-31-203-4301",
+        "ja": "事業者登録番号 176-24-01388 | Tel +82-31-203-4301",
+        "zh": "营业执照 176-24-01388 | Tel +82-31-203-4301"
+      },
+      "footer_terms": {
+        "ko": "이용약관", "en": "Terms of Use", "ja": "利用規約", "zh": "使用条款"
+      },
+      "footer_privacy": {
+        "ko": "개인정보처리방침", "en": "Privacy Policy", "ja": "プライバシーポリシー", "zh": "隐私政策"
+      },
+      "btn_inquiry": {
+        "ko": "문의", "en": "Inquiry", "ja": "お問い合わせ", "zh": "咨询"
+      }
+    };
+
+    // 2. 언어 변경 함수
+    function updateLanguage(lang) {
+      document.querySelectorAll('[data-lang-key]').forEach(elem => {
+        const key = elem.getAttribute('data-lang-key');
+        if (translations[key] && translations[key][lang]) {
+          // HTML 태그(br, p 등)를 포함하여 렌더링
+          elem.innerHTML = translations[key][lang];
+        }
+      });
+      
+      // Select 박스 값 동기화 (데스크탑 <-> 모바일)
+      document.getElementById('desktop-lang-select').value = lang;
+      document.getElementById('mobile-lang-select').value = lang;
+    }
+
+    // 3. 이벤트 리스너 등록
+    const desktopSelect = document.getElementById('desktop-lang-select');
+    const mobileSelect = document.getElementById('mobile-lang-select');
+
+    desktopSelect.addEventListener('change', (e) => updateLanguage(e.target.value));
+    mobileSelect.addEventListener('change', (e) => updateLanguage(e.target.value));
+
+
+    // --- 기존 모바일 메뉴 스크립트 ---
     const mobileMenuBtn = document.getElementById("mobile-menu-btn");
     const mobileDrawer = document.getElementById("mobile-drawer");
     const drawerOverlay = document.getElementById("drawer-overlay");
@@ -223,7 +351,6 @@
     mobileCloseBtn.addEventListener("click", closeMenu);
     drawerOverlay.addEventListener("click", closeMenu);
 
-    // Rooms 하위 메뉴 토글 로직
     const roomsToggle = document.getElementById("rooms-toggle");
     const roomsSubmenu = document.getElementById("rooms-submenu");
     
