@@ -159,12 +159,6 @@
           <p class="text-slate-500 text-xs">We strive to provide comfort by using high-quality cotton bedding to enhance relaxation.</p>
         </section>
 
-        <section class="mb-16">
-          <div class="overflow-hidden rounded-lg bg-slate-100 shadow-sm">
-            <img src="hero14.png" alt="Suite Room detail" class="w-full h-auto object-cover" />
-          </div>
-        </section>
-
         <section id="contact" class="pt-10 pb-12 bg-white border-t border-slate-200">
           <div class="max-w-4xl mx-auto px-4 text-center text-xs text-slate-600 space-y-3">
             <div class="flex justify-center gap-4 text-lg"> 
@@ -214,96 +208,96 @@
   </a>
 
   <script>
-    // 1. 번역 데이터 객체
+    // 1. 번역 데이터 객체 (주의: 백틱 ` 을 사용하여 줄바꿈 오류 방지)
     const translations = {
       // 네비게이션
       "nav_about": {
-        "ko": "about", "en": "about", "ja": "紹介", "zh": "关于我们"
+        "ko": `about`, "en": `about`, "ja": `紹介`, "zh": `关于我们`
       },
       "nav_rooms": {
-        "ko": "rooms", "en": "rooms", "ja": "客室", "zh": "客房"
+        "ko": `rooms`, "en": `rooms`, "ja": `客室`, "zh": `客房`
       },
       "nav_reservation": {
-        "ko": "reservation", "en": "reservation", "ja": "予約", "zh": "预订"
+        "ko": `reservation`, "en": `reservation`, "ja": `予約`, "zh": `预订`
       },
       "nav_lounge": {
-        "ko": "bluerain lounge", "en": "bluerain lounge", "ja": "ブルーレインラウンジ", "zh": "Bluerain 休息室"
+        "ko": `bluerain lounge`, "en": `bluerain lounge`, "ja": `ブルーレインラウンジ`, "zh": `Bluerain 休息室`
       },
       "nav_contact": {
-        "ko": "contact", "en": "contact", "ja": "お問い合わせ", "zh": "联系我们"
+        "ko": `contact`, "en": `contact`, "ja": `お問い合わせ`, "zh": `联系我们`
       },
 
       // 객실 설명
       "room_type_sub": {
-        "ko": "TYPE 1 / 인스타 트윈",
-        "en": "TYPE 1 / INSTA TWIN",
-        "ja": "TYPE 1 / インスタ・ツイン",
-        "zh": "TYPE 1 / INSTA 双床房"
+        "ko": `TYPE 1 / 인스타 트윈`,
+        "en": `TYPE 1 / INSTA TWIN`,
+        "ja": `TYPE 1 / インスタ・ツイン`,
+        "zh": `TYPE 1 / INSTA 双床房`
       },
       "room_title": {
-        "ko": "Twin Room", "en": "Twin Room", "ja": "ツインルーム", "zh": "双床房"
+        "ko": `Twin Room`, "en": `Twin Room`, "ja": `ツインルーム`, "zh": `双床房`
       },
       "room_amenities": {
-        "ko": "Free wi-fi, LG Air Conditioner, Air Purifier, Refrigerator, Full-body bath, Two Bed",
-        "en": "Free wi-fi, LG Air Conditioner, Air Purifier, Refrigerator, Full-body bath, Two Bed",
-        "ja": "無料Wi-Fi、LGエアコン、空気清浄機、冷蔵庫、バスタブ、ベッド2台",
-        "zh": "免费无线网络，LG空调，空气净化器，冰箱，全身浴缸，两张床"
+        "ko": `Free wi-fi, LG Air Conditioner, Air Purifier, Refrigerator, Full-body bath, Two Bed`,
+        "en": `Free wi-fi, LG Air Conditioner, Air Purifier, Refrigerator, Full-body bath, Two Bed`,
+        "ja": `無料Wi-Fi、LGエアコン、空気清浄機、冷蔵庫、バスタブ、ベッド2台`,
+        "zh": `免费无线网络，LG空调，空气净化器，冰箱，全身浴缸，两张床`
       },
       "desc_title": {
-        "ko": "Enjoy the scenery of Suwon<br />just for you.",
-        "en": "Enjoy the scenery of Suwon<br />just for you.",
-        "ja": "あなただけの水原の風景を<br />お楽しみください。",
-        "zh": "享受专属于您的<br />水原美景。"
+        "ko": `Enjoy the scenery of Suwon<br />just for you.`,
+        "en": `Enjoy the scenery of Suwon<br />just for you.`,
+        "ja": `あなただけの水原の風景を<br />お楽しみください。`,
+        "zh": `享受专属于您的<br />水原美景。`
       },
       "desc_body_1": {
-        "ko": "전 객실은 따뜻한 조명으로 아늑하고 따뜻한 분위기를 느끼며 쉴 수 있도록 감성적인 인테리어로 준비되어 있습니다.<br/>여유로운 침대와 편안한 휴식으로 여행의 피로를 충분히 풀어보세요.<br/>조용한 분위기 속에서 편안한 숙박을 원하는 출장·여행 고객님께 특히 추천드립니다.",
-        "en": "All rooms feature emotional interiors with warm lighting to help you relax in a cozy and inviting atmosphere.<br/>Relieve the fatigue of your journey with spacious beds and comfortable rest.<br/>We highly recommend this for business travelers and tourists seeking a peaceful stay in a quiet environment.",
-        "ja": "全客室は暖かい照明で、居心地の良い雰囲気の中で休めるよう、感性的なインテリアで準備されています。<br/>ゆったりとしたベッドと快適な休息で、旅の疲れを十分に癒してください。<br/>静かな雰囲気の中で快適な宿泊をご希望の出張・旅行のお客様に特におすすめです。",
-        "zh": "所有客房均采用感性内饰，配有暖色调照明，为您营造舒适温馨的休息氛围。<br/>宽敞的床铺和舒适的休息环境将充分缓解您旅途的疲劳。<br/>特别推荐给希望在安静氛围中享受舒适住宿的出差及旅游客人。"
+        "ko": `전 객실은 따뜻한 조명으로 아늑하고 따뜻한 분위기를 느끼며 쉴 수 있도록 감성적인 인테리어로 준비되어 있습니다.<br/>여유로운 침대와 편안한 휴식으로 여행의 피로를 충분히 풀어보세요.<br/>조용한 분위기 속에서 편안한 숙박을 원하는 출장·여행 고객님께 특히 추천드립니다.`,
+        "en": `All rooms feature emotional interiors with warm lighting to help you relax in a cozy and inviting atmosphere.<br/>Relieve the fatigue of your journey with spacious beds and comfortable rest.<br/>We highly recommend this for business travelers and tourists seeking a peaceful stay in a quiet environment.`,
+        "ja": `全客室は暖かい照明で、居心地の良い雰囲気の中で休めるよう、感性的なインテリアで準備されています。<br/>ゆったりとしたベッドと快適な休息で、旅の疲れを十分に癒してください。<br/>静かな雰囲気の中で快適な宿泊をご希望の出張・旅行のお客様に特におすすめです。`,
+        "zh": `所有客房均采用感性内饰，配有暖色调照明，为您营造舒适温馨的休息氛围。<br/>宽敞的床铺和舒适的休息环境将充分缓解您旅途的疲劳。<br/>特别推荐给希望在安静氛围中享受舒适住宿的出差及旅游客人。`
       },
       "desc_body_2": {
-        "ko": "<p>insta hotel의 모든 침대는 지친 여행길에 객실에서 편히 쉴 수 있도록</p><p>국내 최고급 ACE 침대를 사용하였으며,</p><p>침구류도 면 사용률을 높여 편안함을 제공하려고 노력하였습니다.</p><br><p class='text-slate-500 text-xs'>All beds at Insta Hotel are equipped with the finest domestic ACE mattresses to ensure a comfortable rest during your weary travels.</p><p class='text-slate-500 text-xs'>We strive to provide comfort by using high-quality cotton bedding to enhance relaxation.</p>",
-        "en": "<p>All beds at Insta Hotel are equipped with Korea's finest ACE mattresses to ensure you can rest comfortably during your weary travels.</p><p>We have also maximized the cotton content of our bedding to provide superior comfort.</p>",
-        "ja": "<p>Insta Hotelのすべてのベッドは、疲れた旅行中に客室でゆっくり休めるよう、</p><p>国内最高級のACEベッドを使用しており、</p><p>寝具類も綿の使用率を高め、快適さを提供するよう努めました。</p>",
-        "zh": "<p>Insta Hotel的所有床铺均采用韩国顶级的ACE床垫，</p><p>旨在让您在疲惫的旅途中享受舒适的休息。</p><p>床上用品也提高了棉的使用率，致力于为您提供最佳的舒适感。</p>"
+        "ko": `<p>insta hotel의 모든 침대는 지친 여행길에 객실에서 편히 쉴 수 있도록</p><p>국내 최고급 ACE 침대를 사용하였으며,</p><p>침구류도 면 사용률을 높여 편안함을 제공하려고 노력하였습니다.</p><br><p class='text-slate-500 text-xs'>All beds at Insta Hotel are equipped with the finest domestic ACE mattresses to ensure a comfortable rest during your weary travels.</p><p class='text-slate-500 text-xs'>We strive to provide comfort by using high-quality cotton bedding to enhance relaxation.</p>`,
+        "en": `<p>All beds at Insta Hotel are equipped with Korea's finest ACE mattresses to ensure you can rest comfortably during your weary travels.</p><p>We have also maximized the cotton content of our bedding to provide superior comfort.</p>`,
+        "ja": `<p>Insta Hotelのすべてのベッドは、疲れた旅行中に客室でゆっくり休めるよう、</p><p>国内最高級のACEベッドを使用しており、</p><p>寝具類も綿の使用率を高め、快適さを提供するよう努めました。</p>`,
+        "zh": `<p>Insta Hotel的所有床铺均采用韩国顶级的ACE床垫，</p><p>旨在让您在疲惫的旅途中享受舒适的休息。</p><p>床上用品也提高了棉的使用率，致力于为您提供最佳的舒适感。</p>`
       },
 
       // 푸터 (Footer)
       "footer_name": {
-        "ko": "insta hotel mainbranch, Korea", "en": "insta hotel mainbranch, Korea", "ja": "Insta Hotel 本店, 韓国", "zh": "Insta Hotel 总店, 韩国"
+        "ko": `insta hotel mainbranch, Korea`, "en": `insta hotel mainbranch, Korea`, "ja": `Insta Hotel 本店, 韓国`, "zh": `Insta Hotel 总店, 韩国`
       },
       "footer_company": {
-        "ko": "(주)호텔인스타", "en": "Hotel Insta Co., Ltd.", "ja": "(株)ホテルインスタ", "zh": "(株) Insta Hotel"
+        "ko": `(주)호텔인스타`, "en": `Hotel Insta Co., Ltd.`, "ja": `(株)ホテルインスタ`, "zh": `(株) Insta Hotel`
       },
       "footer_ceo": {
-        "ko": "대표자 : 이영환", "en": "CEO : Young-Hwan Lee", "ja": "代表者 : イ・ヨンファン", "zh": "代表 : 李永焕"
+        "ko": `대표자 : 이영환`, "en": `CEO : Young-Hwan Lee`, "ja": `代表者 : イ・ヨンファン`, "zh": `代表 : 李永焕`
       },
       "footer_biz_report": {
-        "ko": "통신판매업 신고번호: 2023-수원영통-1696호", 
-        "en": "E-commerce Registration: 2023-SuwonYeongtong-1696", 
-        "ja": "通信販売業申告番号: 2023-水原霊通-1696号", 
-        "zh": "通信销售业申报号码: 2023-水原灵通-1696号"
+        "ko": `통신판매업 신고번호: 2023-수원영통-1696호`, 
+        "en": `E-commerce Registration: 2023-SuwonYeongtong-1696`, 
+        "ja": `通信販売業申告番号: 2023-水原霊通-1696号`, 
+        "zh": `通信销售业申报号码: 2023-水原灵通-1696号`
       },
       "footer_address": {
-        "ko": "수원시 영통구 영통로 94-6", 
-        "en": "94-6, Yeongtong-ro, Yeongtong-gu, Suwon-si, Korea", 
-        "ja": "京畿道 水原市 霊通区 霊通路 94-6", 
-        "zh": "京畿道 水原市 灵通区 灵通路 94-6"
+        "ko": `수원시 영통구 영통로 94-6`, 
+        "en": `94-6, Yeongtong-ro, Yeongtong-gu, Suwon-si, Korea`, 
+        "ja": `京畿道 水原市 霊通区 霊通路 94-6`, 
+        "zh": `京畿道 水原市 灵通区 灵通路 94-6`
       },
       "footer_license": {
-        "ko": "Business License 176-24-01388 | Tel 031-203-4301",
-        "en": "Business License 176-24-01388 | Tel +82-31-203-4301",
-        "ja": "事業者登録番号 176-24-01388 | Tel +82-31-203-4301",
-        "zh": "营业执照 176-24-01388 | Tel +82-31-203-4301"
+        "ko": `Business License 176-24-01388 | Tel 031-203-4301`,
+        "en": `Business License 176-24-01388 | Tel +82-31-203-4301`,
+        "ja": `事業者登録番号 176-24-01388 | Tel +82-31-203-4301`,
+        "zh": `营业执照 176-24-01388 | Tel +82-31-203-4301`
       },
       "footer_terms": {
-        "ko": "이용약관", "en": "Terms of Use", "ja": "利用規約", "zh": "使用条款"
+        "ko": `이용약관`, "en": `Terms of Use`, "ja": `利用規約`, "zh": `使用条款`
       },
       "footer_privacy": {
-        "ko": "개인정보처리방침", "en": "Privacy Policy", "ja": "プライバシーポリシー", "zh": "隐私政策"
+        "ko": `개인정보처리방침`, "en": `Privacy Policy`, "ja": `プライバシーポリシー`, "zh": `隐私政策`
       },
       "btn_inquiry": {
-        "ko": "문의", "en": "Inquiry", "ja": "お問い合わせ", "zh": "咨询"
+        "ko": `문의`, "en": `Inquiry`, "ja": `お問い合わせ`, "zh": `咨询`
       }
     };
 
@@ -312,23 +306,24 @@
       document.querySelectorAll('[data-lang-key]').forEach(elem => {
         const key = elem.getAttribute('data-lang-key');
         if (translations[key] && translations[key][lang]) {
-          // HTML 태그(br, p 등)를 포함하여 렌더링
           elem.innerHTML = translations[key][lang];
         }
       });
       
-      // Select 박스 값 동기화 (데스크탑 <-> 모바일)
-      document.getElementById('desktop-lang-select').value = lang;
-      document.getElementById('mobile-lang-select').value = lang;
+      // Select 박스 값 동기화
+      const desktopSelect = document.getElementById('desktop-lang-select');
+      const mobileSelect = document.getElementById('mobile-lang-select');
+      
+      if(desktopSelect) desktopSelect.value = lang;
+      if(mobileSelect) mobileSelect.value = lang;
     }
 
     // 3. 이벤트 리스너 등록
     const desktopSelect = document.getElementById('desktop-lang-select');
     const mobileSelect = document.getElementById('mobile-lang-select');
 
-    desktopSelect.addEventListener('change', (e) => updateLanguage(e.target.value));
-    mobileSelect.addEventListener('change', (e) => updateLanguage(e.target.value));
-
+    if(desktopSelect) desktopSelect.addEventListener('change', (e) => updateLanguage(e.target.value));
+    if(mobileSelect) mobileSelect.addEventListener('change', (e) => updateLanguage(e.target.value));
 
     // --- 기존 모바일 메뉴 스크립트 ---
     const mobileMenuBtn = document.getElementById("mobile-menu-btn");
@@ -347,9 +342,9 @@
         document.body.style.overflow = ""; 
     }
 
-    mobileMenuBtn.addEventListener("click", openMenu);
-    mobileCloseBtn.addEventListener("click", closeMenu);
-    drawerOverlay.addEventListener("click", closeMenu);
+    if(mobileMenuBtn) mobileMenuBtn.addEventListener("click", openMenu);
+    if(mobileCloseBtn) mobileCloseBtn.addEventListener("click", closeMenu);
+    if(drawerOverlay) drawerOverlay.addEventListener("click", closeMenu);
 
     const roomsToggle = document.getElementById("rooms-toggle");
     const roomsSubmenu = document.getElementById("rooms-submenu");
