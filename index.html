@@ -5,190 +5,119 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotel Insta</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Noto Sans KR', sans-serif; }
         .font-eng { font-family: 'Montserrat', sans-serif; }
-        /* 스크롤바 숨기기 (가로 스와이프 영역) */
-        .hide-scrollbar::-webkit-scrollbar { display: none; }
-        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        /* 아코디언 애니메이션 */
-        details > summary { list-style: none; cursor: pointer; }
-        details > summary::-webkit-details-marker { display: none; }
     </style>
 </head>
-<body class="text-gray-900 bg-white">
+<body class="h-screen flex flex-col text-gray-900 bg-white overflow-hidden">
 
-    <header class="sticky top-0 z-50 bg-white border-b border-gray-200">
-        <div class="flex justify-between items-center px-6 py-4 max-w-screen-2xl mx-auto">
-            <div class="flex items-center gap-8">
-                <h1 class="font-eng font-bold text-3xl tracking-tighter">HOTEL INSTA</h1>
-                <nav class="hidden md:flex gap-6 text-xs font-semibold tracking-wider font-eng uppercase text-gray-500">
-                    <a href="#" class="hover:text-black">The Hotel</a>
-                    <a href="#" class="hover:text-black">Offers</a>
-                </nav>
+    <div class="flex justify-between items-end px-8 pt-6 pb-2">
+        <h1 class="font-eng font-bold text-5xl tracking-tighter uppercase">Hotel Insta</h1>
+        <nav class="flex gap-6 text-sm font-eng text-gray-500 font-medium">
+            <a href="#" class="text-black border-b-2 border-blue-500 pb-1">Overview</a>
+            <a href="#" class="hover:text-black pb-1 transition">Gallery</a>
+            <a href="#" class="hover:text-black pb-1 transition">Accommodations</a>
+            <a href="#" class="hover:text-black pb-1 transition">Dining</a>
+            <a href="#" class="hover:text-black pb-1 transition">Experiences</a>
+            <a href="#" class="hover:text-black pb-1 transition">Events</a>
+        </nav>
+    </div>
+
+    <div class="flex justify-between items-center px-8 py-3 border-b border-gray-200">
+        <div class="flex items-center gap-3">
+            <span class="font-eng font-bold text-[15px] tracking-wide">HOTEL INSTA, BOUTIQUE COLLECTION</span>
+            <div class="flex text-[#3b82f6] text-[10px] tracking-tighter gap-0.5">
+                <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10"/></svg>
+                <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10"/></svg>
+                <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10"/></svg>
+                <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10"/></svg>
+                <svg class="w-3.5 h-3.5 text-[#3b82f6]" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M10 0 A10 10 0 0 0 10 20 Z" fill="currentColor" stroke="none"/>
+                    <circle cx="10" cy="10" r="9"/>
+                </svg>
             </div>
-            <div class="hidden md:flex gap-6 text-xs font-semibold tracking-wider font-eng uppercase text-gray-500">
-                <a href="#" class="hover:text-black">Location</a>
-                <a href="#" class="hover:text-black">Gallery</a>
-                <a href="#" class="hover:text-black">Sign In</a>
+            <span class="text-xs font-bold font-eng">4.6</span>
+            <span class="text-xs text-gray-800 font-medium underline decoration-gray-400 underline-offset-2 hover:text-black cursor-pointer">1446 Reviews</span>
+        </div>
+        
+        <div class="flex items-center gap-6 text-[13px] font-eng font-medium text-gray-800">
+            <a href="#" class="flex items-center gap-1.5 hover:underline decoration-gray-400 underline-offset-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                VIEW MAP
+            </a>
+            <a href="#" class="flex items-center gap-1.5 hover:underline decoration-gray-400 underline-offset-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                +82 31-000-0000
+            </a>
+        </div>
+    </div>
+
+    <div class="flex items-center justify-between px-8 py-3 bg-white border-b border-gray-200">
+        
+        <div class="flex-1 flex flex-col cursor-pointer group">
+            <div class="flex items-center gap-2 text-gray-500 text-[10px] font-bold font-eng uppercase tracking-widest mb-1">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                Dates (1 Night)
+            </div>
+            <div class="flex items-center text-[13px] font-eng text-gray-800 font-medium group-hover:text-black">
+                Tue, May 26 <span class="mx-3 text-gray-400">→</span> Wed, May 27
             </div>
         </div>
 
-        <div class="border-t border-gray-200 bg-gray-50">
-            <div class="max-w-screen-2xl mx-auto px-6 py-3 flex flex-wrap md:flex-nowrap justify-between items-center gap-4 text-sm">
-                <div class="flex gap-4 w-full md:w-auto">
-                    <div class="flex flex-col">
-                        <span class="text-[10px] text-gray-500 font-eng uppercase tracking-widest">Check-in / Check-out</span>
-                        <input type="text" placeholder="Select Dates" class="bg-transparent font-medium focus:outline-none cursor-pointer mt-1" readonly value="2026. 05. 26 - 2026. 05. 27">
-                    </div>
-                </div>
-                <div class="flex gap-4 w-full md:w-auto items-center">
-                    <div class="flex flex-col border-l border-gray-300 pl-4">
-                        <span class="text-[10px] text-gray-500 font-eng uppercase tracking-widest">Rooms & Guests</span>
-                        <select class="bg-transparent font-medium focus:outline-none cursor-pointer mt-1 pr-4">
-                            <option>1 Room, 2 Adults</option>
-                            <option>1 Room, 3 Adults</option>
-                        </select>
-                    </div>
-                    <button class="ml-auto md:ml-4 bg-gray-900 text-white font-eng uppercase text-xs tracking-widest py-3 px-8 rounded hover:bg-gray-700 transition">Book Now</button>
-                </div>
+        <div class="h-10 border-l border-dotted border-gray-400 mx-4"></div>
+
+        <div class="flex-1 flex flex-col cursor-pointer group pl-4">
+            <div class="text-gray-500 text-[10px] font-bold font-eng uppercase tracking-widest mb-1">
+                Rooms & Guests
+            </div>
+            <div class="flex items-center justify-between text-[13px] font-eng text-gray-800 font-medium group-hover:text-black pr-8">
+                <span>1 Room, 1 Adult</span>
+                <svg class="w-3.5 h-3.5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
             </div>
         </div>
-    </header>
 
-    <section class="relative w-full h-[60vh] md:h-[75vh] bg-gray-200">
+        <div class="h-10 border-l border-dotted border-gray-400 mx-4"></div>
+
+        <div class="flex-1 flex flex-col cursor-pointer group pl-4">
+            <div class="text-gray-500 text-[10px] font-bold font-eng uppercase tracking-widest mb-1">
+                Special Rates
+            </div>
+            <div class="flex items-center justify-between text-[13px] font-eng text-gray-800 font-medium group-hover:text-black pr-8">
+                <span>Lowest Regular Rate</span>
+                <svg class="w-3.5 h-3.5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </div>
+        </div>
+
+        <div class="pl-4">
+            <button class="bg-[#6b6b6b] text-white px-8 py-2.5 rounded-full font-eng font-bold text-xs tracking-wider hover:bg-gray-800 transition shadow-sm">
+                View Rates
+            </button>
+        </div>
+    </div>
+
+    <div class="relative flex-1 w-full bg-gray-100 overflow-hidden">
         <img src="https://images.unsplash.com/photo-1542314831-c53cd4b85aca?q=80&w=2000&auto=format&fit=crop" alt="Hotel Interior" class="w-full h-full object-cover">
         
-        <div class="absolute inset-0 bg-black bg-opacity-20 flex flex-col justify-end items-center pb-20 text-center">
-            <p class="text-white text-xs font-eng tracking-[0.2em] mb-4 uppercase">Welcome to the artistic mood</p>
-            <h2 class="text-white font-eng font-bold text-4xl md:text-5xl tracking-tight leading-tight max-w-4xl px-4 uppercase">
-                Experience Our Visionary<br>Boutique Hotel
-            </h2>
-        </div>
-    </section>
-
-    <section class="py-20 max-w-screen-xl mx-auto px-6">
-        <h3 class="font-eng text-2xl font-bold tracking-tight mb-8 uppercase text-center md:text-left">Rooms & Suites</h3>
-        <div class="flex overflow-x-auto gap-6 hide-scrollbar snap-x snap-mandatory">
+        <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-3">
             
-            <div class="min-w-[85vw] md:min-w-[calc(33.333%-1rem)] snap-center group cursor-pointer border border-gray-200 rounded-lg overflow-hidden">
-                <div class="h-64 bg-gray-300 overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <div class="flex items-center gap-3 bg-black/60 backdrop-blur-md text-white px-4 py-1.5 rounded-full shadow-lg">
+                <button class="text-sm hover:text-gray-300 font-eng transition">❮</button>
+                <div class="flex gap-1.5 items-center">
+                    <div class="w-1.5 h-1.5 bg-white rounded-full"></div>
+                    <div class="w-1.5 h-1.5 bg-white/40 rounded-full"></div>
+                    <div class="w-1.5 h-1.5 bg-white/40 rounded-full"></div>
                 </div>
-                <div class="p-6">
-                    <h4 class="font-eng font-bold text-lg mb-2 uppercase">Aurora Room</h4>
-                    <a href="#" class="inline-block mt-4 text-xs font-eng uppercase tracking-widest border border-black py-2 px-6 rounded hover:bg-black hover:text-white transition">View Details</a>
-                </div>
+                <button class="text-sm hover:text-gray-300 font-eng transition">❯</button>
             </div>
 
-            <div class="min-w-[85vw] md:min-w-[calc(33.333%-1rem)] snap-center group cursor-pointer border border-gray-200 rounded-lg overflow-hidden">
-                <div class="h-64 bg-gray-300 overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                </div>
-                <div class="p-6">
-                    <h4 class="font-eng font-bold text-lg mb-2 uppercase">Edelweiss Room</h4>
-                    <a href="#" class="inline-block mt-4 text-xs font-eng uppercase tracking-widest border border-black py-2 px-6 rounded hover:bg-black hover:text-white transition">View Details</a>
-                </div>
-            </div>
-
-            <div class="min-w-[85vw] md:min-w-[calc(33.333%-1rem)] snap-center group cursor-pointer border border-gray-200 rounded-lg overflow-hidden">
-                <div class="h-64 bg-gray-300 overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1566665797739-1674de7a421a?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                </div>
-                <div class="p-6">
-                    <h4 class="font-eng font-bold text-lg mb-2 uppercase">Envision Room</h4>
-                    <a href="#" class="inline-block mt-4 text-xs font-eng uppercase tracking-widest border border-black py-2 px-6 rounded hover:bg-black hover:text-white transition">View Details</a>
-                </div>
-            </div>
-            
+            <button class="flex items-center gap-2 bg-black/60 backdrop-blur-md text-white px-5 py-1.5 rounded-full text-sm font-eng font-medium shadow-lg hover:bg-black/80 transition">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                Gallery
+            </button>
         </div>
-    </section>
-
-    <section class="border-t border-b border-gray-200 bg-gray-50 py-16">
-        <div class="max-w-screen-xl mx-auto px-6">
-            <h3 class="font-eng text-2xl font-bold tracking-tight mb-8 uppercase text-center">Featured Amenities On-Site</h3>
-            <div class="flex justify-center gap-8 border-b border-gray-300 mb-8 font-eng text-sm tracking-wider uppercase text-gray-500">
-                <button class="pb-2 border-b-2 border-black text-black">Property Amenities</button>
-                <button class="pb-2 hover:text-black">Room Amenities</button>
-            </div>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-sm font-medium">
-                <div class="flex items-center gap-2"><span>✓</span> Free Wi-Fi</div>
-                <div class="flex items-center gap-2"><span>✓</span> Restaurant & Cafe</div>
-                <div class="flex items-center gap-2"><span>✓</span> Fitness Center</div>
-                <div class="flex items-center gap-2"><span>✓</span> Valet Parking</div>
-                <div class="flex items-center gap-2"><span>✓</span> 24-Hour Front Desk</div>
-                <div class="flex items-center gap-2"><span>✓</span> Luggage Storage</div>
-            </div>
-        </div>
-    </section>
-
-    <section class="bg-zinc-900 text-white py-16">
-        <div class="max-w-screen-xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-            <div>
-                <h3 class="font-eng text-2xl font-bold tracking-tight mb-6 uppercase">Getting Here</h3>
-                <div class="mb-8">
-                    <p class="font-bold mb-1">Hotel Insta</p>
-                    <p class="text-sm text-gray-400">94-6 Yeongtong-ro, Yeongtong-gu,<br>Suwon-si, Gyeonggi-do</p>
-                </div>
-                <div class="space-y-4 text-sm font-eng tracking-wider uppercase border-t border-zinc-700 pt-6">
-                    <div class="flex justify-between cursor-pointer group">
-                        <span class="group-hover:text-gray-300">By Subway</span>
-                        <span>+</span>
-                    </div>
-                    <div class="flex justify-between cursor-pointer group border-t border-zinc-700 pt-4">
-                        <span class="group-hover:text-gray-300">By Car & Parking</span>
-                        <span>+</span>
-                    </div>
-                </div>
-            </div>
-            <div class="w-full h-80 bg-zinc-800 rounded flex items-center justify-center border border-zinc-700">
-                <span class="font-eng text-zinc-500 uppercase tracking-widest text-sm">[ Map API Area ]</span>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-20 max-w-screen-md mx-auto px-6">
-        <h3 class="font-eng text-2xl font-bold tracking-tight mb-8 uppercase text-center">Frequently Asked Questions</h3>
-        <div class="space-y-4">
-            <details class="group border-b border-gray-200 pb-4">
-                <summary class="flex justify-between items-center font-medium cursor-pointer">
-                    What is the check-in and check-out time?
-                    <span class="transition group-open:rotate-180">▼</span>
-                </summary>
-                <p class="text-sm text-gray-600 mt-4 leading-relaxed">Check-in is from 3:00 PM, and check-out is until 12:00 PM. 편안한 휴식을 위해 시간을 준수해 주시면 감사하겠습니다.</p>
-            </details>
-            <details class="group border-b border-gray-200 pb-4">
-                <summary class="flex justify-between items-center font-medium cursor-pointer">
-                    Is parking available at the hotel?
-                    <span class="transition group-open:rotate-180">▼</span>
-                </summary>
-                <p class="text-sm text-gray-600 mt-4 leading-relaxed">Yes, valet parking is available for all registered guests. Please contact the front desk for details.</p>
-            </details>
-            <details class="group border-b border-gray-200 pb-4">
-                <summary class="flex justify-between items-center font-medium cursor-pointer">
-                    Can I request an early check-in or late check-out?
-                    <span class="transition group-open:rotate-180">▼</span>
-                </summary>
-                <p class="text-sm text-gray-600 mt-4 leading-relaxed">Requests are subject to availability. Additional charges may apply.</p>
-            </details>
-        </div>
-    </section>
-
-    <footer class="bg-black text-white py-12 text-center md:text-left">
-        <div class="max-w-screen-xl mx-auto px-6 border-b border-zinc-800 pb-8 mb-8">
-            <h1 class="font-eng font-bold text-2xl tracking-tighter mb-4">HOTEL INSTA</h1>
-            <p class="text-xs text-zinc-400">94-6 Yeongtong-ro, Yeongtong-gu, Suwon-si, Gyeonggi-do</p>
-            <p class="text-xs text-zinc-400 mt-1">@instahotel.kr</p>
-        </div>
-        <div class="max-w-screen-xl mx-auto px-6 text-[10px] text-zinc-500 font-eng uppercase tracking-widest flex flex-col md:flex-row justify-between items-center">
-            <p>© 2026 Hotel Insta. All Rights Reserved.</p>
-            <div class="flex gap-4 mt-4 md:mt-0">
-                <a href="#" class="hover:text-white">Privacy Policy</a>
-                <a href="#" class="hover:text-white">Terms of Use</a>
-            </div>
-        </div>
-    </footer>
+    </div>
 
 </body>
 </html>
