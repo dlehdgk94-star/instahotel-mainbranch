@@ -1,531 +1,194 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <title>Insta Hotel - Main</title>
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Insta Hotel - MainBranch">
-  <meta property="og:description" content="인스타 호텔에 오신 것을 환영합니다.">
-  <meta property="og:image" content="https://dlehdgk94-star.github.io/hero7.jpg">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <style>
-    html { scroll-behavior: smooth; font-family: 'Poppins', sans-serif; }
-    
-    /* 오렌지 섹션 스트라이프 배경 */
-    .stripe-bg {
-      background-image: repeating-linear-gradient(
-        135deg,
-        rgba(255,255,255,0.5) 0,
-        rgba(255,255,255,0.5) 1px,
-        transparent 1px,
-        transparent 18px
-      );
-    }
-
-    /* 모바일(768px 이하) 무한 스크롤 애니메이션 */
-    @media (max-width: 768px) {
-      @keyframes infinite-scroll {
-        from { transform: translateX(0); }
-        to { transform: translateX(-50%); }
-      }
-      .mobile-scroll-only {
-        display: flex;
-        width: max-content;
-        animation: infinite-scroll 40s linear infinite;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Insta</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Noto Sans KR', sans-serif; }
+        .font-eng { font-family: 'Montserrat', sans-serif; }
+        /* 스크롤바 숨기기 (가로 스와이프 영역) */
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        /* 아코디언 애니메이션 */
+        details > summary { list-style: none; cursor: pointer; }
+        details > summary::-webkit-details-marker { display: none; }
+    </style>
 </head>
+<body class="text-gray-900 bg-white">
 
-<body class="text-slate-900 bg-white">
-
-  <header id="header" class="fixed top-0 left-0 right-0 z-30 transition-colors duration-300 bg-transparent text-white">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between h-14 relative">
-      
-      <button id="mobile-menu-btn" class="md:hidden text-white flex items-center focus:outline-none drop-shadow-md">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-8 h-8">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-        </svg>
-      </button>
-
-      <a href="#" class="absolute left-1/2 transform -translate-x-1/2 md:static md:translate-x-0 md:flex items-center drop-shadow-md">
-        <span class="text-2xl font-bold tracking-tight md:hidden">Insta hotel</span>
-        <span class="hidden md:block text-2xl font-semibold tracking-tight">Insta Hotel - mainbranch</span>
-      </a>
-
-      <nav class="hidden md:flex items-center gap-8 text-sm font-medium drop-shadow-md">
-        <a href="about.html" class="hover:text-orange-200 transition-colors">about</a>
-        <a href="rooms.html" class="hover:text-orange-200 transition-colors">rooms</a>
-        <a href="reservation.html" class="hover:text-orange-200 transition-colors">reservation</a>
-        <a href="#lounge" class="hover:text-orange-200 transition-colors">bluerain lounge</a>
-        <a href="contact.html" class="hover:text-orange-200 transition-colors">contact</a>
-      </nav>
-
-      <div class="flex items-center relative drop-shadow-md">
-         <div class="flex items-center gap-1 cursor-pointer relative">
-            <span id="current-flag-icon" class="text-2xl shadow-sm rounded-sm leading-none pt-1">🇰🇷</span>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-white opacity-90">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-            </svg>
-
-            <select id="header-lang-select" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer appearance-none">
-                <option value="ko">🇰🇷 한국어</option>
-                <option value="en">🇺🇸 English</option>
-                <option value="ja">🇯🇵 日本語</option>
-                <option value="zh">🇨🇳 中文</option>
-            </select>
-         </div>
-      </div>
-
-    </div>
-  </header>
-
-  <div id="drawer-overlay" class="fixed inset-0 bg-black/50 z-40 hidden md:hidden transition-opacity duration-300"></div>
-  
-  <nav id="mobile-drawer" class="fixed top-0 left-0 w-[75%] max-w-sm h-full z-50 bg-white shadow-xl text-slate-900 md:hidden transform -translate-x-full transition-transform duration-300 ease-in-out">
-    <div class="p-6 h-full flex flex-col">
-      <button id="mobile-menu-close-btn" class="absolute top-4 right-4 text-3xl font-light hover:text-[#ff6900]">&times;</button>
-      
-      <div class="mt-2 mb-8">
-        <span class="text-xl font-bold tracking-tight text-[#ff6900]">Insta hotel</span>
-      </div>
-      
-      <ul class="flex flex-col space-y-4 text-lg font-medium flex-grow">
-        <li><a href="about.html" class="block hover:text-[#ff6900]">about</a></li>
-        
-        <li>
-            <div class="flex justify-between items-center cursor-pointer hover:text-[#ff6900]" id="rooms-toggle">
-                <span>rooms</span> <span class="text-sm">▼</span>
+    <header class="sticky top-0 z-50 bg-white border-b border-gray-200">
+        <div class="flex justify-between items-center px-6 py-4 max-w-screen-2xl mx-auto">
+            <div class="flex items-center gap-8">
+                <h1 class="font-eng font-bold text-3xl tracking-tighter">HOTEL INSTA</h1>
+                <nav class="hidden md:flex gap-6 text-xs font-semibold tracking-wider font-eng uppercase text-gray-500">
+                    <a href="#" class="hover:text-black">The Hotel</a>
+                    <a href="#" class="hover:text-black">Offers</a>
+                </nav>
             </div>
-            <ul id="rooms-submenu" class="hidden mt-3 ml-4 space-y-3 border-l-2 border-slate-100 pl-4">
-                <li><a href="rooms.html" class="block text-sm text-slate-600 hover:text-[#ff6900]">Twin</a></li>
-                <li><a href="rooms.html" class="block text-sm text-slate-600 hover:text-[#ff6900]">Special</a></li>
-                <li><a href="rooms.html" class="block text-sm text-slate-600 hover:text-[#ff6900]">Luxury</a></li>
-                <li><a href="rooms.html" class="block text-sm text-slate-600 hover:text-[#ff6900]">Premium</a></li>
-                <li><a href="rooms.html" class="block text-sm text-slate-600 hover:text-[#ff6900]">Deluxe</a></li>
-                <li><a href="rooms.html" class="block text-sm text-slate-600 hover:text-[#ff6900]">Standard</a></li>
-                <li><a href="reservation.html" class="block text-sm text-slate-600 hover:text-[#ff6900] font-semibold">Long Stay</a></li>
-            </ul>
-        </li>
-
-        <li><a href="reservation.html" class="block hover:text-[#ff6900]">reservation</a></li>
-        <li><a href="#lounge" class="block hover:text-[#ff6900]">bluerain lounge</a></li>
-        <li><a href="contact.html" class="block hover:text-[#ff6900]">contact</a></li>
-      </ul>
-
-      <div class="mt-8 border-t pt-4">
-         <p class="text-sm text-slate-400 mb-2">Language</p>
-         <select id="drawer-lang-select" class="w-full p-2 border rounded text-slate-700 bg-slate-50 outline-none">
-             <option value="ko">Korean</option>
-             <option value="en">English</option>
-             <option value="ja">Japanese</option>
-             <option value="zh">Chinese</option>
-         </select>
-      </div>
-    </div>
-  </nav>
-
-  <section id="hero" class="relative h-[65vh] md:h-screen min-h-[400px] overflow-hidden bg-gray-900">
-    <img src="hero1.jpg" class="slide absolute inset-0 w-full h-full object-cover opacity-100 transition-opacity duration-[1500ms]" />
-    <img src="hero2.jpg" class="slide absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-[1500ms]" />
-    <img src="hero3.jpg" class="slide absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-[1500ms]" />
-    <img src="hero4.jpg" class="slide absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-[1500ms]" />
-
-    <div class="absolute inset-0 bg-black/20"></div>
-    
-    <div class="absolute bottom-6 left-0 right-0 flex justify-center gap-2 z-10">
-        <span class="w-1.5 h-1.5 rounded-full bg-white opacity-100 dot"></span>
-        <span class="w-1.5 h-1.5 rounded-full bg-white opacity-50 dot"></span>
-        <span class="w-1.5 h-1.5 rounded-full bg-white opacity-50 dot"></span>
-        <span class="w-1.5 h-1.5 rounded-full bg-white opacity-50 dot"></span>
-    </div>
-  </section>
-
-  <section id="about-inner" class="relative text-white py-3 md:py-14 overflow-hidden" style="background-color: #ff6900">
-    <div class="absolute inset-0 stripe-bg opacity-60 pointer-events-none"></div>
-
-    <div class="relative w-full overflow-hidden md:max-w-6xl md:mx-auto md:px-4 md:overflow-visible">
-      <div class="mobile-scroll-only flex items-center gap-8 md:animate-none md:flex-wrap md:justify-center md:gap-6 md:w-full">
-        <div class="hidden md:contents text-sm font-medium whitespace-nowrap md:text-3xl md:leading-relaxed">
-            <span>People</span>
-            <img src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?q=80&w=200&auto=format&fit=crop" class="w-14 h-14 rounded-full object-cover border-4 border-white/80" />
-            <span>Village</span>
-            <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=200&auto=format&fit=crop" class="w-14 h-14 rounded-full object-cover border-4 border-white/80" />
-            <span>Local Artist</span>
-            <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?q=80&w=200&auto=format&fit=crop" class="w-14 h-14 rounded-full object-cover border-4 border-white/80" />
-            <span>Food</span>
-            <img src="https://images.unsplash.com/photo-1504753793650-d4a2b783c15e?q=80&w=200&auto=format&fit=crop" class="w-14 h-14 rounded-full object-cover border-4 border-white/80" />
-            <span>Suwon-Insta Music</span>
-            <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=200&auto=format&fit=crop" class="w-14 h-14 rounded-full object-cover border-4 border-white/80" />
-            <span>Tourist</span>
-            <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?q=80&w=200&auto=format&fit=crop" class="w-14 h-14 rounded-full object-cover border-4 border-white/80" />
-            <span>Book</span>
-            <img src="https://images.unsplash.com/photo-1495446815901-a7297e633e8d?q=80&w=200&auto=format&fit=crop" class="w-14 h-14 rounded-full object-cover border-4 border-white/80" />
-            <span>Culture, Play</span>
+            <div class="hidden md:flex gap-6 text-xs font-semibold tracking-wider font-eng uppercase text-gray-500">
+                <a href="#" class="hover:text-black">Location</a>
+                <a href="#" class="hover:text-black">Gallery</a>
+                <a href="#" class="hover:text-black">Sign In</a>
+            </div>
         </div>
 
-        <div class="flex md:hidden items-center gap-3 text-sm font-medium whitespace-nowrap">
-            <span>People</span><img src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?q=80&w=200&auto=format&fit=crop" class="w-6 h-6 rounded-full object-cover border-2 border-white/80" />
-            <span>Village</span><img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=200&auto=format&fit=crop" class="w-6 h-6 rounded-full object-cover border-2 border-white/80" />
-            <span>Local Artist</span><img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?q=80&w=200&auto=format&fit=crop" class="w-6 h-6 rounded-full object-cover border-2 border-white/80" />
-            <span>Food</span><img src="https://images.unsplash.com/photo-1504753793650-d4a2b783c15e?q=80&w=200&auto=format&fit=crop" class="w-6 h-6 rounded-full object-cover border-2 border-white/80" />
-            <span>Suwon-Insta Music</span><img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=200&auto=format&fit=crop" class="w-6 h-6 rounded-full object-cover border-2 border-white/80" />
-            <span>Tourist</span><img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?q=80&w=200&auto=format&fit=crop" class="w-6 h-6 rounded-full object-cover border-2 border-white/80" />
-            <span>Book</span><img src="https://images.unsplash.com/photo-1495446815901-a7297e633e8d?q=80&w=200&auto=format&fit=crop" class="w-6 h-6 rounded-full object-cover border-2 border-white/80" />
-            <span>Culture, Play</span>
+        <div class="border-t border-gray-200 bg-gray-50">
+            <div class="max-w-screen-2xl mx-auto px-6 py-3 flex flex-wrap md:flex-nowrap justify-between items-center gap-4 text-sm">
+                <div class="flex gap-4 w-full md:w-auto">
+                    <div class="flex flex-col">
+                        <span class="text-[10px] text-gray-500 font-eng uppercase tracking-widest">Check-in / Check-out</span>
+                        <input type="text" placeholder="Select Dates" class="bg-transparent font-medium focus:outline-none cursor-pointer mt-1" readonly value="2026. 05. 26 - 2026. 05. 27">
+                    </div>
+                </div>
+                <div class="flex gap-4 w-full md:w-auto items-center">
+                    <div class="flex flex-col border-l border-gray-300 pl-4">
+                        <span class="text-[10px] text-gray-500 font-eng uppercase tracking-widest">Rooms & Guests</span>
+                        <select class="bg-transparent font-medium focus:outline-none cursor-pointer mt-1 pr-4">
+                            <option>1 Room, 2 Adults</option>
+                            <option>1 Room, 3 Adults</option>
+                        </select>
+                    </div>
+                    <button class="ml-auto md:ml-4 bg-gray-900 text-white font-eng uppercase text-xs tracking-widest py-3 px-8 rounded hover:bg-gray-700 transition">Book Now</button>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </header>
 
-  <section id="building" class="bg-white">
-    <img src="hero6.jpg" alt="building" class="w-full h-[50vh] md:h-[720px] object-cover" />
-  </section>
-
-  <section id="intro-text" class="py-10 bg-white">
-    <div class="max-w-xl mx-auto px-6 text-center">
-      <p class="text-sm md:text-xl text-slate-800 italic font-serif leading-relaxed">
-        insta is a group of people that aspire to<br />
-        ‘insta’ people, society, culture, and art together.
-      </p>
-    </div>
-  </section>
-
-  <section id="instagram" class="pb-16 bg-white">
-    <div class="max-w-6xl mx-auto px-4">
-      <p class="mb-4">
-        <span class="font-bold text-lg">Insta Hotel Instagram</span>
-        <span class="ml-1 text-sm text-slate-500">@instahotel_mainbranch</span>
-      </p>
-
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-2 mb-8">
-        <img src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?q=80&w=600&auto=format&fit=crop" alt="" class="w-full aspect-square object-cover" />
-        <img src="https://images.unsplash.com/photo-1520256862855-398228c41684?q=80&w=601&auto=format&fit=crop" alt="" class="w-full aspect-square object-cover" />
-        <img src="hero8.png" alt="" class="w-full aspect-square object-cover" />
-        <img src="hero2.jpg" alt="" class="w-full aspect-square object-cover" />
-        <img src="hero14.png" alt="" class="w-full aspect-square object-cover" />
-        <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=605&auto=format&fit=crop" alt="" class="w-full aspect-square object-cover" />
-        <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=606&auto=format&fit=crop" alt="" class="w-full aspect-square object-cover" />
-        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=607&auto=format&fit=crop" alt="" class="w-full aspect-square object-cover" />
-      </div>
-
-      <div class="text-center">
-        <button id="btnMore" class="px-8 py-3 border border-slate-300 text-xs text-slate-500 bg-white hover:bg-slate-50 uppercase tracking-widest">
-          View More
-        </button>
-      </div>
-    </div>
-  </section>
-
-  <section id="contact" class="pt-10 pb-12 bg-white border-t border-slate-100">
-    <div class="max-w-4xl mx-auto px-4 text-center text-xs text-slate-500">
-      
-      <div class="flex justify-center gap-4 mb-6">
-        <a href="https://www.instagram.com/instahotel_mainbranch/" target="_blank" class="hover:opacity-75 transition-opacity">
-            <img src="icons8-인스-타-그램-48.png" alt="Instagram" width="24" height="24">
-        </a>
-        <a href="https://map.naver.com/p/entry/place/1630717211" target="_blank" class="hover:opacity-75 transition-opacity">
-            <img src="icons8-네이버-64.png" alt="Naver" width="24" height="24">
-        </a>
-        <a href="http://pf.kakao.com/_xiITuG" target="_blank" class="hover:opacity-75 transition-opacity">
-            <img src="icons8-카카오-톡-48.png" alt="KakaoTalk" width="24" height="24">
-        </a>
-        <a href="https://www.facebook.com/VIPdesign2020" target="_blank" class="hover:opacity-75 transition-opacity">
-            <img src="icons8-페이스-북-48.png" alt="Facebook" width="24" height="24">
-        </a>
-      </div>
-
-      <div class="space-y-1.5 leading-relaxed font-light">
-        <p>insta hotel mainbranch, Korea</p>
+    <section class="relative w-full h-[60vh] md:h-[75vh] bg-gray-200">
+        <img src="https://images.unsplash.com/photo-1542314831-c53cd4b85aca?q=80&w=2000&auto=format&fit=crop" alt="Hotel Interior" class="w-full h-full object-cover">
         
-        <p>
-            <span id="companyName">(주)호텔인스타</span>
-            <span class="mx-1">|</span>
-            <span id="ceoName">대표자 : 이영환</span>
-        </p>
+        <div class="absolute inset-0 bg-black bg-opacity-20 flex flex-col justify-end items-center pb-20 text-center">
+            <p class="text-white text-xs font-eng tracking-[0.2em] mb-4 uppercase">Welcome to the artistic mood</p>
+            <h2 class="text-white font-eng font-bold text-4xl md:text-5xl tracking-tight leading-tight max-w-4xl px-4 uppercase">
+                Experience Our Visionary<br>Boutique Hotel
+            </h2>
+        </div>
+    </section>
 
-        <p id="bizNumber">통신판매업 신고번호: 2023-수원영통-1696호</p>
-        <p id="address">수원시 영통구 영통로 94-6</p>
-        <p>Business License 176-24-01388 <span class="mx-1">|</span> Tel 031-203-4301</p>
-      </div>
+    <section class="py-20 max-w-screen-xl mx-auto px-6">
+        <h3 class="font-eng text-2xl font-bold tracking-tight mb-8 uppercase text-center md:text-left">Rooms & Suites</h3>
+        <div class="flex overflow-x-auto gap-6 hide-scrollbar snap-x snap-mandatory">
+            
+            <div class="min-w-[85vw] md:min-w-[calc(33.333%-1rem)] snap-center group cursor-pointer border border-gray-200 rounded-lg overflow-hidden">
+                <div class="h-64 bg-gray-300 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                </div>
+                <div class="p-6">
+                    <h4 class="font-eng font-bold text-lg mb-2 uppercase">Aurora Room</h4>
+                    <a href="#" class="inline-block mt-4 text-xs font-eng uppercase tracking-widest border border-black py-2 px-6 rounded hover:bg-black hover:text-white transition">View Details</a>
+                </div>
+            </div>
 
-      <div class="flex justify-center gap-8 mt-8 text-slate-400">
-        <a href="#" id="termsLink" class="hover:text-slate-600">이용약관</a>
-        <a href="#" id="privacyLink" class="hover:text-slate-600 font-medium">개인정보처리방침</a>
-      </div>
+            <div class="min-w-[85vw] md:min-w-[calc(33.333%-1rem)] snap-center group cursor-pointer border border-gray-200 rounded-lg overflow-hidden">
+                <div class="h-64 bg-gray-300 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                </div>
+                <div class="p-6">
+                    <h4 class="font-eng font-bold text-lg mb-2 uppercase">Edelweiss Room</h4>
+                    <a href="#" class="inline-block mt-4 text-xs font-eng uppercase tracking-widest border border-black py-2 px-6 rounded hover:bg-black hover:text-white transition">View Details</a>
+                </div>
+            </div>
 
-    </div>
-  </section>
+            <div class="min-w-[85vw] md:min-w-[calc(33.333%-1rem)] snap-center group cursor-pointer border border-gray-200 rounded-lg overflow-hidden">
+                <div class="h-64 bg-gray-300 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1566665797739-1674de7a421a?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                </div>
+                <div class="p-6">
+                    <h4 class="font-eng font-bold text-lg mb-2 uppercase">Envision Room</h4>
+                    <a href="#" class="inline-block mt-4 text-xs font-eng uppercase tracking-widest border border-black py-2 px-6 rounded hover:bg-black hover:text-white transition">View Details</a>
+                </div>
+            </div>
+            
+        </div>
+    </section>
 
-  <a href="http://pf.kakao.com/_xiITuG" target="_blank"
-    class="fixed bottom-6 right-6 z-50 flex items-center gap-2 bg-[#FFEB00] text-black px-4 py-2 rounded-full shadow-lg hover:bg-yellow-400 transition-colors font-bold">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
-      <path fill-rule="evenodd" d="M4.804 21.644A6.707 6.707 0 006 21.75a6.721 6.721 0 003.583-1.029c.774.182 1.584.279 2.417.279 5.322 0 9.75-3.97 9.75-9 0-5.03-4.428-9-9.75-9s-9.75 3.97-9.75 9c0 2.409 1.025 4.587 2.674 6.192.232.226.277.428.254.543a3.73 3.73 0 01-.814 1.686.75.75 0 00.44 1.223zM8.25 10.875a1.125 1.125 0 100 2.25 1.125 1.125 0 000-2.25zM10.875 12a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0zm4.875-1.125a1.125 1.125 0 100 2.25 1.125 1.125 0 000-2.25z" clip-rule="evenodd" />
-    </svg>
-    <span id="inquiryBtn" class="text-lg">문의</span>
-  </a>
+    <section class="border-t border-b border-gray-200 bg-gray-50 py-16">
+        <div class="max-w-screen-xl mx-auto px-6">
+            <h3 class="font-eng text-2xl font-bold tracking-tight mb-8 uppercase text-center">Featured Amenities On-Site</h3>
+            <div class="flex justify-center gap-8 border-b border-gray-300 mb-8 font-eng text-sm tracking-wider uppercase text-gray-500">
+                <button class="pb-2 border-b-2 border-black text-black">Property Amenities</button>
+                <button class="pb-2 hover:text-black">Room Amenities</button>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-sm font-medium">
+                <div class="flex items-center gap-2"><span>✓</span> Free Wi-Fi</div>
+                <div class="flex items-center gap-2"><span>✓</span> Restaurant & Cafe</div>
+                <div class="flex items-center gap-2"><span>✓</span> Fitness Center</div>
+                <div class="flex items-center gap-2"><span>✓</span> Valet Parking</div>
+                <div class="flex items-center gap-2"><span>✓</span> 24-Hour Front Desk</div>
+                <div class="flex items-center gap-2"><span>✓</span> Luggage Storage</div>
+            </div>
+        </div>
+    </section>
 
-  <script>
-    /* --------------------------------------
-       1. 헤더 스크롤 색상 변경
-    -------------------------------------- */
-    const header = document.getElementById("header");
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 20) {
-        header.classList.add("bg-[#ff6900]", "shadow-md");
-        header.classList.remove("bg-transparent");
-      } else {
-        header.classList.remove("bg-[#ff6900]", "shadow-md");
-        header.classList.add("bg-transparent");
-      }
-    });
+    <section class="bg-zinc-900 text-white py-16">
+        <div class="max-w-screen-xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+            <div>
+                <h3 class="font-eng text-2xl font-bold tracking-tight mb-6 uppercase">Getting Here</h3>
+                <div class="mb-8">
+                    <p class="font-bold mb-1">Hotel Insta</p>
+                    <p class="text-sm text-gray-400">94-6 Yeongtong-ro, Yeongtong-gu,<br>Suwon-si, Gyeonggi-do</p>
+                </div>
+                <div class="space-y-4 text-sm font-eng tracking-wider uppercase border-t border-zinc-700 pt-6">
+                    <div class="flex justify-between cursor-pointer group">
+                        <span class="group-hover:text-gray-300">By Subway</span>
+                        <span>+</span>
+                    </div>
+                    <div class="flex justify-between cursor-pointer group border-t border-zinc-700 pt-4">
+                        <span class="group-hover:text-gray-300">By Car & Parking</span>
+                        <span>+</span>
+                    </div>
+                </div>
+            </div>
+            <div class="w-full h-80 bg-zinc-800 rounded flex items-center justify-center border border-zinc-700">
+                <span class="font-eng text-zinc-500 uppercase tracking-widest text-sm">[ Map API Area ]</span>
+            </div>
+        </div>
+    </section>
 
-    /* --------------------------------------
-       2. 모바일 메뉴 (Drawer)
-    -------------------------------------- */
-    const mobileMenuBtn = document.getElementById("mobile-menu-btn");
-    const mobileDrawer = document.getElementById("mobile-drawer");
-    const drawerOverlay = document.getElementById("drawer-overlay");
-    const mobileCloseBtn = document.getElementById("mobile-menu-close-btn");
+    <section class="py-20 max-w-screen-md mx-auto px-6">
+        <h3 class="font-eng text-2xl font-bold tracking-tight mb-8 uppercase text-center">Frequently Asked Questions</h3>
+        <div class="space-y-4">
+            <details class="group border-b border-gray-200 pb-4">
+                <summary class="flex justify-between items-center font-medium cursor-pointer">
+                    What is the check-in and check-out time?
+                    <span class="transition group-open:rotate-180">▼</span>
+                </summary>
+                <p class="text-sm text-gray-600 mt-4 leading-relaxed">Check-in is from 3:00 PM, and check-out is until 12:00 PM. 편안한 휴식을 위해 시간을 준수해 주시면 감사하겠습니다.</p>
+            </details>
+            <details class="group border-b border-gray-200 pb-4">
+                <summary class="flex justify-between items-center font-medium cursor-pointer">
+                    Is parking available at the hotel?
+                    <span class="transition group-open:rotate-180">▼</span>
+                </summary>
+                <p class="text-sm text-gray-600 mt-4 leading-relaxed">Yes, valet parking is available for all registered guests. Please contact the front desk for details.</p>
+            </details>
+            <details class="group border-b border-gray-200 pb-4">
+                <summary class="flex justify-between items-center font-medium cursor-pointer">
+                    Can I request an early check-in or late check-out?
+                    <span class="transition group-open:rotate-180">▼</span>
+                </summary>
+                <p class="text-sm text-gray-600 mt-4 leading-relaxed">Requests are subject to availability. Additional charges may apply.</p>
+            </details>
+        </div>
+    </section>
 
-    function openMenu() {
-        mobileDrawer.classList.remove("-translate-x-full");
-        drawerOverlay.classList.remove("hidden");
-        document.body.style.overflow = "hidden"; 
-    }
-    function closeMenu() {
-        mobileDrawer.classList.add("-translate-x-full");
-        drawerOverlay.classList.add("hidden");
-        document.body.style.overflow = ""; 
-    }
+    <footer class="bg-black text-white py-12 text-center md:text-left">
+        <div class="max-w-screen-xl mx-auto px-6 border-b border-zinc-800 pb-8 mb-8">
+            <h1 class="font-eng font-bold text-2xl tracking-tighter mb-4">HOTEL INSTA</h1>
+            <p class="text-xs text-zinc-400">94-6 Yeongtong-ro, Yeongtong-gu, Suwon-si, Gyeonggi-do</p>
+            <p class="text-xs text-zinc-400 mt-1">@instahotel.kr</p>
+        </div>
+        <div class="max-w-screen-xl mx-auto px-6 text-[10px] text-zinc-500 font-eng uppercase tracking-widest flex flex-col md:flex-row justify-between items-center">
+            <p>© 2026 Hotel Insta. All Rights Reserved.</p>
+            <div class="flex gap-4 mt-4 md:mt-0">
+                <a href="#" class="hover:text-white">Privacy Policy</a>
+                <a href="#" class="hover:text-white">Terms of Use</a>
+            </div>
+        </div>
+    </footer>
 
-    if(mobileMenuBtn) mobileMenuBtn.addEventListener("click", openMenu);
-    if(mobileCloseBtn) mobileCloseBtn.addEventListener("click", closeMenu);
-    if(drawerOverlay) drawerOverlay.addEventListener("click", closeMenu);
-
-    const roomsToggle = document.getElementById("rooms-toggle");
-    const roomsSubmenu = document.getElementById("rooms-submenu");
-    if(roomsToggle && roomsSubmenu){
-        roomsToggle.addEventListener("click", () => {
-            roomsSubmenu.classList.toggle("hidden");
-        });
-    }
-
-    /* --------------------------------------
-       3. 메인 히어로 슬라이더
-    -------------------------------------- */
-    let index = 0;
-    const slides = document.querySelectorAll(".slide");
-    const dots = document.querySelectorAll(".dot");
-
-    function updateDots() {
-      dots.forEach((dot, i) => {
-        if(i === index) {
-            dot.classList.remove('opacity-50');
-            dot.classList.add('opacity-100');
-        } else {
-            dot.classList.remove('opacity-100');
-            dot.classList.add('opacity-50');
-        }
-      });
-    }
-
-    function showNextSlide() {
-      slides[index].style.opacity = 0;
-      index = (index + 1) % slides.length;
-      slides[index].style.opacity = 1;
-      updateDots();
-    }
-    setInterval(showNextSlide, 4000);
-
-    /* --------------------------------------
-       4. 다국어 번역 로직 (한국어만 번역, 나머지는 영어 유지)
-    -------------------------------------- */
-    const translations = {
-      ko: { 
-          flag: "🇰🇷",
-          btnMore: "더보기", 
-          companyName: "(주)호텔인스타", 
-          ceoName: "대표자 : 이영환", 
-          bizNumber: "통신판매업 신고번호: 2023-수원영통-1696호", 
-          address: "수원시 영통구 영통로 94-6", 
-          termsLink: "이용약관", 
-          privacyLink: "개인정보처리방침", 
-          inquiryBtn: "문의" 
-      },
-      en: { 
-          flag: "🇺🇸",
-          btnMore: "View more", 
-          companyName: "Insta Hotel Co., Ltd.", 
-          ceoName: "CEO: Lee Young Hwan", 
-          bizNumber: "Registration: 2023-Suwon Yeongtong-1696", 
-          address: "94-6, Yeongtong-ro, Yeongtong-gu, Suwon-si", 
-          termsLink: "Terms of Use", 
-          privacyLink: "Privacy Policy", 
-          inquiryBtn: "Contact" 
-      },
-      ja: { 
-          flag: "🇯🇵",
-          btnMore: "もっと見る", 
-          companyName: "インスタホテル株式会社", 
-          ceoName: "代表者 : イ・ヨンファン", 
-          bizNumber: "通信販売業申告番号: 2023-水原ヨントン-1696号", 
-          address: "水原市 永東区 永東路 94-6", 
-          termsLink: "利用規約", 
-          privacyLink: "個人情報処理方針", 
-          inquiryBtn: "お問い合わせ" 
-      },
-      zh: { 
-          flag: "🇨🇳",
-          btnMore: "查看更多", 
-          companyName: "Insta Hotel有限公司", 
-          ceoName: "代表：李永焕", 
-          bizNumber: "通信销售业申报编号：2023-水原灵通-1696号", 
-          address: "水原市 灵通区 灵通路94-6", 
-          termsLink: "使用条款", 
-          privacyLink: "隐私政策", 
-          inquiryBtn: "咨询" 
-      },
-    };
-
-    const headerSelect = document.getElementById("header-lang-select");
-    const drawerSelect = document.getElementById("drawer-lang-select");
-    const currentFlagIcon = document.getElementById("current-flag-icon");
-
-    function updateLanguage(lang) {
-        const t = translations[lang] || translations.ko;
-
-        // 1. 국기 변경
-        if(currentFlagIcon) currentFlagIcon.textContent = t.flag;
-
-        // 2. 텍스트 변경 (아이디 매칭)
-        const textIds = [
-            "btnMore", "companyName", "ceoName", "bizNumber", "address",
-            "termsLink", "privacyLink", "inquiryBtn"
-        ];
-        
-        textIds.forEach(id => {
-            const el = document.getElementById(id);
-            if(el && t[id]) {
-                el.textContent = t[id];
-            }
-        });
-    }
-
-    // 헤더 셀렉트 이벤트
-    if(headerSelect) {
-        headerSelect.addEventListener("change", (e) => {
-            const lang = e.target.value;
-            if(drawerSelect) drawerSelect.value = lang;
-            updateLanguage(lang);
-        });
-    }
-
-    // 드로어 셀렉트 이벤트
-    if(drawerSelect) {
-        drawerSelect.addEventListener("change", (e) => {
-            const lang = e.target.value;
-            if(headerSelect) headerSelect.value = lang;
-            updateLanguage(lang);
-        });
-    }
-  </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
