@@ -25,46 +25,46 @@
             color: #333;
         }
 
-        /* 1. 최상단 헤더 (로고 & 네비게이션) */
+        /* 1. 최상단 헤더 (오리지널 여백으로 복구) */
         .top-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 30px 60px;
+            padding: 20px 40px; 
             background-color: #fff;
         }
 
-        /* 이미지 로고 스타일 조정 - 텍스트 로고 볼륨감에 맞춰 크기 대폭 확대 */
+        /* 이미지 로고 (오리지널 텍스트 로고 크기에 맞춤) */
         .logo {
             display: flex;
             align-items: center;
         }
         
         .logo img {
-            height: 90px; /* 기존 50px에서 90px로 확대 */
+            height: 45px; 
             width: auto;
             object-fit: contain;
         }
 
         .main-nav {
             display: flex;
-            gap: 45px;
-            font-size: 21px;
+            gap: 30px;
+            font-size: 14px;
             font-weight: 500;
         }
 
         .main-nav li.active {
-            border-bottom: 3px solid #00768e;
-            padding-bottom: 8px;
+            border-bottom: 2px solid #00768e;
+            padding-bottom: 5px;
             color: #00768e;
         }
 
-        /* 2. 서브 헤더 (호텔 이름, 평점, 연락처) */
+        /* 2. 서브 헤더 (오리지널 사이즈로 복구) */
         .sub-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 22px 60px;
+            padding: 15px 40px;
             border-top: 1px solid #eee;
             border-bottom: 1px solid #eee;
             background-color: #fff;
@@ -73,49 +73,49 @@
         .hotel-info-left {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 10px;
         }
 
         .hotel-name {
-            font-size: 27px;
+            font-size: 18px;
             font-weight: 700;
         }
 
         .rating-dots {
             color: #3fa9f5;
-            font-size: 18px;
-            letter-spacing: 3px;
+            font-size: 12px;
+            letter-spacing: 2px;
         }
 
         .rating-text {
-            font-size: 18px;
+            font-size: 12px;
             color: #666;
             text-decoration: underline;
         }
 
         .hotel-info-right {
             display: flex;
-            gap: 30px;
-            font-size: 20px;
+            gap: 20px;
+            font-size: 13px;
             color: #333;
         }
         
         .hotel-info-right a {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 5px;
         }
 
         .hotel-info-right a:hover {
             text-decoration: underline;
         }
 
-        /* 3. 예약 바 (날짜, 객실, 요금 선택) */
+        /* 3. 예약 바 (오리지널 사이즈로 복구) */
         .booking-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 22px 60px;
+            padding: 15px 40px;
             background-color: #fff;
             box-shadow: 0 4px 6px -6px rgba(0,0,0,0.1);
             position: relative;
@@ -126,27 +126,27 @@
             flex: 1;
             display: flex;
             flex-direction: column;
-            gap: 8px;
-            padding: 0 30px;
+            gap: 5px;
+            padding: 0 20px;
             border-right: 1px dashed #ccc;
         }
 
         .booking-item:last-child {
             border-right: none;
-            flex: 0.5;
+            flex: 0.5; 
             align-items: flex-end;
         }
 
         .booking-label {
-            font-size: 16px;
+            font-size: 11px;
             color: #666;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 5px;
         }
 
         .booking-value {
-            font-size: 21px;
+            font-size: 14px;
             font-weight: 500;
             display: flex;
             justify-content: space-between;
@@ -155,18 +155,18 @@
         }
 
         .date-arrow {
-            font-size: 18px;
+            font-size: 12px;
             color: #999;
-            margin: 0 15px;
+            margin: 0 10px;
         }
 
         .search-btn {
             background-color: #666;
             color: #fff;
             border: none;
-            padding: 18px 36px;
-            border-radius: 35px;
-            font-size: 21px;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 14px;
             font-weight: 500;
             cursor: pointer;
             transition: background 0.3s;
@@ -186,35 +186,34 @@
             position: relative;
         }
 
-        /* 이미지 하단 컨트롤러 */
+        /* 이미지 하단 컨트롤러 (오리지널 사이즈로 복구) */
         .hero-controls {
             position: absolute;
-            bottom: 30px;
+            bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
-            gap: 20px;
+            gap: 15px;
         }
 
         .slider-nav {
             background-color: rgba(0, 0, 0, 0.6);
-            border-radius: 30px;
-            padding: 12px 22px;
+            border-radius: 20px;
+            padding: 8px 15px;
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 15px;
             color: #fff;
-            font-size: 18px;
         }
 
         .slider-dots {
             display: flex;
-            gap: 8px;
+            gap: 5px;
         }
 
         .dot {
-            width: 8px;
-            height: 8px;
+            width: 5px;
+            height: 5px;
             border-radius: 50%;
             background-color: rgba(255, 255, 255, 0.4);
         }
@@ -227,12 +226,12 @@
             background-color: rgba(0, 0, 0, 0.6);
             color: #fff;
             border: none;
-            border-radius: 30px;
-            padding: 12px 30px;
-            font-size: 18px;
+            border-radius: 20px;
+            padding: 8px 20px;
+            font-size: 13px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             cursor: pointer;
         }
 
