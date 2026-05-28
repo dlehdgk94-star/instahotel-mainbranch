@@ -3,48 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>호텔 랜딩 페이지</title>
+    <title>호텔 세부정보 | 라이즈, 오토그래프 컬렉션</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header class="navbar">
-        <div class="logo">HOTEL LOGO</div>
-        <nav class="menu">
-            <a href="#">예약 관리</a>
-            <a href="#">회원 가입</a>
-            <a href="#">로그인</a>
-        </nav>
+    <!-- 1. 글로벌 메리어트 헤더 (블랙 바) -->
+    <header class="marriott-global-header">
+        <div class="global-left">
+            <span class="marriott-logo">MARRIOTT BONVOY</span>
+        </div>
+        <div class="global-right">
+            <a href="#">한국어</a>
+            <a href="#">내 예약</a>
+            <a href="#">로그인 / 가입</a>
+        </div>
     </header>
 
-    <section class="hero">
-        <div class="hero-content">
-            <h1>라이즈 오토그래프 컬렉션</h1>
-            <p>서울 마포구 양화로 130</p>
+    <!-- 2. 개별 호텔 헤더 (화이트 바) -->
+    <nav class="hotel-local-header">
+        <div class="hotel-title">
+            <h2>라이즈, 오토그래프 컬렉션</h2>
         </div>
+        <div class="hotel-menu">
+            <a href="#" class="active">개요</a>
+            <a href="#">사진</a>
+            <a href="#">객실</a>
+            <a href="#">다이닝</a>
+            <a href="#">스파 및 피트니스</a>
+            <a href="#">주변 지역</a>
+        </div>
+    </nav>
 
-        <div class="booking-bar">
-            <div class="booking-item">
-                <label>체크인 - 체크아웃</label>
-                <input type="text" placeholder="날짜를 선택하세요">
+    <!-- 3. 메인 히어로 이미지 -->
+    <section class="hero-section">
+        <!-- 메리어트 스타일의 예약 검색 바 (이미지 하단 배치) -->
+        <div class="booking-container">
+            <div class="booking-form">
+                <div class="input-group">
+                    <label>날짜</label>
+                    <input type="text" value="체크인 — 체크아웃" readonly>
+                </div>
+                <div class="input-group">
+                    <label>객실 및 인원</label>
+                    <input type="text" value="1 객실, 1 성인" readonly>
+                </div>
+                <div class="input-group">
+                    <label>특별 요금</label>
+                    <input type="text" value="최저가" readonly>
+                </div>
+                <button class="submit-btn">객실 보기</button>
             </div>
-            <div class="booking-item">
-                <label>객실 및 인원</label>
-                <input type="text" value="1 객실, 1 성인">
-            </div>
-            <button class="book-btn">요금 확인</button>
         </div>
     </section>
 
-    <nav class="sub-nav">
-        <a href="#" class="active">개요</a>
-        <a href="#">사진</a>
-        <a href="#">객실</a>
-        <a href="#">다이닝</a>
-        <a href="#">피트니스</a>
-    </nav>
-
-    <main class="content">
-        </main>
+    <!-- 4. 콘텐츠 영역 -->
+    <main class="content-section">
+        <h1 class="main-heading">영감을 주는 홍대 중심부의 호텔</h1>
+        <p class="sub-text">서울 마포구 양화로 130</p>
+    </main>
 </body>
 </html>
