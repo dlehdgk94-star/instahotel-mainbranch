@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>호텔 벤치마킹 홈페이지</title>
+    <title>호텔 인스타 홈페이지</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     
@@ -34,10 +34,16 @@
             background-color: #fff;
         }
 
+        /* 이미지 로고 스타일 조정 */
         .logo {
-            font-size: 40px;
-            font-weight: 900;
-            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 50px; /* 로고 이미지 높이 조절 (원하는 크기로 변경 가능) */
+            width: auto;
+            object-fit: contain;
         }
 
         .main-nav {
@@ -127,7 +133,7 @@
 
         .booking-item:last-child {
             border-right: none;
-            flex: 0.5; /* 버튼 영역 크기 조정 */
+            flex: 0.5;
             align-items: flex-end;
         }
 
@@ -173,8 +179,7 @@
         /* 4. 메인 히어로 이미지 영역 */
         .hero-section {
             width: 100%;
-            height: 65vh; /* 화면 높이에 맞게 조절 가능 */
-            /* 이미지 URL을 실제 호텔 로비 사진으로 변경하세요 */
+            height: 65vh; 
             background-image: url('https://images.unsplash.com/photo-1542314831-c6a4208de2a5?q=80&w=2000&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
@@ -239,7 +244,9 @@
 <body>
 
     <header class="top-header">
-        <div class="logo">HOTEL</div>
+        <a href="https://instahotel.kr" class="logo">
+            <img src="로고111.png" alt="호텔 인스타 로고">
+        </a>
         <ul class="main-nav">
             <li class="active"><a href="#">개요</a></li>
             <li><a href="#">갤러리</a></li>
@@ -252,7 +259,7 @@
 
     <div class="sub-header">
         <div class="hotel-info-left">
-            <span class="hotel-name">호텔 오토그래프 컬렉션</span>
+            <span class="hotel-name">호텔 인스타 (Hotel Insta)</span>
             <span class="rating-dots">
                 <i class="fa-solid fa-circle"></i>
                 <i class="fa-solid fa-circle"></i>
