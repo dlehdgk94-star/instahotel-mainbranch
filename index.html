@@ -3,64 +3,315 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>호텔 세부정보 | 라이즈, 오토그래프 컬렉션</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <title>호텔 벤치마킹 홈페이지</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* 기본 초기화 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        body {
+            color: #333;
+        }
+
+        /* 1. 최상단 헤더 (로고 & 네비게이션) */
+        .top-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background-color: #fff;
+        }
+
+        .logo {
+            font-size: 40px;
+            font-weight: 900;
+            letter-spacing: 2px;
+        }
+
+        .main-nav {
+            display: flex;
+            gap: 30px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .main-nav li.active {
+            border-bottom: 2px solid #00768e;
+            padding-bottom: 5px;
+            color: #00768e;
+        }
+
+        /* 2. 서브 헤더 (호텔 이름, 평점, 연락처) */
+        .sub-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+            background-color: #fff;
+        }
+
+        .hotel-info-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .hotel-name {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .rating-dots {
+            color: #3fa9f5;
+            font-size: 12px;
+            letter-spacing: 2px;
+        }
+
+        .rating-text {
+            font-size: 12px;
+            color: #666;
+            text-decoration: underline;
+        }
+
+        .hotel-info-right {
+            display: flex;
+            gap: 20px;
+            font-size: 13px;
+            color: #333;
+        }
+        
+        .hotel-info-right a {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .hotel-info-right a:hover {
+            text-decoration: underline;
+        }
+
+        /* 3. 예약 바 (날짜, 객실, 요금 선택) */
+        .booking-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            background-color: #fff;
+            box-shadow: 0 4px 6px -6px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 10;
+        }
+
+        .booking-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            padding: 0 20px;
+            border-right: 1px dashed #ccc;
+        }
+
+        .booking-item:last-child {
+            border-right: none;
+            flex: 0.5; /* 버튼 영역 크기 조정 */
+            align-items: flex-end;
+        }
+
+        .booking-label {
+            font-size: 11px;
+            color: #666;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .booking-value {
+            font-size: 14px;
+            font-weight: 500;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .date-arrow {
+            font-size: 12px;
+            color: #999;
+            margin: 0 10px;
+        }
+
+        .search-btn {
+            background-color: #666;
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .search-btn:hover {
+            background-color: #444;
+        }
+
+        /* 4. 메인 히어로 이미지 영역 */
+        .hero-section {
+            width: 100%;
+            height: 65vh; /* 화면 높이에 맞게 조절 가능 */
+            /* 이미지 URL을 실제 호텔 로비 사진으로 변경하세요 */
+            background-image: url('https://images.unsplash.com/photo-1542314831-c6a4208de2a5?q=80&w=2000&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        /* 이미지 하단 컨트롤러 */
+        .hero-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+        }
+
+        .slider-nav {
+            background-color: rgba(0, 0, 0, 0.6);
+            border-radius: 20px;
+            padding: 8px 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: #fff;
+        }
+
+        .slider-dots {
+            display: flex;
+            gap: 5px;
+        }
+
+        .dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .dot.active {
+            background-color: #fff;
+        }
+
+        .gallery-btn {
+            background-color: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 20px;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .gallery-btn:hover, .slider-nav i:hover {
+            opacity: 0.8;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-    <!-- 1. 글로벌 메리어트 헤더 (블랙 바) -->
-    <header class="marriott-global-header">
-        <div class="global-left">
-            <span class="marriott-logo">MARRIOTT BONVOY</span>
-        </div>
-        <div class="global-right">
-            <a href="#">한국어</a>
-            <a href="#">내 예약</a>
-            <a href="#">로그인 / 가입</a>
-        </div>
+
+    <header class="top-header">
+        <div class="logo">HOTEL</div>
+        <ul class="main-nav">
+            <li class="active"><a href="#">개요</a></li>
+            <li><a href="#">갤러리</a></li>
+            <li><a href="#">숙박 시설</a></li>
+            <li><a href="#">다이닝</a></li>
+            <li><a href="#">경험</a></li>
+            <li><a href="#">이벤트</a></li>
+        </ul>
     </header>
 
-    <!-- 2. 개별 호텔 헤더 (화이트 바) -->
-    <nav class="hotel-local-header">
-        <div class="hotel-title">
-            <h2>라이즈, 오토그래프 컬렉션</h2>
+    <div class="sub-header">
+        <div class="hotel-info-left">
+            <span class="hotel-name">호텔 오토그래프 컬렉션</span>
+            <span class="rating-dots">
+                <i class="fa-solid fa-circle"></i>
+                <i class="fa-solid fa-circle"></i>
+                <i class="fa-solid fa-circle"></i>
+                <i class="fa-solid fa-circle"></i>
+                <i class="fa-solid fa-circle-half-stroke"></i>
+            </span>
+            <span class="rating-text">4.6 • 1446 후기</span>
         </div>
-        <div class="hotel-menu">
-            <a href="#" class="active">개요</a>
-            <a href="#">사진</a>
-            <a href="#">객실</a>
-            <a href="#">다이닝</a>
-            <a href="#">스파 및 피트니스</a>
-            <a href="#">주변 지역</a>
+        <div class="hotel-info-right">
+            <a href="#"><i class="fa-solid fa-location-dot"></i> 지도 보기</a>
+            <a href="#"><i class="fa-solid fa-phone"></i> +82 2-330-7700</a>
         </div>
-    </nav>
+    </div>
 
-    <!-- 3. 메인 히어로 이미지 -->
-    <section class="hero-section">
-        <!-- 메리어트 스타일의 예약 검색 바 (이미지 하단 배치) -->
-        <div class="booking-container">
-            <div class="booking-form">
-                <div class="input-group">
-                    <label>날짜</label>
-                    <input type="text" value="체크인 — 체크아웃" readonly>
-                </div>
-                <div class="input-group">
-                    <label>객실 및 인원</label>
-                    <input type="text" value="1 객실, 1 성인" readonly>
-                </div>
-                <div class="input-group">
-                    <label>특별 요금</label>
-                    <input type="text" value="최저가" readonly>
-                </div>
-                <button class="submit-btn">객실 보기</button>
+    <div class="booking-bar">
+        <div class="booking-item">
+            <span class="booking-label"><i class="fa-regular fa-calendar"></i> 날짜 (1 박)</span>
+            <div class="booking-value">
+                <span>5월 28일, 목</span>
+                <i class="fa-solid fa-arrow-right date-arrow"></i>
+                <span>5월 29일, 금</span>
             </div>
+        </div>
+        <div class="booking-item">
+            <span class="booking-label">객실 & 투숙객</span>
+            <div class="booking-value">
+                <span>1 객실, 1 성인</span>
+                <i class="fa-solid fa-chevron-down"></i>
+            </div>
+        </div>
+        <div class="booking-item">
+            <span class="booking-label">특별 요금</span>
+            <div class="booking-value">
+                <span>최저 요금</span>
+                <i class="fa-solid fa-chevron-down"></i>
+            </div>
+        </div>
+        <div class="booking-item">
+            <button class="search-btn">요금 조회</button>
+        </div>
+    </div>
+
+    <section class="hero-section">
+        <div class="hero-controls">
+            <div class="slider-nav">
+                <i class="fa-solid fa-chevron-left"></i>
+                <div class="slider-dots">
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+                <i class="fa-solid fa-chevron-right"></i>
+            </div>
+            <button class="gallery-btn">
+                <i class="fa-regular fa-images"></i> 갤러리
+            </button>
         </div>
     </section>
 
-    <!-- 4. 콘텐츠 영역 -->
-    <main class="content-section">
-        <h1 class="main-heading">영감을 주는 홍대 중심부의 호텔</h1>
-        <p class="sub-text">서울 마포구 양화로 130</p>
-    </main>
 </body>
 </html>
