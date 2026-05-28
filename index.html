@@ -25,40 +25,40 @@
             color: #333;
         }
 
-        /* 1. 최상단 헤더 (로고 & 네비게이션) - 1.5배 확대 */
+        /* 1. 최상단 헤더 (로고 & 네비게이션) */
         .top-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 30px 60px; /* 기존 20px 40px */
+            padding: 20px 40px;
             background-color: #fff;
         }
 
         .logo {
-            font-size: 60px; /* 기존 40px */
+            font-size: 40px;
             font-weight: 900;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
         }
 
         .main-nav {
             display: flex;
-            gap: 45px; /* 기존 30px */
-            font-size: 21px; /* 기존 14px */
+            gap: 30px;
+            font-size: 14px;
             font-weight: 500;
         }
 
         .main-nav li.active {
-            border-bottom: 3px solid #00768e;
-            padding-bottom: 8px;
+            border-bottom: 2px solid #00768e;
+            padding-bottom: 5px;
             color: #00768e;
         }
 
-        /* 2. 서브 헤더 (호텔 이름, 평점, 연락처) - 1.5배 확대 */
+        /* 2. 서브 헤더 (호텔 이름, 평점, 연락처) */
         .sub-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 22px 60px; /* 기존 15px 40px */
+            padding: 15px 40px;
             border-top: 1px solid #eee;
             border-bottom: 1px solid #eee;
             background-color: #fff;
@@ -67,49 +67,49 @@
         .hotel-info-left {
             display: flex;
             align-items: center;
-            gap: 15px; /* 기존 10px */
+            gap: 10px;
         }
 
         .hotel-name {
-            font-size: 27px; /* 기존 18px */
+            font-size: 18px;
             font-weight: 700;
         }
 
         .rating-dots {
             color: #3fa9f5;
-            font-size: 18px; /* 기존 12px */
-            letter-spacing: 3px;
+            font-size: 12px;
+            letter-spacing: 2px;
         }
 
         .rating-text {
-            font-size: 18px; /* 기존 12px */
+            font-size: 12px;
             color: #666;
             text-decoration: underline;
         }
 
         .hotel-info-right {
             display: flex;
-            gap: 30px; /* 기존 20px */
-            font-size: 20px; /* 기존 13px */
+            gap: 20px;
+            font-size: 13px;
             color: #333;
         }
         
         .hotel-info-right a {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 5px;
         }
 
         .hotel-info-right a:hover {
             text-decoration: underline;
         }
 
-        /* 3. 예약 바 (날짜, 객실, 요금 선택) - 1.5배 확대 */
+        /* 3. 예약 바 (날짜, 객실, 요금 선택) */
         .booking-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 22px 60px; /* 기존 15px 40px */
+            padding: 15px 40px;
             background-color: #fff;
             box-shadow: 0 4px 6px -6px rgba(0,0,0,0.1);
             position: relative;
@@ -120,27 +120,27 @@
             flex: 1;
             display: flex;
             flex-direction: column;
-            gap: 8px;
-            padding: 0 30px; /* 기존 20px */
+            gap: 5px;
+            padding: 0 20px;
             border-right: 1px dashed #ccc;
         }
 
         .booking-item:last-child {
             border-right: none;
-            flex: 0.5;
+            flex: 0.5; /* 버튼 영역 크기 조정 */
             align-items: flex-end;
         }
 
         .booking-label {
-            font-size: 16px; /* 기존 11px */
+            font-size: 11px;
             color: #666;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 5px;
         }
 
         .booking-value {
-            font-size: 21px; /* 기존 14px */
+            font-size: 14px;
             font-weight: 500;
             display: flex;
             justify-content: space-between;
@@ -149,18 +149,18 @@
         }
 
         .date-arrow {
-            font-size: 18px; /* 기존 12px */
+            font-size: 12px;
             color: #999;
-            margin: 0 15px;
+            margin: 0 10px;
         }
 
         .search-btn {
             background-color: #666;
             color: #fff;
             border: none;
-            padding: 18px 36px; /* 기존 12px 24px */
-            border-radius: 35px;
-            font-size: 21px; /* 기존 14px */
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 14px;
             font-weight: 500;
             cursor: pointer;
             transition: background 0.3s;
@@ -173,7 +173,8 @@
         /* 4. 메인 히어로 이미지 영역 */
         .hero-section {
             width: 100%;
-            height: 65vh; 
+            height: 65vh; /* 화면 높이에 맞게 조절 가능 */
+            /* 이미지 URL을 실제 호텔 로비 사진으로 변경하세요 */
             background-image: url('https://images.unsplash.com/photo-1542314831-c6a4208de2a5?q=80&w=2000&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
@@ -183,32 +184,31 @@
         /* 이미지 하단 컨트롤러 */
         .hero-controls {
             position: absolute;
-            bottom: 30px;
+            bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
-            gap: 20px;
+            gap: 15px;
         }
 
         .slider-nav {
             background-color: rgba(0, 0, 0, 0.6);
-            border-radius: 30px;
-            padding: 12px 22px;
+            border-radius: 20px;
+            padding: 8px 15px;
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 15px;
             color: #fff;
-            font-size: 18px;
         }
 
         .slider-dots {
             display: flex;
-            gap: 8px;
+            gap: 5px;
         }
 
         .dot {
-            width: 8px;
-            height: 8px;
+            width: 5px;
+            height: 5px;
             border-radius: 50%;
             background-color: rgba(255, 255, 255, 0.4);
         }
@@ -221,12 +221,12 @@
             background-color: rgba(0, 0, 0, 0.6);
             color: #fff;
             border: none;
-            border-radius: 30px;
-            padding: 12px 30px;
-            font-size: 18px;
+            border-radius: 20px;
+            padding: 8px 20px;
+            font-size: 13px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             cursor: pointer;
         }
 
