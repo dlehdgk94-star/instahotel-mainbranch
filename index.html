@@ -417,18 +417,17 @@
             margin: 0 15px;
         }
 
-        /* 이동하는 파란색 부분 */
         .progress-indicator {
             position: absolute;
             top: -1px;
             left: 0;
-            width: 16.666%; /* 6개의 객실 기준 1/6 */
+            width: 16.666%; 
             height: 3px;
             background-color: #00768e;
             transition: left 0.3s ease-out;
         }
 
-        /* 이전 / 다음 커스텀 버튼 (긴 선 + 화살표) */
+        /* 이전 / 다음 커스텀 버튼 */
         .btn-prev, .btn-next {
             display: flex;
             align-items: center;
@@ -566,7 +565,7 @@
             cursor: pointer;
         }
 
-        /* 7. 호텔 내 부대시설 섹션 */
+        /* 7. 호텔 내 부대시설 섹션 (리뉴얼) */
         .facilities-section {
             padding: 80px 40px;
             background-color: #fff;
@@ -621,78 +620,58 @@
             display: none; 
         }
 
-        .fac-header-wrap {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-        }
-
-        .fac-header-wrap h3 {
-            font-size: 22px;
-            font-weight: 600;
-            color: #000;
-        }
-
-        .fac-inc {
-            font-size: 14px;
-            font-weight: 600;
-            color: #111;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .fac-grid {
+        /* 카테고리 그리드 레이아웃 (새로운 사진 구조) */
+        .fac-category-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 40px 20px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 50px 30px;
         }
 
-        .fac-item {
+        .fac-box {
             display: flex;
-            align-items: flex-start;
+            flex-direction: column;
             gap: 15px;
         }
 
-        .fac-icon {
-            font-size: 22px;
-            color: #00768e; 
-            margin-top: 2px;
-            width: 25px;
-            text-align: center;
-        }
-
-        .fac-text {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-
-        .fac-name {
-            font-size: 14px;
+        .fac-box-title {
+            font-size: 16px;
             font-weight: 800;
             color: #000;
             display: flex;
             align-items: center;
+            gap: 8px;
         }
 
-        .fac-name.underline {
-            text-decoration: underline;
-            text-underline-offset: 3px;
-            cursor: pointer;
-        }
-        
-        .fac-name i {
-            font-size: 12px;
-            color: #111;
-            margin-left: 5px;
+        .fac-box-title i {
+            font-size: 18px;
+            color: #000; /* 제목 앞 아이콘 색상 */
         }
 
-        .fac-sub {
-            font-size: 12px;
+        .fac-box-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .fac-box-list li, .fac-box-text {
+            font-size: 14px;
             font-weight: 500;
-            color: #444;
+            color: #111;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            line-height: 1.5;
+        }
+
+        .fac-box-list li i {
+            font-size: 13px;
+            color: #555; /* 체크마크 색상 */
+            margin-top: 4px;
+        }
+
+        .fac-box-text {
+            color: #555;
         }
 
         /* 8. 호텔 정보 섹션 */
@@ -958,7 +937,6 @@
 </head>
 <body>
 
-    <!-- 1. 최상단 헤더 -->
     <header class="top-header">
         <a href="https://instahotel.kr" class="logo">
             <img src="홈로고2.png" alt="호텔 인스타 로고">
@@ -973,9 +951,7 @@
         </ul>
     </header>
 
-    <!-- 스크롤 시 상단에 고정되는 래퍼 영역 시작 -->
     <div class="sticky-wrapper">
-        <!-- 2. 서브 헤더 -->
         <div class="sub-header">
             <div class="hotel-info-left">
                 <span class="hotel-name">INSTA HOTEL, Real Guest Reviews</span>
@@ -994,7 +970,6 @@
             </div>
         </div>
 
-        <!-- 3. 예약 바 -->
         <div class="booking-bar">
             <div class="booking-item">
                 <span class="booking-label"><i class="fa-regular fa-calendar"></i> 날짜 (1 박)</span>
@@ -1023,7 +998,6 @@
             </div>
         </div>
     </div>
-    <!-- 래퍼 영역 끝 -->
 
     <section class="hero-section">
         <div class="hero-controls">
@@ -1048,7 +1022,7 @@
         <p class="intro-desc">
             전통의 숨결과 현대적 에너지가 공존하는 도시 수원.그 중심인 영통에 자리한 INSTA HOTEL은 단순한 숙박을 넘어, 머무름 자체가 특별한 경험이 되는 공간을 제안합니다.
             글로벌 혁신의 중심인 삼성전자와 삼성 반도체 산업단지와 인접해 비즈니스 여행객에게 효율적이고 편안한 여정을 제공하며, 조금만 발걸음을 옮기면 유네스코 세계문화유산 수원화성과 수원행궁, 감성적인 행궁동 거리, 한국민속촌의 고즈넉한 풍경을 만나볼 수 있습니다.
-            미니멀하면서도 감각적인 무드로 완성된 객실은 복잡한 일상에서 벗어나 오롯이 휴식에 집중할 수 있도록 설계되었습니다. 따뜻한 조명, 편안한 침구, 정제된 공간감은 바쁜 하루의 끝에 가장 편안한 쉼을 선사합니다.
+            미니멀하면서도 감각적인 무드로 완성된 객실은 복잡한 일상에서 벗어나 오롯이 휴식에 집중할 수 있도록 설계되었습니다. 따뜻한 조명, 편안한 침구, 정제된 공간감은 바쁜 하루의 끝에 가장 편안한 휴식을 선사합니다.
             비즈니스의 성공적인 여정부터 문화와 여행이 주는 새로운 영감까지.
             도시의 활기와 조용한 휴식이 공존하는 공간, INSTA HOTEL에서 당신만의 특별한 이야기를 시작해 보시기 바랍니다.
         </p>
@@ -1073,19 +1047,16 @@
                 <div class="rooms-nav-wrapper">
                     <div class="nav-controls">
                         <span class="current-page">01</span>
-                        <!-- 상태 진행줄 (프로그레스 바) -->
                         <div class="progress-track">
                             <div class="progress-indicator"></div>
                         </div>
                         <span>06</span>
                     </div>
                     <div class="nav-controls" style="gap: 30px;">
-                        <!-- 커스텀 이전 버튼 (위치 수정됨: 텍스트 -> 왼쪽 화살표) -->
                         <div class="btn-prev">
                             <span>이전</span>
                             <div class="long-arrow prev-arrow"></div>
                         </div>
-                        <!-- 커스텀 다음 버튼 (위치 수정됨: 오른쪽 화살표 -> 텍스트) -->
                         <div class="btn-next">
                             <div class="long-arrow next-arrow"></div>
                             <span>다음</span>
@@ -1095,7 +1066,6 @@
             </div>
 
             <div class="rooms-grid">
-                <!-- 1. 에델바이 -->
                 <div class="room-card">
                     <div class="room-img-wrapper">
                         <img src="" alt="에델바이 룸">
@@ -1110,7 +1080,6 @@
                     </div>
                 </div>
 
-                <!-- 2. 오로라 -->
                 <div class="room-card">
                     <div class="room-img-wrapper">
                         <img src="" alt="오로라 룸">
@@ -1125,7 +1094,6 @@
                     </div>
                 </div>
 
-                <!-- 3. 글로리오 -->
                 <div class="room-card">
                     <div class="room-img-wrapper">
                         <img src="" alt="글로리오 룸">
@@ -1140,7 +1108,6 @@
                     </div>
                 </div>
 
-                <!-- 4. 엔비디온 -->
                 <div class="room-card">
                     <div class="room-img-wrapper">
                         <img src="" alt="엔비디온 룸">
@@ -1155,7 +1122,6 @@
                     </div>
                 </div>
 
-                <!-- 5. 스페셜 -->
                 <div class="room-card">
                     <div class="room-img-wrapper">
                         <img src="" alt="스페셜 룸">
@@ -1170,7 +1136,6 @@
                     </div>
                 </div>
 
-                <!-- 6. 루비룸 (애견동반) -->
                 <div class="room-card">
                     <div class="room-img-wrapper">
                         <img src="" alt="루비룸">
@@ -1188,229 +1153,280 @@
         </div>
     </section>
 
+    <!-- 7. 호텔 내 부대시설 섹션 (제공된 사진의 옵션으로 완벽 반영) -->
     <section class="facilities-section">
         <div class="content-container">
             <h2 class="fac-main-title">호텔 내 부대시설</h2>
             
+            <!-- 새로운 4개의 탭 -->
             <div class="fac-tabs">
                 <ul>
-                    <li class="active" onclick="changeTab('tab-amenity', this)">호텔 어메니티 (5)</li>
-                    <li onclick="changeTab('tab-room', this)">객실 편의용품 (2)</li>
-                    <li onclick="changeTab('tab-service', this)">호텔 서비스 (8)</li>
-                    <li onclick="changeTab('tab-all', this)">전체 보기 (15)</li>
+                    <li class="active" onclick="changeTab('tab-room-fac', this)">객실 편의 시설</li>
+                    <li onclick="changeTab('tab-hotel-ser', this)">호텔 및 부대 서비스</li>
+                    <li onclick="changeTab('tab-sec-gen', this)">보안 및 일반 정보</li>
+                    <li onclick="changeTab('tab-fac-all', this)">전체 보기</li>
                 </ul>
             </div>
 
-            <div id="tab-amenity" class="fac-tab-content" style="display: block;">
-                <div class="fac-header-wrap">
-                    <h3>호텔 내 부대시설</h3>
-                    <div class="fac-inc">
-                        <i class="fa-regular fa-circle-check"></i> 부대시설 포함 (1)
+            <!-- 탭 1: 객실 편의 시설 -->
+            <div id="tab-room-fac" class="fac-tab-content" style="display: block;">
+                <div class="fac-category-grid">
+                    <div class="fac-box">
+                        <div class="fac-box-title"><i class="fa-solid fa-bath"></i> 욕실</div>
+                        <ul class="fac-box-list">
+                            <li><i class="fa-solid fa-check"></i> 화장지</li>
+                            <li><i class="fa-solid fa-check"></i> 타월</li>
+                            <li><i class="fa-solid fa-check"></i> 비데</li>
+                            <li><i class="fa-solid fa-check"></i> 욕조 또는 샤워기</li>
+                            <li><i class="fa-solid fa-check"></i> 슬리퍼</li>
+                            <li><i class="fa-solid fa-check"></i> 전용 욕실</li>
+                            <li><i class="fa-solid fa-check"></i> 화장실</li>
+                            <li><i class="fa-solid fa-check"></i> 무료 세면도구</li>
+                            <li><i class="fa-solid fa-check"></i> 목욕 가운</li>
+                            <li><i class="fa-solid fa-check"></i> 헤어드라이어</li>
+                            <li><i class="fa-solid fa-check"></i> 샤워 시설</li>
+                        </ul>
                     </div>
-                </div>
-                <div class="fac-grid">
-                    <div class="fac-item">
-                        <i class="fa-solid fa-utensils fac-icon"></i>
-                        <div class="fac-text">
-                            <span class="fac-name underline">호텔 내 레스토랑</span>
-                            <span class="fac-sub">3 레스토랑</span>
-                        </div>
+                    
+                    <div class="fac-box">
+                        <div class="fac-box-title"><i class="fa-solid fa-bed"></i> 침실</div>
+                        <ul class="fac-box-list">
+                            <li><i class="fa-solid fa-check"></i> 린넨</li>
+                        </ul>
+
+                        <div class="fac-box-title" style="margin-top: 20px;"><i class="fa-solid fa-kitchen-set"></i> 주방</div>
+                        <ul class="fac-box-list">
+                            <li><i class="fa-solid fa-check"></i> 식탁</li>
+                            <li><i class="fa-solid fa-check"></i> 전기 주전자</li>
+                            <li><i class="fa-solid fa-check"></i> 전자레인지</li>
+                            <li><i class="fa-solid fa-check"></i> 냉장고</li>
+                        </ul>
+
+                        <div class="fac-box-title" style="margin-top: 20px;"><i class="fa-solid fa-couch"></i> 객실 어메니티</div>
+                        <ul class="fac-box-list">
+                            <li><i class="fa-solid fa-check"></i> 침대 옆 콘센트</li>
+                            <li><i class="fa-solid fa-check"></i> 옷걸이</li>
+                        </ul>
                     </div>
-                    <div class="fac-item">
-                        <i class="fa-solid fa-gift fac-icon"></i>
-                        <div class="fac-text">
-                            <span class="fac-name">기념품점</span>
-                        </div>
-                    </div>
-                    <div class="fac-item">
-                        <i class="fa-solid fa-desktop fac-icon"></i>
-                        <div class="fac-text">
-                            <span class="fac-name">비즈니스 센터</span>
-                        </div>
-                    </div>
-                    <div class="fac-item">
-                        <i class="fa-solid fa-users-viewfinder fac-icon"></i>
-                        <div class="fac-text">
-                            <span class="fac-name">미팅룸</span>
-                        </div>
-                    </div>
-                    <div class="fac-item">
-                        <i class="fa-solid fa-dumbbell fac-icon"></i>
-                        <div class="fac-text">
-                            <span class="fac-name">피트니스 센터 <i class="fa-regular fa-circle-check"></i></span>
-                            <span class="fac-sub">무료</span>
-                        </div>
+
+                    <div class="fac-box">
+                        <div class="fac-box-title"><i class="fa-solid fa-loveseat"></i> 거실 공간</div>
+                        <ul class="fac-box-list">
+                            <li><i class="fa-solid fa-check"></i> 식사 공간</li>
+                            <li><i class="fa-solid fa-check"></i> 업무용 책상</li>
+                        </ul>
+
+                        <div class="fac-box-title" style="margin-top: 20px;"><i class="fa-solid fa-tv"></i> 미디어/테크놀로지</div>
+                        <ul class="fac-box-list">
+                            <li><i class="fa-solid fa-check"></i> 스트리밍 서비스(예: Netflix)</li>
+                            <li><i class="fa-solid fa-check"></i> 평면 TV</li>
+                            <li><i class="fa-solid fa-check"></i> 케이블 채널</li>
+                            <li><i class="fa-solid fa-check"></i> 위성 채널</li>
+                            <li><i class="fa-solid fa-check"></i> 전화기</li>
+                            <li><i class="fa-solid fa-check"></i> TV</li>
+                        </ul>
                     </div>
                 </div>
             </div>
 
-            <div id="tab-room" class="fac-tab-content">
-                <div class="fac-header-wrap">
-                    <h3>호텔 객실 내 어메니티</h3>
-                    <div class="fac-inc">
-                        <i class="fa-regular fa-circle-check"></i> 부대시설 포함 (2)
+            <!-- 탭 2: 호텔 및 부대 서비스 -->
+            <div id="tab-hotel-ser" class="fac-tab-content">
+                <div class="fac-category-grid">
+                    <div class="fac-box">
+                        <div class="fac-box-title"><i class="fa-solid fa-utensils"></i> 식음료</div>
+                        <ul class="fac-box-list">
+                            <li><i class="fa-solid fa-check"></i> 객실 내 조식 서비스</li>
+                        </ul>
+
+                        <div class="fac-box-title" style="margin-top: 20px;"><i class="fa-solid fa-bell-concierge"></i> 서비스</div>
+                        <ul class="fac-box-list">
+                            <li><i class="fa-solid fa-check"></i> 하우스키핑 (매일)</li>
+                            <li><i class="fa-solid fa-check"></i> 전용 체크인/체크아웃</li>
+                            <li><i class="fa-solid fa-check"></i> 모닝콜 서비스</li>
+                            <li><i class="fa-solid fa-check"></i> 24시간 프런트 데스크</li>
+                            <li><i class="fa-solid fa-check"></i> 룸서비스 <span style="color: #888; font-size: 12px; margin-left: 5px;">유료</span></li>
+                        </ul>
+
+                        <div class="fac-box-title" style="margin-top: 20px;"><i class="fa-solid fa-clipboard-user"></i> 리셉션 서비스</div>
+                        <ul class="fac-box-list">
+                            <li><i class="fa-solid fa-check"></i> 청구서(인보이스) 제공 숙소</li>
+                        </ul>
                     </div>
-                </div>
-                <div class="fac-grid">
-                    <div class="fac-item">
-                        <i class="fa-solid fa-wifi fac-icon"></i>
-                        <div class="fac-text">
-                            <span class="fac-name">무료 Wi-Fi <i class="fa-regular fa-circle-check"></i></span>
-                            <span class="fac-sub">메리어트 본보이 멤버 무료</span>
-                        </div>
+
+                    <div class="fac-box">
+                        <div class="fac-box-title"><i class="fa-solid fa-paw"></i> 반려동물</div>
+                        <div class="fac-box-text">반려동물 동반 요청 시 가능합니다. 별도의 요금이 부과될 수 있습니다.</div>
                     </div>
-                    <div class="fac-item">
-                        <i class="fa-solid fa-key fac-icon"></i>
-                        <div class="fac-text">
-                            <span class="fac-name">모바일 키 <i class="fa-regular fa-circle-check"></i></span>
-                        </div>
+
+                    <div class="fac-box">
+                        <div class="fac-box-title"><i class="fa-solid fa-wifi"></i> 인터넷</div>
+                        <div class="fac-box-text">Wi-Fi 호텔 전 구역에서 무료입니다.</div>
+
+                        <div class="fac-box-title" style="margin-top: 20px;"><i class="fa-solid fa-square-parking"></i> 주차</div>
+                        <div class="fac-box-text">호텔 내 (사전 예약 불필요) 전용 주차장이 무료로 이용 가능합니다.</div>
                     </div>
                 </div>
             </div>
 
-            <div id="tab-service" class="fac-tab-content">
-                <div class="fac-header-wrap">
-                    <h3>호텔 내 서비스</h3>
-                    <div class="fac-inc">
-                        <i class="fa-regular fa-circle-check"></i> 부대시설 포함 (2)
+            <!-- 탭 3: 보안 및 일반 정보 -->
+            <div id="tab-sec-gen" class="fac-tab-content">
+                <div class="fac-category-grid">
+                    <div class="fac-box">
+                        <div class="fac-box-title"><i class="fa-solid fa-shield-halved"></i> 보안</div>
+                        <ul class="fac-box-list">
+                            <li><i class="fa-solid fa-check"></i> 소화기</li>
+                            <li><i class="fa-solid fa-check"></i> 숙소 외부 CCTV</li>
+                            <li><i class="fa-solid fa-check"></i> 공용 공간 CCTV</li>
+                            <li><i class="fa-solid fa-check"></i> 화재 경보</li>
+                            <li><i class="fa-solid fa-check"></i> 보안 알람</li>
+                            <li><i class="fa-solid fa-check"></i> 카드키 출입</li>
+                            <li><i class="fa-solid fa-check"></i> 24시간 보안</li>
+                        </ul>
                     </div>
-                </div>
-                <div class="fac-grid">
-                    <div class="fac-item">
-                        <i class="fa-solid fa-shirt fac-icon"></i>
-                        <div class="fac-text">
-                            <span class="fac-name">드라이클리닝 서비스</span>
-                        </div>
+
+                    <div class="fac-box">
+                        <div class="fac-box-title"><i class="fa-solid fa-circle-info"></i> 일반</div>
+                        <ul class="fac-box-list">
+                            <li><i class="fa-solid fa-check"></i> 미니마트 (숙소 부지 내)</li>
+                            <li><i class="fa-solid fa-check"></i> 일부 흡연 구역</li>
+                            <li><i class="fa-solid fa-check"></i> 에어컨</li>
+                            <li><i class="fa-solid fa-check"></i> 난방 시설</li>
+                            <li><i class="fa-solid fa-check"></i> 방음 시설</li>
+                            <li><i class="fa-solid fa-check"></i> 전용 입구</li>
+                            <li><i class="fa-solid fa-check"></i> 방음 설비된 객실</li>
+                            <li><i class="fa-solid fa-check"></i> 엘리베이터</li>
+                            <li><i class="fa-solid fa-check"></i> 가족 객실</li>
+                            <li><i class="fa-solid fa-check"></i> 금연 객실</li>
+                        </ul>
                     </div>
-                    <div class="fac-item">
-                        <i class="fa-solid fa-shirt fac-icon"></i>
-                        <div class="fac-text">
-                            <span class="fac-name">당일 드라이클리닝 서비스</span>
-                        </div>
-                    </div>
-                    <div class="fac-item">
-                        <i class="fa-solid fa-bell-concierge fac-icon"></i>
-                        <div class="fac-text">
-                            <span class="fac-name">룸 서비스</span>
-                        </div>
-                    </div>
-                    <div class="fac-item">
-                        <i class="fa-solid fa-phone-volume fac-icon"></i>
-                        <div class="fac-text">
-                            <span class="fac-name">모닝콜 <i class="fa-regular fa-circle-check"></i></span>
-                        </div>
-                    </div>
-                    <div class="fac-item">
-                        <i class="fa-solid fa-bed fac-icon"></i>
-                        <div class="fac-text">
-                            <span class="fac-name">턴다운(객실 정돈) 서비스 <i class="fa-regular fa-circle-check"></i></span>
-                        </div>
-                    </div>
-                    <div class="fac-item">
-                        <i class="fa-solid fa-hand-holding-hand fac-icon"></i>
-                        <div class="fac-text">
-                            <span class="fac-name">서비스 요청</span>
-                        </div>
-                    </div>
-                    <div class="fac-item">
-                        <i class="fa-solid fa-user-tie fac-icon"></i>
-                        <div class="fac-text">
-                            <span class="fac-name">컨시어지</span>
-                        </div>
-                    </div>
-                    <div class="fac-item">
-                        <i class="fa-solid fa-broom fac-icon"></i>
-                        <div class="fac-text">
-                            <span class="fac-name">하우스키핑</span>
-                        </div>
+
+                    <div class="fac-box">
+                        <div class="fac-box-title"><i class="fa-solid fa-language"></i> 지원 가능한 언어</div>
+                        <ul class="fac-box-list">
+                            <li><i class="fa-solid fa-check"></i> 영어</li>
+                            <li><i class="fa-solid fa-check"></i> 스페인어</li>
+                            <li><i class="fa-solid fa-check"></i> 프랑스어</li>
+                            <li><i class="fa-solid fa-check"></i> 이탈리아어</li>
+                            <li><i class="fa-solid fa-check"></i> 일본어</li>
+                            <li><i class="fa-solid fa-check"></i> 한국어</li>
+                            <li><i class="fa-solid fa-check"></i> 러시아어</li>
+                            <li><i class="fa-solid fa-check"></i> 중국어</li>
+                        </ul>
                     </div>
                 </div>
             </div>
 
-            <div id="tab-all" class="fac-tab-content">
-                <div class="fac-header-wrap">
-                    <h3>호텔 내 모든 부대시설</h3>
-                    <div class="fac-inc">
-                        <i class="fa-regular fa-circle-check"></i> 부대시설 포함 (5)
+            <!-- 탭 4: 전체 보기 -->
+            <div id="tab-fac-all" class="fac-tab-content">
+                <div class="fac-category-grid">
+                    <div class="fac-box">
+                        <div class="fac-box-title"><i class="fa-solid fa-bath"></i> 욕실</div>
+                        <ul class="fac-box-list">
+                            <li><i class="fa-solid fa-check"></i> 화장지</li>
+                            <li><i class="fa-solid fa-check"></i> 타월</li>
+                            <li><i class="fa-solid fa-check"></i> 비데</li>
+                            <li><i class="fa-solid fa-check"></i> 욕조 또는 샤워기</li>
+                            <li><i class="fa-solid fa-check"></i> 슬리퍼</li>
+                            <li><i class="fa-solid fa-check"></i> 전용 욕실</li>
+                            <li><i class="fa-solid fa-check"></i> 화장실</li>
+                            <li><i class="fa-solid fa-check"></i> 무료 세면도구</li>
+                            <li><i class="fa-solid fa-check"></i> 목욕 가운</li>
+                            <li><i class="fa-solid fa-check"></i> 헤어드라이어</li>
+                            <li><i class="fa-solid fa-check"></i> 샤워 시설</li>
+                        </ul>
+                        <div class="fac-box-title" style="margin-top: 20px;"><i class="fa-solid fa-bed"></i> 침실</div>
+                        <ul class="fac-box-list"><li><i class="fa-solid fa-check"></i> 린넨</li></ul>
+                        <div class="fac-box-title" style="margin-top: 20px;"><i class="fa-solid fa-kitchen-set"></i> 주방</div>
+                        <ul class="fac-box-list">
+                            <li><i class="fa-solid fa-check"></i> 식탁</li>
+                            <li><i class="fa-solid fa-check"></i> 전기 주전자</li>
+                            <li><i class="fa-solid fa-check"></i> 전자레인지</li>
+                            <li><i class="fa-solid fa-check"></i> 냉장고</li>
+                        </ul>
+                        <div class="fac-box-title" style="margin-top: 20px;"><i class="fa-solid fa-couch"></i> 객실 어메니티</div>
+                        <ul class="fac-box-list">
+                            <li><i class="fa-solid fa-check"></i> 침대 옆 콘센트</li>
+                            <li><i class="fa-solid fa-check"></i> 옷걸이</li>
+                        </ul>
+                        <div class="fac-box-title" style="margin-top: 20px;"><i class="fa-solid fa-loveseat"></i> 거실 공간</div>
+                        <ul class="fac-box-list">
+                            <li><i class="fa-solid fa-check"></i> 식사 공간</li>
+                            <li><i class="fa-solid fa-check"></i> 업무용 책상</li>
+                        </ul>
+                        <div class="fac-box-title" style="margin-top: 20px;"><i class="fa-solid fa-tv"></i> 미디어/테크놀로지</div>
+                        <ul class="fac-box-list">
+                            <li><i class="fa-solid fa-check"></i> 스트리밍 서비스(예: Netflix)</li>
+                            <li><i class="fa-solid fa-check"></i> 평면 TV</li>
+                            <li><i class="fa-solid fa-check"></i> 케이블 채널</li>
+                            <li><i class="fa-solid fa-check"></i> 위성 채널</li>
+                            <li><i class="fa-solid fa-check"></i> 전화기</li>
+                            <li><i class="fa-solid fa-check"></i> TV</li>
+                        </ul>
                     </div>
-                </div>
-                <div class="fac-grid">
-                    <div class="fac-item">
-                        <i class="fa-solid fa-utensils fac-icon"></i>
-                        <div class="fac-text">
-                            <span class="fac-name underline">호텔 내 레스토랑</span>
-                            <span class="fac-sub">3 레스토랑</span>
-                        </div>
+
+                    <div class="fac-box">
+                        <div class="fac-box-title"><i class="fa-solid fa-utensils"></i> 식음료</div>
+                        <ul class="fac-box-list"><li><i class="fa-solid fa-check"></i> 객실 내 조식 서비스</li></ul>
+                        <div class="fac-box-title" style="margin-top: 20px;"><i class="fa-solid fa-wifi"></i> 인터넷</div>
+                        <div class="fac-box-text">Wi-Fi 호텔 전 구역에서 무료입니다.</div>
+                        <div class="fac-box-title" style="margin-top: 20px;"><i class="fa-solid fa-square-parking"></i> 주차</div>
+                        <div class="fac-box-text">호텔 내 (사전 예약 불필요) 전용 주차장이 무료로 이용 가능합니다.</div>
+                        <div class="fac-box-title" style="margin-top: 20px;"><i class="fa-solid fa-paw"></i> 반려동물</div>
+                        <div class="fac-box-text">반려동물 동반 요청 시 가능합니다. 별도의 요금이 부과될 수 있습니다.</div>
+                        <div class="fac-box-title" style="margin-top: 20px;"><i class="fa-solid fa-bell-concierge"></i> 서비스</div>
+                        <ul class="fac-box-list">
+                            <li><i class="fa-solid fa-check"></i> 하우스키핑 (매일)</li>
+                            <li><i class="fa-solid fa-check"></i> 전용 체크인/체크아웃</li>
+                            <li><i class="fa-solid fa-check"></i> 모닝콜 서비스</li>
+                            <li><i class="fa-solid fa-check"></i> 24시간 프런트 데스크</li>
+                            <li><i class="fa-solid fa-check"></i> 룸서비스 <span style="color: #888; font-size: 12px; margin-left: 5px;">유료</span></li>
+                        </ul>
+                        <div class="fac-box-title" style="margin-top: 20px;"><i class="fa-solid fa-clipboard-user"></i> 리셉션 서비스</div>
+                        <ul class="fac-box-list"><li><i class="fa-solid fa-check"></i> 청구서(인보이스) 제공 숙소</li></ul>
                     </div>
-                    <div class="fac-item">
-                        <i class="fa-solid fa-gift fac-icon"></i>
-                        <div class="fac-text"><span class="fac-name">기념품점</span></div>
-                    </div>
-                    <div class="fac-item">
-                        <i class="fa-solid fa-desktop fac-icon"></i>
-                        <div class="fac-text"><span class="fac-name">비즈니스 센터</span></div>
-                    </div>
-                    <div class="fac-item">
-                        <i class="fa-solid fa-users-viewfinder fac-icon"></i>
-                        <div class="fac-text"><span class="fac-name">미팅룸</span></div>
-                    </div>
-                    <div class="fac-item">
-                        <i class="fa-solid fa-dumbbell fac-icon"></i>
-                        <div class="fac-text">
-                            <span class="fac-name">피트니스 센터 <i class="fa-regular fa-circle-check"></i></span>
-                            <span class="fac-sub">무료</span>
-                        </div>
-                    </div>
-                    <div class="fac-item">
-                        <i class="fa-solid fa-wifi fac-icon"></i>
-                        <div class="fac-text">
-                            <span class="fac-name">무료 Wi-Fi <i class="fa-regular fa-circle-check"></i></span>
-                            <span class="fac-sub">메리어트 본보이 멤버 무료</span>
-                        </div>
-                    </div>
-                    <div class="fac-item">
-                        <i class="fa-solid fa-key fac-icon"></i>
-                        <div class="fac-text">
-                            <span class="fac-name">모바일 키 <i class="fa-regular fa-circle-check"></i></span>
-                        </div>
-                    </div>
-                    <div class="fac-item">
-                        <i class="fa-solid fa-shirt fac-icon"></i>
-                        <div class="fac-text"><span class="fac-name">드라이클리닝 서비스</span></div>
-                    </div>
-                    <div class="fac-item">
-                        <i class="fa-solid fa-shirt fac-icon"></i>
-                        <div class="fac-text"><span class="fac-name">당일 드라이클리닝 서비스</span></div>
-                    </div>
-                    <div class="fac-item">
-                        <i class="fa-solid fa-bell-concierge fac-icon"></i>
-                        <div class="fac-text"><span class="fac-name">룸 서비스</span></div>
-                    </div>
-                    <div class="fac-item">
-                        <i class="fa-solid fa-phone-volume fac-icon"></i>
-                        <div class="fac-text"><span class="fac-name">모닝콜 <i class="fa-regular fa-circle-check"></i></span></div>
-                    </div>
-                    <div class="fac-item">
-                        <i class="fa-solid fa-bed fac-icon"></i>
-                        <div class="fac-text"><span class="fac-name">턴다운(객실 정돈) 서비스 <i class="fa-regular fa-circle-check"></i></span></div>
-                    </div>
-                    <div class="fac-item">
-                        <i class="fa-solid fa-hand-holding-hand fac-icon"></i>
-                        <div class="fac-text"><span class="fac-name">서비스 요청</span></div>
-                    </div>
-                    <div class="fac-item">
-                        <i class="fa-solid fa-user-tie fac-icon"></i>
-                        <div class="fac-text"><span class="fac-name">컨시어지</span></div>
-                    </div>
-                    <div class="fac-item">
-                        <i class="fa-solid fa-broom fac-icon"></i>
-                        <div class="fac-text"><span class="fac-name">하우스키핑</span></div>
+
+                    <div class="fac-box">
+                        <div class="fac-box-title"><i class="fa-solid fa-shield-halved"></i> 보안</div>
+                        <ul class="fac-box-list">
+                            <li><i class="fa-solid fa-check"></i> 소화기</li>
+                            <li><i class="fa-solid fa-check"></i> 숙소 외부 CCTV</li>
+                            <li><i class="fa-solid fa-check"></i> 공용 공간 CCTV</li>
+                            <li><i class="fa-solid fa-check"></i> 화재 경보</li>
+                            <li><i class="fa-solid fa-check"></i> 보안 알람</li>
+                            <li><i class="fa-solid fa-check"></i> 카드키 출입</li>
+                            <li><i class="fa-solid fa-check"></i> 24시간 보안</li>
+                        </ul>
+                        <div class="fac-box-title" style="margin-top: 20px;"><i class="fa-solid fa-circle-info"></i> 일반</div>
+                        <ul class="fac-box-list">
+                            <li><i class="fa-solid fa-check"></i> 미니마트 (숙소 부지 내)</li>
+                            <li><i class="fa-solid fa-check"></i> 일부 흡연 구역</li>
+                            <li><i class="fa-solid fa-check"></i> 에어컨</li>
+                            <li><i class="fa-solid fa-check"></i> 난방 시설</li>
+                            <li><i class="fa-solid fa-check"></i> 방음 시설</li>
+                            <li><i class="fa-solid fa-check"></i> 전용 입구</li>
+                            <li><i class="fa-solid fa-check"></i> 방음 설비된 객실</li>
+                            <li><i class="fa-solid fa-check"></i> 엘리베이터</li>
+                            <li><i class="fa-solid fa-check"></i> 가족 객실</li>
+                            <li><i class="fa-solid fa-check"></i> 금연 객실</li>
+                        </ul>
+                        <div class="fac-box-title" style="margin-top: 20px;"><i class="fa-solid fa-language"></i> 지원 가능한 언어</div>
+                        <ul class="fac-box-list">
+                            <li><i class="fa-solid fa-check"></i> 영어</li>
+                            <li><i class="fa-solid fa-check"></i> 스페인어</li>
+                            <li><i class="fa-solid fa-check"></i> 프랑스어</li>
+                            <li><i class="fa-solid fa-check"></i> 이탈리아어</li>
+                            <li><i class="fa-solid fa-check"></i> 일본어</li>
+                            <li><i class="fa-solid fa-check"></i> 한국어</li>
+                            <li><i class="fa-solid fa-check"></i> 러시아어</li>
+                            <li><i class="fa-solid fa-check"></i> 중국어</li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- 8. 호텔 정보 섹션 -->
     <section class="info-section">
         <div class="content-container">
             <h3 class="info-main-title">호텔 정보</h3>
@@ -1482,6 +1498,7 @@
         </div>
     </section>
 
+    <!-- 9. 오시는 길 섹션 -->
     <section class="location-section">
         <div class="content-container location-container">
             <div class="location-info">
@@ -1628,11 +1645,10 @@
         let startX;
         let scrollLeft;
 
-        // 마우스 드래그 이벤트 (PC용)
         slider.addEventListener('mousedown', (e) => {
             isDown = true;
             slider.style.cursor = 'grabbing';
-            slider.style.scrollBehavior = 'auto'; // 드래그 중에는 부드러운 스크롤 끄기
+            slider.style.scrollBehavior = 'auto'; 
             startX = e.pageX - slider.offsetLeft;
             scrollLeft = slider.scrollLeft;
         });
@@ -1653,17 +1669,16 @@
             if (!isDown) return;
             e.preventDefault();
             const x = e.pageX - slider.offsetLeft;
-            const walk = (x - startX) * 1.5; // 드래그 속도 조절
+            const walk = (x - startX) * 1.5; 
             slider.scrollLeft = scrollLeft - walk;
         });
 
-        // 이전/다음 버튼 기능
         const prevBtn = document.querySelector('.btn-prev');
         const nextBtn = document.querySelector('.btn-next');
         const currentPageEl = document.querySelector('.current-page');
 
         prevBtn.addEventListener('click', () => {
-            const cardWidth = slider.querySelector('.room-card').offsetWidth + 20; // 카드 넓이 + 갭
+            const cardWidth = slider.querySelector('.room-card').offsetWidth + 20; 
             slider.scrollBy({ left: -cardWidth, top: 0, behavior: 'smooth' });
         });
 
@@ -1672,13 +1687,10 @@
             slider.scrollBy({ left: cardWidth, top: 0, behavior: 'smooth' });
         });
 
-        // 스크롤 시 상태 진행줄(프로그레스 바) 및 상단 번호 자동 업데이트
         slider.addEventListener('scroll', () => {
             const cardWidth = slider.querySelector('.room-card').offsetWidth + 20;
-            // 스크롤 위치에 따라 현재 보이는 첫 번째 카드 인덱스 계산
             let currentIndex = Math.round(slider.scrollLeft / cardWidth) + 1;
             
-            // 드래그가 끝에 도달했는지 확인하여 정확히 마지막 번호로 인식되게 처리
             if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 10) {
                 currentIndex = 6;
             }
@@ -1688,9 +1700,7 @@
             
             currentPageEl.textContent = String(currentIndex).padStart(2, '0');
 
-            // 프로그레스 바(파란색 선) 이동 로직
             const indicator = document.querySelector('.progress-indicator');
-            // 6칸이므로 100%를 6으로 나누어 이동시킴
             indicator.style.left = ((currentIndex - 1) * (100 / 6)) + '%';
         });
 
@@ -1713,7 +1723,6 @@
                 const content = this.nextElementSibling;
                 const isOpen = content.style.display === 'block';
 
-                // 열려있는 다른 아코디언 모두 닫기
                 document.querySelectorAll('.accordion-content-faq').forEach(c => {
                     c.style.display = 'none';
                 });
@@ -1721,7 +1730,6 @@
                     h.classList.remove('active');
                 });
 
-                // 클릭한 항목이 닫혀있었다면 열기
                 if (!isOpen) {
                     content.style.display = 'block';
                     this.classList.add('active');
