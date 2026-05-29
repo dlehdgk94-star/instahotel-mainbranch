@@ -525,7 +525,7 @@
         }
 
         .fac-tab-content {
-            display: none; /* 기본적으로 모두 숨김 처리 (JS에서 제어) */
+            display: none; 
         }
 
         .fac-header-wrap {
@@ -661,6 +661,99 @@
             text-decoration: underline;
             text-underline-offset: 3px;
             cursor: pointer;
+        }
+
+        /* 9. 오시는 길 섹션 (새로 추가) */
+        .location-section {
+            background-color: #1a1a1a;
+            color: #fff;
+            padding: 80px 40px;
+        }
+
+        .location-container {
+            display: flex;
+            gap: 60px;
+            align-items: flex-start;
+        }
+
+        .location-info {
+            flex: 1;
+            max-width: 400px;
+        }
+
+        .loc-subtitle {
+            font-size: 11px;
+            color: #aaa;
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        .loc-title {
+            font-size: 32px;
+            font-weight: 300;
+            margin-bottom: 35px;
+            color: #fff;
+            letter-spacing: -1px;
+        }
+
+        .loc-address-box {
+            margin-bottom: 40px;
+            font-size: 13px;
+            color: #ccc;
+            line-height: 1.8;
+        }
+
+        .loc-address-box strong {
+            display: block;
+            font-size: 15px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .loc-accordion {
+            border-top: 1px solid #333;
+        }
+
+        .acc-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid #333;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            color: #eee;
+            transition: color 0.3s;
+        }
+
+        .acc-item:hover {
+            color: #fff;
+        }
+
+        .acc-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .acc-left i {
+            font-size: 16px;
+        }
+
+        .location-map {
+            flex: 1.5;
+            height: 400px;
+            background-color: #333;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .location-map iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
         }
     </style>
 </head>
@@ -830,6 +923,7 @@
         </div>
     </section>
 
+    <!-- 7. 호텔 내 부대시설 섹션 -->
     <section class="facilities-section">
         <div class="content-container">
             <h2 class="fac-main-title">호텔 내 부대시설</h2>
@@ -843,6 +937,7 @@
                 </ul>
             </div>
 
+            <!-- 탭 1. 호텔 어메니티 (기본 활성화) -->
             <div id="tab-amenity" class="fac-tab-content" style="display: block;">
                 <div class="fac-header-wrap">
                     <h3>호텔 내 부대시설</h3>
@@ -886,6 +981,7 @@
                 </div>
             </div>
 
+            <!-- 탭 2. 객실 편의용품 -->
             <div id="tab-room" class="fac-tab-content">
                 <div class="fac-header-wrap">
                     <h3>호텔 객실 내 어메니티</h3>
@@ -910,6 +1006,7 @@
                 </div>
             </div>
 
+            <!-- 탭 3. 호텔 서비스 -->
             <div id="tab-service" class="fac-tab-content">
                 <div class="fac-header-wrap">
                     <h3>호텔 내 서비스</h3>
@@ -969,6 +1066,7 @@
                 </div>
             </div>
 
+            <!-- 탭 4. 전체 보기 -->
             <div id="tab-all" class="fac-tab-content">
                 <div class="fac-header-wrap">
                     <h3>호텔 내 모든 부대시설</h3>
@@ -977,6 +1075,7 @@
                     </div>
                 </div>
                 <div class="fac-grid">
+                    <!-- 어메니티 -->
                     <div class="fac-item">
                         <i class="fa-solid fa-utensils fac-icon"></i>
                         <div class="fac-text">
@@ -1003,6 +1102,7 @@
                             <span class="fac-sub">무료</span>
                         </div>
                     </div>
+                    <!-- 룸 -->
                     <div class="fac-item">
                         <i class="fa-solid fa-wifi fac-icon"></i>
                         <div class="fac-text">
@@ -1016,6 +1116,7 @@
                             <span class="fac-name">모바일 키 <i class="fa-regular fa-circle-check"></i></span>
                         </div>
                     </div>
+                    <!-- 서비스 -->
                     <div class="fac-item">
                         <i class="fa-solid fa-shirt fac-icon"></i>
                         <div class="fac-text"><span class="fac-name">드라이클리닝 서비스</span></div>
@@ -1053,11 +1154,13 @@
         </div>
     </section>
 
+    <!-- 8. 호텔 정보 섹션 -->
     <section class="info-section">
         <div class="content-container">
             <h3 class="info-main-title">호텔 정보</h3>
             
             <div class="info-grid">
+                <!-- 첫 번째 열 -->
                 <div class="info-col">
                     <div class="info-item">
                         <i class="fa-regular fa-clock info-icon"></i>
@@ -1081,6 +1184,7 @@
                     </div>
                 </div>
 
+                <!-- 두 번째 열 -->
                 <div class="info-col">
                     <div class="info-item">
                         <i class="fa-regular fa-bell info-icon"></i>
@@ -1100,6 +1204,7 @@
                     </div>
                 </div>
 
+                <!-- 세 번째 열 -->
                 <div class="info-col">
                     <div class="info-item">
                         <i class="fa-solid fa-parking info-icon"></i>
@@ -1124,6 +1229,52 @@
         </div>
     </section>
 
+    <!-- 9. 오시는 길 섹션 (새로 추가) -->
+    <section class="location-section">
+        <div class="content-container location-container">
+            <div class="location-info">
+                <span class="loc-subtitle">호텔 위치</span>
+                <h2 class="loc-title">오시는 길</h2>
+                
+                <div class="loc-address-box">
+                    <strong>INSTAR HOTEL</strong>
+                    <p>경기도 수원시 영통구, 대한민국</p>
+                    <p>전화: +82 31-203-4301</p>
+                </div>
+
+                <div class="loc-accordion">
+                    <div class="acc-item">
+                        <div class="acc-left">
+                            <i class="fa-solid fa-plane"></i>
+                            <span>인천국제공항</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="acc-item">
+                        <div class="acc-left">
+                            <i class="fa-solid fa-plane"></i>
+                            <span>김포 국제공항</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="acc-item">
+                        <div class="acc-left">
+                            <i class="fa-solid fa-bus-simple"></i>
+                            <span>기타 교통수단</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="location-map">
+                <!-- 실제 지도 연동 시 src 부분을 호텔 주소 구글맵 링크로 변경 -->
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d50664.08865614272!2d127.0175841!3d37.2655389!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357b43aaaaaaab31%3A0x6b445582f3c7df47!2z6rK96riw64-EIOyImOybkOyLnCDsmIHthrXqtaw!5e0!3m2!1sko!2skr!4v1717070000000!5m2!1sko!2skr" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- JavaScript 탭 기능 처리 -->
     <script>
         function changeTab(tabId, element) {
             // 1. 모든 탭에서 활성화(active) 표시 지우기
