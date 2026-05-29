@@ -68,8 +68,8 @@
             justify-content: space-between;
             align-items: center;
             padding: 15px 40px;
-            border-top: 1px solid #e5e5e5;
-            border-bottom: 1px solid #e5e5e5;
+            border-top: 1px solid #e5e5e5; 
+            border-bottom: 1px solid #e5e5e5; 
             background-color: #f4f4f4; 
         }
 
@@ -121,7 +121,7 @@
             align-items: center;
             padding: 30px 40px; 
             background-color: #fff;
-            border-bottom: 1px solid #e5e5e5;
+            border-bottom: 1px solid #e5e5e5; 
             position: relative;
             z-index: 10;
         }
@@ -136,12 +136,10 @@
             position: relative; 
         }
 
-        /* 첫 번째 칸 좌측 여백 제거 */
         .booking-item:first-child {
             padding-left: 0;
         }
 
-        /* 각 칸 사이의 중앙 점선 효과 */
         .booking-item:not(:last-child)::after {
             content: '';
             position: absolute;
@@ -201,13 +199,12 @@
         .hero-section {
             width: 100%;
             height: calc(100vh - 245px);
-            background-image: url('mainpp.png');
+            background-image: url('hero6.jpg');
             background-size: cover;
             background-position: center;
             position: relative;
         }
 
-        /* 이미지 하단 컨트롤러 */
         .hero-controls {
             position: absolute;
             bottom: 20px;
@@ -663,7 +660,7 @@
             cursor: pointer;
         }
 
-        /* 9. 오시는 길 섹션 (새로 추가) */
+        /* 9. 오시는 길 섹션 */
         .location-section {
             background-color: #1a1a1a;
             color: #fff;
@@ -754,6 +751,65 @@
             width: 100%;
             height: 100%;
             border: none;
+        }
+
+        /* 10. 호텔 세부정보 및 FAQ 섹션 (새로 추가) */
+        .faq-details-section {
+            padding: 80px 40px;
+            background-color: #fff;
+        }
+
+        .faq-container {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .faq-group {
+            margin-bottom: 80px;
+        }
+
+        .faq-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #111;
+            margin-bottom: 15px;
+        }
+
+        .accordion-list {
+            border-top: 1px solid #111;
+        }
+
+        .accordion-item-faq {
+            border-bottom: 1px solid #111;
+        }
+
+        .accordion-header-faq {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 0;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            color: #111;
+        }
+
+        .accordion-header-faq i {
+            font-size: 14px;
+            color: #111;
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-header-faq.active i {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content-faq {
+            display: none;
+            padding-bottom: 25px;
+            font-size: 13px;
+            color: #555;
+            line-height: 1.6;
         }
     </style>
 </head>
@@ -923,7 +979,6 @@
         </div>
     </section>
 
-    <!-- 7. 호텔 내 부대시설 섹션 -->
     <section class="facilities-section">
         <div class="content-container">
             <h2 class="fac-main-title">호텔 내 부대시설</h2>
@@ -937,7 +992,6 @@
                 </ul>
             </div>
 
-            <!-- 탭 1. 호텔 어메니티 (기본 활성화) -->
             <div id="tab-amenity" class="fac-tab-content" style="display: block;">
                 <div class="fac-header-wrap">
                     <h3>호텔 내 부대시설</h3>
@@ -981,7 +1035,6 @@
                 </div>
             </div>
 
-            <!-- 탭 2. 객실 편의용품 -->
             <div id="tab-room" class="fac-tab-content">
                 <div class="fac-header-wrap">
                     <h3>호텔 객실 내 어메니티</h3>
@@ -1006,7 +1059,6 @@
                 </div>
             </div>
 
-            <!-- 탭 3. 호텔 서비스 -->
             <div id="tab-service" class="fac-tab-content">
                 <div class="fac-header-wrap">
                     <h3>호텔 내 서비스</h3>
@@ -1066,7 +1118,6 @@
                 </div>
             </div>
 
-            <!-- 탭 4. 전체 보기 -->
             <div id="tab-all" class="fac-tab-content">
                 <div class="fac-header-wrap">
                     <h3>호텔 내 모든 부대시설</h3>
@@ -1075,7 +1126,6 @@
                     </div>
                 </div>
                 <div class="fac-grid">
-                    <!-- 어메니티 -->
                     <div class="fac-item">
                         <i class="fa-solid fa-utensils fac-icon"></i>
                         <div class="fac-text">
@@ -1102,7 +1152,6 @@
                             <span class="fac-sub">무료</span>
                         </div>
                     </div>
-                    <!-- 룸 -->
                     <div class="fac-item">
                         <i class="fa-solid fa-wifi fac-icon"></i>
                         <div class="fac-text">
@@ -1116,7 +1165,6 @@
                             <span class="fac-name">모바일 키 <i class="fa-regular fa-circle-check"></i></span>
                         </div>
                     </div>
-                    <!-- 서비스 -->
                     <div class="fac-item">
                         <i class="fa-solid fa-shirt fac-icon"></i>
                         <div class="fac-text"><span class="fac-name">드라이클리닝 서비스</span></div>
@@ -1154,13 +1202,11 @@
         </div>
     </section>
 
-    <!-- 8. 호텔 정보 섹션 -->
     <section class="info-section">
         <div class="content-container">
             <h3 class="info-main-title">호텔 정보</h3>
             
             <div class="info-grid">
-                <!-- 첫 번째 열 -->
                 <div class="info-col">
                     <div class="info-item">
                         <i class="fa-regular fa-clock info-icon"></i>
@@ -1184,7 +1230,6 @@
                     </div>
                 </div>
 
-                <!-- 두 번째 열 -->
                 <div class="info-col">
                     <div class="info-item">
                         <i class="fa-regular fa-bell info-icon"></i>
@@ -1204,7 +1249,6 @@
                     </div>
                 </div>
 
-                <!-- 세 번째 열 -->
                 <div class="info-col">
                     <div class="info-item">
                         <i class="fa-solid fa-parking info-icon"></i>
@@ -1229,7 +1273,6 @@
         </div>
     </section>
 
-    <!-- 9. 오시는 길 섹션 (새로 추가) -->
     <section class="location-section">
         <div class="content-container location-container">
             <div class="location-info">
@@ -1237,8 +1280,8 @@
                 <h2 class="loc-title">오시는 길</h2>
                 
                 <div class="loc-address-box">
-                    <strong>INSTAR HOTEL</strong>
-                    <p>경기도 수원시 영통구, 대한민국</p>
+                    <strong>INSTA HOTEL</strong>
+                    <p>경기도 수원시 영통구 영통로 94-6, 대한민국</p>
                     <p>전화: +82 31-203-4301</p>
                 </div>
 
@@ -1268,29 +1311,129 @@
             </div>
             
             <div class="location-map">
-                <!-- 실제 지도 연동 시 src 부분을 호텔 주소 구글맵 링크로 변경 -->
                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d50664.08865614272!2d127.0175841!3d37.2655389!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357b43aaaaaaab31%3A0x6b445582f3c7df47!2z6rK96riw64-EIOyImOybkOyLnCDsmIHthrXqtaw!5e0!3m2!1sko!2skr!4v1717070000000!5m2!1sko!2skr" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
     </section>
 
-    <!-- JavaScript 탭 기능 처리 -->
+    <!-- 10. 호텔 세부정보 및 FAQ 섹션 (새로 추가) -->
+    <section class="faq-details-section">
+        <div class="faq-container">
+            <!-- 호텔 세부정보 -->
+            <div class="faq-group">
+                <h3 class="faq-title">호텔 세부정보</h3>
+                <div class="accordion-list">
+                    <div class="accordion-item-faq">
+                        <div class="accordion-header-faq">
+                            <span>일반 정보</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-content-faq">
+                            INSTAR HOTEL은 수원 영통에 위치한 감각적인 부티크 호텔로, 도심 속 편안하고 세련된 휴식을 제공합니다.
+                        </div>
+                    </div>
+                    <div class="accordion-item-faq">
+                        <div class="accordion-header-faq">
+                            <span>장애인 고객 접근성 정보</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-content-faq">
+                            휠체어 접근 가능 객실 및 공용 편의 시설을 갖추고 있어 모든 고객님이 편안하게 머무실 수 있습니다.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 자주 묻는 질문(FAQ) -->
+            <div class="faq-group">
+                <h3 class="faq-title">자주 묻는 질문(FAQ)</h3>
+                <div class="accordion-list">
+                    <div class="accordion-item-faq">
+                        <div class="accordion-header-faq">
+                            <span>INSTAR HOTEL의 체크인/체크아웃 시간이 어떻게 되나요?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-content-faq">
+                            체크인은 오후 3:00부터이며, 체크아웃은 오후 12:00까지입니다.
+                        </div>
+                    </div>
+                    <div class="accordion-item-faq">
+                        <div class="accordion-header-faq">
+                            <span>INSTAR HOTEL에 반려동물을 동반할 수 있나요?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-content-faq">
+                            네, 8kg 미만의 소형견과 함께 투숙할 수 있는 반려견 전용 객실 '루비룸(Ruby Room)'이 마련되어 있습니다.
+                        </div>
+                    </div>
+                    <div class="accordion-item-faq">
+                        <div class="accordion-header-faq">
+                            <span>INSTAR HOTEL의 주차 옵션은 어떤 것들이 있나요?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-content-faq">
+                            투숙객의 경우 투숙 당 ₩15,000에 주차장을 이용하실 수 있으며, 발레파킹 서비스(일일 ₩25,000) 및 전기차 충전소도 제공하고 있습니다.
+                        </div>
+                    </div>
+                    <div class="accordion-item-faq">
+                        <div class="accordion-header-faq">
+                            <span>INSTAR HOTEL에는 어떤 편의시설이 있나요?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-content-faq">
+                            무료 피트니스 센터, 미팅룸, 3개의 레스토랑, 비즈니스 센터 등 다양한 편의시설이 마련되어 있습니다.
+                        </div>
+                    </div>
+                    <div class="accordion-item-faq">
+                        <div class="accordion-header-faq">
+                            <span>INSTAR HOTEL에서 객실 내 와이파이를 제공하나요?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-content-faq">
+                            네, 전 객실 및 공용 공간에서 초고속 무선 인터넷(Wi-Fi)을 제공합니다.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- JavaScript 기능 처리 -->
     <script>
+        // 탭 기능
         function changeTab(tabId, element) {
-            // 1. 모든 탭에서 활성화(active) 표시 지우기
             const tabs = document.querySelectorAll('.fac-tabs li');
             tabs.forEach(tab => tab.classList.remove('active'));
 
-            // 2. 현재 클릭한 탭에만 활성화 표시 추가
             element.classList.add('active');
 
-            // 3. 모든 컨텐츠 영역 숨기기
             const contents = document.querySelectorAll('.fac-tab-content');
             contents.forEach(content => content.style.display = 'none');
 
-            // 4. 클릭한 탭의 ID와 연결된 컨텐츠 영역만 보여주기
             document.getElementById(tabId).style.display = 'block';
         }
+
+        // FAQ 아코디언 기능
+        document.querySelectorAll('.accordion-header-faq').forEach(header => {
+            header.addEventListener('click', function() {
+                const content = this.nextElementSibling;
+                const isOpen = content.style.display === 'block';
+
+                // 열려있는 다른 아코디언 모두 닫기
+                document.querySelectorAll('.accordion-content-faq').forEach(c => {
+                    c.style.display = 'none';
+                });
+                document.querySelectorAll('.accordion-header-faq').forEach(h => {
+                    h.classList.remove('active');
+                });
+
+                // 클릭한 항목이 닫혀있었다면 열기
+                if (!isOpen) {
+                    content.style.display = 'block';
+                    this.classList.add('active');
+                }
+            });
+        });
     </script>
 
 </body>
