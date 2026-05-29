@@ -371,7 +371,7 @@
             background-color: #333;
         }
 
-        /* 6. 객실 & 스위트 섹션 (슬라이더 구현) */
+        /* 6. 객실 & 스위트 섹션 (프로그레스 바 & 화살표 커스텀) */
         .rooms-section {
             background-color: #f4f4f4;
             padding: 60px 40px;
@@ -408,7 +408,31 @@
             gap: 15px;
         }
 
+        /* 슬라이드 진행 상태 표시줄 (Progress Track) */
+        .progress-track {
+            width: 250px;
+            height: 1px;
+            background-color: #333;
+            position: relative;
+            margin: 0 15px;
+        }
+
+        /* 이동하는 파란색 부분 */
+        .progress-indicator {
+            position: absolute;
+            top: -1px;
+            left: 0;
+            width: 16.666%; /* 6개의 객실 기준 1/6 */
+            height: 3px;
+            background-color: #00768e;
+            transition: left 0.3s ease-out;
+        }
+
+        /* 이전 / 다음 커스텀 버튼 (긴 선 + 화살표) */
         .btn-prev, .btn-next {
+            display: flex;
+            align-items: center;
+            gap: 10px;
             cursor: pointer;
             transition: opacity 0.3s;
             user-select: none;
@@ -418,15 +442,35 @@
             opacity: 0.6;
         }
 
-        .nav-line {
-            width: 150px;
+        .long-arrow {
+            width: 60px;
             height: 1px;
-            background-color: #00768e; 
+            background-color: #00768e;
+            position: relative;
         }
 
-        .nav-line.light {
-            background-color: #88c0cc;
-            width: 80px;
+        .prev-arrow::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: -4px;
+            width: 8px;
+            height: 8px;
+            border-top: 1px solid #00768e;
+            border-left: 1px solid #00768e;
+            transform: rotate(-45deg);
+        }
+
+        .next-arrow::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: -4px;
+            width: 8px;
+            height: 8px;
+            border-top: 1px solid #00768e;
+            border-right: 1px solid #00768e;
+            transform: rotate(45deg);
         }
 
         /* 슬라이더 트랙 컨테이너 */
@@ -437,9 +481,8 @@
             scroll-snap-type: x mandatory;
             scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
-            padding-bottom: 20px; /* 스크롤바 가리기 위한 여백 */
+            padding-bottom: 20px; 
             cursor: grab;
-            /* 기본 스크롤바 숨기기 */
             -ms-overflow-style: none;  
             scrollbar-width: none;  
         }
@@ -456,7 +499,7 @@
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            flex: 0 0 calc(33.333% - 13.33px); /* 3개가 한 화면에 꽉 차게 */
+            flex: 0 0 calc(33.333% - 13.33px); 
             scroll-snap-align: start;
             user-select: none;
         }
@@ -471,7 +514,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            pointer-events: none; /* 드래그 시 이미지 잡히는 현상 방지 */
+            pointer-events: none; 
         }
 
         .expand-icon {
@@ -1023,13 +1066,20 @@
                 <div class="rooms-nav-wrapper">
                     <div class="nav-controls">
                         <span class="current-page">01</span>
-                        <div class="nav-line"></div>
+                        <div class="progress-track">
+                            <div class="progress-indicator"></div>
+                        </div>
                         <span>06</span>
                     </div>
-                    <div class="nav-controls">
-                        <span class="btn-prev">이전</span>
-                        <div class="nav-line light"></div>
-                        <span class="btn-next">다음</span>
+                    <div class="nav-controls" style="gap: 30px;">
+                        <div class="btn-prev">
+                            <div class="long-arrow prev-arrow"></div>
+                            <span>이전</span>
+                        </div>
+                        <div class="btn-next">
+                            <span>다음</span>
+                            <div class="long-arrow next-arrow"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1107,7 +1157,7 @@
 
                 <div class="room-card">
                     <div class="room-img-wrapper">
-                        <img src="" alt="루비룸 룸">
+                        <img src="" alt="루비룸">
                         <div class="expand-icon"><i class="fa-solid fa-expand"></i></div>
                     </div>
                     <div class="room-info">
@@ -1601,18 +1651,27 @@
             slider.scrollBy({ left: cardWidth, top: 0, behavior: 'smooth' });
         });
 
-        // 스크롤 시 상단 번호 자동 업데이트 (01 ~ 06)
+        // 스크롤 시 상태 진행줄(프로그레스 바) 및 상단 번호 자동 업데이트
         slider.addEventListener('scroll', () => {
             const cardWidth = slider.querySelector('.room-card').offsetWidth + 20;
             // 스크롤 위치에 따라 현재 보이는 첫 번째 카드 인덱스 계산
             let currentIndex = Math.round(slider.scrollLeft / cardWidth) + 1;
             
-            // 최대 번호는 전체 카드 수(6개)
+            // 드래그가 끝에 도달했는지 확인하여 정확히 마지막 번호로 인식되게 처리
+            if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 10) {
+                currentIndex = 6;
+            }
+
             if (currentIndex > 6) currentIndex = 6;
+            if (currentIndex < 1) currentIndex = 1;
             
             currentPageEl.textContent = String(currentIndex).padStart(2, '0');
-        });
 
+            // 프로그레스 바(파란색 선) 이동 로직
+            const indicator = document.querySelector('.progress-indicator');
+            // 6칸이므로 100%를 6으로 나누어 이동시킴
+            indicator.style.left = ((currentIndex - 1) * (100 / 6)) + '%';
+        });
 
         // --- 2. 호텔 부대시설 탭 기능 ---
         function changeTab(tabId, element) {
@@ -1626,7 +1685,6 @@
 
             document.getElementById(tabId).style.display = 'block';
         }
-
 
         // --- 3. FAQ 아코디언 기능 ---
         document.querySelectorAll('.accordion-header-faq').forEach(header => {
