@@ -62,14 +62,14 @@
             color: #ff5a00;
         }
 
-        /* 2. 서브 헤더 (경계선 색상 옅게 롤백) */
+        /* 2. 서브 헤더 */
         .sub-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 15px 40px;
-            border-top: 1px solid #e5e5e5; /* 다시 옅게 변경 */
-            border-bottom: 1px solid #e5e5e5; /* 다시 옅게 변경 */
+            border-top: 1px solid #e5e5e5;
+            border-bottom: 1px solid #e5e5e5;
             background-color: #f4f4f4; 
         }
 
@@ -114,14 +114,14 @@
             text-decoration: underline;
         }
 
-        /* 3. 예약 바 (하단 경계선 색상 옅게 롤백 및 내부 글자 크기 증가) */
+        /* 3. 예약 바 */
         .booking-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 30px 40px; 
             background-color: #fff;
-            border-bottom: 1px solid #e5e5e5; /* 다시 옅게 변경 */
+            border-bottom: 1px solid #e5e5e5;
             position: relative;
             z-index: 10;
         }
@@ -158,7 +158,6 @@
             padding-right: 0;
         }
 
-        /* 예약 바 상단 라벨 크기 증가 (기존 11px -> 13px) */
         .booking-label {
             font-size: 13px; 
             color: #666;
@@ -167,7 +166,6 @@
             gap: 5px;
         }
 
-        /* 예약 바 하단 내용 크기 증가 (기존 14px -> 16px) */
         .booking-value {
             font-size: 16px; 
             font-weight: 500;
@@ -177,14 +175,12 @@
             cursor: pointer;
         }
 
-        /* 날짜 화살표 크기 증가 (기존 12px -> 14px) */
         .date-arrow {
             font-size: 14px; 
             color: #999;
             margin: 0 15px;
         }
 
-        /* 요금 조회 버튼 텍스트 크기 증가 (기존 14px -> 16px) */
         .search-btn {
             background-color: #666;
             color: #fff;
@@ -365,7 +361,7 @@
             padding: 60px 40px;
         }
 
-        .rooms-container {
+        .content-container {
             max-width: 1200px;
             margin: 0 auto;
         }
@@ -476,13 +472,197 @@
             width: fit-content;
             cursor: pointer;
         }
+
+        /* 7. 호텔 내 부대시설 섹션 (새로 추가) */
+        .facilities-section {
+            padding: 80px 40px;
+            background-color: #fff;
+        }
+
+        .fac-main-title {
+            text-align: center;
+            font-size: 32px;
+            font-weight: 300;
+            margin-bottom: 40px;
+            color: #222;
+            letter-spacing: -1px;
+        }
+
+        .fac-tabs {
+            margin-bottom: 50px;
+        }
+
+        .fac-tabs ul {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            list-style: none;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .fac-tabs li {
+            font-size: 15px;
+            font-weight: 500;
+            color: #666;
+            padding-bottom: 15px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .fac-tabs li.active {
+            color: #222;
+            font-weight: 700;
+        }
+
+        .fac-tabs li.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: #4fb4c4; /* 이미지의 밝은 청록색 라인 */
+        }
+
+        .fac-header-wrap {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .fac-header-wrap h3 {
+            font-size: 22px;
+            font-weight: 500;
+            color: #222;
+        }
+
+        .fac-inc {
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .fac-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px 20px;
+        }
+
+        .fac-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .fac-icon {
+            font-size: 22px;
+            color: #00768e; /* 로고/포인트 컬러와 맞춘 청록색 아이콘 */
+            margin-top: 2px;
+            width: 25px;
+            text-align: center;
+        }
+
+        .fac-text {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .fac-name {
+            font-size: 14px;
+            font-weight: 700;
+            color: #222;
+        }
+
+        .fac-name.underline {
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            cursor: pointer;
+        }
+        
+        .fac-name i {
+            font-size: 12px;
+            color: #333;
+            margin-left: 3px;
+        }
+
+        .fac-sub {
+            font-size: 12px;
+            color: #666;
+        }
+
+        /* 8. 호텔 정보 섹션 (새로 추가) */
+        .info-section {
+            padding: 40px 40px 100px;
+            background-color: #fff;
+        }
+
+        .info-main-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: #222;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .info-col {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 13px;
+            color: #222;
+        }
+
+        .info-icon {
+            font-size: 18px;
+            color: #00768e;
+            width: 20px;
+            text-align: center;
+            margin-top: 1px;
+        }
+
+        .info-text-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .info-text-title {
+            font-weight: 700;
+        }
+
+        .info-text-sub {
+            color: #222;
+            line-height: 1.6;
+        }
+
+        .info-link {
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
 
     <header class="top-header">
         <a href="https://instahotel.kr" class="logo">
-            <img src="홈로고2.png" alt="호텔 인스타 로고">
+            <img src="hero6.jpg" alt="호텔 인스타 로고">
         </a>
         <ul class="main-nav">
             <li class="active"><a href="#">개요</a></li>
@@ -561,11 +741,11 @@
         <p class="intro-welcome">호텔 인스타에 오신 것을 환영합니다.</p>
         <h2 class="intro-title">수원에서 만나는 감각적인 호텔 스테이</h2>
         <p class="intro-desc">
-            전통의 숨결과 현대적 에너지가 공존하는 도시 수원.그 중심인 영통에 자리한 INSTAR HOTEL은 단순한 숙박을 넘어, 머무름 자체가 특별한 경험이 되는 공간을 제안합니다.
+            전통의 숨결과 현대적 에너지가 공존하는 도시 수원.그 중심인 영통에 자리한 INSTA HOTEL은 단순한 숙박을 넘어, 머무름 자체가 특별한 경험이 되는 공간을 제안합니다.
             글로벌 혁신의 중심인 삼성전자와 삼성 반도체 산업단지와 인접해 비즈니스 여행객에게 효율적이고 편안한 여정을 제공하며, 조금만 발걸음을 옮기면 유네스코 세계문화유산 수원화성과 수원행궁, 감성적인 행궁동 거리, 한국민속촌의 고즈넉한 풍경을 만나볼 수 있습니다.
             미니멀하면서도 감각적인 무드로 완성된 객실은 복잡한 일상에서 벗어나 오롯이 휴식에 집중할 수 있도록 설계되었습니다. 따뜻한 조명, 편안한 침구, 정제된 공간감은 바쁜 하루의 끝에 가장 편안한 쉼을 선사합니다.
             비즈니스의 성공적인 여정부터 문화와 여행이 주는 새로운 영감까지.
-            도시의 활기와 조용한 휴식이 공존하는 공간, INSTAR HOTEL에서 당신만의 특별한 이야기를 시작해 보시기 바랍니다.
+            도시의 활기와 조용한 휴식이 공존하는 공간, INSTA HOTEL에서 당신만의 특별한 이야기를 시작해 보시기 바랍니다.
         </p>
         
         <div class="promo-banner">
@@ -581,7 +761,7 @@
     </section>
 
     <section class="rooms-section">
-        <div class="rooms-container">
+        <div class="content-container">
             <div class="rooms-header">
                 <h3>객실 & 스위트</h3>
                 <div class="rooms-nav-wrapper">
@@ -638,6 +818,143 @@
                             <i class="fa-solid fa-chevron-right"></i>
                         </div>
                         <button class="room-price-btn">요금 조회</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. 호텔 내 부대시설 섹션 -->
+    <section class="facilities-section">
+        <div class="content-container">
+            <h2 class="fac-main-title">호텔 내 부대시설</h2>
+            
+            <div class="fac-tabs">
+                <ul>
+                    <li class="active">호텔 어메니티 (5)</li>
+                    <li>객실 편의용품 (2)</li>
+                    <li>호텔 서비스 (8)</li>
+                    <li>전체 보기 (15)</li>
+                </ul>
+            </div>
+
+            <div class="fac-header-wrap">
+                <h3>호텔 내 부대시설</h3>
+                <div class="fac-inc">
+                    <i class="fa-regular fa-circle-check"></i> 부대시설 포함 (1)
+                </div>
+            </div>
+
+            <div class="fac-grid">
+                <div class="fac-item">
+                    <i class="fa-solid fa-utensils fac-icon"></i>
+                    <div class="fac-text">
+                        <span class="fac-name underline">호텔 내 레스토랑</span>
+                        <span class="fac-sub">3 레스토랑</span>
+                    </div>
+                </div>
+                
+                <div class="fac-item">
+                    <i class="fa-solid fa-gift fac-icon"></i>
+                    <div class="fac-text">
+                        <span class="fac-name">기념품점</span>
+                    </div>
+                </div>
+                
+                <div class="fac-item">
+                    <i class="fa-solid fa-desktop fac-icon"></i>
+                    <div class="fac-text">
+                        <span class="fac-name">비즈니스 센터</span>
+                    </div>
+                </div>
+                
+                <div class="fac-item">
+                    <i class="fa-solid fa-users-viewfinder fac-icon"></i>
+                    <div class="fac-text">
+                        <span class="fac-name">미팅룸</span>
+                    </div>
+                </div>
+                
+                <div class="fac-item">
+                    <i class="fa-solid fa-dumbbell fac-icon"></i>
+                    <div class="fac-text">
+                        <span class="fac-name">피트니스 센터 <i class="fa-regular fa-circle-check"></i></span>
+                        <span class="fac-sub">무료</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. 호텔 정보 섹션 -->
+    <section class="info-section">
+        <div class="content-container">
+            <h3 class="info-main-title">호텔 정보</h3>
+            
+            <div class="info-grid">
+                <!-- 첫 번째 열 -->
+                <div class="info-col">
+                    <div class="info-item">
+                        <i class="fa-regular fa-clock info-icon"></i>
+                        <span>체크인: 오후 3:00</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fa-regular fa-clock info-icon"></i>
+                        <span>체크아웃: 오후 12:00</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fa-solid fa-check info-icon" style="font-size: 16px;"></i>
+                        <span>체크인 가능한 최소 연령 19</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fa-solid fa-ban-smoking info-icon"></i>
+                        <span>금연 호텔</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fa-solid fa-wheelchair info-icon"></i>
+                        <span class="info-link">장애인 고객용 시설 보기</span>
+                    </div>
+                </div>
+
+                <!-- 두 번째 열 -->
+                <div class="info-col">
+                    <div class="info-item">
+                        <i class="fa-regular fa-bell info-icon"></i>
+                        <span>프론트 데스크</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fa-solid fa-paw info-icon"></i>
+                        <div class="info-text-group">
+                            <span class="info-text-title">반려동물 정책</span>
+                            <div class="info-text-sub">
+                                반려동물 환영<br>
+                                반려동물을 동반하시려면 펫 프로젝트 패키지를 예약해 주시기 바랍니다.<br>
+                                반려동물 요금(환불 불가) 투숙당: ₩65000.00<br>
+                                객실 내 최대 수용 가능 반려동물 수: 2
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 세 번째 열 -->
+                <div class="info-col">
+                    <div class="info-item">
+                        <i class="fa-solid fa-parking info-icon"></i>
+                        <div class="info-text-group">
+                            <span class="info-text-title">주차</span>
+                            <div class="info-text-sub" style="margin-top: 5px;">
+                                <strong>호텔 주차장</strong><br>
+                                시간당: ₩4000.00<br>
+                                일일: ₩15000.00<br>
+                                주간: ₩15000.00<br>
+                                투숙당: ₩15000.00<br><br>
+                                <strong>발레파킹</strong><br>
+                                일일: ₩25000.00<br><br>
+                                <strong>전기차 충전소</strong><br><br>
+                                주차 관련 추가 정보<br>
+                                주차 요금: 30분당 2,000원
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
