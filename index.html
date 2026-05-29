@@ -25,19 +25,20 @@
             color: #333;
         }
 
-        /* 1. 최상단 헤더 (오리지널 여백으로 복구) */
+        /* 1. 최상단 헤더 */
         .top-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 2px 40px; 
+            padding: 10px 40px; /* 기존 20px에서 50% 줄인 10px 적용 */
             background-color: #fff;
         }
 
-        /* 이미지 로고 (오리지널 텍스트 로고 크기에 맞춤) */
+        /* 이미지 로고 */
         .logo {
             display: flex;
             align-items: center;
+            margin-left: -15px; /* H 위치에 맞추기 위해 좌측으로 당김 (필요시 수치 조절) */
         }
         
         .logo img {
@@ -59,7 +60,7 @@
             color: #00768e;
         }
 
-        /* 2. 서브 헤더 (오리지널 사이즈로 복구) */
+        /* 2. 서브 헤더 */
         .sub-header {
             display: flex;
             justify-content: space-between;
@@ -110,7 +111,7 @@
             text-decoration: underline;
         }
 
-        /* 3. 예약 바 (오리지널 사이즈로 복구) */
+        /* 3. 예약 바 */
         .booking-bar {
             display: flex;
             justify-content: space-between;
@@ -176,17 +177,17 @@
             background-color: #444;
         }
 
-        /* 4. 메인 히어로 이미지 영역 - 높이 꽉 차게 수정됨 */
+        /* 4. 메인 히어로 이미지 영역 */
         .hero-section {
             width: 100%;
-            height: calc(100vh - 245px); /* 상단 메뉴들 높이를 뺀 나머지 전체 화면을 채웁니다 */
+            height: calc(100vh - 245px);
             background-image: url('mainpp.png');
             background-size: cover;
             background-position: center;
             position: relative;
         }
 
-        /* 이미지 하단 컨트롤러 (오리지널 사이즈로 복구) */
+        /* 이미지 하단 컨트롤러 */
         .hero-controls {
             position: absolute;
             bottom: 20px;
