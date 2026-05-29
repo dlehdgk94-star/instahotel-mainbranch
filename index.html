@@ -201,7 +201,7 @@
         .hero-section {
             width: 100%;
             height: calc(100vh - 245px);
-            background-image: url('hero6.jpg');
+            background-image: url('mainpp.png');
             background-size: cover;
             background-position: center;
             position: relative;
@@ -473,7 +473,7 @@
             cursor: pointer;
         }
 
-        /* 7. 호텔 내 부대시설 섹션 (새로 추가) */
+        /* 7. 호텔 내 부대시설 섹션 */
         .facilities-section {
             padding: 80px 40px;
             background-color: #fff;
@@ -521,7 +521,11 @@
             left: 0;
             width: 100%;
             height: 3px;
-            background-color: #4fb4c4; /* 이미지의 밝은 청록색 라인 */
+            background-color: #4fb4c4; 
+        }
+
+        .fac-tab-content {
+            display: none; /* 기본적으로 모두 숨김 처리 (JS에서 제어) */
         }
 
         .fac-header-wrap {
@@ -560,7 +564,7 @@
 
         .fac-icon {
             font-size: 22px;
-            color: #00768e; /* 로고/포인트 컬러와 맞춘 청록색 아이콘 */
+            color: #00768e; 
             margin-top: 2px;
             width: 25px;
             text-align: center;
@@ -576,6 +580,8 @@
             font-size: 14px;
             font-weight: 700;
             color: #222;
+            display: flex;
+            align-items: center;
         }
 
         .fac-name.underline {
@@ -587,7 +593,7 @@
         .fac-name i {
             font-size: 12px;
             color: #333;
-            margin-left: 3px;
+            margin-left: 5px;
         }
 
         .fac-sub {
@@ -595,7 +601,7 @@
             color: #666;
         }
 
-        /* 8. 호텔 정보 섹션 (새로 추가) */
+        /* 8. 호텔 정보 섹션 */
         .info-section {
             padding: 40px 40px 100px;
             background-color: #fff;
@@ -741,11 +747,11 @@
         <p class="intro-welcome">호텔 인스타에 오신 것을 환영합니다.</p>
         <h2 class="intro-title">수원에서 만나는 감각적인 호텔 스테이</h2>
         <p class="intro-desc">
-            전통의 숨결과 현대적 에너지가 공존하는 도시 수원.그 중심인 영통에 자리한 INSTAR HOTEL은 단순한 숙박을 넘어, 머무름 자체가 특별한 경험이 되는 공간을 제안합니다.
+            전통의 숨결과 현대적 에너지가 공존하는 도시 수원.그 중심인 영통에 자리한 INSTA HOTEL은 단순한 숙박을 넘어, 머무름 자체가 특별한 경험이 되는 공간을 제안합니다.
             글로벌 혁신의 중심인 삼성전자와 삼성 반도체 산업단지와 인접해 비즈니스 여행객에게 효율적이고 편안한 여정을 제공하며, 조금만 발걸음을 옮기면 유네스코 세계문화유산 수원화성과 수원행궁, 감성적인 행궁동 거리, 한국민속촌의 고즈넉한 풍경을 만나볼 수 있습니다.
             미니멀하면서도 감각적인 무드로 완성된 객실은 복잡한 일상에서 벗어나 오롯이 휴식에 집중할 수 있도록 설계되었습니다. 따뜻한 조명, 편안한 침구, 정제된 공간감은 바쁜 하루의 끝에 가장 편안한 쉼을 선사합니다.
             비즈니스의 성공적인 여정부터 문화와 여행이 주는 새로운 영감까지.
-            도시의 활기와 조용한 휴식이 공존하는 공간, INSTAR HOTEL에서 당신만의 특별한 이야기를 시작해 보시기 바랍니다.
+            도시의 활기와 조용한 휴식이 공존하는 공간, INSTA HOTEL에서 당신만의 특별한 이야기를 시작해 보시기 바랍니다.
         </p>
         
         <div class="promo-banner">
@@ -824,75 +830,234 @@
         </div>
     </section>
 
-    <!-- 7. 호텔 내 부대시설 섹션 -->
     <section class="facilities-section">
         <div class="content-container">
             <h2 class="fac-main-title">호텔 내 부대시설</h2>
             
             <div class="fac-tabs">
                 <ul>
-                    <li class="active">호텔 어메니티 (5)</li>
-                    <li>객실 편의용품 (2)</li>
-                    <li>호텔 서비스 (8)</li>
-                    <li>전체 보기 (15)</li>
+                    <li class="active" onclick="changeTab('tab-amenity', this)">호텔 어메니티 (5)</li>
+                    <li onclick="changeTab('tab-room', this)">객실 편의용품 (2)</li>
+                    <li onclick="changeTab('tab-service', this)">호텔 서비스 (8)</li>
+                    <li onclick="changeTab('tab-all', this)">전체 보기 (15)</li>
                 </ul>
             </div>
 
-            <div class="fac-header-wrap">
-                <h3>호텔 내 부대시설</h3>
-                <div class="fac-inc">
-                    <i class="fa-regular fa-circle-check"></i> 부대시설 포함 (1)
+            <div id="tab-amenity" class="fac-tab-content" style="display: block;">
+                <div class="fac-header-wrap">
+                    <h3>호텔 내 부대시설</h3>
+                    <div class="fac-inc">
+                        <i class="fa-regular fa-circle-check"></i> 부대시설 포함 (1)
+                    </div>
+                </div>
+                <div class="fac-grid">
+                    <div class="fac-item">
+                        <i class="fa-solid fa-utensils fac-icon"></i>
+                        <div class="fac-text">
+                            <span class="fac-name underline">호텔 내 레스토랑</span>
+                            <span class="fac-sub">3 레스토랑</span>
+                        </div>
+                    </div>
+                    <div class="fac-item">
+                        <i class="fa-solid fa-gift fac-icon"></i>
+                        <div class="fac-text">
+                            <span class="fac-name">기념품점</span>
+                        </div>
+                    </div>
+                    <div class="fac-item">
+                        <i class="fa-solid fa-desktop fac-icon"></i>
+                        <div class="fac-text">
+                            <span class="fac-name">비즈니스 센터</span>
+                        </div>
+                    </div>
+                    <div class="fac-item">
+                        <i class="fa-solid fa-users-viewfinder fac-icon"></i>
+                        <div class="fac-text">
+                            <span class="fac-name">미팅룸</span>
+                        </div>
+                    </div>
+                    <div class="fac-item">
+                        <i class="fa-solid fa-dumbbell fac-icon"></i>
+                        <div class="fac-text">
+                            <span class="fac-name">피트니스 센터 <i class="fa-regular fa-circle-check"></i></span>
+                            <span class="fac-sub">무료</span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="fac-grid">
-                <div class="fac-item">
-                    <i class="fa-solid fa-utensils fac-icon"></i>
-                    <div class="fac-text">
-                        <span class="fac-name underline">호텔 내 레스토랑</span>
-                        <span class="fac-sub">3 레스토랑</span>
+            <div id="tab-room" class="fac-tab-content">
+                <div class="fac-header-wrap">
+                    <h3>호텔 객실 내 어메니티</h3>
+                    <div class="fac-inc">
+                        <i class="fa-regular fa-circle-check"></i> 부대시설 포함 (2)
                     </div>
                 </div>
-                
-                <div class="fac-item">
-                    <i class="fa-solid fa-gift fac-icon"></i>
-                    <div class="fac-text">
-                        <span class="fac-name">기념품점</span>
+                <div class="fac-grid">
+                    <div class="fac-item">
+                        <i class="fa-solid fa-wifi fac-icon"></i>
+                        <div class="fac-text">
+                            <span class="fac-name">무료 Wi-Fi <i class="fa-regular fa-circle-check"></i></span>
+                            <span class="fac-sub">메리어트 본보이 멤버 무료</span>
+                        </div>
+                    </div>
+                    <div class="fac-item">
+                        <i class="fa-solid fa-key fac-icon"></i>
+                        <div class="fac-text">
+                            <span class="fac-name">모바일 키 <i class="fa-regular fa-circle-check"></i></span>
+                        </div>
                     </div>
                 </div>
-                
-                <div class="fac-item">
-                    <i class="fa-solid fa-desktop fac-icon"></i>
-                    <div class="fac-text">
-                        <span class="fac-name">비즈니스 센터</span>
+            </div>
+
+            <div id="tab-service" class="fac-tab-content">
+                <div class="fac-header-wrap">
+                    <h3>호텔 내 서비스</h3>
+                    <div class="fac-inc">
+                        <i class="fa-regular fa-circle-check"></i> 부대시설 포함 (2)
                     </div>
                 </div>
-                
-                <div class="fac-item">
-                    <i class="fa-solid fa-users-viewfinder fac-icon"></i>
-                    <div class="fac-text">
-                        <span class="fac-name">미팅룸</span>
+                <div class="fac-grid">
+                    <div class="fac-item">
+                        <i class="fa-solid fa-shirt fac-icon"></i>
+                        <div class="fac-text">
+                            <span class="fac-name">드라이클리닝 서비스</span>
+                        </div>
+                    </div>
+                    <div class="fac-item">
+                        <i class="fa-solid fa-shirt fac-icon"></i>
+                        <div class="fac-text">
+                            <span class="fac-name">당일 드라이클리닝 서비스</span>
+                        </div>
+                    </div>
+                    <div class="fac-item">
+                        <i class="fa-solid fa-bell-concierge fac-icon"></i>
+                        <div class="fac-text">
+                            <span class="fac-name">룸 서비스</span>
+                        </div>
+                    </div>
+                    <div class="fac-item">
+                        <i class="fa-solid fa-phone-volume fac-icon"></i>
+                        <div class="fac-text">
+                            <span class="fac-name">모닝콜 <i class="fa-regular fa-circle-check"></i></span>
+                        </div>
+                    </div>
+                    <div class="fac-item">
+                        <i class="fa-solid fa-bed fac-icon"></i>
+                        <div class="fac-text">
+                            <span class="fac-name">턴다운(객실 정돈) 서비스 <i class="fa-regular fa-circle-check"></i></span>
+                        </div>
+                    </div>
+                    <div class="fac-item">
+                        <i class="fa-solid fa-hand-holding-hand fac-icon"></i>
+                        <div class="fac-text">
+                            <span class="fac-name">서비스 요청</span>
+                        </div>
+                    </div>
+                    <div class="fac-item">
+                        <i class="fa-solid fa-user-tie fac-icon"></i>
+                        <div class="fac-text">
+                            <span class="fac-name">컨시어지</span>
+                        </div>
+                    </div>
+                    <div class="fac-item">
+                        <i class="fa-solid fa-broom fac-icon"></i>
+                        <div class="fac-text">
+                            <span class="fac-name">하우스키핑</span>
+                        </div>
                     </div>
                 </div>
-                
-                <div class="fac-item">
-                    <i class="fa-solid fa-dumbbell fac-icon"></i>
-                    <div class="fac-text">
-                        <span class="fac-name">피트니스 센터 <i class="fa-regular fa-circle-check"></i></span>
-                        <span class="fac-sub">무료</span>
+            </div>
+
+            <div id="tab-all" class="fac-tab-content">
+                <div class="fac-header-wrap">
+                    <h3>호텔 내 모든 부대시설</h3>
+                    <div class="fac-inc">
+                        <i class="fa-regular fa-circle-check"></i> 부대시설 포함 (5)
+                    </div>
+                </div>
+                <div class="fac-grid">
+                    <div class="fac-item">
+                        <i class="fa-solid fa-utensils fac-icon"></i>
+                        <div class="fac-text">
+                            <span class="fac-name underline">호텔 내 레스토랑</span>
+                            <span class="fac-sub">3 레스토랑</span>
+                        </div>
+                    </div>
+                    <div class="fac-item">
+                        <i class="fa-solid fa-gift fac-icon"></i>
+                        <div class="fac-text"><span class="fac-name">기념품점</span></div>
+                    </div>
+                    <div class="fac-item">
+                        <i class="fa-solid fa-desktop fac-icon"></i>
+                        <div class="fac-text"><span class="fac-name">비즈니스 센터</span></div>
+                    </div>
+                    <div class="fac-item">
+                        <i class="fa-solid fa-users-viewfinder fac-icon"></i>
+                        <div class="fac-text"><span class="fac-name">미팅룸</span></div>
+                    </div>
+                    <div class="fac-item">
+                        <i class="fa-solid fa-dumbbell fac-icon"></i>
+                        <div class="fac-text">
+                            <span class="fac-name">피트니스 센터 <i class="fa-regular fa-circle-check"></i></span>
+                            <span class="fac-sub">무료</span>
+                        </div>
+                    </div>
+                    <div class="fac-item">
+                        <i class="fa-solid fa-wifi fac-icon"></i>
+                        <div class="fac-text">
+                            <span class="fac-name">무료 Wi-Fi <i class="fa-regular fa-circle-check"></i></span>
+                            <span class="fac-sub">메리어트 본보이 멤버 무료</span>
+                        </div>
+                    </div>
+                    <div class="fac-item">
+                        <i class="fa-solid fa-key fac-icon"></i>
+                        <div class="fac-text">
+                            <span class="fac-name">모바일 키 <i class="fa-regular fa-circle-check"></i></span>
+                        </div>
+                    </div>
+                    <div class="fac-item">
+                        <i class="fa-solid fa-shirt fac-icon"></i>
+                        <div class="fac-text"><span class="fac-name">드라이클리닝 서비스</span></div>
+                    </div>
+                    <div class="fac-item">
+                        <i class="fa-solid fa-shirt fac-icon"></i>
+                        <div class="fac-text"><span class="fac-name">당일 드라이클리닝 서비스</span></div>
+                    </div>
+                    <div class="fac-item">
+                        <i class="fa-solid fa-bell-concierge fac-icon"></i>
+                        <div class="fac-text"><span class="fac-name">룸 서비스</span></div>
+                    </div>
+                    <div class="fac-item">
+                        <i class="fa-solid fa-phone-volume fac-icon"></i>
+                        <div class="fac-text"><span class="fac-name">모닝콜 <i class="fa-regular fa-circle-check"></i></span></div>
+                    </div>
+                    <div class="fac-item">
+                        <i class="fa-solid fa-bed fac-icon"></i>
+                        <div class="fac-text"><span class="fac-name">턴다운(객실 정돈) 서비스 <i class="fa-regular fa-circle-check"></i></span></div>
+                    </div>
+                    <div class="fac-item">
+                        <i class="fa-solid fa-hand-holding-hand fac-icon"></i>
+                        <div class="fac-text"><span class="fac-name">서비스 요청</span></div>
+                    </div>
+                    <div class="fac-item">
+                        <i class="fa-solid fa-user-tie fac-icon"></i>
+                        <div class="fac-text"><span class="fac-name">컨시어지</span></div>
+                    </div>
+                    <div class="fac-item">
+                        <i class="fa-solid fa-broom fac-icon"></i>
+                        <div class="fac-text"><span class="fac-name">하우스키핑</span></div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 8. 호텔 정보 섹션 -->
     <section class="info-section">
         <div class="content-container">
             <h3 class="info-main-title">호텔 정보</h3>
             
             <div class="info-grid">
-                <!-- 첫 번째 열 -->
                 <div class="info-col">
                     <div class="info-item">
                         <i class="fa-regular fa-clock info-icon"></i>
@@ -916,7 +1081,6 @@
                     </div>
                 </div>
 
-                <!-- 두 번째 열 -->
                 <div class="info-col">
                     <div class="info-item">
                         <i class="fa-regular fa-bell info-icon"></i>
@@ -936,7 +1100,6 @@
                     </div>
                 </div>
 
-                <!-- 세 번째 열 -->
                 <div class="info-col">
                     <div class="info-item">
                         <i class="fa-solid fa-parking info-icon"></i>
@@ -960,6 +1123,24 @@
             </div>
         </div>
     </section>
+
+    <script>
+        function changeTab(tabId, element) {
+            // 1. 모든 탭에서 활성화(active) 표시 지우기
+            const tabs = document.querySelectorAll('.fac-tabs li');
+            tabs.forEach(tab => tab.classList.remove('active'));
+
+            // 2. 현재 클릭한 탭에만 활성화 표시 추가
+            element.classList.add('active');
+
+            // 3. 모든 컨텐츠 영역 숨기기
+            const contents = document.querySelectorAll('.fac-tab-content');
+            contents.forEach(content => content.style.display = 'none');
+
+            // 4. 클릭한 탭의 ID와 연결된 컨텐츠 영역만 보여주기
+            document.getElementById(tabId).style.display = 'block';
+        }
+    </script>
 
 </body>
 </html>
