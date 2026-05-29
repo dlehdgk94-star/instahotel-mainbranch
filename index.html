@@ -958,6 +958,7 @@
 </head>
 <body>
 
+    <!-- 1. 최상단 헤더 -->
     <header class="top-header">
         <a href="https://instahotel.kr" class="logo">
             <img src="홈로고2.png" alt="호텔 인스타 로고">
@@ -972,7 +973,9 @@
         </ul>
     </header>
 
+    <!-- 스크롤 시 상단에 고정되는 래퍼 영역 시작 -->
     <div class="sticky-wrapper">
+        <!-- 2. 서브 헤더 -->
         <div class="sub-header">
             <div class="hotel-info-left">
                 <span class="hotel-name">INSTA HOTEL, Real Guest Reviews</span>
@@ -991,6 +994,7 @@
             </div>
         </div>
 
+        <!-- 3. 예약 바 -->
         <div class="booking-bar">
             <div class="booking-item">
                 <span class="booking-label"><i class="fa-regular fa-calendar"></i> 날짜 (1 박)</span>
@@ -1019,6 +1023,8 @@
             </div>
         </div>
     </div>
+    <!-- 래퍼 영역 끝 -->
+
     <section class="hero-section">
         <div class="hero-controls">
             <div class="slider-nav">
@@ -1059,6 +1065,7 @@
         </div>
     </section>
 
+    <!-- 6. 객실 및 스위트룸 섹션 -->
     <section class="rooms-section">
         <div class="content-container">
             <div class="rooms-header">
@@ -1066,25 +1073,29 @@
                 <div class="rooms-nav-wrapper">
                     <div class="nav-controls">
                         <span class="current-page">01</span>
+                        <!-- 상태 진행줄 (프로그레스 바) -->
                         <div class="progress-track">
                             <div class="progress-indicator"></div>
                         </div>
                         <span>06</span>
                     </div>
                     <div class="nav-controls" style="gap: 30px;">
+                        <!-- 커스텀 이전 버튼 (위치 수정됨: 텍스트 -> 왼쪽 화살표) -->
                         <div class="btn-prev">
-                            <div class="long-arrow prev-arrow"></div>
                             <span>이전</span>
+                            <div class="long-arrow prev-arrow"></div>
                         </div>
+                        <!-- 커스텀 다음 버튼 (위치 수정됨: 오른쪽 화살표 -> 텍스트) -->
                         <div class="btn-next">
-                            <span>다음</span>
                             <div class="long-arrow next-arrow"></div>
+                            <span>다음</span>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="rooms-grid">
+                <!-- 1. 에델바이 -->
                 <div class="room-card">
                     <div class="room-img-wrapper">
                         <img src="" alt="에델바이 룸">
@@ -1099,6 +1110,7 @@
                     </div>
                 </div>
 
+                <!-- 2. 오로라 -->
                 <div class="room-card">
                     <div class="room-img-wrapper">
                         <img src="" alt="오로라 룸">
@@ -1113,6 +1125,7 @@
                     </div>
                 </div>
 
+                <!-- 3. 글로리오 -->
                 <div class="room-card">
                     <div class="room-img-wrapper">
                         <img src="" alt="글로리오 룸">
@@ -1127,6 +1140,7 @@
                     </div>
                 </div>
 
+                <!-- 4. 엔비디온 -->
                 <div class="room-card">
                     <div class="room-img-wrapper">
                         <img src="" alt="엔비디온 룸">
@@ -1141,6 +1155,7 @@
                     </div>
                 </div>
 
+                <!-- 5. 스페셜 -->
                 <div class="room-card">
                     <div class="room-img-wrapper">
                         <img src="" alt="스페셜 룸">
@@ -1155,6 +1170,7 @@
                     </div>
                 </div>
 
+                <!-- 6. 루비룸 (애견동반) -->
                 <div class="room-card">
                     <div class="room-img-wrapper">
                         <img src="" alt="루비룸">
@@ -1509,8 +1525,10 @@
         </div>
     </section>
 
+    <!-- 10. 호텔 세부정보 및 FAQ 섹션 -->
     <section class="faq-details-section">
         <div class="faq-container">
+            <!-- 호텔 세부정보 -->
             <div class="faq-group">
                 <h3 class="faq-title">호텔 세부정보</h3>
                 <div class="accordion-list">
@@ -1535,6 +1553,7 @@
                 </div>
             </div>
 
+            <!-- 자주 묻는 질문(FAQ) -->
             <div class="faq-group">
                 <h3 class="faq-title">자주 묻는 질문(FAQ)</h3>
                 <div class="accordion-list">
@@ -1588,6 +1607,7 @@
         </div>
     </section>
 
+    <!-- 11. 푸터 섹션 -->
     <footer class="footer-section">
         <div class="content-container">
             <div class="footer-follow">
@@ -1600,6 +1620,7 @@
         </div>
     </footer>
 
+    <!-- JavaScript 기능 처리 -->
     <script>
         // --- 1. 객실 슬라이더 & 마우스 드래그 기능 ---
         const slider = document.querySelector('.rooms-grid');
