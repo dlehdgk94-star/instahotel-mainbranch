@@ -25,7 +25,7 @@
         }
 
         body {
-            color: #333;
+            color: #111; /* 전체 기본 글씨 색상을 더 진하게 변경 */
         }
 
         /* 1. 최상단 헤더 */
@@ -55,10 +55,10 @@
             display: flex;
             gap: 30px;
             font-size: 14px;
-            font-weight: 500;
+            font-weight: 600; /* 네비게이션 폰트 약간 더 굵게 */
         }
 
-        /* 활성화된 메뉴 텍스트 및 밑줄 색상 변경 (파란색으로 통일) */
+        /* 활성화된 메뉴 텍스트 및 밑줄 색상 변경 */
         .main-nav li.active {
             border-bottom: 2px solid #00768e;
             padding-bottom: 5px;
@@ -92,12 +92,12 @@
 
         .hotel-name {
             font-size: 20px; 
-            font-weight: 700;
+            font-weight: 800; /* 더 진하게 */
             letter-spacing: -0.5px; 
-            color: #111;
+            color: #000;
         }
 
-        /* 리뷰 점수(도트) 색상 및 크기 변경 (파란색, 크기 증가) */
+        /* 리뷰 점수 */
         .rating-dots {
             color: #00768e;
             font-size: 15px; 
@@ -107,7 +107,8 @@
 
         .rating-text {
             font-size: 13px; 
-            color: #666;
+            font-weight: 500;
+            color: #333;
             text-decoration: underline;
         }
 
@@ -115,7 +116,8 @@
             display: flex;
             gap: 20px;
             font-size: 13px;
-            color: #333;
+            font-weight: 500;
+            color: #000;
         }
         
         .hotel-info-right a {
@@ -171,7 +173,8 @@
 
         .booking-label {
             font-size: 13px; 
-            color: #666;
+            font-weight: 500; /* 라벨 굵기 추가 */
+            color: #555; /* 너무 옅지 않게 조정 */
             display: flex;
             align-items: center;
             gap: 5px;
@@ -179,7 +182,8 @@
 
         .booking-value {
             font-size: 16px; 
-            font-weight: 500;
+            font-weight: 600; /* 내용 굵게 */
+            color: #000;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -188,24 +192,24 @@
 
         .date-arrow {
             font-size: 14px; 
-            color: #999;
+            color: #777;
             margin: 0 15px;
         }
 
         .search-btn {
-            background-color: #666;
+            background-color: #555; /* 버튼 색상 약간 진하게 */
             color: #fff;
             border: none;
             padding: 12px 24px;
             border-radius: 25px;
             font-size: 16px; 
-            font-weight: 500;
+            font-weight: 600;
             cursor: pointer;
             transition: background 0.3s;
         }
 
         .search-btn:hover {
-            background-color: #444;
+            background-color: #333;
         }
 
         /* 4. 메인 히어로 이미지 영역 */
@@ -271,7 +275,7 @@
             cursor: pointer;
         }
 
-        /* 5. 호텔 소개 섹션 */
+        /* 5. 호텔 소개 섹션 (폰트 또렷하게) */
         .intro-section {
             max-width: 1000px;
             margin: 60px auto;
@@ -280,25 +284,25 @@
         }
         
         .intro-welcome {
-            font-size: 12px;
-            color: #666;
+            font-size: 13px;
+            color: #444;
             margin-bottom: 10px;
-            font-weight: 500;
+            font-weight: 600; /* 더 또렷하게 */
         }
 
         .intro-title {
             font-size: 32px; 
-            font-weight: 300; 
-            color: #222;
+            font-weight: 400; /* 사진처럼 적당한 굵기 유지하되 색상을 블랙으로 */
+            color: #000;
             margin-bottom: 25px;
             letter-spacing: -1px;
         }
 
         .intro-desc {
-            font-size: 13px;
+            font-size: 14px;
             line-height: 1.6;
-            font-weight: 700; 
-            color: #333;
+            font-weight: 500; /* 옅어보이지 않게 미디움 굵기 적용 */
+            color: #111; /* 완전한 블랙에 가깝게 */
             margin-bottom: 40px;
             word-break: keep-all;
         }
@@ -341,28 +345,31 @@
 
         .promo-info h4 {
             font-size: 16px;
-            font-weight: 700;
+            font-weight: 800; /* 또렷하게 */
+            color: #000;
             margin-bottom: 5px;
         }
 
         .promo-info p {
             font-size: 13px;
-            color: #666;
+            font-weight: 500;
+            color: #444;
         }
 
         .promo-btn {
-            background-color: #777;
+            background-color: #555;
             color: #fff;
             border: none;
             padding: 10px 20px;
             border-radius: 20px;
             font-size: 13px;
+            font-weight: 600;
             cursor: pointer;
             transition: background 0.3s;
         }
 
         .promo-btn:hover {
-            background-color: #555;
+            background-color: #333;
         }
 
         /* 6. 객실 & 스위트 섹션 */
@@ -382,18 +389,18 @@
 
         .rooms-header h3 {
             font-size: 24px;
-            font-weight: 400; /* 기존 300에서 진하게 변경 */
+            font-weight: 400; 
             margin-bottom: 20px;
-            color: #111; /* 기존 #333에서 완전한 검은색 계열로 변경 */
+            color: #000;
         }
 
         .rooms-nav-wrapper {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 14px; /* 기존 13px에서 크기 약간 증가 */
-            font-weight: 600; /* 텍스트 굵게 */
-            color: #111; /* 텍스트 색상 진하게 */
+            font-size: 14px; 
+            font-weight: 700; 
+            color: #000; 
         }
 
         .nav-controls {
@@ -464,16 +471,16 @@
         }
 
         .room-title {
-            font-size: 16px; /* 폰트 크기 증가 */
-            font-weight: 800; /* 폰트 두께 확실하게 굵게 */
+            font-size: 16px; 
+            font-weight: 800; 
             margin-bottom: 20px;
-            padding-bottom: 15px; /* 밑줄 추가를 위한 여백 */
-            border-bottom: 1px solid #eaeaea; /* 카드 타이틀 아래 사진과 동일한 밑줄 추가 */
+            padding-bottom: 15px; 
+            border-bottom: 1px solid #eaeaea; 
             display: flex;
             justify-content: space-between;
             align-items: center;
             cursor: pointer;
-            color: #111; /* 완전한 검은색에 가깝게 */
+            color: #000; 
         }
 
         .room-price-btn {
@@ -483,7 +490,7 @@
             padding: 8px 18px;
             border-radius: 20px;
             font-size: 12px;
-            font-weight: 600; /* 버튼 텍스트 굵게 */
+            font-weight: 600; 
             width: fit-content;
             cursor: pointer;
         }
@@ -497,9 +504,9 @@
         .fac-main-title {
             text-align: center;
             font-size: 32px;
-            font-weight: 300;
+            font-weight: 400;
             margin-bottom: 40px;
-            color: #222;
+            color: #000;
             letter-spacing: -1px;
         }
 
@@ -517,16 +524,16 @@
 
         .fac-tabs li {
             font-size: 15px;
-            font-weight: 500;
-            color: #666;
+            font-weight: 600;
+            color: #555;
             padding-bottom: 15px;
             cursor: pointer;
             position: relative;
         }
 
         .fac-tabs li.active {
-            color: #222;
-            font-weight: 700;
+            color: #000;
+            font-weight: 800;
         }
 
         .fac-tabs li.active::after {
@@ -552,14 +559,14 @@
 
         .fac-header-wrap h3 {
             font-size: 22px;
-            font-weight: 500;
-            color: #222;
+            font-weight: 600;
+            color: #000;
         }
 
         .fac-inc {
             font-size: 14px;
-            font-weight: 500;
-            color: #333;
+            font-weight: 600;
+            color: #111;
             display: flex;
             align-items: center;
             gap: 5px;
@@ -593,8 +600,8 @@
 
         .fac-name {
             font-size: 14px;
-            font-weight: 700;
-            color: #222;
+            font-weight: 800;
+            color: #000;
             display: flex;
             align-items: center;
         }
@@ -607,16 +614,17 @@
         
         .fac-name i {
             font-size: 12px;
-            color: #333;
+            color: #111;
             margin-left: 5px;
         }
 
         .fac-sub {
             font-size: 12px;
-            color: #666;
+            font-weight: 500;
+            color: #444;
         }
 
-        /* 8. 호텔 정보 섹션 */
+        /* 8. 호텔 정보 섹션 (폰트 또렷하게 강화) */
         .info-section {
             padding: 40px 40px 100px;
             background-color: #fff;
@@ -624,9 +632,9 @@
 
         .info-main-title {
             font-size: 18px;
-            font-weight: 700;
+            font-weight: 800; /* 사진처럼 완전 진하게 */
             margin-bottom: 30px;
-            color: #222;
+            color: #000;
         }
 
         .info-grid {
@@ -646,7 +654,8 @@
             align-items: flex-start;
             gap: 12px;
             font-size: 13px;
-            color: #222;
+            font-weight: 600; /* 정보 텍스트 선명하게 */
+            color: #111;
         }
 
         .info-icon {
@@ -664,12 +673,19 @@
         }
 
         .info-text-title {
-            font-weight: 700;
+            font-weight: 800;
+            color: #000;
         }
 
         .info-text-sub {
-            color: #222;
+            font-weight: 500; /* 하위 텍스트도 옅어보이지 않게 */
+            color: #111;
             line-height: 1.6;
+        }
+        
+        .info-text-sub strong {
+            font-weight: 800;
+            color: #000;
         }
 
         .info-link {
@@ -788,8 +804,8 @@
 
         .faq-title {
             font-size: 20px;
-            font-weight: 700;
-            color: #111;
+            font-weight: 800;
+            color: #000;
             margin-bottom: 15px;
         }
 
@@ -808,13 +824,13 @@
             padding: 25px 0;
             cursor: pointer;
             font-size: 14px;
-            font-weight: 500;
-            color: #111;
+            font-weight: 700;
+            color: #000;
         }
 
         .accordion-header-faq i {
             font-size: 14px;
-            color: #111;
+            color: #000;
             transition: transform 0.3s ease;
         }
 
@@ -826,7 +842,8 @@
             display: none;
             padding-bottom: 25px;
             font-size: 13px;
-            color: #555;
+            font-weight: 500;
+            color: #333;
             line-height: 1.6;
         }
 
@@ -849,8 +866,8 @@
             align-items: center;
             gap: 15px;
             font-size: 15px;
-            font-weight: 500;
-            color: #222;
+            font-weight: 700;
+            color: #000;
         }
 
         .footer-follow i {
@@ -862,7 +879,8 @@
         .footer-info {
             padding: 25px 0;
             font-size: 12px;
-            color: #555;
+            font-weight: 500;
+            color: #333;
             line-height: 1.6;
         }
     </style>
