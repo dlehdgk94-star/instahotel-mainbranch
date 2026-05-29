@@ -65,6 +65,14 @@
             color: #00768e;
         }
 
+        /* ★ 스크롤 시 상단 고정(Sticky)을 위한 래퍼 클래스 추가 */
+        .sticky-wrapper {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background-color: #fff; /* 스크롤 시 뒤에 내용이 비치지 않게 배경색 지정 */
+        }
+
         /* 2. 서브 헤더 */
         .sub-header {
             display: flex;
@@ -82,6 +90,7 @@
             gap: 10px;
         }
 
+        /* 사진 속 폰트 스타일과 동일하게 수정 */
         .hotel-name {
             font-size: 20px; 
             font-weight: 700;
@@ -92,7 +101,7 @@
         /* 리뷰 점수(도트) 색상 및 크기 변경 (파란색, 크기 증가) */
         .rating-dots {
             color: #00768e;
-            font-size: 15px; /* 기존 12px에서 15px로 확대 */
+            font-size: 15px; 
             letter-spacing: 2px;
             margin-left: 5px;
         }
@@ -129,7 +138,6 @@
             background-color: #fff;
             border-bottom: 1px solid #e5e5e5; 
             position: relative;
-            z-index: 10;
         }
 
         .booking-item {
@@ -871,52 +879,53 @@
         </ul>
     </header>
 
-    <div class="sub-header">
-        <div class="hotel-info-left">
-            <span class="hotel-name">INSTA HOTEL, Real Guest Reviews</span>
-            <span class="rating-dots">
-                <i class="fa-solid fa-circle"></i>
-                <i class="fa-solid fa-circle"></i>
-                <i class="fa-solid fa-circle"></i>
-                <i class="fa-solid fa-circle"></i>
-                <i class="fa-solid fa-circle-half-stroke"></i>
-            </span>
-            <span class="rating-text">4.9 • 1446 후기</span>
+    <div class="sticky-wrapper">
+        <div class="sub-header">
+            <div class="hotel-info-left">
+                <span class="hotel-name">INSTA HOTEL, Real Guest Reviews</span>
+                <span class="rating-dots">
+                    <i class="fa-solid fa-circle"></i>
+                    <i class="fa-solid fa-circle"></i>
+                    <i class="fa-solid fa-circle"></i>
+                    <i class="fa-solid fa-circle"></i>
+                    <i class="fa-solid fa-circle-half-stroke"></i>
+                </span>
+                <span class="rating-text">4.9 • 1446 후기</span>
+            </div>
+            <div class="hotel-info-right">
+                <a href="#"><i class="fa-solid fa-location-dot"></i> 지도 보기</a>
+                <a href="#"><i class="fa-solid fa-phone"></i> +82 31-203-4301</a>
+            </div>
         </div>
-        <div class="hotel-info-right">
-            <a href="#"><i class="fa-solid fa-location-dot"></i> 지도 보기</a>
-            <a href="#"><i class="fa-solid fa-phone"></i> +82 31-203-4301</a>
+
+        <div class="booking-bar">
+            <div class="booking-item">
+                <span class="booking-label"><i class="fa-regular fa-calendar"></i> 날짜 (1 박)</span>
+                <div class="booking-value">
+                    <span>5월 28일, 목</span>
+                    <i class="fa-solid fa-arrow-right date-arrow"></i>
+                    <span>5월 29일, 금</span>
+                </div>
+            </div>
+            <div class="booking-item">
+                <span class="booking-label">객실 & 투숙객</span>
+                <div class="booking-value">
+                    <span>1 객실, 1 성인</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+            </div>
+            <div class="booking-item">
+                <span class="booking-label">특별 요금</span>
+                <div class="booking-value">
+                    <span>최저 요금</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+            </div>
+            <div class="booking-item">
+                <button class="search-btn">요금 조회</button>
+            </div>
         </div>
     </div>
-
-    <div class="booking-bar">
-        <div class="booking-item">
-            <span class="booking-label"><i class="fa-regular fa-calendar"></i> 날짜 (1 박)</span>
-            <div class="booking-value">
-                <span>5월 28일, 목</span>
-                <i class="fa-solid fa-arrow-right date-arrow"></i>
-                <span>5월 29일, 금</span>
-            </div>
-        </div>
-        <div class="booking-item">
-            <span class="booking-label">객실 & 투숙객</span>
-            <div class="booking-value">
-                <span>1 객실, 1 성인</span>
-                <i class="fa-solid fa-chevron-down"></i>
-            </div>
-        </div>
-        <div class="booking-item">
-            <span class="booking-label">특별 요금</span>
-            <div class="booking-value">
-                <span>최저 요금</span>
-                <i class="fa-solid fa-chevron-down"></i>
-            </div>
-        </div>
-        <div class="booking-item">
-            <button class="search-btn">요금 조회</button>
-        </div>
-    </div>
-
     <section class="hero-section">
         <div class="hero-controls">
             <div class="slider-nav">
@@ -1358,10 +1367,8 @@
         </div>
     </section>
 
-    <!-- 10. 호텔 세부정보 및 FAQ 섹션 -->
     <section class="faq-details-section">
         <div class="faq-container">
-            <!-- 호텔 세부정보 -->
             <div class="faq-group">
                 <h3 class="faq-title">호텔 세부정보</h3>
                 <div class="accordion-list">
@@ -1386,7 +1393,6 @@
                 </div>
             </div>
 
-            <!-- 자주 묻는 질문(FAQ) -->
             <div class="faq-group">
                 <h3 class="faq-title">자주 묻는 질문(FAQ)</h3>
                 <div class="accordion-list">
@@ -1440,7 +1446,6 @@
         </div>
     </section>
 
-    <!-- 11. 푸터 섹션 -->
     <footer class="footer-section">
         <div class="content-container">
             <div class="footer-follow">
@@ -1453,7 +1458,6 @@
         </div>
     </footer>
 
-    <!-- JavaScript 기능 처리 -->
     <script>
         // 탭 기능
         function changeTab(tabId, element) {
