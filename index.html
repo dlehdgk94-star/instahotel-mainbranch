@@ -28,12 +28,13 @@
             color: #333;
         }
 
-        /* 1. 최상단 헤더 */
+        /* 1. 최상단 헤더 (여백 축소 및 슬림화) */
         .top-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 40px; 
+            padding: 0 40px; /* 위아래 패딩 제거 */
+            height: 70px; /* 헤더 전체 높이를 슬림하게 고정 */
             background-color: #f4f4f4; 
         }
 
@@ -45,7 +46,7 @@
         }
         
         .logo img {
-            height: 95px; 
+            height: 55px; /* 슬림해진 헤더에 맞춰 로고 크기 축소 */
             width: auto;
             object-fit: contain;
             mix-blend-mode: multiply; 
@@ -65,12 +66,12 @@
             color: #00768e;
         }
 
-        /* ★ 스크롤 시 상단 고정(Sticky)을 위한 래퍼 클래스 추가 */
+        /* 스크롤 시 상단 고정(Sticky)을 위한 래퍼 클래스 */
         .sticky-wrapper {
             position: sticky;
             top: 0;
             z-index: 1000;
-            background-color: #fff; /* 스크롤 시 뒤에 내용이 비치지 않게 배경색 지정 */
+            background-color: #fff;
         }
 
         /* 2. 서브 헤더 */
@@ -90,7 +91,6 @@
             gap: 10px;
         }
 
-        /* 사진 속 폰트 스타일과 동일하게 수정 */
         .hotel-name {
             font-size: 20px; 
             font-weight: 700;
@@ -865,6 +865,7 @@
 </head>
 <body>
 
+    <!-- 1. 최상단 헤더 -->
     <header class="top-header">
         <a href="https://instahotel.kr" class="logo">
             <img src="홈로고2.png" alt="호텔 인스타 로고">
@@ -879,7 +880,9 @@
         </ul>
     </header>
 
+    <!-- 스크롤 시 상단에 고정되는 래퍼 영역 시작 -->
     <div class="sticky-wrapper">
+        <!-- 2. 서브 헤더 -->
         <div class="sub-header">
             <div class="hotel-info-left">
                 <span class="hotel-name">INSTA HOTEL, Real Guest Reviews</span>
@@ -898,6 +901,7 @@
             </div>
         </div>
 
+        <!-- 3. 예약 바 -->
         <div class="booking-bar">
             <div class="booking-item">
                 <span class="booking-label"><i class="fa-regular fa-calendar"></i> 날짜 (1 박)</span>
@@ -926,6 +930,8 @@
             </div>
         </div>
     </div>
+    <!-- 래퍼 영역 끝 -->
+
     <section class="hero-section">
         <div class="hero-controls">
             <div class="slider-nav">
@@ -1367,8 +1373,10 @@
         </div>
     </section>
 
+    <!-- 10. 호텔 세부정보 및 FAQ 섹션 -->
     <section class="faq-details-section">
         <div class="faq-container">
+            <!-- 호텔 세부정보 -->
             <div class="faq-group">
                 <h3 class="faq-title">호텔 세부정보</h3>
                 <div class="accordion-list">
@@ -1393,6 +1401,7 @@
                 </div>
             </div>
 
+            <!-- 자주 묻는 질문(FAQ) -->
             <div class="faq-group">
                 <h3 class="faq-title">자주 묻는 질문(FAQ)</h3>
                 <div class="accordion-list">
@@ -1446,6 +1455,7 @@
         </div>
     </section>
 
+    <!-- 11. 푸터 섹션 -->
     <footer class="footer-section">
         <div class="content-container">
             <div class="footer-follow">
@@ -1458,6 +1468,7 @@
         </div>
     </footer>
 
+    <!-- JavaScript 기능 처리 -->
     <script>
         // 탭 기능
         function changeTab(tabId, element) {
