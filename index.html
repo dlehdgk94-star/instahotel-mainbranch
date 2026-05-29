@@ -28,12 +28,12 @@
             color: #333;
         }
 
-        /* 1. 최상단 헤더 (여백만 최소화) */
+        /* 1. 최상단 헤더 */
         .top-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 40px; /* 위아래 패딩 제거로 여백만 줄임 */
+            padding: 10px 40px; 
             background-color: #f4f4f4; 
         }
 
@@ -45,7 +45,7 @@
         }
         
         .logo img {
-            height: 95px; /* 로고 크기는 예전과 동일하게 복구 */
+            height: 95px; 
             width: auto;
             object-fit: contain;
             mix-blend-mode: multiply; 
@@ -382,17 +382,18 @@
 
         .rooms-header h3 {
             font-size: 24px;
-            font-weight: 300;
+            font-weight: 400; /* 기존 300에서 진하게 변경 */
             margin-bottom: 20px;
-            color: #333;
+            color: #111; /* 기존 #333에서 완전한 검은색 계열로 변경 */
         }
 
         .rooms-nav-wrapper {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 13px;
-            color: #333;
+            font-size: 14px; /* 기존 13px에서 크기 약간 증가 */
+            font-weight: 600; /* 텍스트 굵게 */
+            color: #111; /* 텍스트 색상 진하게 */
         }
 
         .nav-controls {
@@ -463,13 +464,16 @@
         }
 
         .room-title {
-            font-size: 15px;
-            font-weight: 700;
+            font-size: 16px; /* 폰트 크기 증가 */
+            font-weight: 800; /* 폰트 두께 확실하게 굵게 */
             margin-bottom: 20px;
+            padding-bottom: 15px; /* 밑줄 추가를 위한 여백 */
+            border-bottom: 1px solid #eaeaea; /* 카드 타이틀 아래 사진과 동일한 밑줄 추가 */
             display: flex;
             justify-content: space-between;
             align-items: center;
             cursor: pointer;
+            color: #111; /* 완전한 검은색에 가깝게 */
         }
 
         .room-price-btn {
@@ -479,6 +483,7 @@
             padding: 8px 18px;
             border-radius: 20px;
             font-size: 12px;
+            font-weight: 600; /* 버튼 텍스트 굵게 */
             width: fit-content;
             cursor: pointer;
         }
@@ -974,7 +979,7 @@
     <section class="rooms-section">
         <div class="content-container">
             <div class="rooms-header">
-                <h3>객실 & 스위트</h3>
+                <h3>객실 및 스위트룸</h3>
                 <div class="rooms-nav-wrapper">
                     <div class="nav-controls">
                         <span>01</span>
@@ -1000,7 +1005,7 @@
                             <span>크리에이터 룸</span>
                             <i class="fa-solid fa-chevron-right"></i>
                         </div>
-                        <button class="room-price-btn">요금 조회</button>
+                        <button class="room-price-btn">요금 보기</button>
                     </div>
                 </div>
 
@@ -1014,7 +1019,7 @@
                             <span>크리에이터 룸</span>
                             <i class="fa-solid fa-chevron-right"></i>
                         </div>
-                        <button class="room-price-btn">요금 조회</button>
+                        <button class="room-price-btn">요금 보기</button>
                     </div>
                 </div>
 
@@ -1028,7 +1033,7 @@
                             <span>에디터 룸</span>
                             <i class="fa-solid fa-chevron-right"></i>
                         </div>
-                        <button class="room-price-btn">요금 조회</button>
+                        <button class="room-price-btn">요금 보기</button>
                     </div>
                 </div>
             </div>
