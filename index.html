@@ -8,12 +8,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     
     <style>
+        /* 세련된 폰트(Pretendard) 추가 */
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
         /* 기본 초기화 */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Noto Sans KR', sans-serif;
+            font-family: 'Pretendard', 'Noto Sans KR', sans-serif; /* 전체 폰트를 프리텐다드로 변경 */
         }
         
         a {
@@ -79,9 +82,12 @@
             gap: 10px;
         }
 
+        /* 사진 속 폰트 스타일과 동일하게 수정 */
         .hotel-name {
-            font-size: 18px;
+            font-size: 20px; /* 크기 약간 확대 */
             font-weight: 700;
+            letter-spacing: -0.5px; /* 자간을 좁혀서 더 밀도있게 */
+            color: #111;
         }
 
         /* 리뷰 점수(도트) 색상 변경 (주황색) */
@@ -89,10 +95,11 @@
             color: #ff5a00;
             font-size: 12px;
             letter-spacing: 2px;
+            margin-left: 5px;
         }
 
         .rating-text {
-            font-size: 12px;
+            font-size: 13px; /* 크기 약간 확대 */
             color: #666;
             text-decoration: underline;
         }
@@ -199,7 +206,7 @@
         .hero-section {
             width: 100%;
             height: calc(100vh - 245px);
-            background-image: url('mainpp.png'); /* 필요시 실제 이미지 경로 적용 */
+            background-image: url('mainpp.png'); 
             background-size: cover;
             background-position: center;
             position: relative;
@@ -812,7 +819,7 @@
             line-height: 1.6;
         }
 
-        /* 11. 푸터 섹션 (새로 추가) */
+        /* 11. 푸터 섹션 */
         .footer-section {
             background-color: #fff;
             padding: 40px 40px 60px;
@@ -837,7 +844,7 @@
 
         .footer-follow i {
             font-size: 18px;
-            color: #00768e; /* 포인트 컬러 적용 */
+            color: #00768e;
             cursor: pointer;
         }
 
