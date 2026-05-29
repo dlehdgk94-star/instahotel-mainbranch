@@ -28,13 +28,12 @@
             color: #333;
         }
 
-        /* 1. 최상단 헤더 (여백 축소 및 슬림화) */
+        /* 1. 최상단 헤더 (여백만 최소화) */
         .top-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 40px; /* 위아래 패딩 제거 */
-            height: 70px; /* 헤더 전체 높이를 슬림하게 고정 */
+            padding: 0 40px; /* 위아래 패딩 제거로 여백만 줄임 */
             background-color: #f4f4f4; 
         }
 
@@ -46,7 +45,7 @@
         }
         
         .logo img {
-            height: 55px; /* 슬림해진 헤더에 맞춰 로고 크기 축소 */
+            height: 95px; /* 로고 크기는 예전과 동일하게 복구 */
             width: auto;
             object-fit: contain;
             mix-blend-mode: multiply; 
