@@ -70,7 +70,7 @@
             top: 0;
             z-index: 1000;
             background-color: #fff;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* 은은한 하단 그림자 */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); 
         }
 
         /* 2. 서브 헤더 */
@@ -335,14 +335,14 @@
             width: 120px;
             height: 75px;
             border-radius: 5px;
-            overflow: hidden; /* 이미지가 둥근 모서리 밖으로 튀어나오지 않게 처리 */
-            flex-shrink: 0; /* 브라우저 창이 좁아져도 이미지 크기가 강제로 줄어들지 않게 고정 */
+            overflow: hidden; 
+            flex-shrink: 0; 
         }
 
         .promo-card-img img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* 원본 비율을 유지하면서 주어진 영역에 빈틈없이 꽉 채움 */
+            object-fit: cover; 
             display: block;
         }
 
@@ -374,6 +374,245 @@
         .promo-btn:hover {
             background-color: #333;
         }
+
+        /* ----- 팝업 모달 스타일 추가 ----- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: none; /* 기본 숨김 */
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            backdrop-filter: blur(3px); /* 배경 살짝 블러처리 */
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            width: 100%;
+            max-width: 480px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            animation: modalFadeIn 0.3s ease-out;
+            position: relative;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal-header {
+            background-color: #e65100; /* 오렌지색 배경 */
+            color: #fff;
+            padding: 30px;
+            position: relative;
+        }
+
+        .modal-logo {
+            background-color: #fff;
+            color: #e65100;
+            display: inline-flex;
+            align-items: center;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: 900;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        
+        .modal-logo i {
+            font-size: 10px;
+            margin: 0 3px;
+        }
+
+        .modal-close-top {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.4);
+            color: #fff;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 16px;
+            transition: all 0.2s;
+        }
+
+        .modal-close-top:hover {
+            background-color: rgba(255,255,255,0.2);
+        }
+
+        .modal-title {
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
+        }
+
+        .modal-subtitle {
+            font-size: 13px;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .modal-section-title {
+            font-size: 14px;
+            font-weight: 800;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .earn-box {
+            background-color: #f9f8f6;
+            border-radius: 8px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .earn-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #ffe0d2;
+            color: #e65100;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .earn-text h5 {
+            font-size: 15px;
+            font-weight: 800;
+            color: #111;
+            margin-bottom: 5px;
+        }
+
+        .earn-text p {
+            font-size: 12px;
+            color: #555;
+            font-weight: 500;
+        }
+
+        .benefit-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .benefit-card {
+            border: 1px solid #eaeaea;
+            border-radius: 8px;
+            padding: 15px;
+        }
+
+        .benefit-point {
+            color: #e65100;
+            font-size: 15px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .benefit-name {
+            font-size: 14px;
+            font-weight: 800;
+            color: #111;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .benefit-name i {
+            color: #777;
+        }
+
+        .benefit-desc {
+            font-size: 12px;
+            color: #777;
+            font-weight: 500;
+            line-height: 1.4;
+            word-break: keep-all;
+        }
+
+        .notice-box {
+            background-color: #fcebe5;
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin-bottom: 25px;
+        }
+
+        .notice-box ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .notice-box li {
+            font-size: 12px;
+            color: #c85a43;
+            font-weight: 600;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            line-height: 1.4;
+        }
+
+        .notice-box li i {
+            margin-top: 2px;
+        }
+
+        .modal-footer {
+            display: flex;
+            gap: 10px;
+        }
+
+        .modal-btn {
+            flex: 1;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 800;
+            cursor: pointer;
+            text-align: center;
+            border: 1px solid #ddd;
+            background-color: #fff;
+            color: #111;
+            transition: all 0.2s;
+        }
+
+        .modal-btn:hover {
+            background-color: #f4f4f4;
+        }
+
+        .modal-btn.primary {
+            flex: 2;
+        }
+        /* ----- 팝업 모달 스타일 종료 ----- */
 
         /* 6. 객실 & 스위트 섹션 */
         .rooms-section {
@@ -1062,7 +1301,7 @@
                     <p>공식 홈페이지 예약 시 포인트 적립. 누적 포인트에 따라 커피 쿠폰, 객실 업그레이드, 무료 숙박권 등 다양한 혜택을 제공합니다.</p>
                 </div>
             </div>
-            <button class="promo-btn">더 알아보기</button>
+            <button class="promo-btn" id="openPromoModal">더 알아보기</button>
         </div>
     </section>
 
@@ -1679,6 +1918,65 @@
         </div>
     </footer>
 
+    <div id="pointModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="modal-close-top" id="closeModalTop"><i class="fa-solid fa-xmark"></i></button>
+                <div class="modal-logo">INSTA<i class="fa-solid fa-star"></i>POINT</div>
+                <h2 class="modal-title">예약할수록 쌓이는 포인트 혜택</h2>
+                <p class="modal-subtitle">공식 홈페이지 예약 시 자동 적립 · 다음 예약부터 바로 사용 가능</p>
+            </div>
+            
+            <div class="modal-body">
+                <div class="modal-section-title">포인트 적립 방법</div>
+                <div class="earn-box">
+                    <div class="earn-icon"><i class="fa-regular fa-building"></i></div>
+                    <div class="earn-text">
+                        <h5>1박 예약 시 결제금액의 5% 자동 적립</h5>
+                        <p>10만원 예약 &rarr; 5,000P 적립 · 회원가입 웰컴 포인트 3,000P 추가 증정</p>
+                    </div>
+                </div>
+
+                <div class="modal-section-title">포인트 혜택 교환</div>
+                <div class="benefit-grid">
+                    <div class="benefit-card">
+                        <div class="benefit-point">5,000P</div>
+                        <div class="benefit-name"><i class="fa-solid fa-mug-hot"></i> 커피 쿠폰</div>
+                        <div class="benefit-desc">호텔 라운지 아메리카노 1잔 무료</div>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-point">15,000P</div>
+                        <div class="benefit-name"><i class="fa-solid fa-utensils"></i> 조식 2인 무료</div>
+                        <div class="benefit-desc">체크인 당일 조식 2인 제공</div>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-point">30,000P</div>
+                        <div class="benefit-name"><i class="fa-solid fa-arrow-up"></i> 객실 업그레이드</div>
+                        <div class="benefit-desc">상위 객실 타입으로 무료 업그레이드</div>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-point">100,000P</div>
+                        <div class="benefit-name"><i class="fa-regular fa-star"></i> 1박 무료 숙박권</div>
+                        <div class="benefit-desc">전 객실 타입 1박 무료 이용</div>
+                    </div>
+                </div>
+
+                <div class="notice-box">
+                    <ul>
+                        <li><i class="fa-solid fa-circle-info"></i> 포인트는 최소 5,000P 이상부터 사용 가능합니다.</li>
+                        <li><i class="fa-solid fa-circle-info"></i> 1회 예약 시 결제금액의 최대 30%까지 포인트로 차감 가능합니다.</li>
+                        <li><i class="fa-solid fa-circle-info"></i> 포인트 유효기간은 마지막 사용일로부터 1년입니다.</li>
+                    </ul>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="modal-btn" id="closeModalBottom">닫기</button>
+                    <button class="modal-btn primary">지금 회원가입하고 3,000P 받기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         // --- 1. 객실 슬라이더 & 마우스 드래그 기능 ---
         const slider = document.querySelector('.rooms-grid');
@@ -1776,6 +2074,35 @@
                     this.classList.add('active');
                 }
             });
+        });
+
+        // --- 4. 팝업 모달 기능 ---
+        const promoBtn = document.getElementById('openPromoModal');
+        const modal = document.getElementById('pointModal');
+        const closeModalTop = document.getElementById('closeModalTop');
+        const closeModalBottom = document.getElementById('closeModalBottom');
+
+        // 모달 열기
+        promoBtn.addEventListener('click', () => {
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // 배경 스크롤 방지
+        });
+
+        // 모달 닫기 함수
+        const closeModal = () => {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto'; // 스크롤 복구
+        };
+
+        // 닫기 버튼(X, 닫기 글씨) 이벤트
+        closeModalTop.addEventListener('click', closeModal);
+        closeModalBottom.addEventListener('click', closeModal);
+
+        // 모달창 바깥(어두운 배경) 클릭 시 닫기
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
         });
     </script>
 
