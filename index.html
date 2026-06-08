@@ -1918,64 +1918,85 @@
         </div>
     </footer>
 
-    <div id="pointModal" class="modal-overlay">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button class="modal-close-top" id="closeModalTop"><i class="fa-solid fa-xmark"></i></button>
-                <div class="modal-logo">INSTA<i class="fa-solid fa-star"></i>POINT</div>
-                <h2 class="modal-title">예약할수록 쌓이는 포인트 혜택</h2>
-                <p class="modal-subtitle">공식 홈페이지 예약 시 자동 적립 · 다음 예약부터 바로 사용 가능</p>
-            </div>
-            
-            <div class="modal-body">
-                <div class="modal-section-title">포인트 적립 방법</div>
-                <div class="earn-box">
-                    <div class="earn-icon"><i class="fa-regular fa-building"></i></div>
-                    <div class="earn-text">
-                        <h5>1박 예약 시 결제금액의 5% 자동 적립</h5>
-                        <p>10만원 예약 &rarr; 5,000P 적립 · 회원가입 웰컴 포인트 3,000P 추가 증정</p>
-                    </div>
+   <div id="pointModal" class="modal-overlay">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #fff; color: #111; padding: 30px; text-align: center;">
+                    <button class="modal-close-top" id="closeModalTop" style="color: #555; border-color: #ddd;"><i class="fa-solid fa-xmark"></i></button>
+                    <div class="modal-logo" style="background-color: #f4f4f4; color: #e65100; margin: 0 auto 20px;">INSTA<i class="fa-solid fa-star"></i>POINT</div>
+                    <h2 class="modal-title" style="font-size: 24px;">공식 홈페이지 회원 전용</h2>
+                    <p class="modal-subtitle" style="font-size: 20px; font-weight: 800; color: #e65100;">리워드 프로그램</p>
                 </div>
+                
+                <div class="modal-body" style="padding: 0 30px 30px;">
+                    <div class="earn-box" style="border: 1px solid #ffd8c4; background-color: #fffaf7; margin-bottom: 25px; padding: 25px;">
+                        <div class="earn-icon" style="background-color: #fff0e6;"><i class="fa-solid fa-gift" style="color: #e65100;"></i></div>
+                        <div class="earn-text">
+                            <h5 style="color: #666; font-size: 13px; margin-bottom: 5px;">신규 회원가입 즉시</h5>
+                            <p style="color: #e65100; font-size: 20px; font-weight: 900;">3,000P 지급!</p>
+                        </div>
+                    </div>
 
-                <div class="modal-section-title">포인트 혜택 교환</div>
-                <div class="benefit-grid">
-                    <div class="benefit-card">
-                        <div class="benefit-point">5,000P</div>
-                        <div class="benefit-name"><i class="fa-solid fa-mug-hot"></i> 커피 쿠폰</div>
-                        <div class="benefit-desc">호텔 라운지 아메리카노 1잔 무료</div>
+                    <div class="modal-section-title" style="margin-bottom: 20px;">포인트 혜택 교환</div>
+                    
+                    <div class="benefit-list" style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 30px;">
+                        <div class="benefit-card" style="display: flex; justify-content: space-between; align-items: center; padding: 15px; border: 1px solid #eee; border-radius: 8px;">
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <i class="fa-solid fa-mug-hot" style="color: #777;"></i>
+                                <div>
+                                    <div style="font-weight: 800; font-size: 14px;">커피 쿠폰</div>
+                                    <div style="font-size: 12px; color: #777;">호텔 라운지 아메리카노 1잔 무료</div>
+                                </div>
+                            </div>
+                            <div style="font-weight: 800; color: #e65100;">5,000P</div>
+                        </div>
+                        <div class="benefit-card" style="display: flex; justify-content: space-between; align-items: center; padding: 15px; border: 1px solid #eee; border-radius: 8px;">
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <i class="fa-solid fa-utensils" style="color: #777;"></i>
+                                <div>
+                                    <div style="font-weight: 800; font-size: 14px;">조식 2인권</div>
+                                    <div style="font-size: 12px; color: #777;">체크인 당일 조식 2인 제공</div>
+                                </div>
+                            </div>
+                            <div style="font-weight: 800; color: #e65100;">15,000P</div>
+                        </div>
+                        <div class="benefit-card" style="display: flex; justify-content: space-between; align-items: center; padding: 15px; border: 1px solid #eee; border-radius: 8px;">
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <i class="fa-solid fa-arrow-up" style="color: #777;"></i>
+                                <div>
+                                    <div style="font-weight: 800; font-size: 14px;">객실 업그레이드</div>
+                                    <div style="font-size: 12px; color: #777;">상위 객실 타입으로 무료 업그레이드</div>
+                                </div>
+                            </div>
+                            <div style="font-weight: 800; color: #e65100;">30,000P</div>
+                        </div>
+                        <div class="benefit-card" style="display: flex; justify-content: space-between; align-items: center; padding: 15px; border: 1px solid #eee; border-radius: 8px; background-color: #fff9f5;">
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <i class="fa-solid fa-bed" style="color: #777;"></i>
+                                <div>
+                                    <div style="font-weight: 800; font-size: 14px;">1박 무료 숙박권</div>
+                                    <div style="font-size: 12px; color: #777;">전 객실 타입 1박 무료 이용</div>
+                                </div>
+                            </div>
+                            <div style="font-weight: 800; color: #e65100;">100,000P</div>
+                        </div>
                     </div>
-                    <div class="benefit-card">
-                        <div class="benefit-point">15,000P</div>
-                        <div class="benefit-name"><i class="fa-solid fa-utensils"></i> 조식 2인 무료</div>
-                        <div class="benefit-desc">체크인 당일 조식 2인 제공</div>
-                    </div>
-                    <div class="benefit-card">
-                        <div class="benefit-point">30,000P</div>
-                        <div class="benefit-name"><i class="fa-solid fa-arrow-up"></i> 객실 업그레이드</div>
-                        <div class="benefit-desc">상위 객실 타입으로 무료 업그레이드</div>
-                    </div>
-                    <div class="benefit-card">
-                        <div class="benefit-point">100,000P</div>
-                        <div class="benefit-name"><i class="fa-regular fa-star"></i> 1박 무료 숙박권</div>
-                        <div class="benefit-desc">전 객실 타입 1박 무료 이용</div>
-                    </div>
-                </div>
 
-                <div class="notice-box">
-                    <ul>
-                        <li><i class="fa-solid fa-circle-info"></i> 포인트는 최소 5,000P 이상부터 사용 가능합니다.</li>
-                        <li><i class="fa-solid fa-circle-info"></i> 1회 예약 시 결제금액의 최대 30%까지 포인트로 차감 가능합니다.</li>
-                        <li><i class="fa-solid fa-circle-info"></i> 포인트 유효기간은 마지막 사용일로부터 1년입니다.</li>
-                    </ul>
-                </div>
+                    <div class="earn-box" style="background-color: #f9f9f9; padding: 15px; border: none; margin-bottom: 20px;">
+                        <div class="earn-icon" style="background-color: #ddd;"><i class="fa-solid fa-coins" style="color: #555;"></i></div>
+                        <div class="earn-text">
+                            <h5 style="font-weight: 800; margin-bottom: 2px;">예약금액의 5% 자동 적립</h5>
+                            <p style="font-size: 12px;">예) 10만원 예약 시 5,000P 적립</p>
+                        </div>
+                        <div style="margin-left: auto; font-weight: 800; color: #e65100; font-size: 18px;">5%</div>
+                    </div>
 
-                <div class="modal-footer">
-                    <button class="modal-btn" id="closeModalBottom">닫기</button>
-                    <button class="modal-btn primary">지금 회원가입하고 3,000P 받기</button>
+                    <div class="modal-footer" style="flex-direction: column;">
+                        <button class="modal-btn primary" style="background-color: #e65100; color: #fff; border: none; width: 100%; padding: 16px;">회원가입하고 3,000P 받기</button>
+                        <button class="modal-btn" id="closeModalBottom" style="border: none; color: #777; margin-top: 10px;">닫기</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
     <script>
         // --- 1. 객실 슬라이더 & 마우스 드래그 기능 ---
