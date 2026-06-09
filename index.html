@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>INSTA HOTEL 홈페이지</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     
     <style>
         /* 세련된 폰트(Pretendard) 추가 */
@@ -376,153 +376,46 @@
         }
 
         /* ---------------------------------------------------
-           ★ 사진(팝업창.png)과 완벽히 일치하는 팝업창 스타일 ★
+           ★ 원본 이미지를 그대로 사용하는 팝업 모달 스타일 ★
            --------------------------------------------------- */
-        .m3-overlay { 
+        .img-modal-overlay { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
             background: rgba(0,0,0,0.7); display: none; justify-content: center; align-items: center; 
             z-index: 9999; backdrop-filter: blur(3px);
         }
-        .m3-overlay.active { display: flex; }
+        .img-modal-overlay.active { display: flex; }
         
-        .m3-modal { 
-            background: #fff; width: 100%; max-width: 540px; border-radius: 24px; 
-            padding: 35px 25px 20px; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.25); 
-            box-sizing: border-box; animation: m3Pop 0.35s cubic-bezier(0.1, 0.8, 0.2, 1);
+        .img-modal-content { 
+            position: relative; width: 100%; max-width: 520px; /* 이미지 원본 비율에 맞게 조정 */
+            border-radius: 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.25); 
+            animation: imgPop 0.35s cubic-bezier(0.1, 0.8, 0.2, 1);
+            display: flex; justify-content: center; align-items: center;
+            background: transparent;
         }
 
-        @keyframes m3Pop {
+        @keyframes imgPop {
             from { opacity: 0; transform: scale(0.95) translateY(10px); }
             to { opacity: 1; transform: scale(1) translateY(0); }
         }
 
-        /* 닫기 X 버튼 */
-        .m3-close { 
-            position: absolute; top: 20px; right: 20px; font-size: 22px; color: #777; 
-            background: none; border: none; cursor: pointer; transition: color 0.2s;
-        }
-        .m3-close:hover { color: #111; }
-
-        /* 헤더 로고 */
-        .m3-logo { 
-            text-align: center; color: #FF4E00; font-size: 13px; font-weight: 800; 
-            letter-spacing: 2px; margin-bottom: 12px; display: flex; justify-content: center; 
-            align-items: center; gap: 6px; 
-        }
-        .m3-logo i { font-size: 10px; }
-
-        /* 메인 및 서브 타이틀 */
-        .m3-title { text-align: center; font-size: 24px; font-weight: 800; color: #111; margin-bottom: 6px; letter-spacing: -0.5px; }
-        
-        .m3-subtitle-wrap { position: relative; text-align: center; margin-bottom: 30px; }
-        .m3-subtitle { font-size: 24px; font-weight: 800; color: #FF4E00; letter-spacing: -0.5px; display: inline-block; position: relative; }
-        
-        /* 흘림체 Welcome! */
-        .m3-welcome { 
-            font-family: 'Caveat', cursive; font-size: 26px; color: #D5CCC0; 
-            position: absolute; right: -75px; bottom: -12px; transform: rotate(-8deg); 
-            font-weight: 700; letter-spacing: 0;
+        /* 팝업창 이미지 원본 */
+        .popup-origin-img {
+            width: 100%; height: auto; display: block; border-radius: 24px;
         }
 
-        /* 웰컴 보너스 박스 */
-        .m3-welcome-box { 
-            background: linear-gradient(135deg, #FFF9F5 0%, #FFF 100%); 
-            border: 1px solid #FFE4D6; border-radius: 16px; padding: 25px 30px; 
-            display: flex; justify-content: space-between; align-items: center; 
-            margin-bottom: 20px; position: relative; overflow: hidden; box-shadow: 0 4px 15px rgba(255, 78, 0, 0.03);
+        /* 이미지 위에 덧씌우는 투명 클릭 영역 (버튼 기능 활성화) */
+        .click-close-top {
+            position: absolute; top: 1.5%; right: 2%; width: 50px; height: 50px;
+            background: transparent; border: none; cursor: pointer;
         }
-        .m3-wb-left { position: relative; z-index: 2; }
-        .m3-wb-left p { font-size: 14px; font-weight: 800; color: #111; margin-bottom: 2px; }
-        .m3-wb-left h2 { font-size: 52px; font-weight: 900; color: #FF4E00; line-height: 1.1; letter-spacing: -1px; margin-bottom: 4px; }
-        .m3-wb-left span { font-size: 12px; font-weight: 700; color: #999; letter-spacing: 2px; }
-        
-        .m3-wb-right { position: relative; z-index: 2; width: 130px; height: 130px; display: flex; justify-content: center; align-items: center; }
-        .m3-wb-img { width: 100%; height: 100%; object-fit: contain; }
-
-        /* 장식용 마름모 반짝이들 */
-        .m3-sparkle { position: absolute; color: #FF4E00; opacity: 0.8; }
-        .sp-1 { top: 20px; left: 35%; font-size: 18px; }
-        .sp-2 { top: 50px; left: 42%; font-size: 12px; }
-        .sp-3 { bottom: 20px; left: 10%; font-size: 14px; color: #FFB38A; }
-        
-        /* 3단 그리드 카드 (01, 02, 03) */
-        .m3-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
-        .m3-card { 
-            border: 1px solid #F0F0F0; border-radius: 12px; padding: 20px 16px; 
-            position: relative; overflow: hidden; background: #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.02); 
-            display: flex; flex-direction: column; justify-content: flex-start;
+        .click-close-bottom {
+            position: absolute; bottom: 1%; left: 35%; width: 30%; height: 6%;
+            background: transparent; border: none; cursor: pointer;
         }
-        
-        .m3-icon-wrap { 
-            width: 38px; height: 38px; border-radius: 50%; background: #FFF1E8; 
-            display: flex; justify-content: center; align-items: center; color: #FF4E00; 
-            font-size: 18px; margin-bottom: 12px; 
+        .click-signup {
+            position: absolute; bottom: 8.5%; left: 6%; width: 88%; height: 7.5%;
+            background: transparent; border: none; cursor: pointer;
         }
-        
-        .m3-card h4 { font-size: 15px; font-weight: 800; color: #111; margin-bottom: 6px; letter-spacing: -0.5px; }
-        .m3-card p { font-size: 11px; font-weight: 500; color: #777; line-height: 1.4; word-break: keep-all; }
-        
-        /* 1번 카드 전용 타이틀 정렬 (아이콘 옆에 5%) */
-        .m3-card-top-flex { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
-        .m3-card-top-flex .m3-icon-wrap { margin-bottom: 0; }
-        .m3-card-top-flex h3 { font-size: 26px; font-weight: 900; color: #FF4E00; line-height: 1; }
-        
-        /* 워터마크 숫자 (01, 02, 03) */
-        .m3-bg-num { 
-            position: absolute; bottom: -8px; right: 2px; font-size: 55px; 
-            font-style: italic; font-weight: 800; color: #FFF2E8; line-height: 1; 
-            z-index: 0; user-select: none; letter-spacing: -2px;
-        }
-        .m3-card * { position: relative; z-index: 1; } 
-
-        /* 하단 다크 스페셜 혜택 박스 */
-        .m3-dark-box { 
-            border-radius: 16px; background-color: #000; 
-            /* 분위기 있는 어두운 호텔 침실 배경 적용 */
-            background-image: url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&q=80&w=1000'); 
-            background-size: cover; background-position: center; position: relative; 
-            padding: 30px 25px; display: flex; justify-content: space-between; align-items: center; 
-            margin-bottom: 25px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-        }
-        .m3-db-overlay { 
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
-            background: linear-gradient(to right, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.6) 60%, rgba(0,0,0,0.1) 100%); z-index: 1; 
-        }
-        .m3-db-content { position: relative; z-index: 2; text-align: left; }
-        .m3-db-label { color: #FF4E00; font-size: 11px; font-weight: 800; letter-spacing: 1px; margin-bottom: 8px; }
-        .m3-db-title { color: #fff; font-size: 16px; font-weight: 700; margin-bottom: 2px; }
-        .m3-db-points { color: #fff; font-size: 42px; font-weight: 900; position: relative; display: inline-block; line-height: 1; letter-spacing: -1px; }
-        
-        /* 흘림체 Free Night */
-        .m3-freenight { 
-            font-family: 'Caveat', cursive; color: #FF4E00; font-size: 26px; 
-            position: absolute; right: -50px; bottom: -12px; transform: rotate(-5deg); white-space: nowrap; 
-        }
-        
-        /* 다크 박스 내 우측 배지 */
-        .m3-badge { 
-            position: relative; z-index: 2; width: 65px; height: 65px; background: #000; 
-            border: 2px solid #FF4E00; border-radius: 50%; display: flex; flex-direction: column; justify-content: center; align-items: center; 
-            text-align: center; color: #FF4E00; font-size: 10px; font-weight: 800; letter-spacing: 1px; line-height: 1.2; box-shadow: 0 4px 10px rgba(0,0,0,0.5); 
-        }
-
-        /* 오렌지색 회원가입 버튼 */
-        .m3-btn { 
-            background: #FF4E00; color: #fff; width: 100%; border: none; border-radius: 12px; 
-            padding: 18px 20px; font-size: 16px; font-weight: 800; display: flex; justify-content: space-between; align-items: center; 
-            cursor: pointer; box-shadow: 0 8px 20px rgba(255,78,0,0.3); transition: background 0.2s; 
-        }
-        .m3-btn:hover { background: #E64600; }
-        .m3-btn-icon { font-size: 14px; }
-        .m3-btn-text { flex: 1; text-align: center; }
-        
-        /* 최하단 닫기 텍스트 */
-        .m3-close-text { 
-            display: block; width: 100%; text-align: center; background: none; border: none; 
-            color: #888; font-size: 13px; font-weight: 600; margin-top: 18px; cursor: pointer; 
-            text-decoration: underline; text-underline-offset: 3px; 
-        }
-        .m3-close-text:hover { color: #333; }
         /* --------------------------------------------------- */
 
         /* 6. 객실 & 스위트 섹션 */
@@ -1830,82 +1723,13 @@
         </div>
     </footer>
 
-    <div id="pointModal" class="m3-overlay">
-        <div class="m3-modal">
-            <button class="m3-close" id="closeModalTop"><i class="fa-solid fa-xmark"></i></button>
-
-            <div class="m3-logo">INSTA ✦ MEMBERSHIP</div>
-            <div class="m3-title">공식 홈페이지 회원 전용</div>
-            <div class="m3-subtitle-wrap">
-                <div class="m3-subtitle">
-                    멤버십 혜택을 만나보세요
-                    <span class="m3-welcome">Welcome!</span>
-                </div>
-            </div>
-
-            <div class="m3-welcome-box">
-                <div class="m3-wb-left">
-                    <p>가입 즉시</p>
-                    <h2>3,000P</h2>
-                    <span>WELCOME BONUS</span>
-                </div>
-                <div class="m3-wb-right">
-                    <img src="https://cdn-icons-png.flaticon.com/512/4213/4213958.png" alt="가입 축하 선물" class="m3-wb-img">
-                </div>
-                
-                <div class="m3-sparkle sp-1">✦</div>
-                <div class="m3-sparkle sp-2">✦</div>
-                <div class="m3-sparkle sp-3">✦</div>
-            </div>
-
-            <div class="m3-grid">
-                <div class="m3-card c1">
-                    <div class="m3-card-top-flex">
-                        <div class="m3-icon-wrap"><i class="fa-solid fa-coins"></i></div>
-                        <h3>5%</h3>
-                    </div>
-                    <h4>자동 적립</h4>
-                    <p>예약금액의 5%<br>자동 적립 혜택</p>
-                    <div class="m3-bg-num">01</div>
-                </div>
-                
-                <div class="m3-card">
-                    <div class="m3-icon-wrap"><i class="fa-solid fa-utensils"></i></div>
-                    <h4>조식 2인권</h4>
-                    <p>체크인 당일<br>조식 2인 제공</p>
-                    <div class="m3-bg-num">02</div>
-                </div>
-
-                <div class="m3-card">
-                    <div class="m3-icon-wrap"><i class="fa-solid fa-arrow-turn-up"></i></div>
-                    <h4>객실 업그레이드</h4>
-                    <p>상위 객실 타입으로<br>무료 업그레이드</p>
-                    <div class="m3-bg-num">03</div>
-                </div>
-            </div>
-
-            <div class="m3-dark-box">
-                <div class="m3-db-overlay"></div>
-                <div class="m3-db-content">
-                    <div class="m3-db-label">SPECIAL BENEFIT</div>
-                    <div class="m3-db-title">전 객실 타입 1박 무료 이용</div>
-                    <div class="m3-db-points">
-                        100,000P
-                        <span class="m3-freenight">Free Night</span>
-                    </div>
-                </div>
-                <div class="m3-badge">
-                    <span>INSTA<br>✦<br>ONLY</span>
-                </div>
-            </div>
-
-            <button class="m3-btn">
-                <i class="fa-solid fa-sparkles m3-btn-icon"></i>
-                <span class="m3-btn-text">회원가입하고 3,000P 받기</span>
-                <i class="fa-solid fa-chevron-right m3-btn-icon"></i>
-            </button>
-
-            <button class="m3-close-text" id="closeModalBottom">닫기</button>
+    <div id="pointModal" class="img-modal-overlay">
+        <div class="img-modal-content">
+            <img src="팝업창.png" alt="멤버십 혜택" class="popup-origin-img">
+            
+            <button class="click-close-top" id="closeModalTop" title="닫기"></button>
+            <button class="click-signup" title="회원가입하기"></button>
+            <button class="click-close-bottom" id="closeModalBottom" title="닫기"></button>
         </div>
     </div>
 
@@ -2008,7 +1832,7 @@
             });
         });
 
-        // --- 4. 팝업 모달 기능 ---
+        // --- 4. 원본 이미지 팝업 모달 기능 ---
         const promoBtn = document.getElementById('openPromoModal');
         const modal = document.getElementById('pointModal');
         const closeModalTop = document.getElementById('closeModalTop');
@@ -2026,7 +1850,7 @@
             document.body.style.overflow = 'auto'; // 스크롤 복구
         };
 
-        // 닫기 버튼(X, 닫기 글씨) 이벤트
+        // 투명 닫기 버튼 이벤트 (X 및 하단 닫기 텍스트 위치)
         closeModalTop.addEventListener('click', closeModal);
         closeModalBottom.addEventListener('click', closeModal);
 
