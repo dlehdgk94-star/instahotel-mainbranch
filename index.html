@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>호텔 인스타 홈페이지</title>
+    <title>INSTA HOTEL 홈페이지</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     
@@ -375,243 +375,87 @@
             background-color: #333;
         }
 
-        /* ----- 팝업 모달 스타일 추가 ----- */
+        /* ----- 팝업 모달 스타일 (이미지 기반 새 디자인) ----- */
         .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
-            display: none; /* 기본 숨김 */
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            backdrop-filter: blur(3px); /* 배경 살짝 블러처리 */
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.4); display: none; justify-content: center; align-items: center;
+            z-index: 9999; backdrop-filter: blur(2px);
         }
-
-        .modal-overlay.active {
-            display: flex;
-        }
-
+        .modal-overlay.active { display: flex; }
+        
         .modal-content {
-            background-color: #fff;
-            width: 100%;
-            max-width: 480px;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            animation: modalFadeIn 0.3s ease-out;
-            position: relative;
+            background-color: #fff; width: 100%; max-width: 440px; border-radius: 16px;
+            overflow: hidden; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15); animation: modalFadeIn 0.3s ease-out;
+            position: relative; padding: 40px 30px 20px; text-align: center;
         }
-
+        
         @keyframes modalFadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .modal-header {
-            background-color: #e65100; /* 오렌지색 배경 */
-            color: #fff;
-            padding: 30px;
-            position: relative;
-        }
-
-        .modal-logo {
-            background-color: #fff;
-            color: #e65100;
-            display: inline-flex;
-            align-items: center;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-weight: 900;
-            font-size: 14px;
-            margin-bottom: 20px;
-        }
-        
-        .modal-logo i {
-            font-size: 10px;
-            margin: 0 3px;
-        }
-
         .modal-close-top {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: transparent;
-            border: 1px solid rgba(255,255,255,0.4);
-            color: #fff;
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 16px;
-            transition: all 0.2s;
+            position: absolute; top: 20px; right: 20px; background: transparent; border: none; color: #555;
+            font-size: 20px; cursor: pointer; padding: 5px; transition: color 0.2s;
+        }
+        .modal-close-top:hover { color: #000; }
+
+        .modal-header-logo {
+            color: #e65100; font-weight: 800; font-size: 14px; margin-bottom: 15px; 
+            display: flex; align-items: center; justify-content: center; letter-spacing: 1.5px;
         }
 
-        .modal-close-top:hover {
-            background-color: rgba(255,255,255,0.2);
-        }
+        .modal-title { font-size: 22px; font-weight: 900; color: #111; margin-bottom: 5px; letter-spacing: -0.5px; }
+        .modal-subtitle { font-size: 18px; font-weight: 800; color: #e65100; margin-bottom: 25px; letter-spacing: -0.5px; }
 
-        .modal-title {
-            font-size: 20px;
-            font-weight: 800;
-            margin-bottom: 10px;
-            letter-spacing: -0.5px;
+        .gift-banner {
+            border: 1px solid #ffe8db; border-radius: 8px; padding: 18px 20px; display: flex; align-items: center;
+            justify-content: center; gap: 15px; margin-bottom: 30px; position: relative;
         }
+        .gift-icon-bg {
+            width: 50px; height: 50px; background-color: #fff5ef; border-radius: 50%; 
+            display: flex; align-items: center; justify-content: center; color: #e65100; font-size: 24px; position: relative;
+        }
+        .gift-icon-bg::after { content: '✦'; position: absolute; top: -2px; right: -5px; font-size: 14px; color: #e65100; }
+        .gift-icon-bg::before { content: '✦'; position: absolute; bottom: 8px; left: -10px; font-size: 10px; color: #e65100; opacity: 0.6; }
 
-        .modal-subtitle {
-            font-size: 13px;
-            font-weight: 500;
-            opacity: 0.9;
-        }
+        .gift-text { text-align: left; }
+        .gift-text .sm { display: block; font-size: 13px; color: #333; font-weight: 600; margin-bottom: 4px; }
+        .gift-text .lg { display: block; font-size: 26px; font-weight: 900; color: #e65100; letter-spacing: -0.5px; }
+        .gift-text .lg span { color: #333; font-size: 18px; font-weight: 800; }
 
-        .modal-body {
-            padding: 30px;
-        }
+        .section-label { text-align: left; font-size: 15px; font-weight: 800; color: #111; margin-bottom: 12px; }
 
-        .modal-section-title {
-            font-size: 14px;
-            font-weight: 800;
-            color: #333;
-            margin-bottom: 15px;
+        .benefit-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+        .b-item {
+            display: flex; align-items: center; justify-content: space-between; padding: 18px 20px;
+            border: 1px solid #f0f0f0; border-radius: 10px; background-color: #fff;
         }
-
-        .earn-box {
-            background-color: #f9f8f6;
-            border-radius: 8px;
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 30px;
+        .b-item.highlight { background-color: #fff7f2; border-color: #ffe8db; }
+        .b-left { display: flex; align-items: center; gap: 15px; }
+        .b-icon {
+            width: 42px; height: 42px; background-color: #f7f7f7; border-radius: 50%; 
+            display: flex; align-items: center; justify-content: center; color: #666; font-size: 16px;
         }
-
-        .earn-icon {
-            width: 40px;
-            height: 40px;
-            background-color: #ffe0d2;
-            color: #e65100;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 18px;
-            flex-shrink: 0;
-        }
-
-        .earn-text h5 {
-            font-size: 15px;
-            font-weight: 800;
-            color: #111;
-            margin-bottom: 5px;
-        }
-
-        .earn-text p {
-            font-size: 12px;
-            color: #555;
-            font-weight: 500;
-        }
-
-        .benefit-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 30px;
-        }
-
-        .benefit-card {
-            border: 1px solid #eaeaea;
-            border-radius: 8px;
-            padding: 15px;
-        }
-
-        .benefit-point {
-            color: #e65100;
-            font-size: 15px;
-            font-weight: 800;
-            margin-bottom: 8px;
-        }
-
-        .benefit-name {
-            font-size: 14px;
-            font-weight: 800;
-            color: #111;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
+        .b-item.highlight .b-icon { background-color: #ffeadd; color: #e65100; }
         
-        .benefit-name i {
-            color: #777;
-        }
+        .b-text { text-align: left; }
+        .b-text h5 { font-size: 15px; font-weight: 800; color: #111; margin-bottom: 4px; }
+        .b-text p { font-size: 12px; font-weight: 500; color: #888; }
+        .b-point { font-size: 16px; font-weight: 900; color: #e65100; }
 
-        .benefit-desc {
-            font-size: 12px;
-            color: #777;
-            font-weight: 500;
-            line-height: 1.4;
-            word-break: keep-all;
+        .btn-signup-modal {
+            background-color: #e65100; color: #fff; border: none; border-radius: 8px; width: 100%;
+            padding: 16px; font-size: 15px; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; margin-top: 25px; transition: background 0.2s; position: relative;
         }
-
-        .notice-box {
-            background-color: #fcebe5;
-            border-radius: 8px;
-            padding: 15px 20px;
-            margin-bottom: 25px;
+        .btn-signup-modal i { position: absolute; right: 20px; }
+        .btn-signup-modal:hover { background-color: #cc4800; }
+        
+        .btn-close-bottom {
+            background: none; border: none; color: #777; font-size: 13px; font-weight: 600; 
+            margin-top: 15px; cursor: pointer; padding: 10px;
         }
-
-        .notice-box ul {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .notice-box li {
-            font-size: 12px;
-            color: #c85a43;
-            font-weight: 600;
-            display: flex;
-            align-items: flex-start;
-            gap: 8px;
-            line-height: 1.4;
-        }
-
-        .notice-box li i {
-            margin-top: 2px;
-        }
-
-        .modal-footer {
-            display: flex;
-            gap: 10px;
-        }
-
-        .modal-btn {
-            flex: 1;
-            padding: 14px;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 800;
-            cursor: pointer;
-            text-align: center;
-            border: 1px solid #ddd;
-            background-color: #fff;
-            color: #111;
-            transition: all 0.2s;
-        }
-
-        .modal-btn:hover {
-            background-color: #f4f4f4;
-        }
-
-        .modal-btn.primary {
-            flex: 2;
-        }
+        .btn-close-bottom:hover { color: #333; }
         /* ----- 팝업 모달 스타일 종료 ----- */
 
         /* 6. 객실 & 스위트 섹션 */
@@ -1202,7 +1046,7 @@
 
     <header class="top-header">
         <a href="https://instahotel.kr" class="logo">
-            <img src="홈로고2.png" alt="호텔 인스타 로고">
+            <img src="홈로고2.png" alt="인스타 호텔 로고">
         </a>
         <ul class="main-nav">
             <li class="active"><a href="#">개요</a></li>
@@ -1263,6 +1107,7 @@
             </div>
         </div>
     </div>
+
     <section class="hero-section">
         <div class="hero-controls">
             <div class="slider-nav">
@@ -1281,7 +1126,7 @@
     </section>
 
     <section class="intro-section">
-        <p class="intro-welcome">호텔 인스타에 오신 것을 환영합니다.</p>
+        <p class="intro-welcome">인스타 호텔에 오신 것을 환영합니다.</p>
         <h2 class="intro-title">수원에서 만나는 감각적인 호텔 스테이</h2>
         <p class="intro-desc">
             전통의 숨결과 현대적 에너지가 공존하는 도시 수원.그 중심인 영통에 자리한 INSTA HOTEL은 단순한 숙박을 넘어, 머무름 자체가 특별한 경험이 되는 공간을 제안합니다.
@@ -1913,90 +1758,91 @@
                 <i class="fa-brands fa-instagram"></i>
             </div>
             <div class="footer-info">
-                사업자 정보: 호텔 인스타 | (주)호텔 인스타 | 사업자등록번호: 176-24-01388 | 통신판매신고번호: 2023-수원영통-1696 | 주소: 경기도 수원시 영통구 영통로 94-6 | 전화: +82 31-203-4301 | 이메일: yhl5258@naver.com
+                사업자 정보: 인스타 호텔 | (주)인스타 호텔 | 사업자등록번호: 176-24-01388 | 통신판매신고번호: 2023-수원영통-1696 | 주소: 경기도 수원시 영통구 영통로 94-6 | 전화: +82 31-203-4301 | 이메일: yhl5258@naver.com
             </div>
         </div>
     </footer>
 
-   <div id="pointModal" class="modal-overlay">
-            <div class="modal-content">
-                <div class="modal-header" style="background-color: #fff; color: #111; padding: 30px; text-align: center;">
-                    <button class="modal-close-top" id="closeModalTop" style="color: #555; border-color: #ddd;"><i class="fa-solid fa-xmark"></i></button>
-                    <div class="modal-logo" style="background-color: #f4f4f4; color: #e65100; margin: 0 auto 20px;">INSTA<i class="fa-solid fa-star"></i>POINT</div>
-                    <h2 class="modal-title" style="font-size: 24px;">공식 홈페이지 회원 전용</h2>
-                    <p class="modal-subtitle" style="font-size: 20px; font-weight: 800; color: #e65100;">리워드 프로그램</p>
-                </div>
-                
-                <div class="modal-body" style="padding: 0 30px 30px;">
-                    <div class="earn-box" style="border: 1px solid #ffd8c4; background-color: #fffaf7; margin-bottom: 25px; padding: 25px;">
-                        <div class="earn-icon" style="background-color: #fff0e6;"><i class="fa-solid fa-gift" style="color: #e65100;"></i></div>
-                        <div class="earn-text">
-                            <h5 style="color: #666; font-size: 13px; margin-bottom: 5px;">신규 회원가입 즉시</h5>
-                            <p style="color: #e65100; font-size: 20px; font-weight: 900;">3,000P 지급!</p>
-                        </div>
-                    </div>
+    <!-- 이미지 디자인으로 완전히 수정된 팝업 모달 영역 -->
+    <div id="pointModal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close-top" id="closeModalTop"><i class="fa-solid fa-xmark"></i></button>
 
-                    <div class="modal-section-title" style="margin-bottom: 20px;">포인트 혜택 교환</div>
-                    
-                    <div class="benefit-list" style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 30px;">
-                        <div class="benefit-card" style="display: flex; justify-content: space-between; align-items: center; padding: 15px; border: 1px solid #eee; border-radius: 8px;">
-                            <div style="display: flex; align-items: center; gap: 10px;">
-                                <i class="fa-solid fa-mug-hot" style="color: #777;"></i>
-                                <div>
-                                    <div style="font-weight: 800; font-size: 14px;">커피 쿠폰</div>
-                                    <div style="font-size: 12px; color: #777;">호텔 라운지 아메리카노 1잔 무료</div>
-                                </div>
-                            </div>
-                            <div style="font-weight: 800; color: #e65100;">5,000P</div>
-                        </div>
-                        <div class="benefit-card" style="display: flex; justify-content: space-between; align-items: center; padding: 15px; border: 1px solid #eee; border-radius: 8px;">
-                            <div style="display: flex; align-items: center; gap: 10px;">
-                                <i class="fa-solid fa-utensils" style="color: #777;"></i>
-                                <div>
-                                    <div style="font-weight: 800; font-size: 14px;">조식 2인권</div>
-                                    <div style="font-size: 12px; color: #777;">체크인 당일 조식 2인 제공</div>
-                                </div>
-                            </div>
-                            <div style="font-weight: 800; color: #e65100;">15,000P</div>
-                        </div>
-                        <div class="benefit-card" style="display: flex; justify-content: space-between; align-items: center; padding: 15px; border: 1px solid #eee; border-radius: 8px;">
-                            <div style="display: flex; align-items: center; gap: 10px;">
-                                <i class="fa-solid fa-arrow-up" style="color: #777;"></i>
-                                <div>
-                                    <div style="font-weight: 800; font-size: 14px;">객실 업그레이드</div>
-                                    <div style="font-size: 12px; color: #777;">상위 객실 타입으로 무료 업그레이드</div>
-                                </div>
-                            </div>
-                            <div style="font-weight: 800; color: #e65100;">30,000P</div>
-                        </div>
-                        <div class="benefit-card" style="display: flex; justify-content: space-between; align-items: center; padding: 15px; border: 1px solid #eee; border-radius: 8px; background-color: #fff9f5;">
-                            <div style="display: flex; align-items: center; gap: 10px;">
-                                <i class="fa-solid fa-bed" style="color: #777;"></i>
-                                <div>
-                                    <div style="font-weight: 800; font-size: 14px;">1박 무료 숙박권</div>
-                                    <div style="font-size: 12px; color: #777;">전 객실 타입 1박 무료 이용</div>
-                                </div>
-                            </div>
-                            <div style="font-weight: 800; color: #e65100;">100,000P</div>
-                        </div>
-                    </div>
+            <div class="modal-header-logo">INSTA <span style="font-size: 11px; margin: 0 4px;">✦</span> POINT</div>
+            <h2 class="modal-title">공식 홈페이지 회원 전용</h2>
+            <p class="modal-subtitle">리워드 프로그램</p>
 
-                    <div class="earn-box" style="background-color: #f9f9f9; padding: 15px; border: none; margin-bottom: 20px;">
-                        <div class="earn-icon" style="background-color: #ddd;"><i class="fa-solid fa-coins" style="color: #555;"></i></div>
-                        <div class="earn-text">
-                            <h5 style="font-weight: 800; margin-bottom: 2px;">예약금액의 5% 자동 적립</h5>
-                            <p style="font-size: 12px;">예) 10만원 예약 시 5,000P 적립</p>
-                        </div>
-                        <div style="margin-left: auto; font-weight: 800; color: #e65100; font-size: 18px;">5%</div>
-                    </div>
-
-                    <div class="modal-footer" style="flex-direction: column;">
-                        <button class="modal-btn primary" style="background-color: #e65100; color: #fff; border: none; width: 100%; padding: 16px;">회원가입하고 3,000P 받기</button>
-                        <button class="modal-btn" id="closeModalBottom" style="border: none; color: #777; margin-top: 10px;">닫기</button>
-                    </div>
+            <div class="gift-banner">
+                <div class="gift-icon-bg"><i class="fa-solid fa-gift"></i></div>
+                <div class="gift-text">
+                    <span class="sm">신규 회원가입 즉시</span>
+                    <span class="lg">3,000P <span>지급!</span></span>
                 </div>
             </div>
+
+            <div class="section-label">포인트 혜택 교환</div>
+
+            <div class="benefit-list">
+                <div class="b-item">
+                    <div class="b-left">
+                        <div class="b-icon"><i class="fa-solid fa-mug-hot"></i></div>
+                        <div class="b-text">
+                            <h5>커피 쿠폰</h5>
+                            <p>호텔 라운지 아메리카노 1잔 무료</p>
+                        </div>
+                    </div>
+                    <div class="b-point">5,000P</div>
+                </div>
+
+                <div class="b-item">
+                    <div class="b-left">
+                        <div class="b-icon"><i class="fa-solid fa-utensils"></i></div>
+                        <div class="b-text">
+                            <h5>조식 2인권</h5>
+                            <p>체크인 당일 조식 2인 제공</p>
+                        </div>
+                    </div>
+                    <div class="b-point">15,000P</div>
+                </div>
+
+                <div class="b-item">
+                    <div class="b-left">
+                        <div class="b-icon"><i class="fa-solid fa-arrow-up"></i></div>
+                        <div class="b-text">
+                            <h5>객실 업그레이드</h5>
+                            <p>상위 객실 타입으로 무료 업그레이드</p>
+                        </div>
+                    </div>
+                    <div class="b-point">30,000P</div>
+                </div>
+
+                <div class="b-item highlight">
+                    <div class="b-left">
+                        <div class="b-icon"><i class="fa-solid fa-bed"></i></div>
+                        <div class="b-text">
+                            <h5>1박 무료 숙박권</h5>
+                            <p>전 객실 타입 1박 무료 이용</p>
+                        </div>
+                    </div>
+                    <div class="b-point">100,000P</div>
+                </div>
+
+                <div class="b-item">
+                    <div class="b-left">
+                        <div class="b-icon"><i class="fa-solid fa-coins"></i></div>
+                        <div class="b-text">
+                            <h5>예약금액의 5% 자동 적립</h5>
+                            <p>예) 10만원 예약 시 5,000P 적립</p>
+                        </div>
+                    </div>
+                    <div class="b-point" style="font-size: 18px;">5%</div>
+                </div>
+            </div>
+
+            <button class="btn-signup-modal">회원가입하고 3,000P 받기 <i class="fa-solid fa-chevron-right"></i></button>
+            <button class="btn-close-bottom" id="closeModalBottom">닫기</button>
         </div>
+    </div>
 
     <script>
         // --- 1. 객실 슬라이더 & 마우스 드래그 기능 ---
