@@ -33,25 +33,32 @@
            ★ 신규 추가: 최상단 블랙 유틸리티 바 ★
            --------------------------------------------------- */
         .top-util-bar {
-            background-color: #0b0b0b;
-            color: #fff;
-            padding: 8px 40px;
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            gap: 24px;
-        }
+    background-color: #0b0b0b;
+    color: #fff;
+    padding: 7px 40px; 
+    display: flex;
+    justify-content: space-between; /* 햄버거 메뉴와 우측 메뉴 양 끝 정렬 */
+    align-items: center;
+}
 
-        .util-promo {
-            font-size: 13px;
-            font-weight: 500;
-            letter-spacing: -0.3px;
-        }
+/* 햄버거 메뉴 아이콘 */
+.hamburger-menu {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 5px;
+}
+.hamburger-menu span {
+    width: 18px;
+    height: 2px;
+    background-color: #fff;
+    border-radius: 2px;
+}
 
-        .util-promo strong {
-            color: #FF4E00; /* 팝업창과 동일한 오렌지 포인트 컬러 */
-            font-weight: 800;
-        }
+.util-right-group { display: flex; align-items: center; gap: 24px; }
+.util-promo { font-size: 12px; font-weight: 500; }
+.util-promo strong { color: #FF4E00; font-weight: 800; }
 
         .util-login-btn {
             display: flex;
@@ -1084,14 +1091,20 @@
 </head>
 <body>
 
-    <!-- 새롭게 추가된 최상단 유틸리티 바 -->
+    <!-- 햄버거 메뉴와 우측 버튼 그룹을 포함한 상단바 -->
     <div class="top-util-bar">
-        <span class="util-promo">회원가입 시 <strong>3,000P</strong> 지급</span>
-        <button class="util-login-btn">
-            <i class="fa-regular fa-user"></i> 로그인 또는 가입하기
-        </button>
+        <div class="hamburger-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="util-right-group">
+            <span class="util-promo">회원가입 시 <strong>3,000P</strong> 지급</span>
+            <button class="util-login-btn">
+                <i class="fa-regular fa-user"></i> 로그인 또는 가입하기
+            </button>
+        </div>
     </div>
-
     <header class="top-header">
         <a href="https://instahotel.kr" class="logo">
             <img src="홈로고2.png" alt="인스타 호텔 로고">
