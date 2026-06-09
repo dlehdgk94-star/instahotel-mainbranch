@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>INSTA HOTEL 홈페이지</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- 기본 폰트 및 팝업창 디자인용 흘림체(Caveat) 폰트 추가 -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
     
     <style>
@@ -27,6 +28,55 @@
         body {
             color: #111; 
         }
+
+        /* ---------------------------------------------------
+           ★ 신규 추가: 최상단 블랙 유틸리티 바 ★
+           --------------------------------------------------- */
+        .top-util-bar {
+            background-color: #0b0b0b;
+            color: #fff;
+            padding: 12px 40px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .util-promo {
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: -0.3px;
+        }
+
+        .util-promo strong {
+            color: #FF4E00; /* 팝업창과 동일한 오렌지 포인트 컬러 */
+            font-weight: 800;
+        }
+
+        .util-login-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: transparent;
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 25px;
+            padding: 7px 16px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .util-login-btn i {
+            font-size: 13px;
+        }
+
+        .util-login-btn:hover {
+            border-color: #fff;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        /* --------------------------------------------------- */
 
         /* 1. 최상단 헤더 */
         .top-header {
@@ -359,9 +409,7 @@
             color: #444;
         }
 
-        /* ---------------------------------------------------
-           ★ '더 알아보기' 버튼 마우스 오버 효과 스타일 ★
-           --------------------------------------------------- */
+        /* '더 알아보기' 버튼 마우스 오버 효과 스타일 */
         .promo-btn {
             background-color: #555;
             color: #fff;
@@ -406,8 +454,6 @@
             opacity: 1;
             transform: translateX(0);
         }
-        /* --------------------------------------------------- */
-
 
         /* ---------------------------------------------------
            ★ 원본 이미지를 그대로 사용하는 팝업 모달 스타일 ★
@@ -1038,6 +1084,14 @@
 </head>
 <body>
 
+    <!-- 새롭게 추가된 최상단 유틸리티 바 -->
+    <div class="top-util-bar">
+        <span class="util-promo">회원가입 시 <strong>3,000P</strong> 지급</span>
+        <button class="util-login-btn">
+            <i class="fa-regular fa-user"></i> 로그인 또는 가입하기
+        </button>
+    </div>
+
     <header class="top-header">
         <a href="https://instahotel.kr" class="logo">
             <img src="홈로고2.png" alt="인스타 호텔 로고">
@@ -1055,7 +1109,7 @@
     <div class="sticky-wrapper">
         <div class="sub-header">
             <div class="hotel-info-left">
-                <span class="hotel-name">INSTA, Real Guest Reviews</span>
+                <span class="hotel-name">INSTA HOTEL, Real Guest Reviews</span>
                 <span class="rating-dots">
                     <i class="fa-solid fa-circle"></i>
                     <i class="fa-solid fa-circle"></i>
@@ -1742,7 +1796,7 @@
                             <i class="fa-solid fa-chevron-down"></i>
                         </div>
                         <div class="accordion-content-faq">
-                            네, 전 객실 및 공용 공간에서 초고속 무선 인터넷(Wi-Fi) 전용 네트워크를 제공합니다.
+                            네, 전 객실 및 공용 공간에서 초고속 무선 인터넷(Wi-Fi)을 제공합니다.
                         </div>
                     </div>
                 </div>
@@ -1762,10 +1816,13 @@
         </div>
     </footer>
 
+    <!-- 사진 원본을 그대로 띄워주는 팝업 모달 영역 -->
     <div id="pointModal" class="img-modal-overlay">
         <div class="img-modal-content">
-            <img src="팝업창.jpg" alt="멤버십 혜택" class="popup-origin-img">
+            <!-- 팝업 이미지 원본 ('팝업창.png' 파일이 같은 폴더에 있어야 합니다) -->
+            <img src="팝업창.png" alt="멤버십 혜택" class="popup-origin-img">
             
+            <!-- 기능 작동을 위한 투명 클릭 영역 -->
             <button class="click-close-top" id="closeModalTop" title="닫기"></button>
             <button class="click-signup" title="회원가입하기"></button>
             <button class="click-close-bottom" id="closeModalBottom" title="닫기"></button>
