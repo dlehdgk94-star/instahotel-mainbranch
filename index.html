@@ -5,12 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>INSTA HOTEL 홈페이지</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- 기본 폰트 및 팝업창 디자인용 흘림체(Caveat) 폰트 추가 -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
     
     <style>
         /* 세련된 폰트(Pretendard) 추가 */
         @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+        /* --- ★ 부드러운 스크롤 효과 추가 ★ --- */
+        html {
+            scroll-behavior: smooth;
+        }
 
         /* 기본 초기화 */
         * {
@@ -600,9 +604,11 @@
         /* --------------------------------------------------- */
 
         /* 6. 객실 & 스위트 섹션 */
+        /* --- ★ 스크롤 이동 시 예약 바에 가려지지 않도록 여백(scroll-margin-top) 추가 ★ --- */
         .rooms-section {
             background-color: #f4f4f4;
             padding: 60px 40px;
+            scroll-margin-top: 150px; 
         }
 
         .content-container {
@@ -1190,7 +1196,6 @@
 </head>
 <body>
 
-    <!-- 햄버거 메뉴와 우측 버튼 그룹을 포함한 상단바 -->
     <div class="top-util-bar">
         <div class="hamburger-menu">
             <span></span>
@@ -1210,7 +1215,7 @@
         </a>
         <ul class="main-nav">
             <li class="active"><a href="#">개요</a></li>
-            <li><a href="#">객실</a></li>
+            <li><a href="#rooms-target">객실</a></li>
             <li><a href="#">갤러리</a></li>
             <li><a href="#">주변안내</a></li>
             <li><a href="#">멤버쉽</a></li>
@@ -1315,7 +1320,7 @@
         </div>
     </section>
 
-    <section class="rooms-section">
+    <section class="rooms-section" id="rooms-target">
         <div class="content-container">
             <div class="rooms-header">
                 <h3>객실 & 스테이</h3>
@@ -1341,7 +1346,6 @@
             </div>
 
             <div class="rooms-grid">
-                <!-- 팝업 구현을 위해 onclick 속성이 추가되었습니다 -->
                 <div class="room-card">
                     <div class="room-img-wrapper">
                         <img src="assets/rooms/edelweiss/edelweiss_01.jpg" alt="에델바이 1">
@@ -1952,7 +1956,6 @@
         </div>
     </footer>
 
-    <!-- 기존 원본 이벤트 팝업 모달 영역 -->
     <div id="pointModal" class="img-modal-overlay">
         <div class="img-modal-content">
             <img src="팝업창.jpg" alt="멤버십 혜택" class="popup-origin-img">
@@ -1962,17 +1965,14 @@
         </div>
     </div>
 
-    <!-- ★ 신규 추가: 객실 갤러리 슬라이더 팝업 모달 ★ -->
     <div id="roomGalleryModal" class="room-gallery-overlay">
         <div class="gallery-header">
-            <div></div> <!-- 우측 정렬을 위한 빈 div -->
-            <i class="fa-solid fa-xmark gallery-close" onclick="closeRoomGallery()"></i>
+            <div></div> <i class="fa-solid fa-xmark gallery-close" onclick="closeRoomGallery()"></i>
         </div>
         <div class="gallery-content">
             <button class="gallery-nav-btn prev" onclick="moveGallery(-1)"><i class="fa-solid fa-chevron-left"></i></button>
             <div class="gallery-slider" id="gallerySlider">
-                <!-- 자바스크립트를 통해 이미지가 여기에 렌더링 됩니다 -->
-            </div>
+                </div>
             <button class="gallery-nav-btn next" onclick="moveGallery(1)"><i class="fa-solid fa-chevron-right"></i></button>
         </div>
         <div class="gallery-footer">
