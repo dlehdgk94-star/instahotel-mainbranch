@@ -425,14 +425,17 @@
         </div>
 
         <div class="booking-bar">
+            <!-- 날짜 영역 -->
             <div class="booking-item" id="date-booking-item">
-                <span class="booking-label"><i class="fa-regular fa-calendar"></i> 날짜 (1 박)</span>
+                <!-- ★ ID 추가됨: 박 수 업데이트를 위한 태그 ★ -->
+                <span class="booking-label" id="nights-label"><i class="fa-regular fa-calendar"></i> 날짜 (1 박)</span>
                 <div class="booking-value" onclick="toggleCalendarPopup(event)">
                     <span id="checkin-date-text">날짜 선택</span>
                     <i class="fa-solid fa-arrow-right date-arrow"></i>
                     <span id="checkout-date-text"></span>
                 </div>
                 
+                <!-- 날짜 달력 팝업 (동적 렌더링) -->
                 <div class="booking-dropdown calendar-dropdown" id="calendarPopup" onclick="event.stopPropagation()">
                     <i class="fa-solid fa-xmark dropdown-close" onclick="closeDropdowns(event)"></i>
                     <div class="cal-months-wrap">
@@ -457,6 +460,7 @@
                 </div>
             </div>
 
+            <!-- 투숙객 영역 -->
             <div class="booking-item" id="guest-booking-item">
                 <span class="booking-label">객실 & 투숙객</span>
                 <div class="booking-value" onclick="toggleGuestPopup(event)">
@@ -464,6 +468,7 @@
                     <i class="fa-solid fa-chevron-down"></i>
                 </div>
 
+                <!-- 투숙객 선택 팝업 -->
                 <div class="booking-dropdown guest-dropdown" id="guestPopup" onclick="event.stopPropagation()">
                     <i class="fa-solid fa-xmark dropdown-close" onclick="closeDropdowns(event)"></i>
                     <div class="guest-notice">객실당 최대 인원 수 8 인원</div>
@@ -702,6 +707,7 @@
         </div>
     </section>
 
+    <!-- 하단 섹션들은 변경사항 없으므로 그대로 두었습니다 -->
     <section class="facilities-section">
         <div class="content-container">
             <h2 class="fac-main-title">호텔 시설 및 서비스</h2>
@@ -1044,6 +1050,7 @@
         </div>
     </footer>
 
+    <!-- 기존 팝업 모달 영역 -->
     <div id="pointModal" class="img-modal-overlay">
         <div class="img-modal-content">
             <img src="팝업창.jpg" alt="멤버십 혜택" class="popup-origin-img">
@@ -1053,6 +1060,7 @@
         </div>
     </div>
 
+    <!-- 객실 갤러리 슬라이더 팝업 모달 -->
     <div id="roomGalleryModal" class="room-gallery-overlay">
         <div class="gallery-header">
             <div></div> 
@@ -1112,7 +1120,7 @@
             });
         });
 
-        // --- ★ 달력 렌더링 및 기능 ★ ---
+        // --- ★ 달력 렌더링 및 박 수 표시 연동 로직 ★ ---
         let currentMonthDate = new Date(); 
         currentMonthDate.setDate(1); 
 
@@ -1135,6 +1143,17 @@
                 document.getElementById('checkout-date-text').innerText = formatDate(checkoutDate);
             } else {
                 document.getElementById('checkout-date-text').innerText = '체크아웃 선택';
+            }
+
+            // --- ★ 추가됨: 상단 'N 박' 표시 로직 ★ ---
+            const nightsLabel = document.getElementById('nights-label');
+            if (checkinDate && checkoutDate) {
+                const timeDiff = checkoutDate.getTime() - checkinDate.getTime();
+                const nights = Math.ceil(timeDiff / (1000 * 3600 * 24));
+                nightsLabel.innerHTML = `<i class="fa-regular fa-calendar"></i> 날짜 (${nights} 박)`;
+            } else {
+                // 하나만 선택됐거나 아무것도 선택 안 됐을 때 기본값
+                nightsLabel.innerHTML = `<i class="fa-regular fa-calendar"></i> 날짜 (1 박)`;
             }
         }
 
@@ -1171,7 +1190,9 @@
                 const dateStr = `${year}-${String(month+1).padStart(2,'0')}-${String(i).padStart(2,'0')}`;
                 
                 let classes = 'cal-date';
-                let clickAction = `onclick="selectDate('${dateStr}')"`;
+                
+                // 이벤트 버블링 방지를 위해 event 객체와 stopPropagation()을 같이 호출합니다.
+                let clickAction = `onclick="event.stopPropagation(); selectDate('${dateStr}')"`;
 
                 if(date < today) {
                     classes += ' faded';
@@ -1223,6 +1244,8 @@
         function changeMonth(direction) {
             currentMonthDate.setMonth(currentMonthDate.getMonth() + direction);
             renderCalendar();
+            // 달 넘길 때 모달 안 꺼지게 이벤트 방지 (HTML의 onclick에도 추가되어 있음)
+            event.stopPropagation(); 
         }
 
         window.addEventListener('DOMContentLoaded', () => {
