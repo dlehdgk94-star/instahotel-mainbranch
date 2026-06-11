@@ -161,7 +161,7 @@
         .search-btn:hover { background-color: #333; }
 
         /* ---------------------------------------------------
-           ★ 수정됨: 예약바 드롭다운 모달 (달력 & 투숙객) ★
+           ★ 드롭다운 모달 (달력 & 투숙객) ★
            --------------------------------------------------- */
         .booking-dropdown {
             position: absolute;
@@ -427,13 +427,13 @@
         <div class="booking-bar">
             <div class="booking-item" id="date-booking-item">
                 <span class="booking-label"><i class="fa-regular fa-calendar"></i> 날짜 (1 박)</span>
-                <div class="booking-value" onclick="toggleCalendarPopup()">
+                <div class="booking-value" onclick="toggleCalendarPopup(event)">
                     <span id="checkin-date-text">날짜 선택</span>
                     <i class="fa-solid fa-arrow-right date-arrow"></i>
                     <span id="checkout-date-text"></span>
                 </div>
                 
-                <div class="booking-dropdown calendar-dropdown" id="calendarPopup">
+                <div class="booking-dropdown calendar-dropdown" id="calendarPopup" onclick="event.stopPropagation()">
                     <i class="fa-solid fa-xmark dropdown-close" onclick="closeDropdowns(event)"></i>
                     <div class="cal-months-wrap">
                         <div class="cal-month">
@@ -459,12 +459,12 @@
 
             <div class="booking-item" id="guest-booking-item">
                 <span class="booking-label">객실 & 투숙객</span>
-                <div class="booking-value" onclick="toggleGuestPopup()">
+                <div class="booking-value" onclick="toggleGuestPopup(event)">
                     <span id="guest-summary-text">1 객실, 1 성인</span>
                     <i class="fa-solid fa-chevron-down"></i>
                 </div>
 
-                <div class="booking-dropdown guest-dropdown" id="guestPopup">
+                <div class="booking-dropdown guest-dropdown" id="guestPopup" onclick="event.stopPropagation()">
                     <i class="fa-solid fa-xmark dropdown-close" onclick="closeDropdowns(event)"></i>
                     <div class="guest-notice">객실당 최대 인원 수 8 인원</div>
                     
@@ -1070,15 +1070,17 @@
     </div>
 
     <script>
-        // --- ★ 신규 추가: 예약바 모달 및 동적 달력 로직 ★ ---
+        // --- ★ 수정됨: 예약바 모달 및 동적 달력 로직 ★ ---
         
         // 팝업 토글 로직
-        function toggleCalendarPopup() {
+        function toggleCalendarPopup(e) {
+            if(e) e.stopPropagation();
             document.getElementById('guestPopup').classList.remove('active');
             document.getElementById('calendarPopup').classList.toggle('active');
         }
 
-        function toggleGuestPopup() {
+        function toggleGuestPopup(e) {
+            if(e) e.stopPropagation();
             document.getElementById('calendarPopup').classList.remove('active');
             document.getElementById('guestPopup').classList.toggle('active');
         }
@@ -1110,9 +1112,9 @@
             });
         });
 
-        // --- ★ 달력 렌더링 및 기능 (특정 날짜 탭 등 제거됨) ★ ---
-        let currentMonthDate = new Date(); // 기본값: 현재 달
-        currentMonthDate.setDate(1); // 달력 렌더링 기준일을 1일로 맞춤
+        // --- ★ 달력 렌더링 및 기능 ★ ---
+        let currentMonthDate = new Date(); 
+        currentMonthDate.setDate(1); 
 
         let checkinDate = null;
         let checkoutDate = null;
@@ -1140,7 +1142,6 @@
             const leftYear = currentMonthDate.getFullYear();
             const leftMonth = currentMonthDate.getMonth();
             
-            // 오른쪽 달력은 다음 달
             const rightDate = new Date(leftYear, leftMonth + 1, 1);
             const rightYear = rightDate.getFullYear();
             const rightMonth = rightDate.getMonth();
@@ -1158,7 +1159,6 @@
             const firstDay = new Date(year, month, 1).getDay();
             const daysInMonth = new Date(year, month + 1, 0).getDate();
             
-            // 앞부분 빈 칸
             for(let i=0; i<firstDay; i++) {
                 html += `<div class="cal-date faded"></div>`;
             }
@@ -1173,17 +1173,15 @@
                 let classes = 'cal-date';
                 let clickAction = `onclick="selectDate('${dateStr}')"`;
 
-                // 오늘 이전 날짜는 비활성화 (선택 안됨)
                 if(date < today) {
                     classes += ' faded';
                     clickAction = ''; 
                 } else {
-                    // CSS 클래스 결정 로직
                     if (checkinDate && date.getTime() === checkinDate.getTime()) {
                         if (checkoutDate) {
                             classes += ' selected-start';
                         } else {
-                            classes += ' selected-single'; // 하나만 선택된 상태
+                            classes += ' selected-single'; 
                         }
                     }
                     if (checkoutDate && date.getTime() === checkoutDate.getTime()) {
@@ -1204,24 +1202,22 @@
             const clickedDate = new Date(parts[0], parts[1]-1, parts[2]);
             clickedDate.setHours(0,0,0,0);
 
-            // 아무것도 선택되지 않았을 때 -> 체크인 선택
             if (!checkinDate || (checkinDate && checkoutDate)) {
                 checkinDate = clickedDate;
                 checkoutDate = null;
             } 
-            // 체크인만 선택된 상태일 때
             else if (checkinDate && !checkoutDate) {
                 if (clickedDate > checkinDate) {
-                    checkoutDate = clickedDate; // 체크아웃 정상 선택
+                    checkoutDate = clickedDate; 
                 } else if (clickedDate.getTime() === checkinDate.getTime()) {
-                    // 같은 날 클릭 시 무시 (최소 1박)
+                    // 동일 날짜 클릭 무시
                 } else {
-                    checkinDate = clickedDate; // 더 앞선 날짜를 누르면 체크인 날짜를 변경
+                    checkinDate = clickedDate; 
                 }
             }
             
             updateDateUI();
-            renderCalendar(); // 선택한 날짜에 맞춰 CSS(배경색) 업데이트
+            renderCalendar(); 
         }
 
         function changeMonth(direction) {
@@ -1229,11 +1225,9 @@
             renderCalendar();
         }
 
-        // 페이지 로드 시 달력 초기화
         window.addEventListener('DOMContentLoaded', () => {
             renderCalendar();
         });
-
 
         // 투숙객 증감 로직
         let guests = { room: 1, adult: 1, child: 0 };
