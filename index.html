@@ -124,6 +124,9 @@
         .hotel-info-right a { display: flex; align-items: center; gap: 5px; }
         .hotel-info-right a:hover { text-decoration: underline; }
 
+        /* 모바일 예약바/패널: 데스크톱에서 숨김 */
+        #mob-booking-bar, #mob-book-panel, #mob-panel-backdrop { display: none; }
+
         /* 예약 바 */
         .booking-bar {
             display: flex;
@@ -723,7 +726,59 @@
                 <button class="search-btn" onclick="handleBookingBtn()">예약하기</button>
             </div>
         </div>
+
+        <!-- 모바일 한 줄 예약바 (sticky-wrapper 안) -->
+        <div id="mob-booking-bar">
+            <div class="mob-bar-chip" id="mob-date-chip" onclick="openMobPanel(event)">
+                <span class="mob-bar-chip-label">날짜</span>
+                <span class="mob-bar-chip-val placeholder" id="mob-date-text">선택</span>
+            </div>
+            <div class="mob-bar-divider"></div>
+            <div class="mob-bar-chip" id="mob-guest-chip" onclick="openMobPanel(event)">
+                <span class="mob-bar-chip-label">인원</span>
+                <span class="mob-bar-chip-val" id="mob-guest-text">1객실·1성인</span>
+            </div>
+            <div class="mob-bar-divider"></div>
+            <div class="mob-bar-chip" id="mob-price-chip" onclick="openMobPanel(event)">
+                <span class="mob-bar-chip-label">요금</span>
+                <span class="mob-bar-chip-val placeholder" id="mob-price-text">객실 선택</span>
+            </div>
+            <button class="mob-bar-btn" onclick="openMobPanel(event)">예약하기</button>
+        </div>
+
+        <!-- 모바일 확장 예약 패널 -->
+        <div id="mob-book-panel">
+            <div class="mob-panel-row" onclick="toggleCalendarPopup(event)">
+                <span class="mob-panel-label" id="mob-panel-nights"><i class="fa-regular fa-calendar"></i> 날짜 (1박)</span>
+                <div class="mob-panel-value">
+                    <span id="mob-panel-checkin">날짜 선택</span>
+                    <i class="fa-solid fa-arrow-right mob-panel-arrow"></i>
+                    <span id="mob-panel-checkout"></span>
+                </div>
+            </div>
+            <div class="mob-panel-row" onclick="toggleGuestPopup(event)">
+                <span class="mob-panel-label">객실 &amp; 투숙객</span>
+                <div class="mob-panel-value">
+                    <span id="mob-panel-guests">1 객실, 1 성인</span>
+                    <i class="fa-solid fa-chevron-down mob-panel-chevron"></i>
+                </div>
+            </div>
+            <div class="mob-panel-row" onclick="togglePricePopup(event)">
+                <span class="mob-panel-label">특별 요금</span>
+                <div class="mob-panel-value">
+                    <span id="mob-panel-price">최저 요금</span>
+                    <i class="fa-solid fa-chevron-down mob-panel-chevron"></i>
+                </div>
+            </div>
+            <div class="mob-panel-footer">
+                <button onclick="handleBookingBtn()">예약하기</button>
+            </div>
+        </div>
+
     </div>
+
+    <!-- 모바일 패널 배경 딤 -->
+    <div id="mob-panel-backdrop" onclick="closeMobPanel()"></div>
 
     <section class="hero-section">
         <img src="images/hero/메인사진1.png" alt="인스타 호텔 메인" class="hero-img active">
@@ -2680,7 +2735,7 @@
             } else {
                 document.getElementById('checkin-date-text').innerText = '체크인 선택';
             }
-            
+
             if (checkoutDate) {
                 document.getElementById('checkout-date-text').innerText = formatDate(checkoutDate);
             } else {
@@ -2694,9 +2749,27 @@
                 const nights = Math.ceil(timeDiff / (1000 * 3600 * 24));
                 nightsLabel.innerHTML = `<i class="fa-regular fa-calendar"></i> 날짜 (${nights} 박)`;
             } else {
-                // 하나만 선택됐거나 아무것도 선택 안 됐을 때 기본값
                 nightsLabel.innerHTML = `<i class="fa-regular fa-calendar"></i> 날짜 (1 박)`;
             }
+
+            // 모바일 바 + 패널 날짜 동기화
+            var mobDateEl = document.getElementById('mob-date-text');
+            if (mobDateEl) {
+                if (checkinDate && checkoutDate) {
+                    var ci = (checkinDate.getMonth()+1) + '/' + checkinDate.getDate();
+                    var co = (checkoutDate.getMonth()+1) + '/' + checkoutDate.getDate();
+                    mobDateEl.innerText = ci + ' → ' + co;
+                    mobDateEl.classList.remove('placeholder');
+                } else if (checkinDate) {
+                    mobDateEl.innerText = (checkinDate.getMonth()+1) + '/' + checkinDate.getDate() + ' →';
+                    mobDateEl.classList.remove('placeholder');
+                } else {
+                    mobDateEl.innerText = '선택';
+                    mobDateEl.classList.add('placeholder');
+                }
+            }
+            // 패널 내 날짜 동기화
+            if (document.getElementById('mob-book-panel') && document.getElementById('mob-book-panel').classList.contains('open')) syncMobPanel();
         }
 
         function renderCalendar() {
@@ -2772,6 +2845,8 @@
                 datesUserSelected = false;
                 const el = document.getElementById('min-price-text');
                 if (el) el.textContent = '최저 요금';
+                selectedRoomId = null;
+                var mp1 = document.getElementById('mob-price-text'); if(mp1){mp1.innerText='객실 선택';mp1.classList.add('placeholder');}
                 document.getElementById('pricePopup').classList.remove('active');
             }
             else if (checkinDate && !checkoutDate) {
@@ -2785,6 +2860,8 @@
                     datesUserSelected = false;
                     const el = document.getElementById('min-price-text');
                     if (el) el.textContent = '최저 요금';
+                    selectedRoomId = null;
+                    var mp2 = document.getElementById('mob-price-text'); if(mp2){mp2.innerText='객실 선택';mp2.classList.add('placeholder');}
                     document.getElementById('pricePopup').classList.remove('active');
                 }
             }
@@ -2852,6 +2929,11 @@
             document.getElementById(`val-${type}`).innerText = newVal;
 
             document.getElementById('guest-summary-text').innerText = `${guests.room} 객실, ${guests.adult} 성인`;
+
+            // 모바일 바 인원 동기화
+            var mobGuestEl = document.getElementById('mob-guest-text');
+            if (mobGuestEl) mobGuestEl.innerText = guests.room + '객실 · ' + guests.adult + '성인';
+
             updateRoomPrices();
         }
 
@@ -2902,6 +2984,15 @@
                 for(var i=0;i<nights;i++){ var nd=new Date(checkinDate); nd.setDate(nd.getDate()+i); total+=getNightRateI(roomId,nd); } total*=roomCount;
                 document.getElementById('min-price-text').textContent=(ROOM_NAMES_I[roomId]?ROOM_NAMES_I[roomId]+' · ':'')+nights+'박 총 '+fmtWon(total)+'원';
             }
+            // 모바일 바 요금 동기화
+            var mobPriceEl = document.getElementById('mob-price-text');
+            if (mobPriceEl) {
+                var rname = ROOM_NAMES_I[roomId] || roomId;
+                mobPriceEl.innerText = rname;
+                mobPriceEl.classList.remove('placeholder');
+            }
+            // 패널 요금 동기화
+            if (document.getElementById('mob-book-panel') && document.getElementById('mob-book-panel').classList.contains('open')) syncMobPanel();
             document.getElementById('pricePopup').classList.remove('active');
         }
 
@@ -2994,6 +3085,7 @@
 
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
+                if (document.getElementById('mob-book-panel') && document.getElementById('mob-book-panel').classList.contains('open')) { closeMobPanel(); return; }
                 if (document.getElementById('locationModal').classList.contains('open')) { closeLocationModalBtn(); return; }
                 if (document.getElementById('reviewModal').classList.contains('open')) { document.getElementById('reviewModal').classList.remove('open'); document.body.style.overflow = ''; return; }
             }
@@ -3280,6 +3372,53 @@
     </div>
 
     <script>
+        function openMobPanel(e) {
+            if (e) e.preventDefault();
+            document.getElementById('mob-book-panel').classList.add('open');
+            document.getElementById('mob-panel-backdrop').classList.add('open');
+            syncMobPanel();
+        }
+        function closeMobPanel() {
+            document.getElementById('mob-book-panel').classList.remove('open');
+            document.getElementById('mob-panel-backdrop').classList.remove('open');
+            closeDropdowns(null);
+        }
+        function syncMobPanel() {
+            // 날짜
+            var ci = document.getElementById('mob-panel-checkin');
+            var co = document.getElementById('mob-panel-checkout');
+            var nl = document.getElementById('mob-panel-nights');
+            if (ci && co) {
+                if (checkinDate && checkoutDate) {
+                    var nights = Math.round((checkoutDate - checkinDate) / 86400000);
+                    ci.innerText = formatDate(checkinDate);
+                    co.innerText = formatDate(checkoutDate);
+                    if (nl) nl.innerHTML = '<i class="fa-regular fa-calendar"></i> 날짜 (' + nights + '박)';
+                } else if (checkinDate) {
+                    ci.innerText = formatDate(checkinDate);
+                    co.innerText = '체크아웃 선택';
+                } else {
+                    ci.innerText = '날짜 선택';
+                    co.innerText = '';
+                }
+            }
+            // 인원
+            var pg = document.getElementById('mob-panel-guests');
+            if (pg) pg.innerText = guests.room + ' 객실, ' + guests.adult + ' 성인';
+            // 요금
+            var pp = document.getElementById('mob-panel-price');
+            if (pp) {
+                if (selectedRoomId && checkinDate && checkoutDate) {
+                    var n = Math.round((checkoutDate - checkinDate) / 86400000);
+                    var rc = guests ? guests.room : 1; var tot = 0;
+                    for (var i = 0; i < n; i++) { var d = new Date(checkinDate); d.setDate(d.getDate()+i); tot += getNightRateI(selectedRoomId, d); } tot *= rc;
+                    pp.innerText = (ROOM_NAMES_I[selectedRoomId] || selectedRoomId) + ' · ' + n + '박 총 ' + fmtWon(tot) + '원';
+                } else {
+                    pp.innerText = '최저 요금';
+                }
+            }
+        }
+
         function openLocationModal(e) {
             e.preventDefault();
             document.getElementById('locationModal').classList.add('open');
