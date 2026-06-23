@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>결제 실패 - INSTA HOTEL</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        *{ margin:0; padding:0; box-sizing:border-box; font-family:'Barlow',sans-serif; }
+        a{ text-decoration:none; color:inherit; }
+        body{ color:rgb(28,28,28); -webkit-font-smoothing:antialiased; background:#f4f4f4; }
+
+        .top-util-bar{ background:rgb(28,28,28); color:#fff; height:49px; padding:0 48px 0 25px; display:flex; justify-content:space-between; align-items:center; }
+        .hamburger-menu{ cursor:pointer; display:flex; flex-direction:column; gap:3px; padding:5px; }
+        .hamburger-menu span{ width:12px; height:1px; background:#fff; border-radius:2px; }
+        .util-login-btn{ display:flex; align-items:center; gap:6px; background:transparent; color:#fff; border:1px solid rgba(255,255,255,0.4); border-radius:25px; padding:5px 12px; font-size:11px; font-weight:500; cursor:pointer; }
+        .top-header{ display:flex; justify-content:space-between; align-items:center; height:88px; padding:0 48px 0 30px; background:rgb(244,244,244); border-bottom:1px solid #e6e6e6; }
+        .logo{ display:flex; align-items:center; }
+        .logo img{ width:auto; height:72px; object-fit:contain; mix-blend-mode:multiply; }
+        .main-nav{ display:flex; align-items:center; gap:32px; list-style:none; font-size:14px; font-weight:500; color:rgb(112,112,112); height:100%; }
+        .main-nav li{ cursor:pointer; display:flex; align-items:center; height:100%; }
+
+        .page-wrap{ max-width:540px; margin:80px auto 100px; padding:0 20px; text-align:center; }
+
+        .fail-card{ background:#fff; border-radius:16px; border:1px solid #e8e8e8; padding:52px 40px 44px; }
+        .fail-icon{ width:72px; height:72px; border-radius:50%; background:#e74c3c; display:inline-flex; align-items:center; justify-content:center; margin-bottom:24px; }
+        .fail-icon i{ font-size:32px; color:#fff; }
+        .fail-title{ font-size:24px; font-weight:800; margin-bottom:12px; }
+        .fail-msg{ font-size:14px; color:rgb(112,112,112); line-height:1.7; margin-bottom:28px; }
+        .error-box{ background:#fff5f5; border:1px solid #fcc; border-radius:8px; padding:14px 18px; margin-bottom:28px; font-size:13px; color:#c0392b; text-align:left; display:none; }
+        .error-box strong{ display:block; margin-bottom:4px; }
+
+        .btn-group{ display:flex; gap:12px; }
+        .btn-primary{ flex:1; height:50px; background:rgb(28,28,28); color:#fff; border:none; border-radius:8px; font-size:15px; font-weight:700; cursor:pointer; font-family:'Barlow',sans-serif; transition:background 0.2s; }
+        .btn-primary:hover{ background:#333; }
+        .btn-secondary{ flex:1; height:50px; background:#fff; color:rgb(28,28,28); border:1.5px solid rgb(28,28,28); border-radius:8px; font-size:15px; font-weight:600; cursor:pointer; font-family:'Barlow',sans-serif; transition:background 0.2s; }
+        .btn-secondary:hover{ background:#f8f8f8; }
+    </style>
+</head>
+<body>
+    <div class="top-util-bar">
+        <div class="hamburger-menu"><span></span><span></span><span></span></div>
+        <button class="util-login-btn"><i class="fa-regular fa-user"></i> 회원가입 시 객실예약할 때 혜택</button>
+    </div>
+    <header class="top-header">
+        <a href="index.html" class="logo"><img src="logo.svg" alt="INSTA Hotel 로고"></a>
+        <ul class="main-nav">
+            <li><a href="index.html">개요</a></li>
+            <li><a href="rooms.html">객실</a></li>
+            <li><a href="gallery.html">갤러리</a></li>
+            <li><a href="nearby.html">주변안내</a></li>
+            <li><a href="#">멤버쉽</a></li>
+        </ul>
+    </header>
+
+    <div class="page-wrap">
+        <div class="fail-card">
+            <div class="fail-icon"><i class="fa-solid fa-xmark"></i></div>
+            <div class="fail-title">결제에 실패했습니다</div>
+            <div class="fail-msg">
+                결제 처리 중 문제가 발생했습니다.<br>
+                입력하신 정보를 확인 후 다시 시도해 주세요.
+            </div>
+            <div class="error-box" id="errorBox">
+                <strong>오류 내용</strong>
+                <span id="errorMsg"></span>
+            </div>
+            <div class="btn-group">
+                <button class="btn-secondary" onclick="location.href='index.html'">홈으로</button>
+                <button class="btn-primary" onclick="history.back()">다시 시도</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    const params  = new URLSearchParams(location.search);
+    const code    = params.get('code')    || '';
+    const message = params.get('message') || '';
+    if (code || message) {
+        const box = document.getElementById('errorBox');
+        document.getElementById('errorMsg').textContent = message || code;
+        box.style.display = 'block';
+    }
+    </script>
+</body>
+</html>

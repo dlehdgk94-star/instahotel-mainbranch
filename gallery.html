@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>갤러리 - INSTA HOTEL</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        *{ margin:0; padding:0; box-sizing:border-box; font-family:'Barlow',sans-serif; }
+        html{ scroll-behavior:smooth; }
+        a{ text-decoration:none; color:inherit; }
+        body{ color:rgb(28,28,28); -webkit-font-smoothing:antialiased; }
+
+        /* ── 상단 유틸리티 바 ── */
+        .top-util-bar{ background-color:rgb(28,28,28); color:#fff; height:49px; padding:0 48px 0 25px; display:flex; justify-content:space-between; align-items:center; }
+        .hamburger-menu{ cursor:pointer; display:flex; flex-direction:column; gap:3px; padding:5px; }
+        .hamburger-menu span{ width:12px; height:1px; background-color:#fff; border-radius:2px; }
+        .util-login-btn{ display:flex; align-items:center; gap:6px; background:transparent; color:#fff; border:1px solid rgba(255,255,255,0.4); border-radius:25px; padding:5px 12px; font-size:11px; font-weight:500; cursor:pointer; }
+        .util-login-btn i{ font-size:13px; }
+
+        /* ── 헤더 ── */
+        .top-header{ display:flex; justify-content:space-between; align-items:center; height:88px; padding:0 48px 0 30px; background-color:rgb(244,244,244); border-bottom:1px solid #e6e6e6; }
+        .logo{ display:flex; align-items:center; }
+        .logo img{ width:auto; height:72px; object-fit:contain; mix-blend-mode:multiply; }
+        .main-nav{ display:flex; align-items:center; gap:32px; list-style:none; font-size:14px; font-weight:500; color:rgb(112,112,112); height:100%; }
+        .main-nav li{ cursor:pointer; display:flex; align-items:center; position:relative; height:100%; }
+        .main-nav li.active{ color:rgb(28,28,28); font-weight:700; }
+        .main-nav li.active::after{ content:''; position:absolute; left:0; right:0; bottom:16px; height:3px; background:#2A91A8; }
+
+        /* ── 서브헤더 + 예약바 ── */
+        .sticky-wrapper{ position:sticky; top:0; z-index:1000; background:#FAFAFA; box-shadow:0 4px 15px rgba(0,0,0,0.1); }
+        .sub-header{ display:flex; justify-content:space-between; align-items:center; height:64px; padding:0 48px 0 30px; border-bottom:1px solid #e5e5e5; background-color:rgb(244,244,244); }
+        .hotel-info-left{ display:flex; align-items:center; gap:10px; }
+        .hotel-name{ font-size:22px; font-weight:700; color:rgb(28,28,28); white-space:nowrap; }
+        .rating-dots{ color:#3A9AB4; font-size:16px; display:flex; align-items:center; gap:5px; }
+        .rating-text{ font-size:14px; font-weight:500; color:rgb(28,28,28); text-decoration:underline; text-underline-offset:3px; cursor:pointer; }
+        .hotel-info-right{ display:flex; gap:24px; font-size:14px; font-weight:500; color:rgb(28,28,28); }
+        .hotel-info-right a{ display:flex; align-items:center; gap:5px; }
+        .booking-bar{ display:flex; justify-content:space-between; align-items:center; height:112px; padding:0 30px; background:#fff; border-bottom:1px solid #e5e5e5; position:relative; }
+        .booking-item{ display:flex; flex-direction:column; justify-content:center; gap:18px; height:100%; padding:0 178px; position:relative; }
+        .booking-item:first-child{ padding-left:0; }
+        .booking-item:nth-child(1){ flex:0 0 478px; padding-right:0; }
+        .booking-item:nth-child(2){ flex:0 0 626px; }
+        .booking-item:nth-child(3){ flex:1 1 auto; padding-right:118px; }
+        .booking-item:nth-child(-n+2)::after{ content:''; position:absolute; right:0; top:50%; transform:translateY(-50%); height:65px; border-right:1px dashed rgb(28,28,28); }
+        .booking-item:last-child{ flex:0 0 116px; align-items:flex-start; padding:0 20px 0 0; }
+        .booking-label{ font-size:12px; font-weight:700; color:rgb(112,112,112); display:flex; align-items:center; gap:7px; }
+        .booking-label i{ font-size:16px; color:rgb(28,28,28); }
+        .booking-value{ font-size:16px; font-weight:500; color:rgb(28,28,28); display:flex; align-items:center; cursor:pointer; gap:10px; }
+        #date-booking-item .booking-value{ gap:30px; }
+        #guest-booking-item .booking-value,
+        #price-booking-item .booking-value{ width:270px; justify-content:space-between; }
+        .booking-value .fa-chevron-down{ font-size:14px; }
+        .date-arrow{ font-size:13px; }
+        .search-btn{ background-color:rgb(114,107,113); color:#fff; border:none; width:95px; height:40px; border-radius:22px; font-size:16px; font-weight:700; cursor:pointer; }
+        .search-btn:hover{ background-color:rgb(95,89,94); }
+        .price-popup{ width:320px; padding:20px 24px; left:0; right:auto; }
+        .price-popup-row{ display:flex; justify-content:space-between; align-items:center; padding:11px 0; border-bottom:1px solid #f0f0f0; cursor:pointer; }
+        .price-popup-row:last-child{ border-bottom:none; }
+        .price-popup-row:hover .price-popup-name{ color:#2A91A8; }
+        .price-popup-name{ font-size:14px; font-weight:600; color:rgb(28,28,28); }
+        .price-popup-total{ font-size:13px; font-weight:600; color:rgb(28,28,28); white-space:nowrap; }
+        .price-popup-unavail{ cursor:default; opacity:0.45; }
+        .price-popup-unavail:hover .price-popup-name{ color:rgb(28,28,28); }
+
+        /* ── 드롭다운 ── */
+        .booking-dropdown{ position:absolute; top:calc(100% + 20px); left:0; background:#fff; border-radius:15px; box-shadow:0 15px 40px rgba(0,0,0,0.15); padding:30px; z-index:2000; display:none; }
+        .booking-dropdown.active{ display:block; }
+        .dropdown-close{ position:absolute; top:20px; right:20px; font-size:16px; cursor:pointer; color:rgb(112,112,112); }
+        .calendar-dropdown{ width:750px; left:-20px; }
+        .cal-months-wrap{ display:flex; gap:40px; margin-top:10px; }
+        .cal-month{ flex:1; }
+        .cal-month-header{ display:flex; justify-content:space-between; align-items:center; font-weight:700; font-size:15px; margin-bottom:20px; }
+        .cal-month-header i{ cursor:pointer; font-size:16px; padding:5px; }
+        .cal-grid{ display:grid; grid-template-columns:repeat(7,1fr); text-align:center; gap:10px 0; }
+        .cal-day-name{ font-size:12px; font-weight:700; color:rgb(112,112,112); margin-bottom:10px; }
+        .cal-date{ font-size:13px; font-weight:500; color:rgb(112,112,112); padding:10px 0; cursor:pointer; border-radius:20px; }
+        .cal-date.faded{ color:#ccc; cursor:default; }
+        .cal-date.selected-start{ background:rgb(28,28,28); color:#fff; border-radius:20px 0 0 20px; }
+        .cal-date.selected-end{ background:rgb(28,28,28); color:#fff; border-radius:0 20px 20px 0; }
+        .cal-date.in-range{ background:#f5f5f5; }
+        .guest-dropdown{ width:420px; left:-20px; }
+        .guest-notice{ font-size:11px; color:rgb(112,112,112); margin-bottom:20px; }
+        .guest-row{ display:flex; justify-content:space-between; align-items:center; padding:20px 0; border-bottom:1px solid #f0f0f0; }
+        .guest-label-box{ display:flex; flex-direction:column; gap:5px; }
+        .g-title{ font-weight:700; font-size:15px; }
+        .g-sub{ font-size:11px; color:rgb(112,112,112); }
+        .guest-controls{ display:flex; align-items:center; gap:15px; }
+        .btn-ctrl{ width:32px; height:32px; border-radius:50%; border:1px solid #ddd; background:#fff; display:flex; justify-content:center; align-items:center; cursor:pointer; }
+        .val-ctrl{ font-size:15px; font-weight:600; width:15px; text-align:center; }
+        .dropdown-done-btn{ display:block; width:100px; margin:30px auto 0; padding:10px 0; border-radius:20px; border:1px solid rgb(112,112,112); background:#fff; font-weight:600; font-size:13px; cursor:pointer; text-align:center; }
+
+        /* ── 언어 선택 ── */
+        .lang-selector{ position:relative; }
+        .lang-btn{ display:flex; align-items:center; gap:6px; background:none; border:1px solid #d0d0d0; border-radius:20px; padding:6px 12px; font-size:13px; font-weight:600; cursor:pointer; color:rgb(112,112,112); font-family:'Barlow',sans-serif; transition:border-color 0.2s,color 0.2s; }
+        .lang-btn:hover{ border-color:#aaa; color:rgb(28,28,28); }
+        .lang-btn .fa-globe{ font-size:13px; }
+        .lang-chevron{ font-size:9px; }
+        .lang-dropdown{ position:absolute; top:calc(100% + 10px); right:0; background:#fff; border-radius:10px; box-shadow:0 8px 28px rgba(0,0,0,0.13); padding:6px 0; min-width:110px; display:none; z-index:1500; }
+        .lang-dropdown.open{ display:block; }
+        .lang-option{ display:block; padding:10px 18px; font-size:13px; font-weight:500; color:rgb(112,112,112); cursor:pointer; white-space:nowrap; }
+        .lang-option:hover{ background:#f5f5f5; color:rgb(28,28,28); }
+        .lang-option.active{ color:rgb(28,28,28); font-weight:700; }
+
+        /* ── 갤러리 헤더 ── */
+        .gal-header-section{ background:rgb(244,244,244); border-bottom:1px solid #e0e0e0; padding:44px 0 0; }
+        .gal-header-inner{ max-width:1240px; margin:0 auto; padding:0 40px; }
+        .gal-header-title{ font-size:28px; font-weight:700; color:rgb(28,28,28); margin-bottom:6px; }
+        .gal-header-sub{ font-size:14px; color:rgb(112,112,112); margin-bottom:28px; }
+
+        /* ── 필터 탭 ── */
+        .gal-tabs{ display:flex; gap:0; border-bottom:none; }
+        .gal-tab{ background:none; border:none; border-bottom:3px solid transparent; padding:12px 20px 10px; font-size:14px; font-weight:600; color:rgb(112,112,112); cursor:pointer; font-family:'Barlow',sans-serif; transition:color 0.2s,border-color 0.2s; margin-bottom:-1px; }
+        .gal-tab.active{ color:rgb(28,28,28); border-bottom-color:rgb(28,28,28); }
+        .gal-tab:hover:not(.active){ color:rgb(28,28,28); }
+
+        /* ── 포토 카운트 ── */
+        .gal-count{ font-size:13px; color:rgb(112,112,112); padding:14px 40px; max-width:1240px; margin:0 auto; }
+        .gal-count span{ font-weight:700; color:rgb(28,28,28); }
+
+        /* ── 마소니 그리드 ── */
+        .gal-grid-wrap{ max-width:1240px; margin:0 auto; padding:0 40px 80px; }
+        .gal-grid{ columns:3; column-gap:8px; }
+        .gal-item{ break-inside:avoid; margin-bottom:8px; cursor:pointer; overflow:hidden; border-radius:5px; background:#e8e8e8; position:relative; display:block; }
+        .gal-item img{ width:100%; height:auto; display:block; transition:transform 0.45s; }
+        .gal-item:hover img{ transform:scale(1.04); }
+        .gal-item-overlay{ position:absolute; inset:0; background:rgba(0,0,0,0); transition:background 0.3s; display:flex; align-items:flex-end; padding:10px 13px; border-radius:5px; }
+        .gal-item:hover .gal-item-overlay{ background:rgba(0,0,0,0.22); }
+        .gal-item-label{ color:#fff; font-size:11px; font-weight:600; letter-spacing:0.5px; opacity:0; transition:opacity 0.3s; text-shadow:0 1px 4px rgba(0,0,0,0.9); }
+        .gal-item:hover .gal-item-label{ opacity:1; }
+
+        /* ── 갤러리 라이트박스 ── */
+        .gallery-overlay{ position:fixed; inset:0; background:rgba(18,18,18,0.96); z-index:10000; display:none; flex-direction:column; align-items:center; justify-content:center; gap:20px; }
+        .gallery-overlay.open{ display:flex; }
+        .gallery-close{ position:fixed; top:18px; right:22px; background:#fff; border:none; border-radius:5px; color:rgb(28,28,28); width:36px; height:36px; font-size:15px; cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 8px rgba(0,0,0,0.4); z-index:3; }
+        .gallery-close:hover{ background:#efefef; }
+        .gallery-stage{ position:relative; width:100%; overflow:hidden; flex-shrink:0; }
+        .gallery-track{ display:flex; gap:16px; will-change:transform; }
+        .gallery-slide{ flex-shrink:0; width:820px; min-width:820px; height:62vh; position:relative; opacity:0.5; transition:opacity 0.38s; }
+        .gallery-slide.g-active{ opacity:1; }
+        .gallery-slide img{ width:100%; height:100%; object-fit:contain; display:block; }
+        .gallery-nav{ position:absolute; top:50%; transform:translateY(-50%); background:rgba(255,255,255,0.9); border:none; border-radius:50%; color:rgb(28,28,28); width:42px; height:42px; font-size:16px; cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 10px rgba(0,0,0,0.35); z-index:2; }
+        .gallery-nav:hover{ background:#fff; }
+        .gallery-prev{ left:120px; }
+        .gallery-next{ right:120px; }
+        .gallery-counter{ color:rgba(255,255,255,0.7); font-size:13px; font-family:'Barlow',sans-serif; }
+    </style>
+    <link rel="stylesheet" href="responsive.css">
+</head>
+<body onclick="closeDropdowns(event)">
+
+    <!-- 상단 유틸리티 바 -->
+    <div class="top-util-bar">
+        <div class="hamburger-menu"><span></span><span></span><span></span></div>
+        <div><button class="util-login-btn"><i class="fa-regular fa-user"></i> 회원가입 시 객실예약할 때 혜택</button></div>
+    </div>
+
+    <!-- 헤더 -->
+    <header class="top-header">
+        <a href="index.html" class="logo"><img src="logo.svg" alt="INSTA Hotel 로고"></a>
+        <ul class="main-nav">
+            <li><a href="index.html">개요</a></li>
+            <li><a href="rooms.html">객실</a></li>
+            <li class="active"><a href="gallery.html">갤러리</a></li>
+            <li><a href="nearby.html">주변안내</a></li>
+            <li><a href="#">멤버쉽</a></li>
+            <li class="lang-selector" onclick="event.stopPropagation()">
+                <button class="lang-btn" onclick="toggleLangDropdown(event)"><i class="fa-solid fa-globe"></i><span id="langCode">KO</span><i class="fa-solid fa-chevron-down lang-chevron"></i></button>
+                <div class="lang-dropdown" id="langDropdown">
+                    <span class="lang-option active" data-code="KO" onclick="selectLang(this)">한국어</span>
+                    <span class="lang-option" data-code="EN" onclick="selectLang(this)">English</span>
+                    <span class="lang-option" data-code="JA" onclick="selectLang(this)">日本語</span>
+                    <span class="lang-option" data-code="ZH" onclick="selectLang(this)">中文</span>
+                </div>
+            </li>
+        </ul>
+    </header>
+
+    <!-- 서브헤더 + 예약바 -->
+    <div class="sticky-wrapper">
+        <div class="sub-header">
+            <div class="hotel-info-left">
+                <span class="hotel-name">인스타 오토그래프 컬렉션</span>
+                <span class="rating-dots">
+                    <i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i>
+                    <i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i>
+                    <i class="fa-solid fa-circle-half-stroke"></i>
+                </span>
+                <span class="rating-text">4.9 • 1446 후기</span>
+            </div>
+            <div class="hotel-info-right">
+                <a href="#"><i class="fa-solid fa-comment"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-solid fa-location-dot"></i></a>
+                <a href="#"><i class="fa-solid fa-phone"></i> +82 31-203-4301</a>
+            </div>
+        </div>
+        <div class="booking-bar">
+            <div class="booking-item" id="date-booking-item">
+                <span class="booking-label" id="nights-label"><i class="fa-regular fa-calendar"></i> 날짜 (1 박)</span>
+                <div class="booking-value" onclick="toggleCalendarPopup(event)">
+                    <span id="checkin-date-text">날짜 선택</span>
+                    <i class="fa-solid fa-arrow-right date-arrow"></i>
+                    <span id="checkout-date-text"></span>
+                </div>
+                <div class="booking-dropdown calendar-dropdown" id="calendarPopup" onclick="event.stopPropagation()">
+                    <i class="fa-solid fa-xmark dropdown-close" onclick="closeDropdowns(event)"></i>
+                    <div class="cal-months-wrap">
+                        <div class="cal-month">
+                            <div class="cal-month-header"><i class="fa-solid fa-chevron-left" onclick="changeMonth(-1)"></i><span id="cal-month-title-left"></span><span></span></div>
+                            <div class="cal-grid" id="cal-grid-left"></div>
+                        </div>
+                        <div class="cal-month">
+                            <div class="cal-month-header"><span></span><span id="cal-month-title-right"></span><i class="fa-solid fa-chevron-right" onclick="changeMonth(1)"></i></div>
+                            <div class="cal-grid" id="cal-grid-right"></div>
+                        </div>
+                    </div>
+                    <button class="dropdown-done-btn" onclick="closeDropdowns(event)">완료</button>
+                </div>
+            </div>
+            <div class="booking-item" id="guest-booking-item">
+                <span class="booking-label">객실 & 투숙객</span>
+                <div class="booking-value" onclick="toggleGuestPopup(event)">
+                    <span id="guest-summary-text">1 객실, 1 성인</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="booking-dropdown guest-dropdown" id="guestPopup" onclick="event.stopPropagation()">
+                    <i class="fa-solid fa-xmark dropdown-close" onclick="closeDropdowns(event)"></i>
+                    <div class="guest-row">
+                        <div class="guest-label-box"><span class="g-title">객실</span></div>
+                        <div class="guest-controls">
+                            <button class="btn-ctrl" onclick="updateGuest('room',-1)"><i class="fa-solid fa-minus"></i></button>
+                            <span class="val-ctrl" id="val-room">1</span>
+                            <button class="btn-ctrl" onclick="updateGuest('room',1)"><i class="fa-solid fa-plus"></i></button>
+                        </div>
+                    </div>
+                    <div class="guest-row">
+                        <div class="guest-label-box"><span class="g-title">성인</span></div>
+                        <div class="guest-controls">
+                            <button class="btn-ctrl" onclick="updateGuest('adult',-1)"><i class="fa-solid fa-minus"></i></button>
+                            <span class="val-ctrl" id="val-adult">1</span>
+                            <button class="btn-ctrl" onclick="updateGuest('adult',1)"><i class="fa-solid fa-plus"></i></button>
+                        </div>
+                    </div>
+                    <button class="dropdown-done-btn" onclick="closeDropdowns(event)">완료</button>
+                </div>
+            </div>
+            <div class="booking-item" id="price-booking-item">
+                <span class="booking-label">특별 요금</span>
+                <div class="booking-value" onclick="togglePricePopup(event)"><span id="min-price-text">최저 요금</span><i class="fa-solid fa-chevron-down"></i></div>
+                <div class="booking-dropdown price-popup" id="pricePopup" onclick="event.stopPropagation()">
+                    <i class="fa-solid fa-xmark dropdown-close" onclick="closeDropdowns(event)"></i>
+                    <div id="pricePopupList"></div>
+                </div>
+            </div>
+            <div class="booking-item">
+                <button class="search-btn" onclick="handleBookingBtn()">예약하기</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 갤러리 헤더 + 필터 -->
+    <div class="gal-header-section">
+        <div class="gal-header-inner">
+            <h1 class="gal-header-title">갤러리</h1>
+            <p class="gal-header-sub">호텔 인스타의 모든 사진을 한눈에 확인하세요</p>
+            <div class="gal-tabs">
+                <button class="gal-tab active" data-filter="all" onclick="filterGallery('all')">전체</button>
+                <button class="gal-tab" data-filter="rooms" onclick="filterGallery('rooms')">객실</button>
+                <button class="gal-tab" data-filter="nearby" onclick="filterGallery('nearby')">주변 관광지</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 사진 수 -->
+    <div class="gal-count" id="galCount"></div>
+
+    <!-- 마소니 그리드 -->
+    <div class="gal-grid-wrap">
+        <div class="gal-grid" id="galGrid"></div>
+    </div>
+
+    <!-- 갤러리 라이트박스 -->
+    <div class="gallery-overlay" id="galleryOverlay" onclick="handleGalleryClick(event)">
+        <button class="gallery-close" onclick="closeGallery()"><i class="fa-solid fa-xmark"></i></button>
+        <div class="gallery-stage" id="galleryStage">
+            <div class="gallery-track" id="galleryTrack"></div>
+            <button class="gallery-nav gallery-prev" onclick="galleryNav(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="gallery-nav gallery-next" onclick="galleryNav(1)"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+        <div class="gallery-counter" id="galleryCounter"></div>
+    </div>
+
+    <script>
+        /* ── 예약 바 ── */
+        const _today=new Date(); _today.setHours(0,0,0,0);
+        const _tomorrow=new Date(_today); _tomorrow.setDate(_today.getDate()+1);
+        let checkinDate=_today, checkoutDate=_tomorrow;
+        let calViewYear=_today.getFullYear(), calViewMonth=_today.getMonth();
+        const DAY_NAMES=['일','월','화','수','목','금','토'];
+        const MONTHS_KO=['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'];
+        function fmtDate(d){ return (d.getMonth()+1)+'월 '+d.getDate()+'일, '+DAY_NAMES[d.getDay()]; }
+        function updateDateUI(){ const n=Math.round((checkoutDate-checkinDate)/86400000); document.getElementById('nights-label').innerHTML='<i class="fa-regular fa-calendar"></i> 날짜 ('+n+' 박)'; document.getElementById('checkin-date-text').textContent=fmtDate(checkinDate); document.getElementById('checkout-date-text').textContent=fmtDate(checkoutDate); }
+        function renderCalendar(){ ['left','right'].forEach(function(side,idx){ const m=(calViewMonth+idx)%12, yr=calViewYear+(calViewMonth+idx>=12?1:0); document.getElementById('cal-month-title-'+side).textContent=yr+'년 '+MONTHS_KO[m]; const grid=document.getElementById('cal-grid-'+side); grid.innerHTML=''; DAY_NAMES.forEach(function(n){ const s=document.createElement('span'); s.className='cal-day-name'; s.textContent=n; grid.appendChild(s); }); const first=new Date(yr,m,1).getDay(); for(let i=0;i<first;i++){ grid.appendChild(document.createElement('span')); } const days=new Date(yr,m+1,0).getDate(); for(let d=1;d<=days;d++){ const date=new Date(yr,m,d); const s=document.createElement('span'); s.className='cal-date'; s.textContent=d; if(date<_today) s.classList.add('faded'); else{ if(checkinDate&&date.getTime()===checkinDate.getTime()) s.classList.add('selected-start'); if(checkoutDate&&date.getTime()===checkoutDate.getTime()) s.classList.add('selected-end'); if(checkinDate&&checkoutDate&&date>checkinDate&&date<checkoutDate) s.classList.add('in-range'); s.onclick=function(){ selectDate(date); }; } grid.appendChild(s); } }); }
+        let pickingCheckin=true;
+        let datesUserSelected=false;
+        function selectDate(d){ if(pickingCheckin||d<=checkinDate){ checkinDate=d; checkoutDate=null; pickingCheckin=false; datesUserSelected=false; var el=document.getElementById('min-price-text'); if(el) el.textContent='최저 요금'; document.getElementById('pricePopup').classList.remove('active'); } else{ checkoutDate=d; pickingCheckin=true; datesUserSelected=true; updateDateUI(); } renderCalendar(); }
+        function changeMonth(dir){ calViewMonth+=dir; if(calViewMonth<0){calViewMonth=11;calViewYear--;} if(calViewMonth>11){calViewMonth=0;calViewYear++;} renderCalendar(); }
+        function toggleCalendarPopup(e){ e.stopPropagation(); document.getElementById('guestPopup').classList.remove('active'); document.getElementById('calendarPopup').classList.toggle('active'); }
+        function toggleGuestPopup(e){ e.stopPropagation(); document.getElementById('calendarPopup').classList.remove('active'); document.getElementById('guestPopup').classList.toggle('active'); }
+        function togglePricePopup(e){ e.stopPropagation(); populatePricePopup(); document.getElementById('pricePopup').classList.toggle('active'); }
+        function closeDropdowns(e){ document.getElementById('calendarPopup').classList.remove('active'); document.getElementById('guestPopup').classList.remove('active'); if(!datesUserSelected) document.getElementById('pricePopup').classList.remove('active'); }
+        let guests={room:1,adult:1,child:0};
+        function updateGuest(type,dir){ guests[type]=Math.max(0,guests[type]+dir); if(guests.room<1)guests.room=1; if(guests.adult<1)guests.adult=1; document.getElementById('val-room').textContent=guests.room; document.getElementById('val-adult').textContent=guests.adult; document.getElementById('guest-summary-text').textContent=guests.room+' 객실, '+guests.adult+' 성인'; updateRoomPrices(); }
+        function openBookingCalendar(){ setTimeout(function(){ document.getElementById('guestPopup').classList.remove('active'); document.getElementById('calendarPopup').classList.add('active'); },0); }
+        function handleBookingBtn(){
+            if(!checkinDate||!checkoutDate){ openBookingCalendar(); return; }
+            var nights=Math.round((checkoutDate-checkinDate)/86400000);
+            var roomCount=guests?guests.room:1, adultCount=guests?guests.adult:1;
+            var total=0; for(var i=0;i<nights;i++){ var d=new Date(checkinDate); d.setDate(d.getDate()+i); total+=getNightRateG(selectedRoomId,d); } total*=roomCount;
+            var roomName=ROOM_NAMES_G[selectedRoomId]||selectedRoomId;
+            localStorage.setItem('instaHotelBooking',JSON.stringify({ roomId:selectedRoomId,roomName:roomName,checkin:checkinDate.toISOString(),checkout:checkoutDate.toISOString(),nights:nights,roomCount:roomCount,adultCount:adultCount,totalPrice:total }));
+            window.location.href='booking.html';
+        }
+        var selectedRoomId='edelweiss';
+        const ROOM_PRICE_TABLE_G={
+            edelweiss:{prices:[49500,58500,72000],maxGuests:2},
+            aurora:   {prices:[58000,67000,81000],maxGuests:2},
+            glorio:   {prices:[67000,76000,99000],maxGuests:2},
+            envidion: {prices:[76000,85000,108000],maxGuests:3},
+            special:  {prices:[99000,108000,126000],maxGuests:4},
+            ruby:     {prices:[76000,85000,108000],maxGuests:2}
+        };
+        const ROOM_NAMES_G={edelweiss:'이코노미 룸',aurora:'스탠다드 룸',glorio:'디럭스 룸',envidion:'트윈 룸',special:'스페셜 룸',ruby:'루비 룸'};
+        const ROOM_ORDER_G=['edelweiss','aurora','glorio','envidion','special','ruby'];
+        function fmtWon(n){ return n.toLocaleString('ko-KR'); }
+        function getNightRateG(id,date){ var r=ROOM_PRICE_TABLE_G[id]; if(!r) return 0; var d=date.getDay(); return d===6?r.prices[2]:d===5?r.prices[1]:r.prices[0]; }
+        function populatePricePopup(){
+            if(!checkinDate||!checkoutDate) return;
+            var listEl=document.getElementById('pricePopupList'); if(!listEl) return;
+            var nights=Math.round((checkoutDate-checkinDate)/86400000);
+            var roomCount=guests?guests.room:1, adultCount=guests?guests.adult:1;
+            listEl.innerHTML=ROOM_ORDER_G.map(function(id){
+                var pt=ROOM_PRICE_TABLE_G[id]; var title=ROOM_NAMES_G[id];
+                var available=pt&&adultCount<=pt.maxGuests*roomCount;
+                var total=0; for(var i=0;i<nights;i++){ var nd=new Date(checkinDate); nd.setDate(nd.getDate()+i); total+=getNightRateG(id,nd); } total*=roomCount;
+                if(!available) return '<div class="price-popup-row price-popup-unavail"><span class="price-popup-name">'+title+'</span><span class="price-popup-total" style="color:rgb(180,180,180);">최대 '+(pt.maxGuests*roomCount)+'인</span></div>';
+                return '<div class="price-popup-row" onclick="selectRoom(\''+id+'\')"><span class="price-popup-name">'+title+'</span><span class="price-popup-total">'+nights+'박 총 '+fmtWon(total)+'원</span></div>';
+            }).join('');
+        }
+        function updateRoomPrices(){
+            var el=document.getElementById('min-price-text'); if(!el) return;
+            if(checkinDate&&checkoutDate){
+                populatePricePopup();
+                if(datesUserSelected){ document.getElementById('pricePopup').classList.add('active'); }
+                if(selectedRoomId){
+                    var nights=Math.round((checkoutDate-checkinDate)/86400000);
+                    var roomCount=guests?guests.room:1; var total=0;
+                    for(var i=0;i<nights;i++){ var nd=new Date(checkinDate); nd.setDate(nd.getDate()+i); total+=getNightRateG(selectedRoomId,nd); } total*=roomCount;
+                    el.textContent=(ROOM_NAMES_G[selectedRoomId]?ROOM_NAMES_G[selectedRoomId]+' · ':'')+nights+'박 총 '+fmtWon(total)+'원';
+                }
+            } else { el.textContent='최저 요금'; document.getElementById('pricePopup').classList.remove('active'); }
+        }
+        function selectRoom(roomId){
+            selectedRoomId=roomId;
+            if(checkinDate&&checkoutDate){
+                var nights=Math.round((checkoutDate-checkinDate)/86400000);
+                var roomCount=guests?guests.room:1; var total=0;
+                for(var i=0;i<nights;i++){ var nd=new Date(checkinDate); nd.setDate(nd.getDate()+i); total+=getNightRateG(roomId,nd); } total*=roomCount;
+                document.getElementById('min-price-text').textContent=(ROOM_NAMES_G[roomId]?ROOM_NAMES_G[roomId]+' · ':'')+nights+'박 총 '+fmtWon(total)+'원';
+            }
+            document.getElementById('pricePopup').classList.remove('active');
+        }
+
+        /* ── 갤러리 데이터 ── */
+        const GALLERY_ITEMS = [
+            // 객실 - 에델바이
+            {cat:'rooms',label:'에델바이',src:'images/rooms/edelweiss/2.png'},
+            {cat:'rooms',label:'에델바이',src:'images/rooms/edelweiss/3.jpg'},
+            {cat:'rooms',label:'에델바이',src:'images/rooms/edelweiss/3.png'},
+            {cat:'rooms',label:'에델바이',src:'images/rooms/edelweiss/4.jpg'},
+            {cat:'rooms',label:'에델바이',src:'images/rooms/edelweiss/5.jpg'},
+            {cat:'rooms',label:'에델바이',src:'images/rooms/edelweiss/6.jpg'},
+            {cat:'rooms',label:'에델바이',src:'images/rooms/edelweiss/7.jpg'},
+            {cat:'rooms',label:'에델바이',src:'images/rooms/edelweiss/8.jpg'},
+            {cat:'rooms',label:'에델바이',src:'images/rooms/edelweiss/9.jpg'},
+            // 객실 - 오로라
+            {cat:'rooms',label:'오로라',src:'images/rooms/aurora/1.png'},
+            {cat:'rooms',label:'오로라',src:'images/rooms/aurora/2b.png'},
+            {cat:'rooms',label:'오로라',src:'images/rooms/aurora/3.png'},
+            {cat:'rooms',label:'오로라',src:'images/rooms/aurora/4.jpg'},
+            {cat:'rooms',label:'오로라',src:'images/rooms/aurora/4.png'},
+            {cat:'rooms',label:'오로라',src:'images/rooms/aurora/4b.png'},
+            {cat:'rooms',label:'오로라',src:'images/rooms/aurora/5.jpg'},
+            {cat:'rooms',label:'오로라',src:'images/rooms/aurora/6.jpg'},
+            {cat:'rooms',label:'오로라',src:'images/rooms/aurora/7.jpg'},
+            {cat:'rooms',label:'오로라',src:'images/rooms/aurora/7.png'},
+            {cat:'rooms',label:'오로라',src:'images/rooms/aurora/8.jpg'},
+            {cat:'rooms',label:'오로라',src:'images/rooms/aurora/9.jpg'},
+            {cat:'rooms',label:'오로라',src:'images/rooms/aurora/10.jpg'},
+            {cat:'rooms',label:'오로라',src:'images/rooms/aurora/11.jpg'},
+            {cat:'rooms',label:'오로라',src:'images/rooms/aurora/12.jpg'},
+            {cat:'rooms',label:'오로라',src:'images/rooms/aurora/13.jpg'},
+            {cat:'rooms',label:'오로라',src:'images/rooms/aurora/14.jpg'},
+            {cat:'rooms',label:'오로라',src:'images/rooms/aurora/15.jpg'},
+            {cat:'rooms',label:'오로라',src:'images/rooms/aurora/16.jpg'},
+            {cat:'rooms',label:'오로라',src:'images/rooms/aurora/17.jpg'},
+            {cat:'rooms',label:'오로라',src:'images/rooms/aurora/18.jpg'},
+            // 객실 - 글로리오
+            {cat:'rooms',label:'글로리오',src:'images/rooms/glorio/1.png'},
+            {cat:'rooms',label:'글로리오',src:'images/rooms/glorio/2.png'},
+            {cat:'rooms',label:'글로리오',src:'images/rooms/glorio/3.png'},
+            {cat:'rooms',label:'글로리오',src:'images/rooms/glorio/3b.png'},
+            {cat:'rooms',label:'글로리오',src:'images/rooms/glorio/4.jpg'},
+            {cat:'rooms',label:'글로리오',src:'images/rooms/glorio/4.png'},
+            {cat:'rooms',label:'글로리오',src:'images/rooms/glorio/4b.png'},
+            {cat:'rooms',label:'글로리오',src:'images/rooms/glorio/4c.png'},
+            {cat:'rooms',label:'글로리오',src:'images/rooms/glorio/5.jpg'},
+            {cat:'rooms',label:'글로리오',src:'images/rooms/glorio/5.png'},
+            {cat:'rooms',label:'글로리오',src:'images/rooms/glorio/5b.png'},
+            {cat:'rooms',label:'글로리오',src:'images/rooms/glorio/5c.png'},
+            {cat:'rooms',label:'글로리오',src:'images/rooms/glorio/6.jpg'},
+            {cat:'rooms',label:'글로리오',src:'images/rooms/glorio/6.png'},
+            {cat:'rooms',label:'글로리오',src:'images/rooms/glorio/7.jpg'},
+            {cat:'rooms',label:'글로리오',src:'images/rooms/glorio/7.png'},
+            {cat:'rooms',label:'글로리오',src:'images/rooms/glorio/7b.png'},
+            {cat:'rooms',label:'글로리오',src:'images/rooms/glorio/8.jpg'},
+            {cat:'rooms',label:'글로리오',src:'images/rooms/glorio/9.jpg'},
+            {cat:'rooms',label:'글로리오',src:'images/rooms/glorio/9.png'},
+            {cat:'rooms',label:'글로리오',src:'images/rooms/glorio/10.jpg'},
+            {cat:'rooms',label:'글로리오',src:'images/rooms/glorio/10.png'},
+            {cat:'rooms',label:'글로리오',src:'images/rooms/glorio/11.jpg'},
+            {cat:'rooms',label:'글로리오',src:'images/rooms/glorio/11.png'},
+            {cat:'rooms',label:'글로리오',src:'images/rooms/glorio/12.jpg'},
+            {cat:'rooms',label:'글로리오',src:'images/rooms/glorio/13.jpg'},
+            {cat:'rooms',label:'글로리오',src:'images/rooms/glorio/14.jpg'},
+            {cat:'rooms',label:'글로리오',src:'images/rooms/glorio/15.jpg'},
+            {cat:'rooms',label:'글로리오',src:'images/rooms/glorio/16.jpg'},
+            {cat:'rooms',label:'글로리오',src:'images/rooms/glorio/17.jpg'},
+            {cat:'rooms',label:'글로리오',src:'images/rooms/glorio/18.jpg'},
+            {cat:'rooms',label:'글로리오',src:'images/rooms/glorio/19.jpg'},
+            {cat:'rooms',label:'글로리오',src:'images/rooms/glorio/20.jpg'},
+            {cat:'rooms',label:'글로리오',src:'images/rooms/glorio/21.jpg'},
+            // 객실 - 엔비디온
+            {cat:'rooms',label:'엔비디온',src:'images/rooms/envidion/1.png'},
+            {cat:'rooms',label:'엔비디온',src:'images/rooms/envidion/2.png'},
+            {cat:'rooms',label:'엔비디온',src:'images/rooms/envidion/3.png'},
+            {cat:'rooms',label:'엔비디온',src:'images/rooms/envidion/4.png'},
+            {cat:'rooms',label:'엔비디온',src:'images/rooms/envidion/5.jpg'},
+            {cat:'rooms',label:'엔비디온',src:'images/rooms/envidion/6.jpg'},
+            {cat:'rooms',label:'엔비디온',src:'images/rooms/envidion/6.png'},
+            {cat:'rooms',label:'엔비디온',src:'images/rooms/envidion/7.jpg'},
+            {cat:'rooms',label:'엔비디온',src:'images/rooms/envidion/8.jpg'},
+            {cat:'rooms',label:'엔비디온',src:'images/rooms/envidion/9.jpg'},
+            {cat:'rooms',label:'엔비디온',src:'images/rooms/envidion/9.png'},
+            {cat:'rooms',label:'엔비디온',src:'images/rooms/envidion/10.jpg'},
+            {cat:'rooms',label:'엔비디온',src:'images/rooms/envidion/11.jpg'},
+            {cat:'rooms',label:'엔비디온',src:'images/rooms/envidion/12.jpg'},
+            {cat:'rooms',label:'엔비디온',src:'images/rooms/envidion/13.png'},
+            {cat:'rooms',label:'엔비디온',src:'images/rooms/envidion/14.png'},
+            {cat:'rooms',label:'엔비디온',src:'images/rooms/envidion/15.png'},
+            {cat:'rooms',label:'엔비디온',src:'images/rooms/envidion/16.png'},
+            // 객실 - 스페셜
+            {cat:'rooms',label:'스페셜',src:'images/rooms/special/1.png'},
+            {cat:'rooms',label:'스페셜',src:'images/rooms/special/2.png'},
+            {cat:'rooms',label:'스페셜',src:'images/rooms/special/3.png'},
+            {cat:'rooms',label:'스페셜',src:'images/rooms/special/4.png'},
+            {cat:'rooms',label:'스페셜',src:'images/rooms/special/5.png'},
+            {cat:'rooms',label:'스페셜',src:'images/rooms/special/6.jpg'},
+            {cat:'rooms',label:'스페셜',src:'images/rooms/special/6.png'},
+            {cat:'rooms',label:'스페셜',src:'images/rooms/special/7.jpg'},
+            {cat:'rooms',label:'스페셜',src:'images/rooms/special/8.jpg'},
+            {cat:'rooms',label:'스페셜',src:'images/rooms/special/8.png'},
+            {cat:'rooms',label:'스페셜',src:'images/rooms/special/9.jpg'},
+            {cat:'rooms',label:'스페셜',src:'images/rooms/special/9.png'},
+            {cat:'rooms',label:'스페셜',src:'images/rooms/special/10.jpg'},
+            {cat:'rooms',label:'스페셜',src:'images/rooms/special/11.jpg'},
+            {cat:'rooms',label:'스페셜',src:'images/rooms/special/12.jpg'},
+            {cat:'rooms',label:'스페셜',src:'images/rooms/special/13.jpg'},
+            {cat:'rooms',label:'스페셜',src:'images/rooms/special/14.jpg'},
+            {cat:'rooms',label:'스페셜',src:'images/rooms/special/15.jpg'},
+            // 주변 - 수원화성
+            {cat:'nearby',label:'수원화성',src:'images/nearby/hwaseong/1.png'},
+            {cat:'nearby',label:'수원화성',src:'images/nearby/hwaseong/2.jpg'},
+            {cat:'nearby',label:'수원화성',src:'images/nearby/hwaseong/3.jpg'},
+            {cat:'nearby',label:'수원화성',src:'images/nearby/hwaseong/4.jpg'},
+            {cat:'nearby',label:'수원화성',src:'images/nearby/hwaseong/5.jpg'},
+            {cat:'nearby',label:'수원화성',src:'images/nearby/hwaseong/6.jpg'},
+            {cat:'nearby',label:'수원화성',src:'images/nearby/hwaseong/7.jpg'},
+            {cat:'nearby',label:'수원화성',src:'images/nearby/hwaseong/8.jpg'},
+            {cat:'nearby',label:'수원화성',src:'images/nearby/hwaseong/9.jpg'},
+            {cat:'nearby',label:'수원화성',src:'images/nearby/hwaseong/10.png'},
+            {cat:'nearby',label:'수원화성',src:'images/nearby/hwaseong/11.png'},
+            {cat:'nearby',label:'수원화성',src:'images/nearby/hwaseong/12.png'},
+            {cat:'nearby',label:'수원화성',src:'images/nearby/hwaseong/13.png'},
+            {cat:'nearby',label:'수원화성',src:'images/nearby/hwaseong/14.png'},
+            {cat:'nearby',label:'수원화성',src:'images/nearby/hwaseong/15.png'},
+            {cat:'nearby',label:'수원화성',src:'images/nearby/hwaseong/16.png'},
+            {cat:'nearby',label:'수원화성',src:'images/nearby/hwaseong/17.png'},
+            {cat:'nearby',label:'수원화성',src:'images/nearby/hwaseong/18.png'},
+            {cat:'nearby',label:'수원화성',src:'images/nearby/hwaseong/19.png'},
+            // 주변 - 에버랜드
+            {cat:'nearby',label:'에버랜드',src:'images/nearby/everland/1.png'},
+            {cat:'nearby',label:'에버랜드',src:'images/nearby/everland/2.png'},
+            {cat:'nearby',label:'에버랜드',src:'images/nearby/everland/3.png'},
+            {cat:'nearby',label:'에버랜드',src:'images/nearby/everland/4.png'},
+            {cat:'nearby',label:'에버랜드',src:'images/nearby/everland/5.png'},
+            {cat:'nearby',label:'에버랜드',src:'images/nearby/everland/6.png'},
+            {cat:'nearby',label:'에버랜드',src:'images/nearby/everland/7.png'},
+            {cat:'nearby',label:'에버랜드',src:'images/nearby/everland/8.png'},
+            {cat:'nearby',label:'에버랜드',src:'images/nearby/everland/9.png'},
+            {cat:'nearby',label:'에버랜드',src:'images/nearby/everland/10.png'},
+            {cat:'nearby',label:'에버랜드',src:'images/nearby/everland/11.png'},
+            {cat:'nearby',label:'에버랜드',src:'images/nearby/everland/12.png'},
+            {cat:'nearby',label:'에버랜드',src:'images/nearby/everland/13.png'},
+            {cat:'nearby',label:'에버랜드',src:'images/nearby/everland/14.png'},
+            {cat:'nearby',label:'에버랜드',src:'images/nearby/everland/15.png'},
+            {cat:'nearby',label:'에버랜드',src:'images/nearby/everland/16.png'},
+            {cat:'nearby',label:'에버랜드',src:'images/nearby/everland/17.png'},
+            // 주변 - 케리비안베이
+            {cat:'nearby',label:'케리비안베이',src:'images/nearby/caribbean/1.png'},
+            {cat:'nearby',label:'케리비안베이',src:'images/nearby/caribbean/2.png'},
+            {cat:'nearby',label:'케리비안베이',src:'images/nearby/caribbean/3.png'},
+            {cat:'nearby',label:'케리비안베이',src:'images/nearby/caribbean/4.png'},
+            {cat:'nearby',label:'케리비안베이',src:'images/nearby/caribbean/5.png'},
+            {cat:'nearby',label:'케리비안베이',src:'images/nearby/caribbean/6.png'},
+            {cat:'nearby',label:'케리비안베이',src:'images/nearby/caribbean/7.png'},
+            // 주변 - 광교호수공원
+            {cat:'nearby',label:'광교호수공원',src:'images/nearby/lake-park/1.png'},
+            {cat:'nearby',label:'광교호수공원',src:'images/nearby/lake-park/2.png'},
+            {cat:'nearby',label:'광교호수공원',src:'images/nearby/lake-park/3.png'},
+            {cat:'nearby',label:'광교호수공원',src:'images/nearby/lake-park/4.png'},
+            {cat:'nearby',label:'광교호수공원',src:'images/nearby/lake-park/5.png'},
+            {cat:'nearby',label:'광교호수공원',src:'images/nearby/lake-park/6.png'},
+            {cat:'nearby',label:'광교호수공원',src:'images/nearby/lake-park/7.png'},
+            {cat:'nearby',label:'광교호수공원',src:'images/nearby/lake-park/8.png'},
+            {cat:'nearby',label:'광교호수공원',src:'images/nearby/lake-park/9.png'},
+            {cat:'nearby',label:'광교호수공원',src:'images/nearby/lake-park/10.png'},
+            {cat:'nearby',label:'광교호수공원',src:'images/nearby/lake-park/11.png'},
+            {cat:'nearby',label:'광교호수공원',src:'images/nearby/lake-park/12.png'},
+            // 주변 - 민속촌
+            {cat:'nearby',label:'민속촌',src:'images/nearby/folk-village/1.png'},
+            {cat:'nearby',label:'민속촌',src:'images/nearby/folk-village/2.png'},
+            {cat:'nearby',label:'민속촌',src:'images/nearby/folk-village/3.png'},
+            {cat:'nearby',label:'민속촌',src:'images/nearby/folk-village/4.png'},
+            {cat:'nearby',label:'민속촌',src:'images/nearby/folk-village/5.png'},
+            {cat:'nearby',label:'민속촌',src:'images/nearby/folk-village/6.png'},
+            {cat:'nearby',label:'민속촌',src:'images/nearby/folk-village/7.png'},
+            {cat:'nearby',label:'민속촌',src:'images/nearby/folk-village/8.png'},
+            {cat:'nearby',label:'민속촌',src:'images/nearby/folk-village/9.png'},
+            {cat:'nearby',label:'민속촌',src:'images/nearby/folk-village/10.png'},
+            {cat:'nearby',label:'민속촌',src:'images/nearby/folk-village/11.png'},
+            {cat:'nearby',label:'민속촌',src:'images/nearby/folk-village/12.png'},
+            {cat:'nearby',label:'민속촌',src:'images/nearby/folk-village/13.png'},
+            {cat:'nearby',label:'민속촌',src:'images/nearby/folk-village/14.png'},
+            {cat:'nearby',label:'민속촌',src:'images/nearby/folk-village/15.png'},
+            {cat:'nearby',label:'민속촌',src:'images/nearby/folk-village/16.png'},
+            {cat:'nearby',label:'민속촌',src:'images/nearby/folk-village/17.png'},
+            // 주변 - 영흥수목원
+            {cat:'nearby',label:'영흥수목원',src:'images/nearby/arboretum/1.png'},
+            {cat:'nearby',label:'영흥수목원',src:'images/nearby/arboretum/2.png'},
+            {cat:'nearby',label:'영흥수목원',src:'images/nearby/arboretum/3.png'},
+            {cat:'nearby',label:'영흥수목원',src:'images/nearby/arboretum/4.png'},
+            {cat:'nearby',label:'영흥수목원',src:'images/nearby/arboretum/5.png'},
+            {cat:'nearby',label:'영흥수목원',src:'images/nearby/arboretum/6.png'},
+            {cat:'nearby',label:'영흥수목원',src:'images/nearby/arboretum/7.png'},
+            // 주변 - 수원 스타필드
+            {cat:'nearby',label:'수원 스타필드',src:'images/nearby/starfield/스타필드.jpg'},
+            {cat:'nearby',label:'수원 스타필드',src:'images/nearby/starfield/스타필드-별마당도서관.jpg'},
+            // 주변 - 편의점
+            {cat:'nearby',label:'편의점',src:'images/nearby/convenience/1.png'},
+            {cat:'nearby',label:'편의점',src:'images/nearby/convenience/2.png'},
+            {cat:'nearby',label:'편의점',src:'images/nearby/convenience/3.png'},
+            {cat:'nearby',label:'편의점',src:'images/nearby/convenience/4.png'},
+            {cat:'nearby',label:'편의점',src:'images/nearby/convenience/5.png'}
+        ];
+
+        /* ── 필터 & 렌더링 ── */
+        var _currentFilter = 'all';
+
+        function filterGallery(filter) {
+            _currentFilter = filter;
+            document.querySelectorAll('.gal-tab').forEach(function(t) {
+                t.classList.toggle('active', t.dataset.filter === filter);
+            });
+            var items = document.querySelectorAll('.gal-item');
+            var visible = 0;
+            items.forEach(function(item) {
+                var show = filter === 'all' || item.dataset.cat === filter;
+                item.style.display = show ? '' : 'none';
+                if (show) visible++;
+            });
+            document.getElementById('galCount').innerHTML = '<span>' + visible + '</span>장의 사진';
+        }
+
+        function renderGrid() {
+            var grid = document.getElementById('galGrid');
+            grid.innerHTML = '';
+            GALLERY_ITEMS.forEach(function(item, i) {
+                var div = document.createElement('div');
+                div.className = 'gal-item';
+                div.dataset.cat = item.cat;
+                div.dataset.src = item.src;
+                div.dataset.idx = i;
+                div.onclick = function() { openGalleryPhoto(div); };
+
+                var img = document.createElement('img');
+                img.src = item.src;
+                img.alt = item.label;
+                img.loading = 'lazy';
+
+                var overlay = document.createElement('div');
+                overlay.className = 'gal-item-overlay';
+                var label = document.createElement('span');
+                label.className = 'gal-item-label';
+                label.textContent = item.label;
+                overlay.appendChild(label);
+
+                div.appendChild(img);
+                div.appendChild(overlay);
+                grid.appendChild(div);
+            });
+            document.getElementById('galCount').innerHTML = '<span>' + GALLERY_ITEMS.length + '</span>장의 사진';
+        }
+
+        /* ── 갤러리 라이트박스 ── */
+        var _galleryImages = [];
+        var _galleryIdx = 0;
+        var G_SLIDE_W = 820;
+        var G_GAP = 16;
+
+        function _setGalleryTrack(animate) {
+            var track = document.getElementById('galleryTrack');
+            var peek = (window.innerWidth - G_SLIDE_W) / 2;
+            track.querySelectorAll('.gallery-slide').forEach(function(s, i) {
+                s.classList.toggle('g-active', i === _galleryIdx);
+            });
+            track.style.transition = animate ? 'transform 0.38s ease' : 'none';
+            track.style.transform = 'translateX(' + (peek - _galleryIdx * (G_SLIDE_W + G_GAP)) + 'px)';
+            document.getElementById('galleryCounter').textContent = (_galleryIdx + 1) + ' / ' + _galleryImages.length;
+        }
+
+        function openGalleryPhoto(clickedEl) {
+            var visibleItems = Array.from(document.querySelectorAll('.gal-item')).filter(function(el) {
+                return el.style.display !== 'none';
+            });
+            var idx = visibleItems.indexOf(clickedEl);
+            _galleryImages = visibleItems.map(function(el) { return el.dataset.src; });
+            _galleryIdx = Math.max(0, idx);
+
+            var track = document.getElementById('galleryTrack');
+            track.innerHTML = '';
+            _galleryImages.forEach(function(src, i) {
+                var slide = document.createElement('div');
+                slide.className = 'gallery-slide' + (i === _galleryIdx ? ' g-active' : '');
+                var img = document.createElement('img');
+                img.src = src;
+                slide.appendChild(img);
+                track.appendChild(slide);
+            });
+            document.getElementById('galleryOverlay').classList.add('open');
+            document.body.style.overflow = 'hidden';
+            _setGalleryTrack(false);
+        }
+
+        function galleryNav(dir) {
+            var next = _galleryIdx + dir;
+            if (next < 0 || next >= _galleryImages.length) return;
+            _galleryIdx = next;
+            _setGalleryTrack(true);
+        }
+
+        function closeGallery() {
+            document.getElementById('galleryOverlay').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        function handleGalleryClick(e) {
+            if (e.target === document.getElementById('galleryOverlay')) closeGallery();
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (!document.getElementById('galleryOverlay').classList.contains('open')) return;
+            if (e.key === 'ArrowLeft') galleryNav(-1);
+            else if (e.key === 'ArrowRight') galleryNav(1);
+            else if (e.key === 'Escape') closeGallery();
+        });
+
+        window.addEventListener('resize', function() {
+            if (document.getElementById('galleryOverlay').classList.contains('open')) _setGalleryTrack(false);
+        });
+
+        /* ── 언어 선택 ── */
+        function toggleLangDropdown(e){ e.stopPropagation(); document.getElementById('langDropdown').classList.toggle('open'); }
+        function selectLang(el){ document.getElementById('langCode').textContent=el.dataset.code; document.querySelectorAll('.lang-option').forEach(function(o){o.classList.remove('active');}); el.classList.add('active'); document.getElementById('langDropdown').classList.remove('open'); }
+        document.addEventListener('click', function(){ var d=document.getElementById('langDropdown'); if(d)d.classList.remove('open'); });
+
+        /* ── 초기화 ── */
+        window.addEventListener('DOMContentLoaded', function() {
+            renderCalendar();
+            updateDateUI();
+            renderGrid();
+        });
+    </script>
+</body>
+</html>

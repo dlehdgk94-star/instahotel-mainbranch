@@ -1,0 +1,128 @@
+/* ═══════════════════════════════════════
+   INSTA HOTEL - Responsive CSS
+   Base design targets 1920px.
+   Booking bar minimum safe width: ~1700px
+   (item1=478 + item2=626 + item4=116 + padding=60 + item3padding=296 + content=120)
+   ═══════════════════════════════════════ */
+
+/* ── 1700px 이하: 예약바 패딩 완화 시작 ── */
+@media (max-width: 1700px) {
+    .booking-bar   { padding: 0 24px; }
+    .booking-item  { padding: 0 120px; }
+    .booking-item:first-child { padding-left: 0; }
+    .booking-item:nth-child(1) { flex: 0 0 460px; padding-right: 0; }
+    .booking-item:nth-child(2) { flex: 0 0 580px; }
+    .booking-item:nth-child(3) { padding-right: 80px; }
+    .booking-item:last-child   { flex: 0 0 112px; padding: 0 14px 0 0; }
+}
+
+/* ── 1536px 이하 (FHD 랩탑, 윈도우 125% 스케일링 포함) ── */
+@media (max-width: 1536px) {
+    .booking-bar   { padding: 0 20px; }
+    .booking-item  { padding: 0 80px; }
+    .booking-item:first-child { padding-left: 0; }
+    .booking-item:nth-child(1) { flex: 0 0 420px; padding-right: 0; }
+    .booking-item:nth-child(2) { flex: 0 0 530px; }
+    .booking-item:nth-child(3) { padding-right: 60px; }
+    .booking-item:last-child   { flex: 0 0 108px; padding: 0 12px 0 0; }
+}
+
+/* ── 1440px 이하 (14인치 랩탑) ── */
+@media (max-width: 1440px) {
+    .top-util-bar  { padding: 0 30px 0 20px; }
+    .top-header    { padding: 0 30px; }
+    .sub-header    { padding: 0 30px; }
+    .main-nav      { gap: 22px; }
+
+    .booking-bar   { padding: 0 18px; }
+    .booking-item  { padding: 0 64px; }
+    .booking-item:first-child { padding-left: 0; }
+    .booking-item:nth-child(1) { flex: 0 0 400px; padding-right: 0; }
+    .booking-item:nth-child(2) { flex: 0 0 510px; }
+    .booking-item:nth-child(3) { padding-right: 50px; }
+    .booking-item:last-child   { flex: 0 0 106px; padding: 0 10px 0 0; }
+}
+
+/* ── 1366px 이하 (일반 랩탑) ── */
+@media (max-width: 1366px) {
+    .booking-item  { padding: 0 50px; }
+    .booking-item:nth-child(1) { flex: 0 0 380px; }
+    .booking-item:nth-child(2) { flex: 0 0 490px; }
+    .booking-item:nth-child(3) { padding-right: 40px; }
+    .booking-item:last-child   { flex: 0 0 104px; }
+
+    .calendar-dropdown { width: 700px; }
+}
+
+/* ── 1280px 이하 (소형 랩탑) ── */
+@media (max-width: 1280px) {
+    /* 헤더 */
+    .top-util-bar  { padding: 0 18px; }
+    .top-header    { padding: 0 18px; height: 80px; }
+    .logo img      { height: 62px; }
+    .main-nav      { gap: 16px; font-size: 13px; }
+    .sub-header    { padding: 0 18px; }
+    .hotel-name    { font-size: 18px; }
+    .hotel-info-right { gap: 14px; font-size: 13px; }
+
+    /* 예약바 */
+    .booking-bar   { padding: 0 14px; height: 100px; }
+    .booking-item  { padding: 0 38px; gap: 12px; }
+    .booking-item:first-child { padding-left: 0; }
+    .booking-item:nth-child(1) { flex: 0 0 348px; padding-right: 0; }
+    .booking-item:nth-child(2) { flex: 0 0 448px; }
+    .booking-item:nth-child(3) { padding-right: 30px; }
+    .booking-item:last-child   { flex: 0 0 100px; padding: 0 8px 0 0; }
+
+    .booking-label { font-size: 11px; }
+    .booking-value { font-size: 14px; }
+    .search-btn    { width: 86px; height: 36px; font-size: 14px; }
+
+    /* 달력 팝업 */
+    .calendar-dropdown { width: 620px; left: -10px; }
+    .cal-months-wrap   { gap: 24px; }
+    .cal-date          { font-size: 12px; padding: 8px 0; }
+
+    /* 게스트 팝업 */
+    .guest-dropdown { width: 370px; }
+
+    /* 가격 팝업 */
+    .price-popup { width: 280px; }
+
+    /* 섹션 패딩 */
+    .rooms-section-header { padding: 0 20px; }
+    .rooms-grid            { padding: 0 20px; gap: 24px 20px; }
+    .promo-pkg-section     { padding: 0 20px; }
+    .facilities-section    { padding: 40px 20px; }
+    .info-section          { padding: 40px 20px 80px; }
+    .location-section      { padding: 60px 20px; }
+    .faq-details-section   { padding: 60px 20px; }
+    .footer-section        { padding: 40px 20px 60px; }
+    .rooms-section         { padding: 40px 20px; }
+
+    /* 위치 섹션 */
+    .location-container    { gap: 36px; }
+
+    /* 어메니티 그리드 */
+    .fac-category-grid     { gap: 36px 20px; }
+    .info-grid             { gap: 28px; }
+}
+
+/* ── 1200px 이하 ── */
+@media (max-width: 1200px) {
+    .main-nav        { gap: 12px; font-size: 12px; }
+    .hotel-info-right { display: none; }
+
+    /* 달력: 단일 월 표시 */
+    .calendar-dropdown  { width: 340px; }
+    .cal-months-wrap    { flex-direction: column; gap: 10px; }
+
+    /* 위치 섹션 세로 배치 */
+    .location-container { flex-direction: column; }
+    .location-info      { max-width: 100%; }
+    .location-map       { width: 100%; }
+
+    /* 그리드 2열 */
+    .fac-category-grid { grid-template-columns: repeat(2, 1fr); }
+    .info-grid         { grid-template-columns: repeat(2, 1fr); }
+}

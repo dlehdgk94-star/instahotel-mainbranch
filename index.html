@@ -1,0 +1,2230 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INSTA HOTEL 홈페이지</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+    
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* 기본 초기화 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Barlow', sans-serif;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        body {
+            color: rgb(28,28,28); 
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* 상단 유틸리티 바 */
+        .top-util-bar {
+            background-color: rgb(28, 28, 28);
+            color: #fff;
+            height: 49px;
+            padding: 0 48px 0 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .hamburger-menu {
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            padding: 5px;
+        }
+        .hamburger-menu span {
+            width: 12px;
+            height: 1px;
+            background-color: #fff;
+            border-radius: 2px;
+        }
+
+        .util-right-group { display: flex; align-items: center; gap: 24px; }
+        .util-promo { font-size: 12px; font-weight: 500; }
+        .util-promo strong { color: #FF4E00; font-weight: 800; }
+
+        .util-login-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: transparent;
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 25px;
+            padding: 5px 12px;
+            font-size: 11px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .util-login-btn i { font-size: 13px; }
+        .util-login-btn:hover { border-color: #fff; background-color: rgba(255, 255, 255, 0.1); }
+
+        /* 헤더 */
+        .top-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 88px;
+            padding: 0 48px 0 30px;
+            background-color: rgb(244, 244, 244);
+            border-bottom: 1px solid #e6e6e6;
+        }
+
+        .logo { display: flex; align-items: center; }
+        .logo img { width: auto; height: 72px; object-fit: contain; mix-blend-mode: multiply; }
+
+        .main-nav { display: flex; align-items: center; gap: 32px; list-style: none; font-family: 'Barlow', sans-serif; font-size: 14px; font-weight: 500; color: rgb(112,112,112); line-height: 20px; -webkit-font-smoothing: antialiased; height: 100%; }
+        .main-nav li { cursor: pointer; display: flex; align-items: center; position: relative; height: 100%; }
+        .main-nav li.active { color: rgb(28,28,28); font-weight: 700; }
+        .main-nav li.active::after { content: ''; position: absolute; left: 0; right: 0; bottom: 16px; height: 3px; background: #2A91A8; }
+
+        .sticky-wrapper {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background-color: #FAFAFA;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .sub-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 64px;
+            padding: 0 48px 0 30px;
+            border-top: 0;
+            border-bottom: 1px solid #e5e5e5;
+            background-color: rgb(244, 244, 244);
+        }
+
+        .hotel-info-left { display: flex; align-items: center; gap: 10px; min-width: 0; }
+        .hotel-name { font-family: 'Barlow', sans-serif; font-size: 22px; font-weight: 700; color: rgb(28,28,28); text-transform: none; line-height: 30px; -webkit-font-smoothing: antialiased; letter-spacing: normal; white-space: nowrap; }
+        .rating-dots { color: #3A9AB4; font-size: 16px; letter-spacing: normal; margin-left: 6px; display: flex; align-items: center; gap: 5px; line-height: 1; }
+        .rating-text { font-size: 14px; font-weight: 500; color: rgb(28,28,28); text-decoration: underline; text-underline-offset: 3px; line-height: 18px; }
+        .hotel-info-right { display: flex; gap: 24px; font-size: 14px; font-weight: 500; color: rgb(28,28,28); }
+        .hotel-info-right a { display: flex; align-items: center; gap: 5px; }
+        .hotel-info-right a:hover { text-decoration: underline; }
+
+        /* 예약 바 */
+        .booking-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 112px;
+            padding: 0 30px;
+            background-color: #fff;
+            border-bottom: 1px solid #e5e5e5;
+            position: relative;
+        }
+
+        .booking-item {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 18px;
+            height: 100%;
+            padding: 0 178px;
+            position: relative;
+        }
+
+        .booking-item:first-child { padding-left: 0; }
+        .booking-item:nth-child(1) { flex: 0 0 478px; padding-right: 0; }
+        .booking-item:nth-child(2) { flex: 0 0 626px; }
+        .booking-item:nth-child(3) { flex: 1 1 auto; padding-right: 118px; }
+        .booking-item:nth-child(-n+2)::after {
+            content: ''; position: absolute; right: 0; top: 50%; transform: translateY(-50%);
+            height: 65px; border-right: 1px dashed #1C1C1C;
+        }
+        .booking-item:last-child { flex: 0 0 116px; align-items: flex-start; padding: 0 20px 0 0; border-right: none; }
+
+        .booking-label { font-size: 12px; font-weight: 700; color: rgb(112,112,112); display: flex; align-items: center; gap: 7px; line-height: 14px; letter-spacing: normal; }
+        .booking-label i { font-size: 16px; color: rgb(28,28,28); margin-right: 1px; }
+        .booking-value {
+            font-size: 16px; font-weight: 500; color: rgb(28, 28, 28); display: flex; justify-content: flex-start;
+            align-items: center; cursor: pointer; padding: 0; gap: 10px; line-height: 20px; letter-spacing: normal;
+        }
+        #date-booking-item .booking-value { gap: 30px; }
+        #guest-booking-item .booking-value,
+        .booking-item:nth-child(3) .booking-value { width: 270px; justify-content: space-between; }
+        .date-arrow { font-size: 13px; color: rgb(28,28,28); margin: 0; }
+        .booking-value .fa-chevron-down { font-size: 14px; color: rgb(28,28,28); }
+
+        .search-btn {
+            background-color: rgb(114,107,113); color: #fff; border: none; width: 95px; height: 40px; padding: 0;
+            border-radius: 22px; font-size: 16px; font-weight: 700; cursor: pointer; transition: background 0.3s;
+            display: inline-flex; align-items: center; justify-content: center; white-space: nowrap;
+        }
+        .search-btn:hover { background-color: rgb(95,89,94); }
+        .price-popup{ width:320px; padding:20px 24px; left:0; right:auto; }
+        .price-popup-row{ display:flex; justify-content:space-between; align-items:center; padding:11px 0; border-bottom:1px solid #f0f0f0; cursor:pointer; }
+        .price-popup-row:last-child{ border-bottom:none; }
+        .price-popup-row:hover .price-popup-name{ color:#2A91A8; }
+        .price-popup-name{ font-size:14px; font-weight:600; color:rgb(28,28,28); }
+        .price-popup-total{ font-size:13px; font-weight:600; color:rgb(28,28,28); white-space:nowrap; }
+        .price-popup-unavail{ cursor:default; opacity:0.45; }
+        .price-popup-unavail:hover .price-popup-name{ color:rgb(28,28,28); }
+
+        /* ---------------------------------------------------
+           ★ 드롭다운 모달 (달력 & 투숙객) ★
+           --------------------------------------------------- */
+        .booking-dropdown {
+            position: absolute;
+            top: calc(100% + 20px);
+            left: 0;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            padding: 30px;
+            z-index: 2000;
+            display: none;
+            cursor: default;
+            animation: fadeIn 0.2s ease-out;
+        }
+        .booking-dropdown.active { display: block; }
+        .dropdown-close { position: absolute; top: 20px; right: 20px; font-size: 16px; cursor: pointer; color: rgb(112,112,112); }
+        .dropdown-close:hover { color: rgb(28, 28, 28); }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* 달력 팝업 동적 스타일 */
+        .calendar-dropdown { width: 750px; left: -20px; }
+        .cal-months-wrap { display: flex; justify-content: space-between; gap: 40px; margin-top: 10px; }
+        .cal-month { flex: 1; }
+        .cal-month-header { display: flex; justify-content: space-between; align-items: center; font-weight: 700; font-size: 15px; margin-bottom: 20px; }
+        .cal-month-header i { cursor: pointer; font-size: 16px; padding: 5px; color: rgb(112,112,112); transition: color 0.2s; }
+        .cal-month-header i:hover { color: #00768e; }
+        .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; gap: 10px 0; }
+        .cal-day-name { font-size: 12px; font-weight: 700; color: rgb(112,112,112); margin-bottom: 10px; }
+        
+        .cal-date { 
+            font-size: 13px; font-weight: 500; color: rgb(112,112,112); padding: 10px 0; cursor: pointer; 
+            border-radius: 20px; transition: all 0.2s ease; position: relative;
+        }
+        .cal-date.faded { color: #ccc; cursor: default; }
+        
+        /* 달력 선택 스타일 */
+        .cal-date.selected-start { background: #000; color: #fff; border-radius: 20px 0 0 20px; }
+        .cal-date.selected-end { background: #000; color: #fff; border-radius: 0 20px 20px 0; }
+        .cal-date.selected-single { background: #000; color: #fff; border-radius: 20px; }
+        .cal-date.in-range { background: #FAFAFA; border-radius: 0; }
+        .cal-date:hover:not(.faded):not(.selected-start):not(.selected-end):not(.selected-single) { background: #eaeaea; border-radius: 20px; }
+
+        /* 투숙객 팝업 특화 스타일 */
+        .guest-dropdown { width: 420px; left: -20px; }
+        .guest-notice { font-size: 11px; color: rgb(112,112,112); margin-bottom: 20px; }
+        .guest-row { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; border-bottom: 1px solid #f0f0f0; }
+        .guest-row:last-of-type { border-bottom: none; }
+        .guest-label-box { display: flex; flex-direction: column; gap: 5px; }
+        .g-title { font-weight: 700; font-size: 15px; color: rgb(28, 28, 28); }
+        .g-sub { font-size: 11px; color: rgb(112,112,112); }
+        .guest-controls { display: flex; align-items: center; gap: 15px; }
+        .btn-ctrl { width: 32px; height: 32px; border-radius: 50%; border: 1px solid #ddd; background: #fff; display: flex; justify-content: center; align-items: center; cursor: pointer; color: rgb(112,112,112); }
+        .btn-ctrl:hover { border-color: rgb(28,28,28); color: rgb(28, 28, 28); }
+        .val-ctrl { font-size: 15px; font-weight: 600; width: 15px; text-align: center; }
+
+        /* 완료 버튼 공통 */
+        .dropdown-done-btn {
+            display: block; width: 100px; margin: 30px auto 0; padding: 10px 0; border-radius: 20px; border: 1px solid #777; background: #fff; font-weight: 600; font-size: 13px; cursor: pointer; transition: background 0.2s; text-align: center;
+        }
+        .dropdown-done-btn:hover { background: #FAFAFA; }
+        /* --------------------------------------------------- */
+
+        /* 히어로 섹션 */
+        .hero-section { width: 100%; height: calc(100vh - 313px); min-height: 400px; background-color: #c8c8c8; position: relative; overflow: hidden; }
+        .hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; display: none; transition: opacity 0.5s; }
+        .hero-img.active { display: block; }
+        .hero-controls { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); display: flex; gap: 9px; align-items: center; }
+        .slider-nav { background-color: rgba(70, 55, 55, 0.82); border-radius: 22px; width: 132px; height: 44px; padding: 0 18px; display: flex; align-items: center; justify-content: space-between; gap: 0; color: #fff; }
+        .slider-nav i { font-size: 16px; line-height: 1; }
+        .slider-dots { display: flex; align-items: center; gap: 8px; }
+        .dot { width: 9px; height: 9px; border-radius: 50%; background-color: rgba(255, 255, 255, 0.36); }
+        .dot.active { background-color: #fff; }
+        .gallery-btn { background-color: rgba(70, 55, 55, 0.82); color: #fff; border: none; border-radius: 22px; width: 123px; height: 44px; padding: 0 18px; font-size: 16px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; line-height: 20px; }
+        .gallery-btn i { font-size: 18px; }
+        .gallery-btn:hover, .slider-nav i:hover { opacity: 0.8; cursor: pointer; }
+
+        /* 소개 섹션 */
+        .intro-section { max-width: 1000px; margin: 60px auto 34px; padding: 0 20px; text-align: center; }
+        .intro-welcome { font-size: 13px; color: rgb(112,112,112); margin-bottom: 10px; font-weight: 600; }
+        .intro-title { font-size: 32px; font-weight: 400; color: rgb(28, 28, 28); margin-bottom: 25px; letter-spacing: -1px; }
+        .intro-desc { font-size: 14px; line-height: 1.6; font-weight: 500; color: rgb(28,28,28); margin-bottom: 40px; word-break: keep-all; }
+        .intro-desc a { font-weight: 700; text-decoration: underline; cursor: pointer; }
+
+        /* 프로모션 배너 */
+        .promo-banner { display: flex; align-items: center; justify-content: space-between; border: 1px solid #e0e0e0; border-radius: 12px; padding: 22px 32px; text-align: left; box-shadow: 0 2px 12px rgba(0,0,0,0.04); }
+        .promo-banner-left { display: flex; align-items: center; gap: 22px; }
+        .promo-card-img { width: 110px; height: 70px; border-radius: 6px; overflow: hidden; flex-shrink: 0; }
+        .promo-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .promo-info h4 { font-size: 15px; font-weight: 700; color: rgb(28, 28, 28); margin-bottom: 6px; line-height: 1.4; }
+        .promo-info p { font-size: 12.5px; font-weight: 400; color: rgb(112,112,112); line-height: 1.5; }
+        .promo-btn { background-color: rgb(114,107,113); color: #fff; border: none; padding: 11px 26px; border-radius: 50px; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.25s ease; white-space: nowrap; flex-shrink: 0; }
+        .promo-btn-arrow { max-width: 0; opacity: 0; display: inline-flex; align-items: center; transform: translateX(-8px); transition: all 0.25s ease; overflow: hidden; white-space: nowrap; }
+        .promo-btn-arrow i { transform: rotate(-45deg); font-size: 11px; margin-left: 5px; }
+        .promo-btn:hover { background-color: rgb(95,89,94); }
+        .promo-btn:hover .promo-btn-arrow { max-width: 20px; opacity: 1; transform: translateX(0); }
+
+        /* 객실 섹션 */
+        .rooms-section { background-color: #FAFAFA; padding: 60px 40px; scroll-margin-top: 150px; }
+        .content-container { max-width: 1200px; margin: 0 auto; }
+        .rooms-header { margin-bottom: 25px; }
+        .rooms-header h3 { font-size: 24px; font-weight: 400; margin-bottom: 20px; color: rgb(28, 28, 28); }
+        .rooms-nav-wrapper { display: flex; justify-content: space-between; align-items: center; font-size: 14px; font-weight: 700; color: rgb(28, 28, 28); }
+        .nav-controls { display: flex; align-items: center; gap: 15px; }
+        .progress-track { width: 250px; height: 1px; background-color: rgb(112,112,112); position: relative; margin: 0 15px; }
+        .progress-indicator { position: absolute; top: -1px; left: 0; width: 16.666%; height: 3px; background-color: #00768e; transition: left 0.3s ease-out; }
+        .btn-prev, .btn-next { display: flex; align-items: center; gap: 10px; cursor: pointer; transition: opacity 0.3s; user-select: none; }
+        .btn-prev:hover, .btn-next:hover { opacity: 0.6; }
+        .long-arrow { width: 60px; height: 1px; background-color: #00768e; position: relative; }
+        .prev-arrow::before { content: ''; position: absolute; left: 0; top: -4px; width: 8px; height: 8px; border-top: 1px solid #00768e; border-left: 1px solid #00768e; transform: rotate(-45deg); }
+        .next-arrow::after { content: ''; position: absolute; right: 0; top: -4px; width: 8px; height: 8px; border-top: 1px solid #00768e; border-right: 1px solid #00768e; transform: rotate(45deg); }
+
+        .rooms-grid { display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; padding-bottom: 20px; cursor: grab; -ms-overflow-style: none; scrollbar-width: none; }
+        .rooms-grid::-webkit-scrollbar { display: none; }
+        .rooms-grid:active { cursor: grabbing; }
+        .room-card { background-color: #fff; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; flex: 0 0 calc(33.333% - 13.33px); scroll-snap-align: start; user-select: none; }
+        .room-img-wrapper { position: relative; height: 250px; background-color: #ddd; }
+        .room-img-wrapper img { width: 100%; height: 100%; object-fit: cover; pointer-events: none; display: none; }
+        .room-img-wrapper img:first-of-type { display: block; }
+        .expand-icon { position: absolute; top: 15px; right: 15px; background-color: rgba(0, 0, 0, 0.5); color: #fff; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 5px; cursor: pointer; font-size: 14px; }
+        .room-info { padding: 20px; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .room-title { font-size: 16px; font-weight: 800; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #eaeaea; display: flex; justify-content: space-between; align-items: center; cursor: pointer; color: rgb(28, 28, 28); }
+        
+        .room-price-btn { background-color: rgb(112,112,112); color: #fff; border: none; padding: 8px 18px; border-radius: 20px; font-size: 12px; font-weight: 600; width: fit-content; cursor: pointer; }
+
+        /* ===== 프로모션 · 패키지 섹션 ===== */
+        .promo-pkg-section { padding: 0 40px; background: #fff; }
+        .promo-pkg-header { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto 14px; }
+        .promo-pkg-title { font-size: 29px; font-weight: 300; color: rgb(28,28,28); margin: 0; }
+        .promo-pkg-all { font-size: 13px; color: #00768e; text-decoration: none; font-weight: 500; white-space: nowrap; }
+        .promo-pkg-all:hover { text-decoration: underline; }
+        .promo-pkg-wrap { position: relative; max-width: 1200px; margin: 0 auto; }
+        .promo-pkg-slider { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; cursor: grab; scrollbar-width: none; padding-bottom: 4px; }
+        .promo-pkg-slider::-webkit-scrollbar { display: none; }
+        .promo-pkg-slider.grabbing { cursor: grabbing; }
+        .promo-pkg-card { flex: 0 0 370px; width: 370px; height: 370px; scroll-snap-align: start; position: relative; border-radius: 14px; overflow: hidden; cursor: pointer; }
+        .promo-pkg-card-img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.45s ease; }
+        .hotel-ways-section .promo-pkg-card:hover .promo-pkg-card-img { transform: none; }
+        .hotel-ways-section .promo-pkg-card { cursor: default; }
+        .promo-pkg-card:hover .promo-pkg-card-img { transform: scale(1.05); }
+        .promo-pkg-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.12) 55%, transparent 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 22px 20px 20px; }
+        .promo-pkg-date { font-size: 11px; color: rgba(255,255,255,0.78); margin-bottom: 7px; display: block; }
+        .promo-pkg-name { font-size: 17px; font-weight: 700; color: #fff; text-transform: uppercase; line-height: 1.35; margin: 0 0 14px; letter-spacing: 0.5px; }
+        .promo-pkg-btn { align-self: flex-end; width: 34px; height: 34px; border-radius: 50%; background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.45); color: #fff; font-size: 18px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s; line-height: 1; }
+        .promo-pkg-btn:hover { background: rgba(255,255,255,0.32); }
+        .promo-pkg-badge { position: absolute; top: 12px; right: 12px; background: #d4600a; color: #fff; font-size: 10px; font-weight: 700; padding: 4px 9px; border-radius: 3px; display: flex; align-items: center; gap: 4px; letter-spacing: 0.3px; }
+        .promo-pkg-next-btn { position: absolute; right: -18px; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; border-radius: 50%; background: #1a1a1a; border: none; color: #fff; font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; z-index: 5; }
+        .promo-pkg-next-btn:hover { background: #333; }
+        .promo-pkg-next-btn.hidden { display: none; }
+        .promo-pkg-dots { display: flex; justify-content: center; gap: 8px; margin-top: 30px; }
+        .promo-pkg-dots .ppd { width: 8px; height: 8px; border-radius: 50%; background: #ccc; cursor: pointer; border: none; padding: 0; transition: background 0.2s; }
+        .promo-pkg-dots .ppd.active { background: #1a1a1a; }
+
+        /* 기타 섹션 (기존 코드 유지) */
+        .facilities-section { padding: 40px 40px; background-color: #fff; }
+        .fac-main-title { text-align: center; font-size: 40px; font-weight: 300; margin-bottom: 40px; color: rgb(28, 28, 28); letter-spacing: -1px; }
+        .fac-tabs { margin-bottom: 25px; }
+        .fac-tabs ul { display: flex; justify-content: center; gap: 40px; list-style: none; border-bottom: 1px solid #e0e0e0; }
+        .fac-tabs li { font-size: 15px; font-weight: 700; color: rgb(112,112,112); padding-bottom: 15px; cursor: pointer; position: relative; }
+        .fac-tabs li.active { color: rgb(28, 28, 28); font-weight: 700; }
+        .fac-tabs li.active::after { content: ''; position: absolute; bottom: -1px; left: 0; width: 100%; height: 3px; background-color: #4fb4c4; }
+        .fac-tab-content { display: none; }
+        .fac-category-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 50px 30px; }
+        .fac-box { display: flex; flex-direction: column; gap: 15px; }
+        .fac-box-title { font-size: 16px; font-weight: 700; color: rgb(28, 28, 28); display: flex; align-items: center; gap: 8px; }
+        .fac-box-title i { font-size: 18px; color: #00768e; }
+        .fac-box-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+        .fac-box-list li, .fac-box-text { font-size: 14px; font-weight: 500; color: rgb(28,28,28); display: flex; align-items: flex-start; gap: 10px; line-height: 1.5; }
+        .fac-box-list li i { font-size: 13px; color: #00768e; margin-top: 4px; }
+        .fac-box-text { color: rgb(28,28,28); }
+        .fac-li-click { cursor: pointer; border-radius: 6px; transition: background 0.15s, color 0.15s; padding: 2px 6px 2px 0; margin-left: -0px; }
+        .fac-photo-hint { font-size: 12px; color: rgb(112,112,112); margin-bottom: 20px; display: flex; align-items: center; gap: 6px; letter-spacing: 0; }
+        .fac-li-click:hover { background: #e8f6f8; color: #00768e; }
+        .fac-li-click:hover i { color: #00768e; }
+
+        #facPhotoModal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.72); z-index: 9999; align-items: center; justify-content: center; }
+        #facPhotoModal.open { display: flex; }
+        .fac-modal-box { background: #fff; border-radius: 16px; overflow: hidden; max-width: 560px; width: 90%; box-shadow: 0 20px 60px rgba(0,0,0,0.35); position: relative; }
+        .fac-modal-img { width: 100%; height: 340px; object-fit: cover; display: block; }
+        .fac-modal-label { padding: 18px 20px 20px; font-size: 16px; font-weight: 700; color: rgb(28,28,28); letter-spacing: -0.3px; }
+        .fac-modal-close { position: absolute; top: 12px; right: 14px; background: rgba(0,0,0,0.45); color: #fff; border: none; border-radius: 50%; width: 32px; height: 32px; font-size: 18px; line-height: 32px; text-align: center; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+
+        .info-section { padding: 40px 40px 100px; background-color: #fff; }
+        .info-main-title { font-size: 18px; font-weight: 800; margin-bottom: 30px; color: rgb(28, 28, 28); }
+        .info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+        .info-col { display: flex; flex-direction: column; gap: 20px; }
+        .info-item { display: flex; align-items: flex-start; gap: 12px; font-size: 13px; font-weight: 600; color: rgb(28,28,28); }
+        .info-icon { font-size: 18px; color: #00768e; width: 20px; text-align: center; margin-top: 1px; }
+        .info-text-group { display: flex; flex-direction: column; gap: 8px; }
+        .info-text-title { font-weight: 800; color: rgb(28, 28, 28); }
+        .info-text-sub { font-weight: 500; color: rgb(28,28,28); line-height: 1.6; }
+        .info-text-sub strong { font-weight: 800; color: rgb(28, 28, 28); }
+
+        .location-section { background-color: rgb(28,28,28); color: #fff; padding: 80px 40px; }
+        .location-container { display: flex; gap: 60px; align-items: flex-start; }
+        .location-info { flex: 1; max-width: 400px; }
+        .loc-subtitle { font-size: 11px; color: rgb(112,112,112); display: block; margin-bottom: 15px; }
+        .loc-title { font-size: 32px; font-weight: 300; margin-bottom: 35px; color: #fff; letter-spacing: -1px; }
+        .loc-address-box { margin-bottom: 40px; font-size: 13px; color: #ccc; line-height: 1.8; }
+        .loc-address-box strong { display: block; font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 10px; }
+        .loc-accordion { border-top: 1px solid #333; }
+        .acc-item { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; border-bottom: 1px solid #333; cursor: pointer; font-size: 14px; font-weight: 500; color: #eee; transition: color 0.3s; }
+        .acc-item:hover { color: #fff; }
+        .acc-left { display: flex; align-items: center; gap: 15px; }
+        .acc-left i { font-size: 16px; }
+        .acc-chevron { transition: transform 0.3s ease; flex-shrink: 0; }
+        .acc-item.open .acc-chevron { transform: rotate(180deg); }
+        .acc-content { display: none; padding: 4px 0 20px 36px; border-bottom: 1px solid #333; }
+        .acc-content.open { display: block; }
+        .acc-content ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+        .acc-content ul li { font-size: 13px; color: rgb(112,112,112); line-height: 1.7; display: flex; gap: 8px; }
+        .acc-content ul li::before { content: '•'; color: rgb(112,112,112); flex-shrink: 0; }
+        .acc-content .acc-sub-label { font-size: 12px; font-weight: 600; color: rgb(112,112,112); margin-top: 14px; margin-bottom: 4px; letter-spacing: 0.5px; text-transform: uppercase; display: block; }
+        .location-map { flex: 1.5; height: 400px; background-color: rgb(112,112,112); border-radius: 4px; overflow: hidden; }
+        .location-map iframe { width: 100%; height: 100%; border: none; }
+
+
+        .footer-section { background-color: #fff; padding: 40px 40px 60px; }
+        .footer-container { max-width: 1200px; margin: 0 auto; }
+        .footer-follow { border-top: 1px solid #e5e5e5; border-bottom: 1px solid #e5e5e5; padding: 25px 0; display: flex; align-items: center; gap: 15px; font-size: 15px; font-weight: 700; color: rgb(28, 28, 28); }
+        .footer-follow i { font-size: 18px; color: #00768e; cursor: pointer; }
+        .footer-info { padding: 25px 0; font-size: 12px; font-weight: 500; color: rgb(28,28,28); line-height: 1.6; }
+
+        /* 팝업 모달 영역 */
+        .img-modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); display: none; justify-content: center; align-items: center; z-index: 9999; backdrop-filter: blur(3px); }
+        .img-modal-overlay.active { display: flex; }
+        .img-modal-content { position: relative; width: 100%; max-width: 520px; border-radius: 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.25); animation: imgPop 0.35s cubic-bezier(0.1, 0.8, 0.2, 1); display: flex; justify-content: center; align-items: center; background: transparent; }
+        @keyframes imgPop { from { opacity: 0; transform: scale(0.95) translateY(10px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+        .popup-origin-img { width: 100%; height: auto; display: block; border-radius: 24px; }
+        .click-close-top { position: absolute; top: 1.5%; right: 2%; width: 50px; height: 50px; background: transparent; border: none; cursor: pointer; }
+        .click-close-bottom { position: absolute; bottom: 1%; left: 35%; width: 30%; height: 6%; background: transparent; border: none; cursor: pointer; }
+        .click-signup { position: absolute; bottom: 8.5%; left: 6%; width: 88%; height: 7.5%; background: transparent; border: none; cursor: pointer; }
+
+        /* ── peek 갤러리 (객실 & 스테이 expand) ── */
+        .pgallery-overlay{ position:fixed; inset:0; background:rgba(18,18,18,0.96); z-index:10000; display:none; flex-direction:column; align-items:center; justify-content:center; gap:20px; }
+        .pgallery-overlay.open{ display:flex; }
+        .pgallery-close{ position:fixed; top:18px; right:22px; background:#fff; border:none; border-radius:5px; color:rgb(28,28,28); width:36px; height:36px; font-size:15px; cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 8px rgba(0,0,0,0.35); z-index:3; }
+        .pgallery-close:hover{ background:#efefef; }
+        .pgallery-stage{ position:relative; width:100%; overflow:hidden; flex-shrink:0; }
+        .pgallery-track{ display:flex; gap:16px; will-change:transform; }
+        .pgallery-slide{ flex-shrink:0; width:820px; min-width:820px; height:62vh; position:relative; opacity:0.5; transition:opacity 0.38s; }
+        .pgallery-slide.pg-active{ opacity:1; }
+        .pgallery-slide img{ width:100%; height:100%; object-fit:contain; display:block; }
+        .pgallery-nav{ position:absolute; top:50%; transform:translateY(-50%); background:rgba(255,255,255,0.9); border:none; border-radius:50%; color:rgb(28,28,28); width:42px; height:42px; font-size:16px; cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 10px rgba(0,0,0,0.35); z-index:2; }
+        .pgallery-nav:hover{ background:#fff; }
+        .pgallery-prev{ left:120px; }
+        .pgallery-next{ right:120px; }
+        .pgallery-counter{ color:rgba(255,255,255,0.75); font-size:13px; font-family:'Barlow',sans-serif; }
+
+        /* Marriott-style rooms card section */
+        .rooms-fan-section { background-color: #f4f4f4; padding: 34px 0 34px; overflow: hidden; position: relative; scroll-margin-top: 208px; width: 100%; }
+        .fan-header { max-width: 1124px; margin: 0 auto 28px; padding: 0; text-align: left; }
+        .fan-subtitle { display: none; }
+        .fan-title { font-size: 0; font-weight: 300; color: rgb(28,28,28); line-height: 0; letter-spacing: normal; margin: 0 0 28px; }
+        .fan-title::after { content: '객실 & 스테이'; display: block; font-size: 29px; font-weight: 300; color: rgb(28,28,28); line-height: 38px; }
+        .fan-toolbar { display: flex; align-items: center; justify-content: space-between; width: 100%; }
+        .rooms-fan-section > .fan-toolbar { max-width: 1124px; margin: 0 auto 32px; }
+        .fan-progress { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 500; color: rgb(28,28,28); line-height: 18px; }
+        .fan-progress-track { width: 360px; height: 1px; background: #1C1C1C; position: relative; }
+        .fan-progress-indicator { position: absolute; left: 0; top: 0; width: 40px; height: 2px; background: #2A91A8; transform: translateY(-0.5px); transition: left 0.3s ease; }
+        .fan-nav { display: flex; align-items: center; gap: 56px; font-size: 14px; font-weight: 600; color: rgb(28,28,28); }
+        .fan-nav-btn { display: inline-flex; align-items: center; gap: 12px; background: transparent; border: 0; color: inherit; font: inherit; cursor: pointer; padding: 0; }
+        .fan-nav-line { width: 56px; height: 1px; background: #2A91A8; display: inline-block; }
+        .fan-stage { max-width: 1124px; margin: 0 auto; height: auto; display: flex; align-items: stretch; justify-content: flex-start; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; padding: 0 0 6px; cursor: grab; user-select: none; -ms-overflow-style: none; scrollbar-width: none; touch-action: pan-y; }
+        .fan-stage::-webkit-scrollbar { display: none; }
+        .fan-stage.is-dragging { cursor: grabbing; }
+        .fan-card { position: relative; bottom: auto; width: auto; flex: 0 0 436px; min-width: 436px; background: #fff; border-radius: 12px; border: 0; overflow: hidden; transition: box-shadow 0.2s ease, transform 0.2s ease; transform: none !important; transform-origin: center; will-change: auto; pointer-events: auto; opacity: 1 !important; scroll-snap-align: start; display: flex; flex-direction: column; box-shadow: 0 10px 24px rgba(0,0,0,0.05); }
+        .fan-card.visible, .fan-card.is-center { pointer-events: auto; box-shadow: none; }
+        .fan-card:hover { box-shadow: 0 14px 32px rgba(0,0,0,0.09); transform: translateY(-2px) !important; }
+        .fan-card .room-img-wrapper { height: 292px; background: #d0d0d0; position: relative; }
+        .fan-card .room-img-wrapper img { width: 100%; height: 100%; object-fit: cover; pointer-events: none; display: none; }
+        .fan-card .room-img-wrapper img:first-of-type { display: block; }
+        .fan-card .expand-icon { opacity: 1; top: 16px; right: 16px; width: 32px; height: 32px; border-radius: 4px; background-color: rgba(28, 28, 28, 0.72); transition: background-color 0.2s; font-size: 15px; }
+        .fan-card .expand-icon:hover { background-color: rgba(0, 0, 0, 0.82); }
+        .fan-card-info { padding: 22px 24px 24px; min-height: 153px; display: flex; flex-direction: column; justify-content: space-between; gap: 22px; }
+        .fan-card-name { display: flex; align-items: center; gap: 8px; font-size: 17px; font-weight: 600; color: rgb(28,28,28); line-height: 22px; margin: 0; letter-spacing: normal; padding-bottom: 28px; border-bottom: 1px solid #d3d3d3; text-decoration: none; cursor: pointer; }
+        .fan-card-name:hover { color: #2A91A8; }
+        .fan-card-name::after { content: '\f105'; font-family: 'Font Awesome 6 Free'; font-weight: 900; font-size: 15px; line-height: 1; }
+        .fan-card-btns { display: flex; align-items: center; justify-content: flex-start; gap: 16px; opacity: 1; transform: none; transition: none; height: auto; overflow: visible; }
+        .fan-card.is-center:hover .fan-card-btns { opacity: 1; transform: none; height: auto; overflow: visible; }
+        .fan-btn-book { min-width: 84px; height: 32px; border: 0; background: rgb(114,107,113); color: #fff; padding: 0 18px; border-radius: 17px; font-size: 14px; letter-spacing: normal; text-transform: none; cursor: pointer; transition: background 0.2s, color 0.2s; font-family: 'Barlow', sans-serif; font-weight: 700; }
+        .fan-btn-book:hover { background: rgb(95,89,94); color: #fff; }
+        .fan-btn-more { display: none; }
+        .fan-footer { max-width: 1200px; margin: 18px auto 0; display: none; justify-content: flex-end; padding: 0; }
+        .fan-all-btn { display: inline-flex; align-items: center; gap: 10px; background: #fff; color: rgb(28,28,28); border: 1px solid #1C1C1C; padding: 12px 22px; border-radius: 23px; font-size: 13px; font-weight: 600; letter-spacing: normal; text-decoration: none; text-transform: none; transition: background 0.2s, color 0.2s; font-family: 'Barlow', sans-serif; }
+        .fan-all-btn:hover { background: #1C1C1C; color: #fff; }
+        .fan-title::after { content: '객실 & 스테이'; }
+        .fan-nav-btn { font-size: 0; }
+        .fan-nav-btn:first-child::before { content: '\C774\C804'; font-size: 14px; }
+        .fan-nav-btn:last-child::after { content: '\B2E4\C74C'; font-size: 14px; }
+
+        /* 피처 슬라이더 섹션 */
+        .feature-slider-section { background: rgb(28, 28, 28); display: flex; height: 480px; overflow: hidden; }
+        .feature-left-panel { width: 44%; padding: 52px 50px 44px max(30px, calc((100vw - 1200px) / 2)); display: flex; flex-direction: column; justify-content: space-between; box-sizing: border-box; flex-shrink: 0; }
+        .feature-content-fixed { display: flex; flex-direction: column; justify-content: flex-start; flex: 1; padding-top: 0; }
+        .feature-title { font-family: 'Barlow', sans-serif; font-size: 29px; font-weight: 500; color: #fff; margin: 0 0 18px; }
+        .feature-desc { font-family: 'Barlow', sans-serif; font-size: 16px; line-height: 1.85; color: #fff; margin: 0 0 28px; word-break: keep-all; }
+        .feature-cta { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.35); border-radius: 50px; color: #fff; font-family: 'Barlow', sans-serif; font-size: 13px; cursor: pointer; align-self: flex-start; text-decoration: none; transition: background 0.2s; }
+        .feature-cta:hover { background: rgba(255,255,255,0.2); }
+        .feature-nav { display: flex; align-items: center; font-family: 'Barlow', sans-serif; font-size: 16px; }
+        .feature-nav-text { cursor: pointer; color: #fff; white-space: nowrap; transition: opacity 0.2s; }
+        .feature-nav-text:hover { opacity: 0.7; }
+        .feature-nav-line { flex: 1; height: 1px; background: #3a3a3a; margin: 0 16px; }
+        .feature-counter { white-space: nowrap; color: #fff; letter-spacing: 1px; }
+        .feature-right-panel { width: 730px; flex-shrink: 0; position: relative; overflow: hidden; background: #3a3a3a; }
+        .feature-slide-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; display: none; }
+        .feature-slide-img.active { display: block; }
+
+        /* 호텔 투숙 방법 섹션 */
+        .hotel-ways-section { background: #fff; padding: 60px 0 70px; }
+        .hotel-ways-title { font-size: 29px; font-weight: 300; color: rgb(28,28,28); margin: 0; }
+        .hotel-ways-section .promo-pkg-header { justify-content: center; margin-bottom: 32px; }
+        .hotel-ways-section .promo-pkg-wrap { max-width: 100%; }
+        .hotel-ways-section .promo-pkg-slider { overflow: hidden; cursor: default; display: block; padding-bottom: 0; }
+        .hw-track { display: flex; gap: 16px; width: max-content; animation: hwScroll 22s linear infinite; will-change: transform; }
+        @keyframes hwScroll {
+            from { transform: translateX(0); }
+            to   { transform: translateX(-50%); }
+        }
+
+        /* 후기 모달 */
+        #reviewModal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.55); z-index: 9999; align-items: center; justify-content: center; padding: 20px; }
+        #reviewModal.open { display: flex; }
+        .review-modal-box { background: #fff; border-radius: 16px; width: 100%; max-width: 820px; max-height: 88vh; display: flex; flex-direction: column; box-shadow: 0 24px 60px rgba(0,0,0,0.22); overflow: hidden; animation: reviewPop 0.28s cubic-bezier(0.2,0.8,0.2,1); }
+        @keyframes reviewPop { from { opacity:0; transform: scale(0.96) translateY(12px); } to { opacity:1; transform: none; } }
+        .review-modal-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 28px 18px; border-bottom: 1px solid #ebebeb; flex-shrink: 0; background: #f7f7f7; }
+        .review-modal-title { font-size: 16px; font-weight: 700; color: rgb(28,28,28); }
+        .review-modal-close { background: none; border: none; font-size: 20px; cursor: pointer; color: rgb(112,112,112); width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: background 0.15s; }
+        .review-modal-close:hover { background: #eee; }
+        .review-summary { padding: 22px 28px 18px; border-bottom: 1px solid #ebebeb; flex-shrink: 0; display: flex; align-items: center; gap: 14px; }
+        .review-summary-dots { display: flex; gap: 5px; }
+        .review-summary-dots i { color: #3A9AB4; font-size: 18px; }
+        .review-summary-score { font-size: 28px; font-weight: 800; color: rgb(28,28,28); letter-spacing: -1px; }
+        .review-summary-count { font-size: 14px; color: rgb(112,112,112); font-weight: 500; }
+        .review-list { overflow-y: auto; padding: 0 28px; flex: 1; }
+        .review-item { padding: 22px 0; border-bottom: 1px solid #ebebeb; }
+        .review-item:last-child { border-bottom: none; }
+        .review-item-meta { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+        .review-item-left { display: flex; flex-direction: column; gap: 5px; }
+        .review-item-name { font-size: 13px; font-weight: 700; color: rgb(28,28,28); }
+        .review-item-stars { display: flex; align-items: center; gap: 6px; }
+        .review-item-stars i { font-size: 13px; color: #3A9AB4; }
+        .review-item-stars span { font-size: 13px; font-weight: 700; color: rgb(28,28,28); }
+        .review-item-date { font-size: 12px; color: rgb(112,112,112); }
+        .review-item-title { font-size: 14px; font-weight: 700; color: rgb(28,28,28); margin-bottom: 7px; }
+        .review-item-body { font-size: 13px; color: rgb(112,112,112); line-height: 1.75; }
+        .review-item-lang { display: inline-block; font-size: 10px; font-weight: 600; color: rgb(112,112,112); background: #f0f0f0; padding: 2px 7px; border-radius: 10px; margin-bottom: 8px; }
+        .review-modal-footer { padding: 16px 28px; border-top: 1px solid #ebebeb; flex-shrink: 0; display: flex; justify-content: flex-end; }
+        .review-more-btn { background: #fff; border: 1px solid #ccc; border-radius: 20px; padding: 9px 20px; font-size: 13px; font-weight: 600; color: rgb(28,28,28); cursor: pointer; font-family: 'Barlow', sans-serif; transition: border-color 0.15s; }
+        .review-more-btn:hover { border-color: rgb(112,112,112); }
+        /* ── 언어 선택 ── */
+        .lang-selector{ position:relative; }
+        .lang-btn{ display:flex; align-items:center; gap:6px; background:none; border:1px solid #d0d0d0; border-radius:20px; padding:6px 12px; font-size:13px; font-weight:600; cursor:pointer; color:rgb(112,112,112); font-family:'Barlow',sans-serif; transition:border-color 0.2s,color 0.2s; }
+        .lang-btn:hover{ border-color:#aaa; color:rgb(28,28,28); }
+        .lang-btn .fa-globe{ font-size:13px; }
+        .lang-chevron{ font-size:9px; }
+        .lang-dropdown{ position:absolute; top:calc(100% + 10px); right:0; background:#fff; border-radius:10px; box-shadow:0 8px 28px rgba(0,0,0,0.13); padding:6px 0; min-width:110px; display:none; z-index:1500; }
+        .lang-dropdown.open{ display:block; }
+        .lang-option{ display:block; padding:10px 18px; font-size:13px; font-weight:500; color:rgb(112,112,112); cursor:pointer; white-space:nowrap; }
+        .lang-option:hover{ background:#f5f5f5; color:rgb(28,28,28); }
+        .lang-option.active{ color:rgb(28,28,28); font-weight:700; }
+    </style>
+    <link rel="stylesheet" href="responsive.css">
+</head>
+<body>
+
+    <div class="top-util-bar">
+        <div class="hamburger-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="util-right-group">
+            <button class="util-login-btn">
+                <i class="fa-regular fa-user"></i> 회원가입 시 객실예약할 때 혜택
+            </button>
+        </div>
+    </div>
+    
+    <header class="top-header">
+        <a href="#" class="logo"><img src="logo.svg" alt="INSTA Hotel 로고"></a>
+        <ul class="main-nav">
+            <li class="active"><a href="#">개요</a></li>
+            <li><a href="rooms.html">객실</a></li>
+            <li><a href="gallery.html">갤러리</a></li>
+            <li><a href="nearby.html">주변안내</a></li>
+            <li><a href="#">멤버쉽</a></li>
+            <li class="lang-selector" onclick="event.stopPropagation()">
+                <button class="lang-btn" onclick="toggleLangDropdown(event)"><i class="fa-solid fa-globe"></i><span id="langCode">KO</span><i class="fa-solid fa-chevron-down lang-chevron"></i></button>
+                <div class="lang-dropdown" id="langDropdown">
+                    <span class="lang-option active" data-code="KO" onclick="selectLang(this)">한국어</span>
+                    <span class="lang-option" data-code="EN" onclick="selectLang(this)">English</span>
+                    <span class="lang-option" data-code="JA" onclick="selectLang(this)">日本語</span>
+                    <span class="lang-option" data-code="ZH" onclick="selectLang(this)">中文</span>
+                </div>
+            </li>
+        </ul>
+    </header>
+
+    <div class="sticky-wrapper" id="booking-header">
+        <div class="sub-header">
+            <div class="hotel-info-left">
+                <span class="hotel-name">인스타 오토그래프 컬렉션</span>
+                <span class="rating-dots">
+                    <i class="fa-solid fa-circle"></i>
+                    <i class="fa-solid fa-circle"></i>
+                    <i class="fa-solid fa-circle"></i>
+                    <i class="fa-solid fa-circle"></i>
+                    <i class="fa-solid fa-circle-half-stroke"></i>
+                </span>
+                <span class="rating-text" onclick="openReviewModal()" style="cursor:pointer;">4.9 • 1446 후기</span>
+            </div>
+            <div class="hotel-info-right">
+                <a href="#"><i class="fa-solid fa-comment"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-solid fa-location-dot"></i></a>
+                <a href="#"><i class="fa-solid fa-phone"></i> +82 31-203-4301</a>
+            </div>
+        </div>
+
+        <div class="booking-bar">
+            <!-- 날짜 영역 -->
+            <div class="booking-item" id="date-booking-item">
+                <!-- ★ ID 추가됨: 박 수 업데이트를 위한 태그 ★ -->
+                <span class="booking-label" id="nights-label"><i class="fa-regular fa-calendar"></i> 날짜 (1 박)</span>
+                <div class="booking-value" onclick="toggleCalendarPopup(event)">
+                    <span id="checkin-date-text">날짜 선택</span>
+                    <i class="fa-solid fa-arrow-right date-arrow"></i>
+                    <span id="checkout-date-text"></span>
+                </div>
+                
+                <!-- 날짜 달력 팝업 (동적 렌더링) -->
+                <div class="booking-dropdown calendar-dropdown" id="calendarPopup" onclick="event.stopPropagation()">
+                    <i class="fa-solid fa-xmark dropdown-close" onclick="closeDropdowns(event)"></i>
+                    <div class="cal-months-wrap">
+                        <div class="cal-month">
+                            <div class="cal-month-header">
+                                <i class="fa-solid fa-chevron-left" onclick="changeMonth(-1)"></i>
+                                <span id="cal-month-title-left"></span>
+                                <span></span> 
+                            </div>
+                            <div class="cal-grid" id="cal-grid-left"></div>
+                        </div>
+                        <div class="cal-month">
+                            <div class="cal-month-header">
+                                <span></span>
+                                <span id="cal-month-title-right"></span>
+                                <i class="fa-solid fa-chevron-right" onclick="changeMonth(1)"></i>
+                            </div>
+                            <div class="cal-grid" id="cal-grid-right"></div>
+                        </div>
+                    </div>
+                    <button class="dropdown-done-btn" onclick="closeDropdowns(event)">완료</button>
+                </div>
+            </div>
+
+            <!-- 투숙객 영역 -->
+            <div class="booking-item" id="guest-booking-item">
+                <span class="booking-label">객실 & 투숙객</span>
+                <div class="booking-value" onclick="toggleGuestPopup(event)">
+                    <span id="guest-summary-text">1 객실, 1 성인</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+
+                <!-- 투숙객 선택 팝업 -->
+                <div class="booking-dropdown guest-dropdown" id="guestPopup" onclick="event.stopPropagation()">
+                    <i class="fa-solid fa-xmark dropdown-close" onclick="closeDropdowns(event)"></i>
+                    <div class="guest-row">
+                        <div class="guest-label-box">
+                            <span class="g-title">객실</span>
+                        </div>
+                        <div class="guest-controls">
+                            <button class="btn-ctrl" onclick="updateGuest('room', -1)"><i class="fa-solid fa-minus"></i></button>
+                            <span class="val-ctrl" id="val-room">1</span>
+                            <button class="btn-ctrl" onclick="updateGuest('room', 1)"><i class="fa-solid fa-plus"></i></button>
+                        </div>
+                    </div>
+                    <div class="guest-row">
+                        <div class="guest-label-box">
+                            <span class="g-title">성인</span>
+                        </div>
+                        <div class="guest-controls">
+                            <button class="btn-ctrl" onclick="updateGuest('adult', -1)"><i class="fa-solid fa-minus"></i></button>
+                            <span class="val-ctrl" id="val-adult">1</span>
+                            <button class="btn-ctrl" onclick="updateGuest('adult', 1)"><i class="fa-solid fa-plus"></i></button>
+                        </div>
+                    </div>
+                    <button class="dropdown-done-btn" onclick="closeDropdowns(event)">완료</button>
+                </div>
+            </div>
+
+            <div class="booking-item" id="price-booking-item">
+                <span class="booking-label">특별 요금</span>
+                <div class="booking-value" onclick="togglePricePopup(event)">
+                    <span id="min-price-text">최저 요금</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="booking-dropdown price-popup" id="pricePopup" onclick="event.stopPropagation()">
+                    <i class="fa-solid fa-xmark dropdown-close" onclick="closeDropdowns(event)"></i>
+                    <div id="pricePopupList"></div>
+                </div>
+            </div>
+            <div class="booking-item">
+                <button class="search-btn" onclick="handleBookingBtn()">예약하기</button>
+            </div>
+        </div>
+    </div>
+
+    <section class="hero-section">
+        <img src="images/hero/메인사진1.png" alt="인스타 호텔 메인" class="hero-img active">
+        <img src="images/hero/main.jpg" alt="인스타 호텔 메인" class="hero-img">
+        <img src="images/hero/main.jpg" alt="인스타 호텔" class="hero-img">
+        <div class="hero-controls">
+            <div class="slider-nav">
+                <i class="fa-solid fa-chevron-left" onclick="heroSlide(-1)" style="cursor:pointer;"></i>
+                <div class="slider-dots" id="heroDots">
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+                <i class="fa-solid fa-chevron-right" onclick="heroSlide(1)" style="cursor:pointer;"></i>
+            </div>
+            <button class="gallery-btn">
+                <i class="fa-regular fa-images"></i> 갤러리
+            </button>
+        </div>
+    </section>
+
+    <section class="intro-section">
+        <p class="intro-welcome">인스타 호텔에 오신 것을 환영합니다.</p>
+        <h2 class="intro-title">수원에서 만나는 감각적인 호텔 스테이</h2>
+        <p class="intro-desc">
+            전통의 숨결과 현대적 에너지가 공존하는 도시 수원.그 중심인 영통에 자리한 INSTA HOTEL은 단순한 숙박을 넘어, 머무름 자체가 특별한 경험이 되는 공간을 제안합니다.
+            글로벌 혁신의 중심인 삼성전자와 삼성 반도체 산업단지와 인접해 비즈니스 여행객에게 효율적이고 편안한 여정을 제공하며, 조금만 발걸음을 옮기면 유네스코 세계문화유산 수원화성과 수원행궁, 감성적인 행궁동 거리, 한국민속촌의 고즈넉한 풍경을 만나볼 수 있습니다.
+            미니멀하면서도 감각적인 무드로 완성된 객실은 복잡한 일상에서 벗어나 오롯이 휴식에 집중할 수 있도록 설계되었습니다. 따뜻한 조명, 편안한 침구, 정제된 공간감은 바쁜 하루의 끝에 가장 편안한 휴식을 선사합니다.
+            비즈니스의 성공적인 여정부터 문화와 여행이 주는 새로운 영감까지.
+            도시의 활기와 조용한 휴식이 공존하는 공간, INSTA HOTEL에서 당신만의 특별한 이야기를 시작해 보시기 바랍니다.
+        </p>
+        
+        <div class="promo-banner">
+            <div class="promo-banner-left">
+                <div class="promo-card-img">
+                    <img src="images/멤버쉽카드.jpg" alt="INSTA POINT 멤버십 혜택">
+                </div>
+                <div class="promo-info">
+                    <h4>예약할수록 쌓이는 INSTA Point, 회원만 누릴 수 있는 특별한 혜택</h4>
+                    <p>공식 홈페이지 예약 시 포인트 적립. 커피 쿠폰, 객실 업그레이드, 무료 숙박권 등 다양한 혜택을 제공합니다.</p>
+                </div>
+            </div>
+            <button class="promo-btn" id="openPromoModal">
+                <span class="promo-btn-text">더 알아보기</span>
+                <span class="promo-btn-arrow"><i class="fa-solid fa-arrow-right"></i></span>
+            </button>
+        </div>
+    </section>
+
+    <section class="rooms-fan-section" id="rooms-target">
+        <div class="fan-header">
+            <span class="fan-subtitle">INSTA HOTEL · SUWON</span>
+            <h2 class="fan-title">감각적인 디자인과 편안함이 공존하는<br>인스타 호텔의 객실 &amp; 스테이</h2>
+        </div>
+
+        <div class="fan-toolbar">
+            <div class="fan-progress">
+                <span>01</span>
+                <span class="fan-progress-track"><span class="fan-progress-indicator"></span></span>
+                <span>06</span>
+            </div>
+            <div class="fan-nav">
+                <button class="fan-nav-btn" type="button" onclick="document.getElementById('fanStage').scrollBy({ left: -452, behavior: 'smooth' })">
+                    이전 <span class="fan-nav-line"></span>
+                </button>
+                <button class="fan-nav-btn" type="button" onclick="document.getElementById('fanStage').scrollBy({ left: 452, behavior: 'smooth' })">
+                    <span class="fan-nav-line"></span> 다음
+                </button>
+            </div>
+        </div>
+
+        <div class="fan-stage marriott-card-grid" id="fanStage">
+            <div class="fan-card" data-fan-idx="0">
+                <div class="room-img-wrapper">
+                    <img src="images/rooms/edelweiss/2.png" alt="에델바이 1">
+                    <img src="images/rooms/edelweiss/3.jpg" alt="에델바이 2">
+                    <img src="images/rooms/edelweiss/4.jpg" alt="에델바이 3">
+                    <img src="images/rooms/edelweiss/5.jpg" alt="에델바이 4">
+                    <img src="images/rooms/edelweiss/6.jpg" alt="에델바이 5">
+                    <img src="images/rooms/edelweiss/7.jpg" alt="에델바이 6">
+                    <img src="images/rooms/edelweiss/8.jpg" alt="에델바이 7">
+                    <img src="images/rooms/edelweiss/9.jpg" alt="에델바이 8">
+                    <div class="expand-icon" onclick="openRoomGallery(this)"><i class="fa-solid fa-expand"></i></div>
+                </div>
+                <div class="fan-card-info">
+                    <a class="fan-card-name" href="rooms.html">이코노미 룸</a>
+                    <div class="fan-card-btns">
+                        <button class="fan-btn-book" onclick="openBookingCalendar()">요금 보기</button>
+                        <button class="fan-btn-more" onclick="openRoomGallery(this.closest('.fan-card').querySelector('.expand-icon'))">자세히 보기</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fan-card" data-fan-idx="1">
+                <div class="room-img-wrapper">
+                    <img src="images/rooms/aurora/1.png" alt="오로라 1">
+                    <img src="images/rooms/aurora/2b.png" alt="오로라 2">
+                    <img src="images/rooms/aurora/3.png" alt="오로라 3">
+                    <img src="images/rooms/aurora/4.jpg" alt="오로라 4">
+                    <img src="images/rooms/aurora/5.jpg" alt="오로라 5">
+                    <img src="images/rooms/aurora/6.jpg" alt="오로라 6">
+                    <img src="images/rooms/aurora/7.jpg" alt="오로라 7">
+                    <img src="images/rooms/aurora/8.jpg" alt="오로라 8">
+                    <img src="images/rooms/aurora/9.jpg" alt="오로라 9">
+                    <img src="images/rooms/aurora/10.jpg" alt="오로라 10">
+                    <img src="images/rooms/aurora/11.jpg" alt="오로라 11">
+                    <img src="images/rooms/aurora/12.jpg" alt="오로라 12">
+                    <img src="images/rooms/aurora/13.jpg" alt="오로라 13">
+                    <img src="images/rooms/aurora/14.jpg" alt="오로라 14">
+                    <img src="images/rooms/aurora/15.jpg" alt="오로라 15">
+                    <img src="images/rooms/aurora/16.jpg" alt="오로라 16">
+                    <img src="images/rooms/aurora/17.jpg" alt="오로라 17">
+                    <img src="images/rooms/aurora/18.jpg" alt="오로라 18">
+                    <div class="expand-icon" onclick="openRoomGallery(this)"><i class="fa-solid fa-expand"></i></div>
+                </div>
+                <div class="fan-card-info">
+                    <a class="fan-card-name" href="rooms.html">스탠다드 룸</a>
+                    <div class="fan-card-btns">
+                        <button class="fan-btn-book" onclick="openBookingCalendar()">요금 보기</button>
+                        <button class="fan-btn-more" onclick="openRoomGallery(this.closest('.fan-card').querySelector('.expand-icon'))">자세히 보기</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fan-card" data-fan-idx="2">
+                <div class="room-img-wrapper">
+                    <img src="images/rooms/glorio/1.png" alt="글로리오 1">
+                    <img src="images/rooms/glorio/2.png" alt="글로리오 2">
+                    <img src="images/rooms/glorio/3.png" alt="글로리오 3">
+                    <img src="images/rooms/glorio/4.jpg" alt="글로리오 4">
+                    <img src="images/rooms/glorio/5.jpg" alt="글로리오 5">
+                    <img src="images/rooms/glorio/6.jpg" alt="글로리오 6">
+                    <img src="images/rooms/glorio/7.jpg" alt="글로리오 7">
+                    <img src="images/rooms/glorio/8.jpg" alt="글로리오 8">
+                    <img src="images/rooms/glorio/9.jpg" alt="글로리오 9">
+                    <img src="images/rooms/glorio/10.jpg" alt="글로리오 10">
+                    <img src="images/rooms/glorio/11.jpg" alt="글로리오 11">
+                    <img src="images/rooms/glorio/12.jpg" alt="글로리오 12">
+                    <img src="images/rooms/glorio/13.jpg" alt="글로리오 13">
+                    <img src="images/rooms/glorio/14.jpg" alt="글로리오 14">
+                    <img src="images/rooms/glorio/15.jpg" alt="글로리오 15">
+                    <img src="images/rooms/glorio/16.jpg" alt="글로리오 16">
+                    <img src="images/rooms/glorio/17.jpg" alt="글로리오 17">
+                    <img src="images/rooms/glorio/18.jpg" alt="글로리오 18">
+                    <img src="images/rooms/glorio/19.jpg" alt="글로리오 19">
+                    <img src="images/rooms/glorio/20.jpg" alt="글로리오 20">
+                    <img src="images/rooms/glorio/21.jpg" alt="글로리오 21">
+                    <div class="expand-icon" onclick="openRoomGallery(this)"><i class="fa-solid fa-expand"></i></div>
+                </div>
+                <div class="fan-card-info">
+                    <a class="fan-card-name" href="rooms.html">디럭스 룸</a>
+                    <div class="fan-card-btns">
+                        <button class="fan-btn-book" onclick="openBookingCalendar()">요금 보기</button>
+                        <button class="fan-btn-more" onclick="openRoomGallery(this.closest('.fan-card').querySelector('.expand-icon'))">자세히 보기</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fan-card" data-fan-idx="3">
+                <div class="room-img-wrapper">
+                    <img src="images/rooms/envidion/1.png" alt="엔비디온 1">
+                    <img src="images/rooms/envidion/2.png" alt="엔비디온 2">
+                    <img src="images/rooms/envidion/3.png" alt="엔비디온 3">
+                    <img src="images/rooms/envidion/4.png" alt="엔비디온 4">
+                    <img src="images/rooms/envidion/5.jpg" alt="엔비디온 5">
+                    <img src="images/rooms/envidion/6.jpg" alt="엔비디온 6">
+                    <img src="images/rooms/envidion/7.jpg" alt="엔비디온 7">
+                    <img src="images/rooms/envidion/8.jpg" alt="엔비디온 8">
+                    <img src="images/rooms/envidion/9.jpg" alt="엔비디온 9">
+                    <img src="images/rooms/envidion/10.jpg" alt="엔비디온 10">
+                    <img src="images/rooms/envidion/11.jpg" alt="엔비디온 11">
+                    <img src="images/rooms/envidion/12.jpg" alt="엔비디온 12">
+                    <img src="images/rooms/envidion/13.png" alt="엔비디온 13">
+                    <img src="images/rooms/envidion/14.png" alt="엔비디온 14">
+                    <img src="images/rooms/envidion/15.png" alt="엔비디온 15">
+                    <img src="images/rooms/envidion/16.png" alt="엔비디온 16">
+                    <div class="expand-icon" onclick="openRoomGallery(this)"><i class="fa-solid fa-expand"></i></div>
+                </div>
+                <div class="fan-card-info">
+                    <a class="fan-card-name" href="rooms.html">트윈 룸</a>
+                    <div class="fan-card-btns">
+                        <button class="fan-btn-book" onclick="openBookingCalendar()">요금 보기</button>
+                        <button class="fan-btn-more" onclick="openRoomGallery(this.closest('.fan-card').querySelector('.expand-icon'))">자세히 보기</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fan-card" data-fan-idx="4">
+                <div class="room-img-wrapper">
+                    <img src="images/rooms/special/1.png" alt="스페셜 1">
+                    <img src="images/rooms/special/2.png" alt="스페셜 2">
+                    <img src="images/rooms/special/3.png" alt="스페셜 3">
+                    <img src="images/rooms/special/4.png" alt="스페셜 4">
+                    <img src="images/rooms/special/5.png" alt="스페셜 5">
+                    <img src="images/rooms/special/6.jpg" alt="스페셜 6">
+                    <img src="images/rooms/special/7.jpg" alt="스페셜 7">
+                    <img src="images/rooms/special/8.jpg" alt="스페셜 8">
+                    <img src="images/rooms/special/9.jpg" alt="스페셜 9">
+                    <img src="images/rooms/special/10.jpg" alt="스페셜 10">
+                    <img src="images/rooms/special/11.jpg" alt="스페셜 11">
+                    <img src="images/rooms/special/12.jpg" alt="스페셜 12">
+                    <img src="images/rooms/special/13.jpg" alt="스페셜 13">
+                    <img src="images/rooms/special/14.jpg" alt="스페셜 14">
+                    <img src="images/rooms/special/15.jpg" alt="스페셜 15">
+                    <div class="expand-icon" onclick="openRoomGallery(this)"><i class="fa-solid fa-expand"></i></div>
+                </div>
+                <div class="fan-card-info">
+                    <a class="fan-card-name" href="rooms.html">스페셜</a>
+                    <div class="fan-card-btns">
+                        <button class="fan-btn-book" onclick="openBookingCalendar()">요금 보기</button>
+                        <button class="fan-btn-more" onclick="openRoomGallery(this.closest('.fan-card').querySelector('.expand-icon'))">자세히 보기</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fan-card" data-fan-idx="5">
+                <div class="room-img-wrapper">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='100%25' height='100%25' fill='%23d0d0d0'/%3E%3C/svg%3E" alt="루비룸 1">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='100%25' height='100%25' fill='%23d0d0d0'/%3E%3C/svg%3E" alt="루비룸 2">
+                    <div class="expand-icon" onclick="openRoomGallery(this)"><i class="fa-solid fa-expand"></i></div>
+                </div>
+                <div class="fan-card-info">
+                    <a class="fan-card-name" href="rooms.html">루비룸 (애견동반)</a>
+                    <div class="fan-card-btns">
+                        <button class="fan-btn-book" onclick="openBookingCalendar()">요금 보기</button>
+                        <button class="fan-btn-more" onclick="openRoomGallery(this.closest('.fan-card').querySelector('.expand-icon'))">자세히 보기</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="fan-footer">
+            <a href="rooms.html" class="fan-all-btn">ALL ROOMS &nbsp;→</a>
+        </div>
+    </section>
+
+    <!-- 프로모션 · 패키지 섹션 -->
+    <section class="promo-pkg-section">
+      <div class="promo-pkg-header">
+        <h2 class="promo-pkg-title">프로모션 · 패키지</h2>
+        <a href="#" class="promo-pkg-all">모든 상품 보기 &rarr;</a>
+      </div>
+      <div class="promo-pkg-wrap">
+        <div class="promo-pkg-slider" id="promoPkgSlider">
+
+          <!-- 카드 1 -->
+          <div class="promo-pkg-card">
+            <img class="promo-pkg-card-img" src="https://images.unsplash.com/photo-1582719508461-905c673771fd?w=600&q=80" alt="프로모션1">
+            <div class="promo-pkg-overlay">
+              <span class="promo-pkg-date">2025.07.01 – 2025.08.31</span>
+              <p class="promo-pkg-name">Summer Stay<br>Package</p>
+              <button class="promo-pkg-btn">&#8250;</button>
+            </div>
+          </div>
+
+          <!-- 카드 2 (멤버 전용) -->
+          <div class="promo-pkg-card">
+            <img class="promo-pkg-card-img" src="https://images.unsplash.com/photo-1540541338287-41700207dee6?w=600&q=80" alt="프로모션2">
+            <div class="promo-pkg-badge">&#128274; 멤버 전용</div>
+            <div class="promo-pkg-overlay">
+              <span class="promo-pkg-date">2025.06.01 – 2025.09.30</span>
+              <p class="promo-pkg-name">Honeymoon<br>Deluxe Suite</p>
+              <button class="promo-pkg-btn">&#8250;</button>
+            </div>
+          </div>
+
+          <!-- 카드 3 -->
+          <div class="promo-pkg-card">
+            <img class="promo-pkg-card-img" src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=600&q=80" alt="프로모션3">
+            <div class="promo-pkg-overlay">
+              <span class="promo-pkg-date">2025.05.01 – 2025.12.31</span>
+              <p class="promo-pkg-name">Dining &amp;<br>Relaxation</p>
+              <button class="promo-pkg-btn">&#8250;</button>
+            </div>
+          </div>
+
+          <!-- 카드 4 (멤버 전용) -->
+          <div class="promo-pkg-card">
+            <img class="promo-pkg-card-img" src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=600&q=80" alt="프로모션4">
+            <div class="promo-pkg-badge">&#128274; 멤버 전용</div>
+            <div class="promo-pkg-overlay">
+              <span class="promo-pkg-date">2025.08.01 – 2025.10.31</span>
+              <p class="promo-pkg-name">Autumn Escape<br>Weekend</p>
+              <button class="promo-pkg-btn">&#8250;</button>
+            </div>
+          </div>
+
+          <!-- 카드 5 -->
+          <div class="promo-pkg-card">
+            <img class="promo-pkg-card-img" src="https://images.unsplash.com/photo-1551882547-ff40c4fe1fa7?w=600&q=80" alt="프로모션5">
+            <div class="promo-pkg-overlay">
+              <span class="promo-pkg-date">2025.01.01 – 2025.12.31</span>
+              <p class="promo-pkg-name">Spa &amp; Wellness<br>Retreat</p>
+              <button class="promo-pkg-btn">&#8250;</button>
+            </div>
+          </div>
+
+        </div>
+        <button class="promo-pkg-next-btn" id="promoPkgNext">&#8250;</button>
+      </div>
+      <div class="promo-pkg-dots" id="promoPkgDots"></div>
+    </section>
+
+    <!-- 하단 섹션들은 변경사항 없으므로 그대로 두었습니다 -->
+    <section class="facilities-section">
+        <div class="content-container">
+            <h2 class="fac-main-title">호텔 시설 및 서비스</h2>
+            <div class="fac-tabs">
+                <ul>
+                    <li class="active" onclick="changeTab('tab-room-fac', this)">객실 편의 시설</li>
+                    <li onclick="changeTab('tab-hotel-ser', this)">호텔 및 부대 서비스</li>
+                    <li onclick="changeTab('tab-sec-gen', this)">보안 및 일반 정보</li>
+                </ul>
+            </div>
+            <div id="tab-room-fac" class="fac-tab-content" style="display: block;">
+                <p class="fac-photo-hint"><i class="fa-regular fa-image"></i> 항목을 클릭하면 사진을 확인할 수 있습니다</p>
+                <div class="fac-category-grid">
+
+                    <!-- 욕실 -->
+                    <div class="fac-box">
+                        <div class="fac-box-title"><i class="fa-solid fa-shower"></i> 욕실</div>
+                        <ul class="fac-box-list">
+                            <li class="fac-li-click" onclick="showFacImg('비데', 'https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=600&q=80')"><i class="fa-solid fa-check"></i> 비데</li>
+                            <li><i class="fa-solid fa-check"></i> 골드 대형거울</li>
+                            <li><i class="fa-solid fa-check"></i> 고급 골드 샤워기</li>
+                            <li><i class="fa-solid fa-check"></i> 고급 골드 세면대</li>
+                            <li><i class="fa-solid fa-check"></i> 고급 골드 휴지걸이</li>
+                            <li class="fac-li-click" onclick="showFacImg('욕조', 'https://images.unsplash.com/photo-1507652313519-d4e9174996dd?w=600&q=80')"><i class="fa-solid fa-check"></i> 욕조</li>
+                            <li><i class="fa-solid fa-check"></i> 욕실 환풍기</li>
+                            <li><i class="fa-solid fa-check"></i> 욕실 슬리퍼</li>
+                            <li><i class="fa-solid fa-check"></i> 전용 욕실</li>
+                        </ul>
+                        <div class="fac-box-title" style="margin-top:20px;"><i class="fa-solid fa-pump-soap"></i> 어메니티</div>
+                        <ul class="fac-box-list">
+                            <li><i class="fa-solid fa-check"></i> 칫솔 / 치약</li>
+                            <li><i class="fa-solid fa-check"></i> 폼클렌징</li>
+                            <li><i class="fa-solid fa-check"></i> 레이디셋</li>
+                            <li><i class="fa-solid fa-check"></i> 면도기</li>
+                            <li><i class="fa-solid fa-check"></i> 샴푸 / 컨디셔너 / 바디워시</li>
+                        </ul>
+                    </div>
+
+                    <!-- 객실 -->
+                    <div class="fac-box">
+                        <div class="fac-box-title"><i class="fa-solid fa-bed"></i> 객실</div>
+                        <ul class="fac-box-list">
+                            <li><i class="fa-solid fa-check"></i> LG 천정형 에어컨 / 난방</li>
+                            <li><i class="fa-solid fa-check"></i> 무소음 냉장고</li>
+                            <li><i class="fa-solid fa-check"></i> 공기청정기</li>
+                            <li><i class="fa-solid fa-check"></i> 전기 주전자</li>
+                            <li class="fac-li-click" onclick="showFacImg('헤어드라이기 / 고데기', 'https://images.unsplash.com/photo-1522338242992-e1a54906a8da?w=600&q=80')"><i class="fa-solid fa-check"></i> 헤어드라이기 / 고데기</li>
+                            <li><i class="fa-solid fa-check"></i> 고급 원형테이블 / 의자</li>
+                            <li><i class="fa-solid fa-check"></i> 골드 원형거울</li>
+                            <li><i class="fa-solid fa-check"></i> 65인치 TV</li>
+                            <li><i class="fa-solid fa-check"></i> 객실 환풍기</li>
+                            <li><i class="fa-solid fa-check"></i> 침대 옆 콘센트</li>
+                            <li><i class="fa-solid fa-check"></i> 최고급 매트리스 / 린넨</li>
+                            <li><i class="fa-solid fa-check"></i> 타월</li>
+                            <li><i class="fa-solid fa-check"></i> 화장품 (여성/남성용 스킨·로션)</li>
+                            <li class="fac-li-click" onclick="showFacImg('객실 가운', 'https://images.unsplash.com/photo-1584464367415-d8b870dc7e4c?w=600&q=80')"><i class="fa-solid fa-check"></i> 객실 가운</li>
+                            <li><i class="fa-solid fa-check"></i> 빗 / 옷걸이 / 슬리퍼</li>
+                            <li><i class="fa-solid fa-check"></i> 금연 / 방음 객실</li>
+                        </ul>
+                    </div>
+
+                    <!-- 공용부 -->
+                    <div class="fac-box">
+                        <div class="fac-box-title"><i class="fa-solid fa-mug-hot"></i> 공용 편의 시설</div>
+                        <ul class="fac-box-list">
+                            <li class="fac-li-click" onclick="showFacImg('전자레인지', 'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=600&q=80')"><i class="fa-solid fa-check"></i> 전자레인지</li>
+                            <li class="fac-li-click" onclick="showFacImg('정수기', 'https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=600&q=80')"><i class="fa-solid fa-check"></i> 정수기</li>
+                            <li class="fac-li-click" onclick="showFacImg('제빙기', 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80')"><i class="fa-solid fa-check"></i> 제빙기</li>
+                            <li class="fac-li-click" onclick="showFacImg('커피머신', 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&q=80')"><i class="fa-solid fa-check"></i> 커피머신</li>
+                            <li><i class="fa-solid fa-check"></i> 무료 생수</li>
+                            <li><i class="fa-solid fa-check"></i> 추가 무료 타월 / 휴지</li>
+                            <li><i class="fa-solid fa-check"></i> 일회용 젓가락 / 수저</li>
+                            <li class="fac-li-click" onclick="showFacImg('키오스크', 'https://images.unsplash.com/photo-1516397281156-ca07cf9746fc?w=600&q=80')"><i class="fa-solid fa-check"></i> 키오스크</li>
+                        </ul>
+                        <div class="fac-box-title" style="margin-top:20px;"><i class="fa-solid fa-tv"></i> 스트리밍 · 고사양 컴퓨터</div>
+                        <ul class="fac-box-list">
+                            <li><i class="fa-solid fa-check"></i> 넷플릭스 / 디즈니+ / 티빙 <span style="color:rgb(112,112,112);font-size:12px;">(전 객실 무료시청)</span></li>
+                            <li><i class="fa-solid fa-check"></i> 애플TV+ / 유튜브 <span style="color:rgb(112,112,112);font-size:12px;">(전 객실 무료시청)</span></li>
+                            <li><i class="fa-solid fa-check"></i> 고사양 PC (GeForce 3060, RAM 16GB)</li>
+                            <li><i class="fa-solid fa-check"></i> 게이밍 모니터 (32인치 165Hz LED)</li>
+                            <li><i class="fa-solid fa-check"></i> 게이밍 LED 키보드</li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="tab-hotel-ser" class="fac-tab-content">
+                <p class="fac-photo-hint"><i class="fa-regular fa-image"></i> 항목을 클릭하면 사진을 확인할 수 있습니다</p>
+                <div class="fac-category-grid">
+                    <div class="fac-box">
+                        <div class="fac-box-title"><i class="fa-solid fa-bell-concierge"></i> 이용안내</div>
+                        <ul class="fac-box-list">
+                            <li><i class="fa-solid fa-check"></i> 체크인 : 15:00</li>
+                            <li><i class="fa-solid fa-check"></i> 체크아웃 : 12:00</li>
+                            <li class="fac-li-click" onclick="showFacImg('체크인 / 체크아웃', 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&q=80')"><i class="fa-solid fa-check"></i> 전용 체크인/체크아웃</li>
+                            <li class="fac-li-click" onclick="showFacImg('24시간 프런트 데스크', 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80')"><i class="fa-solid fa-check"></i> 24시간 프런트 데스크</li>
+                            <li class="fac-li-click" onclick="showFacImg('하우스키핑', 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=600&q=80')"><i class="fa-solid fa-check"></i> 하우스키핑 (매일)</li>
+                            <li class="fac-li-click" onclick="showFacImg('모닝콜 서비스', 'https://images.unsplash.com/photo-1563241527-3004b8b77a8c?w=600&q=80')"><i class="fa-solid fa-check"></i> 모닝콜 서비스</li>
+                        </ul>
+                    </div>
+                    <div class="fac-box">
+                        <div class="fac-box-title"><i class="fa-solid fa-paw"></i> 반려동물</div>
+                        <div class="fac-box-text">루비룸 (애견동반 가능 객실)</div>
+                        <div class="fac-box-title" style="margin-top: 20px;"><i class="fa-solid fa-wifi"></i> 인터넷</div>
+                        <div class="fac-box-text">Wi-Fi 호텔 전 구역에서 무료입니다.</div>
+                        <div class="fac-box-text">객실 내 개별 무료 초고속 Wi-Fi</div>
+                        <div class="fac-box-title" style="margin-top: 20px;"><i class="fa-solid fa-square-parking"></i> 주차</div>
+                        <div class="fac-box-text">호텔 내 (사전 예약 불필요) 전용 주차장이 무료로 이용 가능합니다.</div>
+                    </div>
+                    <div class="fac-box">
+                        <div class="fac-box-title"><i class="fa-solid fa-clipboard-user"></i> 리셉션 서비스</div>
+                        <ul class="fac-box-list"><li class="fac-li-click" onclick="showFacImg('청구서 (인보이스) 제공', 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&q=80')"><i class="fa-solid fa-check"></i> 청구서(인보이스) 제공 숙소</li></ul>
+                        <div class="fac-box-title" style="margin-top:20px;"><i class="fa-solid fa-utensils"></i> 식음료</div>
+                        <ul class="fac-box-list">
+                            <li class="fac-li-click" onclick="showFacImg('객실 내 조식 서비스', 'https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?w=600&q=80')"><i class="fa-solid fa-check"></i> 객실 내 조식 서비스</li>
+                            <li class="fac-li-click" onclick="showFacImg('룸서비스', 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80')"><i class="fa-solid fa-check"></i> 룸서비스 <span style="color: rgb(112,112,112); font-size: 12px; margin-left: 5px;">조식</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tab-sec-gen" class="fac-tab-content">
+                <p class="fac-photo-hint"><i class="fa-regular fa-image"></i> 항목을 클릭하면 사진을 확인할 수 있습니다</p>
+                <div class="fac-category-grid">
+                    <div class="fac-box">
+                        <div class="fac-box-title"><i class="fa-solid fa-shield-halved"></i> 보안</div>
+                        <ul class="fac-box-list">
+                            <li class="fac-li-click" onclick="showFacImg('소화기', 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80')"><i class="fa-solid fa-check"></i> 소화기</li>
+                            <li class="fac-li-click" onclick="showFacImg('숙소 외부 CCTV', 'https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=600&q=80')"><i class="fa-solid fa-check"></i> 숙소 외부 CCTV</li>
+                            <li class="fac-li-click" onclick="showFacImg('공용 공간 CCTV', 'https://images.unsplash.com/photo-1557597774-9d273605dfa9?w=600&q=80')"><i class="fa-solid fa-check"></i> 공용 공간 CCTV</li>
+                            <li class="fac-li-click" onclick="showFacImg('화재 경보', 'https://images.unsplash.com/photo-1542744173-05336fcc7ad4?w=600&q=80')"><i class="fa-solid fa-check"></i> 화재 경보</li>
+                            <li class="fac-li-click" onclick="showFacImg('보안 알람', 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=600&q=80')"><i class="fa-solid fa-check"></i> 보안 알람</li>
+                            <li class="fac-li-click" onclick="showFacImg('카드키 출입', 'https://images.unsplash.com/photo-1544457070-4cd773b4d71e?w=600&q=80')"><i class="fa-solid fa-check"></i> 카드키 출입</li>
+                            <li class="fac-li-click" onclick="showFacImg('24시간 보안', 'https://images.unsplash.com/photo-1582139329536-e7284fece509?w=600&q=80')"><i class="fa-solid fa-check"></i> 24시간 보안</li>
+                        </ul>
+                    </div>
+                    <div class="fac-box">
+                        <div class="fac-box-title"><i class="fa-solid fa-circle-info"></i> 일반</div>
+                        <ul class="fac-box-list">
+                            <li class="fac-li-click" onclick="showFacImg('편의점 / 마트', 'https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=600&q=80')"><i class="fa-solid fa-check"></i> 호텔 앞 24시간 편의점, 마트</li>
+                            <li class="fac-li-click" onclick="showFacImg('병원', 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=600&q=80')"><i class="fa-solid fa-check"></i> 호텔 앞 병원</li>
+                            <li class="fac-li-click" onclick="showFacImg('빨래방', 'https://images.unsplash.com/photo-1545173168-9f1947eebb7f?w=600&q=80')"><i class="fa-solid fa-check"></i> 호텔 앞 24시간 빨래방</li>
+                            <li class="fac-li-click" onclick="showFacImg('24시간 식당', 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&q=80')"><i class="fa-solid fa-check"></i> 호텔 앞 24시간 식당</li>
+                            <li class="fac-li-click" onclick="showFacImg('흡연 구역', 'https://images.unsplash.com/photo-1574007557169-0f4d79e39b19?w=600&q=80')"><i class="fa-solid fa-check"></i> 일부 흡연 구역</li>
+                            <li class="fac-li-click" onclick="showFacImg('엘리베이터', 'https://images.unsplash.com/photo-1558979159-2b18a4070a87?w=600&q=80')"><i class="fa-solid fa-check"></i> 엘리베이터</li>
+                        </ul>
+                    </div>
+                    <div class="fac-box">
+                        <div class="fac-box-title"><i class="fa-solid fa-language"></i> 지원 가능한 언어</div>
+                        <ul class="fac-box-list">
+                            <li><i class="fa-solid fa-check"></i> 영어</li><li><i class="fa-solid fa-check"></i> 스페인어</li>
+                            <li><i class="fa-solid fa-check"></i> 프랑스어</li><li><i class="fa-solid fa-check"></i> 이탈리아어</li>
+                            <li><i class="fa-solid fa-check"></i> 일본어</li><li><i class="fa-solid fa-check"></i> 한국어</li>
+                            <li><i class="fa-solid fa-check"></i> 러시아어</li><li><i class="fa-solid fa-check"></i> 중국어</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- 피처 슬라이더 섹션 -->
+    <section class="feature-slider-section">
+        <!-- 좌측 고정 텍스트 패널 -->
+        <div class="feature-left-panel">
+            <div class="feature-content-fixed">
+                <h2 class="feature-title">특별한 순간을 담다</h2>
+                <p class="feature-desc">머무는 순간은 휴식, 사진을 찍는 순간은 추억이 되는 공간.<br>Where staying feels like rest, and every captured moment becomes a memory.</p>
+                <a href="https://www.instagram.com/instar_hotel_/" target="_blank" class="feature-cta">@instar_hotel_ <i class="fa-brands fa-instagram"></i></a>
+            </div>
+            <div class="feature-nav">
+                <span class="feature-nav-text" onclick="changeFeatureSlide(-1)">이전</span>
+                <span class="feature-nav-line"></span>
+                <span class="feature-counter" id="featureCounter">01 / 03</span>
+                <span class="feature-nav-line"></span>
+                <span class="feature-nav-text" onclick="changeFeatureSlide(1)">다음</span>
+            </div>
+        </div>
+        <!-- 우측 이미지 패널 (사진만 슬라이드) -->
+        <div class="feature-right-panel">
+            <img class="feature-slide-img active" src="images/gallery/Collecting1.jpg" alt="">
+            <img class="feature-slide-img" src="images/gallery/Collecting2.jpg" alt="">
+            <img class="feature-slide-img" src="images/gallery/Collecting3.jpg" alt="">
+        </div>
+    </section>
+
+    <!-- 호텔 투숙 방법 섹션 -->
+    <section class="hotel-ways-section">
+      <div class="promo-pkg-header">
+        <h2 class="hotel-ways-title">호텔 투숙을 즐기는 다양한 방법</h2>
+      </div>
+      <div class="promo-pkg-wrap">
+        <div class="promo-pkg-slider" id="hwSlider">
+          <!-- hw-track은 JS가 생성 -->
+        </div>
+        <!-- hw-track 원본 카드 (JS가 track으로 이동) -->
+        <template id="hwCards">
+          <div class="promo-pkg-card">
+            <img class="promo-pkg-card-img" src="images/facilities/fitness.jpg" alt="피트니스">
+            <div class="promo-pkg-overlay"><p class="promo-pkg-name">Fitness<br>Center</p></div>
+          </div>
+          <div class="promo-pkg-card">
+            <img class="promo-pkg-card-img" src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80" alt="다이닝">
+            <div class="promo-pkg-overlay"><p class="promo-pkg-name">Dining &amp;<br>Restaurant</p></div>
+          </div>
+          <div class="promo-pkg-card">
+            <img class="promo-pkg-card-img" src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=600&q=80" alt="스파">
+            <div class="promo-pkg-overlay"><p class="promo-pkg-name">Spa &amp;<br>Wellness</p></div>
+          </div>
+          <div class="promo-pkg-card">
+            <img class="promo-pkg-card-img" src="https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?w=600&q=80" alt="수영장">
+            <div class="promo-pkg-overlay"><p class="promo-pkg-name">Pool &amp;<br>Aqua</p></div>
+          </div>
+          <div class="promo-pkg-card">
+            <img class="promo-pkg-card-img" src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&q=80" alt="루프탑">
+            <div class="promo-pkg-overlay"><p class="promo-pkg-name">Rooftop<br>Lounge</p></div>
+          </div>
+        </template>
+      </div>
+    </section>
+
+    <section class="location-section">
+        <div class="content-container location-container">
+            <div class="location-info">
+                <span class="loc-subtitle">호텔 위치</span>
+                <h2 class="loc-title">오시는 길</h2>
+                <div class="loc-address-box">
+                    <strong>INSTA HOTEL</strong>
+                    <p>경기도 수원시 영통구 영통로 94-6, 대한민국</p>
+                    <p>전화: +82 31-203-4301</p>
+                </div>
+                <div class="loc-accordion">
+
+                    <!-- 인천국제공항 -->
+                    <div class="acc-item" onclick="toggleAcc(this)">
+                        <div class="acc-left"><i class="fa-solid fa-plane-departure"></i><span>인천국제공항</span></div>
+                        <i class="fa-solid fa-chevron-down acc-chevron"></i>
+                    </div>
+                    <div class="acc-content">
+                        <ul>
+                            <li><span><strong>공항리무진 A4100</strong> — 망포역 7번 출구 정류장 탑승 → 인천공항 T1·T2<br>약 1시간 40분 소요 / 성인 13,500원 / 하루 약 37회 운행 / 선착순 좌석제 (예약 없음)</span></li>
+                            <li><span><strong>지하철 + 공항철도</strong> — 망포역(수인분당선)에서 환승, 약 2시간</span></li>
+                            <li><span><strong>택시 / 자가용</strong> — 약 70km, 약 1시간~1시간 20분</span></li>
+                        </ul>
+                    </div>
+
+                    <!-- 김포국제공항 -->
+                    <div class="acc-item" onclick="toggleAcc(this)">
+                        <div class="acc-left"><i class="fa-solid fa-plane"></i><span>김포국제공항</span></div>
+                        <i class="fa-solid fa-chevron-down acc-chevron"></i>
+                    </div>
+                    <div class="acc-content">
+                        <ul>
+                            <li><span><strong>지하철</strong> — 망포역(수인분당선)에서 김포공항역까지 환승, 약 1시간 20분~1시간 40분</span></li>
+                            <li><span><strong>택시 / 자가용</strong> — 약 45km, 약 50분~1시간</span></li>
+                        </ul>
+                    </div>
+
+                    <!-- 기타 교통수단 -->
+                    <div class="acc-item" onclick="toggleAcc(this)">
+                        <div class="acc-left"><i class="fa-solid fa-bus-simple"></i><span>기타 교통수단</span></div>
+                        <i class="fa-solid fa-chevron-down acc-chevron"></i>
+                    </div>
+                    <div class="acc-content">
+                        <ul>
+                            <li><span><strong>지하철</strong> — 수인분당선 망포역 인근 (호텔에서 도보 이동)</span></li>
+                            <li><span><strong>KTX</strong> — 수원역 이용 후 택시 / 버스로 이동</span></li>
+                            <li><span><strong>자가용 주차</strong> — 투숙객 전용 주차장 무료 이용 가능 (사전 예약 불필요)</span></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+            <div class="location-map">
+                <iframe src="https://maps.google.com/maps?q=37.2377421,127.0593218&z=17&output=embed&hl=ko" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </section>
+
+
+    <footer class="footer-section">
+        <div class="content-container">
+            <div class="footer-follow"><span>팔로우하기 인스타 호텔</span><i class="fa-brands fa-instagram"></i></div>
+            <div class="footer-info">사업자 정보: 인스타 호텔 &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp; (주)인스타 호텔 &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp; 사업자등록번호: 176-24-01388 &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp; 통신판매신고번호: 2023-수원영통-1696 &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp; 주소: 경기도 수원시 영통구 영통로 94-6 &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp; 전화: +82 31-203-4301 &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp; 이메일: yhl5258@naver.com</div>
+        </div>
+    </footer>
+
+    <!-- 후기 모달 -->
+    <div id="reviewModal" onclick="closeReviewModal(event)">
+        <div class="review-modal-box">
+            <div class="review-modal-header">
+                <span class="review-modal-title">평점 및 후기</span>
+                <button class="review-modal-close" onclick="document.getElementById('reviewModal').classList.remove('open')">✕</button>
+            </div>
+            <div class="review-summary">
+                <div class="review-summary-dots">
+                    <i class="fa-solid fa-circle"></i>
+                    <i class="fa-solid fa-circle"></i>
+                    <i class="fa-solid fa-circle"></i>
+                    <i class="fa-solid fa-circle"></i>
+                    <i class="fa-solid fa-circle-half-stroke"></i>
+                </div>
+                <span class="review-summary-score">4.9</span>
+                <span class="review-summary-count">· 1446 후기</span>
+            </div>
+            <div class="review-list">
+
+                <!-- 1 -->
+                <div class="review-item">
+                    <div class="review-item-meta">
+                        <div class="review-item-left">
+                            <span class="review-item-name">김지수</span>
+                            <div class="review-item-stars">
+                                <i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i>
+                                <span>5</span>
+                            </div>
+                        </div>
+                        <span class="review-item-date">3일 전</span>
+                    </div>
+                    <span class="review-item-lang">한국어</span>
+                    <div class="review-item-title">정말 완벽한 숙소였어요</div>
+                    <div class="review-item-body">처음에 기대 없이 방문했는데 생각보다 훨씬 좋았어요. 방이 굉장히 깔끔하고 아늑하며, 비데, 목욕 가운까지 구비되어 있어 호텔급 서비스를 느꼈습니다. 직원분들도 너무 친절하시고, 위치도 편의점이 바로 앞에 있어 너무 편했어요. 다음에도 꼭 다시 오고 싶어요!</div>
+                </div>
+
+                <!-- 2 -->
+                <div class="review-item">
+                    <div class="review-item-meta">
+                        <div class="review-item-left">
+                            <span class="review-item-name">James W.</span>
+                            <div class="review-item-stars">
+                                <i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i>
+                                <span>5</span>
+                            </div>
+                        </div>
+                        <span class="review-item-date">5 days ago</span>
+                    </div>
+                    <span class="review-item-lang">English</span>
+                    <div class="review-item-title">Exceeded all expectations!</div>
+                    <div class="review-item-body">I travel frequently for work and this is easily one of the most comfortable stays I've had in Korea. The room was spotless, the bed incredibly cozy, and the soundproofing was excellent — I didn't hear a thing from outside. The free parking and 24-hour front desk made everything effortless. Highly recommend to anyone visiting Suwon!</div>
+                </div>
+
+                <!-- 3 -->
+                <div class="review-item">
+                    <div class="review-item-meta">
+                        <div class="review-item-left">
+                            <span class="review-item-name">田中 美咲</span>
+                            <div class="review-item-stars">
+                                <i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i>
+                                <span>5</span>
+                            </div>
+                        </div>
+                        <span class="review-item-date">1週間前</span>
+                    </div>
+                    <span class="review-item-lang">日本語</span>
+                    <div class="review-item-title">また絶対に泊まりたいです！</div>
+                    <div class="review-item-body">韓国旅行でこちらに宿泊しました。部屋は清潔でとても広く感じられ、アメニティも充実していました。特にビデとバスローブが嬉しかったです。スタッフの方も笑顔で親切に対応してくださり、安心して過ごせました。次回の韓国旅行でも必ずリピートします！</div>
+                </div>
+
+                <!-- 4 -->
+                <div class="review-item">
+                    <div class="review-item-meta">
+                        <div class="review-item-left">
+                            <span class="review-item-name">王小明</span>
+                            <div class="review-item-stars">
+                                <i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i>
+                                <span>5</span>
+                            </div>
+                        </div>
+                        <span class="review-item-date">2周前</span>
+                    </div>
+                    <span class="review-item-lang">中文</span>
+                    <div class="review-item-title">非常棒的入住体验！</div>
+                    <div class="review-item-body">这家酒店的性价比非常高，房间干净整洁，床铺也很舒适。前台工作人员24小时都非常热情，有问必答。酒店附近有便利店和餐厅，生活十分便利。浴室设施齐全，提供浴袍和拖鞋，感觉非常贴心。强烈推荐给来韩国旅游的朋友们！</div>
+                </div>
+
+                <!-- 5 -->
+                <div class="review-item">
+                    <div class="review-item-meta">
+                        <div class="review-item-left">
+                            <span class="review-item-name">이준혁</span>
+                            <div class="review-item-stars">
+                                <i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i>
+                                <span>5</span>
+                            </div>
+                        </div>
+                        <span class="review-item-date">2주 전</span>
+                    </div>
+                    <span class="review-item-lang">한국어</span>
+                    <div class="review-item-title">가성비 최고, 재방문 확정</div>
+                    <div class="review-item-body">출장으로 방문했는데 업무용 책상이 넓고 Wi-Fi도 빨라서 작업하기 최적의 환경이었습니다. 방음도 잘 되어 있어서 옆방 소리가 전혀 안 들렸어요. 무료 주차도 큰 장점이고, 프런트 직원분이 늦은 시간에도 친절하게 응대해주셨습니다. 앞으로 수원 출장 때는 항상 이곳을 이용할 것 같아요.</div>
+                </div>
+
+                <!-- 6 -->
+                <div class="review-item">
+                    <div class="review-item-meta">
+                        <div class="review-item-left">
+                            <span class="review-item-name">Sarah M.</span>
+                            <div class="review-item-stars">
+                                <i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i><i class="fa-regular fa-circle"></i>
+                                <span>4</span>
+                            </div>
+                        </div>
+                        <span class="review-item-date">3 weeks ago</span>
+                    </div>
+                    <span class="review-item-lang">English</span>
+                    <div class="review-item-title">Great value, lovely stay</div>
+                    <div class="review-item-body">Really enjoyed my two-night stay here. The room had a unique design that felt very Instagram-worthy — which is fitting for the name! The bathroom amenities were top-notch and the mini fridge was a great touch. The area has lots of conveniences nearby. Would definitely stay again on my next visit to Korea.</div>
+                </div>
+
+                <!-- 7 -->
+                <div class="review-item">
+                    <div class="review-item-meta">
+                        <div class="review-item-left">
+                            <span class="review-item-name">박소현</span>
+                            <div class="review-item-stars">
+                                <i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i>
+                                <span>5</span>
+                            </div>
+                        </div>
+                        <span class="review-item-date">1개월 전</span>
+                    </div>
+                    <span class="review-item-lang">한국어</span>
+                    <div class="review-item-title">루비룸 강추!! 강아지랑 함께</div>
+                    <div class="review-item-body">강아지와 함께 여행을 많이 다니는 편인데 애견동반이 가능한 숙소를 찾기가 정말 힘들었어요. 루비룸은 강아지와 함께 묵을 수 있어서 너무 감사했고, 방도 넓고 깨끗했습니다. 직원분도 강아지를 따뜻하게 맞아주셔서 마음이 놓였어요. 반려동물 동반 여행하시는 분들께 강력 추천합니다!</div>
+                </div>
+
+                <!-- 8 -->
+                <div class="review-item">
+                    <div class="review-item-meta">
+                        <div class="review-item-left">
+                            <span class="review-item-name">鈴木 健太</span>
+                            <div class="review-item-stars">
+                                <i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i>
+                                <span>5</span>
+                            </div>
+                        </div>
+                        <span class="review-item-date">1ヶ月前</span>
+                    </div>
+                    <span class="review-item-lang">日本語</span>
+                    <div class="review-item-title">韓国旅行のベストステイ</div>
+                    <div class="review-item-body">友人と2人で利用しました。部屋のデザインがおしゃれで、写真映えする空間でした。アメニティも豊富で、スリッパやバスローブまで用意されていて大満足。近くにコンビニや飲食店があり、観光の拠点としても最高でした。次回の韓国旅行でも必ずここに泊まります！</div>
+                </div>
+
+                <!-- 9 -->
+                <div class="review-item">
+                    <div class="review-item-meta">
+                        <div class="review-item-left">
+                            <span class="review-item-name">李美华</span>
+                            <div class="review-item-stars">
+                                <i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i><i class="fa-regular fa-circle"></i>
+                                <span>4</span>
+                            </div>
+                        </div>
+                        <span class="review-item-date">1个月前</span>
+                    </div>
+                    <span class="review-item-lang">中文</span>
+                    <div class="review-item-title">整体感觉很好，值得推荐</div>
+                    <div class="review-item-body">第一次来韩国旅游，选择了这家酒店，非常满意。房间设计很有特色，每个房型的装饰都不一样，很有新鲜感。床铺非常舒适，睡眠质量很好。早上退房时前台也非常友好地帮助我们。停车场免费使用也很方便。下次再来韩国一定还会选择这里。</div>
+                </div>
+
+                <!-- 10 -->
+                <div class="review-item">
+                    <div class="review-item-meta">
+                        <div class="review-item-left">
+                            <span class="review-item-name">최민서</span>
+                            <div class="review-item-stars">
+                                <i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i>
+                                <span>5</span>
+                            </div>
+                        </div>
+                        <span class="review-item-date">2개월 전</span>
+                    </div>
+                    <span class="review-item-lang">한국어</span>
+                    <div class="review-item-title">스페셜룸 4인 가족여행 최적!</div>
+                    <div class="review-item-body">가족 4명이서 스페셜룸 이용했는데 정말 넓고 쾌적했어요. 퀸 침대 하나에 싱글 침대 두 개라 아이들도 편하게 잘 수 있었고, 추가요금 없이 4인 이용이 가능하다는 점이 가장 큰 장점이었어요. 전자레인지, 제빙기, 정수기까지 공용 공간에 잘 갖춰져 있어서 너무 편리했습니다. 가족여행 강추!</div>
+                </div>
+
+            </div>
+            <div class="review-modal-footer">
+                <button class="review-more-btn">더 많은 후기 보기 (1436)</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 기존 팝업 모달 영역 -->
+    <div id="pointModal" class="img-modal-overlay">
+        <div class="img-modal-content">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='100%25' height='100%25' fill='%23d0d0d0'/%3E%3C/svg%3E" alt="멤버십 혜택" class="popup-origin-img" style="min-height:400px;">
+            <button class="click-close-top" id="closeModalTop" title="닫기"></button>
+            <button class="click-signup" title="회원가입하기"></button>
+            <button class="click-close-bottom" id="closeModalBottom" title="닫기"></button>
+        </div>
+    </div>
+
+    <!-- 객실 갤러리 peek 슬라이더 -->
+    <div class="pgallery-overlay" id="pgalleryOverlay" onclick="handlePGalleryClick(event)">
+        <button class="pgallery-close" onclick="closePGallery()"><i class="fa-solid fa-xmark"></i></button>
+        <div class="pgallery-stage" id="pgalleryStage">
+            <div class="pgallery-track" id="pgalleryTrack"></div>
+            <button class="pgallery-nav pgallery-prev" onclick="pgalleryNav(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="pgallery-nav pgallery-next" onclick="pgalleryNav(1)"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+        <div class="pgallery-counter" id="pgalleryCounter"></div>
+    </div>
+
+    <script>
+        // 네비게이션 active 클래스 이동
+        document.querySelectorAll('.main-nav li:not(.lang-selector)').forEach(li => {
+            li.addEventListener('click', () => {
+                document.querySelectorAll('.main-nav li').forEach(el => el.classList.remove('active'));
+                li.classList.add('active');
+            });
+        });
+
+        // --- ★ 수정됨: 예약바 모달 및 동적 달력 로직 ★ ---
+        
+        // 팝업 토글 로직
+        function toggleCalendarPopup(e) {
+            if(e) e.stopPropagation();
+            document.getElementById('guestPopup').classList.remove('active');
+            document.getElementById('calendarPopup').classList.toggle('active');
+        }
+
+        function toggleGuestPopup(e) {
+            if(e) e.stopPropagation();
+            document.getElementById('calendarPopup').classList.remove('active');
+            document.getElementById('guestPopup').classList.toggle('active');
+        }
+
+        function togglePricePopup(e){ if(e) e.stopPropagation(); populatePricePopup(); document.getElementById('pricePopup').classList.toggle('active'); }
+        function closeDropdowns(e) {
+            if(e) e.stopPropagation();
+            document.getElementById('calendarPopup').classList.remove('active');
+            document.getElementById('guestPopup').classList.remove('active');
+            if(!datesUserSelected) document.getElementById('pricePopup').classList.remove('active');
+        }
+
+        function openBookingCalendar() {
+            setTimeout(function() {
+                document.getElementById('guestPopup').classList.remove('active');
+                document.getElementById('calendarPopup').classList.add('active');
+            }, 0);
+        }
+        function handleBookingBtn() {
+            if (!checkinDate || !checkoutDate) {
+                openBookingCalendar(); return;
+            }
+            var nights = Math.round((checkoutDate - checkinDate) / 86400000);
+            var roomCount = guests ? guests.room : 1;
+            var adultCount = guests ? guests.adult : 1;
+            var total = 0;
+            for (var i = 0; i < nights; i++) { var d = new Date(checkinDate); d.setDate(d.getDate()+i); total += getNightRateI(selectedRoomId, d); }
+            total *= roomCount;
+            var roomName = ROOM_NAMES_I[selectedRoomId] || selectedRoomId;
+            localStorage.setItem('instaHotelBooking', JSON.stringify({
+                roomId: selectedRoomId, roomName: roomName,
+                checkin: checkinDate.toISOString(), checkout: checkoutDate.toISOString(),
+                nights: nights, roomCount: roomCount, adultCount: adultCount, totalPrice: total
+            }));
+            window.location.href = 'booking.html';
+        }
+
+        window.addEventListener('click', (e) => {
+            const dateItem = document.getElementById('date-booking-item');
+            const guestItem = document.getElementById('guest-booking-item');
+            const priceItem = document.getElementById('price-booking-item');
+            if (!dateItem.contains(e.target) && !guestItem.contains(e.target) && !priceItem.contains(e.target)) {
+                closeDropdowns();
+            }
+        });
+
+        // 요금 보기 스크롤 제어
+        document.querySelectorAll('.view-price-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const targetHeader = document.getElementById('booking-header');
+                targetHeader.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                setTimeout(() => {
+                    document.getElementById('guestPopup').classList.remove('active');
+                    document.getElementById('calendarPopup').classList.add('active');
+                }, 400); 
+            });
+        });
+
+        // --- ★ 달력 렌더링 및 박 수 표시 연동 로직 ★ ---
+        let currentMonthDate = new Date(); 
+        currentMonthDate.setDate(1); 
+
+        const _today = new Date();
+        _today.setHours(0, 0, 0, 0);
+        const _tomorrow = new Date(_today);
+        _tomorrow.setDate(_today.getDate() + 1);
+        let checkinDate = _today;
+        let checkoutDate = _tomorrow;
+        
+        function formatDate(date) {
+            const days = ['일', '월', '화', '수', '목', '금', '토'];
+            return `${date.getMonth() + 1}월 ${date.getDate()}일, ${days[date.getDay()]}`;
+        }
+
+        function updateDateUI() {
+            if (checkinDate) {
+                document.getElementById('checkin-date-text').innerText = formatDate(checkinDate);
+            } else {
+                document.getElementById('checkin-date-text').innerText = '체크인 선택';
+            }
+            
+            if (checkoutDate) {
+                document.getElementById('checkout-date-text').innerText = formatDate(checkoutDate);
+            } else {
+                document.getElementById('checkout-date-text').innerText = '체크아웃 선택';
+            }
+
+            // --- ★ 추가됨: 상단 'N 박' 표시 로직 ★ ---
+            const nightsLabel = document.getElementById('nights-label');
+            if (checkinDate && checkoutDate) {
+                const timeDiff = checkoutDate.getTime() - checkinDate.getTime();
+                const nights = Math.ceil(timeDiff / (1000 * 3600 * 24));
+                nightsLabel.innerHTML = `<i class="fa-regular fa-calendar"></i> 날짜 (${nights} 박)`;
+            } else {
+                // 하나만 선택됐거나 아무것도 선택 안 됐을 때 기본값
+                nightsLabel.innerHTML = `<i class="fa-regular fa-calendar"></i> 날짜 (1 박)`;
+            }
+        }
+
+        function renderCalendar() {
+            const leftYear = currentMonthDate.getFullYear();
+            const leftMonth = currentMonthDate.getMonth();
+            
+            const rightDate = new Date(leftYear, leftMonth + 1, 1);
+            const rightYear = rightDate.getFullYear();
+            const rightMonth = rightDate.getMonth();
+
+            document.getElementById('cal-month-title-left').innerText = `${leftYear}년 ${leftMonth + 1}월`;
+            document.getElementById('cal-month-title-right').innerText = `${rightYear}년 ${rightMonth + 1}월`;
+
+            document.getElementById('cal-grid-left').innerHTML = generateMonthHTML(leftYear, leftMonth);
+            document.getElementById('cal-grid-right').innerHTML = generateMonthHTML(rightYear, rightMonth);
+        }
+
+        function generateMonthHTML(year, month) {
+            let html = '<div class="cal-day-name">일</div><div class="cal-day-name">월</div><div class="cal-day-name">화</div><div class="cal-day-name">수</div><div class="cal-day-name">목</div><div class="cal-day-name">금</div><div class="cal-day-name">토</div>';
+            
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            
+            for(let i=0; i<firstDay; i++) {
+                html += `<div class="cal-date faded"></div>`;
+            }
+            
+            const today = new Date();
+            today.setHours(0,0,0,0);
+
+            for(let i=1; i<=daysInMonth; i++) {
+                const date = new Date(year, month, i);
+                const dateStr = `${year}-${String(month+1).padStart(2,'0')}-${String(i).padStart(2,'0')}`;
+                
+                let classes = 'cal-date';
+                
+                // 이벤트 버블링 방지를 위해 event 객체와 stopPropagation()을 같이 호출합니다.
+                let clickAction = `onclick="event.stopPropagation(); selectDate('${dateStr}')"`;
+
+                if(date < today) {
+                    classes += ' faded';
+                    clickAction = ''; 
+                } else {
+                    if (checkinDate && date.getTime() === checkinDate.getTime()) {
+                        if (checkoutDate) {
+                            classes += ' selected-start';
+                        } else {
+                            classes += ' selected-single'; 
+                        }
+                    }
+                    if (checkoutDate && date.getTime() === checkoutDate.getTime()) {
+                        classes += ' selected-end';
+                    }
+                    if (checkinDate && checkoutDate && date > checkinDate && date < checkoutDate) {
+                        classes += ' in-range';
+                    }
+                }
+                
+                html += `<div class="${classes}" ${clickAction}>${i}</div>`;
+            }
+            return html;
+        }
+
+        let datesUserSelected = false;
+        function selectDate(dateString) {
+            const parts = dateString.split('-');
+            const clickedDate = new Date(parts[0], parts[1]-1, parts[2]);
+            clickedDate.setHours(0,0,0,0);
+
+            if (!checkinDate || (checkinDate && checkoutDate)) {
+                checkinDate = clickedDate;
+                checkoutDate = null;
+                datesUserSelected = false;
+                const el = document.getElementById('min-price-text');
+                if (el) el.textContent = '최저 요금';
+                document.getElementById('pricePopup').classList.remove('active');
+            }
+            else if (checkinDate && !checkoutDate) {
+                if (clickedDate > checkinDate) {
+                    checkoutDate = clickedDate;
+                    datesUserSelected = true;
+                } else if (clickedDate.getTime() === checkinDate.getTime()) {
+                    // 동일 날짜 클릭 무시
+                } else {
+                    checkinDate = clickedDate;
+                    datesUserSelected = false;
+                    const el = document.getElementById('min-price-text');
+                    if (el) el.textContent = '최저 요금';
+                    document.getElementById('pricePopup').classList.remove('active');
+                }
+            }
+
+            updateDateUI();
+            renderCalendar();
+            if (datesUserSelected) updateRoomPrices();
+        }
+
+        function changeMonth(direction) {
+            currentMonthDate.setMonth(currentMonthDate.getMonth() + direction);
+            renderCalendar();
+            // 달 넘길 때 모달 안 꺼지게 이벤트 방지 (HTML의 onclick에도 추가되어 있음)
+            event.stopPropagation(); 
+        }
+
+        // 히어로 슬라이더
+        let heroCurrentSlide = 0;
+        const heroImgs = document.querySelectorAll('.hero-img');
+        const heroDotEls = document.querySelectorAll('#heroDots .dot');
+        function heroSlide(dir) {
+            heroImgs[heroCurrentSlide].classList.remove('active');
+            heroDotEls[heroCurrentSlide].classList.remove('active');
+            heroCurrentSlide = (heroCurrentSlide + dir + heroImgs.length) % heroImgs.length;
+            heroImgs[heroCurrentSlide].classList.add('active');
+            heroDotEls[heroCurrentSlide].classList.add('active');
+        }
+        heroDotEls.forEach((dot, i) => {
+            dot.style.cursor = 'pointer';
+            dot.addEventListener('click', () => {
+                heroImgs[heroCurrentSlide].classList.remove('active');
+                heroDotEls[heroCurrentSlide].classList.remove('active');
+                heroCurrentSlide = i;
+                heroImgs[i].classList.add('active');
+                heroDotEls[i].classList.add('active');
+            });
+        });
+
+        // 피처 슬라이더 (이미지만 전환, 텍스트 고정)
+        let featureCurrentSlide = 0;
+        const featureTotalSlides = 3;
+        function changeFeatureSlide(dir) {
+            const imgs = document.querySelectorAll('.feature-slide-img');
+            imgs[featureCurrentSlide].classList.remove('active');
+            featureCurrentSlide = (featureCurrentSlide + dir + featureTotalSlides) % featureTotalSlides;
+            imgs[featureCurrentSlide].classList.add('active');
+            const num = String(featureCurrentSlide + 1).padStart(2, '0');
+            const tot = String(featureTotalSlides).padStart(2, '0');
+            document.getElementById('featureCounter').textContent = num + ' / ' + tot;
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            renderCalendar();
+            updateDateUI();
+        });
+
+        // 투숙객 증감 로직
+        let guests = { room: 1, adult: 1, child: 0 };
+        function updateGuest(type, change) {
+            let newVal = guests[type] + change;
+            if (type === 'room' && newVal < 1) newVal = 1;
+            if (type === 'adult' && newVal < 1) newVal = 1;
+
+            guests[type] = newVal;
+            document.getElementById(`val-${type}`).innerText = newVal;
+
+            document.getElementById('guest-summary-text').innerText = `${guests.room} 객실, ${guests.adult} 성인`;
+            updateRoomPrices();
+        }
+
+        let selectedRoomId = 'edelweiss';
+        const ROOM_PRICE_TABLE_I = {
+            edelweiss:{prices:[49500,58500,72000],maxGuests:2},
+            aurora:   {prices:[58000,67000,81000],maxGuests:2},
+            glorio:   {prices:[67000,76000,99000],maxGuests:2},
+            envidion: {prices:[76000,85000,108000],maxGuests:3},
+            special:  {prices:[99000,108000,126000],maxGuests:4},
+            ruby:     {prices:[76000,85000,108000],maxGuests:2}
+        };
+        const ROOM_NAMES_I={edelweiss:'이코노미 룸',aurora:'스탠다드 룸',glorio:'디럭스 룸',envidion:'트윈 룸',special:'스페셜 룸',ruby:'루비 룸'};
+        const ROOM_ORDER_I=['edelweiss','aurora','glorio','envidion','special','ruby'];
+        function fmtWon(n){ return n.toLocaleString('ko-KR'); }
+        function getNightRateI(id,date){ var r=ROOM_PRICE_TABLE_I[id]; if(!r) return 0; var d=date.getDay(); return d===6?r.prices[2]:d===5?r.prices[1]:r.prices[0]; }
+        function populatePricePopup(){
+            if(!checkinDate||!checkoutDate) return;
+            var listEl=document.getElementById('pricePopupList'); if(!listEl) return;
+            var nights=Math.round((checkoutDate-checkinDate)/86400000);
+            var roomCount=guests?guests.room:1, adultCount=guests?guests.adult:1;
+            listEl.innerHTML=ROOM_ORDER_I.map(function(id){
+                var pt=ROOM_PRICE_TABLE_I[id]; var title=ROOM_NAMES_I[id];
+                var available=pt&&adultCount<=pt.maxGuests*roomCount;
+                var total=0; for(var i=0;i<nights;i++){ var nd=new Date(checkinDate); nd.setDate(nd.getDate()+i); total+=getNightRateI(id,nd); } total*=roomCount;
+                if(!available) return '<div class="price-popup-row price-popup-unavail"><span class="price-popup-name">'+title+'</span><span class="price-popup-total" style="color:rgb(180,180,180);">최대 '+(pt.maxGuests*roomCount)+'인</span></div>';
+                return '<div class="price-popup-row" onclick="selectRoom(\''+id+'\')"><span class="price-popup-name">'+title+'</span><span class="price-popup-total">'+nights+'박 총 '+fmtWon(total)+'원</span></div>';
+            }).join('');
+        }
+        function updateRoomPrices(){
+            var el=document.getElementById('min-price-text'); if(!el) return;
+            if(checkinDate&&checkoutDate){
+                populatePricePopup();
+                if(datesUserSelected){ document.getElementById('pricePopup').classList.add('active'); }
+                if(selectedRoomId){
+                    var nights=Math.round((checkoutDate-checkinDate)/86400000);
+                    var roomCount=guests?guests.room:1; var total=0;
+                    for(var i=0;i<nights;i++){ var nd=new Date(checkinDate); nd.setDate(nd.getDate()+i); total+=getNightRateI(selectedRoomId,nd); } total*=roomCount;
+                    el.textContent=(ROOM_NAMES_I[selectedRoomId]?ROOM_NAMES_I[selectedRoomId]+' · ':'')+nights+'박 총 '+fmtWon(total)+'원';
+                }
+            } else { el.textContent='최저 요금'; document.getElementById('pricePopup').classList.remove('active'); }
+        }
+        function selectRoom(roomId){
+            selectedRoomId=roomId;
+            if(checkinDate&&checkoutDate){
+                var nights=Math.round((checkoutDate-checkinDate)/86400000);
+                var roomCount=guests?guests.room:1; var total=0;
+                for(var i=0;i<nights;i++){ var nd=new Date(checkinDate); nd.setDate(nd.getDate()+i); total+=getNightRateI(roomId,nd); } total*=roomCount;
+                document.getElementById('min-price-text').textContent=(ROOM_NAMES_I[roomId]?ROOM_NAMES_I[roomId]+' · ':'')+nights+'박 총 '+fmtWon(total)+'원';
+            }
+            document.getElementById('pricePopup').classList.remove('active');
+        }
+
+        // rooms-grid 슬라이더 코드는 fan 섹션으로 대체됨
+
+        function toggleAcc(header) {
+            const content = header.nextElementSibling;
+            const isOpen = content.classList.contains('open');
+            document.querySelectorAll('.acc-content').forEach(c => c.classList.remove('open'));
+            document.querySelectorAll('.acc-item').forEach(h => h.classList.remove('open'));
+            if (!isOpen) {
+                content.classList.add('open');
+                header.classList.add('open');
+            }
+        }
+
+        function changeTab(tabId, element) {
+            const tabs = document.querySelectorAll('.fac-tabs li');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            element.classList.add('active');
+            const contents = document.querySelectorAll('.fac-tab-content');
+            contents.forEach(content => content.style.display = 'none');
+            document.getElementById(tabId).style.display = 'block';
+        }
+
+
+        const promoBtn = document.getElementById('openPromoModal');
+        const modal = document.getElementById('pointModal');
+        const closeModalTop = document.getElementById('closeModalTop');
+        const closeModalBottom = document.getElementById('closeModalBottom');
+        promoBtn.addEventListener('click', () => { modal.classList.add('active'); document.body.style.overflow = 'hidden'; });
+        const closePromoModal = () => { modal.classList.remove('active'); document.body.style.overflow = 'auto'; };
+        closeModalTop.addEventListener('click', closePromoModal);
+        closeModalBottom.addEventListener('click', closePromoModal);
+        modal.addEventListener('click', (e) => { if (e.target === modal) closePromoModal(); });
+
+        /* ── peek 갤러리 (객실 & 스테이) ── */
+        var _pgImages = [];
+        var _pgIdx = 0;
+        var PG_SLIDE_W = 820;
+        var PG_GAP = 16;
+
+        function _setPGTrack(animate) {
+            var track = document.getElementById('pgalleryTrack');
+            var peek = (window.innerWidth - PG_SLIDE_W) / 2;
+            track.querySelectorAll('.pgallery-slide').forEach(function(s, i) {
+                s.classList.toggle('pg-active', i === _pgIdx);
+            });
+            track.style.transition = animate ? 'transform 0.38s ease' : 'none';
+            track.style.transform = 'translateX(' + (peek - _pgIdx * (PG_SLIDE_W + PG_GAP)) + 'px)';
+            document.getElementById('pgalleryCounter').textContent = (_pgIdx + 1) + ' / ' + _pgImages.length;
+        }
+
+        function openRoomGallery(iconElement) {
+            var card = iconElement.closest('.fan-card') || iconElement.closest('.room-card');
+            var imgs = card.querySelectorAll('.room-img-wrapper img');
+            _pgImages = Array.from(imgs).map(function(img) { return img.getAttribute('src'); }).filter(function(src) { return src && src.indexOf('svg') === -1; });
+            if (_pgImages.length === 0) return;
+            _pgIdx = 0;
+            var track = document.getElementById('pgalleryTrack');
+            track.innerHTML = '';
+            _pgImages.forEach(function(src, i) {
+                var slide = document.createElement('div');
+                slide.className = 'pgallery-slide' + (i === 0 ? ' pg-active' : '');
+                var img = document.createElement('img');
+                img.src = src;
+                slide.appendChild(img);
+                track.appendChild(slide);
+            });
+            document.getElementById('pgalleryOverlay').classList.add('open');
+            document.body.style.overflow = 'hidden';
+            _setPGTrack(false);
+        }
+
+        function pgalleryNav(dir) {
+            var next = _pgIdx + dir;
+            if (next < 0 || next >= _pgImages.length) return;
+            _pgIdx = next;
+            _setPGTrack(true);
+        }
+
+        function closePGallery() {
+            document.getElementById('pgalleryOverlay').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        function handlePGalleryClick(e) {
+            if (e.target === document.getElementById('pgalleryOverlay')) closePGallery();
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (!document.getElementById('pgalleryOverlay').classList.contains('open')) return;
+            if (e.key === 'ArrowLeft') pgalleryNav(-1);
+            else if (e.key === 'ArrowRight') pgalleryNav(1);
+            else if (e.key === 'Escape') closePGallery();
+        });
+
+        window.addEventListener('resize', function() {
+            if (document.getElementById('pgalleryOverlay').classList.contains('open')) _setPGTrack(false);
+        });
+        // ===== Fan Room Carousel =====
+        (function () {
+            const stage = document.getElementById('fanStage');
+            if (!stage) return;
+            if (stage.classList.contains('marriott-card-grid')) {
+                const cards = Array.from(stage.querySelectorAll('.fan-card'));
+                const cardStep = function () {
+                    const first = cards[0];
+                    if (!first) return 452;
+                    const gap = parseFloat(getComputedStyle(stage).columnGap || getComputedStyle(stage).gap) || 16;
+                    return first.getBoundingClientRect().width + gap;
+                };
+                let isDown = false;
+                let startX = 0;
+                let startScroll = 0;
+                let moved = false;
+
+                function snapToNearest() {
+                    const step = cardStep();
+                    const index = Math.round(stage.scrollLeft / step);
+                    stage.scrollTo({ left: index * step, behavior: 'smooth' });
+                }
+
+                function updateProgressBar() {
+                    const indicator = document.querySelector('.fan-progress-indicator');
+                    const track = document.querySelector('.fan-progress-track');
+                    if (!indicator || !track) return;
+                    const maxScroll = stage.scrollWidth - stage.clientWidth;
+                    const ratio = maxScroll > 0 ? stage.scrollLeft / maxScroll : 0;
+                    const trackWidth = track.offsetWidth;
+                    const indicatorWidth = indicator.offsetWidth;
+                    indicator.style.left = (ratio * (trackWidth - indicatorWidth)) + 'px';
+                }
+                stage.addEventListener('scroll', updateProgressBar);
+
+                stage.addEventListener('mousedown', function (e) {
+                    isDown = true;
+                    moved = false;
+                    startX = e.pageX;
+                    startScroll = stage.scrollLeft;
+                    stage.classList.add('is-dragging');
+                    e.preventDefault();
+                });
+
+                window.addEventListener('mousemove', function (e) {
+                    if (!isDown) return;
+                    const diff = e.pageX - startX;
+                    if (Math.abs(diff) > 4) moved = true;
+                    stage.scrollLeft = startScroll - diff;
+                });
+
+                window.addEventListener('mouseup', function () {
+                    if (!isDown) return;
+                    isDown = false;
+                    stage.classList.remove('is-dragging');
+                    if (moved) snapToNearest();
+                });
+
+                stage.addEventListener('touchstart', function (e) {
+                    isDown = true;
+                    moved = false;
+                    startX = e.touches[0].pageX;
+                    startScroll = stage.scrollLeft;
+                }, { passive: true });
+
+                stage.addEventListener('touchmove', function (e) {
+                    if (!isDown) return;
+                    const diff = e.touches[0].pageX - startX;
+                    if (Math.abs(diff) > 4) moved = true;
+                    stage.scrollLeft = startScroll - diff;
+                }, { passive: true });
+
+                stage.addEventListener('touchend', function () {
+                    if (!isDown) return;
+                    isDown = false;
+                    if (moved) snapToNearest();
+                });
+
+                cards.forEach(function (card) {
+                    card.addEventListener('click', function (e) {
+                        if (!moved) return;
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }, true);
+                });
+                return;
+            }
+            const cards = Array.from(stage.querySelectorAll('.fan-card'));
+            const total = cards.length;
+            let current = 0;
+            let dragX = null;
+            let dragMoved = false;
+
+            function getTransform(offset) {
+                const W = stage.offsetWidth;
+                const sp = W * 0.165;
+                const map = {
+                    '-2': { x: -sp * 2.2, rot: -13,  scale: 0.70, op: 0.40, z: 1 },
+                    '-1': { x: -sp,        rot: -6.5, scale: 0.87, op: 0.82, z: 2 },
+                     '0': { x: 0,          rot: 0,    scale: 1.00, op: 1.00, z: 5 },
+                     '1': { x: sp,         rot: 6.5,  scale: 0.87, op: 0.82, z: 2 },
+                     '2': { x: sp * 2.2,   rot: 13,   scale: 0.70, op: 0.40, z: 1 },
+                };
+                const key = Math.max(-2, Math.min(2, offset)).toString();
+                return map[key];
+            }
+
+            function render() {
+                cards.forEach(function (card, i) {
+                    let off = i - current;
+                    if (off > total / 2)  off -= total;
+                    if (off < -total / 2) off += total;
+                    const show = Math.abs(off) <= 2;
+                    card.classList.toggle('visible', show);
+                    card.classList.toggle('is-center', off === 0);
+                    if (!show) {
+                        card.style.opacity = '0';
+                        card.style.pointerEvents = 'none';
+                        card.style.zIndex = '0';
+                        return;
+                    }
+                    const t = getTransform(off);
+                    card.style.transform = 'translateX(' + t.x + 'px) rotate(' + t.rot + 'deg) scale(' + t.scale + ')';
+                    card.style.opacity  = t.op;
+                    card.style.zIndex   = t.z;
+                    card.style.pointerEvents = 'auto';
+                });
+            }
+
+            function goTo(idx) {
+                current = ((idx % total) + total) % total;
+                render();
+            }
+
+            stage.addEventListener('mousedown', function (e) {
+                dragX = e.clientX; dragMoved = false;
+                stage.classList.add('is-dragging');
+                e.preventDefault();
+            });
+            window.addEventListener('mousemove', function (e) {
+                if (dragX !== null && Math.abs(e.clientX - dragX) > 8) dragMoved = true;
+            });
+            window.addEventListener('mouseup', function (e) {
+                if (dragX === null) return;
+                const diff = e.clientX - dragX;
+                if (dragMoved && Math.abs(diff) > 50) goTo(diff < 0 ? current + 1 : current - 1);
+                dragX = null;
+                stage.classList.remove('is-dragging');
+            });
+
+            stage.addEventListener('touchstart', function (e) { dragX = e.touches[0].clientX; dragMoved = false; }, { passive: true });
+            stage.addEventListener('touchmove',  function (e) { if (dragX !== null && Math.abs(e.touches[0].clientX - dragX) > 8) dragMoved = true; }, { passive: true });
+            stage.addEventListener('touchend',   function (e) {
+                if (dragX === null) return;
+                const diff = e.changedTouches[0].clientX - dragX;
+                if (Math.abs(diff) > 50) goTo(diff < 0 ? current + 1 : current - 1);
+                dragX = null;
+            });
+
+            cards.forEach(function (card, i) {
+                card.addEventListener('click', function () {
+                    if (dragMoved) return;
+                    let off = i - current;
+                    if (off > total / 2)  off -= total;
+                    if (off < -total / 2) off += total;
+                    if (off !== 0) goTo(i);
+                });
+            });
+
+            render();
+            window.addEventListener('resize', render);
+        })();
+
+        /* ===== 프로모션 · 패키지 슬라이더 ===== */
+        (function () {
+            const slider = document.getElementById('promoPkgSlider');
+            const nextBtn = document.getElementById('promoPkgNext');
+            const dotsWrap = document.getElementById('promoPkgDots');
+            if (!slider) return;
+
+            const cards = Array.from(slider.querySelectorAll('.promo-pkg-card'));
+            const total = cards.length;
+            const visible = 3;
+            const pages = Math.ceil(total / visible);
+            let page = 0;
+
+            /* dot 생성 */
+            dotsWrap.innerHTML = '';
+            for (let i = 0; i < pages; i++) {
+                const d = document.createElement('button');
+                d.className = 'ppd' + (i === 0 ? ' active' : '');
+                d.addEventListener('click', () => goTo(i));
+                dotsWrap.appendChild(d);
+            }
+
+            function goTo(p) {
+                page = Math.max(0, Math.min(pages - 1, p));
+                const cardW = cards[0].getBoundingClientRect().width;
+                const gap = 16;
+                slider.scrollTo({ left: page * visible * (cardW + gap), behavior: 'smooth' });
+                dotsWrap.querySelectorAll('.ppd').forEach((d, i) => d.classList.toggle('active', i === page));
+                if (nextBtn) nextBtn.classList.toggle('hidden', page >= pages - 1);
+            }
+
+            if (nextBtn) {
+                nextBtn.addEventListener('click', () => goTo(page + 1));
+                if (pages <= 1) nextBtn.classList.add('hidden');
+            }
+
+            /* 드래그 스크롤 */
+            let isDown = false, startX = 0, scrollLeft = 0;
+            slider.addEventListener('mousedown', e => {
+                isDown = true;
+                slider.classList.add('grabbing');
+                startX = e.pageX - slider.offsetLeft;
+                scrollLeft = slider.scrollLeft;
+                e.preventDefault();
+            });
+            document.addEventListener('mouseup', () => {
+                if (!isDown) return;
+                isDown = false;
+                slider.classList.remove('grabbing');
+                /* snap to nearest page */
+                const cardW = cards[0].getBoundingClientRect().width + 16;
+                const p = Math.round(slider.scrollLeft / (cardW * visible));
+                goTo(p);
+            });
+            document.addEventListener('mousemove', e => {
+                if (!isDown) return;
+                const x = e.pageX - slider.offsetLeft;
+                slider.scrollLeft = scrollLeft - (x - startX);
+            });
+
+            /* 스크롤 기반 dot 업데이트 */
+            slider.addEventListener('scroll', () => {
+                const cardW = (cards[0].getBoundingClientRect().width || 1) + 16;
+                const p = Math.round(slider.scrollLeft / (cardW * visible));
+                const clamped = Math.max(0, Math.min(pages - 1, p));
+                dotsWrap.querySelectorAll('.ppd').forEach((d, i) => d.classList.toggle('active', i === clamped));
+                if (nextBtn) nextBtn.classList.toggle('hidden', clamped >= pages - 1);
+            });
+        })();
+
+        /* ===== 호텔 투숙을 즐기는 다양한 방법 — 무한 마퀴 슬라이더 ===== */
+        (function () {
+            const slider = document.getElementById('hwSlider');
+            const tpl   = document.getElementById('hwCards');
+            if (!slider || !tpl) return;
+
+            const track = document.createElement('div');
+            track.className = 'hw-track';
+
+            /* 원본 카드 삽입 */
+            const frag = tpl.content.cloneNode(true);
+            const origCards = Array.from(frag.querySelectorAll('.promo-pkg-card'));
+            origCards.forEach(c => track.appendChild(c));
+
+            /* 복제 카드 삽입 (seamless loop 용) */
+            origCards.forEach(c => track.appendChild(c.cloneNode(true)));
+
+            slider.appendChild(track);
+        })();
+    </script>
+
+    <!-- 시설 사진 모달 -->
+    <div id="facPhotoModal" onclick="closeFacImg(event)">
+        <div class="fac-modal-box">
+            <button class="fac-modal-close" onclick="document.getElementById('facPhotoModal').classList.remove('open')">✕</button>
+            <img id="facModalImg" class="fac-modal-img" src="" alt="">
+            <div id="facModalLabel" class="fac-modal-label"></div>
+        </div>
+    </div>
+
+    <script>
+        function openReviewModal() {
+            document.getElementById('reviewModal').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeReviewModal(e) {
+            if (e.target === document.getElementById('reviewModal')) {
+                document.getElementById('reviewModal').classList.remove('open');
+                document.body.style.overflow = '';
+            }
+        }
+
+        function showFacImg(label, imgUrl) {
+            document.getElementById('facModalImg').src = imgUrl;
+            document.getElementById('facModalLabel').textContent = label;
+            document.getElementById('facPhotoModal').classList.add('open');
+        }
+        function closeFacImg(e) {
+            if (e.target === document.getElementById('facPhotoModal')) {
+                document.getElementById('facPhotoModal').classList.remove('open');
+            }
+        }
+    </script>
+    <script>function toggleLangDropdown(e){e.stopPropagation();document.getElementById("langDropdown").classList.toggle("open");}function selectLang(el){document.getElementById("langCode").textContent=el.dataset.code;document.querySelectorAll(".lang-option").forEach(function(o){o.classList.remove("active");});el.classList.add("active");document.getElementById("langDropdown").classList.remove("open");}document.addEventListener("click",function(){var d=document.getElementById("langDropdown");if(d)d.classList.remove("open");});</script>
+</body>
+</html>
+
+
+

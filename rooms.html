@@ -1,0 +1,1083 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>객실 & 스테이 - INSTA HOTEL</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        *{ margin:0; padding:0; box-sizing:border-box; font-family:'Barlow',sans-serif; }
+        html{ scroll-behavior:smooth; }
+        a{ text-decoration:none; color:inherit; }
+        body{ color:rgb(28,28,28); -webkit-font-smoothing:antialiased; }
+
+        /* ── 상단 유틸리티 바 ── */
+        .top-util-bar{ background-color:rgb(28,28,28); color:#fff; height:49px; padding:0 48px 0 25px; display:flex; justify-content:space-between; align-items:center; }
+        .hamburger-menu{ cursor:pointer; display:flex; flex-direction:column; gap:3px; padding:5px; }
+        .hamburger-menu span{ width:12px; height:1px; background-color:#fff; border-radius:2px; }
+        .util-login-btn{ display:flex; align-items:center; gap:6px; background:transparent; color:#fff; border:1px solid rgba(255,255,255,0.4); border-radius:25px; padding:5px 12px; font-size:11px; font-weight:500; cursor:pointer; }
+        .util-login-btn i{ font-size:13px; }
+
+        /* ── 헤더 ── */
+        .top-header{ display:flex; justify-content:space-between; align-items:center; height:88px; padding:0 48px 0 30px; background-color:rgb(244,244,244); border-bottom:1px solid #e6e6e6; }
+        .logo{ display:flex; align-items:center; }
+        .logo img{ width:auto; height:72px; object-fit:contain; mix-blend-mode:multiply; }
+        .main-nav{ display:flex; align-items:center; gap:32px; list-style:none; font-size:14px; font-weight:500; color:rgb(112,112,112); height:100%; }
+        .main-nav li{ cursor:pointer; display:flex; align-items:center; position:relative; height:100%; }
+        .main-nav li.active{ color:rgb(28,28,28); font-weight:700; }
+        .main-nav li.active::after{ content:''; position:absolute; left:0; right:0; bottom:16px; height:3px; background:#2A91A8; }
+
+        /* ── 서브헤더 + 예약바 ── */
+        .sticky-wrapper{ position:sticky; top:0; z-index:1000; background:#FAFAFA; box-shadow:0 4px 15px rgba(0,0,0,0.1); }
+        .sub-header{ display:flex; justify-content:space-between; align-items:center; height:64px; padding:0 48px 0 30px; border-bottom:1px solid #e5e5e5; background-color:rgb(244,244,244); }
+        .hotel-info-left{ display:flex; align-items:center; gap:10px; }
+        .hotel-name{ font-size:22px; font-weight:700; color:rgb(28,28,28); white-space:nowrap; }
+        .rating-dots{ color:#3A9AB4; font-size:16px; display:flex; align-items:center; gap:5px; }
+        .rating-text{ font-size:14px; font-weight:500; color:rgb(28,28,28); text-decoration:underline; text-underline-offset:3px; cursor:pointer; }
+        .hotel-info-right{ display:flex; gap:24px; font-size:14px; font-weight:500; color:rgb(28,28,28); }
+        .hotel-info-right a{ display:flex; align-items:center; gap:5px; }
+
+        .booking-bar{ display:flex; justify-content:space-between; align-items:center; height:112px; padding:0 30px; background:#fff; border-bottom:1px solid #e5e5e5; position:relative; }
+        .booking-item{ display:flex; flex-direction:column; justify-content:center; gap:18px; height:100%; padding:0 178px; position:relative; }
+        .booking-item:first-child{ padding-left:0; }
+        .booking-item:nth-child(1){ flex:0 0 478px; padding-right:0; }
+        .booking-item:nth-child(2){ flex:0 0 626px; }
+        .booking-item:nth-child(3){ flex:1 1 auto; padding-right:118px; }
+        .booking-item:nth-child(-n+2)::after{ content:''; position:absolute; right:0; top:50%; transform:translateY(-50%); height:65px; border-right:1px dashed #1C1C1C; }
+        .booking-item:last-child{ flex:0 0 116px; align-items:flex-start; padding:0 20px 0 0; }
+        .booking-label{ font-size:12px; font-weight:700; color:rgb(112,112,112); display:flex; align-items:center; gap:7px; }
+        .booking-label i{ font-size:16px; color:rgb(28,28,28); }
+        .booking-value{ font-size:16px; font-weight:500; color:rgb(28,28,28); display:flex; align-items:center; cursor:pointer; gap:10px; }
+        #date-booking-item .booking-value{ gap:30px; }
+        #guest-booking-item .booking-value{ width:270px; justify-content:space-between; }
+        .booking-value .fa-chevron-down{ font-size:14px; }
+        .date-arrow{ font-size:13px; }
+        .search-btn{ background-color:rgb(114,107,113); color:#fff; border:none; width:95px; height:40px; border-radius:22px; font-size:16px; font-weight:700; cursor:pointer; }
+
+        /* ── 드롭다운 ── */
+        .booking-dropdown{ position:absolute; top:calc(100% + 20px); left:0; background:#fff; border-radius:15px; box-shadow:0 15px 40px rgba(0,0,0,0.15); padding:30px; z-index:2000; display:none; }
+        .price-popup{ width:320px; padding:20px 24px; left:0; right:auto; }
+        .price-popup-row{ display:flex; justify-content:space-between; align-items:center; padding:11px 0; border-bottom:1px solid #f0f0f0; cursor:pointer; }
+        .price-popup-row:last-child{ border-bottom:none; }
+        .price-popup-row:hover .price-popup-name{ color:#2A91A8; }
+        .price-popup-name{ font-size:14px; font-weight:600; color:rgb(28,28,28); }
+        .price-popup-total{ font-size:13px; font-weight:600; color:rgb(28,28,28); white-space:nowrap; }
+        .price-popup-unavail{ cursor:default; opacity:0.45; }
+        .price-popup-unavail:hover .price-popup-name{ color:rgb(28,28,28); }
+        .booking-dropdown.active{ display:block; }
+        .dropdown-close{ position:absolute; top:20px; right:20px; font-size:16px; cursor:pointer; color:rgb(112,112,112); }
+        .calendar-dropdown{ width:750px; left:-20px; }
+        .cal-months-wrap{ display:flex; gap:40px; margin-top:10px; }
+        .cal-month{ flex:1; }
+        .cal-month-header{ display:flex; justify-content:space-between; align-items:center; font-weight:700; font-size:15px; margin-bottom:20px; }
+        .cal-month-header i{ cursor:pointer; font-size:16px; padding:5px; }
+        .cal-grid{ display:grid; grid-template-columns:repeat(7,1fr); text-align:center; gap:10px 0; }
+        .cal-day-name{ font-size:12px; font-weight:700; color:rgb(112,112,112); margin-bottom:10px; }
+        .cal-date{ font-size:13px; font-weight:500; color:rgb(112,112,112); padding:10px 0; cursor:pointer; border-radius:20px; }
+        .cal-date.faded{ color:#ccc; cursor:default; }
+        .cal-date.selected-start{ background:#000; color:#fff; border-radius:20px 0 0 20px; }
+        .cal-date.selected-end{ background:#000; color:#fff; border-radius:0 20px 20px 0; }
+        .cal-date.in-range{ background:#FAFAFA; border-radius:0; }
+        .guest-dropdown{ width:420px; left:-20px; }
+        .guest-notice{ font-size:11px; color:rgb(112,112,112); margin-bottom:20px; }
+        .guest-row{ display:flex; justify-content:space-between; align-items:center; padding:20px 0; border-bottom:1px solid #f0f0f0; }
+        .guest-label-box{ display:flex; flex-direction:column; gap:5px; }
+        .g-title{ font-weight:700; font-size:15px; }
+        .g-sub{ font-size:11px; color:rgb(112,112,112); }
+        .guest-controls{ display:flex; align-items:center; gap:15px; }
+        .btn-ctrl{ width:32px; height:32px; border-radius:50%; border:1px solid #ddd; background:#fff; display:flex; justify-content:center; align-items:center; cursor:pointer; }
+        .val-ctrl{ font-size:15px; font-weight:600; width:15px; text-align:center; }
+        .dropdown-done-btn{ display:block; width:100px; margin:30px auto 0; padding:10px 0; border-radius:20px; border:1px solid #777; background:#fff; font-weight:600; font-size:13px; cursor:pointer; text-align:center; }
+
+        /* ── 히어로 ── */
+        .hero-section{ width:100%; height:calc(100vh - 313px); min-height:400px; background:#c8c8c8; position:relative; overflow:hidden; }
+        .hero-img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center; display:none; }
+        .hero-img.active{ display:block; }
+        .hero-overlay{ position:absolute; inset:0; background:rgba(0,0,0,0.35); display:flex; flex-direction:column; justify-content:center; align-items:center; color:#fff; text-align:center; }
+        .hero-label-row{ display:flex; align-items:center; gap:14px; margin-bottom:20px; }
+        .hero-label-line{ flex:0 0 60px; height:1px; background:rgba(255,255,255,0.6); }
+        .hero-label-text{ font-size:13px; letter-spacing:3px; font-weight:400; opacity:0.9; white-space:nowrap; }
+        .hero-title{ font-size:38px; font-weight:700; letter-spacing:0; line-height:1.3; }
+        .hero-scroll-hint{ position:absolute; bottom:32px; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:8px; color:#fff; font-size:12px; letter-spacing:2px; opacity:0.7; }
+        .hero-scroll-hint i{ font-size:18px; animation:bounce 1.6s infinite; }
+        @keyframes bounce{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(6px); } }
+
+        /* ── 객실 리스트 섹션 ── */
+        .rooms-section{ background:#fff; padding:30px 0 80px; }
+        .rooms-section-header{ max-width:1240px; margin:0 auto 36px; padding:0 40px; }
+        .rooms-section-title{ font-size:22px; font-weight:700; color:rgb(28,28,28); }
+
+        .rooms-grid{ max-width:1240px; margin:0 auto; padding:0 40px; display:grid; grid-template-columns:repeat(2, 1fr); gap:32px 28px; }
+
+        .room-card{ background:#fff; display:flex; flex-direction:column; }
+
+        .room-card-img-wrap{ position:relative; width:100%; height:300px; overflow:hidden; background:#e0e0e0; border-radius:4px; }
+        .room-card-img-wrap img{ width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.45s; }
+        .room-card:hover .room-card-img-wrap img{ transform:scale(1.03); }
+        .room-card-expand{ position:absolute; top:12px; right:12px; width:32px; height:32px; background:rgba(30,30,30,0.62); border-radius:4px; display:flex; align-items:center; justify-content:center; color:#fff; font-size:13px; cursor:pointer; }
+
+        .room-card-body{ padding:18px 4px 0; }
+        .room-card-name{ font-size:17px; font-weight:600; color:rgb(28,28,28); margin-bottom:8px; }
+        .room-card-meta { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 14px; }
+        .room-card-sub{ font-size:13px; color:rgb(112,112,112); margin:0; white-space: nowrap; }
+        .room-card-price { display: flex; flex-direction: row; gap: 10px; align-items: center; flex-shrink: 0; }
+        .room-card-price-item { font-size: 12px; color: rgb(112,112,112); white-space: nowrap; }
+        .room-card-price-item strong { font-size: 13px; font-weight: 600; color: rgb(28,28,28); }
+
+        .room-card-divider{ border:none; border-top:1px solid #d8d8d8; margin-bottom:16px; }
+
+        .room-card-actions{ display:flex; justify-content:space-between; align-items:center; }
+        .room-card-detail{ font-size:14px; font-weight:600; color:rgb(28,28,28); text-decoration:underline; text-underline-offset:3px; cursor:pointer; background:none; border:none; padding:0; }
+        .room-card-detail:hover{ color:#2A91A8; }
+        .room-card-book{ background:rgb(114,107,113); color:#fff; border:none; border-radius:22px; padding:9px 20px; font-size:13px; font-weight:600; cursor:pointer; transition:background 0.2s; }
+        .room-card-book:hover{ background:rgb(95,89,94); }
+
+        /* ── 팝업 모달 ── */
+        .modal-overlay{ position:fixed; top:176px; left:0; right:0; bottom:0; background:rgba(0,0,0,0.75); z-index:9000; display:none; justify-content:center; align-items:flex-start; padding-top:12px; }
+        .modal-overlay.open{ display:flex; }
+        .modal-box{ background:#fff; border-radius:10px; width:690px; height:760px; max-height:calc(100vh - 176px - 24px); overflow-y:auto; overflow-x:hidden; box-shadow:0 24px 64px rgba(0,0,0,0.35); scrollbar-width:none; -ms-overflow-style:none; }
+        .modal-box::-webkit-scrollbar{ display:none; }
+
+        /* 헤더 */
+        .modal-header{ position:sticky; top:0; z-index:10; display:flex; justify-content:space-between; align-items:center; padding:15px 18px 13px; background:rgb(28,28,28); }
+        .modal-title{ font-size:16px; font-weight:700; color:#fff; font-family:'Barlow',sans-serif; }
+        .modal-close{ width:28px; height:28px; background:rgba(255,255,255,0.15); border:none; border-radius:5px; font-size:13px; cursor:pointer; display:flex; align-items:center; justify-content:center; color:#fff; flex-shrink:0; }
+        .modal-close:hover{ background:rgba(255,255,255,0.3); }
+
+        /* 슬라이더 - peek 효과 */
+        .modal-slider-outer{ position:relative; width:100%; height:420px; overflow:hidden; background:#c8c8c8; }
+        .modal-slider-track{ display:flex; height:100%; gap:10px; transition:transform 0.34s ease; }
+        .modal-slide{ height:100%; flex-shrink:0; }
+        .modal-slide img{ width:100%; height:100%; object-fit:cover; display:block; }
+        .modal-slide-placeholder{ width:100%; height:100%; background:#d5d5d5; }
+
+        /* 슬라이더 네비 */
+        .modal-slider-nav{ position:absolute; bottom:14px; left:50%; transform:translateX(-50%); display:flex; align-items:center; gap:9px; }
+        .modal-slider-btn{ width:28px; height:28px; border-radius:50%; background:rgba(20,20,20,0.58); border:none; color:#fff; font-size:10px; cursor:pointer; display:flex; align-items:center; justify-content:center; }
+        .modal-slider-btn:hover{ background:rgba(0,0,0,0.82); }
+        .modal-dot{ width:7px; height:7px; border-radius:50%; background:rgba(255,255,255,0.42); cursor:pointer; transition:background 0.2s; }
+        .modal-dot.active{ background:#fff; }
+
+        /* 바디 */
+        .modal-body{ padding:18px 20px 24px; background:#fff; }
+        .modal-top-row{ display:flex; justify-content:space-between; align-items:flex-start; gap:14px; margin-bottom:5px; }
+        .modal-room-title{ font-size:18px; font-weight:700; color:rgb(28,28,28); font-family:'Barlow',sans-serif; line-height:1.3; }
+        .modal-book-btn{ background:rgb(114,107,113); color:#fff; border:none; border-radius:22px; padding:9px 18px; font-size:13px; font-weight:600; cursor:pointer; white-space:nowrap; flex-shrink:0; font-family:'Barlow',sans-serif; transition:background 0.18s; }
+        .modal-book-btn:hover{ background:rgb(95,89,94); }
+        .modal-sub-row{ display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:14px; }
+        .modal-room-sub{ font-size:14px; font-weight:500; color:rgb(28,28,28); line-height:1.55; margin:0; font-family:'Barlow',sans-serif; }
+        .modal-room-price{ display:flex; gap:12px; align-items:center; flex-shrink:0; }
+        .modal-price-item{ font-size:13px; color:rgb(112,112,112); white-space:nowrap; font-family:'Barlow',sans-serif; }
+        .modal-price-item strong{ font-size:13px; font-weight:600; color:rgb(28,28,28); }
+        .modal-divider{ border:none; border-top:1px solid #dedede; margin:14px 0 16px; }
+        .modal-amenity-grid{ display:grid; grid-template-columns:1fr 1fr; gap:16px 20px; align-items:start; }
+        .modal-amenity-col-title{ font-size:16px; font-weight:700; color:rgb(28,28,28); display:flex; align-items:center; gap:6px; margin-bottom:10px; font-family:'Barlow',sans-serif; }
+        .modal-amenity-col-title i{ font-size:14px; color:rgb(28,28,28); }
+        .modal-amenity-item{ font-size:14px; font-weight:500; color:rgb(28,28,28); padding:5px 0; font-family:'Barlow',sans-serif; }
+        .modal-amenity-item:last-child{ border-bottom:none; }
+
+        /* ── 갤러리 라이트박스 ── */
+        .gallery-overlay{ position:fixed; inset:0; background:rgba(18,18,18,0.96); z-index:10000; display:none; flex-direction:column; align-items:center; justify-content:center; gap:20px; }
+        .gallery-overlay.open{ display:flex; }
+        .gallery-close{ position:fixed; top:18px; right:22px; background:#fff; border:none; border-radius:5px; color:rgb(28,28,28); width:36px; height:36px; font-size:15px; cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 8px rgba(0,0,0,0.4); z-index:3; }
+        .gallery-close:hover{ background:#efefef; }
+        .gallery-stage{ position:relative; width:100%; overflow:hidden; flex-shrink:0; }
+        .gallery-track{ display:flex; gap:16px; will-change:transform; }
+        .gallery-slide{ flex-shrink:0; width:820px; min-width:820px; height:62vh; position:relative; opacity:0.5; transition:opacity 0.38s; }
+        .gallery-slide.g-active{ opacity:1; }
+        .gallery-slide img{ width:100%; height:100%; object-fit:contain; display:block; }
+        .gallery-nav{ position:absolute; top:50%; transform:translateY(-50%); background:rgba(255,255,255,0.9); border:none; border-radius:50%; color:rgb(28,28,28); width:42px; height:42px; font-size:16px; cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 10px rgba(0,0,0,0.35); z-index:2; }
+        .gallery-nav:hover{ background:#fff; }
+        .gallery-prev{ left:120px; }
+        .gallery-next{ right:120px; }
+        .gallery-counter{ color:rgba(255,255,255,0.7); font-size:13px; font-family:'Barlow',sans-serif; }
+            /* ── 언어 선택 ── */
+        .lang-selector{ position:relative; }
+        .lang-btn{ display:flex; align-items:center; gap:6px; background:none; border:1px solid #d0d0d0; border-radius:20px; padding:6px 12px; font-size:13px; font-weight:600; cursor:pointer; color:rgb(112,112,112); font-family:'Barlow',sans-serif; transition:border-color 0.2s,color 0.2s; }
+        .lang-btn:hover{ border-color:#aaa; color:rgb(28,28,28); }
+        .lang-btn .fa-globe{ font-size:13px; }
+        .lang-chevron{ font-size:9px; }
+        .lang-dropdown{ position:absolute; top:calc(100% + 10px); right:0; background:#fff; border-radius:10px; box-shadow:0 8px 28px rgba(0,0,0,0.13); padding:6px 0; min-width:110px; display:none; z-index:1500; }
+        .lang-dropdown.open{ display:block; }
+        .lang-option{ display:block; padding:10px 18px; font-size:13px; font-weight:500; color:rgb(112,112,112); cursor:pointer; white-space:nowrap; }
+        .lang-option:hover{ background:#f5f5f5; color:rgb(28,28,28); }
+        .lang-option.active{ color:rgb(28,28,28); font-weight:700; }
+    </style>
+    <link rel="stylesheet" href="responsive.css">
+</head>
+<body onclick="closeDropdowns(event)">
+
+    <!-- 상단 유틸리티 바 -->
+    <div class="top-util-bar">
+        <div class="hamburger-menu"><span></span><span></span><span></span></div>
+        <div><button class="util-login-btn"><i class="fa-regular fa-user"></i> 회원가입 시 객실예약할 때 혜택</button></div>
+    </div>
+
+    <!-- 헤더 -->
+    <header class="top-header">
+        <a href="index.html" class="logo"><img src="logo.svg" alt="INSTA Hotel 로고"></a>
+        <ul class="main-nav">
+            <li><a href="index.html">개요</a></li>
+            <li class="active"><a href="#">객실</a></li>
+            <li><a href="gallery.html">갤러리</a></li>
+            <li><a href="nearby.html">주변안내</a></li>
+            <li><a href="#">멤버쉽</a></li>
+            <li class="lang-selector" onclick="event.stopPropagation()">
+                <button class="lang-btn" onclick="toggleLangDropdown(event)"><i class="fa-solid fa-globe"></i><span id="langCode">KO</span><i class="fa-solid fa-chevron-down lang-chevron"></i></button>
+                <div class="lang-dropdown" id="langDropdown">
+                    <span class="lang-option active" data-code="KO" onclick="selectLang(this)">한국어</span>
+                    <span class="lang-option" data-code="EN" onclick="selectLang(this)">English</span>
+                    <span class="lang-option" data-code="JA" onclick="selectLang(this)">日本語</span>
+                    <span class="lang-option" data-code="ZH" onclick="selectLang(this)">中文</span>
+                </div>
+            </li>
+        </ul>
+    </header>
+
+    <!-- 서브헤더 + 예약바 -->
+    <div class="sticky-wrapper">
+        <div class="sub-header">
+            <div class="hotel-info-left">
+                <span class="hotel-name">인스타 오토그래프 컬렉션</span>
+                <span class="rating-dots">
+                    <i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i>
+                    <i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i>
+                    <i class="fa-solid fa-circle-half-stroke"></i>
+                </span>
+                <span class="rating-text">4.9 • 1446 후기</span>
+            </div>
+            <div class="hotel-info-right">
+                <a href="#"><i class="fa-solid fa-comment"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-solid fa-location-dot"></i></a>
+                <a href="#"><i class="fa-solid fa-phone"></i> +82 31-203-4301</a>
+            </div>
+        </div>
+        <div class="booking-bar">
+            <div class="booking-item" id="date-booking-item">
+                <span class="booking-label" id="nights-label"><i class="fa-regular fa-calendar"></i> 날짜 (1 박)</span>
+                <div class="booking-value" onclick="toggleCalendarPopup(event)">
+                    <span id="checkin-date-text">날짜 선택</span>
+                    <i class="fa-solid fa-arrow-right date-arrow"></i>
+                    <span id="checkout-date-text"></span>
+                </div>
+                <div class="booking-dropdown calendar-dropdown" id="calendarPopup" onclick="event.stopPropagation()">
+                    <i class="fa-solid fa-xmark dropdown-close" onclick="closeDropdowns(event)"></i>
+                    <div class="cal-months-wrap">
+                        <div class="cal-month">
+                            <div class="cal-month-header"><i class="fa-solid fa-chevron-left" onclick="changeMonth(-1)"></i><span id="cal-month-title-left"></span><span></span></div>
+                            <div class="cal-grid" id="cal-grid-left"></div>
+                        </div>
+                        <div class="cal-month">
+                            <div class="cal-month-header"><span></span><span id="cal-month-title-right"></span><i class="fa-solid fa-chevron-right" onclick="changeMonth(1)"></i></div>
+                            <div class="cal-grid" id="cal-grid-right"></div>
+                        </div>
+                    </div>
+                    <button class="dropdown-done-btn" onclick="closeDropdowns(event)">완료</button>
+                </div>
+            </div>
+            <div class="booking-item" id="guest-booking-item">
+                <span class="booking-label">객실 & 투숙객</span>
+                <div class="booking-value" onclick="toggleGuestPopup(event)">
+                    <span id="guest-summary-text">1 객실, 1 성인</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="booking-dropdown guest-dropdown" id="guestPopup" onclick="event.stopPropagation()">
+                    <i class="fa-solid fa-xmark dropdown-close" onclick="closeDropdowns(event)"></i>
+                    <div class="guest-row">
+                        <div class="guest-label-box"><span class="g-title">객실</span></div>
+                        <div class="guest-controls">
+                            <button class="btn-ctrl" onclick="updateGuest('room',-1)"><i class="fa-solid fa-minus"></i></button>
+                            <span class="val-ctrl" id="val-room">1</span>
+                            <button class="btn-ctrl" onclick="updateGuest('room',1)"><i class="fa-solid fa-plus"></i></button>
+                        </div>
+                    </div>
+                    <div class="guest-row">
+                        <div class="guest-label-box"><span class="g-title">성인</span></div>
+                        <div class="guest-controls">
+                            <button class="btn-ctrl" onclick="updateGuest('adult',-1)"><i class="fa-solid fa-minus"></i></button>
+                            <span class="val-ctrl" id="val-adult">1</span>
+                            <button class="btn-ctrl" onclick="updateGuest('adult',1)"><i class="fa-solid fa-plus"></i></button>
+                        </div>
+                    </div>
+                    <button class="dropdown-done-btn" onclick="closeDropdowns(event)">완료</button>
+                </div>
+            </div>
+            <div class="booking-item" id="price-booking-item">
+                <span class="booking-label">특별 요금</span>
+                <div class="booking-value" onclick="togglePricePopup(event)"><span id="min-price-text">최저 요금</span><i class="fa-solid fa-chevron-down"></i></div>
+                <div class="booking-dropdown price-popup" id="pricePopup" onclick="event.stopPropagation()">
+                    <i class="fa-solid fa-xmark dropdown-close" onclick="closeDropdowns(event)"></i>
+                    <div id="pricePopupList"></div>
+                </div>
+            </div>
+            <div class="booking-item">
+                <button class="search-btn" onclick="handleBookingBtn()">예약하기</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 히어로 -->
+    <section class="hero-section">
+        <img src="images/hero/메인사진1.png" alt="인스타 호텔 객실" class="hero-img active">
+        <img src="images/hero/main.jpg" alt="인스타 호텔" class="hero-img">
+        <div class="hero-overlay">
+            <div class="hero-label-row">
+                <span class="hero-label-line"></span>
+                <span class="hero-label-text">호텔 인스타</span>
+                <span class="hero-label-line"></span>
+            </div>
+            <h1 class="hero-title">공식 홈페이지에서 저렴하게 예약하세요</h1>
+        </div>
+        <div class="hero-scroll-hint">
+            <span>SCROLL</span>
+            <i class="fa-solid fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- 객실 리스트 -->
+    <section class="rooms-section" id="rooms-list">
+        <div class="rooms-section-header">
+            <h2 class="rooms-section-title">전체 객실</h2>
+        </div>
+        <div class="rooms-grid">
+
+            <!-- 이코노미 룸 -->
+            <div class="room-card" id="edelweiss">
+                <div class="room-card-img-wrap">
+                    <img src="images/rooms/edelweiss/2.png" alt="이코노미 룸" onerror="this.parentElement.style.background='#d4c9b8'">
+                    <div class="room-card-expand" onclick="event.stopPropagation();openGallery('edelweiss')"><i class="fa-solid fa-expand"></i></div>
+                </div>
+                <div class="room-card-body">
+                    <h3 class="room-card-name">이코노미 룸</h3>
+                    <div class="room-card-meta">
+                        <p class="room-card-sub">기준 2인 / 최대 2인 &nbsp;·&nbsp; 퀸 침대 1개</p>
+                        <div class="room-card-price" data-room="edelweiss">
+                            <span class="room-card-price-item">(일~목) <strong>49,500</strong></span>
+                            <span class="room-card-price-item">(금) <strong>58,500</strong></span>
+                            <span class="room-card-price-item">(토) <strong>72,000</strong></span>
+                        </div>
+                    </div>
+                    <hr class="room-card-divider">
+                    <div class="room-card-actions">
+                        <button class="room-card-detail" onclick="openModal('edelweiss')">자세히 보기</button>
+                        <button class="room-card-book" onclick="openBookingCalendar('edelweiss')">요금 조회</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 스탠다드 룸 -->
+            <div class="room-card" id="aurora">
+                <div class="room-card-img-wrap">
+                    <img src="images/rooms/aurora/1.png" alt="스탠다드 룸" onerror="this.parentElement.style.background='#b8c8d4'">
+                    <div class="room-card-expand" onclick="event.stopPropagation();openGallery('aurora')"><i class="fa-solid fa-expand"></i></div>
+                </div>
+                <div class="room-card-body">
+                    <h3 class="room-card-name">스탠다드 룸</h3>
+                    <div class="room-card-meta">
+                        <p class="room-card-sub">기준 2인 / 최대 2인 &nbsp;·&nbsp; 퀸 침대 1개</p>
+                        <div class="room-card-price" data-room="aurora">
+                            <span class="room-card-price-item">(일~목) <strong>58,000</strong></span>
+                            <span class="room-card-price-item">(금) <strong>67,000</strong></span>
+                            <span class="room-card-price-item">(토) <strong>81,000</strong></span>
+                        </div>
+                    </div>
+                    <hr class="room-card-divider">
+                    <div class="room-card-actions">
+                        <button class="room-card-detail" onclick="openModal('aurora')">자세히 보기</button>
+                        <button class="room-card-book" onclick="openBookingCalendar('aurora')">요금 조회</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 디럭스 룸 -->
+            <div class="room-card" id="glorio">
+                <div class="room-card-img-wrap">
+                    <img src="images/rooms/glorio/1.png" alt="디럭스 룸" onerror="this.parentElement.style.background='#c8d4b8'">
+                    <div class="room-card-expand" onclick="event.stopPropagation();openGallery('glorio')"><i class="fa-solid fa-expand"></i></div>
+                </div>
+                <div class="room-card-body">
+                    <h3 class="room-card-name">디럭스 룸</h3>
+                    <div class="room-card-meta">
+                        <p class="room-card-sub">기준 2인 / 최대 2인 &nbsp;·&nbsp; 퀸 침대 1개</p>
+                        <div class="room-card-price" data-room="glorio">
+                            <span class="room-card-price-item">(일~목) <strong>67,000</strong></span>
+                            <span class="room-card-price-item">(금) <strong>76,000</strong></span>
+                            <span class="room-card-price-item">(토) <strong>99,000</strong></span>
+                        </div>
+                    </div>
+                    <hr class="room-card-divider">
+                    <div class="room-card-actions">
+                        <button class="room-card-detail" onclick="openModal('glorio')">자세히 보기</button>
+                        <button class="room-card-book" onclick="openBookingCalendar('glorio')">요금 조회</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 트윈 룸 -->
+            <div class="room-card" id="envidion">
+                <div class="room-card-img-wrap">
+                    <img src="images/rooms/envidion/1.png" alt="트윈 룸" onerror="this.parentElement.style.background='#c8b8d4'">
+                    <div class="room-card-expand" onclick="event.stopPropagation();openGallery('envidion')"><i class="fa-solid fa-expand"></i></div>
+                </div>
+                <div class="room-card-body">
+                    <h3 class="room-card-name">트윈 룸</h3>
+                    <div class="room-card-meta">
+                        <p class="room-card-sub">기준 2인 / 최대 3인 무료 &nbsp;·&nbsp; 퀸 침대 1개 / 싱글 침대 1개</p>
+                        <div class="room-card-price" data-room="envidion">
+                            <span class="room-card-price-item">(일~목) <strong>76,000</strong></span>
+                            <span class="room-card-price-item">(금) <strong>85,000</strong></span>
+                            <span class="room-card-price-item">(토) <strong>108,000</strong></span>
+                        </div>
+                    </div>
+                    <hr class="room-card-divider">
+                    <div class="room-card-actions">
+                        <button class="room-card-detail" onclick="openModal('envidion')">자세히 보기</button>
+                        <button class="room-card-book" onclick="openBookingCalendar('envidion')">요금 조회</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 스페셜 -->
+            <div class="room-card" id="special">
+                <div class="room-card-img-wrap">
+                    <img src="images/rooms/special/1.png" alt="스페셜" onerror="this.parentElement.style.background='#d4d0b8'">
+                    <div class="room-card-expand" onclick="event.stopPropagation();openGallery('special')"><i class="fa-solid fa-expand"></i></div>
+                </div>
+                <div class="room-card-body">
+                    <h3 class="room-card-name">스페셜</h3>
+                    <div class="room-card-meta">
+                        <p class="room-card-sub">기준 2인 / 최대 4인 무료 &nbsp;·&nbsp; 퀸 침대 1개 / 싱글 침대 2개</p>
+                        <div class="room-card-price" data-room="special">
+                            <span class="room-card-price-item">(일~목) <strong>99,000</strong></span>
+                            <span class="room-card-price-item">(금) <strong>108,000</strong></span>
+                            <span class="room-card-price-item">(토) <strong>126,000</strong></span>
+                        </div>
+                    </div>
+                    <hr class="room-card-divider">
+                    <div class="room-card-actions">
+                        <button class="room-card-detail" onclick="openModal('special')">자세히 보기</button>
+                        <button class="room-card-book" onclick="openBookingCalendar('special')">요금 조회</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 루비룸 (애견동반) -->
+            <div class="room-card" id="ruby">
+                <div class="room-card-img-wrap">
+                    <img src="images/rooms/ruby/main.jpg" alt="루비룸" onerror="this.parentElement.style.background='#d4b8b8'">
+                    <div class="room-card-expand" onclick="event.stopPropagation();openGallery('ruby')"><i class="fa-solid fa-expand"></i></div>
+                </div>
+                <div class="room-card-body">
+                    <h3 class="room-card-name">루비룸</h3>
+                    <div class="room-card-meta">
+                        <p class="room-card-sub"><i class="fa-solid fa-paw" style="color:#2e7d32;font-size:11px;"></i> 애견동반 가능 룸 &nbsp;·&nbsp; 기준 2인 / 최대 2인 &nbsp;·&nbsp; 퀸 침대 1개</p>
+                        <div class="room-card-price" data-room="ruby">
+                            <span class="room-card-price-item">(일~목) <strong>76,000</strong></span>
+                            <span class="room-card-price-item">(금) <strong>85,000</strong></span>
+                            <span class="room-card-price-item">(토) <strong>108,000</strong></span>
+                        </div>
+                    </div>
+                    <hr class="room-card-divider">
+                    <div class="room-card-actions">
+                        <button class="room-card-detail" onclick="openModal('ruby')">자세히 보기</button>
+                        <button class="room-card-book" onclick="openBookingCalendar('ruby')">요금 조회</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ── 팝업 모달 ── -->
+    <!-- 갤러리 라이트박스 -->
+    <div class="gallery-overlay" id="galleryOverlay" onclick="handleGalleryOverlayClick(event)">
+        <button class="gallery-close" onclick="closeGallery()"><i class="fa-solid fa-xmark"></i></button>
+        <div class="gallery-stage" id="galleryStage">
+            <div class="gallery-track" id="galleryTrack"></div>
+            <button class="gallery-nav gallery-prev" onclick="galleryNav(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="gallery-nav gallery-next" onclick="galleryNav(1)"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+        <div class="gallery-counter" id="galleryCounter"></div>
+    </div>
+
+    <div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
+        <div class="modal-box" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <span class="modal-title" id="modalTitle"></span>
+                <button class="modal-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-slider-outer" id="modalSliderOuter">
+                <div class="modal-slider-track" id="modalSliderTrack"></div>
+                <div class="modal-slider-nav" id="modalSliderNav">
+                    <button class="modal-slider-btn" onclick="modalChangeSlide(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+                    <div id="modalNavDots" style="display:flex;gap:7px;align-items:center;"></div>
+                    <button class="modal-slider-btn" onclick="modalChangeSlide(1)"><i class="fa-solid fa-chevron-right"></i></button>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="modal-top-row">
+                    <p class="modal-room-title" id="modalRoomTitle"></p>
+                    <button class="modal-book-btn" id="modalBookBtn">요금 조회</button>
+                </div>
+                <div class="modal-sub-row">
+                    <p class="modal-room-sub" id="modalRoomSub"></p>
+                    <div class="modal-room-price" id="modalRoomPrice"></div>
+                </div>
+                <hr class="modal-divider">
+                <div class="modal-amenity-grid" id="modalAmenityGrid"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const _today=new Date(); _today.setHours(0,0,0,0);
+        const _tomorrow=new Date(_today); _tomorrow.setDate(_today.getDate()+1);
+        let checkinDate=_today, checkoutDate=_tomorrow;
+        let calViewYear=_today.getFullYear(), calViewMonth=_today.getMonth();
+        const DAY_NAMES=['일','월','화','수','목','금','토'];
+        const MONTHS_KO=['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'];
+
+        function fmtDate(d){ return (d.getMonth()+1)+'월 '+d.getDate()+'일, '+DAY_NAMES[d.getDay()]; }
+        function updateDateUI(){
+            const nights=Math.round((checkoutDate-checkinDate)/86400000);
+            document.getElementById('nights-label').innerHTML='<i class="fa-regular fa-calendar"></i> 날짜 ('+nights+' 박)';
+            document.getElementById('checkin-date-text').textContent=fmtDate(checkinDate);
+            document.getElementById('checkout-date-text').textContent=fmtDate(checkoutDate);
+        }
+
+        const ROOM_PRICE_TABLE = {
+            edelweiss: { prices: [49500, 58500, 72000],  maxGuests: 2 },
+            aurora:    { prices: [58000, 67000, 81000],  maxGuests: 2 },
+            glorio:    { prices: [67000, 76000, 99000],  maxGuests: 2 },
+            envidion:  { prices: [76000, 85000, 108000], maxGuests: 3 },
+            special:   { prices: [99000, 108000, 126000],maxGuests: 4 },
+            ruby:      { prices: [76000, 85000, 108000], maxGuests: 2 }
+        };
+        function getNightRate(roomId, date) {
+            const r = ROOM_PRICE_TABLE[roomId]; if (!r) return 0;
+            const p = r.prices;
+            const d = date.getDay();
+            return d === 6 ? p[2] : d === 5 ? p[1] : p[0];
+        }
+        function fmtWon(n) { return n.toLocaleString('ko-KR'); }
+        function renderStaticPrice(roomId) {
+            const p = ROOM_PRICE_TABLE[roomId]; if (!p) return '';
+            return '<span class="room-card-price-item">(일~목) <strong>'+fmtWon(p[0])+'</strong></span>'+
+                   '<span class="room-card-price-item">(금) <strong>'+fmtWon(p[1])+'</strong></span>'+
+                   '<span class="room-card-price-item">(토) <strong>'+fmtWon(p[2])+'</strong></span>';
+        }
+        const ROOM_ORDER = ['edelweiss','aurora','glorio','envidion','special','ruby'];
+        function populatePricePopup() {
+            if (!checkinDate || !checkoutDate) return;
+            const listEl = document.getElementById('pricePopupList');
+            if (!listEl || !ROOM_DATA) return;
+            const nights = Math.round((checkoutDate - checkinDate) / 86400000);
+            const roomCount = guests ? guests.room : 1;
+            const adultCount = guests ? guests.adult : 1;
+            listEl.innerHTML = ROOM_ORDER.map(function(id) {
+                const room = ROOM_DATA[id]; if (!room) return '';
+                const pt = ROOM_PRICE_TABLE[id];
+                const available = pt && adultCount <= pt.maxGuests * roomCount;
+                let total = 0;
+                for (let i = 0; i < nights; i++) { const d = new Date(checkinDate); d.setDate(d.getDate()+i); total += getNightRate(id, d); }
+                total *= roomCount;
+                if (!available) {
+                    return '<div class="price-popup-row price-popup-unavail">' +
+                        '<span class="price-popup-name">'+room.roomTitle+'</span>' +
+                        '<span class="price-popup-total" style="color:rgb(180,180,180);">최대 '+(pt.maxGuests*roomCount)+'인</span>' +
+                        '</div>';
+                }
+                return '<div class="price-popup-row" onclick="selectRoom(\''+id+'\')">' +
+                    '<span class="price-popup-name">'+room.roomTitle+'</span>' +
+                    '<span class="price-popup-total">'+nights+'박 총 '+fmtWon(total)+'원</span>' +
+                    '</div>';
+            }).join('');
+        }
+        function calcRoomTotal(roomId) {
+            if (!checkinDate || !checkoutDate) return 0;
+            const nights = Math.round((checkoutDate - checkinDate) / 86400000);
+            const roomCount = guests ? guests.room : 1;
+            let total = 0;
+            for (let i = 0; i < nights; i++) { const d = new Date(checkinDate); d.setDate(d.getDate()+i); total += getNightRate(roomId, d); }
+            return total * roomCount;
+        }
+        function updatePriceText() {
+            const el = document.getElementById('min-price-text');
+            if (!el || !checkinDate || !checkoutDate) return;
+            if (selectedRoomId) {
+                const nights = Math.round((checkoutDate - checkinDate) / 86400000);
+                const roomName = ROOM_DATA && ROOM_DATA[selectedRoomId] ? ROOM_DATA[selectedRoomId].roomTitle : '';
+                el.textContent = (roomName ? roomName + ' · ' : '') + nights + '박 총 ' + fmtWon(calcRoomTotal(selectedRoomId)) + '원';
+            }
+        }
+        function updateRoomPrices() {
+            const el = document.getElementById('min-price-text');
+            if (!el) return;
+            if (checkinDate && checkoutDate) {
+                populatePricePopup();
+                if (datesUserSelected) { document.getElementById('pricePopup').classList.add('active'); }
+                if (selectedRoomId) { updatePriceText(); }
+            } else {
+                el.textContent = '최저 요금';
+                document.getElementById('pricePopup').classList.remove('active');
+            }
+        }
+        function selectRoom(roomId) {
+            selectedRoomId = roomId;
+            if (checkinDate && checkoutDate) {
+                const nights = Math.round((checkoutDate - checkinDate) / 86400000);
+                const roomCount = guests ? guests.room : 1;
+                const roomName = ROOM_DATA && ROOM_DATA[roomId] ? ROOM_DATA[roomId].roomTitle : '';
+                document.getElementById('min-price-text').textContent = (roomName ? roomName + ' · ' : '') + nights + '박 총 ' + fmtWon(calcRoomTotal(roomId)) + '원';
+            }
+            document.getElementById('pricePopup').classList.remove('active');
+        }
+        function renderCalendar(){
+            ['left','right'].forEach(function(side,idx){
+                const y=calViewYear, m=(calViewMonth+idx)%12;
+                const yr=y+(calViewMonth+idx>=12?1:0);
+                document.getElementById('cal-month-title-'+side).textContent=yr+'년 '+MONTHS_KO[m];
+                const grid=document.getElementById('cal-grid-'+side);
+                grid.innerHTML='';
+                DAY_NAMES.forEach(function(n){ const s=document.createElement('span'); s.className='cal-day-name'; s.textContent=n; grid.appendChild(s); });
+                const first=new Date(yr,m,1).getDay();
+                for(let i=0;i<first;i++){ const s=document.createElement('span'); grid.appendChild(s); }
+                const days=new Date(yr,m+1,0).getDate();
+                for(let d=1;d<=days;d++){
+                    const date=new Date(yr,m,d);
+                    const s=document.createElement('span'); s.className='cal-date'; s.textContent=d;
+                    if(date<_today) s.classList.add('faded');
+                    else{
+                        if(checkinDate&&date.getTime()===checkinDate.getTime()) s.classList.add('selected-start');
+                        if(checkoutDate&&date.getTime()===checkoutDate.getTime()) s.classList.add('selected-end');
+                        if(checkinDate&&checkoutDate&&date>checkinDate&&date<checkoutDate) s.classList.add('in-range');
+                        s.onclick=function(){ selectDate(date); };
+                    }
+                    grid.appendChild(s);
+                }
+            });
+        }
+        let pickingCheckin=true;
+        let datesUserSelected=false;
+        function selectDate(d){ if(pickingCheckin||d<=checkinDate){ checkinDate=d; checkoutDate=null; pickingCheckin=false; datesUserSelected=false; selectedRoomId=null; const el=document.getElementById('min-price-text'); if(el) el.textContent='최저 요금'; document.getElementById('pricePopup').classList.remove('active'); } else{ checkoutDate=d; pickingCheckin=true; datesUserSelected=true; updateDateUI(); updateRoomPrices(); } renderCalendar(); }
+        function changeMonth(dir){ calViewMonth+=dir; if(calViewMonth<0){calViewMonth=11;calViewYear--;} if(calViewMonth>11){calViewMonth=0;calViewYear++;} renderCalendar(); }
+        function toggleCalendarPopup(e){ e.stopPropagation(); document.getElementById('guestPopup').classList.remove('active'); document.getElementById('calendarPopup').classList.toggle('active'); }
+        function toggleGuestPopup(e){ e.stopPropagation(); document.getElementById('calendarPopup').classList.remove('active'); document.getElementById('guestPopup').classList.toggle('active'); }
+        function togglePricePopup(e){ e.stopPropagation(); populatePricePopup(); document.getElementById('pricePopup').classList.toggle('active'); }
+        function closeDropdowns(e){ document.getElementById('calendarPopup').classList.remove('active'); document.getElementById('guestPopup').classList.remove('active'); if(!datesUserSelected) document.getElementById('pricePopup').classList.remove('active'); }
+
+        let guests={room:1,adult:1,child:0};
+        function updateGuest(type,dir){ guests[type]=Math.max(0,guests[type]+dir); if(guests.room<1) guests.room=1; if(guests.adult<1) guests.adult=1; document.getElementById('val-room').textContent=guests.room; document.getElementById('val-adult').textContent=guests.adult; document.getElementById('guest-summary-text').textContent=guests.room+' 객실, '+guests.adult+' 성인'; updateRoomPrices(); }
+
+        let selectedRoomId = null;
+        function openBookingCalendar(roomId) {
+            if (roomId) selectedRoomId = roomId;
+            setTimeout(function() {
+                document.getElementById('guestPopup').classList.remove('active');
+                document.getElementById('calendarPopup').classList.add('active');
+            }, 0);
+        }
+        function handleBookingBtn() {
+            if (!checkinDate || !checkoutDate) {
+                openBookingCalendar(); return;
+            }
+            const effectiveRoomId = selectedRoomId || 'edelweiss';
+            const nights = Math.round((checkoutDate - checkinDate) / 86400000);
+            const roomCount = guests ? guests.room : 1;
+            const adultCount = guests ? guests.adult : 1;
+            let total = 0;
+            for (let i = 0; i < nights; i++) { const d = new Date(checkinDate); d.setDate(d.getDate()+i); total += getNightRate(effectiveRoomId, d); }
+            total *= roomCount;
+            const roomName = ROOM_DATA && ROOM_DATA[effectiveRoomId] ? ROOM_DATA[effectiveRoomId].roomTitle : effectiveRoomId;
+            localStorage.setItem('instaHotelBooking', JSON.stringify({
+                roomId: effectiveRoomId, roomName: roomName,
+                checkin: checkinDate.toISOString(), checkout: checkoutDate.toISOString(),
+                nights: nights, roomCount: roomCount, adultCount: adultCount, totalPrice: total
+            }));
+            window.location.href = 'booking.html';
+        }
+
+        window.addEventListener('DOMContentLoaded', function(){
+            renderCalendar(); updateDateUI();
+            if(location.hash){
+                const target=document.querySelector(location.hash);
+                if(target){ setTimeout(function(){ target.scrollIntoView({behavior:'smooth',block:'center'}); }, 300); }
+            }
+        });
+
+        /* ── 팝업 모달 데이터 ── */
+        const FAC_COLS = [
+            { icon: 'fa-shower',         label: '욕실',                    items: ['비데', '골드 대형거울', '고급 골드 샤워기', '고급 골드 세면대', '고급 골드 휴지걸이', '욕조', '욕실 환풍기', '욕실 슬리퍼', '전용 욕실'] },
+            { icon: 'fa-pump-soap',      label: '어메니티',                items: ['칫솔 / 치약', '폼클렌징', '레이디셋', '면도기', '샴푸 / 컨디셔너 / 바디워시'] },
+            { icon: 'fa-bed',            label: '객실',                    items: ['LG 천정형 에어컨 / 난방', '무소음 냉장고', '공기청정기', '전기 주전자', '헤어드라이기 / 고데기', '고급 원형테이블 / 의자', '골드 원형거울', '65인치 TV', '객실 환풍기', '침대 옆 콘센트', '최고급 매트리스 / 린넨', '타월', '화장품 (여성/남성용 스킨·로션)', '객실 가운', '빗 / 옷걸이 / 슬리퍼', '금연 / 방음 객실'] },
+            { icon: 'fa-mug-hot',        label: '공용 편의 시설',          items: ['전자레인지', '정수기', '제빙기', '커피머신', '무료 생수', '추가 무료 타월 / 휴지', '일회용 젓가락 / 수저', '키오스크'] },
+            { icon: 'fa-tv',             label: '스트리밍 · 고사양 컴퓨터', items: ['넷플릭스 / 디즈니+ / 티빙 (전 객실 무료시청)', '애플TV+ / 유튜브 (전 객실 무료시청)', '고사양 PC (GeForce 3060, RAM 16GB)', '게이밍 모니터 (32인치 165Hz LED)', '게이밍 LED 키보드'] },
+            { icon: 'fa-bell-concierge', label: '이용안내',                items: ['체크인 : 15:00', '체크아웃 : 12:00', '전용 체크인/체크아웃', '24시간 프런트 데스크', '하우스키핑 (매일)', '모닝콜 서비스'] },
+            { icon: 'fa-utensils',       label: '식음료',                  items: ['객실 내 조식 서비스', '룸서비스 (조식)'] },
+            { icon: 'fa-wifi',           label: '인터넷',                  items: ['Wi-Fi 호텔 전 구역에서 무료', '객실 내 개별 무료 초고속 Wi-Fi'] },
+            { icon: 'fa-square-parking', label: '주차',                    items: ['호텔 내 전용 주차장 무료 (사전 예약 불필요)'] },
+            { icon: 'fa-clipboard-user', label: '리셉션 서비스',           items: ['청구서(인보이스) 제공 숙소'] },
+            { icon: 'fa-shield-halved',  label: '보안',                    items: ['소화기', '숙소 외부 CCTV', '공용 공간 CCTV', '화재 경보', '보안 알람', '카드키 출입', '24시간 보안'] },
+            { icon: 'fa-circle-info',    label: '일반',                    items: ['호텔 앞 24시간 편의점 / 마트', '호텔 앞 병원', '호텔 앞 24시간 빨래방', '호텔 앞 24시간 식당', '일부 흡연 구역', '엘리베이터'] }
+        ];
+        const FAC_COLS_NO_GAMING = FAC_COLS.map(function(col) {
+            if (col.label === '스트리밍 · 고사양 컴퓨터') {
+                return { icon: col.icon, label: '스트리밍', items: ['넷플릭스 / 디즈니+ / 티빙 (전 객실 무료시청)', '애플TV+ / 유튜브 (전 객실 무료시청)'] };
+            }
+            if (col.label === '욕실') {
+                return { icon: col.icon, label: col.label, items: col.items.filter(function(i){ return i !== '욕조'; }) };
+            }
+            return col;
+        });
+        const FAC_COLS_GLORIO = FAC_COLS.map(function(col) {
+            if (col.label === '욕실') {
+                return { icon: col.icon, label: col.label, items: col.items.map(function(i){ return i === '욕조' ? '욕조 (랜덤배정, 요청시 배정)' : i; }) };
+            }
+            return col;
+        });
+        const FAC_COLS_RUBY = FAC_COLS.slice(0, 6).concat([
+            { icon: 'fa-paw',            label: '반려동물',                items: ['루비룸 (애견동반 가능 객실)', '소형견·중형견(10kg) 입실 가능', '외출 시 반려견 동반 필수', '로비·복도 이동 시 케이지 이용'] }
+        ]).concat(FAC_COLS.slice(6));
+
+        const ROOM_DATA = {
+            edelweiss: {
+                title: '이코노미 룸',
+                roomTitle: '이코노미 룸',
+                sub: '기준 2인 / 최대 2인 · 퀸 침대 1개',
+                price: [['일~목', '49,500'], ['금', '58,500'], ['토', '72,000']],
+                href: 'rooms/edelweiss.html',
+                images: [
+                    'images/rooms/edelweiss/2.png',
+                    'images/rooms/edelweiss/3.jpg',
+                    'images/rooms/edelweiss/4.jpg',
+                    'images/rooms/edelweiss/5.jpg',
+                    'images/rooms/edelweiss/6.jpg',
+                    'images/rooms/edelweiss/7.jpg',
+                    'images/rooms/edelweiss/8.jpg',
+                    'images/rooms/edelweiss/9.jpg'
+                ],
+                cols: FAC_COLS_NO_GAMING
+            },
+            aurora: {
+                title: '스탠다드 룸',
+                roomTitle: '스탠다드 룸',
+                sub: '기준 2인 / 최대 2인 · 퀸 침대 1개',
+                price: [['일~목', '58,000'], ['금', '67,000'], ['토', '81,000']],
+                href: 'rooms/aurora.html',
+                images: [
+                    'images/rooms/aurora/1.png',
+                    'images/rooms/aurora/2b.png',
+                    'images/rooms/aurora/3.png',
+                    'images/rooms/aurora/4.jpg',
+                    'images/rooms/aurora/4b.png',
+                    'images/rooms/aurora/5.jpg',
+                    'images/rooms/aurora/6.jpg',
+                    'images/rooms/aurora/7.jpg',
+                    'images/rooms/aurora/8.jpg',
+                    'images/rooms/aurora/9.jpg',
+                    'images/rooms/aurora/10.jpg',
+                    'images/rooms/aurora/11.jpg',
+                    'images/rooms/aurora/12.jpg',
+                    'images/rooms/aurora/13.jpg',
+                    'images/rooms/aurora/14.jpg',
+                    'images/rooms/aurora/15.jpg',
+                    'images/rooms/aurora/16.jpg',
+                    'images/rooms/aurora/17.jpg',
+                    'images/rooms/aurora/18.jpg'
+                ],
+                cols: FAC_COLS_NO_GAMING
+            },
+            glorio: {
+                title: '디럭스 룸',
+                roomTitle: '디럭스 룸',
+                sub: '기준 2인 / 최대 2인 · 퀸 침대 1개',
+                price: [['일~목', '67,000'], ['금', '76,000'], ['토', '99,000']],
+                href: 'rooms/glorio.html',
+                images: [
+                    'images/rooms/glorio/1.png',
+                    'images/rooms/glorio/2.png',
+                    'images/rooms/glorio/3.png',
+                    'images/rooms/glorio/3b.png',
+                    'images/rooms/glorio/4.jpg',
+                    'images/rooms/glorio/4b.png',
+                    'images/rooms/glorio/4c.png',
+                    'images/rooms/glorio/5.jpg',
+                    'images/rooms/glorio/5b.png',
+                    'images/rooms/glorio/5c.png',
+                    'images/rooms/glorio/6.jpg',
+                    'images/rooms/glorio/7.jpg',
+                    'images/rooms/glorio/7b.png',
+                    'images/rooms/glorio/8.jpg',
+                    'images/rooms/glorio/9.jpg',
+                    'images/rooms/glorio/10.jpg',
+                    'images/rooms/glorio/11.jpg',
+                    'images/rooms/glorio/12.jpg',
+                    'images/rooms/glorio/13.jpg',
+                    'images/rooms/glorio/14.jpg',
+                    'images/rooms/glorio/15.jpg',
+                    'images/rooms/glorio/16.jpg',
+                    'images/rooms/glorio/17.jpg',
+                    'images/rooms/glorio/18.jpg',
+                    'images/rooms/glorio/19.jpg',
+                    'images/rooms/glorio/20.jpg',
+                    'images/rooms/glorio/21.jpg'
+                ],
+                cols: FAC_COLS_GLORIO
+            },
+            envidion: {
+                title: '트윈 룸',
+                roomTitle: '트윈 룸',
+                sub: '기준 2인 / 최대 3인 무료 · 퀸 침대 1개 / 싱글 침대 1개',
+                price: [['일~목', '76,000'], ['금', '85,000'], ['토', '108,000']],
+                href: 'rooms/envidion.html',
+                images: [
+                    'images/rooms/envidion/1.png',
+                    'images/rooms/envidion/2.png',
+                    'images/rooms/envidion/3.png',
+                    'images/rooms/envidion/4.png',
+                    'images/rooms/envidion/5.jpg',
+                    'images/rooms/envidion/6.jpg',
+                    'images/rooms/envidion/7.jpg',
+                    'images/rooms/envidion/8.jpg',
+                    'images/rooms/envidion/9.jpg',
+                    'images/rooms/envidion/10.jpg',
+                    'images/rooms/envidion/11.jpg',
+                    'images/rooms/envidion/12.jpg',
+                    'images/rooms/envidion/13.png',
+                    'images/rooms/envidion/14.png',
+                    'images/rooms/envidion/15.png',
+                    'images/rooms/envidion/16.png'
+                ],
+                cols: FAC_COLS
+            },
+            special: {
+                title: '스페셜',
+                roomTitle: '스페셜',
+                sub: '기준 2인 / 최대 4인 무료 · 퀸 침대 1개 / 싱글 침대 2개',
+                price: [['일~목', '99,000'], ['금', '108,000'], ['토', '126,000']],
+                href: 'rooms/special.html',
+                images: [
+                    'images/rooms/special/1.png',
+                    'images/rooms/special/2.png',
+                    'images/rooms/special/3.png',
+                    'images/rooms/special/4.png',
+                    'images/rooms/special/5.png',
+                    'images/rooms/special/6.jpg',
+                    'images/rooms/special/7.jpg',
+                    'images/rooms/special/8.jpg',
+                    'images/rooms/special/9.jpg',
+                    'images/rooms/special/10.jpg',
+                    'images/rooms/special/11.jpg',
+                    'images/rooms/special/12.jpg',
+                    'images/rooms/special/13.jpg',
+                    'images/rooms/special/14.jpg',
+                    'images/rooms/special/15.jpg'
+                ],
+                cols: FAC_COLS
+            },
+            ruby: {
+                title: '루비룸 (애견동반)',
+                roomTitle: '루비룸',
+                sub: '기준 2인 / 최대 2인 · 퀸 침대 1개 · 애견동반 가능',
+                price: [['일~목', '76,000'], ['금', '85,000'], ['토', '108,000']],
+                href: 'rooms/ruby.html',
+                images: ['images/rooms/ruby/main.jpg'],
+                cols: FAC_COLS_RUBY
+            }
+        };
+
+        /* ── 모달 슬라이더 (peek 효과) ── */
+        const PEEK = 42;   // 좌우로 보이는 이전/다음 슬라이드 px
+        const SGAP = 10;   // 슬라이드 간 gap px
+        let modalSlideIdx = 0;
+        let modalSlideCount = 0;
+
+        function _slideW() {
+            return document.getElementById('modalSliderOuter').offsetWidth - PEEK * 2;
+        }
+
+        function _setTrack(animate) {
+            const track = document.getElementById('modalSliderTrack');
+            if (!animate) track.style.transition = 'none';
+            else track.style.transition = 'transform 0.34s ease';
+            const sw = _slideW();
+            const offset = PEEK - modalSlideIdx * (sw + SGAP);
+            track.style.transform = 'translateX(' + offset + 'px)';
+            document.querySelectorAll('#modalNavDots .modal-dot').forEach(function(d, i) {
+                d.classList.toggle('active', i === modalSlideIdx);
+            });
+        }
+
+        function openModal(roomId) {
+            const data = ROOM_DATA[roomId];
+            if (!data) return;
+
+            document.getElementById('modalTitle').textContent = data.title;
+            document.getElementById('modalRoomTitle').textContent = data.roomTitle;
+            document.getElementById('modalRoomSub').textContent = data.sub;
+            const priceEl = document.getElementById('modalRoomPrice');
+            priceEl.innerHTML = (data.price || []).map(function(p) {
+                return '<span class="modal-price-item">(' + p[0] + ') <strong>' + p[1] + '</strong></span>';
+            }).join('');
+            document.getElementById('modalBookBtn').onclick = function(){ closeModal(); openBookingCalendar(roomId); };
+
+            // 슬라이더 빌드
+            const track = document.getElementById('modalSliderTrack');
+            const dotsEl = document.getElementById('modalNavDots');
+            track.innerHTML = '';
+            dotsEl.innerHTML = '';
+            modalSlideIdx = 0;
+            modalSlideCount = data.images.length;
+
+            data.images.forEach(function(src, i) {
+                const slide = document.createElement('div');
+                slide.className = 'modal-slide';
+                const img = document.createElement('img');
+                img.src = src; img.alt = data.title;
+                img.onerror = function(){ slide.innerHTML = '<div class="modal-slide-placeholder"></div>'; };
+                slide.appendChild(img);
+                track.appendChild(slide);
+
+                const dot = document.createElement('span');
+                dot.className = 'modal-dot' + (i === 0 ? ' active' : '');
+                dot.onclick = (function(idx){ return function(){ modalGoTo(idx); }; })(i);
+                dotsEl.appendChild(dot);
+            });
+
+            // 네비 표시 여부
+            document.getElementById('modalSliderNav').style.display = data.images.length > 1 ? 'flex' : 'none';
+
+            // 어메니티 빌드
+            const grid = document.getElementById('modalAmenityGrid');
+            grid.innerHTML = '';
+            data.cols.forEach(function(col) {
+                const div = document.createElement('div');
+                div.style.borderTop = '1px solid #ececec';
+                div.style.paddingTop = '12px';
+                const t = document.createElement('p');
+                t.className = 'modal-amenity-col-title';
+                t.innerHTML = '<i class="fa-solid ' + col.icon + '"></i> ' + col.label;
+                div.appendChild(t);
+                col.items.forEach(function(item) {
+                    const p = document.createElement('p');
+                    p.className = 'modal-amenity-item';
+                    p.textContent = item;
+                    div.appendChild(p);
+                });
+                grid.appendChild(div);
+            });
+
+            // 오버레이 열기
+            document.getElementById('modalOverlay').classList.add('open');
+            document.body.style.overflow = 'hidden';
+
+            // 슬라이드 폭 적용 (레이아웃 후)
+            requestAnimationFrame(function() {
+                const sw = _slideW();
+                document.querySelectorAll('.modal-slide').forEach(function(s) {
+                    s.style.width = sw + 'px';
+                    s.style.minWidth = sw + 'px';
+                });
+                track.style.transition = 'none';
+                track.style.transform = 'translateX(' + PEEK + 'px)';
+                requestAnimationFrame(function() {
+                    track.style.transition = 'transform 0.34s ease';
+                });
+            });
+        }
+
+        function closeModal() {
+            document.getElementById('modalOverlay').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        function handleOverlayClick(e) {
+            if (e.target === document.getElementById('modalOverlay')) closeModal();
+        }
+
+        /* ── 갤러리 라이트박스 (peek 슬라이더) ── */
+        var _galleryImages = [];
+        var _galleryIdx = 0;
+        var G_SLIDE_W = 820;
+        var G_GAP = 16;
+
+        function _setGalleryTrack(animate) {
+            var track = document.getElementById('galleryTrack');
+            var peek = (window.innerWidth - G_SLIDE_W) / 2;
+            track.querySelectorAll('.gallery-slide').forEach(function(s, i) {
+                s.classList.toggle('g-active', i === _galleryIdx);
+            });
+            track.style.transition = animate ? 'transform 0.38s ease' : 'none';
+            track.style.transform = 'translateX(' + (peek - _galleryIdx * (G_SLIDE_W + G_GAP)) + 'px)';
+            document.getElementById('galleryCounter').textContent = (_galleryIdx + 1) + ' / ' + _galleryImages.length;
+        }
+
+        function openGallery(roomId) {
+            var data = ROOM_DATA[roomId];
+            if (!data || !data.images.length) return;
+            _galleryImages = data.images;
+            _galleryIdx = 0;
+            var track = document.getElementById('galleryTrack');
+            track.innerHTML = '';
+            _galleryImages.forEach(function(src, i) {
+                var slide = document.createElement('div');
+                slide.className = 'gallery-slide' + (i === 0 ? ' g-active' : '');
+                var img = document.createElement('img');
+                img.src = src;
+                slide.appendChild(img);
+                track.appendChild(slide);
+            });
+            document.getElementById('galleryOverlay').classList.add('open');
+            document.body.style.overflow = 'hidden';
+            _setGalleryTrack(false);
+        }
+
+        function galleryNav(dir) {
+            var next = _galleryIdx + dir;
+            if (next < 0 || next >= _galleryImages.length) return;
+            _galleryIdx = next;
+            _setGalleryTrack(true);
+        }
+
+        function closeGallery() {
+            document.getElementById('galleryOverlay').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        function handleGalleryOverlayClick(e) {
+            if (e.target === document.getElementById('galleryOverlay')) closeGallery();
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (!document.getElementById('galleryOverlay').classList.contains('open')) return;
+            if (e.key === 'ArrowLeft') galleryNav(-1);
+            else if (e.key === 'ArrowRight') galleryNav(1);
+            else if (e.key === 'Escape') closeGallery();
+        });
+
+        window.addEventListener('resize', function() {
+            if (document.getElementById('galleryOverlay').classList.contains('open')) {
+                _setGalleryTrack(false);
+            }
+        });
+
+        function modalChangeSlide(dir) {
+            modalSlideIdx = Math.max(0, Math.min(modalSlideCount - 1, modalSlideIdx + dir));
+            _setTrack(true);
+        }
+
+        function modalGoTo(idx) {
+            modalSlideIdx = idx;
+            _setTrack(true);
+        }
+
+        document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeModal(); });
+    </script>
+    <script>function toggleLangDropdown(e){e.stopPropagation();document.getElementById("langDropdown").classList.toggle("open");}function selectLang(el){document.getElementById("langCode").textContent=el.dataset.code;document.querySelectorAll(".lang-option").forEach(function(o){o.classList.remove("active");});el.classList.add("active");document.getElementById("langDropdown").classList.remove("open");}document.addEventListener("click",function(){var d=document.getElementById("langDropdown");if(d)d.classList.remove("open");});</script>
+</body>
+</html>
+
+
+

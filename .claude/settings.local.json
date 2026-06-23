@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls \"C:/Users/vip/Desktop/주변안내/\")",
+      "Read(//c/Users/vip/Desktop/주변안내/**)"
+    ]
+  }
+}
