@@ -58,6 +58,7 @@
         .btn-secondary{ flex:1; height:50px; background:#fff; color:rgb(28,28,28); border:1.5px solid rgb(28,28,28); border-radius:8px; font-size:15px; font-weight:600; cursor:pointer; font-family:'Barlow',sans-serif; transition:background 0.2s; }
         .btn-secondary:hover{ background:#f8f8f8; }
     </style>
+    <link rel="stylesheet" href="responsive.css">
 </head>
 <body>
     <div class="top-util-bar">
@@ -88,7 +89,14 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
     <script>
+    /* ── Supabase 클라이언트 ── */
+    const _sb = window.supabase.createClient(
+        'https://lbhdujheuokkmiowobzu.supabase.co',
+        'sb_publishable_2X3S_RgN_0ipbUtR-zAV6A_yIp1n5PC'
+    );
+
     const ROOM_NAMES = {
         edelweiss:'이코노미 룸', aurora:'스탠다드 룸', glorio:'디럭스 룸',
         envidion:'트윈 룸', special:'스페셜 룸', ruby:'루비 룸'
@@ -97,7 +105,6 @@
     function fmtDate(d){ return (d.getMonth()+1)+'월 '+d.getDate()+'일 ('+DAYS[d.getDay()]+')'; }
     function fmtWon(n){ return n.toLocaleString('ko-KR'); }
 
-    // URL 파라미터에서 결제 정보 추출 (토스페이먼츠가 붙여주는 값)
     const params   = new URLSearchParams(location.search);
     const payKey   = params.get('paymentKey')  || '';
     const orderId  = params.get('orderId')      || localStorage.getItem('instaHotelOrderId') || '-';
@@ -119,7 +126,7 @@
         <div class="section-title">예약 정보</div>
         <div class="detail-row"><span class="detail-label">객실</span><span class="detail-value">${roomName}</span></div>
         ${checkin  ? `<div class="detail-row"><span class="detail-label">체크인</span><span class="detail-value">${fmtDate(checkin)} 오후 3:00</span></div>` : ''}
-        ${checkout ? `<div class="detail-row"><span class="detail-label">체크아웃</span><span class="detail-value">${fmtDate(checkout)} 오전 11:00</span></div>` : ''}
+        ${checkout ? `<div class="detail-row"><span class="detail-label">체크아웃</span><span class="detail-value">${fmtDate(checkout)} 오후 12:00</span></div>` : ''}
         ${b.nights ? `<div class="detail-row"><span class="detail-label">숙박</span><span class="detail-value">${b.nights}박</span></div>` : ''}
         ${b.roomCount ? `<div class="detail-row"><span class="detail-label">객실 / 인원</span><span class="detail-value">${b.roomCount}객실 · 성인 ${b.adultCount}인</span></div>` : ''}
 
@@ -129,6 +136,8 @@
         ${g.name  ? `<div class="detail-row"><span class="detail-label">이름</span><span class="detail-value">${g.name}</span></div>` : ''}
         ${g.phone ? `<div class="detail-row"><span class="detail-label">연락처</span><span class="detail-value">${g.phone.replace(/(\d{3})(\d{3,4})(\d{4})/, '$1-$2-$3')}</span></div>` : ''}
         ${g.email ? `<div class="detail-row"><span class="detail-label">이메일</span><span class="detail-value">${g.email}</span></div>` : ''}
+        ${g.country   ? `<div class="detail-row"><span class="detail-label">나라</span><span class="detail-value">${g.country}</span></div>` : ''}
+        ${g.instagram ? `<div class="detail-row"><span class="detail-label">인스타그램</span><span class="detail-value">${g.instagram}</span></div>` : ''}
 
         <hr class="divider">
 
@@ -139,9 +148,9 @@
 
         <div class="notice-box">
             <strong>체크인 안내</strong><br>
-            · 체크인: 오후 3:00 / 체크아웃: 오전 11:00<br>
+            · 체크인: 오후 3:00 / 체크아웃: 오후 12:00<br>
             · 체크인 시 신분증을 지참해 주세요.<br>
-            · 문의: <strong>032-XXX-XXXX</strong> (09:00~22:00)
+            · 문의: <strong>+82 31-203-4301</strong> (09:00~22:00)
         </div>
 
         <div class="btn-group">
@@ -149,6 +158,43 @@
             <button class="btn-primary" onclick="location.href='index.html'">홈으로</button>
         </div>
     `;
+
+    /* ── Supabase에 예약 저장 (중복 저장 방지: orderId로 체크) ── */
+    (async function saveReservation() {
+        if (!b.roomId && !g.name) return;
+
+        const { data: existing } = await _sb
+            .from('reservations')
+            .select('id')
+            .eq('order_id', orderId)
+            .maybeSingle();
+
+        if (existing) return; // 이미 저장된 예약
+
+        const { error } = await _sb.from('reservations').insert({
+            order_id:       orderId,
+            payment_key:    payKey || null,
+            room_id:        b.roomId        || null,
+            room_name:      roomName,
+            checkin_date:   b.checkin  ? b.checkin.split('T')[0]  : null,
+            checkout_date:  b.checkout ? b.checkout.split('T')[0] : null,
+            nights:         b.nights        || null,
+            room_count:     b.roomCount     || null,
+            adult_count:    b.adultCount    || null,
+            total_price:    total           || null,
+            guest_name:     g.name          || null,
+            guest_email:    g.email         || null,
+            guest_phone:    g.phone         || null,
+            guest_country:  g.country       || null,
+            guest_instagram:g.instagram     || null,
+            special_request:g.request       || null,
+            payment_status: 'paid'
+        });
+
+        if (error) console.error('[Supabase] 저장 오류:', error.message);
+    })();
     </script>
+    <script src="mobile-nav.js"></script>
+    <script>(function(){var w=window;if(w.ChannelIO){return w.console.error("ChannelIO script included twice.");}var ch=function(){ch.c(arguments);};ch.q=[];ch.c=function(args){ch.q.push(args);};w.ChannelIO=ch;function l(){if(w.ChannelIOInitialized){return;}w.ChannelIOInitialized=true;var s=document.createElement("script");s.type="text/javascript";s.async=true;s.src="https://cdn.channel.io/plugin/ch-plugin-web.js";var x=document.getElementsByTagName("script")[0];if(x.parentNode){x.parentNode.insertBefore(s,x);}}if(document.readyState==="complete"){l();}else{w.addEventListener("DOMContentLoaded",l);w.addEventListener("load",l);}})();ChannelIO('boot', {"pluginKey": "c7167588-160b-4e88-9b45-c25be2be8af8"});</script>
 </body>
 </html>

@@ -316,6 +316,7 @@
         function openBookingCalendar(){ setTimeout(function(){ document.getElementById('guestPopup').classList.remove('active'); document.getElementById('calendarPopup').classList.add('active'); },0); }
         function handleBookingBtn(){
             if(!checkinDate||!checkoutDate){ openBookingCalendar(); return; }
+            if(!selectedRoomId){ alert('객실을 선택해 주세요.'); document.getElementById('pricePopup').classList.add('active'); populatePricePopup(); return; }
             var nights=Math.round((checkoutDate-checkinDate)/86400000);
             var roomCount=guests?guests.room:1, adultCount=guests?guests.adult:1;
             var total=0; for(var i=0;i<nights;i++){ var d=new Date(checkinDate); d.setDate(d.getDate()+i); total+=getNightRateG(selectedRoomId,d); } total*=roomCount;
@@ -323,7 +324,7 @@
             localStorage.setItem('instaHotelBooking',JSON.stringify({ roomId:selectedRoomId,roomName:roomName,checkin:checkinDate.toISOString(),checkout:checkoutDate.toISOString(),nights:nights,roomCount:roomCount,adultCount:adultCount,totalPrice:total }));
             window.location.href='booking.html';
         }
-        var selectedRoomId='edelweiss';
+        var selectedRoomId=null;
         const ROOM_PRICE_TABLE_G={
             edelweiss:{prices:[49500,58500,72000],maxGuests:2},
             aurora:   {prices:[58000,67000,81000],maxGuests:2},
@@ -703,5 +704,7 @@
             renderGrid();
         });
     </script>
+    <script src="mobile-nav.js"></script>
+    <script>(function(){var w=window;if(w.ChannelIO){return w.console.error("ChannelIO script included twice.");}var ch=function(){ch.c(arguments);};ch.q=[];ch.c=function(args){ch.q.push(args);};w.ChannelIO=ch;function l(){if(w.ChannelIOInitialized){return;}w.ChannelIOInitialized=true;var s=document.createElement("script");s.type="text/javascript";s.async=true;s.src="https://cdn.channel.io/plugin/ch-plugin-web.js";var x=document.getElementsByTagName("script")[0];if(x.parentNode){x.parentNode.insertBefore(s,x);}}if(document.readyState==="complete"){l();}else{w.addEventListener("DOMContentLoaded",l);w.addEventListener("load",l);}})();ChannelIO('boot', {"pluginKey": "c7167588-160b-4e88-9b45-c25be2be8af8"});</script>
 </body>
 </html>
