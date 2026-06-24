@@ -818,8 +818,8 @@
 
     /* ── rooms.html 팝업 모달 ── */
     .modal-overlay  { top: 0; padding-top: 0; align-items: flex-end; }
-    .modal-box      { width: 100%; height: auto; max-height: 78vh; border-radius: 16px 16px 0 0; }
-    .modal-slider-outer { height: 200px; }
+    .modal-box      { width: 100%; height: auto; max-height: 92vh; border-radius: 16px 16px 0 0; }
+    .modal-slider-outer { height: 185px; }
     .modal-header   { padding: 12px 16px 11px; }
     .modal-body     { padding: 14px 16px 20px; }
     .modal-amenity-grid { grid-template-columns: 1fr 1fr; gap: 0; }
