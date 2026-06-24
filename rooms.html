@@ -29,7 +29,7 @@
         .main-nav li.active::after{ content:''; position:absolute; left:0; right:0; bottom:16px; height:3px; background:#2A91A8; }
 
         /* ── 서브헤더 + 예약바 ── */
-        .sticky-wrapper{ position:sticky; top:0; z-index:1000; background:#FAFAFA; box-shadow:0 4px 15px rgba(0,0,0,0.1); }
+        .sticky-wrapper{ position:-webkit-sticky; position:sticky; top:0; z-index:1000; background:#FAFAFA; box-shadow:0 4px 15px rgba(0,0,0,0.1); }
         .sub-header{ display:flex; justify-content:space-between; align-items:center; height:64px; padding:0 48px 0 30px; border-bottom:1px solid #e5e5e5; background-color:rgb(244,244,244); }
         .hotel-info-left{ display:flex; align-items:center; gap:10px; }
         .hotel-name{ font-size:22px; font-weight:700; color:rgb(28,28,28); white-space:nowrap; }
@@ -211,7 +211,7 @@
     <!-- 상단 유틸리티 바 -->
     <div class="top-util-bar">
         <div class="hamburger-menu"><span></span><span></span><span></span></div>
-        <div><button class="util-login-btn"><i class="fa-regular fa-user"></i> 회원가입 시 객실예약할 때 혜택</button></div>
+        <div><button class="util-login-btn">공식 홈페이지 예약 시 최대 혜택</button></div>
     </div>
 
     <!-- 헤더 -->

@@ -81,6 +81,51 @@
     background: rgba(255,255,255,0.07);
     color: #fff;
 }
+.mob-nav-lang {
+    padding: 16px 24px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    position: relative;
+}
+.mob-lang-btn {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 20px;
+    color: rgba(255,255,255,0.85);
+    padding: 6px 14px;
+    font-size: 13px;
+    font-family: 'Barlow', sans-serif;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.mob-lang-btn:hover { background: rgba(255,255,255,0.14); }
+.mob-lang-chevron { font-size: 10px; }
+.mob-lang-dropdown {
+    display: none;
+    position: absolute;
+    bottom: calc(100% - 8px);
+    left: 24px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+    overflow: hidden;
+    min-width: 110px;
+    z-index: 10;
+}
+.mob-lang-dropdown.open { display: block; }
+.mob-lang-option {
+    display: block;
+    padding: 10px 16px;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+    font-family: 'Barlow', sans-serif;
+    transition: background 0.15s;
+}
+.mob-lang-option:hover { background: #f5f5f5; }
+.mob-lang-option.active { font-weight: 700; color: #111; }
 .mob-nav-footer {
     padding: 20px 24px;
     border-top: 1px solid rgba(255,255,255,0.1);
@@ -101,6 +146,61 @@
     line-height: 1.5;
     font-family: 'Barlow', sans-serif;
 }
+
+/* ── 예약 팝업 공통 기본 스타일 (mobile-nav.js 주입 팝업에서도 사용) ── */
+.booking-dropdown {
+    position: absolute;
+    top: calc(100% + 20px);
+    left: 0;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    padding: 30px;
+    z-index: 2000;
+    display: none;
+    cursor: default;
+}
+.booking-dropdown.active { display: block; }
+.dropdown-close { position: absolute; top: 20px; right: 20px; font-size: 16px; cursor: pointer; color: rgb(112,112,112); }
+.dropdown-close:hover { color: rgb(28,28,28); }
+
+.calendar-dropdown { width: 750px; left: -20px; }
+.cal-months-wrap { display: flex; justify-content: space-between; gap: 40px; margin-top: 10px; }
+.cal-month { flex: 1; }
+.cal-month-header { display: flex; justify-content: space-between; align-items: center; font-weight: 700; font-size: 15px; margin-bottom: 20px; }
+.cal-month-header i { cursor: pointer; font-size: 16px; padding: 5px; color: rgb(112,112,112); transition: color 0.2s; }
+.cal-month-header i:hover { color: #00768e; }
+.cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; gap: 10px 0; }
+.cal-day-name { font-size: 12px; font-weight: 700; color: rgb(112,112,112); margin-bottom: 10px; }
+.cal-date { font-size: 13px; font-weight: 500; color: rgb(112,112,112); padding: 10px 0; cursor: pointer; border-radius: 20px; transition: all 0.2s ease; position: relative; }
+.cal-date.faded { color: #ccc; cursor: default; }
+.cal-date.selected-start { background: #000; color: #fff; border-radius: 20px 0 0 20px; }
+.cal-date.selected-end   { background: #000; color: #fff; border-radius: 0 20px 20px 0; }
+.cal-date.selected-single { background: #000; color: #fff; border-radius: 20px; }
+.cal-date.in-range { background: #FAFAFA; border-radius: 0; }
+.cal-date:hover:not(.faded):not(.selected-start):not(.selected-end):not(.selected-single) { background: #eaeaea; border-radius: 20px; }
+
+.guest-dropdown { width: 420px; left: -20px; }
+.guest-row { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; border-bottom: 1px solid #f0f0f0; }
+.guest-row:last-of-type { border-bottom: none; }
+.guest-label-box { display: flex; flex-direction: column; gap: 5px; }
+.g-title { font-weight: 700; font-size: 15px; color: rgb(28,28,28); }
+.guest-controls { display: flex; align-items: center; gap: 15px; }
+.btn-ctrl { width: 32px; height: 32px; border-radius: 50%; border: 1px solid #ddd; background: #fff; display: flex; justify-content: center; align-items: center; cursor: pointer; color: rgb(112,112,112); }
+.btn-ctrl:hover { border-color: rgb(28,28,28); color: rgb(28,28,28); }
+.val-ctrl { font-size: 15px; font-weight: 600; width: 15px; text-align: center; }
+
+.price-popup { width: 320px; padding: 20px 24px; left: 0; right: auto; }
+.price-popup-row { display: flex; justify-content: space-between; align-items: center; padding: 11px 0; border-bottom: 1px solid #f0f0f0; cursor: pointer; }
+.price-popup-row:last-child { border-bottom: none; }
+.price-popup-row:hover .price-popup-name { color: #2A91A8; }
+.price-popup-name { font-size: 14px; font-weight: 600; color: rgb(28,28,28); }
+.price-popup-total { font-size: 13px; font-weight: 600; color: rgb(28,28,28); white-space: nowrap; }
+.price-popup-unavail { cursor: default; opacity: 0.45; }
+.price-popup-unavail:hover .price-popup-name { color: rgb(28,28,28); }
+
+.dropdown-done-btn { display: block; width: 100px; margin: 30px auto 0; padding: 10px 0; border-radius: 20px; border: 1px solid #777; background: #fff; font-weight: 600; font-size: 13px; cursor: pointer; transition: background 0.2s; text-align: center; font-family: inherit; }
+.dropdown-done-btn:hover { background: #FAFAFA; }
 
 /* ── 1700px 이하: 예약바 패딩 완화 시작 ── */
 @media (max-width: 1700px) {
@@ -253,134 +353,147 @@
     .rating-text    { font-size: 12px; }
     .hotel-info-right { display: none; }
 
-    /* ── 모바일 예약바 & 패널 ── */
-    .booking-bar { display: none !important; }
+    /* rooms.html 기존 sticky-wrapper 숨김 (index.html의 #booking-header 제외) */
+    .sticky-wrapper:not(#booking-header) {
+        display: none !important;
+    }
 
-    #mob-booking-bar {
-        display: flex;
-        align-items: center;
+    /* ── 기존 예약바 숨기기 (height:0으로 처리 — display:none 쓰면 fixed 드롭다운도 같이 숨겨짐) ── */
+    .booking-bar {
+        height: 0 !important;
+        min-height: 0 !important;
+        overflow: hidden !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        border: none !important;
+    }
+
+    #mob-trigger-bar {
+        padding: 10px 16px;
         background: #fff;
         border-top: 1px solid #eee;
-        padding: 0 12px 0 6px;
-        height: 54px;
-        gap: 0;
     }
-    .mob-bar-chip {
-        display: flex;
+    #mob-sticky-top {
+        background: #fafafa;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    #mob-sticky-top.is-fixed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+    }
+    #mob-ext-panel {
+        display: none;
         flex-direction: column;
-        align-items: flex-start;
-        justify-content: center;
-        gap: 2px;
-        padding: 0 10px;
-        height: 100%;
-        cursor: pointer;
-        flex: 1;
-        min-width: 0;
-        -webkit-tap-highlight-color: transparent;
+        background: #fff;
+        border-top: 1px solid #eee;
     }
-    .mob-bar-chip:active { background: rgba(0,0,0,0.03); }
-    .mob-bar-chip-label {
-        font-size: 9px;
-        font-weight: 600;
-        color: rgb(130,130,130);
-        letter-spacing: 0.3px;
-        text-transform: uppercase;
-        line-height: 1;
+    #mob-ext-panel.open { display: flex; }
+    #mob-sub-bar {
+        background: rgb(244,244,244);
+        border-bottom: 1px solid #e6e6e6;
+        padding: 8px 16px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
     }
-    .mob-bar-chip-val {
-        font-size: 12px;
-        font-weight: 700;
-        color: rgb(28,28,28);
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        max-width: 100%;
-        line-height: 1.3;
+    .mob-hotel-name { font-size: 13px; font-weight: 700; color: rgb(28,28,28); font-family: 'Barlow', sans-serif; }
+    .mob-rating-dots { display: flex; gap: 2px; color: #2A91A8; font-size: 8px; align-items: center; }
+    .mob-rating-text { font-size: 12px; color: rgb(100,100,100); font-family: 'Barlow', sans-serif; }
+    #mob-book-bar {
+        padding: 10px 16px;
+        background: #fff;
+        border-top: 1px solid #eee;
     }
-    .mob-bar-chip-val.placeholder { color: rgb(160,160,160); font-weight: 500; }
-    .mob-bar-divider { width: 1px; height: 22px; background: #e0e0e0; flex-shrink: 0; }
-    .mob-bar-btn {
-        flex-shrink: 0;
-        margin-left: 10px;
-        padding: 0 16px;
-        height: 38px;
-        background: rgb(28,28,28);
-        color: #fff;
+    #mob-book-bar a { display: block; }
+    #mob-book-bar-btn {
+        width: 100%;
+        height: 46px;
+        background: rgb(244,244,244);
+        color: #1a1a1a;
         border: none;
         border-radius: 8px;
-        font-size: 13px;
+        font-size: 15px;
         font-weight: 700;
-        cursor: pointer;
         font-family: 'Barlow', sans-serif;
-        white-space: nowrap;
+        cursor: pointer;
         -webkit-tap-highlight-color: transparent;
     }
-    .mob-bar-btn:active { background: rgb(55,55,55); }
+    #mob-book-bar-btn:active { opacity: 0.85; }
+    #mob-book-trigger {
+        width: 100%;
+        height: 46px;
+        background: rgb(244,244,244);
+        color: #1a1a1a;
+        border: none;
+        border-radius: 8px;
+        font-size: 15px;
+        font-weight: 700;
+        font-family: 'Barlow', sans-serif;
+        cursor: pointer;
+        letter-spacing: -0.2px;
+        -webkit-tap-highlight-color: transparent;
+    }
+    #mob-book-trigger:active { opacity: 0.85; }
 
-    /* 확장 패널 */
     #mob-book-panel {
         display: none;
         flex-direction: column;
         background: #fff;
         border-top: 1px solid #eee;
-        overflow: hidden;
     }
     #mob-book-panel.open { display: flex; }
 
     .mob-panel-row {
         display: flex;
         flex-direction: column;
+        gap: 8px;
         padding: 16px 20px 14px;
         border-bottom: 1px solid #f0f0f0;
         cursor: pointer;
         -webkit-tap-highlight-color: transparent;
-        gap: 6px;
     }
     .mob-panel-row:active { background: rgba(0,0,0,0.02); }
     .mob-panel-label {
         font-size: 12px;
         font-weight: 600;
         color: rgb(100,100,100);
-        line-height: 1;
     }
     .mob-panel-value {
         display: flex;
         align-items: center;
         gap: 8px;
         font-size: 16px;
-        font-weight: 600;
+        font-weight: 500;
         color: rgb(28,28,28);
     }
-    .mob-panel-arrow { color: rgb(130,130,130); font-size: 13px; }
-    .mob-panel-chevron { font-size: 13px; color: rgb(130,130,130); margin-left: auto; }
-    .mob-panel-footer {
-        padding: 14px 16px 18px;
-    }
-    .mob-panel-footer button {
+    .mob-panel-confirm {
         width: 100%;
-        height: 52px;
-        background: rgb(28,28,28);
-        color: #fff;
+        height: 50px;
+        background: rgb(244,244,244);
+        color: #1a1a1a;
         border: none;
-        border-radius: 10px;
+        border-radius: 8px;
         font-size: 16px;
         font-weight: 700;
-        cursor: pointer;
         font-family: 'Barlow', sans-serif;
-        letter-spacing: -0.3px;
+        cursor: pointer;
+        letter-spacing: -0.2px;
+        -webkit-tap-highlight-color: transparent;
     }
-    .mob-panel-footer button:active { background: rgb(55,55,55); }
+    .mob-panel-confirm:active { opacity: 0.85; }
 
-    /* 배경 딤 */
-    #mob-panel-backdrop {
-        display: none;
-        position: fixed;
-        inset: 0;
-        background: rgba(0,0,0,0.35);
-        z-index: 798;
+    /* 기존 예약바 — 수직 스택 (이 블록은 이제 사용 안 함, 하단 .booking-item 스타일만 유지) */
+    .booking-bar-unused {
+        flex-direction: column;
+        height: auto;
+        padding: 0 14px 14px;
+        align-items: stretch;
+        gap: 0;
     }
-    #mob-panel-backdrop.open { display: block; }
-
     .booking-item {
         flex: none !important;
         width: 100% !important;
@@ -411,7 +524,7 @@
 
     /* ── 달력 드롭다운 (모바일 전체폭) ── */
     .booking-dropdown {
-        position: fixed;
+        position: fixed !important;
         top: 50% !important;
         left: 50% !important;
         transform: translate(-50%, -50%);
@@ -419,7 +532,7 @@
         max-width: 400px;
         max-height: 80vh;
         overflow-y: auto;
-        z-index: 9000;
+        z-index: 9000 !important;
         border-radius: 16px;
     }
     .calendar-dropdown {
@@ -449,13 +562,45 @@
     /* ── 히어로 ── */
     .hero-section { height: 52vw; min-height: 220px; }
     .hero-controls { bottom: 14px; }
-    .slider-nav  { width: 110px; height: 38px; }
-    .gallery-btn { width: 100px; height: 38px; font-size: 14px; }
+    .slider-nav           { width: 90px; height: 30px; }
+    .slider-nav i         { font-size: 11px; }
+    .slider-dots          { gap: 6px; }
+    .dot                  { width: 6px; height: 6px; }
+    .gallery-btn          { width: 85px; height: 30px; font-size: 11px; gap: 5px; white-space: nowrap; }
+    .gallery-btn i        { font-size: 12px; }
 
     /* ── 소개 섹션 ── */
     .intro-section  { margin: 36px auto 24px; padding: 0 16px; }
     .intro-title    { font-size: 22px; }
     .intro-desc     { font-size: 13px; }
+    .intro-more-dots { display: inline; }
+    .intro-desc-more { display: none; }
+    .intro-more-btn {
+        display: inline;
+        background: none;
+        border: none;
+        color: #00768e;
+        font-size: 13px;
+        font-weight: 700;
+        cursor: pointer;
+        padding: 0 2px;
+        vertical-align: baseline;
+        text-decoration: underline;
+        font-family: inherit;
+    }
+    .intro-less-btn {
+        display: inline;
+        background: none;
+        border: none;
+        color: #00768e;
+        font-size: 13px;
+        font-weight: 700;
+        cursor: pointer;
+        padding: 0 2px;
+        vertical-align: baseline;
+        text-decoration: underline;
+        font-family: inherit;
+    }
 
     /* ── 프로모 배너 ── */
     .promo-banner       { flex-direction: column; align-items: flex-start; gap: 16px; padding: 18px 16px; }
@@ -477,8 +622,64 @@
     .fan-card-name  { font-size: 15px; padding-bottom: 18px; }
     .fan-btn-book   { height: 30px; font-size: 13px; }
     .fan-stage      { padding-bottom: 4px; }
-    .fan-toolbar { flex-wrap: wrap; gap: 10px; }
-    .fan-nav    { gap: 28px; }
+    /* 툴바: [← ──────] [01 / 06] [────── →] */
+    .fan-toolbar {
+        align-items: center;
+        gap: 0;
+        flex-wrap: nowrap;
+        padding: 0 16px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    .fan-progress {
+        order: 2;
+        gap: 0;
+        font-size: 14px;
+        font-weight: 500;
+        color: rgb(100,100,100);
+        font-family: 'Barlow', sans-serif;
+        white-space: nowrap;
+        flex-shrink: 0;
+        padding: 0 12px;
+    }
+    .fan-progress-track { display: none; }
+    .fan-progress span:last-child::before { content: ' / '; }
+    .fan-nav { display: contents; }
+    .fan-nav-btn:first-child { order: 1; flex: 1; justify-content: flex-start; gap: 10px; }
+    .fan-nav-btn:last-child  { order: 3; flex: 1; justify-content: flex-end;   gap: 10px; }
+    .fan-nav-btn {
+        font-size: 0;
+        height: 36px;
+        background: none;
+        border: none;
+        color: #2A91A8;
+        cursor: pointer;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        -webkit-tap-highlight-color: transparent;
+    }
+    .fan-nav-btn:first-child::before {
+        content: '\f060';
+        font-family: 'Font Awesome 6 Free';
+        font-weight: 900;
+        font-size: 18px;
+        flex-shrink: 0;
+        order: -1;
+    }
+    .fan-nav-btn:last-child::after {
+        content: '\f061';
+        font-family: 'Font Awesome 6 Free';
+        font-weight: 900;
+        font-size: 18px;
+        flex-shrink: 0;
+    }
+    .fan-nav-line {
+        display: block;
+        flex: 1;
+        height: 1px;
+        background: #2A91A8;
+    }
 
     /* ── 프로모·패키지 카드 ── */
     .promo-pkg-section { padding: 0 16px; }
@@ -488,16 +689,55 @@
     /* ── 시설 탭 ── */
     .facilities-section { padding: 32px 16px; }
     .fac-main-title     { font-size: 26px; margin-bottom: 28px; }
-    .fac-tabs ul        { gap: 14px; overflow-x: auto; justify-content: flex-start; padding-bottom: 2px; }
+    .fac-tabs ul        { gap: 14px; overflow-x: auto; justify-content: center; padding-bottom: 2px; }
     .fac-tabs li        { font-size: 13px; white-space: nowrap; }
-    .fac-category-grid  { grid-template-columns: 1fr; gap: 24px; }
+    .fac-category-grid  { grid-template-columns: 1fr; gap: 0; }
+    .fac-box            { gap: 0; }
+    .fac-box-title i    { width: 22px; text-align: center; flex-shrink: 0; }
+    .fac-box-title      { font-weight: 500; }
+
+    /* ── 시설 카테고리 토글 (모바일) ── */
+    .fac-box-title.fac-toggleable {
+        cursor: pointer;
+        justify-content: space-between;
+        padding: 10px 0;
+        border-bottom: 1px solid #f0f0f0;
+        -webkit-tap-highlight-color: transparent;
+        user-select: none;
+        margin-top: 0 !important;
+    }
+    .fac-toggle-hint {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        margin-left: auto;
+        font-size: 12px;
+        color: rgb(112,112,112);
+        font-weight: 500;
+        flex-shrink: 0;
+    }
+    .fac-toggle-hint::after {
+        content: '\f078';
+        font-family: 'Font Awesome 6 Free';
+        font-weight: 900;
+        font-size: 11px;
+        color: rgb(112,112,112);
+        transition: transform 0.25s ease;
+    }
+    .fac-box-title.collapsed .fac-toggle-hint::after {
+        transform: rotate(-90deg);
+    }
+    .fac-box-title.fac-toggleable + .fac-box-list,
+    .fac-box-title.fac-toggleable + .fac-box-text {
+        margin-top: 10px;
+    }
 
     /* ── 어메니티 정보 ── */
     .info-section { padding: 32px 16px 60px; }
     .info-grid    { grid-template-columns: 1fr; gap: 18px; }
 
     /* ── 피처 슬라이더 ── */
-    .feature-slider-section { flex-direction: column; height: auto; }
+    .feature-slider-section { flex-direction: column-reverse; height: auto; }
     .feature-left-panel {
         width: 100%;
         padding: 36px 20px 28px;
@@ -506,6 +746,8 @@
     .feature-right-panel { width: 100%; height: 220px; flex-shrink: 0; }
     .feature-title { font-size: 22px; }
     .feature-desc  { font-size: 14px; line-height: 1.7; margin-bottom: 20px; }
+    .feature-nav   { font-size: 12px; }
+    .feature-counter { font-size: 12px; }
 
     /* ── 호텔 투숙 방법 ── */
     .hotel-ways-section { padding: 40px 0 50px; }
@@ -546,14 +788,48 @@
     .gal-grid       { columns: 2; }
     .gal-count      { padding: 12px 16px; }
 
+    /* ── rooms.html 객실 목록 ── */
+    .hero-section         { height: 58vw; min-height: 200px; }
+    .hero-title           { font-size: 24px; line-height: 1.3; }
+    .hero-label-text      { font-size: 11px; letter-spacing: 2px; }
+    .rooms-section        { padding: 20px 0 60px; }
+    .rooms-section-header { padding: 0 16px; margin-bottom: 20px; }
+    .rooms-section-title  { font-size: 18px; }
+    .rooms-grid           { grid-template-columns: 1fr; padding: 0 16px; gap: 28px; }
+    .room-card-img-wrap   { height: 220px; }
+    .room-card-body       { padding: 14px 2px 0; }
+    .room-card-name       { font-size: 15px; }
+    .room-card-meta       { flex-direction: column; align-items: flex-start; gap: 4px; }
+    .room-card-price      { flex-wrap: wrap; gap: 4px; }
+    .room-card-price-item { font-size: 11px; }
+
+    /* ── rooms.html 팝업 모달 ── */
+    .modal-overlay  { top: 0; padding-top: 0; align-items: flex-end; }
+    .modal-box      { width: 100%; height: 90vh; max-height: 90vh; border-radius: 16px 16px 0 0; }
+    .modal-slider-outer { height: 240px; }
+    .modal-top-row  { flex-wrap: wrap; gap: 10px; }
+    .modal-sub-row  { flex-wrap: wrap; gap: 6px; }
+    .modal-room-price { flex-wrap: wrap; gap: 6px; }
+    .modal-amenity-grid { grid-template-columns: 1fr; }
+    .gallery-prev   { left: 24px; }
+    .gallery-next   { right: 24px; }
+
     /* ── 객실 상세 (rooms/*.html) ── */
-    .room-detail-section { padding: 32px 16px; }
-    .room-detail-title   { font-size: 26px; }
-    .room-detail-body    { flex-direction: column; gap: 32px; }
-    .room-detail-right   { width: 100%; }
-    .room-booking-card   { position: static; }
-    .room-stats          { gap: 18px; flex-wrap: wrap; }
-    .room-amenities-grid { grid-template-columns: 1fr; }
+    .room-detail-section  { padding: 28px 16px 48px; }
+    .room-detail-title    { font-size: 24px; }
+    .room-detail-subtitle { font-size: 13px; margin-bottom: 28px; }
+    .room-detail-body     { flex-direction: column; gap: 28px; }
+    .room-detail-right    { width: 100%; }
+    .room-booking-card    { position: static; padding: 20px 16px; }
+    .room-booking-price strong { font-size: 22px; }
+    .room-stats           { gap: 14px; flex-wrap: wrap; }
+    .room-stat-label      { font-size: 10px; }
+    .room-stat-value      { font-size: 14px; }
+    .room-amenities-grid  { grid-template-columns: 1fr; }
+    .room-breadcrumb      { font-size: 12px; margin-bottom: 20px; }
+    .hero-controls        { gap: 8px; }
+    .slider-nav           { width: 90px; height: 30px; padding: 0 10px; }
+    .gallery-btn          { width: 88px; height: 30px; font-size: 11px; }
 
     /* ── 예약 성공/실패 페이지 ── */
     .page-wrap  { margin: 32px auto 60px; }
@@ -573,6 +849,11 @@
     .review-modal-box { border-radius: 12px; }
     .review-modal-header { padding: 16px 18px; }
     .review-list { padding: 0 18px; }
+}
+
+/* ── 데스크탑에서 모바일 전용 주입 요소 숨김 ── */
+@media (min-width: 769px) {
+    #mob-sticky-top, #mob-sub-bar, #mob-book-bar, #mob-sticky-spacer { display: none !important; }
 }
 
 /* ── 480px 이하 (소형 폰) ── */
