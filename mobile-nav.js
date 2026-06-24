@@ -184,7 +184,7 @@
                         '</div>' +
                     '</div>' +
                     '<div class="mob-panel-row" onclick="togglePricePopup(event)">' +
-                        '<span class="mob-panel-label">특별 요금</span>' +
+                        '<span class="mob-panel-label">객실선택 & 특별요금</span>' +
                         '<div class="mob-panel-value">' +
                             '<span id="mob-ext-price-lbl">최저 요금</span>' +
                             '<i class="fa-solid fa-chevron-down" style="font-size:12px;color:#aaa;margin-left:auto;"></i>' +
@@ -362,17 +362,16 @@
             };
             window.goExtBooking = function() {
                 if (!extCI || !extCO) { window.toggleCalendarPopup(); return; }
+                if (!extRoomId) { alert('객실을 선택해 주세요.'); window.togglePricePopup(); return; }
                 var nights = Math.round((extCO-extCI)/86400000);
                 var total = 0;
-                if (extRoomId) {
-                    for (var i=0; i<nights; i++) { var nd=new Date(extCI); nd.setDate(nd.getDate()+i); total+=extNightRate(extRoomId,nd); }
-                    total *= extGuests.room;
-                    localStorage.setItem('instaHotelBooking', JSON.stringify({
-                        roomId: extRoomId, roomName: EXT_NAMES[extRoomId]||extRoomId,
-                        checkin: extCI.toISOString(), checkout: extCO.toISOString(),
-                        nights: nights, roomCount: extGuests.room, adultCount: extGuests.adult, totalPrice: total
-                    }));
-                }
+                for (var i=0; i<nights; i++) { var nd=new Date(extCI); nd.setDate(nd.getDate()+i); total+=extNightRate(extRoomId,nd); }
+                total *= extGuests.room;
+                localStorage.setItem('instaHotelBooking', JSON.stringify({
+                    roomId: extRoomId, roomName: EXT_NAMES[extRoomId]||extRoomId,
+                    checkin: extCI.toISOString(), checkout: extCO.toISOString(),
+                    nights: nights, roomCount: extGuests.room, adultCount: extGuests.adult, totalPrice: total
+                }));
                 window.location.href = base + 'booking.html';
             };
 
