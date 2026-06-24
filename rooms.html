@@ -705,6 +705,17 @@
         let selectedRoomId = null;
         function openBookingCalendar(roomId) {
             if (roomId) selectedRoomId = roomId;
+            if (window.innerWidth <= 768) {
+                setTimeout(function() {
+                    var panel = document.getElementById('mob-ext-panel');
+                    var bookBar = document.getElementById('mob-book-bar');
+                    if (panel && !panel.classList.contains('open')) {
+                        panel.classList.add('open');
+                        if (bookBar) bookBar.style.display = 'none';
+                    }
+                }, 0);
+                return;
+            }
             setTimeout(function() {
                 document.getElementById('guestPopup').classList.remove('active');
                 document.getElementById('calendarPopup').classList.add('active');
