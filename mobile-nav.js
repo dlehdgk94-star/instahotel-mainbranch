@@ -307,6 +307,12 @@
             window.closeDropdowns = function(e) {
                 if(e) e.stopPropagation();
                 ['ext-calendarPopup','ext-guestPopup','ext-pricePopup'].forEach(function(id){ var el=document.getElementById(id); if(el) el.classList.remove('active'); });
+                var panel = document.getElementById('mob-ext-panel');
+                var bookBar = document.getElementById('mob-book-bar');
+                if (panel && panel.classList.contains('open')) {
+                    panel.classList.remove('open');
+                    if (bookBar) bookBar.style.display = '';
+                }
             };
             window.changeMonth = function(dir) {
                 event.stopPropagation();
