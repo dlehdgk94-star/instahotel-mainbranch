@@ -605,8 +605,8 @@
     /* ── 프로모 배너 ── */
     .promo-banner       { flex-direction: column; align-items: flex-start; gap: 16px; padding: 18px 16px; }
     .promo-banner-left  { flex-direction: column; gap: 12px; }
-    .promo-card-img     { width: 100%; height: 150px; }
-    .promo-btn          { width: 100%; justify-content: center; }
+    .promo-card-img     { display: none; }
+    .promo-btn          { width: auto; align-self: center; }
 
     /* ── 객실 섹션 ── */
     .rooms-section  { padding: 32px 16px; }
