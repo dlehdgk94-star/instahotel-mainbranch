@@ -162,7 +162,7 @@
                         '<i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i>' +
                         '<i class="fa-solid fa-circle-half-stroke"></i>' +
                     '</span>' +
-                    '<span class="mob-rating-text">4.9 · 1446 후기</span>' +
+                    '<span class="mob-rating-text" onclick="if(typeof openReviewModal===\'function\')openReviewModal()" style="cursor:pointer;">4.9 · 1446 후기</span>' +
                 '</div>' +
                 '<div id="mob-book-bar">' +
                     '<button id="mob-book-bar-btn" onclick="toggleExtPanel(event)">예약하기</button>' +
@@ -431,5 +431,67 @@
         document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape') closeNav();
         });
+    });
+
+    // 후기 모달 폴백 - index.html에 이미 정의된 경우는 그대로 사용
+    document.addEventListener('DOMContentLoaded', function() {
+        if (typeof window.openReviewModal !== 'function') {
+            var REVIEWS = [
+                { name:'김지수', lang:'한국어', date:'3일 전', stars:5, title:'정말 완벽한 숙소였어요', body:'처음에 기대 없이 방문했는데 생각보다 훨씬 좋았어요. 방이 굉장히 깔끔하고 아늑하며, 비데, 목욕 가운까지 구비되어 있어 호텔급 서비스를 느꼈습니다.' },
+                { name:'James W.', lang:'English', date:'5 days ago', stars:5, title:'Exceeded all expectations!', body:'I travel frequently for work and this is easily one of the most comfortable stays I\'ve had in Korea. The room was spotless and the soundproofing was excellent.' },
+                { name:'田中 美咲', lang:'日本語', date:'1週間前', stars:5, title:'また絶対に泊まりたいです！', body:'部屋は清潔でとても広く感じられ、アメニティも充実していました。スタッフの方も笑顔で親切に対応してくださり、安心して過ごせました。' },
+                { name:'王小明', lang:'中文', date:'2周前', stars:5, title:'非常棒的入住体验！', body:'这家酒店的性价比非常高，房间干净整洁，床铺也很舒适。酒店附近有便利店和餐厅，生活十分便利。' },
+                { name:'이준혁', lang:'한국어', date:'2주 전', stars:5, title:'가성비 최고, 재방문 확정', body:'출장으로 방문했는데 업무용 책상이 넓고 Wi-Fi도 빨라서 작업하기 최적의 환경이었습니다. 방음도 잘 되어 있어서 옆방 소리가 전혀 안 들렸어요.' },
+                { name:'Sarah M.', lang:'English', date:'3 weeks ago', stars:4, title:'Great value, lovely stay', body:'Really enjoyed my two-night stay here. The bathroom amenities were top-notch and the mini fridge was a great touch. Would definitely stay again.' },
+                { name:'박소현', lang:'한국어', date:'1개월 전', stars:5, title:'루비룸 강추!! 강아지랑 함께', body:'강아지와 함께 여행을 많이 다니는 편인데 루비룸은 강아지와 함께 묵을 수 있어서 너무 감사했고, 방도 넓고 깨끗했습니다.' },
+                { name:'鈴木 健太', lang:'日本語', date:'1ヶ月前', stars:5, title:'韓国旅行のベストステイ', body:'部屋のデザインがおしゃれで、写真映えする空間でした。近くにコンビニや飲食店があり、観光の拠点としても最高でした。' },
+                { name:'이수현', lang:'한국어', date:'3개월 전', stars:4, title:'전반적으로 만족스러운 숙박', body:'깔끔하고 모던한 인테리어가 마음에 들었어요. 객실 청결도와 침구 품질은 정말 훌륭했습니다.' },
+                { name:'최민서', lang:'한국어', date:'2개월 전', stars:5, title:'스페셜룸 4인 가족여행 최적!', body:'가족 4명이서 스페셜룸 이용했는데 정말 넓고 쾌적했어요. 추가요금 없이 4인 이용이 가능하다는 점이 가장 큰 장점이었어요.' }
+            ];
+
+            function starHTML(n) {
+                var h = '';
+                for (var i = 0; i < 5; i++) h += i < n ? '<i class="fa-solid fa-circle"></i>' : '<i class="fa-regular fa-circle"></i>';
+                return h;
+            }
+
+            var itemsHTML = REVIEWS.map(function(r) {
+                return '<div class="review-item">' +
+                    '<div class="review-item-meta"><div class="review-item-left">' +
+                    '<span class="review-item-name">' + r.name + '</span>' +
+                    '<div class="review-item-stars">' + starHTML(r.stars) + '<span>' + r.stars + '</span></div>' +
+                    '</div><span class="review-item-date">' + r.date + '</span></div>' +
+                    '<span class="review-item-lang">' + r.lang + '</span>' +
+                    '<div class="review-item-title">' + r.title + '</div>' +
+                    '<div class="review-item-body">' + r.body + '</div>' +
+                    '</div>';
+            }).join('');
+
+            var modal = document.createElement('div');
+            modal.id = 'reviewModal';
+            modal.innerHTML =
+                '<div class="review-modal-box">' +
+                    '<div class="review-modal-header">' +
+                        '<span class="review-modal-title">평점 및 후기</span>' +
+                        '<button class="review-modal-close" onclick="document.getElementById(\'reviewModal\').classList.remove(\'open\');document.body.style.overflow=\'\'">✕</button>' +
+                    '</div>' +
+                    '<div class="review-summary">' +
+                        '<div class="review-summary-dots"><i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle-half-stroke"></i></div>' +
+                        '<span class="review-summary-score">4.9</span>' +
+                        '<span class="review-summary-count">· 1446 후기</span>' +
+                    '</div>' +
+                    '<div class="review-list">' + itemsHTML + '</div>' +
+                    '<div class="review-modal-footer"><button class="review-more-btn">더 많은 후기 보기 (1436)</button></div>' +
+                '</div>';
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) { modal.classList.remove('open'); document.body.style.overflow = ''; }
+            });
+            document.body.appendChild(modal);
+
+            window.openReviewModal = function() {
+                document.getElementById('reviewModal').classList.add('open');
+                document.body.style.overflow = 'hidden';
+            };
+        }
     });
 })();

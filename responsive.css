@@ -756,8 +756,8 @@
 
     /* ── 위치 섹션 ── */
     .location-section   { padding: 48px 16px; }
-    .location-container { flex-direction: column; gap: 32px; }
-    .location-info      { max-width: 100%; }
+    .location-container { flex-direction: column; gap: 32px; align-items: stretch; }
+    .location-info      { max-width: 100%; width: 100%; }
     .location-map       { width: 100%; height: 240px; }
     .loc-title          { font-size: 24px; }
 
@@ -790,7 +790,8 @@
 
     /* ── rooms.html 객실 목록 ── */
     .hero-section         { height: 58vw; min-height: 200px; }
-    .hero-title           { font-size: 24px; line-height: 1.3; }
+    .hero-title           { font-size: 18px; line-height: 1.3; white-space: nowrap; }
+    .hero-scroll-hint     { bottom: 14px; }
     .hero-label-text      { font-size: 11px; letter-spacing: 2px; }
     .rooms-section        { padding: 20px 0 60px; }
     .rooms-section-header { padding: 0 16px; margin-bottom: 20px; }
@@ -805,8 +806,13 @@
 
     /* ── rooms.html 팝업 모달 ── */
     .modal-overlay  { top: 0; padding-top: 0; align-items: flex-end; }
-    .modal-box      { width: 100%; height: 90vh; max-height: 90vh; border-radius: 16px 16px 0 0; }
-    .modal-slider-outer { height: 240px; }
+    .modal-box      { width: 100%; height: auto; max-height: 78vh; border-radius: 16px 16px 0 0; }
+    .modal-slider-outer { height: 200px; }
+    .modal-header   { padding: 12px 16px 11px; }
+    .modal-body     { padding: 14px 16px 20px; }
+    .modal-amenity-grid { grid-template-columns: 1fr; gap: 0; }
+    .modal-amenity-col-title { font-size: 14px; margin-bottom: 6px; }
+    .modal-amenity-item { font-size: 13px; padding: 3px 0; }
     .modal-top-row  { flex-wrap: wrap; gap: 10px; }
     .modal-sub-row  { flex-wrap: wrap; gap: 6px; }
     .modal-room-price { flex-wrap: wrap; gap: 6px; }
