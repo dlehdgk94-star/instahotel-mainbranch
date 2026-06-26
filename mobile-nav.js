@@ -145,7 +145,7 @@
             );
             injectPopup(
                 '<div class="booking-dropdown price-popup" id="ext-pricePopup" onclick="event.stopPropagation()">' +
-                    '<i class="fa-solid fa-xmark dropdown-close" onclick="closeDropdowns(event)"></i>' +
+                    '<i class="fa-solid fa-xmark dropdown-close" onclick="event.stopPropagation(); document.getElementById(\'ext-pricePopup\').classList.remove(\'active\')"></i>' +
                     '<div id="ext-pricePopupList"></div>' +
                 '</div>'
             );
