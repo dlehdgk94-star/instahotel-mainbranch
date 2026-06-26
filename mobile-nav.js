@@ -105,7 +105,7 @@
                             '<div class="cal-month-header">' +
                                 '<i class="fa-solid fa-chevron-left" onclick="extChangeMonth(-1)"></i>' +
                                 '<span id="ext-cal-month-title-left"></span>' +
-                                '<span></span>' +
+                                '<i class="fa-solid fa-chevron-right cal-nav-right-mob" onclick="event.stopPropagation(); extChangeMonth(1)"></i>' +
                             '</div>' +
                             '<div class="cal-grid" id="ext-cal-grid-left"></div>' +
                         '</div>' +

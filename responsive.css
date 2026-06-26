@@ -202,6 +202,10 @@
 .dropdown-done-btn { display: block; width: 100px; margin: 30px auto 0; padding: 10px 0; border-radius: 20px; border: 1px solid #777; background: #fff; font-weight: 600; font-size: 13px; cursor: pointer; transition: background 0.2s; text-align: center; font-family: inherit; }
 .dropdown-done-btn:hover { background: #FAFAFA; }
 
+/* 달력 첫 번째 달 > 버튼: 데스크탑 숨김, ::after 스페이서로 타이틀 중앙 유지 */
+.cal-nav-right-mob { display: none; }
+.cal-month:first-child .cal-month-header::after { content: ''; display: inline-block; width: 26px; flex-shrink: 0; }
+
 /* ── 1700px 이하: 예약바 패딩 완화 시작 ── */
 @media (max-width: 1700px) {
     .booking-bar   { padding: 0 24px; }
@@ -550,11 +554,13 @@
         justify-content: space-between;
         align-items: center;
     }
-    .cal-month:first-child .cal-month-header #cal-month-title-left {
+    .cal-month:first-child .cal-month-header #cal-month-title-left,
+    .cal-month:first-child .cal-month-header #ext-cal-month-title-left {
         flex: 1;
         text-align: center;
     }
     .cal-nav-right-mob { display: inline-block !important; }
+    .cal-month:first-child .cal-month-header::after { display: none; }
     .cal-date { font-size: 12px; padding: 8px 2px; }
     .cal-day-name { font-size: 11px; }
 
