@@ -2956,11 +2956,15 @@
             }
         }
         document.addEventListener('click', function(e) {
-            var bar = document.getElementById('mob-trigger-bar');
-            var panel = document.getElementById('mob-book-panel');
             var wrapper = document.getElementById('booking-header');
             if (!wrapper) return;
-            if (!wrapper.contains(e.target)) closeMobPanelIfOpen();
+            if (!wrapper.contains(e.target)) {
+                if (document.querySelector('.booking-dropdown.active')) {
+                    closeDropdowns(null);
+                } else {
+                    closeMobPanelIfOpen();
+                }
+            }
         });
 
         function openLocationModal(e) {

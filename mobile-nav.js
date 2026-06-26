@@ -310,12 +310,6 @@
             window.closeDropdowns = function(e) {
                 if(e) e.stopPropagation();
                 ['ext-calendarPopup','ext-guestPopup','ext-pricePopup'].forEach(function(id){ var el=document.getElementById(id); if(el) el.classList.remove('active'); });
-                var panel = document.getElementById('mob-ext-panel');
-                var bookBar = document.getElementById('mob-book-bar');
-                if (panel && panel.classList.contains('open')) {
-                    panel.classList.remove('open');
-                    if (bookBar) bookBar.style.display = '';
-                }
             };
             window.extCalendarDone = function(e) {
                 if(e) e.stopPropagation();
@@ -413,17 +407,15 @@
                 var panel = document.getElementById('mob-ext-panel');
                 var bookBar = document.getElementById('mob-book-bar');
                 if (panel && !stickyTop.contains(e.target)) {
-                    panel.classList.remove('open');
-                    if (bookBar) bookBar.style.display = '';
-                }
-                // 팝업 바깥 클릭 시 닫기
-                var popupIds = ['ext-calendarPopup','ext-guestPopup','ext-pricePopup'];
-                popupIds.forEach(function(id) {
-                    var el = document.getElementById(id);
-                    if (el && el.classList.contains('active') && !el.contains(e.target) && !stickyTop.contains(e.target)) {
-                        el.classList.remove('active');
+                    var anyDropdownOpen = document.querySelector('#ext-calendarPopup.active, #ext-guestPopup.active, #ext-pricePopup.active');
+                    if (anyDropdownOpen) {
+                        // 팝업만 닫고 패널은 유지
+                        ['ext-calendarPopup','ext-guestPopup','ext-pricePopup'].forEach(function(id){ var el=document.getElementById(id); if(el) el.classList.remove('active'); });
+                    } else {
+                        panel.classList.remove('open');
+                        if (bookBar) bookBar.style.display = '';
                     }
-                });
+                }
             });
 
             // 스크롤 기반 sticky 구현 (position:sticky 브라우저 호환 이슈 우회)
