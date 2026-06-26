@@ -219,11 +219,14 @@
         .cal-month-header { display: flex; justify-content: space-between; align-items: center; font-weight: 700; font-size: 15px; margin-bottom: 20px; }
         .cal-month-header i { cursor: pointer; font-size: 16px; padding: 5px; color: rgb(112,112,112); transition: color 0.2s; }
         .cal-month-header i:hover { color: #00768e; }
-        .cal-nav-right-mob { opacity: 0; pointer-events: none; }
+        .cal-nav-right-mob { display: none; }
+        /* 데스크탑: > 버튼 숨긴 자리에 동일 너비 spacer로 타이틀 중앙 정렬 유지 */
+        .cal-month:first-child .cal-month-header::after { content: ''; display: inline-block; width: 26px; flex-shrink: 0; }
         @media (max-width: 768px) {
             .calendar-dropdown .dropdown-close { display: none; }
             .cal-month:last-child { display: none !important; }
-            .cal-nav-right-mob { opacity: 1 !important; pointer-events: auto !important; display: inline-block !important; }
+            .cal-nav-right-mob { display: inline-block !important; }
+            .cal-month:first-child .cal-month-header::after { display: none; }
             .cal-month:first-child .cal-month-header #cal-month-title-left { flex: 1; text-align: center; }
         }
         .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; gap: 10px 0; }
@@ -2692,19 +2695,6 @@
         window.addEventListener('DOMContentLoaded', () => {
             renderCalendar();
             updateDateUI();
-            // 모바일: > 버튼 강제 표시 + 두 번째 달 강제 숨김 (CSS cascade 우회)
-            if (window.innerWidth <= 768) {
-                var nextBtn = document.querySelector('.cal-nav-right-mob');
-                if (nextBtn) {
-                    nextBtn.style.setProperty('opacity', '1', 'important');
-                    nextBtn.style.setProperty('display', 'inline-block', 'important');
-                    nextBtn.style.setProperty('pointer-events', 'auto', 'important');
-                }
-                var calMonths = document.querySelectorAll('#calendarPopup .cal-month');
-                if (calMonths.length >= 2) {
-                    calMonths[1].style.setProperty('display', 'none', 'important');
-                }
-            }
         });
 
         // 투숙객 증감 로직

@@ -554,7 +554,7 @@
         flex: 1;
         text-align: center;
     }
-    .cal-nav-right-mob { display: inline-block !important; opacity: 1 !important; pointer-events: auto !important; }
+    .cal-nav-right-mob { display: inline-block !important; }
     .cal-date { font-size: 12px; padding: 8px 2px; }
     .cal-day-name { font-size: 11px; }
 
