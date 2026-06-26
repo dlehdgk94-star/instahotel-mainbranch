@@ -534,11 +534,13 @@
         overflow-y: auto;
         z-index: 9000 !important;
         border-radius: 16px;
+        box-sizing: border-box;
     }
     .calendar-dropdown {
         width: calc(100vw - 28px);
         max-width: 400px;
         padding: 20px 16px;
+        box-sizing: border-box;
     }
     .calendar-dropdown .dropdown-close { display: none; }
     .cal-months-wrap { flex-direction: column; gap: 20px; }
