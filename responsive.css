@@ -287,7 +287,7 @@
     .price-popup { width: 280px; }
 
     /* 섹션 패딩 */
-    .rooms-section-header { padding: 0 20px; }
+    .rooms-section-hd { padding: 0 20px; }
     .rooms-grid            { padding: 0 20px; gap: 24px 20px; }
     .promo-pkg-section     { padding: 0 20px; }
     .facilities-section    { padding: 40px 20px; }
@@ -611,87 +611,6 @@
     /* ── 객실 섹션 ── */
     .rooms-section  { padding: 32px 16px; }
 
-    /* ── 객실 & 스테이 (fan) ── */
-    .rooms-fan-section { padding: 24px 0; }
-    .fan-header        { padding: 0 16px; margin-bottom: 20px; }
-    .fan-title::after  { font-size: 22px; }
-    .fan-progress-track { width: 120px; }
-    .fan-card  { flex: 0 0 260px; min-width: 260px; }
-    .fan-card .room-img-wrapper { height: 180px; }
-    .fan-card-info  { padding: 16px 16px 18px; gap: 14px; min-height: auto; }
-    .fan-card-name  { font-size: 15px; padding-bottom: 18px; }
-    .fan-btn-book   { height: 30px; font-size: 13px; }
-    .fan-stage      { padding-bottom: 4px; }
-    /* 툴바: [← ──────] [01 / 06] [────── →] */
-    .fan-toolbar {
-        align-items: center;
-        gap: 0;
-        flex-wrap: nowrap;
-        padding: 0 16px;
-        width: 100%;
-        box-sizing: border-box;
-    }
-    .fan-progress {
-        order: 2;
-        gap: 0;
-        font-size: 14px;
-        font-weight: 500;
-        color: rgb(100,100,100);
-        font-family: 'Barlow', sans-serif;
-        white-space: nowrap;
-        flex-shrink: 0;
-        padding: 0 12px;
-    }
-    .fan-progress-track { display: none; }
-    .fan-progress span:last-child::before { content: ' / '; }
-    .fan-nav { display: contents; }
-    .fan-nav-btn:first-child { order: 1; flex: 1; justify-content: flex-start; gap: 0; }
-    .fan-nav-btn:last-child  { order: 3; flex: 1; justify-content: flex-end;   gap: 0; }
-    .fan-nav-btn:first-child::before { display: none; }
-    .fan-nav-btn:last-child::after   { display: none; }
-    .fan-nav-btn {
-        font-size: 0;
-        height: 36px;
-        background: none;
-        border: none;
-        color: #2A91A8;
-        cursor: pointer;
-        padding: 0;
-        display: flex;
-        align-items: center;
-        -webkit-tap-highlight-color: transparent;
-    }
-    .fan-nav-line {
-        display: block;
-        flex: 1;
-        max-width: 60px;
-        height: 1px;
-        background: #2A91A8;
-        position: relative;
-    }
-    .fan-nav-btn:last-child .fan-nav-line::after {
-        content: '';
-        position: absolute;
-        right: -1px;
-        top: 50%;
-        width: 7px;
-        height: 7px;
-        border-right: 1.5px solid #2A91A8;
-        border-top: 1.5px solid #2A91A8;
-        transform: translateY(-50%) rotate(45deg);
-    }
-    .fan-nav-btn:first-child .fan-nav-line::before {
-        content: '';
-        position: absolute;
-        left: -1px;
-        top: 50%;
-        width: 7px;
-        height: 7px;
-        border-left: 1.5px solid #2A91A8;
-        border-bottom: 1.5px solid #2A91A8;
-        transform: translateY(-50%) rotate(45deg);
-    }
-
     /* ── 프로모·패키지 카드 ── */
     .promo-pkg-section { padding: 0 16px; }
     .promo-pkg-title   { font-size: 22px; }
@@ -806,7 +725,7 @@
     .hero-scroll-hint     { bottom: 14px; }
     .hero-label-text      { font-size: 11px; letter-spacing: 2px; }
     .rooms-section        { padding: 20px 0 60px; }
-    .rooms-section-header { padding: 0 16px; margin-bottom: 20px; }
+    .rooms-section-hd { padding: 0 16px; margin-bottom: 20px; }
     .rooms-section-title  { font-size: 18px; }
     .rooms-grid           { grid-template-columns: 1fr; padding: 0 16px; gap: 28px; }
     .room-card-img-wrap   { height: 220px; }
@@ -907,8 +826,7 @@
 
 /* ── 480px 이하 (소형 폰) ── */
 @media (max-width: 480px) {
-    .fan-card  { flex: 0 0 220px; min-width: 220px; }
-    .promo-pkg-card { flex: 0 0 190px; width: 190px; height: 190px; }
+.promo-pkg-card { flex: 0 0 190px; width: 190px; height: 190px; }
     .hotel-ways-section .promo-pkg-card { flex: 0 0 170px; width: 170px; height: 170px; }
     .gal-grid { columns: 1; }
     .nb-photo-grid { grid-template-columns: 1fr; }
