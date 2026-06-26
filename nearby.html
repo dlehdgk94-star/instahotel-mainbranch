@@ -233,7 +233,7 @@
                             <div class="cal-grid" id="cal-grid-right"></div>
                         </div>
                     </div>
-                    <button class="dropdown-done-btn" onclick="closeDropdowns(event)">완료</button>
+                    <button class="dropdown-done-btn" onclick="calendarDone(event)">완료</button>
                 </div>
             </div>
             <div class="booking-item" id="guest-booking-item">
@@ -383,6 +383,7 @@
         function toggleGuestPopup(e){ e.stopPropagation(); document.getElementById('calendarPopup').classList.remove('active'); document.getElementById('guestPopup').classList.toggle('active'); }
         function togglePricePopup(e){ e.stopPropagation(); populatePricePopup(); document.getElementById('pricePopup').classList.toggle('active'); }
         function closeDropdowns(e){ document.getElementById('calendarPopup').classList.remove('active'); document.getElementById('guestPopup').classList.remove('active'); if(!datesUserSelected) document.getElementById('pricePopup').classList.remove('active'); }
+        function calendarDone(e){ if(e) e.stopPropagation(); document.getElementById('calendarPopup').classList.remove('active'); document.getElementById('pricePopup').classList.remove('active'); if(checkinDate&&checkoutDate){ setTimeout(function(){ document.getElementById('guestPopup').classList.add('active'); },150); } }
         function guestDone(e){ closeDropdowns(e); setTimeout(function(){ populatePricePopup(); document.getElementById('pricePopup').classList.add('active'); },200); }
 
         let guests={room:1,adult:1,child:0};

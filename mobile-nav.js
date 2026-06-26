@@ -118,7 +118,7 @@
                             '<div class="cal-grid" id="ext-cal-grid-right"></div>' +
                         '</div>' +
                     '</div>' +
-                    '<button class="dropdown-done-btn" onclick="closeDropdowns(event)">완료</button>' +
+                    '<button class="dropdown-done-btn" onclick="extCalendarDone(event)">완료</button>' +
                 '</div>'
             );
             injectPopup(
@@ -313,6 +313,18 @@
                 if (panel && panel.classList.contains('open')) {
                     panel.classList.remove('open');
                     if (bookBar) bookBar.style.display = '';
+                }
+            };
+            window.extCalendarDone = function(e) {
+                if(e) e.stopPropagation();
+                var cp=document.getElementById('ext-calendarPopup'), pp=document.getElementById('ext-pricePopup');
+                if(cp) cp.classList.remove('active');
+                if(pp) pp.classList.remove('active');
+                if(extCI&&extCO){
+                    setTimeout(function(){
+                        var gp=document.getElementById('ext-guestPopup');
+                        if(gp){ gp.classList.add('active'); gp.scrollIntoView({behavior:'smooth',block:'nearest'}); }
+                    },150);
                 }
             };
             window.extGuestDone = function(e) {
