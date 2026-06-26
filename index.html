@@ -692,7 +692,7 @@
             <div class="booking-item" id="price-booking-item">
                 <span class="booking-label">객실선택 & 특별요금</span>
                 <div class="booking-value" onclick="togglePricePopup(event)">
-                    <span id="min-price-text">최저 요금</span>
+                    <span id="min-price-text">최저 요금선택</span>
                     <i class="fa-solid fa-chevron-down"></i>
                 </div>
                 <div class="booking-dropdown price-popup" id="pricePopup" onclick="event.stopPropagation()">
@@ -730,7 +730,7 @@
             <div class="mob-panel-row" onclick="togglePricePopup(event)">
                 <span class="mob-panel-label">객실선택 & 특별요금</span>
                 <div class="mob-panel-value">
-                    <span id="mob-panel-price">최저 요금</span>
+                    <span id="mob-panel-price">최저 요금선택</span>
                     <i class="fa-solid fa-chevron-down" style="font-size:12px;color:#aaa;margin-left:auto;"></i>
                 </div>
             </div>
@@ -2651,7 +2651,7 @@
                 checkoutDate = null;
                 datesUserSelected = false;
                 const el = document.getElementById('min-price-text');
-                if (el) el.textContent = '최저 요금';
+                if (el) el.textContent = '최저 요금선택';
                 selectedRoomId = null;
                 if (typeof syncMobPanel === 'function') syncMobPanel();
                 document.getElementById('pricePopup').classList.remove('active');
@@ -2667,7 +2667,7 @@
                     checkinDate = clickedDate;
                     datesUserSelected = false;
                     const el = document.getElementById('min-price-text');
-                    if (el) el.textContent = '최저 요금';
+                    if (el) el.textContent = '최저 요금선택';
                     selectedRoomId = null;
                     if (typeof syncMobPanel === 'function') syncMobPanel();
                     document.getElementById('pricePopup').classList.remove('active');
@@ -2751,7 +2751,7 @@
                     for(var i=0;i<nights;i++){ var nd=new Date(checkinDate); nd.setDate(nd.getDate()+i); total+=getNightRateI(selectedRoomId,nd); } total*=roomCount;
                     el.textContent=(ROOM_NAMES_I[selectedRoomId]?ROOM_NAMES_I[selectedRoomId]+' · ':'')+nights+'박 총 '+fmtWon(total)+'원';
                 }
-            } else { el.textContent='최저 요금'; document.getElementById('pricePopup').classList.remove('active'); }
+            } else { el.textContent='최저 요금선택'; document.getElementById('pricePopup').classList.remove('active'); }
         }
         function selectRoom(roomId){
             selectedRoomId=roomId;
@@ -2961,7 +2961,7 @@
                     var rc = guests.room, tot = 0;
                     for (var i = 0; i < n; i++) { var d = new Date(checkinDate); d.setDate(d.getDate()+i); tot += getNightRateI(selectedRoomId, d); } tot *= rc;
                     pp.innerText = (ROOM_NAMES_I[selectedRoomId] || selectedRoomId) + ' · ' + n + '박 총 ' + fmtWon(tot) + '원';
-                } else { pp.innerText = '최저 요금'; }
+                } else { pp.innerText = '최저 요금선택'; }
             }
         }
         document.addEventListener('click', function(e) {

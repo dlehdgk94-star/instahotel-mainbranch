@@ -187,7 +187,7 @@
                     '<div class="mob-panel-row" onclick="togglePricePopup(event)">' +
                         '<span class="mob-panel-label">객실선택 & 특별요금</span>' +
                         '<div class="mob-panel-value">' +
-                            '<span id="mob-ext-price-lbl">최저 요금</span>' +
+                            '<span id="mob-ext-price-lbl">최저 요금선택</span>' +
                             '<i class="fa-solid fa-chevron-down" style="font-size:12px;color:#aaa;margin-left:auto;"></i>' +
                         '</div>' +
                     '</div>' +
@@ -241,7 +241,7 @@
                     if(extRoomId && extCI && extCO) {
                         var tot=0; for(var i=0;i<nights;i++){ var nd=new Date(extCI); nd.setDate(nd.getDate()+i); tot+=extNightRate(extRoomId,nd); } tot*=extGuests.room;
                         p.textContent=(EXT_NAMES[extRoomId]||'')+' · '+nights+'박 총 '+extFmtWon(tot)+'원';
-                    } else { p.textContent='최저 요금'; }
+                    } else { p.textContent='최저 요금선택'; }
                 }
             }
             function extRenderCal() {
