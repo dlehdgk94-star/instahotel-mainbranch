@@ -25,7 +25,7 @@
                 '<a href="' + base + 'index.html"><img src="' + base + 'logo.svg" alt="INSTA HOTEL"></a>' +
             '</div>' +
             '<ul class="mob-nav-links">' +
-                link('index.html', '개요') +
+                link('index.html', '호텔소개') +
                 link('rooms.html', '객실') +
                 link('gallery.html', '갤러리') +
                 link('nearby.html', '주변안내') +
