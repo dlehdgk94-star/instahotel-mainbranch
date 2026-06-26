@@ -559,7 +559,7 @@
         .modal-amenity-col-title i{ font-size:14px; color:rgb(28,28,28); }
         .modal-amenity-item{ font-size:14px; font-weight:500; color:rgb(28,28,28); padding:5px 0; font-family:'Barlow',sans-serif; }
     </style>
-    <link rel="stylesheet" href="responsive.css">
+    <link rel="stylesheet" href="responsive.css?v=3">
 </head>
 <body>
 
@@ -2692,6 +2692,19 @@
         window.addEventListener('DOMContentLoaded', () => {
             renderCalendar();
             updateDateUI();
+            // 모바일: > 버튼 강제 표시 + 두 번째 달 강제 숨김 (CSS cascade 우회)
+            if (window.innerWidth <= 768) {
+                var nextBtn = document.querySelector('.cal-nav-right-mob');
+                if (nextBtn) {
+                    nextBtn.style.setProperty('opacity', '1', 'important');
+                    nextBtn.style.setProperty('display', 'inline-block', 'important');
+                    nextBtn.style.setProperty('pointer-events', 'auto', 'important');
+                }
+                var calMonths = document.querySelectorAll('#calendarPopup .cal-month');
+                if (calMonths.length >= 2) {
+                    calMonths[1].style.setProperty('display', 'none', 'important');
+                }
+            }
         });
 
         // 투숙객 증감 로직
