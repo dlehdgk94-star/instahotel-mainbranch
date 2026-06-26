@@ -22,7 +22,7 @@
         '<div id="mobileNavDrawer">' +
             '<button id="mobileNavClose"><i class="fa-solid fa-xmark"></i></button>' +
             '<div class="mob-nav-logo">' +
-                '<a href="' + base + 'index.html"><img src="' + base + 'logo.svg" alt="INSTA HOTEL"></a>' +
+                '<a href="' + base + 'index.html"><img src="' + base + 'logo.png" alt="INSTA HOTEL"></a>' +
             '</div>' +
             '<ul class="mob-nav-links">' +
                 link('index.html', '호텔소개') +
