@@ -433,7 +433,6 @@
             var el=document.getElementById('min-price-text'); if(!el) return;
             if(checkinDate&&checkoutDate){
                 populatePricePopup();
-                if(datesUserSelected){ document.getElementById('pricePopup').classList.add('active'); }
                 if(selectedRoomId){
                     var nights=Math.round((checkoutDate-checkinDate)/86400000);
                     var roomCount=guests?guests.room:1; var total=0;

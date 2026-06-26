@@ -647,7 +647,6 @@
             if (!el) return;
             if (checkinDate && checkoutDate) {
                 populatePricePopup();
-                if (datesUserSelected) { document.getElementById('pricePopup').classList.add('active'); }
                 if (selectedRoomId) { updatePriceText(); }
             } else {
                 el.textContent = '최저 요금';
