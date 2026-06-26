@@ -90,18 +90,27 @@
         .val-ctrl{ font-size:15px; font-weight:600; width:15px; text-align:center; }
         .dropdown-done-btn{ display:block; width:100px; margin:30px auto 0; padding:10px 0; border-radius:20px; border:1px solid #777; background:#fff; font-weight:600; font-size:13px; cursor:pointer; text-align:center; }
 
-        /* ── 히어로 ── */
-        .hero-section{ width:100%; height:calc(100vh - 313px); min-height:400px; background:#c8c8c8; position:relative; overflow:hidden; }
-        .hero-img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center; display:none; }
-        .hero-img.active{ display:block; }
-        .hero-overlay{ position:absolute; inset:0; background:rgba(0,0,0,0.35); display:flex; flex-direction:column; justify-content:center; align-items:center; color:#fff; text-align:center; }
-        .hero-label-row{ display:flex; align-items:center; gap:14px; margin-bottom:20px; }
-        .hero-label-line{ flex:0 0 60px; height:1px; background:rgba(255,255,255,0.6); }
-        .hero-label-text{ font-size:13px; letter-spacing:3px; font-weight:400; opacity:0.9; white-space:nowrap; }
-        .hero-title{ font-size:38px; font-weight:700; letter-spacing:0; line-height:1.3; }
-        .hero-scroll-hint{ position:absolute; bottom:32px; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:8px; color:#fff; font-size:12px; letter-spacing:2px; opacity:0.7; }
-        .hero-scroll-hint i{ font-size:18px; animation:bounce 1.6s infinite; }
-        @keyframes bounce{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(6px); } }
+        /* ── 호텔 투숙 방법 섹션 ── */
+        .promo-pkg-header { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto 14px; }
+        .promo-pkg-wrap { position: relative; max-width: 1200px; margin: 0 auto; }
+        .promo-pkg-slider { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; cursor: grab; scrollbar-width: none; padding-bottom: 4px; }
+        .promo-pkg-slider::-webkit-scrollbar { display: none; }
+        .promo-pkg-slider.grabbing { cursor: grabbing; }
+        .promo-pkg-card { flex: 0 0 370px; width: 370px; height: 370px; scroll-snap-align: start; position: relative; border-radius: 14px; overflow: hidden; cursor: pointer; }
+        .promo-pkg-card-img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.45s ease; }
+        .hotel-ways-section .promo-pkg-card:hover .promo-pkg-card-img { transform: none; }
+        .hotel-ways-section .promo-pkg-card { cursor: default; }
+        .promo-pkg-card:hover .promo-pkg-card-img { transform: scale(1.05); }
+        .hotel-ways-section { background: #fff; padding: 30px 0 0; }
+        .hotel-ways-title { font-size: 29px; font-weight: 300; color: rgb(28,28,28); margin: 0; }
+        .hotel-ways-section .promo-pkg-header { justify-content: center; margin-bottom: 32px; }
+        .hotel-ways-section .promo-pkg-wrap { max-width: 100%; }
+        .hotel-ways-section .promo-pkg-slider { overflow: hidden; cursor: default; display: block; padding-bottom: 0; }
+        .hw-track { display: flex; gap: 16px; width: max-content; animation: hwScroll 22s linear infinite; will-change: transform; }
+        @keyframes hwScroll {
+            from { transform: translateX(0); }
+            to   { transform: translateX(-50%); }
+        }
 
         /* ── 객실 리스트 섹션 ── */
         .rooms-section{ background:#fff; padding:30px 0 80px; }
@@ -348,22 +357,33 @@
         </div>
     </div>
 
-    <!-- 히어로 -->
-    <section class="hero-section">
-        <img src="images/hero/메인사진1.png" alt="인스타 호텔 객실" class="hero-img active">
-        <img src="images/hero/main.jpg" alt="인스타 호텔" class="hero-img">
-        <div class="hero-overlay">
-            <div class="hero-label-row">
-                <span class="hero-label-line"></span>
-                <span class="hero-label-text">호텔 인스타</span>
-                <span class="hero-label-line"></span>
-            </div>
-            <h1 class="hero-title">공식 홈페이지에서 저렴하게 예약하세요</h1>
+    <!-- 호텔 투숙을 즐기는 다양한 방법 -->
+    <section class="hotel-ways-section">
+      <div class="promo-pkg-header">
+        <h2 class="hotel-ways-title">호텔 투숙을 즐기는 다양한 방법</h2>
+      </div>
+      <div class="promo-pkg-wrap">
+        <div class="promo-pkg-slider" id="hwSlider">
+          <!-- hw-track은 JS가 생성 -->
         </div>
-        <div class="hero-scroll-hint">
-            <span>SCROLL</span>
-            <i class="fa-solid fa-chevron-down"></i>
-        </div>
+        <template id="hwCards">
+          <div class="promo-pkg-card">
+            <img class="promo-pkg-card-img" src="images/facilities/ways/1.png" alt="욕조">
+          </div>
+          <div class="promo-pkg-card">
+            <img class="promo-pkg-card-img" src="images/facilities/ways/2.png" alt="인룸다이닝">
+          </div>
+          <div class="promo-pkg-card">
+            <img class="promo-pkg-card-img" src="images/facilities/ways/3.png" alt="와인">
+          </div>
+          <div class="promo-pkg-card">
+            <img class="promo-pkg-card-img" src="images/facilities/ways/4.png" alt="인스타그램">
+          </div>
+          <div class="promo-pkg-card">
+            <img class="promo-pkg-card-img" src="images/facilities/ways/5.png" alt="셀카">
+          </div>
+        </template>
+      </div>
     </section>
 
     <!-- 객실 리스트 -->
@@ -1125,6 +1145,24 @@
         }
 
         document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeModal(); });
+
+        /* ===== 호텔 투숙을 즐기는 다양한 방법 — 무한 마퀴 슬라이더 ===== */
+        (function () {
+            const slider = document.getElementById('hwSlider');
+            const tpl   = document.getElementById('hwCards');
+            if (!slider || !tpl) return;
+
+            const track = document.createElement('div');
+            track.className = 'hw-track';
+
+            const frag = tpl.content.cloneNode(true);
+            const origCards = Array.from(frag.querySelectorAll('.promo-pkg-card'));
+            origCards.forEach(c => track.appendChild(c));
+
+            origCards.forEach(c => track.appendChild(c.cloneNode(true)));
+
+            slider.appendChild(track);
+        })();
     </script>
     <script>function toggleLangDropdown(e){e.stopPropagation();document.getElementById("langDropdown").classList.toggle("open");}function selectLang(el){document.getElementById("langCode").textContent=el.dataset.code;document.querySelectorAll(".lang-option").forEach(function(o){o.classList.remove("active");});el.classList.add("active");document.getElementById("langDropdown").classList.remove("open");}document.addEventListener("click",function(){var d=document.getElementById("langDropdown");if(d)d.classList.remove("open");});</script>
     <script src="mobile-nav.js"></script>
