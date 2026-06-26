@@ -398,13 +398,9 @@
         padding: 8px 16px;
         display: flex;
         align-items: center;
-        justify-content: space-between;
         gap: 6px;
         flex-wrap: nowrap;
     }
-    .mob-hotel-name { font-size: 12px; font-weight: 700; color: rgb(28,28,28); font-family: 'Barlow', sans-serif; white-space: nowrap; flex-shrink: 0; }
-    .mob-rating-dots { display: flex; gap: 2px; color: #2A91A8; font-size: 7px; align-items: center; flex-shrink: 0; }
-    .mob-rating-text { font-size: 11px; color: rgb(100,100,100); font-family: 'Barlow', sans-serif; white-space: nowrap; flex-shrink: 0; }
     #mob-book-bar {
         padding: 10px 16px;
         background: #fff;
