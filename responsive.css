@@ -402,7 +402,7 @@
     }
     .mob-hotel-name { font-size: 13px; font-weight: 700; color: rgb(28,28,28); font-family: 'Barlow', sans-serif; }
     .mob-rating-dots { display: flex; gap: 2px; color: #2A91A8; font-size: 8px; align-items: center; }
-    .mob-rating-text { font-size: 12px; color: rgb(100,100,100); font-family: 'Barlow', sans-serif; }
+    .mob-rating-text { font-size: 12px; color: rgb(100,100,100); font-family: 'Barlow', sans-serif; letter-spacing: 0.5px; word-spacing: 2px; }
     #mob-book-bar {
         padding: 10px 16px;
         background: #fff;
@@ -913,4 +913,20 @@
     .gal-grid { columns: 1; }
     .nb-photo-grid { grid-template-columns: 1fr; }
     .nearby-hero-title { font-size: 20px; }
+}
+
+/* ── Booking bar auto-advance highlight ── */
+.search-btn.auto-highlight {
+    background-color: #2A91A8 !important;
+    animation: bookBtnPulse 0.65s ease 0s 2;
+    box-shadow: 0 0 0 5px rgba(42,145,168,0.28);
+    transition: none !important;
+}
+@keyframes bookBtnPulse {
+    0%,100% { transform: scale(1); }
+    50%      { transform: scale(1.1); }
+}
+.mob-panel-confirm.auto-highlight {
+    background: #2A91A8 !important;
+    animation: bookBtnPulse 0.65s ease 0s 2;
 }

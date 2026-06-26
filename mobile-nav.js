@@ -29,7 +29,6 @@
                 link('rooms.html', '객실') +
                 link('gallery.html', '갤러리') +
                 link('nearby.html', '주변안내') +
-                '<li><a href="#">멤버쉽</a></li>' +
             '</ul>' +
             '<div class="mob-nav-lang">' +
                 '<button class="mob-lang-btn" onclick="toggleMobLangDropdown(event)">' +
@@ -141,7 +140,7 @@
                             '<button class="btn-ctrl" onclick="updateGuest(\'adult\',1)"><i class="fa-solid fa-plus"></i></button>' +
                         '</div>' +
                     '</div>' +
-                    '<button class="dropdown-done-btn" onclick="closeDropdowns(event)">완료</button>' +
+                    '<button class="dropdown-done-btn" onclick="extGuestDone(event)">완료</button>' +
                 '</div>'
             );
             injectPopup(
@@ -162,7 +161,7 @@
                         '<i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i>' +
                         '<i class="fa-solid fa-circle-half-stroke"></i>' +
                     '</span>' +
-                    '<span class="mob-rating-text" onclick="if(typeof openReviewModal===\'function\')openReviewModal()" style="cursor:pointer;">4.9 · 1446 후기</span>' +
+                    '<span class="mob-rating-text" onclick="if(typeof openReviewModal===\'function\')openReviewModal()" style="cursor:pointer;">4.9&nbsp;&nbsp;&nbsp;&nbsp;·&nbsp;&nbsp;&nbsp;&nbsp;1446개의 리뷰</span>' +
                 '</div>' +
                 '<div id="mob-book-bar">' +
                     '<button id="mob-book-bar-btn" onclick="toggleExtPanel(event)">예약하기</button>' +
@@ -203,6 +202,7 @@
             var extGuests = { room: 1, adult: 1 };
             var extRoomId = null;
             var extDatesSelected = true;
+            var _extAutoAdvDate = true;
 
             var EXT_PRICES = {
                 edelweiss:{prices:[49500,58500,72000],maxGuests:2},
@@ -289,7 +289,7 @@
                 if(e) e.stopPropagation();
                 var cp=document.getElementById('ext-calendarPopup'), gp=document.getElementById('ext-guestPopup'), pp=document.getElementById('ext-pricePopup');
                 if(gp) gp.classList.remove('active'); if(pp) pp.classList.remove('active');
-                if(cp){ var opening=!cp.classList.contains('active'); cp.classList.toggle('active'); if(opening) extRenderCal(); }
+                if(cp){ var opening=!cp.classList.contains('active'); cp.classList.toggle('active'); if(opening) extRenderCal(); if(opening&&extCI&&extCO) _extAutoAdvDate=false; else if(opening) _extAutoAdvDate=true; }
             };
             window.toggleGuestPopup = function(e) {
                 if(e) e.stopPropagation();
@@ -314,6 +314,14 @@
                     if (bookBar) bookBar.style.display = '';
                 }
             };
+            window.extGuestDone = function(e) {
+                window.closeDropdowns(e);
+                setTimeout(function(){
+                    extPopulatePrice();
+                    var pp=document.getElementById('ext-pricePopup');
+                    if(pp){ pp.classList.add('active'); pp.scrollIntoView({behavior:'smooth',block:'nearest'}); }
+                },200);
+            };
             window.changeMonth = function(dir) {
                 event.stopPropagation();
                 extCurMonth.setMonth(extCurMonth.getMonth()+dir);
@@ -329,6 +337,13 @@
                 }
                 extSyncPanel(); extRenderCal();
                 if(extDatesSelected) extPopulatePrice();
+                if(extDatesSelected&&_extAutoAdvDate){
+                    setTimeout(function(){
+                        var cp=document.getElementById('ext-calendarPopup'), gp=document.getElementById('ext-guestPopup');
+                        if(cp) cp.classList.remove('active');
+                        if(gp){ gp.classList.add('active'); gp.scrollIntoView({behavior:'smooth',block:'nearest'}); }
+                    },350);
+                }
             };
             window.updateGuest = function(type, delta) {
                 var nv=extGuests[type]+delta;
@@ -340,6 +355,7 @@
             window.extSelectRoom = function(id) {
                 extRoomId=id; extSyncPanel();
                 var pp=document.getElementById('ext-pricePopup'); if(pp) pp.classList.remove('active');
+                var btn=document.querySelector('.mob-panel-confirm'); if(btn){ btn.classList.add('auto-highlight'); setTimeout(function(){ btn.classList.remove('auto-highlight'); },3000); }
             };
 
             var header = document.querySelector('.top-header');
@@ -483,7 +499,7 @@
                     '<div class="review-summary">' +
                         '<div class="review-summary-dots"><i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle-half-stroke"></i></div>' +
                         '<span class="review-summary-score">4.9</span>' +
-                        '<span class="review-summary-count">· 1446 후기</span>' +
+                        '<span class="review-summary-count">· 1446개의 리뷰</span>' +
                     '</div>' +
                     '<div class="review-list">' + itemsHTML + '</div>' +
                     '<div class="review-modal-footer"><button class="review-more-btn">더 많은 후기 보기 (1436)</button></div>' +

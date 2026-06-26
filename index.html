@@ -615,7 +615,6 @@
             <li><a href="rooms.html">객실</a></li>
             <li><a href="gallery.html">갤러리</a></li>
             <li><a href="nearby.html">주변안내</a></li>
-            <li><a href="#">멤버쉽</a></li>
             <li class="lang-selector" onclick="event.stopPropagation()">
                 <button class="lang-btn" onclick="toggleLangDropdown(event)"><i class="fa-solid fa-globe"></i><span id="langCode">KO</span><i class="fa-solid fa-chevron-down lang-chevron"></i></button>
                 <div class="lang-dropdown" id="langDropdown">
@@ -639,7 +638,7 @@
                     <i class="fa-solid fa-circle"></i>
                     <i class="fa-solid fa-circle-half-stroke"></i>
                 </span>
-                <span class="rating-text" onclick="openReviewModal()" style="cursor:pointer;">4.9 • 1446 후기</span>
+                <span class="rating-text" onclick="openReviewModal()" style="cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; gap:8px;">4.9<span style="font-size:28px; line-height:1; position:relative; top:-2px;">·</span><span style="text-decoration:underline; text-underline-offset:3px;">1446개의 리뷰</span></span>
             </div>
             <div class="hotel-info-right">
                 <a href="https://www.instagram.com/instar_hotel_/" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>
@@ -715,7 +714,7 @@
                             <button class="btn-ctrl" onclick="updateGuest('adult', 1)"><i class="fa-solid fa-plus"></i></button>
                         </div>
                     </div>
-                    <button class="dropdown-done-btn" onclick="closeDropdowns(event)">완료</button>
+                    <button class="dropdown-done-btn" onclick="guestDone(event)">완료</button>
                 </div>
             </div>
 
@@ -1441,7 +1440,7 @@
                     <i class="fa-solid fa-circle-half-stroke"></i>
                 </div>
                 <span class="review-summary-score">4.9</span>
-                <span class="review-summary-count">· 1446 후기</span>
+                <span class="review-summary-count">· 1446개의 리뷰</span>
             </div>
             <div class="review-list">
 
@@ -2633,6 +2632,9 @@
         // 팝업 토글 로직
         function toggleCalendarPopup(e) {
             if(e) e.stopPropagation();
+            var opening = !document.getElementById('calendarPopup').classList.contains('active');
+            if(opening && checkinDate && checkoutDate) _autoAdvDate = false;
+            else if(opening) _autoAdvDate = true;
             document.getElementById('guestPopup').classList.remove('active');
             document.getElementById('pricePopup').classList.remove('active');
             document.getElementById('calendarPopup').classList.toggle('active');
@@ -2651,6 +2653,13 @@
             document.getElementById('calendarPopup').classList.remove('active');
             document.getElementById('guestPopup').classList.remove('active');
             if(!datesUserSelected) document.getElementById('pricePopup').classList.remove('active');
+        }
+        function guestDone(e) {
+            closeDropdowns(e);
+            setTimeout(function(){
+                populatePricePopup();
+                document.getElementById('pricePopup').classList.add('active');
+            }, 200);
         }
 
         function openBookingCalendar() {
@@ -2822,6 +2831,7 @@
         }
 
         let datesUserSelected = false;
+        let _autoAdvDate = true;
         function selectDate(dateString) {
             const parts = dateString.split('-');
             const clickedDate = new Date(parts[0], parts[1]-1, parts[2]);
@@ -2857,6 +2867,12 @@
             updateDateUI();
             renderCalendar();
             if (datesUserSelected) updateRoomPrices();
+            if (datesUserSelected && _autoAdvDate) {
+                setTimeout(function(){
+                    document.getElementById('calendarPopup').classList.remove('active');
+                    document.getElementById('guestPopup').classList.add('active');
+                }, 350);
+            }
         }
 
         function changeMonth(direction) {
@@ -2973,6 +2989,8 @@
             // 모바일 패널 동기화
             if (typeof syncMobPanel === 'function') syncMobPanel();
             document.getElementById('pricePopup').classList.remove('active');
+            var _sb = document.querySelector('.search-btn');
+            if(_sb){ _sb.classList.add('auto-highlight'); setTimeout(function(){ _sb.classList.remove('auto-highlight'); }, 3000); }
         }
 
         // rooms-grid 슬라이더 코드는 fan 섹션으로 대체됨
