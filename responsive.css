@@ -256,7 +256,7 @@
     /* 헤더 */
     .top-util-bar  { padding: 0 18px; }
     .top-header    { padding: 0 18px; height: 80px; }
-    .logo img      { width: auto; height: 70px; }
+    .logo img      { height: 62px; }
     .main-nav      { gap: 16px; font-size: 13px; }
     .sub-header    { padding: 0 18px; }
     .hotel-name    { font-size: 18px; }
@@ -336,7 +336,7 @@
 
     /* ── 헤더 ── */
     .top-header { padding: 0 14px; height: 56px; }
-    .logo img   { width: auto; height: 46px; }
+    .logo img   { height: 44px; }
     .main-nav   { display: none; }
 
     /* ── 서브헤더 ── */
