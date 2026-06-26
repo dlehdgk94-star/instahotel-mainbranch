@@ -2582,15 +2582,6 @@
         </div>
     </div>
 
-    <!-- 기존 팝업 모달 영역 -->
-    <div id="pointModal" class="img-modal-overlay">
-        <div class="img-modal-content">
-            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='100%25' height='100%25' fill='%23d0d0d0'/%3E%3C/svg%3E" alt="멤버십 혜택" class="popup-origin-img" style="min-height:400px;">
-            <button class="click-close-top" id="closeModalTop" title="닫기"></button>
-            <button class="click-signup" title="회원가입하기"></button>
-            <button class="click-close-bottom" id="closeModalBottom" title="닫기"></button>
-        </div>
-    </div>
 
     <!-- 객실 갤러리 peek 슬라이더 -->
     <div class="pgallery-overlay" id="pgalleryOverlay" onclick="handlePGalleryClick(event)">
@@ -3041,15 +3032,6 @@
         }
 
 
-        const promoBtn = document.getElementById('openPromoModal');
-        const modal = document.getElementById('pointModal');
-        const closeModalTop = document.getElementById('closeModalTop');
-        const closeModalBottom = document.getElementById('closeModalBottom');
-        promoBtn.addEventListener('click', () => { modal.classList.add('active'); document.body.style.overflow = 'hidden'; });
-        const closePromoModal = () => { modal.classList.remove('active'); document.body.style.overflow = 'auto'; };
-        closeModalTop.addEventListener('click', closePromoModal);
-        closeModalBottom.addEventListener('click', closePromoModal);
-        modal.addEventListener('click', (e) => { if (e.target === modal) closePromoModal(); });
 
         /* ── peek 갤러리 (객실 & 스테이) ── */
         var _pgImages = [];
