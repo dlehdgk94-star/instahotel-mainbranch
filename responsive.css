@@ -347,10 +347,11 @@
         flex-wrap: wrap;
         gap: 0;
     }
-    .hotel-name     { font-size: 14px; }
-    .rating-dots    { font-size: 12px; gap: 3px; }
-    .rating-dots i  { font-size: 10px; }
-    .rating-text    { font-size: 12px; }
+    .hotel-info-left { flex-wrap: nowrap; gap: 5px; }
+    .hotel-name     { font-size: 13px; white-space: nowrap; }
+    .rating-dots    { gap: 2px; flex-shrink: 0; }
+    .rating-dots i  { font-size: 9px; }
+    .rating-text    { font-size: 11px; white-space: nowrap; flex-shrink: 0; }
     .hotel-info-right { display: none; }
 
     /* rooms.html 기존 sticky-wrapper 숨김 (index.html의 #booking-header 제외) */
