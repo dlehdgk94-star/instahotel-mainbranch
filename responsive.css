@@ -544,7 +544,7 @@
     }
     .calendar-dropdown .dropdown-close { display: none; }
     .cal-months-wrap { flex-direction: column; gap: 20px; }
-    .cal-month:last-child { display: none; }
+    .cal-month:last-child { display: none !important; }
     .cal-month:first-child .cal-month-header {
         display: flex;
         justify-content: space-between;
@@ -554,7 +554,7 @@
         flex: 1;
         text-align: center;
     }
-    .cal-nav-right-mob { display: inline-block !important; visibility: visible !important; }
+    .cal-nav-right-mob { display: inline-block !important; opacity: 1 !important; pointer-events: auto !important; }
     .cal-date { font-size: 12px; padding: 8px 2px; }
     .cal-day-name { font-size: 11px; }
 
