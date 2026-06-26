@@ -542,6 +542,7 @@
     }
     .cal-months-wrap { flex-direction: column; gap: 20px; }
     .cal-month:last-child { display: none; }   /* 한 달만 표시 */
+    .cal-nav-right-mob { display: inline-block !important; }
     .cal-date { font-size: 12px; padding: 8px 2px; }
     .cal-day-name { font-size: 11px; }
 
