@@ -103,7 +103,7 @@
                     '<div class="cal-months-wrap">' +
                         '<div class="cal-month">' +
                             '<div class="cal-month-header">' +
-                                '<i class="fa-solid fa-chevron-left" onclick="changeMonth(-1)"></i>' +
+                                '<i class="fa-solid fa-chevron-left" onclick="extChangeMonth(-1)"></i>' +
                                 '<span id="ext-cal-month-title-left"></span>' +
                                 '<span></span>' +
                             '</div>' +
@@ -113,7 +113,7 @@
                             '<div class="cal-month-header">' +
                                 '<span></span>' +
                                 '<span id="ext-cal-month-title-right"></span>' +
-                                '<i class="fa-solid fa-chevron-right" onclick="changeMonth(1)"></i>' +
+                                '<i class="fa-solid fa-chevron-right" onclick="extChangeMonth(1)"></i>' +
                             '</div>' +
                             '<div class="cal-grid" id="ext-cal-grid-right"></div>' +
                         '</div>' +
@@ -331,7 +331,7 @@
                     if(pp){ pp.classList.add('active'); pp.scrollIntoView({behavior:'smooth',block:'nearest'}); }
                 },200);
             };
-            window.changeMonth = function(dir) {
+            window.extChangeMonth = function(dir) {
                 event.stopPropagation();
                 extCurMonth.setMonth(extCurMonth.getMonth()+dir);
                 extRenderCal();
