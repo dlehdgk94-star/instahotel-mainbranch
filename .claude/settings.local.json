@@ -4,7 +4,10 @@
       "Bash(ls \"C:/Users/vip/Desktop/주변안내/\")",
       "Read(//c/Users/vip/Desktop/주변안내/**)",
       "Bash(ls \"C:/Users/vip/Desktop/\" --file-type | grep -iE \"\\\\.\\(jpg|jpeg|png|webp|gif\\)\")",
-      "Read(//c/Users/vip/Desktop/**)"
+      "Read(//c/Users/vip/Desktop/**)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)"
     ]
   }
 }

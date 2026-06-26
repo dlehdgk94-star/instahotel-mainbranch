@@ -26,7 +26,7 @@
             '</div>' +
             '<ul class="mob-nav-links">' +
                 link('index.html', '호텔소개') +
-                link('rooms.html', '객실') +
+                link('rooms.html', '객실예약') +
                 link('gallery.html', '갤러리') +
                 link('nearby.html', '주변안내') +
             '</ul>' +
