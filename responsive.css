@@ -419,6 +419,7 @@
         font-family: 'Barlow', sans-serif;
         cursor: pointer;
         -webkit-tap-highlight-color: transparent;
+        outline: none;
     }
     #mob-book-bar-btn:active { opacity: 0.85; }
     #mob-book-trigger {
@@ -434,6 +435,7 @@
         cursor: pointer;
         letter-spacing: -0.2px;
         -webkit-tap-highlight-color: transparent;
+        outline: none;
     }
     #mob-book-trigger:active { opacity: 0.85; }
 
@@ -835,17 +837,3 @@
 }
 
 /* ── Booking bar auto-advance highlight ── */
-.search-btn.auto-highlight {
-    background-color: #2A91A8 !important;
-    animation: bookBtnPulse 0.65s ease 0s 2;
-    box-shadow: 0 0 0 5px rgba(42,145,168,0.28);
-    transition: none !important;
-}
-@keyframes bookBtnPulse {
-    0%,100% { transform: scale(1); }
-    50%      { transform: scale(1.1); }
-}
-.mob-panel-confirm.auto-highlight {
-    background: #2A91A8 !important;
-    animation: bookBtnPulse 0.65s ease 0s 2;
-}

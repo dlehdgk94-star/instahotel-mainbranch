@@ -2753,8 +2753,6 @@
             // 모바일 패널 동기화
             if (typeof syncMobPanel === 'function') syncMobPanel();
             document.getElementById('pricePopup').classList.remove('active');
-            var _sb = document.querySelector('.search-btn');
-            if(_sb){ _sb.classList.add('auto-highlight'); setTimeout(function(){ _sb.classList.remove('auto-highlight'); }, 3000); }
         }
 
         // rooms-grid 슬라이더 코드는 fan 섹션으로 대체됨

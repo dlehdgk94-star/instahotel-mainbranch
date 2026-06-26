@@ -364,7 +364,6 @@
             window.extSelectRoom = function(id) {
                 extRoomId=id; extSyncPanel();
                 var pp=document.getElementById('ext-pricePopup'); if(pp) pp.classList.remove('active');
-                var btn=document.querySelector('.mob-panel-confirm'); if(btn){ btn.classList.add('auto-highlight'); setTimeout(function(){ btn.classList.remove('auto-highlight'); },3000); }
             };
 
             var header = document.querySelector('.top-header');
