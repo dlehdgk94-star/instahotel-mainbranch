@@ -203,6 +203,7 @@
             var extRoomId = null;
             var extDatesSelected = true;
             var _extAutoAdvDate = true;
+            var _extDatesExplicitlySet = false;
 
             var EXT_PRICES = {
                 edelweiss:{prices:[49500,58500,72000],maxGuests:2},
@@ -289,7 +290,7 @@
                 if(e) e.stopPropagation();
                 var cp=document.getElementById('ext-calendarPopup'), gp=document.getElementById('ext-guestPopup'), pp=document.getElementById('ext-pricePopup');
                 if(gp) gp.classList.remove('active'); if(pp) pp.classList.remove('active');
-                if(cp){ var opening=!cp.classList.contains('active'); cp.classList.toggle('active'); if(opening) extRenderCal(); if(opening&&extCI&&extCO) _extAutoAdvDate=false; else if(opening) _extAutoAdvDate=true; }
+                if(cp){ var opening=!cp.classList.contains('active'); cp.classList.toggle('active'); if(opening) extRenderCal(); if(opening&&extCI&&extCO&&_extDatesExplicitlySet) _extAutoAdvDate=false; else if(opening) _extAutoAdvDate=true; }
             };
             window.toggleGuestPopup = function(e) {
                 if(e) e.stopPropagation();
@@ -332,7 +333,7 @@
                 var today=new Date(); today.setHours(0,0,0,0); if(clicked<today) return;
                 if(!extCI||(extCI&&extCO)){ extCI=clicked; extCO=null; extDatesSelected=false; extRoomId=null; }
                 else if(extCI&&!extCO){
-                    if(clicked>extCI){ extCO=clicked; extDatesSelected=true; }
+                    if(clicked>extCI){ extCO=clicked; extDatesSelected=true; _extDatesExplicitlySet=true; }
                     else if(clicked.getTime()!==extCI.getTime()){ extCI=clicked; extDatesSelected=false; extRoomId=null; }
                 }
                 extSyncPanel(); extRenderCal();

@@ -2633,7 +2633,7 @@
         function toggleCalendarPopup(e) {
             if(e) e.stopPropagation();
             var opening = !document.getElementById('calendarPopup').classList.contains('active');
-            if(opening && checkinDate && checkoutDate) _autoAdvDate = false;
+            if(opening && checkinDate && checkoutDate && _datesExplicitlySet) _autoAdvDate = false;
             else if(opening) _autoAdvDate = true;
             document.getElementById('guestPopup').classList.remove('active');
             document.getElementById('pricePopup').classList.remove('active');
@@ -2832,6 +2832,7 @@
 
         let datesUserSelected = false;
         let _autoAdvDate = true;
+        let _datesExplicitlySet = false;
         function selectDate(dateString) {
             const parts = dateString.split('-');
             const clickedDate = new Date(parts[0], parts[1]-1, parts[2]);
@@ -2851,6 +2852,7 @@
                 if (clickedDate > checkinDate) {
                     checkoutDate = clickedDate;
                     datesUserSelected = true;
+                    _datesExplicitlySet = true;
                 } else if (clickedDate.getTime() === checkinDate.getTime()) {
                     // 동일 날짜 클릭 무시
                 } else {
