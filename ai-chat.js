@@ -7,7 +7,7 @@
         <button id="ai-chat-btn" aria-label="AI 컨시어지 열기">
             <img src="${getBase()}images/symbol-icon.png" alt="AI">
         </button>
-        <span id="ai-chat-label">챗GPT</span>
+        <span id="ai-chat-label">궁금한점<br>챗GPT 문의하기</span>
     </div>
 
     <!-- 채팅창 -->
@@ -70,6 +70,8 @@
     font-family: 'Barlow', sans-serif;
     letter-spacing: 0.2px;
     user-select: none;
+    text-align: center;
+    line-height: 1.5;
 }
 #ai-chat-btn {
     width: 56px;
