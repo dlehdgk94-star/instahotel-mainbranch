@@ -65,8 +65,8 @@
 }
 #ai-chat-label {
     font-size: 13px;
-    font-weight: 600;
-    color: red;
+    font-weight: 700;
+    color: rgb(58, 154, 180);
     font-family: 'Barlow', sans-serif;
     letter-spacing: 0.2px;
     user-select: none;
