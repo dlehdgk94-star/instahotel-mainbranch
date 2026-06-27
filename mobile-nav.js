@@ -158,9 +158,9 @@
                     '<div class="hotel-info-left">' +
                         '<span class="hotel-name">인스타 오토그래프 컬렉션</span>' +
                         '<span class="rating-dots">' +
-                            '<i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i>' +
-                            '<i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i>' +
-                            '<i class="fa-solid fa-circle-half-stroke"></i>' +
+                            '<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>' +
+                            '<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>' +
+                            '<i class="fa-solid fa-star-half-stroke"></i>' +
                         '</span>' +
                         '<span class="rating-text" onclick="if(typeof openReviewModal===\'function\')openReviewModal()" style="cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;">4.9<span style="font-size:20px;line-height:1;position:relative;top:-1px;">·</span><span style="text-decoration:underline;text-underline-offset:3px;">1446개의 리뷰</span></span>' +
                     '</div>' +
@@ -478,7 +478,7 @@
 
             function starHTML(n) {
                 var h = '';
-                for (var i = 0; i < 5; i++) h += i < n ? '<i class="fa-solid fa-circle"></i>' : '<i class="fa-regular fa-circle"></i>';
+                for (var i = 0; i < 5; i++) h += i < n ? '<i class="fa-solid fa-star"></i>' : '<i class="fa-regular fa-star"></i>';
                 return h;
             }
 
@@ -503,7 +503,7 @@
                         '<button class="review-modal-close" onclick="document.getElementById(\'reviewModal\').classList.remove(\'open\');document.body.style.overflow=\'\'">✕</button>' +
                     '</div>' +
                     '<div class="review-summary">' +
-                        '<div class="review-summary-dots"><i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle-half-stroke"></i></div>' +
+                        '<div class="review-summary-dots"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i></div>' +
                         '<span class="review-summary-score">4.9</span>' +
                         '<span class="review-summary-count">· 1446개의 리뷰</span>' +
                     '</div>' +
