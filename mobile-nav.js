@@ -154,17 +154,6 @@
             var stickyTop = document.createElement('div');
             stickyTop.id = 'mob-sticky-top';
             stickyTop.innerHTML =
-                '<div id="mob-sub-bar">' +
-                    '<div class="hotel-info-left">' +
-                        '<span class="hotel-name">인스타 오토그래프 컬렉션</span>' +
-                        '<span class="rating-dots">' +
-                            '<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>' +
-                            '<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>' +
-                            '<i class="fa-solid fa-star-half-stroke"></i>' +
-                        '</span>' +
-                        '<span class="rating-text" onclick="if(typeof openReviewModal===\'function\')openReviewModal()" style="cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;">4.9<span style="font-size:20px;line-height:1;position:relative;top:-1px;">·</span><span style="text-decoration:underline;text-underline-offset:3px;">1446개의 리뷰</span></span>' +
-                    '</div>' +
-                '</div>' +
                 '<div id="mob-book-bar">' +
                     '<button id="mob-book-bar-btn" onclick="toggleExtPanel(event)">예약하기</button>' +
                 '</div>' +

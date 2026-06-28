@@ -343,8 +343,6 @@
     .logo img   { height: 34px; }
     .main-nav   { display: none; }
     .header-right { display: none; }
-    .top-header .rating-dots,
-    .top-header .rating-text { display: none; }
 
     /* ── 서브헤더 ── */
     .sub-header {
