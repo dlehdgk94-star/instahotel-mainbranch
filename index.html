@@ -2476,14 +2476,14 @@
 
         function openBookingCalendar() {
             if (window.innerWidth <= 768) {
-                setTimeout(function() {
-                    var panel = document.getElementById('mob-book-panel');
-                    var triggerBar = document.getElementById('mob-trigger-bar');
-                    if (panel && !panel.classList.contains('open')) {
-                        panel.classList.add('open');
-                        if (triggerBar) triggerBar.style.display = 'none';
-                    }
-                }, 0);
+                var panel = document.getElementById('mob-book-panel');
+                var triggerBar = document.getElementById('mob-trigger-bar');
+                if (panel && !panel.classList.contains('open')) {
+                    panel.classList.add('open');
+                    if (triggerBar) triggerBar.style.display = 'none';
+                    syncMobPanel();
+                }
+                window.scrollTo({ top: 0, behavior: 'smooth' });
                 return;
             }
             setTimeout(function() {
