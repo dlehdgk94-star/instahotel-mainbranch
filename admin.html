@@ -446,13 +446,18 @@ const _sb = window.supabase.createClient(
 );
 
 const ROOM_DEFAULTS = {
-    edelweiss: { name:'이코노미 룸', price:89000,  stock:5 },
-    aurora:    { name:'스탠다드 룸', price:119000, stock:5 },
-    glorio:    { name:'디럭스 룸',  price:159000, stock:3 },
-    envidion:  { name:'트윈 룸',    price:179000, stock:3 },
-    special:   { name:'스페셜 룸',  price:219000, stock:2 },
-    ruby:      { name:'루비 룸',    price:149000, stock:2 }
+    edelweiss: { name:'이코노미 룸', prices:[49500,  58500,  72000],  stock:5 },
+    aurora:    { name:'스탠다드 룸', prices:[58000,  67000,  81000],  stock:5 },
+    glorio:    { name:'디럭스 룸',  prices:[67000,  76000,  99000],  stock:3 },
+    envidion:  { name:'트윈 룸',    prices:[76000,  85000,  108000], stock:3 },
+    special:   { name:'스페셜 룸',  prices:[99000,  108000, 126000], stock:2 },
+    ruby:      { name:'루비 룸',    prices:[76000,  85000,  108000], stock:2 }
 };
+function defPrice(roomId, dateStr){
+    const p = ROOM_DEFAULTS[roomId].prices;
+    const dow = new Date(dateStr+'T00:00:00').getDay();
+    return dow===6 ? p[2] : dow===5 ? p[1] : p[0];
+}
 const COUNTRIES = {
     KR:'대한민국',US:'미국',JP:'일본',CN:'중국',GB:'영국',
     FR:'프랑스',DE:'독일',AU:'호주',CA:'캐나다',SG:'싱가포르',
@@ -725,7 +730,7 @@ function renderSheet(){
             const isToday = dateStr === todayStr;
             const rec     = invData[roomId]?.[dateStr];
 
-            const price = rec?.price ?? def.price;
+            const price = rec?.price ?? defPrice(roomId, dateStr);
             const stock = rec?.stock ?? def.stock;
             const avail = rec ? rec.is_available : null; // null = 미설정
 
@@ -765,7 +770,7 @@ function openDateModal(roomId, dateStr){
 
     document.getElementById('dateModalTitle').textContent =
         `${def.name} · ${d.getMonth()+1}월 ${d.getDate()}일 (${DAYS_KO[d.getDay()]})`;
-    document.getElementById('editPrice').value = rec?.price ?? def.price;
+    document.getElementById('editPrice').value = rec?.price ?? defPrice(roomId, dateStr);
     document.getElementById('editStock').value = rec?.stock ?? def.stock;
     setAvail(editIsAvail);
 
