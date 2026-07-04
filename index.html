@@ -421,13 +421,14 @@
         .room-card:hover .room-card-img-wrap img { transform: scale(1.03); }
         .room-card-expand { position: absolute; top: 12px; right: 12px; width: 32px; height: 32px; background: rgba(30,30,30,0.62); border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 13px; cursor: pointer; }
         .room-card-body { padding: 18px 4px 20px; }
-        .room-card-name { font-size: 17px; font-weight: 600; color: rgb(28,28,28); margin-bottom: 8px; }
-        .room-card-meta { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 4px; }
+        .room-card-title-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 4px; }
+        .room-card-name { font-size: 17px; font-weight: 600; color: rgb(28,28,28); margin: 0; }
+        .room-card-meta { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 14px; }
         .room-card-sub { font-size: 13px; color: rgb(112,112,112); margin: 0; white-space: nowrap; }
         .room-card-price { display: flex; flex-direction: row; gap: 10px; align-items: center; flex-shrink: 0; }
         .room-card-price-item { font-size: 12px; color: rgb(112,112,112); white-space: nowrap; }
         .room-card-price-item strong { font-size: 13px; font-weight: 600; color: rgb(28,28,28); }
-        .room-price-notice { font-size: 11px; color: rgb(170,170,170); font-style: italic; margin: 0 0 10px; text-align: right; }
+        .room-price-notice { font-size: 11px; color: rgb(170,170,170); font-style: italic; margin: 0; text-align: right; }
         .room-card-divider { border: none; border-top: 1px solid #d8d8d8; margin-bottom: 16px; }
         .room-card-actions { display: flex; justify-content: space-between; align-items: center; }
         .room-card-detail { font-size: 14px; font-weight: 600; color: rgb(28,28,28); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; background: none; border: none; padding: 0; }
@@ -807,16 +808,18 @@
                     <div class="room-card-expand" onclick="openRoomGallery('edelweiss')"><i class="fa-solid fa-expand"></i></div>
                 </div>
                 <div class="room-card-body">
-                    <h3 class="room-card-name">이코노미 룸</h3>
-                    <div class="room-card-meta">
-                        <p class="room-card-sub">기준 2인 / 최대 2인 · 퀸 침대 1개</p>
+                    <div class="room-card-title-row">
+                        <h3 class="room-card-name">이코노미 룸</h3>
                         <div class="room-card-price">
                             <span class="room-card-price-item">(일~목) <strong>49,500</strong></span>
                             <span class="room-card-price-item">(금) <strong>58,500</strong></span>
                             <span class="room-card-price-item">(토) <strong>72,000</strong></span>
                         </div>
                     </div>
-                    <p class="room-price-notice">공휴일·성수기 요금 별도 적용</p>
+                    <div class="room-card-meta">
+                        <p class="room-card-sub">기준 2인 / 최대 2인 · 퀸 침대 1개</p>
+                        <p class="room-price-notice">공휴일·성수기 요금 별도 적용</p>
+                    </div>
                     <hr class="room-card-divider">
                     <div class="room-card-actions">
                         <button class="room-card-detail" onclick="openRoomModal('edelweiss')">자세히 보기</button>
@@ -831,16 +834,18 @@
                     <div class="room-card-expand" onclick="openRoomGallery('aurora')"><i class="fa-solid fa-expand"></i></div>
                 </div>
                 <div class="room-card-body">
-                    <h3 class="room-card-name">스탠다드 룸</h3>
-                    <div class="room-card-meta">
-                        <p class="room-card-sub">기준 2인 / 최대 2인 · 퀸 침대 1개</p>
+                    <div class="room-card-title-row">
+                        <h3 class="room-card-name">스탠다드 룸</h3>
                         <div class="room-card-price">
                             <span class="room-card-price-item">(일~목) <strong>58,000</strong></span>
                             <span class="room-card-price-item">(금) <strong>67,000</strong></span>
                             <span class="room-card-price-item">(토) <strong>81,000</strong></span>
                         </div>
                     </div>
-                    <p class="room-price-notice">공휴일·성수기 요금 별도 적용</p>
+                    <div class="room-card-meta">
+                        <p class="room-card-sub">기준 2인 / 최대 2인 · 퀸 침대 1개</p>
+                        <p class="room-price-notice">공휴일·성수기 요금 별도 적용</p>
+                    </div>
                     <hr class="room-card-divider">
                     <div class="room-card-actions">
                         <button class="room-card-detail" onclick="openRoomModal('aurora')">자세히 보기</button>
@@ -855,16 +860,18 @@
                     <div class="room-card-expand" onclick="openRoomGallery('glorio')"><i class="fa-solid fa-expand"></i></div>
                 </div>
                 <div class="room-card-body">
-                    <h3 class="room-card-name">디럭스 룸</h3>
-                    <div class="room-card-meta">
-                        <p class="room-card-sub">기준 2인 / 최대 2인 · 퀸 침대 1개</p>
+                    <div class="room-card-title-row">
+                        <h3 class="room-card-name">디럭스 룸</h3>
                         <div class="room-card-price">
                             <span class="room-card-price-item">(일~목) <strong>67,000</strong></span>
                             <span class="room-card-price-item">(금) <strong>76,000</strong></span>
                             <span class="room-card-price-item">(토) <strong>99,000</strong></span>
                         </div>
                     </div>
-                    <p class="room-price-notice">공휴일·성수기 요금 별도 적용</p>
+                    <div class="room-card-meta">
+                        <p class="room-card-sub">기준 2인 / 최대 2인 · 퀸 침대 1개</p>
+                        <p class="room-price-notice">공휴일·성수기 요금 별도 적용</p>
+                    </div>
                     <hr class="room-card-divider">
                     <div class="room-card-actions">
                         <button class="room-card-detail" onclick="openRoomModal('glorio')">자세히 보기</button>
@@ -879,16 +886,18 @@
                     <div class="room-card-expand" onclick="openRoomGallery('envidion')"><i class="fa-solid fa-expand"></i></div>
                 </div>
                 <div class="room-card-body">
-                    <h3 class="room-card-name">트윈 룸</h3>
-                    <div class="room-card-meta">
-                        <p class="room-card-sub">기준 2인 / 최대 3인 무료 · 퀸 침대 1개 / 싱글 침대 1개</p>
+                    <div class="room-card-title-row">
+                        <h3 class="room-card-name">트윈 룸</h3>
                         <div class="room-card-price">
                             <span class="room-card-price-item">(일~목) <strong>76,000</strong></span>
                             <span class="room-card-price-item">(금) <strong>85,000</strong></span>
                             <span class="room-card-price-item">(토) <strong>108,000</strong></span>
                         </div>
                     </div>
-                    <p class="room-price-notice">공휴일·성수기 요금 별도 적용</p>
+                    <div class="room-card-meta">
+                        <p class="room-card-sub">기준 2인 / 최대 3인 무료 · 퀸 침대 1개 / 싱글 침대 1개</p>
+                        <p class="room-price-notice">공휴일·성수기 요금 별도 적용</p>
+                    </div>
                     <hr class="room-card-divider">
                     <div class="room-card-actions">
                         <button class="room-card-detail" onclick="openRoomModal('envidion')">자세히 보기</button>
@@ -903,16 +912,18 @@
                     <div class="room-card-expand" onclick="openRoomGallery('special')"><i class="fa-solid fa-expand"></i></div>
                 </div>
                 <div class="room-card-body">
-                    <h3 class="room-card-name">스페셜</h3>
-                    <div class="room-card-meta">
-                        <p class="room-card-sub">기준 2인 / 최대 4인 무료 · 퀸 침대 1개 / 싱글 침대 2개</p>
+                    <div class="room-card-title-row">
+                        <h3 class="room-card-name">스페셜</h3>
                         <div class="room-card-price">
                             <span class="room-card-price-item">(일~목) <strong>99,000</strong></span>
                             <span class="room-card-price-item">(금) <strong>108,000</strong></span>
                             <span class="room-card-price-item">(토) <strong>126,000</strong></span>
                         </div>
                     </div>
-                    <p class="room-price-notice">공휴일·성수기 요금 별도 적용</p>
+                    <div class="room-card-meta">
+                        <p class="room-card-sub">기준 2인 / 최대 4인 무료 · 퀸 침대 1개 / 싱글 침대 2개</p>
+                        <p class="room-price-notice">공휴일·성수기 요금 별도 적용</p>
+                    </div>
                     <hr class="room-card-divider">
                     <div class="room-card-actions">
                         <button class="room-card-detail" onclick="openRoomModal('special')">자세히 보기</button>
@@ -927,16 +938,18 @@
                     <div class="room-card-expand" onclick="openRoomGallery('ruby')"><i class="fa-solid fa-expand"></i></div>
                 </div>
                 <div class="room-card-body">
-                    <h3 class="room-card-name">루비룸 (애견동반)</h3>
-                    <div class="room-card-meta">
-                        <p class="room-card-sub">기준 2인 / 최대 2인 · 퀸 침대 1개</p>
+                    <div class="room-card-title-row">
+                        <h3 class="room-card-name">루비룸 (애견동반)</h3>
                         <div class="room-card-price">
                             <span class="room-card-price-item">(일~목) <strong>76,000</strong></span>
                             <span class="room-card-price-item">(금) <strong>85,000</strong></span>
                             <span class="room-card-price-item">(토) <strong>108,000</strong></span>
                         </div>
                     </div>
-                    <p class="room-price-notice">공휴일·성수기 요금 별도 적용</p>
+                    <div class="room-card-meta">
+                        <p class="room-card-sub">기준 2인 / 최대 2인 · 퀸 침대 1개</p>
+                        <p class="room-price-notice">공휴일·성수기 요금 별도 적용</p>
+                    </div>
                     <hr class="room-card-divider">
                     <div class="room-card-actions">
                         <button class="room-card-detail" onclick="openRoomModal('ruby')">자세히 보기</button>
