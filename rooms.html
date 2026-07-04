@@ -19,25 +19,27 @@
         .hamburger-menu span{ width:12px; height:1px; background-color:#fff; border-radius:2px; }
         .util-login-btn{ display:flex; align-items:center; gap:6px; background:transparent; color:#fff; border:1px solid rgba(255,255,255,0.4); border-radius:25px; padding:5px 12px; font-size:11px; font-weight:500; cursor:pointer; }
         .util-login-btn i{ font-size:13px; }
+        .util-login-btn:hover{ border-color:#fff; background-color:rgba(255,255,255,0.1); }
+        .util-right-group{ display:flex; align-items:center; gap:24px; }
 
         /* ── 헤더 ── */
         .top-header{ display:flex; justify-content:space-between; align-items:center; height:88px; padding:0 48px 0 30px; background-color:rgb(244,244,244); border-bottom:1px solid #e6e6e6; }
         .logo{ display:flex; align-items:center; }
         .logo img{ width:auto; height:58px; }
-        .main-nav{ display:flex; align-items:center; gap:32px; list-style:none; font-size:14px; font-weight:500; color:rgb(112,112,112); height:100%; }
-        .main-nav li{ cursor:pointer; display:flex; align-items:center; position:relative; height:100%; }
+        .header-left{ display:flex; align-items:flex-end; gap:12px; }
+        .header-rating{ display:flex; align-items:center; gap:10px; align-self:flex-end; }
+        .header-right{ display:flex; flex-direction:column; align-items:flex-end; justify-content:center; gap:8px; height:100%; }
+        .main-nav{ display:flex; align-items:center; gap:32px; list-style:none; font-size:14px; font-weight:500; color:rgb(112,112,112); height:auto; }
+        .main-nav li{ cursor:pointer; display:flex; align-items:center; position:relative; height:auto; padding:2px 0; }
         .main-nav li.active{ color:rgb(28,28,28); font-weight:700; }
-        .main-nav li.active::after{ content:''; position:absolute; left:0; right:0; bottom:16px; height:3px; background:#2A91A8; }
-
-        /* ── 서브헤더 + 예약바 ── */
-        .sticky-wrapper{ position:-webkit-sticky; position:sticky; top:0; z-index:1000; background:#FAFAFA; box-shadow:0 4px 15px rgba(0,0,0,0.1); }
-        .sub-header{ display:flex; justify-content:space-between; align-items:center; height:64px; padding:0 48px 0 30px; border-bottom:1px solid #e5e5e5; background-color:rgb(244,244,244); }
-        .hotel-info-left{ display:flex; align-items:center; gap:10px; }
-        .hotel-name{ font-size:22px; font-weight:700; color:rgb(28,28,28); white-space:nowrap; }
+        .main-nav li.active::after{ content:''; position:absolute; left:0; right:0; bottom:-5px; height:3px; background:#2A91A8; }
         .rating-dots{ color:#3A9AB4; font-size:16px; display:flex; align-items:center; gap:5px; }
         .rating-text{ font-size:14px; font-weight:500; color:rgb(28,28,28); text-decoration:underline; text-underline-offset:3px; cursor:pointer; }
         .hotel-info-right{ display:flex; gap:24px; font-size:14px; font-weight:500; color:rgb(28,28,28); }
         .hotel-info-right a{ display:flex; align-items:center; gap:5px; }
+
+        /* ── 예약바 ── */
+        .sticky-wrapper{ position:-webkit-sticky; position:sticky; top:0; z-index:1000; background:#FAFAFA; box-shadow:0 4px 15px rgba(0,0,0,0.1); }
 
         .booking-bar{ display:flex; justify-content:space-between; align-items:center; height:112px; padding:0 30px; background:#fff; border-bottom:1px solid #e5e5e5; position:relative; }
         .booking-item{ display:flex; flex-direction:column; justify-content:center; gap:18px; height:100%; padding:0 178px; position:relative; }
@@ -254,48 +256,52 @@
     <!-- 상단 유틸리티 바 -->
     <div class="top-util-bar">
         <div class="hamburger-menu"><span></span><span></span><span></span></div>
-        <div><button class="util-login-btn">공식 홈페이지 예약 시 최대 혜택</button></div>
+        <div class="util-right-group">
+            <button class="util-login-btn">공식 홈페이지 예약 시 최대 혜택</button>
+        </div>
     </div>
 
     <!-- 헤더 -->
     <header class="top-header">
-        <a href="index.html" class="logo"><img src="instalogo.png" alt="INSTA Hotel 로고"></a>
-        <ul class="main-nav">
-            <li><a href="index.html">호텔소개</a></li>
-            <li class="active"><a href="#">객실예약</a></li>
-            <li><a href="gallery.html">갤러리</a></li>
-            <li><a href="nearby.html">주변안내</a></li>
-            <li class="lang-selector" onclick="event.stopPropagation()">
-                <button class="lang-btn" onclick="toggleLangDropdown(event)"><i class="fa-solid fa-globe"></i><span id="langCode">KO</span><i class="fa-solid fa-chevron-down lang-chevron"></i></button>
-                <div class="lang-dropdown" id="langDropdown">
-                    <span class="lang-option active" data-code="KO" onclick="selectLang(this)">한국어</span>
-                    <span class="lang-option" data-code="EN" onclick="selectLang(this)">English</span>
-                    <span class="lang-option" data-code="JA" onclick="selectLang(this)">日本語</span>
-                    <span class="lang-option" data-code="ZH" onclick="selectLang(this)">中文</span>
-                </div>
-            </li>
-        </ul>
-    </header>
-
-    <!-- 서브헤더 + 예약바 -->
-    <div class="sticky-wrapper">
-        <div class="sub-header">
-            <div class="hotel-info-left">
-                <span class="hotel-name">인스타 오토그래프 컬렉션</span>
+        <div class="header-left">
+            <a href="index.html" class="logo"><img src="instalogo.png" alt="INSTA Hotel 로고"></a>
+            <div class="header-rating">
                 <span class="rating-dots">
-                    <i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i>
-                    <i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i>
-                    <i class="fa-solid fa-circle-half-stroke"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star-half-stroke"></i>
                 </span>
                 <span class="rating-text" onclick="openReviewModal()" style="cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; gap:8px;">4.9<span style="font-size:28px; line-height:1; position:relative; top:-2px;">·</span><span style="text-decoration:underline; text-underline-offset:3px;">1446개의 리뷰</span></span>
             </div>
+        </div>
+        <div class="header-right">
+            <ul class="main-nav">
+                <li><a href="index.html">호텔소개</a></li>
+                <li class="active"><a href="rooms.html">객실예약</a></li>
+                <li><a href="gallery.html">갤러리</a></li>
+                <li><a href="nearby.html">주변안내</a></li>
+                <li class="lang-selector" onclick="event.stopPropagation()">
+                    <button class="lang-btn" onclick="toggleLangDropdown(event)"><i class="fa-solid fa-globe"></i><span id="langCode">KO</span><i class="fa-solid fa-chevron-down lang-chevron"></i></button>
+                    <div class="lang-dropdown" id="langDropdown">
+                        <span class="lang-option active" data-code="KO" onclick="selectLang(this)">한국어</span>
+                        <span class="lang-option" data-code="EN" onclick="selectLang(this)">English</span>
+                        <span class="lang-option" data-code="JA" onclick="selectLang(this)">日本語</span>
+                        <span class="lang-option" data-code="ZH" onclick="selectLang(this)">中文</span>
+                    </div>
+                </li>
+            </ul>
             <div class="hotel-info-right">
-                <a href="#"><i class="fa-solid fa-comment"></i></a>
                 <a href="https://www.instagram.com/instar_hotel_/" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>
-                <a href="#"><i class="fa-solid fa-location-dot"></i></a>
+                <a href="#" onclick="openLocationModal(event)"><i class="fa-solid fa-location-dot"></i></a>
                 <a href="#"><i class="fa-solid fa-phone"></i> +82 31-203-4301</a>
             </div>
         </div>
+    </header>
+
+    <!-- 예약바 -->
+    <div class="sticky-wrapper">
         <div class="booking-bar">
             <div class="booking-item" id="date-booking-item">
                 <span class="booking-label" id="nights-label"><i class="fa-regular fa-calendar"></i> 날짜 (1 박)</span>
