@@ -332,7 +332,9 @@
         #facPhotoModal.open { display: flex; }
         .fac-modal-box { background: #fff; border-radius: 16px; overflow: hidden; max-width: 560px; width: 90%; box-shadow: 0 20px 60px rgba(0,0,0,0.35); position: relative; }
         .fac-modal-img { width: 100%; height: 340px; object-fit: contain; display: block; background: #f5f5f5; }
-        .fac-modal-label { padding: 18px 20px 20px; font-size: 16px; font-weight: 700; color: rgb(28,28,28); letter-spacing: -0.3px; }
+        .fac-modal-label { padding: 18px 20px 20px; display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+        .fac-modal-label-title { font-size: 16px; font-weight: 700; color: rgb(28,28,28); letter-spacing: -0.3px; white-space: nowrap; }
+        .fac-modal-label-sub { font-size: 11px; color: rgb(140,140,140); text-align: right; line-height: 1.6; }
         .fac-modal-close { position: absolute; top: 12px; right: 14px; background: rgba(0,0,0,0.45); color: #fff; border: none; border-radius: 50%; width: 32px; height: 32px; font-size: 18px; line-height: 32px; text-align: center; cursor: pointer; display: flex; align-items: center; justify-content: center; }
         .fac-modal-img-wrap { position: relative; }
         .fac-modal-nav { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.85); border: none; border-radius: 50%; width: 36px; height: 36px; font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
@@ -980,7 +982,7 @@
                     <div class="fac-box">
                         <div class="fac-box-title"><i class="fa-solid fa-shower"></i> 욕실</div>
                         <ul class="fac-box-list">
-                            <li class="fac-li-click" onclick="showFacImg('최고급 비데 일체형 양변기', ['images/amenity/bidet/video.mp4','images/amenity/bidet/1.webp'])"><i class="fa-solid fa-check"></i> 최고급 비데 일체형 양변기</li>
+                            <li class="fac-li-click" onclick="showFacImg('최고급 비데 일체형 양변기', ['images/amenity/bidet/video.mp4','images/amenity/bidet/1.webp'], '안전댐퍼 · 자동 물내림 · 무선리모컨 · 온풍건조 · 온열시트 · 리듬 · 노즐청소')"><i class="fa-solid fa-check"></i> 최고급 비데 일체형 양변기</li>
                             <li class="fac-li-click" onclick="showFacImg('골드 대형거울', ['images/amenity/mirror-large/1.jpg','images/amenity/mirror-large/2.jpg','images/amenity/mirror-large/3.jpg','images/amenity/mirror-large/4.jpg','images/amenity/mirror-large/5.jpg'])"><i class="fa-solid fa-check"></i> 골드 대형거울</li>
                             <li class="fac-li-click" onclick="showFacImg('고급 골드 샤워기', ['images/amenity/shower/video.mp4','images/amenity/shower/1.jpg','images/amenity/shower/2.jpg','images/amenity/shower/3.jpg','images/amenity/shower/4.jpg'])"><i class="fa-solid fa-check"></i> 고급 골드 샤워기</li>
                             <li class="fac-li-click" onclick="showFacImg('고급 골드 세면대', ['images/amenity/sink/1.jpg','images/amenity/sink/2.jpg'])"><i class="fa-solid fa-check"></i> 고급 골드 세면대</li>
@@ -2951,7 +2953,7 @@
                 <button class="fac-modal-nav fac-modal-next" id="facModalNext" onclick="event.stopPropagation();facModalNav(1)"><i class="fa-solid fa-chevron-right"></i></button>
             </div>
             <div id="facModalCounter" class="fac-modal-counter"></div>
-            <div id="facModalLabel" class="fac-modal-label"></div>
+            <div id="facModalLabel" class="fac-modal-label"><span id="facModalLabelTitle"></span><span id="facModalLabelSub" style="display:none;"></span></div>
         </div>
     </div>
 
@@ -3045,10 +3047,11 @@
             }
         }
 
-        var _facImgList = [], _facImgIdx = 0;
-        function showFacImg(label, imgs) {
+        var _facImgList = [], _facImgIdx = 0, _facSubLabel = '';
+        function showFacImg(label, imgs, subLabel) {
             _facImgList = Array.isArray(imgs) ? imgs : [imgs];
             _facImgIdx = 0;
+            _facSubLabel = subLabel || '';
             _renderFacModal(label);
             document.getElementById('facPhotoModal').classList.add('open');
         }
@@ -3068,7 +3071,13 @@
                 imgEl.style.display = 'block';
                 imgEl.src = src;
             }
-            if (label !== undefined) document.getElementById('facModalLabel').textContent = label;
+            if (label !== undefined) {
+                document.getElementById('facModalLabelTitle').className = 'fac-modal-label-title';
+                document.getElementById('facModalLabelTitle').textContent = label;
+                var sub = document.getElementById('facModalLabelSub');
+                if (_facSubLabel) { sub.className = 'fac-modal-label-sub'; sub.textContent = _facSubLabel; sub.style.display = ''; }
+                else { sub.style.display = 'none'; sub.textContent = ''; }
+            }
             var multi = _facImgList.length > 1;
             var prev = document.getElementById('facModalPrev');
             var next = document.getElementById('facModalNext');
