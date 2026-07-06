@@ -980,9 +980,9 @@
                     <div class="fac-box">
                         <div class="fac-box-title"><i class="fa-solid fa-shower"></i> 욕실</div>
                         <ul class="fac-box-list">
-                            <li class="fac-li-click" onclick="showFacImg('최고급 비데 일체형 양변기', 'images/amenity/bidet.webp')"><i class="fa-solid fa-check"></i> 최고급 비데 일체형 양변기</li>
+                            <li class="fac-li-click" onclick="showFacImg('최고급 비데 일체형 양변기', ['images/amenity/bidet/video.mp4','images/amenity/bidet/1.webp'])"><i class="fa-solid fa-check"></i> 최고급 비데 일체형 양변기</li>
                             <li class="fac-li-click" onclick="showFacImg('골드 대형거울', ['images/amenity/mirror-large/1.jpg','images/amenity/mirror-large/2.jpg','images/amenity/mirror-large/3.jpg','images/amenity/mirror-large/4.jpg','images/amenity/mirror-large/5.jpg'])"><i class="fa-solid fa-check"></i> 골드 대형거울</li>
-                            <li class="fac-li-click" onclick="showFacImg('고급 골드 샤워기', ['images/amenity/shower/1.jpg','images/amenity/shower/2.jpg','images/amenity/shower/3.jpg','images/amenity/shower/4.jpg'])"><i class="fa-solid fa-check"></i> 고급 골드 샤워기</li>
+                            <li class="fac-li-click" onclick="showFacImg('고급 골드 샤워기', ['images/amenity/shower/video.mp4','images/amenity/shower/1.jpg','images/amenity/shower/2.jpg','images/amenity/shower/3.jpg','images/amenity/shower/4.jpg'])"><i class="fa-solid fa-check"></i> 고급 골드 샤워기</li>
                             <li class="fac-li-click" onclick="showFacImg('고급 골드 세면대', ['images/amenity/sink/1.jpg','images/amenity/sink/2.jpg'])"><i class="fa-solid fa-check"></i> 고급 골드 세면대</li>
                             <li class="fac-li-click" onclick="showFacImg('고급 골드 휴지걸이', 'images/amenity/toilet-holder.jpg')"><i class="fa-solid fa-check"></i> 고급 골드 휴지걸이</li>
                             <li class="fac-li-click" onclick="showFacImg('욕조', ['images/amenity/bathtub/1.png','images/amenity/bathtub/2.png','images/amenity/bathtub/3.png','images/amenity/bathtub/4.png'])"><i class="fa-solid fa-check"></i> 욕조</li>
@@ -1006,9 +1006,9 @@
                         <ul class="fac-box-list">
                             <li class="fac-li-click" onclick="showFacImg('LG 천정형 에어컨 / 난방', 'images/amenity/aircon.jpg')"><i class="fa-solid fa-check"></i> LG 천정형 에어컨 / 난방</li>
                             <li class="fac-li-click" onclick="showFacImg('무소음 냉장고', ['images/amenity/fridge/1.jpg','images/amenity/fridge/2.jpg','images/amenity/fridge/3.jpg'])"><i class="fa-solid fa-check"></i> 무소음 냉장고</li>
-                            <li class="fac-li-click" onclick="showFacImg('공기청정기', 'images/amenity/air-purifier.avif')"><i class="fa-solid fa-check"></i> 공기청정기</li>
-                            <li class="fac-li-click" onclick="showFacImg('전기 주전자', 'images/amenity/kettle.jpg')"><i class="fa-solid fa-check"></i> 전기 주전자</li>
-                            <li class="fac-li-click" onclick="showFacImg('헤어드라이기 / 고데기', 'images/amenity/hairdryer.jpg')"><i class="fa-solid fa-check"></i> 헤어드라이기 / 고데기</li>
+                            <li class="fac-li-click" onclick="showFacImg('공기청정기', ['images/amenity/air-purifier/video.mp4','images/amenity/air-purifier/1.jpg'])"><i class="fa-solid fa-check"></i> 공기청정기</li>
+                            <li class="fac-li-click" onclick="showFacImg('전기 주전자', ['images/amenity/kettle/video.mp4','images/amenity/kettle/1.jpg'])"><i class="fa-solid fa-check"></i> 전기 주전자</li>
+                            <li class="fac-li-click" onclick="showFacImg('헤어드라이기 / 고데기', ['images/amenity/hairdryer/video.mp4','images/amenity/hairdryer/1.jpg'])"><i class="fa-solid fa-check"></i> 헤어드라이기 / 고데기</li>
                             <li class="fac-li-click" onclick="showFacImg('고급 원형테이블 / 의자', ['images/amenity/table-chair/1.jpg','images/amenity/table-chair/2.jpg','images/amenity/table-chair/3.jpg','images/amenity/table-chair/4.jpg','images/amenity/table-chair/5.jpg'])"><i class="fa-solid fa-check"></i> 고급 원형테이블 / 의자</li>
                             <li><i class="fa-solid fa-check"></i> 골드 원형거울</li>
                             <li><i class="fa-solid fa-check"></i> 65인치 TV</li>
@@ -2943,9 +2943,10 @@
     <!-- 시설 사진 모달 -->
     <div id="facPhotoModal" onclick="closeFacImg(event)">
         <div class="fac-modal-box">
-            <button class="fac-modal-close" onclick="document.getElementById('facPhotoModal').classList.remove('open')">✕</button>
+            <button class="fac-modal-close" onclick="document.getElementById('facPhotoModal').classList.remove('open');var v=document.getElementById('facModalVideo');v.pause();v.src='';">✕</button>
             <div class="fac-modal-img-wrap">
                 <img id="facModalImg" class="fac-modal-img" src="" alt="">
+                <video id="facModalVideo" class="fac-modal-img" controls playsinline style="display:none;background:#000;"></video>
                 <button class="fac-modal-nav fac-modal-prev" id="facModalPrev" onclick="event.stopPropagation();facModalNav(-1)"><i class="fa-solid fa-chevron-left"></i></button>
                 <button class="fac-modal-nav fac-modal-next" id="facModalNext" onclick="event.stopPropagation();facModalNav(1)"><i class="fa-solid fa-chevron-right"></i></button>
             </div>
@@ -3052,7 +3053,21 @@
             document.getElementById('facPhotoModal').classList.add('open');
         }
         function _renderFacModal(label) {
-            document.getElementById('facModalImg').src = _facImgList[_facImgIdx];
+            var src = _facImgList[_facImgIdx];
+            var isVideo = /\.(mp4|webm|mov)$/i.test(src);
+            var imgEl = document.getElementById('facModalImg');
+            var vidEl = document.getElementById('facModalVideo');
+            if (isVideo) {
+                imgEl.style.display = 'none';
+                vidEl.style.display = 'block';
+                vidEl.src = src;
+                vidEl.load();
+                vidEl.play().catch(function(){});
+            } else {
+                vidEl.pause(); vidEl.src = ''; vidEl.style.display = 'none';
+                imgEl.style.display = 'block';
+                imgEl.src = src;
+            }
             if (label !== undefined) document.getElementById('facModalLabel').textContent = label;
             var multi = _facImgList.length > 1;
             var prev = document.getElementById('facModalPrev');
@@ -3072,6 +3087,7 @@
         function closeFacImg(e) {
             if (e.target === document.getElementById('facPhotoModal')) {
                 document.getElementById('facPhotoModal').classList.remove('open');
+                var v = document.getElementById('facModalVideo'); v.pause(); v.src = '';
             }
         }
 
