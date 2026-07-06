@@ -190,6 +190,23 @@
         .modal-amenity-col-title i{ font-size:14px; color:rgb(28,28,28); }
         .modal-amenity-item{ font-size:14px; font-weight:500; color:rgb(28,28,28); padding:5px 0; font-family:'Barlow',sans-serif; }
         .modal-amenity-item:last-child{ border-bottom:none; }
+        .modal-amenity-item-click{ cursor:pointer; border-radius:5px; padding:5px 6px 5px 0; transition:background 0.15s,color 0.15s; }
+        .modal-amenity-item-click:hover{ background:#e8f6f8; color:#00768e; }
+        #facPhotoModal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.72); z-index:9999; align-items:center; justify-content:center; }
+        #facPhotoModal.open { display:flex; }
+        .fac-modal-box { background:#fff; border-radius:16px; overflow:hidden; max-width:560px; width:90%; box-shadow:0 20px 60px rgba(0,0,0,0.35); position:relative; }
+        .fac-modal-img { width:100%; height:340px; object-fit:contain; display:block; background:#f5f5f5; }
+        .fac-modal-label { padding:18px 20px 20px; display:flex; align-items:baseline; justify-content:space-between; gap:12px; }
+        .fac-modal-label-title { font-size:16px; font-weight:700; color:rgb(28,28,28); letter-spacing:-0.3px; white-space:nowrap; }
+        .fac-modal-label-sub { font-size:11px; color:rgb(140,140,140); text-align:right; line-height:1.6; white-space:pre-line; }
+        .fac-modal-close { position:absolute; top:12px; right:14px; background:rgba(0,0,0,0.45); color:#fff; border:none; border-radius:50%; width:32px; height:32px; font-size:18px; cursor:pointer; display:flex; align-items:center; justify-content:center; }
+        .fac-modal-img-wrap { position:relative; }
+        .fac-modal-nav { position:absolute; top:50%; transform:translateY(-50%); background:rgba(255,255,255,0.85); border:none; border-radius:50%; width:36px; height:36px; font-size:14px; cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 8px rgba(0,0,0,0.2); }
+        .fac-modal-nav:hover { background:#fff; }
+        .fac-modal-nav:disabled { opacity:0.3; cursor:default; }
+        .fac-modal-prev { left:10px; }
+        .fac-modal-next { right:10px; }
+        .fac-modal-counter { text-align:center; font-size:12px; color:rgb(112,112,112); padding:6px 0 0; }
 
         /* ── 갤러리 라이트박스 ── */
         .gallery-overlay{ position:fixed; inset:0; background:rgba(18,18,18,0.96); z-index:10000; display:none; flex-direction:column; align-items:center; justify-content:center; gap:20px; }
@@ -1043,7 +1060,15 @@
                 div.appendChild(t);
                 col.items.forEach(function(item) {
                     const p = document.createElement('p');
-                    p.className = 'modal-amenity-item';
+                    const entry = FAC_IMG_MAP[item];
+                    if (entry) {
+                        p.className = 'modal-amenity-item modal-amenity-item-click';
+                        p.onclick = (function(label, e) {
+                            return function() { showFacImg(label, e.imgs, e.sub); };
+                        })(item, entry);
+                    } else {
+                        p.className = 'modal-amenity-item';
+                    }
                     p.textContent = item;
                     div.appendChild(p);
                 });
@@ -1176,8 +1201,118 @@
     </script>
     <script>function toggleLangDropdown(e){e.stopPropagation();document.getElementById("langDropdown").classList.toggle("open");}function selectLang(el){document.getElementById("langCode").textContent=el.dataset.code;document.querySelectorAll(".lang-option").forEach(function(o){o.classList.remove("active");});el.classList.add("active");document.getElementById("langDropdown").classList.remove("open");}document.addEventListener("click",function(){var d=document.getElementById("langDropdown");if(d)d.classList.remove("open");});</script>
     <script src="mobile-nav.js"></script>
-    
+
 <script src="ai-chat.js"></script>
+
+<!-- facPhotoModal -->
+<div id="facPhotoModal" onclick="closeFacImg(event)">
+    <div class="fac-modal-box">
+        <button class="fac-modal-close" onclick="document.getElementById('facPhotoModal').classList.remove('open');var v=document.getElementById('facModalVideo');v.pause();v.src='';">✕</button>
+        <div class="fac-modal-img-wrap">
+            <img id="facModalImg" class="fac-modal-img" src="" alt="">
+            <video id="facModalVideo" class="fac-modal-img" controls playsinline muted style="display:none;background:#000;"></video>
+            <button class="fac-modal-nav fac-modal-prev" id="facModalPrev" onclick="event.stopPropagation();facModalNav(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="fac-modal-nav fac-modal-next" id="facModalNext" onclick="event.stopPropagation();facModalNav(1)"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+        <div id="facModalCounter" class="fac-modal-counter"></div>
+        <div id="facModalLabel" class="fac-modal-label"><span id="facModalLabelTitle"></span><span id="facModalLabelSub" style="display:none;"></span></div>
+    </div>
+</div>
+<script>
+var _facImgList = [], _facImgIdx = 0, _facSubLabel = '';
+function showFacImg(label, imgs, subLabel) {
+    _facImgList = Array.isArray(imgs) ? imgs : [imgs];
+    _facImgIdx = 0;
+    _facSubLabel = subLabel || '';
+    _renderFacModal(label);
+    document.getElementById('facPhotoModal').classList.add('open');
+}
+function _renderFacModal(label) {
+    var src = _facImgList[_facImgIdx];
+    var isVideo = /\.(mp4|webm|mov)$/i.test(src);
+    var imgEl = document.getElementById('facModalImg');
+    var vidEl = document.getElementById('facModalVideo');
+    if (isVideo) {
+        imgEl.style.display = 'none';
+        vidEl.style.display = 'block';
+        vidEl.src = src;
+        vidEl.load();
+        vidEl.play().catch(function(){});
+    } else {
+        vidEl.pause(); vidEl.src = ''; vidEl.style.display = 'none';
+        imgEl.style.display = 'block';
+        imgEl.src = src;
+    }
+    if (label !== undefined) {
+        document.getElementById('facModalLabelTitle').className = 'fac-modal-label-title';
+        document.getElementById('facModalLabelTitle').textContent = label;
+        var sub = document.getElementById('facModalLabelSub');
+        if (_facSubLabel) { sub.className = 'fac-modal-label-sub'; sub.textContent = _facSubLabel; sub.style.display = ''; }
+        else { sub.style.display = 'none'; sub.textContent = ''; }
+    }
+    var multi = _facImgList.length > 1;
+    var prev = document.getElementById('facModalPrev');
+    var next = document.getElementById('facModalNext');
+    var counter = document.getElementById('facModalCounter');
+    prev.style.display = multi ? 'flex' : 'none';
+    next.style.display = multi ? 'flex' : 'none';
+    counter.style.display = multi ? 'block' : 'none';
+    if (multi) counter.textContent = (_facImgIdx + 1) + ' / ' + _facImgList.length;
+    prev.disabled = _facImgIdx === 0;
+    next.disabled = _facImgIdx === _facImgList.length - 1;
+}
+function facModalNav(dir) {
+    var n = _facImgIdx + dir;
+    if (n >= 0 && n < _facImgList.length) { _facImgIdx = n; _renderFacModal(); }
+}
+function closeFacImg(e) {
+    if (e.target === document.getElementById('facPhotoModal')) {
+        document.getElementById('facPhotoModal').classList.remove('open');
+        var v = document.getElementById('facModalVideo'); v.pause(); v.src = '';
+    }
+}
+const FAC_IMG_MAP = {
+    '최고급 비데 일체형 양변기': { imgs:'images/amenity/bidet/video.mp4', sub:'안전댐퍼 · 자동 물내림 · 무선리모컨 · 온풍건조 · 온열시트 · 리듬 · 노즐청소' },
+    '골드 대형거울': { imgs:['images/amenity/mirror-large/1.jpg','images/amenity/mirror-large/2.jpg','images/amenity/mirror-large/3.jpg','images/amenity/mirror-large/4.jpg','images/amenity/mirror-large/5.jpg'] },
+    '고급 골드 샤워기': { imgs:['images/amenity/shower/video.mp4','images/amenity/shower/1.jpg','images/amenity/shower/2.jpg','images/amenity/shower/3.jpg','images/amenity/shower/4.jpg'], sub:'핸드 샤워기 / 해바라기 샤워기 / 토수구 세가지 방식으로 욕실에서 편리하게 사용가능' },
+    '고급 골드 세면대': { imgs:['images/amenity/sink/1.jpg','images/amenity/sink/2.jpg'] },
+    '고급 골드 휴지걸이': { imgs:['images/amenity/toilet-holder/video.mp4','images/amenity/toilet-holder/1.png'] },
+    '욕조': { imgs:['images/amenity/bathtub/1.png','images/amenity/bathtub/2.png','images/amenity/bathtub/3.png','images/amenity/bathtub/4.png'] },
+    '욕조 (랜덤배정, 요청시 배정)': { imgs:['images/amenity/bathtub/1.png','images/amenity/bathtub/2.png','images/amenity/bathtub/3.png','images/amenity/bathtub/4.png'] },
+    '욕실 환풍기': { imgs:['images/amenity/ventilation/video.mp4','images/amenity/ventilation/1.png'], sub:'힘펠환풍기 제로크 · BLDC Fan-Motor (고효율/저소음) · 정풍량 환기팬 인증 · 고기밀 모터댐퍼' },
+    '욕실 슬리퍼': { imgs:'images/amenity/bathroom-slipper.jpg' },
+    '전용 욕실': { imgs:['images/amenity/bathroom/1.jpg','images/amenity/bathroom/2.jpg','images/amenity/bathroom/3.jpg','images/amenity/bathroom/4.jpg','images/amenity/bathroom/5.jpg'] },
+    '칫솔 / 치약': { imgs:['images/amenity/toothbrush/1.png','images/amenity/toothbrush/2.jpg','images/amenity/amenity-end.jpg'] },
+    '폼클렌징': { imgs:['images/amenity/foam-cleanser.jpg','images/amenity/amenity-end.jpg'] },
+    '레이디셋': { imgs:['images/amenity/ladyset.jpg','images/amenity/amenity-end.jpg'] },
+    '면도기': { imgs:['images/amenity/razor.jpg','images/amenity/amenity-end.jpg'] },
+    '샴푸 / 컨디셔너 / 바디워시': { imgs:['images/amenity/shampoo/1.jpg','images/amenity/shampoo/2.jpg'] },
+    'LG 천정형 에어컨 / 난방': { imgs:'images/amenity/aircon.jpg', sub:'LG 휘센 1Way · 빠르고 쾌적하게 냉방,청정관리로 편안함을 더한 천장형 에어컨' },
+    '무소음 냉장고': { imgs:['images/amenity/fridge/1.jpg','images/amenity/fridge/2.jpg','images/amenity/fridge/3.jpg'], sub:'확상흡수식/전열관식 냉각방식으로 완전무소음 냉장고' },
+    '공기청정기': { imgs:['images/amenity/air-purifier/video.mp4','images/amenity/air-purifier/1.jpg'] },
+    '전기 주전자': { imgs:['images/amenity/kettle/video.mp4','images/amenity/kettle/1.jpg'] },
+    '헤어드라이기 / 고데기': { imgs:['images/amenity/hairdryer/video.mp4','images/amenity/hairdryer/1.jpg'] },
+    '고급 원형테이블 / 의자': { imgs:['images/amenity/table-chair/1.jpg','images/amenity/table-chair/2.jpg','images/amenity/table-chair/3.jpg','images/amenity/table-chair/4.jpg','images/amenity/table-chair/5.jpg'] },
+    '65인치 TV': { imgs:'images/amenity/tv.png' },
+    '객실 환풍기': { imgs:['images/amenity/ventilation/video.mp4','images/amenity/ventilation/1.png'], sub:'힘펠환풍기 제로크 · BLDC Fan-Motor (고효율/저소음) · 정풍량 환기팬 인증 · 고기밀 모터댐퍼' },
+    '침대 옆 콘센트 / 핸드폰충전기': { imgs:['images/amenity/outlet/1.jpg','images/amenity/outlet/2.jpg'] },
+    '타월': { imgs:['images/amenity/towel/1.jpg','images/amenity/towel/2.jpg','images/amenity/towel/3.jpg'] },
+    '화장품 (여성/남성용 스킨·로션)': { imgs:'images/amenity/cosmetics.jpg' },
+    '객실 가운': { imgs:['images/amenity/gown/1.png','images/amenity/gown/2.jpeg'] },
+    '빗 / 옷걸이 / 슬리퍼': { imgs:['images/amenity/comb-hanger/1.jpg','images/amenity/comb-hanger/2.jpg','images/amenity/comb-hanger/3.jpg'] },
+    '전자레인지': { imgs:['images/amenity/microwave/video.mp4','images/amenity/microwave/1.jpg','images/amenity/microwave/2.webp','images/amenity/microwave/3.webp'], sub:'LG디오스 전자레인지 · 겉과 속을 균일하게 조리하는 스마트 인버터\n높은 출력으로 빠르게 조리하는 1,000W출력 · 기름때가 스며들지 않는 항균 처리된 이지클린 코팅' },
+    '정수기': { imgs:'images/amenity/water-station.jpg' },
+    '제빙기': { imgs:'images/amenity/water-station.jpg' },
+    '커피머신': { imgs:'images/amenity/water-station.jpg' },
+    '무료 생수': { imgs:['images/amenity/water/1.jpg','images/amenity/water/2.png'] },
+    '키오스크': { imgs:'images/amenity/kiosk.jpg' },
+    '넷플릭스 / 디즈니+ / 티빙 (전 객실 무료시청)': { imgs:'images/amenity/ott.mp4' },
+    '애플TV+ / 유튜브 (전 객실 무료시청)': { imgs:'images/amenity/ott.mp4' },
+    '고사양 PC (GeForce 3060, RAM 16GB)': { imgs:'images/amenity/pc.png' },
+    '게이밍 모니터 (32인치 165Hz LED)': { imgs:'images/amenity/gaming-monitor.mp4' },
+    '게이밍 LED 키보드': { imgs:'images/amenity/gaming-keyboard.mp4' },
+};
+</script>
 </body>
 </html>
 
