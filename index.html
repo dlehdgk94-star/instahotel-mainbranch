@@ -732,6 +732,9 @@
             <button id="mob-book-trigger" onclick="toggleMobPanel(event)">예약하기</button>
         </div>
 
+        <!-- 모바일 전용: 예약 패널 백드롭 -->
+        <div id="mob-panel-backdrop" onclick="closeMobPanelIfOpen()"></div>
+
         <!-- 모바일 전용: 펼쳐지는 예약 패널 -->
         <div id="mob-book-panel">
             <div class="mob-panel-row" onclick="toggleCalendarPopup(event)">
@@ -2519,6 +2522,8 @@
                 if (panel && !panel.classList.contains('open')) {
                     panel.classList.add('open');
                     if (triggerBar) triggerBar.style.display = 'none';
+                    var bd = document.getElementById('mob-panel-backdrop');
+                    if (bd) bd.classList.add('open');
                     syncMobPanel();
                 }
                 return;
@@ -2975,13 +2980,16 @@
             if (e) e.stopPropagation();
             var panel = document.getElementById('mob-book-panel');
             var triggerBar = document.getElementById('mob-trigger-bar');
+            var bd = document.getElementById('mob-panel-backdrop');
             if (panel.classList.contains('open')) {
                 panel.classList.remove('open');
                 if (triggerBar) triggerBar.style.display = '';
+                if (bd) bd.classList.remove('open');
                 closeDropdowns(null);
             } else {
                 panel.classList.add('open');
                 if (triggerBar) triggerBar.style.display = 'none';
+                if (bd) bd.classList.add('open');
                 syncMobPanel();
             }
         }
@@ -2991,9 +2999,12 @@
             if (panel && panel.classList.contains('open')) {
                 panel.classList.remove('open');
                 if (triggerBar) triggerBar.style.display = '';
+                var bd = document.getElementById('mob-panel-backdrop');
+                if (bd) bd.classList.remove('open');
                 closeDropdowns(null);
             }
         }
+        function closeMobPanel() { closeMobPanelIfOpen(); }
         function syncMobPanel() {
             var nights = checkinDate && checkoutDate ? Math.round((checkoutDate - checkinDate) / 86400000) : 1;
             var nl = document.getElementById('mob-panel-nights');
