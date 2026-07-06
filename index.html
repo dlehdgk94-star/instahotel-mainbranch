@@ -576,6 +576,8 @@
         .modal-amenity-col-title{ font-size:16px; font-weight:700; color:rgb(28,28,28); display:flex; align-items:center; gap:6px; margin-bottom:10px; font-family:'Barlow',sans-serif; }
         .modal-amenity-col-title i{ font-size:14px; color:rgb(28,28,28); }
         .modal-amenity-item{ font-size:14px; font-weight:500; color:rgb(28,28,28); padding:5px 0; font-family:'Barlow',sans-serif; }
+        .modal-amenity-item-click{ cursor:pointer; border-radius:5px; padding:5px 6px 5px 0; transition:background 0.15s,color 0.15s; }
+        .modal-amenity-item-click:hover{ background:#e8f6f8; color:#00768e; }
     </style>
     <link rel="stylesheet" href="responsive.css?v=3">
 </head>
@@ -3190,6 +3192,48 @@
             });
         }
 
+        const FAC_IMG_MAP = {
+            '최고급 비데 일체형 양변기':          { imgs:'images/amenity/bidet/video.mp4', sub:'안전댐퍼 · 자동 물내림 · 무선리모컨 · 온풍건조 · 온열시트 · 리듬 · 노즐청소' },
+            '골드 대형거울':                      { imgs:['images/amenity/mirror-large/1.jpg','images/amenity/mirror-large/2.jpg','images/amenity/mirror-large/3.jpg','images/amenity/mirror-large/4.jpg','images/amenity/mirror-large/5.jpg'] },
+            '고급 골드 샤워기':                   { imgs:['images/amenity/shower/video.mp4','images/amenity/shower/1.jpg','images/amenity/shower/2.jpg','images/amenity/shower/3.jpg','images/amenity/shower/4.jpg'], sub:'핸드 샤워기 / 해바라기 샤워기 / 토수구 세가지 방식으로 욕실에서 편리하게 사용가능' },
+            '고급 골드 세면대':                   { imgs:['images/amenity/sink/1.jpg','images/amenity/sink/2.jpg'] },
+            '고급 골드 휴지걸이':                 { imgs:['images/amenity/toilet-holder/video.mp4','images/amenity/toilet-holder/1.png'] },
+            '욕조':                               { imgs:['images/amenity/bathtub/1.png','images/amenity/bathtub/2.png','images/amenity/bathtub/3.png','images/amenity/bathtub/4.png'] },
+            '욕조 (랜덤배정, 요청시 배정)':        { imgs:['images/amenity/bathtub/1.png','images/amenity/bathtub/2.png','images/amenity/bathtub/3.png','images/amenity/bathtub/4.png'] },
+            '욕실 환풍기':                        { imgs:['images/amenity/ventilation/video.mp4','images/amenity/ventilation/1.png'], sub:'힘펠환풍기 제로크 · BLDC Fan-Motor (고효율/저소음) · 정풍량 환기팬 인증 · 고기밀 모터댐퍼' },
+            '욕실 슬리퍼':                        { imgs:'images/amenity/bathroom-slipper.jpg' },
+            '전용 욕실':                          { imgs:['images/amenity/bathroom/1.jpg','images/amenity/bathroom/2.jpg','images/amenity/bathroom/3.jpg','images/amenity/bathroom/4.jpg','images/amenity/bathroom/5.jpg'] },
+            '칫솔 / 치약':                        { imgs:['images/amenity/toothbrush/1.png','images/amenity/toothbrush/2.jpg','images/amenity/amenity-end.jpg'] },
+            '폼클렌징':                           { imgs:['images/amenity/foam-cleanser.jpg','images/amenity/amenity-end.jpg'] },
+            '레이디셋':                           { imgs:['images/amenity/ladyset.jpg','images/amenity/amenity-end.jpg'] },
+            '면도기':                             { imgs:['images/amenity/razor.jpg','images/amenity/amenity-end.jpg'] },
+            '샴푸 / 컨디셔너 / 바디워시':          { imgs:['images/amenity/shampoo/1.jpg','images/amenity/shampoo/2.jpg'] },
+            'LG 천정형 에어컨 / 난방':             { imgs:'images/amenity/aircon.jpg', sub:'LG 휘센 1Way · 빠르고 쾌적하게 냉방,청정관리로 편안함을 더한 천장형 에어컨' },
+            '무소음 냉장고':                      { imgs:['images/amenity/fridge/1.jpg','images/amenity/fridge/2.jpg','images/amenity/fridge/3.jpg'], sub:'확상흡수식/전열관식 냉각방식으로 완전무소음 냉장고' },
+            '공기청정기':                         { imgs:['images/amenity/air-purifier/video.mp4','images/amenity/air-purifier/1.jpg'] },
+            '전기 주전자':                        { imgs:['images/amenity/kettle/video.mp4','images/amenity/kettle/1.jpg'] },
+            '헤어드라이기 / 고데기':              { imgs:['images/amenity/hairdryer/video.mp4','images/amenity/hairdryer/1.jpg'] },
+            '고급 원형테이블 / 의자':             { imgs:['images/amenity/table-chair/1.jpg','images/amenity/table-chair/2.jpg','images/amenity/table-chair/3.jpg','images/amenity/table-chair/4.jpg','images/amenity/table-chair/5.jpg'] },
+            '65인치 TV':                          { imgs:'images/amenity/tv.png' },
+            '객실 환풍기':                        { imgs:['images/amenity/ventilation/video.mp4','images/amenity/ventilation/1.png'], sub:'힘펠환풍기 제로크 · BLDC Fan-Motor (고효율/저소음) · 정풍량 환기팬 인증 · 고기밀 모터댐퍼' },
+            '침대 옆 콘센트 / 핸드폰충전기':      { imgs:['images/amenity/outlet/1.jpg','images/amenity/outlet/2.jpg'] },
+            '타월':                               { imgs:['images/amenity/towel/1.jpg','images/amenity/towel/2.jpg','images/amenity/towel/3.jpg'] },
+            '화장품 (여성/남성용 스킨·로션)':      { imgs:'images/amenity/cosmetics.jpg' },
+            '객실 가운':                          { imgs:['images/amenity/gown/1.png','images/amenity/gown/2.jpeg'] },
+            '빗 / 옷걸이 / 슬리퍼':              { imgs:['images/amenity/comb-hanger/1.jpg','images/amenity/comb-hanger/2.jpg','images/amenity/comb-hanger/3.jpg'] },
+            '전자레인지':                         { imgs:['images/amenity/microwave/video.mp4','images/amenity/microwave/1.jpg','images/amenity/microwave/2.webp','images/amenity/microwave/3.webp'], sub:'LG디오스 전자레인지 · 겉과 속을 균일하게 조리하는 스마트 인버터\n높은 출력으로 빠르게 조리하는 1,000W출력 · 기름때가 스며들지 않는 항균 처리된 이지클린 코팅' },
+            '정수기':                             { imgs:'images/amenity/water-station.jpg' },
+            '제빙기':                             { imgs:'images/amenity/water-station.jpg' },
+            '커피머신':                           { imgs:'images/amenity/water-station.jpg' },
+            '무료 생수':                          { imgs:['images/amenity/water/1.jpg','images/amenity/water/2.png'] },
+            '키오스크':                           { imgs:'images/amenity/kiosk.jpg' },
+            '넷플릭스 / 디즈니+ / 티빙 (전 객실 무료시청)': { imgs:'images/amenity/ott.mp4' },
+            '애플TV+ / 유튜브 (전 객실 무료시청)':          { imgs:'images/amenity/ott.mp4' },
+            '고사양 PC (GeForce 3060, RAM 16GB)':           { imgs:'images/amenity/pc.png' },
+            '게이밍 모니터 (32인치 165Hz LED)':             { imgs:'images/amenity/gaming-monitor.mp4' },
+            '게이밍 LED 키보드':                            { imgs:'images/amenity/gaming-keyboard.mp4' },
+        };
+
         function openRoomModal(roomId) {
             var data = ROOM_DATA[roomId];
             if (!data) return;
@@ -3234,7 +3278,15 @@
                 div.appendChild(t);
                 col.items.forEach(function(item) {
                     var p = document.createElement('p');
-                    p.className = 'modal-amenity-item';
+                    var entry = FAC_IMG_MAP[item];
+                    if (entry) {
+                        p.className = 'modal-amenity-item modal-amenity-item-click';
+                        p.onclick = (function(label, e) {
+                            return function() { showFacImg(label, e.imgs, e.sub); };
+                        })(item, entry);
+                    } else {
+                        p.className = 'modal-amenity-item';
+                    }
                     p.textContent = item;
                     div.appendChild(p);
                 });
