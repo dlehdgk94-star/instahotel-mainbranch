@@ -832,7 +832,7 @@
                     <hr class="room-card-divider">
                     <div class="room-card-actions">
                         <button class="room-card-detail" onclick="openRoomModal('edelweiss')">자세히 보기</button>
-                        <button class="room-card-book" onclick="openBookingCalendar('edelweiss')">요금 조회</button>
+                        <button class="room-card-book" onclick="openBookingCalendar('edelweiss', event)">요금 조회</button>
                     </div>
                 </div>
             </div>
@@ -858,7 +858,7 @@
                     <hr class="room-card-divider">
                     <div class="room-card-actions">
                         <button class="room-card-detail" onclick="openRoomModal('aurora')">자세히 보기</button>
-                        <button class="room-card-book" onclick="openBookingCalendar('aurora')">요금 조회</button>
+                        <button class="room-card-book" onclick="openBookingCalendar('aurora', event)">요금 조회</button>
                     </div>
                 </div>
             </div>
@@ -884,7 +884,7 @@
                     <hr class="room-card-divider">
                     <div class="room-card-actions">
                         <button class="room-card-detail" onclick="openRoomModal('glorio')">자세히 보기</button>
-                        <button class="room-card-book" onclick="openBookingCalendar('glorio')">요금 조회</button>
+                        <button class="room-card-book" onclick="openBookingCalendar('glorio', event)">요금 조회</button>
                     </div>
                 </div>
             </div>
@@ -910,7 +910,7 @@
                     <hr class="room-card-divider">
                     <div class="room-card-actions">
                         <button class="room-card-detail" onclick="openRoomModal('envidion')">자세히 보기</button>
-                        <button class="room-card-book" onclick="openBookingCalendar('envidion')">요금 조회</button>
+                        <button class="room-card-book" onclick="openBookingCalendar('envidion', event)">요금 조회</button>
                     </div>
                 </div>
             </div>
@@ -936,7 +936,7 @@
                     <hr class="room-card-divider">
                     <div class="room-card-actions">
                         <button class="room-card-detail" onclick="openRoomModal('special')">자세히 보기</button>
-                        <button class="room-card-book" onclick="openBookingCalendar('special')">요금 조회</button>
+                        <button class="room-card-book" onclick="openBookingCalendar('special', event)">요금 조회</button>
                     </div>
                 </div>
             </div>
@@ -962,7 +962,7 @@
                     <hr class="room-card-divider">
                     <div class="room-card-actions">
                         <button class="room-card-detail" onclick="openRoomModal('ruby')">자세히 보기</button>
-                        <button class="room-card-book" onclick="openBookingCalendar('ruby')">요금 조회</button>
+                        <button class="room-card-book" onclick="openBookingCalendar('ruby', event)">요금 조회</button>
                     </div>
                 </div>
             </div>
@@ -2510,7 +2510,9 @@
             }, 200);
         }
 
-        function openBookingCalendar() {
+        function openBookingCalendar(roomId, e) {
+            if (e) e.stopPropagation();
+            if (roomId) selectedRoomId = roomId;
             if (window.innerWidth <= 768) {
                 var panel = document.getElementById('mob-book-panel');
                 var triggerBar = document.getElementById('mob-trigger-bar');
@@ -3444,6 +3446,7 @@
 <script src="ai-chat.js"></script>
 </body>
 </html>
+
 
 
 
