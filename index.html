@@ -2515,6 +2515,7 @@
 
         function openBookingCalendar(roomId, e) {
             if (e) e.stopPropagation();
+            if (Date.now() - _panelCloseTime < 350) return;
             if (roomId) selectedRoomId = roomId;
             if (window.innerWidth <= 768) {
                 var panel = document.getElementById('mob-book-panel');
@@ -2993,6 +2994,7 @@
                 syncMobPanel();
             }
         }
+        var _panelCloseTime = 0;
         function closeMobPanelIfOpen() {
             var panel = document.getElementById('mob-book-panel');
             var triggerBar = document.getElementById('mob-trigger-bar');
@@ -3002,6 +3004,7 @@
                 var bd = document.getElementById('mob-panel-backdrop');
                 if (bd) bd.classList.remove('open');
                 closeDropdowns(null);
+                _panelCloseTime = Date.now();
             }
         }
         function closeMobPanel() { closeMobPanelIfOpen(); }
