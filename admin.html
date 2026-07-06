@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -277,7 +277,7 @@
                 <input class="fi fi-search" id="searchInput" type="text" placeholder="이름·이메일·예약번호 검색..." oninput="applyFilter()">
                 <select class="fi fi-select" id="filterRoom" onchange="applyFilter()">
                     <option value="">전체 객실</option>
-                    <option>이코노미 룸</option><option>스탠다드 룸</option><option>디럭스 룸</option>
+                    <option>이코노미 룸</option><option>스탠다드 룸 (디자인 랜덤배정)</option><option>디럭스 룸 (디자인 랜덤배정)</option>
                     <option>트윈 룸</option><option>스페셜 룸</option><option>루비 룸</option>
                 </select>
                 <select class="fi fi-select" id="filterStatus" onchange="applyFilter()">
@@ -447,8 +447,8 @@ const _sb = window.supabase.createClient(
 
 const ROOM_DEFAULTS = {
     edelweiss: { name:'이코노미 룸', prices:[49500,  58500,  72000],  stock:5 },
-    aurora:    { name:'스탠다드 룸', prices:[58000,  67000,  81000],  stock:5 },
-    glorio:    { name:'디럭스 룸',  prices:[67000,  76000,  99000],  stock:3 },
+    aurora:    { name:'스탠다드 룸 (디자인 랜덤배정)', prices:[58000,  67000,  81000],  stock:5 },
+    glorio:    { name:'디럭스 룸 (디자인 랜덤배정)',  prices:[67000,  76000,  99000],  stock:3 },
     envidion:  { name:'트윈 룸',    prices:[76000,  85000,  108000], stock:3 },
     special:   { name:'스페셜 룸',  prices:[99000,  108000, 126000], stock:2 },
     ruby:      { name:'루비 룸',    prices:[76000,  85000,  108000], stock:2 }
