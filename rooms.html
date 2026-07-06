@@ -1115,13 +1115,16 @@
         var G_GAP = 16;
 
         function _setGalleryTrack(animate) {
+            var slideW = Math.min(G_SLIDE_W, window.innerWidth);
             var track = document.getElementById('galleryTrack');
-            var peek = (window.innerWidth - G_SLIDE_W) / 2;
+            var peek = (window.innerWidth - slideW) / 2;
             track.querySelectorAll('.gallery-slide').forEach(function(s, i) {
+                s.style.width = slideW + 'px';
+                s.style.minWidth = slideW + 'px';
                 s.classList.toggle('g-active', i === _galleryIdx);
             });
             track.style.transition = animate ? 'transform 0.38s ease' : 'none';
-            track.style.transform = 'translateX(' + (peek - _galleryIdx * (G_SLIDE_W + G_GAP)) + 'px)';
+            track.style.transform = 'translateX(' + (peek - _galleryIdx * (slideW + G_GAP)) + 'px)';
             document.getElementById('galleryCounter').textContent = (_galleryIdx + 1) + ' / ' + _galleryImages.length;
         }
 

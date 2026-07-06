@@ -2864,13 +2864,16 @@
         var PG_GAP = 16;
 
         function _setPGTrack(animate) {
+            var slideW = Math.min(PG_SLIDE_W, window.innerWidth);
             var track = document.getElementById('pgalleryTrack');
-            var peek = (window.innerWidth - PG_SLIDE_W) / 2;
+            var peek = (window.innerWidth - slideW) / 2;
             track.querySelectorAll('.pgallery-slide').forEach(function(s, i) {
+                s.style.width = slideW + 'px';
+                s.style.minWidth = slideW + 'px';
                 s.classList.toggle('pg-active', i === _pgIdx);
             });
             track.style.transition = animate ? 'transform 0.38s ease' : 'none';
-            track.style.transform = 'translateX(' + (peek - _pgIdx * (PG_SLIDE_W + PG_GAP)) + 'px)';
+            track.style.transform = 'translateX(' + (peek - _pgIdx * (slideW + PG_GAP)) + 'px)';
             document.getElementById('pgalleryCounter').textContent = (_pgIdx + 1) + ' / ' + _pgImages.length;
         }
 
@@ -3341,13 +3344,16 @@
         var RG_GAP = 16;
 
         function _setRoomGalleryTrack(animate) {
+            var slideW = Math.min(RG_SLIDE_W, window.innerWidth);
             var track = document.getElementById('roomGalleryTrack');
-            var peek = (window.innerWidth - RG_SLIDE_W) / 2;
+            var peek = (window.innerWidth - slideW) / 2;
             track.querySelectorAll('.gallery-slide').forEach(function(s, i) {
+                s.style.width = slideW + 'px';
+                s.style.minWidth = slideW + 'px';
                 s.classList.toggle('g-active', i === _rgIdx);
             });
             track.style.transition = animate ? 'transform 0.38s ease' : 'none';
-            track.style.transform = 'translateX(' + (peek - _rgIdx * (RG_SLIDE_W + RG_GAP)) + 'px)';
+            track.style.transform = 'translateX(' + (peek - _rgIdx * (slideW + RG_GAP)) + 'px)';
             document.getElementById('roomGalleryCounter').textContent = (_rgIdx + 1) + ' / ' + _rgImages.length;
         }
 
