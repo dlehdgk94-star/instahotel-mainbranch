@@ -3098,8 +3098,13 @@
         function showFacImg(label, imgs, subLabel) {
             _facImgList = Array.isArray(imgs) ? imgs : [imgs];
             _facImgIdx = 0;
-            _facSubLabel = subLabel || '';
-            _renderFacModal(label);
+            // label은 항상 한국어 키 — 현재 언어로 번역
+            var displayLabel = typeof tFacItem === 'function' ? tFacItem(label) : label;
+            // 부제 설명: fac.sub.<키> 번역 시도, 없으면 전달된 원본 사용
+            var subKey = 'fac.sub.' + label;
+            var trSub = typeof t === 'function' ? t(subKey) : subKey;
+            _facSubLabel = (trSub !== subKey) ? trSub : (subLabel || '');
+            _renderFacModal(displayLabel);
             document.getElementById('facPhotoModal').classList.add('open');
         }
         function _renderFacModal(label) {
@@ -3336,9 +3341,9 @@
                     var displayLabel = (typeof tFacItem === 'function') ? tFacItem(item) : item;
                     if (entry) {
                         p.className = 'modal-amenity-item modal-amenity-item-click';
-                        p.onclick = (function(trLabel, e) {
-                            return function() { showFacImg(trLabel, e.imgs, e.sub); };
-                        })(displayLabel, entry);
+                        p.onclick = (function(korKey, e) {
+                            return function() { showFacImg(korKey, e.imgs, e.sub); };
+                        })(item, entry);
                     } else {
                         p.className = 'modal-amenity-item';
                     }
