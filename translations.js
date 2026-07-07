@@ -205,6 +205,11 @@ const translations = {
     "fac.sub.LG 천정형 에어컨 / 난방": "LG 휘센 1Way · 빠르고 쾌적하게 냉방, 청정관리로 편안함을 더한 천장형 에어컨",
     "fac.sub.무소음 냉장고": "확상흡수식/전열관식 냉각방식으로 완전무소음 냉장고",
     "fac.sub.전자레인지": "LG디오스 전자레인지 · 겉과 속을 균일하게 조리하는 스마트 인버터 · 1,000W 고출력으로 빠르게 조리 · 기름때가 스며들지 않는 항균 이지클린 코팅",
+    // rooms.html 전용
+    "nav.util_benefit": "공식 홈페이지 예약 시 최대 혜택",
+    "rooms.all_rooms": "전체 객실",
+    "booking.select_room_alert": "객실을 선택해 주세요.",
+    "booking.min_price": "최저 요금",
   },
   en: {
     "nav.hotel": "About Hotel",
@@ -397,6 +402,10 @@ const translations = {
     "fac.sub.LG 천정형 에어컨 / 난방": "LG Whisen 1Way · Fast, refreshing cooling with built-in air purification — ceiling-mounted for total comfort",
     "fac.sub.무소음 냉장고": "Absorption / thermoelectric cooling technology — completely silent operation",
     "fac.sub.전자레인지": "LG DIOS Microwave · Smart inverter for even inside-and-out heating · High-power 1,000W output for fast cooking · EasyClean antibacterial coating that resists grease",
+    "nav.util_benefit": "Best rate guaranteed when booking direct",
+    "rooms.all_rooms": "All Rooms",
+    "booking.select_room_alert": "Please select a room.",
+    "booking.min_price": "Lowest Rate",
   },
   ja: {
     "nav.hotel": "ホテル紹介",
@@ -589,6 +598,10 @@ const translations = {
     "fac.sub.LG 천정형 에어컨 / 난방": "LG ウィーゼン 1Way · 素早く快適な冷房と空気清浄機能を兼ね備えた天井型エアコン",
     "fac.sub.무소음 냉장고": "吸収式・電熱管式冷却方式による完全無音の冷蔵庫",
     "fac.sub.전자레인지": "LG DIOSレンジ · スマートインバーターで食材を均一に加熱 · 1,000W高出力で素早く調理 · 抗菌イージークリーンコーティングで油汚れを防止",
+    "nav.util_benefit": "公式サイト予約で最大特典",
+    "rooms.all_rooms": "全客室",
+    "booking.select_room_alert": "客室を選択してください。",
+    "booking.min_price": "最安値",
   },
   zh: {
     "nav.hotel": "酒店介绍",
@@ -781,6 +794,10 @@ const translations = {
     "fac.sub.LG 천정형 에어컨 / 난방": "LG Whisen 1Way · 快速冷却，兼备空气净化功能的天花板嵌入式空调",
     "fac.sub.무소음 냉장고": "采用吸收式/热管式制冷方式，实现完全无声运行的冰箱",
     "fac.sub.전자레인지": "LG DIOS微波炉 · 智能变频均匀加热 · 1,000W高功率快速烹饪 · 抗菌EasyClean涂层，防止油污渗入",
+    "nav.util_benefit": "官网直订享最大优惠",
+    "rooms.all_rooms": "全部客房",
+    "booking.select_room_alert": "请选择客房。",
+    "booking.min_price": "最低价",
   }
 };
 

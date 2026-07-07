@@ -142,7 +142,9 @@
         .room-card-price { display: flex; flex-direction: row; gap: 10px; align-items: center; flex-shrink: 0; }
         .room-card-price-item { font-size: 12px; color: rgb(112,112,112); white-space: nowrap; }
         .room-card-price-item strong { font-size: 13px; font-weight: 600; color: rgb(28,28,28); }
+        .price-conv { font-size: 11px; color: rgb(100,140,80); font-weight: 500; }
         .room-price-notice { font-size: 11px; color: rgb(170,170,170); margin: 0; text-align: right; }
+        .room-price-note { font-size: 10px; color: rgb(190,140,60); margin: 4px 0 0; font-style: italic; }
 
         .room-card-divider{ border:none; border-top:1px solid #d8d8d8; margin-bottom:16px; }
 
@@ -186,7 +188,7 @@
         .modal-book-btn:hover{ background:rgb(95,89,94); }
         .modal-sub-row{ display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:14px; }
         .modal-room-sub{ font-size:14px; font-weight:500; color:rgb(28,28,28); line-height:1.55; margin:0; font-family:'Barlow',sans-serif; }
-        .modal-room-price{ display:flex; gap:12px; align-items:center; flex-shrink:0; }
+        .modal-room-price{ display:flex; gap:6px 12px; align-items:center; flex-shrink:0; flex-wrap:wrap; justify-content:flex-end; }
         .modal-price-item{ font-size:13px; color:rgb(112,112,112); white-space:nowrap; font-family:'Barlow',sans-serif; }
         .modal-price-item strong{ font-size:13px; font-weight:600; color:rgb(28,28,28); }
         .modal-divider{ border:none; border-top:1px solid #dedede; margin:14px 0 16px; }
@@ -279,7 +281,7 @@
     <div class="top-util-bar">
         <div class="hamburger-menu"><span></span><span></span><span></span></div>
         <div class="util-right-group">
-            <button class="util-login-btn">공식 홈페이지 예약 시 최대 혜택</button>
+            <button class="util-login-btn" data-i18n="nav.util_benefit">공식 홈페이지 예약 시 최대 혜택</button>
         </div>
     </div>
 
@@ -295,15 +297,15 @@
                     <i class="fa-solid fa-star"></i>
                     <i class="fa-solid fa-star-half-stroke"></i>
                 </span>
-                <span class="rating-text" onclick="openReviewModal()" style="cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; gap:8px;">4.9<span style="font-size:28px; line-height:1; position:relative; top:-2px;">·</span><span style="text-decoration:underline; text-underline-offset:3px;">1446개의 리뷰</span></span>
+                <span class="rating-text" onclick="openReviewModal()" style="cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; gap:8px;">4.9<span style="font-size:28px; line-height:1; position:relative; top:-2px;">·</span><span style="text-decoration:underline; text-underline-offset:3px;" data-i18n="header.reviews">1446개의 리뷰</span></span>
             </div>
         </div>
         <div class="header-right">
             <ul class="main-nav">
-                <li><a href="index.html">호텔소개</a></li>
-                <li class="active"><a href="rooms.html">객실예약</a></li>
-                <li><a href="gallery.html">갤러리</a></li>
-                <li><a href="nearby.html">주변안내</a></li>
+                <li><a href="index.html" data-i18n="nav.hotel">호텔소개</a></li>
+                <li class="active"><a href="rooms.html" data-i18n="nav.rooms">객실예약</a></li>
+                <li><a href="gallery.html" data-i18n="nav.gallery">갤러리</a></li>
+                <li><a href="nearby.html" data-i18n="nav.nearby">주변안내</a></li>
                 <li class="lang-selector" onclick="event.stopPropagation()">
                     <button class="lang-btn" onclick="toggleLangDropdown(event)"><i class="fa-solid fa-globe"></i><span id="langCode">KO</span><i class="fa-solid fa-chevron-down lang-chevron"></i></button>
                     <div class="lang-dropdown" id="langDropdown">
@@ -344,11 +346,11 @@
                             <div class="cal-grid" id="cal-grid-right"></div>
                         </div>
                     </div>
-                    <button class="dropdown-done-btn" onclick="calendarDone(event)">완료</button>
+                    <button class="dropdown-done-btn" onclick="calendarDone(event)" data-i18n="booking.calendar_done">완료</button>
                 </div>
             </div>
             <div class="booking-item" id="guest-booking-item">
-                <span class="booking-label">객실 & 투숙객</span>
+                <span class="booking-label" data-i18n="booking.guest_label">객실 & 투숙객</span>
                 <div class="booking-value" onclick="toggleGuestPopup(event)">
                     <span id="guest-summary-text">1 객실, 1 성인</span>
                     <i class="fa-solid fa-chevron-down"></i>
@@ -356,7 +358,7 @@
                 <div class="booking-dropdown guest-dropdown" id="guestPopup" onclick="event.stopPropagation()">
                     <i class="fa-solid fa-xmark dropdown-close" onclick="closeDropdowns(event)"></i>
                     <div class="guest-row">
-                        <div class="guest-label-box"><span class="g-title">객실</span></div>
+                        <div class="guest-label-box"><span class="g-title" data-i18n="booking.room">객실</span></div>
                         <div class="guest-controls">
                             <button class="btn-ctrl" onclick="updateGuest('room',-1)"><i class="fa-solid fa-minus"></i></button>
                             <span class="val-ctrl" id="val-room">1</span>
@@ -364,18 +366,18 @@
                         </div>
                     </div>
                     <div class="guest-row">
-                        <div class="guest-label-box"><span class="g-title">성인</span></div>
+                        <div class="guest-label-box"><span class="g-title" data-i18n="booking.adult">성인</span></div>
                         <div class="guest-controls">
                             <button class="btn-ctrl" onclick="updateGuest('adult',-1)"><i class="fa-solid fa-minus"></i></button>
                             <span class="val-ctrl" id="val-adult">1</span>
                             <button class="btn-ctrl" onclick="updateGuest('adult',1)"><i class="fa-solid fa-plus"></i></button>
                         </div>
                     </div>
-                    <button class="dropdown-done-btn" onclick="guestDone(event)">완료</button>
+                    <button class="dropdown-done-btn" onclick="guestDone(event)" data-i18n="booking.guest_done">완료</button>
                 </div>
             </div>
             <div class="booking-item" id="price-booking-item">
-                <span class="booking-label">객실선택 & 특별요금</span>
+                <span class="booking-label" data-i18n="booking.price_label">객실선택 & 특별요금</span>
                 <div class="booking-value" onclick="togglePricePopup(event)"><span id="min-price-text">최저 요금</span><i class="fa-solid fa-chevron-down"></i></div>
                 <div class="booking-dropdown price-popup" id="pricePopup" onclick="event.stopPropagation()">
                     <i class="fa-solid fa-xmark dropdown-close" onclick="event.stopPropagation(); document.getElementById('pricePopup').classList.remove('active')"></i>
@@ -383,7 +385,7 @@
                 </div>
             </div>
             <div class="booking-item">
-                <button class="search-btn" onclick="handleBookingBtn()">예약하기</button>
+                <button class="search-btn" onclick="handleBookingBtn()" data-i18n="booking.btn">예약하기</button>
             </div>
         </div>
     </div>
@@ -391,7 +393,7 @@
     <!-- 호텔 투숙을 즐기는 다양한 방법 -->
     <section class="hotel-ways-section">
       <div class="promo-pkg-header">
-        <h2 class="hotel-ways-title">호텔 투숙을 즐기는 다양한 방법</h2>
+        <h2 class="hotel-ways-title" data-i18n="ways.title">호텔 투숙을 즐기는 다양한 방법</h2>
       </div>
       <div class="promo-pkg-wrap">
         <div class="promo-pkg-slider" id="hwSlider">
@@ -420,168 +422,168 @@
     <!-- 객실 리스트 -->
     <section class="rooms-section" id="rooms-list">
         <div class="rooms-section-header">
-            <h2 class="rooms-section-title">전체 객실</h2>
+            <h2 class="rooms-section-title" data-i18n="rooms.all_rooms">전체 객실</h2>
         </div>
         <div class="rooms-grid">
 
             <!-- 이코노미 룸 -->
-            <div class="room-card" id="edelweiss">
+            <div class="room-card" id="edelweiss" data-room-id="edelweiss">
                 <div class="room-card-img-wrap">
                     <img src="images/rooms/edelweiss/1.jpg" alt="이코노미 룸" onerror="this.parentElement.style.background='#d4c9b8'">
                     <div class="room-card-expand" onclick="event.stopPropagation();openGallery('edelweiss')"><i class="fa-solid fa-expand"></i></div>
                 </div>
                 <div class="room-card-body">
                     <div class="room-card-title-row">
-                        <h3 class="room-card-name">이코노미 룸</h3>
+                        <h3 class="room-card-name" data-i18n="room.economy">이코노미 룸</h3>
                         <div class="room-card-price" data-room="edelweiss">
-                            <span class="room-card-price-item">(일~목) <strong>49,500</strong></span>
-                            <span class="room-card-price-item">(금) <strong>58,500</strong></span>
-                            <span class="room-card-price-item">(토) <strong>72,000</strong></span>
+                            <span class="room-card-price-item"><span data-i18n="price.weekday">(일~목)</span> <strong>49,500</strong></span>
+                            <span class="room-card-price-item"><span data-i18n="price.fri">(금)</span> <strong>58,500</strong></span>
+                            <span class="room-card-price-item"><span data-i18n="price.sat">(토)</span> <strong>72,000</strong></span>
                         </div>
                     </div>
                     <div class="room-card-meta">
-                        <p class="room-card-sub">기준 2인 / 최대 2인 &nbsp;·&nbsp; 퀸 침대 1개</p>
-                        <p class="room-price-notice">공휴일·성수기 요금 별도 적용</p>
+                        <p class="room-card-sub" data-i18n="room.economy.sub">기준 2인 / 최대 2인 · 퀸 침대 1개</p>
+                        <p class="room-price-notice" data-i18n="room.notice">공휴일·성수기 요금 별도 적용</p>
                     </div>
                     <hr class="room-card-divider">
                     <div class="room-card-actions">
-                        <button class="room-card-detail" onclick="openModal('edelweiss')">자세히 보기</button>
-                        <button class="room-card-book" onclick="openBookingCalendar('edelweiss')">요금 조회</button>
+                        <button class="room-card-detail" onclick="openModal('edelweiss')" data-i18n="room.detail">자세히 보기</button>
+                        <button class="room-card-book" onclick="openBookingCalendar('edelweiss')" data-i18n="room.book">요금 조회</button>
                     </div>
                 </div>
             </div>
 
             <!-- 스탠다드 룸 (디자인 랜덤배정) -->
-            <div class="room-card" id="aurora">
+            <div class="room-card" id="aurora" data-room-id="aurora">
                 <div class="room-card-img-wrap">
                     <img src="images/rooms/aurora/1.jpg" alt="스탠다드 룸 (디자인 랜덤배정)" onerror="this.parentElement.style.background='#b8c8d4'">
                     <div class="room-card-expand" onclick="event.stopPropagation();openGallery('aurora')"><i class="fa-solid fa-expand"></i></div>
                 </div>
                 <div class="room-card-body">
                     <div class="room-card-title-row">
-                        <h3 class="room-card-name">스탠다드 룸 <span class="room-name-badge">(디자인 랜덤배정)</span></h3>
+                        <h3 class="room-card-name"><span data-i18n="room.standard">스탠다드 룸</span> <span class="room-name-badge" data-i18n="room.standard.badge">(디자인 랜덤배정)</span></h3>
                         <div class="room-card-price" data-room="aurora">
-                            <span class="room-card-price-item">(일~목) <strong>58,000</strong></span>
-                            <span class="room-card-price-item">(금) <strong>67,000</strong></span>
-                            <span class="room-card-price-item">(토) <strong>81,000</strong></span>
+                            <span class="room-card-price-item"><span data-i18n="price.weekday">(일~목)</span> <strong>58,000</strong></span>
+                            <span class="room-card-price-item"><span data-i18n="price.fri">(금)</span> <strong>67,000</strong></span>
+                            <span class="room-card-price-item"><span data-i18n="price.sat">(토)</span> <strong>81,000</strong></span>
                         </div>
                     </div>
                     <div class="room-card-meta">
-                        <p class="room-card-sub">기준 2인 / 최대 2인 &nbsp;·&nbsp; 퀸 침대 1개<span class="room-sub-badge"> (디자인 랜덤배정)</span></p>
-                        <p class="room-price-notice">공휴일·성수기 요금 별도 적용</p>
+                        <p class="room-card-sub"><span data-i18n="room.standard.sub">기준 2인 / 최대 2인 · 퀸 침대 1개</span><span class="room-sub-badge"> <span data-i18n="room.standard.badge">(디자인 랜덤배정)</span></span></p>
+                        <p class="room-price-notice" data-i18n="room.notice">공휴일·성수기 요금 별도 적용</p>
                     </div>
                     <hr class="room-card-divider">
                     <div class="room-card-actions">
-                        <button class="room-card-detail" onclick="openModal('aurora')">자세히 보기</button>
-                        <button class="room-card-book" onclick="openBookingCalendar('aurora')">요금 조회</button>
+                        <button class="room-card-detail" onclick="openModal('aurora')" data-i18n="room.detail">자세히 보기</button>
+                        <button class="room-card-book" onclick="openBookingCalendar('aurora')" data-i18n="room.book">요금 조회</button>
                     </div>
                 </div>
             </div>
 
             <!-- 디럭스 룸 (디자인 랜덤배정) -->
-            <div class="room-card" id="glorio">
+            <div class="room-card" id="glorio" data-room-id="glorio">
                 <div class="room-card-img-wrap">
                     <img src="images/rooms/glorio/1.jpg" alt="디럭스 룸 (디자인 랜덤배정)" onerror="this.parentElement.style.background='#c8d4b8'">
                     <div class="room-card-expand" onclick="event.stopPropagation();openGallery('glorio')"><i class="fa-solid fa-expand"></i></div>
                 </div>
                 <div class="room-card-body">
                     <div class="room-card-title-row">
-                        <h3 class="room-card-name">디럭스 룸 <span class="room-name-badge">(디자인 랜덤배정)</span></h3>
+                        <h3 class="room-card-name"><span data-i18n="room.deluxe">디럭스 룸</span> <span class="room-name-badge" data-i18n="room.deluxe.badge">(디자인 랜덤배정)</span></h3>
                         <div class="room-card-price" data-room="glorio">
-                            <span class="room-card-price-item">(일~목) <strong>67,000</strong></span>
-                            <span class="room-card-price-item">(금) <strong>76,000</strong></span>
-                            <span class="room-card-price-item">(토) <strong>99,000</strong></span>
+                            <span class="room-card-price-item"><span data-i18n="price.weekday">(일~목)</span> <strong>67,000</strong></span>
+                            <span class="room-card-price-item"><span data-i18n="price.fri">(금)</span> <strong>76,000</strong></span>
+                            <span class="room-card-price-item"><span data-i18n="price.sat">(토)</span> <strong>99,000</strong></span>
                         </div>
                     </div>
                     <div class="room-card-meta">
-                        <p class="room-card-sub">기준 2인 / 최대 2인 &nbsp;·&nbsp; 퀸 침대 1개<span class="room-sub-badge"> (디자인 랜덤배정)</span></p>
-                        <p class="room-price-notice">공휴일·성수기 요금 별도 적용</p>
+                        <p class="room-card-sub"><span data-i18n="room.deluxe.sub">기준 2인 / 최대 2인 · 퀸 침대 1개</span><span class="room-sub-badge"> <span data-i18n="room.deluxe.badge">(디자인 랜덤배정)</span></span></p>
+                        <p class="room-price-notice" data-i18n="room.notice">공휴일·성수기 요금 별도 적용</p>
                     </div>
                     <hr class="room-card-divider">
                     <div class="room-card-actions">
-                        <button class="room-card-detail" onclick="openModal('glorio')">자세히 보기</button>
-                        <button class="room-card-book" onclick="openBookingCalendar('glorio')">요금 조회</button>
+                        <button class="room-card-detail" onclick="openModal('glorio')" data-i18n="room.detail">자세히 보기</button>
+                        <button class="room-card-book" onclick="openBookingCalendar('glorio')" data-i18n="room.book">요금 조회</button>
                     </div>
                 </div>
             </div>
 
             <!-- 트윈 룸 -->
-            <div class="room-card" id="envidion">
+            <div class="room-card" id="envidion" data-room-id="envidion">
                 <div class="room-card-img-wrap">
                     <img src="images/rooms/envidion/1.jpg" alt="트윈 룸" onerror="this.parentElement.style.background='#c8b8d4'">
                     <div class="room-card-expand" onclick="event.stopPropagation();openGallery('envidion')"><i class="fa-solid fa-expand"></i></div>
                 </div>
                 <div class="room-card-body">
                     <div class="room-card-title-row">
-                        <h3 class="room-card-name">트윈 룸</h3>
+                        <h3 class="room-card-name" data-i18n="room.twin">트윈 룸</h3>
                         <div class="room-card-price" data-room="envidion">
-                            <span class="room-card-price-item">(일~목) <strong>76,000</strong></span>
-                            <span class="room-card-price-item">(금) <strong>85,000</strong></span>
-                            <span class="room-card-price-item">(토) <strong>108,000</strong></span>
+                            <span class="room-card-price-item"><span data-i18n="price.weekday">(일~목)</span> <strong>76,000</strong></span>
+                            <span class="room-card-price-item"><span data-i18n="price.fri">(금)</span> <strong>85,000</strong></span>
+                            <span class="room-card-price-item"><span data-i18n="price.sat">(토)</span> <strong>108,000</strong></span>
                         </div>
                     </div>
                     <div class="room-card-meta">
-                        <p class="room-card-sub">기준 2인 / 최대 3인 무료 &nbsp;·&nbsp; 퀸 침대 1개 / 싱글 침대 1개</p>
-                        <p class="room-price-notice">공휴일·성수기 요금 별도 적용</p>
+                        <p class="room-card-sub" data-i18n="room.twin.sub">기준 2인 / 최대 3인 무료 · 퀸 침대 1개 / 싱글 침대 1개</p>
+                        <p class="room-price-notice" data-i18n="room.notice">공휴일·성수기 요금 별도 적용</p>
                     </div>
                     <hr class="room-card-divider">
                     <div class="room-card-actions">
-                        <button class="room-card-detail" onclick="openModal('envidion')">자세히 보기</button>
-                        <button class="room-card-book" onclick="openBookingCalendar('envidion')">요금 조회</button>
+                        <button class="room-card-detail" onclick="openModal('envidion')" data-i18n="room.detail">자세히 보기</button>
+                        <button class="room-card-book" onclick="openBookingCalendar('envidion')" data-i18n="room.book">요금 조회</button>
                     </div>
                 </div>
             </div>
 
             <!-- 스페셜 -->
-            <div class="room-card" id="special">
+            <div class="room-card" id="special" data-room-id="special">
                 <div class="room-card-img-wrap">
                     <img src="images/rooms/special/1.jpg" alt="스페셜" onerror="this.parentElement.style.background='#d4d0b8'">
                     <div class="room-card-expand" onclick="event.stopPropagation();openGallery('special')"><i class="fa-solid fa-expand"></i></div>
                 </div>
                 <div class="room-card-body">
                     <div class="room-card-title-row">
-                        <h3 class="room-card-name">스페셜</h3>
+                        <h3 class="room-card-name" data-i18n="room.special">스페셜</h3>
                         <div class="room-card-price" data-room="special">
-                            <span class="room-card-price-item">(일~목) <strong>99,000</strong></span>
-                            <span class="room-card-price-item">(금) <strong>108,000</strong></span>
-                            <span class="room-card-price-item">(토) <strong>126,000</strong></span>
+                            <span class="room-card-price-item"><span data-i18n="price.weekday">(일~목)</span> <strong>99,000</strong></span>
+                            <span class="room-card-price-item"><span data-i18n="price.fri">(금)</span> <strong>108,000</strong></span>
+                            <span class="room-card-price-item"><span data-i18n="price.sat">(토)</span> <strong>126,000</strong></span>
                         </div>
                     </div>
                     <div class="room-card-meta">
-                        <p class="room-card-sub">기준 2인 / 최대 4인 무료 &nbsp;·&nbsp; 퀸 침대 1개 / 싱글 침대 2개</p>
-                        <p class="room-price-notice">공휴일·성수기 요금 별도 적용</p>
+                        <p class="room-card-sub" data-i18n="room.special.sub">기준 2인 / 최대 4인 무료 · 퀸 침대 1개 / 싱글 침대 2개</p>
+                        <p class="room-price-notice" data-i18n="room.notice">공휴일·성수기 요금 별도 적용</p>
                     </div>
                     <hr class="room-card-divider">
                     <div class="room-card-actions">
-                        <button class="room-card-detail" onclick="openModal('special')">자세히 보기</button>
-                        <button class="room-card-book" onclick="openBookingCalendar('special')">요금 조회</button>
+                        <button class="room-card-detail" onclick="openModal('special')" data-i18n="room.detail">자세히 보기</button>
+                        <button class="room-card-book" onclick="openBookingCalendar('special')" data-i18n="room.book">요금 조회</button>
                     </div>
                 </div>
             </div>
 
             <!-- 루비룸 (애견동반) -->
-            <div class="room-card" id="ruby">
+            <div class="room-card" id="ruby" data-room-id="ruby">
                 <div class="room-card-img-wrap">
                     <img src="images/rooms/ruby/대표사진.png" alt="루비룸" onerror="this.parentElement.style.background='#d4b8b8'">
                     <div class="room-card-expand" onclick="event.stopPropagation();openGallery('ruby')"><i class="fa-solid fa-expand"></i></div>
                 </div>
                 <div class="room-card-body">
                     <div class="room-card-title-row">
-                        <h3 class="room-card-name">루비룸</h3>
+                        <h3 class="room-card-name" data-i18n="room.ruby">루비룸 (애견동반)</h3>
                         <div class="room-card-price" data-room="ruby">
-                            <span class="room-card-price-item">(일~목) <strong>76,000</strong></span>
-                            <span class="room-card-price-item">(금) <strong>85,000</strong></span>
-                            <span class="room-card-price-item">(토) <strong>108,000</strong></span>
+                            <span class="room-card-price-item"><span data-i18n="price.weekday">(일~목)</span> <strong>76,000</strong></span>
+                            <span class="room-card-price-item"><span data-i18n="price.fri">(금)</span> <strong>85,000</strong></span>
+                            <span class="room-card-price-item"><span data-i18n="price.sat">(토)</span> <strong>108,000</strong></span>
                         </div>
                     </div>
                     <div class="room-card-meta">
-                        <p class="room-card-sub"><i class="fa-solid fa-paw" style="color:#2e7d32;font-size:11px;"></i> 애견동반 가능 룸 &nbsp;·&nbsp; 기준 2인 / 최대 2인 &nbsp;·&nbsp; 퀸 침대 1개</p>
-                        <p class="room-price-notice">공휴일·성수기 요금 별도 적용</p>
+                        <p class="room-card-sub"><i class="fa-solid fa-paw" style="color:#2e7d32;font-size:11px;"></i> <span data-i18n="room.ruby.modal.sub">기준 2인 / 최대 2인 · 퀸 침대 1개 · 애견동반 가능</span></p>
+                        <p class="room-price-notice" data-i18n="room.notice">공휴일·성수기 요금 별도 적용</p>
                     </div>
                     <hr class="room-card-divider">
                     <div class="room-card-actions">
-                        <button class="room-card-detail" onclick="openModal('ruby')">자세히 보기</button>
-                        <button class="room-card-book" onclick="openBookingCalendar('ruby')">요금 조회</button>
+                        <button class="room-card-detail" onclick="openModal('ruby')" data-i18n="room.detail">자세히 보기</button>
+                        <button class="room-card-book" onclick="openBookingCalendar('ruby')" data-i18n="room.book">요금 조회</button>
                     </div>
                 </div>
             </div>
@@ -638,12 +640,24 @@
         const DAY_NAMES=['일','월','화','수','목','금','토'];
         const MONTHS_KO=['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'];
 
-        function fmtDate(d){ return (d.getMonth()+1)+'월 '+d.getDate()+'일, '+DAY_NAMES[d.getDay()]; }
-        function updateDateUI(){
-            const nights=Math.round((checkoutDate-checkinDate)/86400000);
-            document.getElementById('nights-label').innerHTML='<i class="fa-regular fa-calendar"></i> 날짜 ('+nights+' 박)';
-            document.getElementById('checkin-date-text').textContent=fmtDate(checkinDate);
-            document.getElementById('checkout-date-text').textContent=fmtDate(checkoutDate);
+        function fmtDate(d) {
+            if (!d) return '';
+            var lang = typeof currentLang !== 'undefined' ? currentLang : 'ko';
+            var days = typeof calDayNames === 'function' ? calDayNames() : DAY_NAMES;
+            var m = d.getMonth() + 1, date = d.getDate(), day = days[d.getDay()];
+            if (lang === 'en') {
+                var sm = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+                return sm[d.getMonth()] + ' ' + date + ', ' + day;
+            }
+            if (lang === 'ja' || lang === 'zh') return m + '月' + date + '日(' + day + ')';
+            return m + '월 ' + date + '일, ' + day;
+        }
+        function updateDateUI() {
+            var nights = Math.round((checkoutDate - checkinDate) / 86400000);
+            var nightsLabel = typeof fmtDateNights === 'function' ? fmtDateNights(nights) : '날짜 (' + nights + '박)';
+            document.getElementById('nights-label').innerHTML = '<i class="fa-regular fa-calendar"></i> ' + nightsLabel;
+            document.getElementById('checkin-date-text').textContent = checkinDate ? fmtDate(checkinDate) : (typeof t === 'function' ? t('booking.date_select') : '날짜 선택');
+            document.getElementById('checkout-date-text').textContent = checkoutDate ? fmtDate(checkoutDate) : '';
         }
 
         const ROOM_PRICE_TABLE = {
@@ -682,15 +696,18 @@
                 let total = 0;
                 for (let i = 0; i < nights; i++) { const d = new Date(checkinDate); d.setDate(d.getDate()+i); total += getNightRate(id, d); }
                 total *= roomCount;
+                var roomName = typeof getRoomName === 'function' ? getRoomName(id) : room.roomTitle;
                 if (!available) {
+                    var maxStr = typeof fmtUnavailMax === 'function' ? fmtUnavailMax(pt.maxGuests * roomCount) : '최대 ' + (pt.maxGuests*roomCount) + '인';
                     return '<div class="price-popup-row price-popup-unavail">' +
-                        '<span class="price-popup-name">'+room.roomTitle+'</span>' +
-                        '<span class="price-popup-total" style="color:rgb(180,180,180);">최대 '+(pt.maxGuests*roomCount)+'인</span>' +
+                        '<span class="price-popup-name">' + roomName + '</span>' +
+                        '<span class="price-popup-total" style="color:rgb(180,180,180);">' + maxStr + '</span>' +
                         '</div>';
                 }
-                return '<div class="price-popup-row" onclick="selectRoom(\''+id+'\')">' +
-                    '<span class="price-popup-name">'+room.roomTitle+'</span>' +
-                    '<span class="price-popup-total">'+nights+'박 총 '+fmtWon(total)+'원</span>' +
+                var totalStr = typeof fmtNightTotal === 'function' ? fmtNightTotal(nights, total) : nights + '박 총 ' + fmtWon(total) + '원';
+                return '<div class="price-popup-row" onclick="selectRoom(\'' + id + '\')">' +
+                    '<span class="price-popup-name">' + roomName + '</span>' +
+                    '<span class="price-popup-total">' + totalStr + '</span>' +
                     '</div>';
             }).join('');
         }
@@ -707,8 +724,9 @@
             if (!el || !checkinDate || !checkoutDate) return;
             if (selectedRoomId) {
                 const nights = Math.round((checkoutDate - checkinDate) / 86400000);
-                const roomName = ROOM_DATA && ROOM_DATA[selectedRoomId] ? ROOM_DATA[selectedRoomId].roomTitle : '';
-                el.textContent = (roomName ? roomName + ' · ' : '') + nights + '박 총 ' + fmtWon(calcRoomTotal(selectedRoomId)) + '원';
+                var roomName = typeof getRoomName === 'function' ? getRoomName(selectedRoomId) : (ROOM_DATA && ROOM_DATA[selectedRoomId] ? ROOM_DATA[selectedRoomId].roomTitle : '');
+                var totalStr = typeof fmtNightTotal === 'function' ? fmtNightTotal(nights, calcRoomTotal(selectedRoomId)) : nights + '박 총 ' + fmtWon(calcRoomTotal(selectedRoomId)) + '원';
+                el.textContent = (roomName ? roomName + ' · ' : '') + totalStr;
             }
         }
         function updateRoomPrices() {
@@ -718,7 +736,7 @@
                 populatePricePopup();
                 if (selectedRoomId) { updatePriceText(); }
             } else {
-                el.textContent = '최저 요금';
+                el.textContent = typeof t === 'function' ? t('booking.min_price') : '최저 요금';
                 document.getElementById('pricePopup').classList.remove('active');
             }
         }
@@ -726,21 +744,23 @@
             selectedRoomId = roomId;
             if (checkinDate && checkoutDate) {
                 const nights = Math.round((checkoutDate - checkinDate) / 86400000);
-                const roomCount = guests ? guests.room : 1;
-                const roomName = ROOM_DATA && ROOM_DATA[roomId] ? ROOM_DATA[roomId].roomTitle : '';
-                document.getElementById('min-price-text').textContent = (roomName ? roomName + ' · ' : '') + nights + '박 총 ' + fmtWon(calcRoomTotal(roomId)) + '원';
+                var roomName = typeof getRoomName === 'function' ? getRoomName(roomId) : (ROOM_DATA && ROOM_DATA[roomId] ? ROOM_DATA[roomId].roomTitle : '');
+                var totalStr = typeof fmtNightTotal === 'function' ? fmtNightTotal(nights, calcRoomTotal(roomId)) : nights + '박 총 ' + fmtWon(calcRoomTotal(roomId)) + '원';
+                document.getElementById('min-price-text').textContent = (roomName ? roomName + ' · ' : '') + totalStr;
             }
             document.getElementById('pricePopup').classList.remove('active');
             var _sb=document.querySelector('.search-btn'); if(_sb){ _sb.classList.add('auto-highlight'); setTimeout(function(){ _sb.classList.remove('auto-highlight'); },3000); }
         }
         function renderCalendar(){
+            var _days = typeof calDayNames === 'function' ? calDayNames() : DAY_NAMES;
             ['left','right'].forEach(function(side,idx){
                 const y=calViewYear, m=(calViewMonth+idx)%12;
                 const yr=y+(calViewMonth+idx>=12?1:0);
-                document.getElementById('cal-month-title-'+side).textContent=yr+'년 '+MONTHS_KO[m];
+                var monthTitle = typeof fmtCalMonth === 'function' ? fmtCalMonth(yr, m) : (yr + '년 ' + MONTHS_KO[m]);
+                document.getElementById('cal-month-title-'+side).textContent = monthTitle;
                 const grid=document.getElementById('cal-grid-'+side);
                 grid.innerHTML='';
-                DAY_NAMES.forEach(function(n){ const s=document.createElement('span'); s.className='cal-day-name'; s.textContent=n; grid.appendChild(s); });
+                _days.forEach(function(n){ const s=document.createElement('span'); s.className='cal-day-name'; s.textContent=n; grid.appendChild(s); });
                 const first=new Date(yr,m,1).getDay();
                 for(let i=0;i<first;i++){ const s=document.createElement('span'); grid.appendChild(s); }
                 const days=new Date(yr,m+1,0).getDate();
@@ -762,7 +782,7 @@
         let datesUserSelected=false;
         let _autoAdvDate=true;
         let _datesExplicitlySet=false;
-        function selectDate(d){ if(pickingCheckin||d<=checkinDate){ checkinDate=d; checkoutDate=null; pickingCheckin=false; datesUserSelected=false; selectedRoomId=null; const el=document.getElementById('min-price-text'); if(el) el.textContent='최저 요금'; document.getElementById('pricePopup').classList.remove('active'); } else{ checkoutDate=d; pickingCheckin=true; datesUserSelected=true; _datesExplicitlySet=true; updateDateUI(); updateRoomPrices(); if(_autoAdvDate){ setTimeout(function(){ document.getElementById('calendarPopup').classList.remove('active'); document.getElementById('guestPopup').classList.add('active'); },350); } } renderCalendar(); }
+        function selectDate(d){ if(pickingCheckin||d<=checkinDate){ checkinDate=d; checkoutDate=null; pickingCheckin=false; datesUserSelected=false; selectedRoomId=null; const el=document.getElementById('min-price-text'); if(el) el.textContent=typeof t==='function'?t('booking.min_price'):'최저 요금'; document.getElementById('pricePopup').classList.remove('active'); } else{ checkoutDate=d; pickingCheckin=true; datesUserSelected=true; _datesExplicitlySet=true; updateDateUI(); updateRoomPrices(); if(_autoAdvDate){ setTimeout(function(){ document.getElementById('calendarPopup').classList.remove('active'); document.getElementById('guestPopup').classList.add('active'); },350); } } renderCalendar(); }
         function changeMonth(dir){ calViewMonth+=dir; if(calViewMonth<0){calViewMonth=11;calViewYear--;} if(calViewMonth>11){calViewMonth=0;calViewYear++;} renderCalendar(); }
         function toggleCalendarPopup(e){ e.stopPropagation(); var opening=!document.getElementById('calendarPopup').classList.contains('active'); if(opening&&checkinDate&&checkoutDate&&_datesExplicitlySet) _autoAdvDate=false; else if(opening) _autoAdvDate=true; document.getElementById('guestPopup').classList.remove('active'); document.getElementById('calendarPopup').classList.toggle('active'); }
         function toggleGuestPopup(e){ e.stopPropagation(); document.getElementById('calendarPopup').classList.remove('active'); document.getElementById('guestPopup').classList.toggle('active'); }
@@ -772,7 +792,7 @@
         function guestDone(e){ closeDropdowns(e); setTimeout(function(){ populatePricePopup(); document.getElementById('pricePopup').classList.add('active'); },200); }
 
         let guests={room:1,adult:1,child:0};
-        function updateGuest(type,dir){ guests[type]=Math.max(0,guests[type]+dir); if(guests.room<1) guests.room=1; if(guests.adult<1) guests.adult=1; document.getElementById('val-room').textContent=guests.room; document.getElementById('val-adult').textContent=guests.adult; document.getElementById('guest-summary-text').textContent=guests.room+' 객실, '+guests.adult+' 성인'; updateRoomPrices(); }
+        function updateGuest(type,dir){ guests[type]=Math.max(0,guests[type]+dir); if(guests.room<1) guests.room=1; if(guests.adult<1) guests.adult=1; document.getElementById('val-room').textContent=guests.room; document.getElementById('val-adult').textContent=guests.adult; var summary=typeof fmtGuestCount==='function'?fmtGuestCount(guests.room,guests.adult):guests.room+' 객실, '+guests.adult+' 성인'; document.getElementById('guest-summary-text').textContent=summary; updateRoomPrices(); }
 
         let selectedRoomId = null;
         function openBookingCalendar(roomId) {
@@ -799,7 +819,7 @@
                 openBookingCalendar(); return;
             }
             if (!selectedRoomId) {
-                alert('객실을 선택해 주세요.');
+                alert(typeof t === 'function' ? t('booking.select_room_alert') : '객실을 선택해 주세요.');
                 document.getElementById('pricePopup').classList.add('active');
                 populatePricePopup();
                 return;
@@ -1014,18 +1034,33 @@
             });
         }
 
+        var _openModalRoomId = null;
         function openModal(roomId) {
             const data = ROOM_DATA[roomId];
             if (!data) return;
+            _openModalRoomId = roomId;
 
-            document.getElementById('modalTitle').textContent = data.title;
-            document.getElementById('modalRoomTitle').textContent = data.roomTitle;
-            document.getElementById('modalRoomSub').textContent = data.sub;
+            var roomName = typeof getRoomName === 'function' ? getRoomName(roomId) : data.title;
+            document.getElementById('modalTitle').textContent = roomName;
+            document.getElementById('modalRoomTitle').textContent = roomName;
+            document.getElementById('modalRoomSub').textContent = typeof getRoomSub === 'function' ? getRoomSub(roomId) : data.sub;
+
+            var dayKeys  = ['price.weekday', 'price.fri', 'price.sat'];
+            var priceKeys = ['weekday', 'fri', 'sat'];
+            var numPrices = (typeof roomPrices !== 'undefined' && roomPrices[roomId]) ? roomPrices[roomId] : {};
             const priceEl = document.getElementById('modalRoomPrice');
-            priceEl.innerHTML = (data.price || []).map(function(p) {
-                return '<span class="modal-price-item">(' + p[0] + ') <strong>' + p[1] + '</strong></span>';
+            priceEl.innerHTML = (data.price || []).map(function(p, idx) {
+                var dayLabel = typeof t === 'function' ? t(dayKeys[idx] || '') : '(' + p[0] + ')';
+                var convHtml = '';
+                if (typeof _convertPrice === 'function' && typeof currentLang !== 'undefined' && currentLang !== 'ko') {
+                    var krwNum = numPrices[priceKeys[idx]];
+                    if (krwNum) { var conv = _convertPrice(krwNum, currentLang); if (conv) convHtml = ' <span class="price-conv">(~' + conv + ')</span>'; }
+                }
+                return '<span class="modal-price-item">' + dayLabel + ' <strong>' + p[1] + '</strong>' + convHtml + '</span>';
             }).join('');
-            document.getElementById('modalBookBtn').onclick = function(){ closeModal(); openBookingCalendar(roomId); };
+
+            var bookBtn = document.getElementById('modalBookBtn');
+            if (bookBtn) { bookBtn.textContent = typeof t === 'function' ? t('room.book') : '요금 조회'; bookBtn.onclick = function(){ closeModal(); openBookingCalendar(roomId); }; }
 
             // 슬라이더 빌드
             const track = document.getElementById('modalSliderTrack');
@@ -1060,22 +1095,24 @@
                 const div = document.createElement('div');
                 div.style.borderTop = '1px solid #ececec';
                 div.style.paddingTop = '12px';
-                const t = document.createElement('p');
-                t.className = 'modal-amenity-col-title';
-                t.innerHTML = '<i class="fa-solid ' + col.icon + '"></i> ' + col.label;
-                div.appendChild(t);
+                const titleEl = document.createElement('p');
+                titleEl.className = 'modal-amenity-col-title';
+                var colLabel = typeof tFacCol === 'function' ? tFacCol(col.label) : col.label;
+                titleEl.innerHTML = '<i class="fa-solid ' + col.icon + '"></i> ' + colLabel;
+                div.appendChild(titleEl);
                 col.items.forEach(function(item) {
                     const p = document.createElement('p');
                     const entry = FAC_IMG_MAP[item];
+                    var displayItem = typeof tFacItem === 'function' ? tFacItem(item) : item;
                     if (entry) {
                         p.className = 'modal-amenity-item modal-amenity-item-click';
-                        p.onclick = (function(label, e) {
-                            return function() { showFacImg(label, e.imgs, e.sub); };
+                        p.onclick = (function(korKey, e) {
+                            return function() { showFacImg(korKey, e.imgs, e.sub); };
                         })(item, entry);
                     } else {
                         p.className = 'modal-amenity-item';
                     }
-                    p.textContent = item;
+                    p.textContent = displayItem;
                     div.appendChild(p);
                 });
                 grid.appendChild(div);
@@ -1103,7 +1140,9 @@
         function closeModal() {
             document.getElementById('modalOverlay').classList.remove('open');
             document.body.style.overflow = '';
+            _openModalRoomId = null;
         }
+        window.openRoomModal = openModal;
 
         function handleOverlayClick(e) {
             if (e.target === document.getElementById('modalOverlay')) closeModal();
@@ -1208,7 +1247,8 @@
             slider.appendChild(track);
         })();
     </script>
-    <script>function toggleLangDropdown(e){e.stopPropagation();document.getElementById("langDropdown").classList.toggle("open");}function selectLang(el){document.getElementById("langCode").textContent=el.dataset.code;document.querySelectorAll(".lang-option").forEach(function(o){o.classList.remove("active");});el.classList.add("active");document.getElementById("langDropdown").classList.remove("open");}document.addEventListener("click",function(){var d=document.getElementById("langDropdown");if(d)d.classList.remove("open");});</script>
+    <script src="translations.js?v=20260707b"></script>
+    <script>function toggleLangDropdown(e){e.stopPropagation();document.getElementById("langDropdown").classList.toggle("open");}function selectLang(el){var lang=el.dataset.code.toLowerCase();if(typeof setLanguage==='function'){setLanguage(lang);}else{document.getElementById("langCode").textContent=el.dataset.code;document.querySelectorAll(".lang-option").forEach(function(o){o.classList.remove("active");});el.classList.add("active");}document.getElementById("langDropdown").classList.remove("open");}document.addEventListener("click",function(){var d=document.getElementById("langDropdown");if(d)d.classList.remove("open");});</script>
     <script src="mobile-nav.js"></script>
 
 <script src="ai-chat.js"></script>
@@ -1232,8 +1272,11 @@ var _facImgList = [], _facImgIdx = 0, _facSubLabel = '';
 function showFacImg(label, imgs, subLabel) {
     _facImgList = Array.isArray(imgs) ? imgs : [imgs];
     _facImgIdx = 0;
-    _facSubLabel = subLabel || '';
-    _renderFacModal(label);
+    var displayLabel = typeof tFacItem === 'function' ? tFacItem(label) : label;
+    var subKey = 'fac.sub.' + label;
+    var trSub = typeof t === 'function' ? t(subKey) : subKey;
+    _facSubLabel = (trSub !== subKey) ? trSub : (subLabel || '');
+    _renderFacModal(displayLabel);
     document.getElementById('facPhotoModal').classList.add('open');
 }
 function _renderFacModal(label) {
