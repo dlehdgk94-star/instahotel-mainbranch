@@ -784,6 +784,7 @@
                     if (panel && !panel.classList.contains('open')) {
                         panel.classList.add('open');
                         if (bookBar) bookBar.style.display = 'none';
+                        if (window._registerExtPanelCloseHandler) window._registerExtPanelCloseHandler();
                     }
                 }, 0);
                 return;

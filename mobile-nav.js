@@ -360,6 +360,28 @@
                 header.parentNode.insertBefore(stickyTop, header.nextSibling);
             }
 
+            var _extPanelCloseHandler = null;
+            window._registerExtPanelCloseHandler = function() {
+                if (_extPanelCloseHandler) {
+                    document.removeEventListener('pointerdown', _extPanelCloseHandler);
+                }
+                _extPanelCloseHandler = function(e) {
+                    if (!stickyTop.contains(e.target)) {
+                        var panel = document.getElementById('mob-ext-panel');
+                        var bookBar = document.getElementById('mob-book-bar');
+                        var anyDropdownOpen = document.querySelector('#ext-calendarPopup.active, #ext-guestPopup.active, #ext-pricePopup.active');
+                        if (anyDropdownOpen) {
+                            ['ext-calendarPopup','ext-guestPopup','ext-pricePopup'].forEach(function(id){ var el=document.getElementById(id); if(el) el.classList.remove('active'); });
+                        } else {
+                            if (panel) panel.classList.remove('open');
+                            if (bookBar) bookBar.style.display = '';
+                            document.removeEventListener('pointerdown', _extPanelCloseHandler);
+                            _extPanelCloseHandler = null;
+                        }
+                    }
+                };
+                document.addEventListener('pointerdown', _extPanelCloseHandler);
+            };
             window.toggleExtPanel = function(e) {
                 if (e) e.stopPropagation();
                 var panel = document.getElementById('mob-ext-panel');
@@ -368,9 +390,14 @@
                 if (panel.classList.contains('open')) {
                     panel.classList.remove('open');
                     if (bookBar) bookBar.style.display = '';
+                    if (_extPanelCloseHandler) {
+                        document.removeEventListener('pointerdown', _extPanelCloseHandler);
+                        _extPanelCloseHandler = null;
+                    }
                 } else {
                     panel.classList.add('open');
                     if (bookBar) bookBar.style.display = 'none';
+                    setTimeout(function() { window._registerExtPanelCloseHandler(); }, 0);
                 }
             };
             window.goExtBooking = function() {
@@ -391,20 +418,6 @@
             // 초기화: 달력 렌더링 + 패널 라벨 동기화
             extRenderCal();
             extSyncPanel();
-            document.addEventListener('click', function(e) {
-                var panel = document.getElementById('mob-ext-panel');
-                var bookBar = document.getElementById('mob-book-bar');
-                if (panel && !stickyTop.contains(e.target)) {
-                    var anyDropdownOpen = document.querySelector('#ext-calendarPopup.active, #ext-guestPopup.active, #ext-pricePopup.active');
-                    if (anyDropdownOpen) {
-                        // 팝업만 닫고 패널은 유지
-                        ['ext-calendarPopup','ext-guestPopup','ext-pricePopup'].forEach(function(id){ var el=document.getElementById(id); if(el) el.classList.remove('active'); });
-                    } else {
-                        panel.classList.remove('open');
-                        if (bookBar) bookBar.style.display = '';
-                    }
-                }
-            });
 
             // 스크롤 기반 sticky 구현 (position:sticky 브라우저 호환 이슈 우회)
             if (window.innerWidth <= 768) {
