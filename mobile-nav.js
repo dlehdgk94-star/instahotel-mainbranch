@@ -366,18 +366,24 @@
                     document.removeEventListener('pointerdown', _extPanelCloseHandler);
                 }
                 _extPanelCloseHandler = function(e) {
-                    if (!stickyTop.contains(e.target)) {
-                        var panel = document.getElementById('mob-ext-panel');
-                        var bookBar = document.getElementById('mob-book-bar');
-                        var anyDropdownOpen = document.querySelector('#ext-calendarPopup.active, #ext-guestPopup.active, #ext-pricePopup.active');
-                        if (anyDropdownOpen) {
-                            ['ext-calendarPopup','ext-guestPopup','ext-pricePopup'].forEach(function(id){ var el=document.getElementById(id); if(el) el.classList.remove('active'); });
-                        } else {
-                            if (panel) panel.classList.remove('open');
-                            if (bookBar) bookBar.style.display = '';
-                            document.removeEventListener('pointerdown', _extPanelCloseHandler);
-                            _extPanelCloseHandler = null;
-                        }
+                    // stickyTop 안이면 무시
+                    if (stickyTop.contains(e.target)) return;
+                    // 열려있는 팝업(달력/투숙객/요금) 안 탭이면 무시 (팝업은 body에 직접 주입되어 stickyTop 밖에 있음)
+                    var popupIds = ['ext-calendarPopup', 'ext-guestPopup', 'ext-pricePopup'];
+                    for (var i = 0; i < popupIds.length; i++) {
+                        var el = document.getElementById(popupIds[i]);
+                        if (el && el.classList.contains('active') && el.contains(e.target)) return;
+                    }
+                    var panel = document.getElementById('mob-ext-panel');
+                    var bookBar = document.getElementById('mob-book-bar');
+                    var anyDropdownOpen = document.querySelector('#ext-calendarPopup.active, #ext-guestPopup.active, #ext-pricePopup.active');
+                    if (anyDropdownOpen) {
+                        popupIds.forEach(function(id){ var el=document.getElementById(id); if(el) el.classList.remove('active'); });
+                    } else {
+                        if (panel) panel.classList.remove('open');
+                        if (bookBar) bookBar.style.display = '';
+                        document.removeEventListener('pointerdown', _extPanelCloseHandler);
+                        _extPanelCloseHandler = null;
                     }
                 };
                 document.addEventListener('pointerdown', _extPanelCloseHandler);
