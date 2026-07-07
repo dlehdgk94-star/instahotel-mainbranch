@@ -2633,15 +2633,17 @@
             const rightYear = rightDate.getFullYear();
             const rightMonth = rightDate.getMonth();
 
-            document.getElementById('cal-month-title-left').innerText = `${leftYear}년 ${leftMonth + 1}월`;
-            document.getElementById('cal-month-title-right').innerText = `${rightYear}년 ${rightMonth + 1}월`;
+            var _fmtM = (typeof fmtCalMonth === 'function') ? fmtCalMonth : function(y,m){ return y+'년 '+(m+1)+'월'; };
+            document.getElementById('cal-month-title-left').innerText  = _fmtM(leftYear,  leftMonth);
+            document.getElementById('cal-month-title-right').innerText = _fmtM(rightYear, rightMonth);
 
             document.getElementById('cal-grid-left').innerHTML = generateMonthHTML(leftYear, leftMonth);
             document.getElementById('cal-grid-right').innerHTML = generateMonthHTML(rightYear, rightMonth);
         }
 
         function generateMonthHTML(year, month) {
-            let html = '<div class="cal-day-name">일</div><div class="cal-day-name">월</div><div class="cal-day-name">화</div><div class="cal-day-name">수</div><div class="cal-day-name">목</div><div class="cal-day-name">금</div><div class="cal-day-name">토</div>';
+            var _days = (typeof calDayNames === 'function') ? calDayNames() : ['일','월','화','수','목','금','토'];
+            let html = _days.map(function(d){ return '<div class="cal-day-name">'+d+'</div>'; }).join('');
             
             const firstDay = new Date(year, month, 1).getDay();
             const daysInMonth = new Date(year, month + 1, 0).getDate();

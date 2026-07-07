@@ -706,6 +706,9 @@ function setLanguage(lang) {
   if (typeof updateRoomPrices === 'function') updateRoomPrices();
   if (typeof syncMobPanel     === 'function') syncMobPanel();
 
+  // 캘린더 월 제목 + 요일 헤더 갱신
+  if (typeof renderCalendar === 'function') renderCalendar();
+
   // 모달이 열려 있으면 재렌더링
   if (typeof openRoomModal === 'function' && typeof _openModalRoomId !== 'undefined' && _openModalRoomId) {
     openRoomModal(_openModalRoomId);
@@ -756,6 +759,26 @@ function _updateRoomPrices(lang) {
 }
 
 // ─── 동적 텍스트 포맷 헬퍼 ───────────────────────────────────────────────────
+
+// 캘린더 월 제목 포맷 (언어별 형식 다름)
+var _EN_MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+var _JA_MONTHS = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+var _ZH_MONTHS = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+
+function fmtCalMonth(year, month) {
+  if (currentLang === 'en') return _EN_MONTHS[month] + ' ' + year;
+  if (currentLang === 'ja') return year + '年' + _JA_MONTHS[month];
+  if (currentLang === 'zh') return year + '年' + _ZH_MONTHS[month];
+  return year + '년 ' + (month + 1) + '월';
+}
+
+// 캘린더 요일 이름 배열 (일~토 순서)
+function calDayNames() {
+  if (currentLang === 'en') return ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  if (currentLang === 'ja') return ['日','月','火','水','木','金','土'];
+  if (currentLang === 'zh') return ['日','一','二','三','四','五','六'];
+  return ['일','월','화','수','목','금','토'];
+}
 
 // 시설 컬럼 제목 (한국어 원본 키 → 현재 언어)
 function tFacCol(kor) {
