@@ -210,6 +210,22 @@ const translations = {
     "rooms.all_rooms": "전체 객실",
     "booking.select_room_alert": "객실을 선택해 주세요.",
     "booking.min_price": "최저 요금",
+    // gallery.html 전용
+    "gal.header.sub": "호텔 인스타의 모든 사진을 한눈에 확인하세요",
+    "gal.tab.all": "전체",
+    "gal.tab.rooms": "객실",
+    "gal.tab.nearby": "주변 관광지",
+    "gal.photos_suffix": "장의 사진",
+    "gal.label.standard": "스탠다드 룸 (디자인 랜덤배정)",
+    "gal.label.deluxe": "디럭스 룸 (디자인 랜덤배정)",
+    "gal.label.hwaseong": "수원화성",
+    "gal.label.everland": "에버랜드",
+    "gal.label.caribbean": "케리비안베이",
+    "gal.label.lake_park": "광교호수공원",
+    "gal.label.folk_village": "민속촌",
+    "gal.label.arboretum": "영흥수목원",
+    "gal.label.starfield": "수원 스타필드",
+    "gal.label.convenience": "편의점",
   },
   en: {
     "nav.hotel": "About Hotel",
@@ -406,6 +422,22 @@ const translations = {
     "rooms.all_rooms": "All Rooms",
     "booking.select_room_alert": "Please select a room.",
     "booking.min_price": "Lowest Rate",
+    // gallery.html
+    "gal.header.sub": "Browse all photos of INSTA Hotel at a glance",
+    "gal.tab.all": "All",
+    "gal.tab.rooms": "Rooms",
+    "gal.tab.nearby": "Nearby Attractions",
+    "gal.photos_suffix": " photos",
+    "gal.label.standard": "Standard Room (Random Design)",
+    "gal.label.deluxe": "Deluxe Room (Random Design)",
+    "gal.label.hwaseong": "Hwaseong Fortress",
+    "gal.label.everland": "Everland",
+    "gal.label.caribbean": "Caribbean Bay",
+    "gal.label.lake_park": "Gwanggyo Lake Park",
+    "gal.label.folk_village": "Korean Folk Village",
+    "gal.label.arboretum": "Yeonghung Arboretum",
+    "gal.label.starfield": "Starfield Suwon",
+    "gal.label.convenience": "Convenience Store",
   },
   ja: {
     "nav.hotel": "ホテル紹介",
@@ -602,6 +634,22 @@ const translations = {
     "rooms.all_rooms": "全客室",
     "booking.select_room_alert": "客室を選択してください。",
     "booking.min_price": "最安値",
+    // gallery.html
+    "gal.header.sub": "INSTAホテルの全写真をひと目でご確認ください",
+    "gal.tab.all": "すべて",
+    "gal.tab.rooms": "客室",
+    "gal.tab.nearby": "周辺観光地",
+    "gal.photos_suffix": "枚の写真",
+    "gal.label.standard": "スタンダードルーム（デザインランダム割当）",
+    "gal.label.deluxe": "デラックスルーム（デザインランダム割当）",
+    "gal.label.hwaseong": "水原華城",
+    "gal.label.everland": "エバーランド",
+    "gal.label.caribbean": "カリビアンベイ",
+    "gal.label.lake_park": "光教湖水公園",
+    "gal.label.folk_village": "韓国民俗村",
+    "gal.label.arboretum": "栄興樹木園",
+    "gal.label.starfield": "水原スターフィールド",
+    "gal.label.convenience": "コンビニ",
   },
   zh: {
     "nav.hotel": "酒店介绍",
@@ -798,6 +846,22 @@ const translations = {
     "rooms.all_rooms": "全部客房",
     "booking.select_room_alert": "请选择客房。",
     "booking.min_price": "最低价",
+    // gallery.html
+    "gal.header.sub": "一览INSTA酒店的所有照片",
+    "gal.tab.all": "全部",
+    "gal.tab.rooms": "客房",
+    "gal.tab.nearby": "周边景点",
+    "gal.photos_suffix": "张照片",
+    "gal.label.standard": "标准间（随机设计分配）",
+    "gal.label.deluxe": "豪华间（随机设计分配）",
+    "gal.label.hwaseong": "水原华城",
+    "gal.label.everland": "爱宝乐园",
+    "gal.label.caribbean": "加勒比海湾",
+    "gal.label.lake_park": "光教湖水公园",
+    "gal.label.folk_village": "韩国民俗村",
+    "gal.label.arboretum": "荣兴树木园",
+    "gal.label.starfield": "水原星域购物中心",
+    "gal.label.convenience": "便利店",
   }
 };
 
@@ -877,6 +941,9 @@ function setLanguage(lang) {
   if (typeof openRoomModal === 'function' && typeof _openModalRoomId !== 'undefined' && _openModalRoomId) {
     openRoomModal(_openModalRoomId);
   }
+
+  // 갤러리 그리드 레이블 / 사진 수 갱신
+  if (typeof syncGalleryLang === 'function') syncGalleryLang();
 }
 
 function _updateRoomPrices(lang) {

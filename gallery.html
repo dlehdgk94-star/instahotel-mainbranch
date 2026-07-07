@@ -157,7 +157,7 @@
     <div class="top-util-bar">
         <div class="hamburger-menu"><span></span><span></span><span></span></div>
         <div class="util-right-group">
-            <button class="util-login-btn">공식 홈페이지 예약 시 최대 혜택</button>
+            <button class="util-login-btn" data-i18n="nav.util_benefit">공식 홈페이지 예약 시 최대 혜택</button>
         </div>
     </div>
 
@@ -173,15 +173,15 @@
                     <i class="fa-solid fa-star"></i>
                     <i class="fa-solid fa-star-half-stroke"></i>
                 </span>
-                <span class="rating-text" onclick="openReviewModal()" style="cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; gap:8px;">4.9<span style="font-size:28px; line-height:1; position:relative; top:-2px;">·</span><span style="text-decoration:underline; text-underline-offset:3px;">1446개의 리뷰</span></span>
+                <span class="rating-text" onclick="openReviewModal()" style="cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; gap:8px;">4.9<span style="font-size:28px; line-height:1; position:relative; top:-2px;">·</span><span style="text-decoration:underline; text-underline-offset:3px;" data-i18n="header.reviews">1446개의 리뷰</span></span>
             </div>
         </div>
         <div class="header-right">
             <ul class="main-nav">
-                <li><a href="index.html">호텔소개</a></li>
-                <li><a href="rooms.html">객실예약</a></li>
-                <li class="active"><a href="gallery.html">갤러리</a></li>
-                <li><a href="nearby.html">주변안내</a></li>
+                <li><a href="index.html" data-i18n="nav.hotel">호텔소개</a></li>
+                <li><a href="rooms.html" data-i18n="nav.rooms">객실예약</a></li>
+                <li class="active"><a href="gallery.html" data-i18n="nav.gallery">갤러리</a></li>
+                <li><a href="nearby.html" data-i18n="nav.nearby">주변안내</a></li>
                 <li class="lang-selector" onclick="event.stopPropagation()">
                     <button class="lang-btn" onclick="toggleLangDropdown(event)"><i class="fa-solid fa-globe"></i><span id="langCode">KO</span><i class="fa-solid fa-chevron-down lang-chevron"></i></button>
                     <div class="lang-dropdown" id="langDropdown">
@@ -222,11 +222,11 @@
                             <div class="cal-grid" id="cal-grid-right"></div>
                         </div>
                     </div>
-                    <button class="dropdown-done-btn" onclick="calendarDone(event)">완료</button>
+                    <button class="dropdown-done-btn" onclick="calendarDone(event)" data-i18n="booking.calendar_done">완료</button>
                 </div>
             </div>
             <div class="booking-item" id="guest-booking-item">
-                <span class="booking-label">객실 & 투숙객</span>
+                <span class="booking-label" data-i18n="booking.guest_label">객실 & 투숙객</span>
                 <div class="booking-value" onclick="toggleGuestPopup(event)">
                     <span id="guest-summary-text">1 객실, 1 성인</span>
                     <i class="fa-solid fa-chevron-down"></i>
@@ -234,7 +234,7 @@
                 <div class="booking-dropdown guest-dropdown" id="guestPopup" onclick="event.stopPropagation()">
                     <i class="fa-solid fa-xmark dropdown-close" onclick="closeDropdowns(event)"></i>
                     <div class="guest-row">
-                        <div class="guest-label-box"><span class="g-title">객실</span></div>
+                        <div class="guest-label-box"><span class="g-title" data-i18n="booking.room">객실</span></div>
                         <div class="guest-controls">
                             <button class="btn-ctrl" onclick="updateGuest('room',-1)"><i class="fa-solid fa-minus"></i></button>
                             <span class="val-ctrl" id="val-room">1</span>
@@ -242,18 +242,18 @@
                         </div>
                     </div>
                     <div class="guest-row">
-                        <div class="guest-label-box"><span class="g-title">성인</span></div>
+                        <div class="guest-label-box"><span class="g-title" data-i18n="booking.adult">성인</span></div>
                         <div class="guest-controls">
                             <button class="btn-ctrl" onclick="updateGuest('adult',-1)"><i class="fa-solid fa-minus"></i></button>
                             <span class="val-ctrl" id="val-adult">1</span>
                             <button class="btn-ctrl" onclick="updateGuest('adult',1)"><i class="fa-solid fa-plus"></i></button>
                         </div>
                     </div>
-                    <button class="dropdown-done-btn" onclick="guestDone(event)">완료</button>
+                    <button class="dropdown-done-btn" onclick="guestDone(event)" data-i18n="booking.guest_done">완료</button>
                 </div>
             </div>
             <div class="booking-item" id="price-booking-item">
-                <span class="booking-label">객실선택 & 특별요금</span>
+                <span class="booking-label" data-i18n="booking.price_label">객실선택 & 특별요금</span>
                 <div class="booking-value" onclick="togglePricePopup(event)"><span id="min-price-text">최저 요금</span><i class="fa-solid fa-chevron-down"></i></div>
                 <div class="booking-dropdown price-popup" id="pricePopup" onclick="event.stopPropagation()">
                     <i class="fa-solid fa-xmark dropdown-close" onclick="event.stopPropagation(); document.getElementById('pricePopup').classList.remove('active')"></i>
@@ -261,7 +261,7 @@
                 </div>
             </div>
             <div class="booking-item">
-                <button class="search-btn" onclick="handleBookingBtn()">예약하기</button>
+                <button class="search-btn" onclick="handleBookingBtn()" data-i18n="booking.btn">예약하기</button>
             </div>
         </div>
     </div>
@@ -269,12 +269,12 @@
     <!-- 갤러리 헤더 + 필터 -->
     <div class="gal-header-section">
         <div class="gal-header-inner">
-            <h1 class="gal-header-title">갤러리</h1>
-            <p class="gal-header-sub">호텔 인스타의 모든 사진을 한눈에 확인하세요</p>
+            <h1 class="gal-header-title" data-i18n="nav.gallery">갤러리</h1>
+            <p class="gal-header-sub" data-i18n="gal.header.sub">호텔 인스타의 모든 사진을 한눈에 확인하세요</p>
             <div class="gal-tabs">
-                <button class="gal-tab active" data-filter="all" onclick="filterGallery('all')">전체</button>
-                <button class="gal-tab" data-filter="rooms" onclick="filterGallery('rooms')">객실</button>
-                <button class="gal-tab" data-filter="nearby" onclick="filterGallery('nearby')">주변 관광지</button>
+                <button class="gal-tab active" data-filter="all" onclick="filterGallery('all')" data-i18n="gal.tab.all">전체</button>
+                <button class="gal-tab" data-filter="rooms" onclick="filterGallery('rooms')" data-i18n="gal.tab.rooms">객실</button>
+                <button class="gal-tab" data-filter="nearby" onclick="filterGallery('nearby')" data-i18n="gal.tab.nearby">주변 관광지</button>
             </div>
         </div>
     </div>
@@ -306,14 +306,57 @@
         let calViewYear=_today.getFullYear(), calViewMonth=_today.getMonth();
         const DAY_NAMES=['일','월','화','수','목','금','토'];
         const MONTHS_KO=['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'];
-        function fmtDate(d){ return (d.getMonth()+1)+'월 '+d.getDate()+'일, '+DAY_NAMES[d.getDay()]; }
-        function updateDateUI(){ const n=Math.round((checkoutDate-checkinDate)/86400000); document.getElementById('nights-label').innerHTML='<i class="fa-regular fa-calendar"></i> 날짜 ('+n+' 박)'; document.getElementById('checkin-date-text').textContent=fmtDate(checkinDate); document.getElementById('checkout-date-text').textContent=fmtDate(checkoutDate); }
-        function renderCalendar(){ ['left','right'].forEach(function(side,idx){ const m=(calViewMonth+idx)%12, yr=calViewYear+(calViewMonth+idx>=12?1:0); document.getElementById('cal-month-title-'+side).textContent=yr+'년 '+MONTHS_KO[m]; const grid=document.getElementById('cal-grid-'+side); grid.innerHTML=''; DAY_NAMES.forEach(function(n){ const s=document.createElement('span'); s.className='cal-day-name'; s.textContent=n; grid.appendChild(s); }); const first=new Date(yr,m,1).getDay(); for(let i=0;i<first;i++){ grid.appendChild(document.createElement('span')); } const days=new Date(yr,m+1,0).getDate(); for(let d=1;d<=days;d++){ const date=new Date(yr,m,d); const s=document.createElement('span'); s.className='cal-date'; s.textContent=d; if(date<_today) s.classList.add('faded'); else{ if(checkinDate&&date.getTime()===checkinDate.getTime()) s.classList.add('selected-start'); if(checkoutDate&&date.getTime()===checkoutDate.getTime()) s.classList.add('selected-end'); if(checkinDate&&checkoutDate&&date>checkinDate&&date<checkoutDate) s.classList.add('in-range'); s.onclick=function(){ selectDate(date); }; } grid.appendChild(s); } }); }
+        function fmtDate(d) {
+            if (!d) return '';
+            var lang = typeof currentLang !== 'undefined' ? currentLang : 'ko';
+            var days = typeof calDayNames === 'function' ? calDayNames() : DAY_NAMES;
+            var m = d.getMonth() + 1, date = d.getDate(), day = days[d.getDay()];
+            if (lang === 'en') {
+                var sm = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+                return sm[d.getMonth()] + ' ' + date + ', ' + day;
+            }
+            if (lang === 'ja' || lang === 'zh') return m + '月' + date + '日(' + day + ')';
+            return m + '월 ' + date + '일, ' + day;
+        }
+        function updateDateUI() {
+            var nights = Math.round((checkoutDate - checkinDate) / 86400000);
+            var nightsLabel = typeof fmtDateNights === 'function' ? fmtDateNights(nights) : '날짜 (' + nights + '박)';
+            document.getElementById('nights-label').innerHTML = '<i class="fa-regular fa-calendar"></i> ' + nightsLabel;
+            document.getElementById('checkin-date-text').textContent = checkinDate ? fmtDate(checkinDate) : (typeof t === 'function' ? t('booking.date_select') : '날짜 선택');
+            document.getElementById('checkout-date-text').textContent = checkoutDate ? fmtDate(checkoutDate) : '';
+        }
+        function renderCalendar() {
+            var _days = typeof calDayNames === 'function' ? calDayNames() : DAY_NAMES;
+            ['left','right'].forEach(function(side, idx) {
+                var m = (calViewMonth + idx) % 12, yr = calViewYear + (calViewMonth + idx >= 12 ? 1 : 0);
+                var monthTitle = typeof fmtCalMonth === 'function' ? fmtCalMonth(yr, m) : (yr + '년 ' + MONTHS_KO[m]);
+                document.getElementById('cal-month-title-' + side).textContent = monthTitle;
+                var grid = document.getElementById('cal-grid-' + side);
+                grid.innerHTML = '';
+                _days.forEach(function(n) { var s = document.createElement('span'); s.className = 'cal-day-name'; s.textContent = n; grid.appendChild(s); });
+                var first = new Date(yr, m, 1).getDay();
+                for (var i = 0; i < first; i++) { grid.appendChild(document.createElement('span')); }
+                var days = new Date(yr, m + 1, 0).getDate();
+                for (var d = 1; d <= days; d++) {
+                    var date = new Date(yr, m, d);
+                    var s = document.createElement('span');
+                    s.className = 'cal-date'; s.textContent = d;
+                    if (date < _today) { s.classList.add('faded'); }
+                    else {
+                        if (checkinDate && date.getTime() === checkinDate.getTime()) s.classList.add('selected-start');
+                        if (checkoutDate && date.getTime() === checkoutDate.getTime()) s.classList.add('selected-end');
+                        if (checkinDate && checkoutDate && date > checkinDate && date < checkoutDate) s.classList.add('in-range');
+                        s.onclick = function() { selectDate(date); };
+                    }
+                    grid.appendChild(s);
+                }
+            });
+        }
         let pickingCheckin=true;
         let datesUserSelected=false;
         let _autoAdvDate=true;
         let _datesExplicitlySet=false;
-        function selectDate(d){ if(pickingCheckin||d<=checkinDate){ checkinDate=d; checkoutDate=null; pickingCheckin=false; datesUserSelected=false; var el=document.getElementById('min-price-text'); if(el) el.textContent='최저 요금'; document.getElementById('pricePopup').classList.remove('active'); } else{ checkoutDate=d; pickingCheckin=true; datesUserSelected=true; _datesExplicitlySet=true; updateDateUI(); if(_autoAdvDate){ setTimeout(function(){ document.getElementById('calendarPopup').classList.remove('active'); document.getElementById('guestPopup').classList.add('active'); },350); } } renderCalendar(); }
+        function selectDate(d){ if(pickingCheckin||d<=checkinDate){ checkinDate=d; checkoutDate=null; pickingCheckin=false; datesUserSelected=false; var el=document.getElementById('min-price-text'); if(el) el.textContent=typeof t==='function'?t('booking.min_price'):'최저 요금'; document.getElementById('pricePopup').classList.remove('active'); } else{ checkoutDate=d; pickingCheckin=true; datesUserSelected=true; _datesExplicitlySet=true; updateDateUI(); if(_autoAdvDate){ setTimeout(function(){ document.getElementById('calendarPopup').classList.remove('active'); document.getElementById('guestPopup').classList.add('active'); },350); } } renderCalendar(); }
         function changeMonth(dir){ calViewMonth+=dir; if(calViewMonth<0){calViewMonth=11;calViewYear--;} if(calViewMonth>11){calViewMonth=0;calViewYear++;} renderCalendar(); }
         function toggleCalendarPopup(e){ e.stopPropagation(); var opening=!document.getElementById('calendarPopup').classList.contains('active'); if(opening&&checkinDate&&checkoutDate&&_datesExplicitlySet) _autoAdvDate=false; else if(opening) _autoAdvDate=true; document.getElementById('guestPopup').classList.remove('active'); document.getElementById('calendarPopup').classList.toggle('active'); }
         function toggleGuestPopup(e){ e.stopPropagation(); document.getElementById('calendarPopup').classList.remove('active'); document.getElementById('guestPopup').classList.toggle('active'); }
@@ -322,11 +365,11 @@
         function calendarDone(e){ if(e) e.stopPropagation(); document.getElementById('calendarPopup').classList.remove('active'); document.getElementById('pricePopup').classList.remove('active'); if(checkinDate&&checkoutDate){ setTimeout(function(){ document.getElementById('guestPopup').classList.add('active'); },150); } }
         function guestDone(e){ closeDropdowns(e); setTimeout(function(){ populatePricePopup(); document.getElementById('pricePopup').classList.add('active'); },200); }
         let guests={room:1,adult:1,child:0};
-        function updateGuest(type,dir){ guests[type]=Math.max(0,guests[type]+dir); if(guests.room<1)guests.room=1; if(guests.adult<1)guests.adult=1; document.getElementById('val-room').textContent=guests.room; document.getElementById('val-adult').textContent=guests.adult; document.getElementById('guest-summary-text').textContent=guests.room+' 객실, '+guests.adult+' 성인'; updateRoomPrices(); }
+        function updateGuest(type,dir){ guests[type]=Math.max(0,guests[type]+dir); if(guests.room<1)guests.room=1; if(guests.adult<1)guests.adult=1; document.getElementById('val-room').textContent=guests.room; document.getElementById('val-adult').textContent=guests.adult; document.getElementById('guest-summary-text').textContent=typeof fmtGuestCount==='function'?fmtGuestCount(guests.room,guests.adult):guests.room+' 객실, '+guests.adult+' 성인'; updateRoomPrices(); }
         function openBookingCalendar(){ setTimeout(function(){ document.getElementById('guestPopup').classList.remove('active'); document.getElementById('calendarPopup').classList.add('active'); },0); }
         function handleBookingBtn(){
             if(!checkinDate||!checkoutDate){ openBookingCalendar(); return; }
-            if(!selectedRoomId){ alert('객실을 선택해 주세요.'); document.getElementById('pricePopup').classList.add('active'); populatePricePopup(); return; }
+            if(!selectedRoomId){ alert(typeof t==='function'?t('booking.select_room_alert'):'객실을 선택해 주세요.'); document.getElementById('pricePopup').classList.add('active'); populatePricePopup(); return; }
             var nights=Math.round((checkoutDate-checkinDate)/86400000);
             var roomCount=guests?guests.room:1, adultCount=guests?guests.adult:1;
             var total=0; for(var i=0;i<nights;i++){ var d=new Date(checkinDate); d.setDate(d.getDate()+i); total+=getNightRateG(selectedRoomId,d); } total*=roomCount;
@@ -353,11 +396,14 @@
             var nights=Math.round((checkoutDate-checkinDate)/86400000);
             var roomCount=guests?guests.room:1, adultCount=guests?guests.adult:1;
             listEl.innerHTML=ROOM_ORDER_G.map(function(id){
-                var pt=ROOM_PRICE_TABLE_G[id]; var title=ROOM_NAMES_G[id];
+                var pt=ROOM_PRICE_TABLE_G[id];
+                var title=typeof getRoomName==='function'?getRoomName(id):(ROOM_NAMES_G[id]||id);
                 var available=pt&&adultCount<=pt.maxGuests*roomCount;
                 var total=0; for(var i=0;i<nights;i++){ var nd=new Date(checkinDate); nd.setDate(nd.getDate()+i); total+=getNightRateG(id,nd); } total*=roomCount;
-                if(!available) return '<div class="price-popup-row price-popup-unavail"><span class="price-popup-name">'+title+'</span><span class="price-popup-total" style="color:rgb(180,180,180);">최대 '+(pt.maxGuests*roomCount)+'인</span></div>';
-                return '<div class="price-popup-row" onclick="selectRoom(\''+id+'\')"><span class="price-popup-name">'+title+'</span><span class="price-popup-total">'+nights+'박 총 '+fmtWon(total)+'원</span></div>';
+                var nightTotal=typeof fmtNightTotal==='function'?fmtNightTotal(nights,total):(nights+'박 총 '+fmtWon(total)+'원');
+                var unavailText=typeof fmtUnavailMax==='function'?fmtUnavailMax(pt.maxGuests*roomCount):('최대 '+(pt.maxGuests*roomCount)+'인');
+                if(!available) return '<div class="price-popup-row price-popup-unavail"><span class="price-popup-name">'+title+'</span><span class="price-popup-total" style="color:rgb(180,180,180);">'+unavailText+'</span></div>';
+                return '<div class="price-popup-row" onclick="selectRoom(\''+id+'\')"><span class="price-popup-name">'+title+'</span><span class="price-popup-total">'+nightTotal+'</span></div>';
             }).join('');
         }
         function updateRoomPrices(){
@@ -368,9 +414,11 @@
                     var nights=Math.round((checkoutDate-checkinDate)/86400000);
                     var roomCount=guests?guests.room:1; var total=0;
                     for(var i=0;i<nights;i++){ var nd=new Date(checkinDate); nd.setDate(nd.getDate()+i); total+=getNightRateG(selectedRoomId,nd); } total*=roomCount;
-                    el.textContent=(ROOM_NAMES_G[selectedRoomId]?ROOM_NAMES_G[selectedRoomId]+' · ':'')+nights+'박 총 '+fmtWon(total)+'원';
+                    var roomName=typeof getRoomName==='function'?getRoomName(selectedRoomId):(ROOM_NAMES_G[selectedRoomId]||'');
+                    var nightTotal=typeof fmtNightTotal==='function'?fmtNightTotal(nights,total):(nights+'박 총 '+fmtWon(total)+'원');
+                    el.textContent=(roomName?roomName+' · ':'')+nightTotal;
                 }
-            } else { el.textContent='최저 요금'; document.getElementById('pricePopup').classList.remove('active'); }
+            } else { el.textContent=typeof t==='function'?t('booking.min_price'):'최저 요금'; document.getElementById('pricePopup').classList.remove('active'); }
         }
         function selectRoom(roomId){
             selectedRoomId=roomId;
@@ -378,7 +426,9 @@
                 var nights=Math.round((checkoutDate-checkinDate)/86400000);
                 var roomCount=guests?guests.room:1; var total=0;
                 for(var i=0;i<nights;i++){ var nd=new Date(checkinDate); nd.setDate(nd.getDate()+i); total+=getNightRateG(roomId,nd); } total*=roomCount;
-                document.getElementById('min-price-text').textContent=(ROOM_NAMES_G[roomId]?ROOM_NAMES_G[roomId]+' · ':'')+nights+'박 총 '+fmtWon(total)+'원';
+                var roomName=typeof getRoomName==='function'?getRoomName(roomId):(ROOM_NAMES_G[roomId]||'');
+                var nightTotal=typeof fmtNightTotal==='function'?fmtNightTotal(nights,total):(nights+'박 총 '+fmtWon(total)+'원');
+                document.getElementById('min-price-text').textContent=(roomName?roomName+' · ':'')+nightTotal;
             }
             document.getElementById('pricePopup').classList.remove('active');
             var _sb=document.querySelector('.search-btn'); if(_sb){ _sb.classList.add('auto-highlight'); setTimeout(function(){ _sb.classList.remove('auto-highlight'); },3000); }
@@ -555,13 +605,30 @@
             {cat:'nearby',label:'편의점',src:'images/nearby/convenience/5.png'}
         ];
 
+        /* ── 갤러리 레이블 키 매핑 ── */
+        var LABEL_KEY_MAP = {
+            '이코노미 룸': 'room.economy',
+            '스탠다드 룸 (디자인 랜덤배정)': 'gal.label.standard',
+            '디럭스 룸 (디자인 랜덤배정)': 'gal.label.deluxe',
+            '트윈 룸': 'room.twin',
+            '스페셜': 'room.special',
+            '수원화성': 'gal.label.hwaseong',
+            '에버랜드': 'gal.label.everland',
+            '케리비안베이': 'gal.label.caribbean',
+            '광교호수공원': 'gal.label.lake_park',
+            '민속촌': 'gal.label.folk_village',
+            '영흥수목원': 'gal.label.arboretum',
+            '수원 스타필드': 'gal.label.starfield',
+            '편의점': 'gal.label.convenience'
+        };
+
         /* ── 필터 & 렌더링 ── */
         var _currentFilter = 'all';
 
         function filterGallery(filter) {
             _currentFilter = filter;
-            document.querySelectorAll('.gal-tab').forEach(function(t) {
-                t.classList.toggle('active', t.dataset.filter === filter);
+            document.querySelectorAll('.gal-tab').forEach(function(tab) {
+                tab.classList.toggle('active', tab.dataset.filter === filter);
             });
             var items = document.querySelectorAll('.gal-item');
             var visible = 0;
@@ -570,7 +637,8 @@
                 item.style.display = show ? '' : 'none';
                 if (show) visible++;
             });
-            document.getElementById('galCount').innerHTML = '<span>' + visible + '</span>장의 사진';
+            var suffix = typeof t === 'function' ? t('gal.photos_suffix') : '장의 사진';
+            document.getElementById('galCount').innerHTML = '<span>' + visible + '</span>' + suffix;
         }
 
         function renderGrid() {
@@ -593,14 +661,21 @@
                 overlay.className = 'gal-item-overlay';
                 var label = document.createElement('span');
                 label.className = 'gal-item-label';
-                label.textContent = item.label;
+                var labelKey = LABEL_KEY_MAP[item.label];
+                label.textContent = (labelKey && typeof t === 'function') ? t(labelKey) : item.label;
                 overlay.appendChild(label);
 
                 div.appendChild(img);
                 div.appendChild(overlay);
                 grid.appendChild(div);
             });
-            document.getElementById('galCount').innerHTML = '<span>' + GALLERY_ITEMS.length + '</span>장의 사진';
+            var suffix = typeof t === 'function' ? t('gal.photos_suffix') : '장의 사진';
+            document.getElementById('galCount').innerHTML = '<span>' + GALLERY_ITEMS.length + '</span>' + suffix;
+        }
+
+        function syncGalleryLang() {
+            renderGrid();
+            filterGallery(_currentFilter);
         }
 
         /* ── 갤러리 라이트박스 ── */
@@ -672,7 +747,7 @@
 
         /* ── 언어 선택 ── */
         function toggleLangDropdown(e){ e.stopPropagation(); document.getElementById('langDropdown').classList.toggle('open'); }
-        function selectLang(el){ document.getElementById('langCode').textContent=el.dataset.code; document.querySelectorAll('.lang-option').forEach(function(o){o.classList.remove('active');}); el.classList.add('active'); document.getElementById('langDropdown').classList.remove('open'); }
+        function selectLang(el){ var lang=el.dataset.code.toLowerCase(); if(typeof setLanguage==='function'){ setLanguage(lang); } document.getElementById('langDropdown').classList.remove('open'); }
         document.addEventListener('click', function(){ var d=document.getElementById('langDropdown'); if(d)d.classList.remove('open'); });
 
         /* ── 초기화 ── */
@@ -682,6 +757,7 @@
             renderGrid();
         });
     </script>
+    <script src="translations.js?v=20260707b"></script>
     <script src="mobile-nav.js"></script>
     
 <script src="ai-chat.js"></script>
