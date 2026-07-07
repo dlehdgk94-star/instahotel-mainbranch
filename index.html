@@ -733,7 +733,7 @@
         </div>
 
         <!-- 모바일 전용: 펼쳐지는 예약 패널 -->
-        <div id="mob-book-panel" onclick="event.stopPropagation()">
+        <div id="mob-book-panel">
             <div class="mob-panel-row" onclick="toggleCalendarPopup(event)">
                 <span class="mob-panel-label" id="mob-panel-nights"><i class="fa-regular fa-calendar"></i> 날짜 (1박)</span>
                 <div class="mob-panel-value">
@@ -2522,6 +2522,9 @@
                     var bd = document.getElementById('mob-panel-backdrop');
                     if (bd) bd.classList.add('open');
                     syncMobPanel();
+                    setTimeout(function() {
+                        _registerMobPanelCloseHandler();
+                    }, 0);
                 }
                 return;
             }
@@ -2973,6 +2976,21 @@
 
     <script>
         /* ── 모바일 예약 패널 ── */
+        var _mobPanelCloseHandler = null;
+        function _registerMobPanelCloseHandler() {
+            if (_mobPanelCloseHandler) {
+                document.removeEventListener('click', _mobPanelCloseHandler);
+            }
+            _mobPanelCloseHandler = function(e) {
+                var bookingBar = document.getElementById('mob-book-panel');
+                if (!bookingBar || !bookingBar.contains(e.target)) {
+                    closeMobPanelIfOpen();
+                    document.removeEventListener('click', _mobPanelCloseHandler);
+                    _mobPanelCloseHandler = null;
+                }
+            };
+            document.addEventListener('click', _mobPanelCloseHandler);
+        }
         function toggleMobPanel(e) {
             if (e) e.stopPropagation();
             var panel = document.getElementById('mob-book-panel');
@@ -2988,6 +3006,7 @@
                 if (triggerBar) triggerBar.style.display = 'none';
                 if (bd) bd.classList.add('open');
                 syncMobPanel();
+                setTimeout(function() { _registerMobPanelCloseHandler(); }, 0);
             }
         }
         function closeMobPanelIfOpen() {
@@ -2999,6 +3018,10 @@
                 var bd = document.getElementById('mob-panel-backdrop');
                 if (bd) bd.classList.remove('open');
                 closeDropdowns(null);
+                if (_mobPanelCloseHandler) {
+                    document.removeEventListener('click', _mobPanelCloseHandler);
+                    _mobPanelCloseHandler = null;
+                }
             }
         }
         function closeMobPanel() { closeMobPanelIfOpen(); }
@@ -3024,15 +3047,10 @@
         }
         document.addEventListener('click', function(e) {
             var header = document.getElementById('booking-header');
-            var panel  = document.getElementById('mob-book-panel');
             if (!header) return;
-            var inHeader = header.contains(e.target);
-            var inPanel  = panel  && panel.contains(e.target);
-            if (!inHeader && !inPanel) {
+            if (!header.contains(e.target)) {
                 if (document.querySelector('.booking-dropdown.active')) {
                     closeDropdowns(null);
-                } else {
-                    closeMobPanelIfOpen();
                 }
             }
         });
