@@ -68,6 +68,7 @@ const translations = {
     "price.fri": "(금)",
     "price.sat": "(토)",
     "ways.title": "호텔 투숙을 즐기는 다양한 방법",
+    "booking.checkout_select": "체크아웃 선택",
   },
   en: {
     "nav.hotel": "About Hotel",
@@ -123,6 +124,7 @@ const translations = {
     "price.fri": "(Fri)",
     "price.sat": "(Sat)",
     "ways.title": "Ways to Enjoy Your Hotel Stay",
+    "booking.checkout_select": "Select checkout",
   },
   ja: {
     "nav.hotel": "ホテル紹介",
@@ -178,6 +180,7 @@ const translations = {
     "price.fri": "(金)",
     "price.sat": "(土)",
     "ways.title": "ホテル滞在をもっと楽しむ方法",
+    "booking.checkout_select": "チェックアウトを選択",
   },
   zh: {
     "nav.hotel": "酒店介绍",
@@ -233,6 +236,7 @@ const translations = {
     "price.fri": "(周五)",
     "price.sat": "(周六)",
     "ways.title": "享受酒店住宿的多种方式",
+    "booking.checkout_select": "选择退房日",
   }
 };
 
@@ -293,6 +297,10 @@ function setLanguage(lang) {
 
   // html lang 속성
   document.documentElement.lang = lang;
+
+  // 날짜 선택 후 변경된 동적 텍스트(요금, 모바일 패널) 새로고침
+  if (typeof updateRoomPrices === 'function') updateRoomPrices();
+  if (typeof syncMobPanel     === 'function') syncMobPanel();
 }
 
 function _updateRoomPrices(lang) {
@@ -338,16 +346,66 @@ function _updateRoomPrices(lang) {
   });
 }
 
+// ─── 동적 텍스트 포맷 헬퍼 ───────────────────────────────────────────────────
+
+// 객실 ID → 현재 언어 객실명
+function getRoomName(id) {
+  var keyMap = {
+    edelweiss: 'room.economy',
+    aurora:    'room.standard',
+    glorio:    'room.deluxe',
+    envidion:  'room.twin',
+    special:   'room.special',
+    ruby:      'room.ruby'
+  };
+  return t(keyMap[id] || id);
+}
+
+// "N박 총 OO원" / "Total for N nights: ~$OO" 등 언어별 포맷
+function fmtNightTotal(nights, krwTotal) {
+  var won = krwTotal.toLocaleString();
+  if (currentLang === 'ko') return nights + '박 총 ' + won + '원';
+  var conv = _convertPrice(krwTotal, currentLang);
+  if (currentLang === 'en') return 'Total for ' + nights + ' night' + (nights > 1 ? 's' : '') + ': ~' + conv;
+  if (currentLang === 'ja') return nights + '泊合計: ~' + conv;
+  if (currentLang === 'zh') return nights + '晚总价: ~' + conv;
+  return nights + '박 총 ' + won + '원';
+}
+
+// "최대 N인" / "Max N guests" 등
+function fmtUnavailMax(n) {
+  if (currentLang === 'en') return 'Max ' + n + ' guests';
+  if (currentLang === 'ja') return '最大' + n + '名';
+  if (currentLang === 'zh') return '最多' + n + '人';
+  return '최대 ' + n + '인';
+}
+
+// "날짜 (N박)" / "Dates (N nights)" 등
+function fmtDateNights(n) {
+  var label = t('booking.date_label');
+  if (currentLang === 'en') return label + ' (' + n + ' night' + (n > 1 ? 's' : '') + ')';
+  if (currentLang === 'ja') return label + ' (' + n + '泊)';
+  if (currentLang === 'zh') return label + ' (' + n + '晚)';
+  return label + ' (' + n + '박)';
+}
+
+// "N 객실, N 성인" / "N Rooms, N Adults" 등
+function fmtGuestCount(room, adult) {
+  if (currentLang === 'en') return room + ' Room' + (room > 1 ? 's' : '') + ', ' + adult + ' Adult' + (adult > 1 ? 's' : '');
+  if (currentLang === 'ja') return room + '室, 大人' + adult + '名';
+  if (currentLang === 'zh') return room + '间客房, ' + adult + '位成人';
+  return room + ' 객실, ' + adult + ' 성인';
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+
 function _syncBookingBarLang(lang) {
-  // 날짜 레이블 (박 수 포함 동적 텍스트는 syncNightsLabel이 담당)
-  // 투숙객 기본 텍스트
+  var r = typeof guests !== 'undefined' ? guests.room  : 1;
+  var a = typeof guests !== 'undefined' ? guests.adult : 1;
   var guestSummary = document.getElementById('guest-summary-text');
   var mobGuests    = document.getElementById('mob-panel-guests');
-  if (guestSummary && guestSummary.dataset.default === '1') {
-    var guestDefault = t('booking.guest_default');
-    guestSummary.textContent = guestDefault;
-    if (mobGuests) mobGuests.textContent = guestDefault;
-  }
+  if (guestSummary) guestSummary.textContent = fmtGuestCount(r, a);
+  if (mobGuests)    mobGuests.textContent    = fmtGuestCount(r, a);
 }
 
 // 페이지 로드 시 저장된 언어 적용

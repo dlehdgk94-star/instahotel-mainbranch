@@ -2604,7 +2604,7 @@
             if (checkoutDate) {
                 document.getElementById('checkout-date-text').innerText = formatDate(checkoutDate);
             } else {
-                document.getElementById('checkout-date-text').innerText = '체크아웃 선택';
+                document.getElementById('checkout-date-text').innerText = t('booking.checkout_select');
             }
 
             // --- ★ 추가됨: 상단 'N 박' 표시 로직 ★ ---
@@ -2612,9 +2612,9 @@
             if (checkinDate && checkoutDate) {
                 const timeDiff = checkoutDate.getTime() - checkinDate.getTime();
                 const nights = Math.ceil(timeDiff / (1000 * 3600 * 24));
-                nightsLabel.innerHTML = `<i class="fa-regular fa-calendar"></i> 날짜 (${nights} 박)`;
+                nightsLabel.innerHTML = `<i class="fa-regular fa-calendar"></i> ` + fmtDateNights(nights);
             } else {
-                nightsLabel.innerHTML = `<i class="fa-regular fa-calendar"></i> 날짜 (1 박)`;
+                nightsLabel.innerHTML = `<i class="fa-regular fa-calendar"></i> ` + fmtDateNights(1);
             }
 
             // 모바일 패널 날짜 동기화
@@ -2695,7 +2695,7 @@
                 checkoutDate = null;
                 datesUserSelected = false;
                 const el = document.getElementById('min-price-text');
-                if (el) el.textContent = '최저 요금선택';
+                if (el) el.textContent = t('booking.price_select');
                 selectedRoomId = null;
                 if (typeof syncMobPanel === 'function') syncMobPanel();
                 document.getElementById('pricePopup').classList.remove('active');
@@ -2711,7 +2711,7 @@
                     checkinDate = clickedDate;
                     datesUserSelected = false;
                     const el = document.getElementById('min-price-text');
-                    if (el) el.textContent = '최저 요금선택';
+                    if (el) el.textContent = t('booking.price_select');
                     selectedRoomId = null;
                     if (typeof syncMobPanel === 'function') syncMobPanel();
                     document.getElementById('pricePopup').classList.remove('active');
@@ -2751,7 +2751,7 @@
             guests[type] = newVal;
             document.getElementById(`val-${type}`).innerText = newVal;
 
-            document.getElementById('guest-summary-text').innerText = `${guests.room} 객실, ${guests.adult} 성인`;
+            document.getElementById('guest-summary-text').innerText = fmtGuestCount(guests.room, guests.adult);
 
             // 모바일 패널 동기화
             if (typeof syncMobPanel === 'function') syncMobPanel();
@@ -2778,11 +2778,11 @@
             var nights=Math.round((checkoutDate-checkinDate)/86400000);
             var roomCount=guests?guests.room:1, adultCount=guests?guests.adult:1;
             listEl.innerHTML=ROOM_ORDER_I.map(function(id){
-                var pt=ROOM_PRICE_TABLE_I[id]; var title=ROOM_NAMES_I[id];
+                var pt=ROOM_PRICE_TABLE_I[id]; var title=getRoomName(id);
                 var available=pt&&adultCount<=pt.maxGuests*roomCount;
                 var total=0; for(var i=0;i<nights;i++){ var nd=new Date(checkinDate); nd.setDate(nd.getDate()+i); total+=getNightRateI(id,nd); } total*=roomCount;
-                if(!available) return '<div class="price-popup-row price-popup-unavail"><span class="price-popup-name">'+title+'</span><span class="price-popup-total" style="color:rgb(180,180,180);">최대 '+(pt.maxGuests*roomCount)+'인</span></div>';
-                return '<div class="price-popup-row" onclick="selectRoom(\''+id+'\')"><span class="price-popup-name">'+title+'</span><span class="price-popup-total">'+nights+'박 총 '+fmtWon(total)+'원</span></div>';
+                if(!available) return '<div class="price-popup-row price-popup-unavail"><span class="price-popup-name">'+title+'</span><span class="price-popup-total" style="color:rgb(180,180,180);">'+fmtUnavailMax(pt.maxGuests*roomCount)+'</span></div>';
+                return '<div class="price-popup-row" onclick="selectRoom(\''+id+'\')"><span class="price-popup-name">'+title+'</span><span class="price-popup-total">'+fmtNightTotal(nights,total)+'</span></div>';
             }).join('');
         }
         function updateRoomPrices(){
@@ -2793,9 +2793,9 @@
                     var nights=Math.round((checkoutDate-checkinDate)/86400000);
                     var roomCount=guests?guests.room:1; var total=0;
                     for(var i=0;i<nights;i++){ var nd=new Date(checkinDate); nd.setDate(nd.getDate()+i); total+=getNightRateI(selectedRoomId,nd); } total*=roomCount;
-                    el.textContent=(ROOM_NAMES_I[selectedRoomId]?ROOM_NAMES_I[selectedRoomId]+' · ':'')+nights+'박 총 '+fmtWon(total)+'원';
+                    el.textContent=getRoomName(selectedRoomId)+' · '+fmtNightTotal(nights,total);
                 }
-            } else { el.textContent='최저 요금선택'; document.getElementById('pricePopup').classList.remove('active'); }
+            } else { el.textContent=t('booking.price_select'); document.getElementById('pricePopup').classList.remove('active'); }
         }
         function selectRoom(roomId){
             selectedRoomId=roomId;
@@ -2803,7 +2803,7 @@
                 var nights=Math.round((checkoutDate-checkinDate)/86400000);
                 var roomCount=guests?guests.room:1; var total=0;
                 for(var i=0;i<nights;i++){ var nd=new Date(checkinDate); nd.setDate(nd.getDate()+i); total+=getNightRateI(roomId,nd); } total*=roomCount;
-                document.getElementById('min-price-text').textContent=(ROOM_NAMES_I[roomId]?ROOM_NAMES_I[roomId]+' · ':'')+nights+'박 총 '+fmtWon(total)+'원';
+                document.getElementById('min-price-text').textContent=getRoomName(roomId)+' · '+fmtNightTotal(nights,total);
             }
             // 모바일 패널 동기화
             if (typeof syncMobPanel === 'function') syncMobPanel();
@@ -3022,21 +3022,21 @@
         function syncMobPanel() {
             var nights = checkinDate && checkoutDate ? Math.round((checkoutDate - checkinDate) / 86400000) : 1;
             var nl = document.getElementById('mob-panel-nights');
-            if (nl) nl.innerHTML = '<i class="fa-regular fa-calendar"></i> 날짜 (' + nights + '박)';
+            if (nl) nl.innerHTML = '<i class="fa-regular fa-calendar"></i> ' + fmtDateNights(nights);
             var ci = document.getElementById('mob-panel-checkin');
             var co = document.getElementById('mob-panel-checkout');
-            if (ci) ci.innerText = checkinDate ? formatDate(checkinDate) : '날짜 선택';
-            if (co) co.innerText = checkoutDate ? formatDate(checkoutDate) : (checkinDate ? '체크아웃 선택' : '');
+            if (ci) ci.innerText = checkinDate ? formatDate(checkinDate) : t('booking.date_select');
+            if (co) co.innerText = checkoutDate ? formatDate(checkoutDate) : (checkinDate ? t('booking.checkout_select') : '');
             var pg = document.getElementById('mob-panel-guests');
-            if (pg) pg.innerText = guests.room + ' 객실, ' + guests.adult + ' 성인';
+            if (pg) pg.innerText = fmtGuestCount(guests.room, guests.adult);
             var pp = document.getElementById('mob-panel-price');
             if (pp) {
                 if (selectedRoomId && checkinDate && checkoutDate) {
                     var n = Math.round((checkoutDate - checkinDate) / 86400000);
                     var rc = guests.room, tot = 0;
                     for (var i = 0; i < n; i++) { var d = new Date(checkinDate); d.setDate(d.getDate()+i); tot += getNightRateI(selectedRoomId, d); } tot *= rc;
-                    pp.innerText = (ROOM_NAMES_I[selectedRoomId] || selectedRoomId) + ' · ' + n + '박 총 ' + fmtWon(tot) + '원';
-                } else { pp.innerText = '최저 요금선택'; }
+                    pp.innerText = getRoomName(selectedRoomId) + ' · ' + fmtNightTotal(n, tot);
+                } else { pp.innerText = t('booking.price_select'); }
             }
         }
         document.addEventListener('click', function(e) {
