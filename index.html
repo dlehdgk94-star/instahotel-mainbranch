@@ -627,10 +627,10 @@
                 <li class="lang-selector" onclick="event.stopPropagation()">
                     <button class="lang-btn" onclick="toggleLangDropdown(event)"><i class="fa-solid fa-globe"></i><span id="langCode">KO</span><i class="fa-solid fa-chevron-down lang-chevron"></i></button>
                     <div class="lang-dropdown" id="langDropdown">
-                        <span class="lang-option active" data-code="ko" onclick="selectLangOption(this)">한국어</span>
-                        <span class="lang-option" data-code="en" onclick="selectLangOption(this)">English</span>
-                        <span class="lang-option" data-code="ja" onclick="selectLangOption(this)">日本語</span>
-                        <span class="lang-option" data-code="zh" onclick="selectLangOption(this)">中文</span>
+                        <span class="lang-option active" data-code="KO" onclick="selectLangOption(this)">한국어</span>
+                        <span class="lang-option" data-code="EN" onclick="selectLangOption(this)">English</span>
+                        <span class="lang-option" data-code="JA" onclick="selectLangOption(this)">日本語</span>
+                        <span class="lang-option" data-code="ZH" onclick="selectLangOption(this)">中文</span>
                     </div>
                 </li>
             </ul>
@@ -3462,7 +3462,7 @@
     </script>
     <script>
     function toggleLangDropdown(e){e.stopPropagation();document.getElementById("langDropdown").classList.toggle("open");}
-    function selectLangOption(el){setLanguage(el.dataset.code);document.getElementById("langDropdown").classList.remove("open");}
+    function selectLangOption(el){setLanguage(el.dataset.code.toLowerCase());document.getElementById("langDropdown").classList.remove("open");}
     document.addEventListener("click",function(){var d=document.getElementById("langDropdown");if(d)d.classList.remove("open");});
     </script>
     <script src="translations.js?v=20260707b"></script>
