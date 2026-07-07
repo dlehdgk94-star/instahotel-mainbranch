@@ -727,40 +727,6 @@
             </div>
         </div>
 
-        <!-- 모바일 전용: 예약하기 트리거 버튼 -->
-        <div id="mob-trigger-bar">
-            <button id="mob-book-trigger" onclick="toggleMobPanel(event)">예약하기</button>
-        </div>
-
-        <!-- 모바일 전용: 펼쳐지는 예약 패널 -->
-        <div id="mob-book-panel">
-            <div class="mob-panel-row" onclick="toggleCalendarPopup(event)">
-                <span class="mob-panel-label" id="mob-panel-nights"><i class="fa-regular fa-calendar"></i> 날짜 (1박)</span>
-                <div class="mob-panel-value">
-                    <span id="mob-panel-checkin">날짜 선택</span>
-                    <i class="fa-solid fa-arrow-right" style="font-size:12px;color:#aaa;"></i>
-                    <span id="mob-panel-checkout"></span>
-                </div>
-            </div>
-            <div class="mob-panel-row" onclick="toggleGuestPopup(event)">
-                <span class="mob-panel-label">객실 &amp; 투숙객</span>
-                <div class="mob-panel-value">
-                    <span id="mob-panel-guests">1 객실, 1 성인</span>
-                    <i class="fa-solid fa-chevron-down" style="font-size:12px;color:#aaa;margin-left:auto;"></i>
-                </div>
-            </div>
-            <div class="mob-panel-row" onclick="togglePricePopup(event)">
-                <span class="mob-panel-label">객실선택 & 특별요금</span>
-                <div class="mob-panel-value">
-                    <span id="mob-panel-price">최저 요금선택</span>
-                    <i class="fa-solid fa-chevron-down" style="font-size:12px;color:#aaa;margin-left:auto;"></i>
-                </div>
-            </div>
-            <div style="padding:12px 16px 16px;">
-                <button class="mob-panel-confirm" onclick="handleBookingBtn()">예약하기</button>
-            </div>
-        </div>
-
     </div>
 
     <section class="hotel-ways-section">
@@ -2979,17 +2945,17 @@
         var _mobPanelCloseHandler = null;
         function _registerMobPanelCloseHandler() {
             if (_mobPanelCloseHandler) {
-                document.removeEventListener('click', _mobPanelCloseHandler);
+                document.removeEventListener('pointerdown', _mobPanelCloseHandler);
             }
             _mobPanelCloseHandler = function(e) {
                 var bookingBar = document.getElementById('mob-book-panel');
                 if (!bookingBar || !bookingBar.contains(e.target)) {
                     closeMobPanelIfOpen();
-                    document.removeEventListener('click', _mobPanelCloseHandler);
+                    document.removeEventListener('pointerdown', _mobPanelCloseHandler);
                     _mobPanelCloseHandler = null;
                 }
             };
-            document.addEventListener('click', _mobPanelCloseHandler);
+            document.addEventListener('pointerdown', _mobPanelCloseHandler);
         }
         function toggleMobPanel(e) {
             if (e) e.stopPropagation();
@@ -3019,7 +2985,7 @@
                 if (bd) bd.classList.remove('open');
                 closeDropdowns(null);
                 if (_mobPanelCloseHandler) {
-                    document.removeEventListener('click', _mobPanelCloseHandler);
+                    document.removeEventListener('pointerdown', _mobPanelCloseHandler);
                     _mobPanelCloseHandler = null;
                 }
             }
@@ -3474,8 +3440,40 @@
 
 <script src="ai-chat.js"></script>
 
-<!-- 모바일 예약 패널 백드롭 — sticky 컨테이너 밖에 위치해야 position:fixed가 뷰포트 기준으로 동작 -->
-<div id="mob-panel-backdrop" onclick="closeMobPanelIfOpen()"></div>
+<!-- 모바일 전용 요소 — sticky/overflow 컨테이너 밖에 위치해야 position:fixed가 뷰포트 기준으로 동작 -->
+<div id="mob-trigger-bar">
+    <button id="mob-book-trigger" onclick="toggleMobPanel(event)">예약하기</button>
+</div>
+
+<div id="mob-book-panel">
+    <div class="mob-panel-row" onclick="toggleCalendarPopup(event)">
+        <span class="mob-panel-label" id="mob-panel-nights"><i class="fa-regular fa-calendar"></i> 날짜 (1박)</span>
+        <div class="mob-panel-value">
+            <span id="mob-panel-checkin">날짜 선택</span>
+            <i class="fa-solid fa-arrow-right" style="font-size:12px;color:#aaa;"></i>
+            <span id="mob-panel-checkout"></span>
+        </div>
+    </div>
+    <div class="mob-panel-row" onclick="toggleGuestPopup(event)">
+        <span class="mob-panel-label">객실 &amp; 투숙객</span>
+        <div class="mob-panel-value">
+            <span id="mob-panel-guests">1 객실, 1 성인</span>
+            <i class="fa-solid fa-chevron-down" style="font-size:12px;color:#aaa;margin-left:auto;"></i>
+        </div>
+    </div>
+    <div class="mob-panel-row" onclick="togglePricePopup(event)">
+        <span class="mob-panel-label">객실선택 & 특별요금</span>
+        <div class="mob-panel-value">
+            <span id="mob-panel-price">최저 요금선택</span>
+            <i class="fa-solid fa-chevron-down" style="font-size:12px;color:#aaa;margin-left:auto;"></i>
+        </div>
+    </div>
+    <div style="padding:12px 16px 16px;">
+        <button class="mob-panel-confirm" onclick="handleBookingBtn()">예약하기</button>
+    </div>
+</div>
+
+<div id="mob-panel-backdrop" onclick="closeMobPanelIfOpen()" onpointerdown="closeMobPanelIfOpen()"></div>
 </body>
 </html>
 
