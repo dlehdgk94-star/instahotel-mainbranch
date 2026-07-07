@@ -77,7 +77,7 @@
         document.body.style.overflow = '';
     }
 
-    var isIndexPage = /index\.html$|\/insta-hotel-html\/?$/.test(path) && !isSubfolder && !/rooms\.html|gallery\.html|nearby\.html|booking/.test(path);
+    var isIndexPage = /index\.html$|\/insta-hotel-html\/?$|\/[^/]*$/.test(path) && !isSubfolder && !/rooms\.html|gallery\.html|nearby\.html|booking/.test(path);
 
     document.addEventListener('DOMContentLoaded', function () {
         document.body.appendChild(overlay);
