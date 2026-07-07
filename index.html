@@ -362,6 +362,7 @@
         .loc-title { font-size: 32px; font-weight: 300; margin-bottom: 35px; color: #fff; letter-spacing: -1px; }
         .loc-address-box { margin-bottom: 40px; font-size: 13px; color: #ccc; line-height: 1.8; }
         .loc-address-box strong { display: block; font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 10px; }
+        .addr-ko { display: block; font-size: 0.85em; opacity: 0.65; margin-top: 2px; }
         .loc-accordion { border-top: 1px solid #333; }
         .acc-item { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; border-bottom: 1px solid #333; cursor: pointer; font-size: 14px; font-weight: 500; color: #eee; transition: color 0.3s; }
         .acc-item:hover { color: #fff; }
@@ -1147,7 +1148,7 @@
                 <h2 class="loc-title" data-i18n="loc.title">오시는 길</h2>
                 <div class="loc-address-box">
                     <strong>INSTA HOTEL</strong>
-                    <p>경기도 수원시 영통구 영통로 94-6, 대한민국</p>
+                    <p data-i18n-html="loc.address">경기도 수원시 영통구 영통로 94-6, 대한민국</p>
                     <p><span data-i18n="loc.tel">전화:</span> +82 31-203-4301</p>
                 </div>
                 <div class="loc-accordion">
@@ -1203,7 +1204,7 @@
     <footer class="footer-section">
         <div class="content-container">
             <div class="footer-follow"><span data-i18n="footer.follow">팔로우하기 인스타 호텔</span><a href="https://www.instagram.com/instar_hotel_/" target="_blank" rel="noopener" style="color:inherit;"><i class="fa-brands fa-instagram"></i></a></div>
-            <div class="footer-info">사업자 정보: 인스타 호텔 &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp; (주)인스타 호텔 &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp; 사업자등록번호: 176-24-01388 &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp; 통신판매신고번호: 2023-수원영통-1696 &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp; 주소: 경기도 수원시 영통구 영통로 94-6 &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp; 전화: +82 31-203-4301 &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp; 이메일: yhl5258@naver.com</div>
+            <div class="footer-info">사업자 정보: 인스타 호텔 &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp; (주)인스타 호텔 &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp; 사업자등록번호: 176-24-01388 &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp; 통신판매신고번호: 2023-수원영통-1696 &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp; 주소: <span data-i18n="footer.address">경기도 수원시 영통구 영통로 94-6</span> &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp; 전화: +82 31-203-4301 &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp; 이메일: yhl5258@naver.com</div>
         </div>
     </footer>
 
@@ -1221,8 +1222,7 @@
                 <div class="loc-modal-info">
                     <div class="loc-modal-address">
                         <strong>INSTA HOTEL</strong>
-                        <p>경기도 수원시 영통구</p>
-                        <p>영통로 94-6, 대한민국</p>
+                        <p data-i18n-html="loc.address">경기도 수원시 영통구 영통로 94-6, 대한민국</p>
                         <p><span data-i18n="loc.tel">전화:</span> +82 31-203-4301</p>
                         <a href="https://map.naver.com/v5/search/경기도 수원시 영통구 영통로 94-6" target="_blank" rel="noopener">
                             <i class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="loc.modal.naver">네이버 지도로 보기</span>
