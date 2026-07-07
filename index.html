@@ -3212,6 +3212,7 @@
         const _MSGAP = 10;
         let _mSlideIdx = 0;
         let _mSlideCount = 0;
+        var _openModalRoomId = null;
 
         function _mSlideW() { return document.getElementById('modalSliderOuter').offsetWidth - _MPEEK * 2; }
 
@@ -3268,13 +3269,20 @@
         };
 
         function openRoomModal(roomId) {
+            _openModalRoomId = roomId;
             var data = ROOM_DATA[roomId];
             if (!data) return;
-            document.getElementById('modalTitle').textContent = data.title;
-            document.getElementById('modalRoomTitle').textContent = data.roomTitle;
-            document.getElementById('modalRoomSub').textContent = data.sub;
-            document.getElementById('modalRoomPrice').innerHTML = (data.price || []).map(function(p) {
-                return '<span class="modal-price-item">(' + p[0] + ') <strong>' + p[1] + '</strong></span>';
+
+            var roomNameStr = (typeof getRoomName === 'function') ? getRoomName(roomId) : data.title;
+            var roomSubStr  = (typeof getRoomSub  === 'function') ? getRoomSub(roomId)  : data.sub;
+            document.getElementById('modalTitle').textContent     = roomNameStr;
+            document.getElementById('modalRoomTitle').textContent = roomNameStr;
+            document.getElementById('modalRoomSub').textContent   = roomSubStr;
+
+            var dayKeys = ['price.weekday', 'price.fri', 'price.sat'];
+            document.getElementById('modalRoomPrice').innerHTML = (data.price || []).map(function(p, idx) {
+                var dayLabel = (typeof t === 'function') ? t(dayKeys[idx] || '') : p[0];
+                return '<span class="modal-price-item">' + dayLabel + ' <strong>' + p[1] + '</strong></span>';
             }).join('');
             document.getElementById('modalBookBtn').onclick = function() { closeRoomModal(); openBookingCalendar(roomId); };
 
@@ -3288,7 +3296,7 @@
                 var slide = document.createElement('div');
                 slide.className = 'modal-slide';
                 var img = document.createElement('img');
-                img.src = src; img.alt = data.title;
+                img.src = src; img.alt = roomNameStr;
                 img.onerror = function() { slide.innerHTML = '<div class="modal-slide-placeholder"></div>'; };
                 slide.appendChild(img);
                 track.appendChild(slide);
@@ -3305,22 +3313,24 @@
                 var div = document.createElement('div');
                 div.style.borderTop = '1px solid #ececec';
                 div.style.paddingTop = '12px';
-                var t = document.createElement('p');
-                t.className = 'modal-amenity-col-title';
-                t.innerHTML = '<i class="fa-solid ' + col.icon + '"></i> ' + col.label;
-                div.appendChild(t);
+                var titleEl = document.createElement('p');
+                titleEl.className = 'modal-amenity-col-title';
+                var colLabel = (typeof tFacCol === 'function') ? tFacCol(col.label) : col.label;
+                titleEl.innerHTML = '<i class="fa-solid ' + col.icon + '"></i> ' + colLabel;
+                div.appendChild(titleEl);
                 col.items.forEach(function(item) {
                     var p = document.createElement('p');
                     var entry = FAC_IMG_MAP[item];
+                    var displayLabel = (typeof tFacItem === 'function') ? tFacItem(item) : item;
                     if (entry) {
                         p.className = 'modal-amenity-item modal-amenity-item-click';
-                        p.onclick = (function(label, e) {
-                            return function() { showFacImg(label, e.imgs, e.sub); };
-                        })(item, entry);
+                        p.onclick = (function(trLabel, e) {
+                            return function() { showFacImg(trLabel, e.imgs, e.sub); };
+                        })(displayLabel, entry);
                     } else {
                         p.className = 'modal-amenity-item';
                     }
-                    p.textContent = item;
+                    p.textContent = displayLabel;
                     div.appendChild(p);
                 });
                 grid.appendChild(div);
@@ -3340,6 +3350,7 @@
         }
 
         function closeRoomModal() {
+            _openModalRoomId = null;
             document.getElementById('modalOverlay').classList.remove('open');
             document.body.style.overflow = '';
         }
@@ -3457,7 +3468,7 @@
             <div class="modal-body">
                 <div class="modal-top-row">
                     <p class="modal-room-title" id="modalRoomTitle"></p>
-                    <button class="modal-book-btn" id="modalBookBtn">요금 조회</button>
+                    <button class="modal-book-btn" id="modalBookBtn" data-i18n="room.book">요금 조회</button>
                 </div>
                 <div class="modal-sub-row">
                     <p class="modal-room-sub" id="modalRoomSub"></p>
