@@ -576,7 +576,7 @@
         .modal-book-btn:hover{ background:rgb(95,89,94); }
         .modal-sub-row{ display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:14px; }
         .modal-room-sub{ font-size:14px; font-weight:500; color:rgb(28,28,28); line-height:1.55; margin:0; font-family:'Barlow',sans-serif; }
-        .modal-room-price{ display:flex; gap:12px; align-items:center; flex-shrink:0; }
+        .modal-room-price{ display:flex; gap:6px 12px; align-items:center; flex-shrink:0; flex-wrap:wrap; justify-content:flex-end; }
         .modal-price-item{ font-size:13px; color:rgb(112,112,112); white-space:nowrap; font-family:'Barlow',sans-serif; }
         .modal-price-item strong{ font-size:13px; font-weight:600; color:rgb(28,28,28); }
         .modal-divider{ border:none; border-top:1px solid #dedede; margin:14px 0 16px; }
@@ -3296,10 +3296,20 @@
             document.getElementById('modalRoomTitle').textContent = roomNameStr;
             document.getElementById('modalRoomSub').textContent   = roomSubStr;
 
-            var dayKeys = ['price.weekday', 'price.fri', 'price.sat'];
+            var dayKeys  = ['price.weekday', 'price.fri', 'price.sat'];
+            var priceKeys = ['weekday', 'fri', 'sat'];
+            var numPrices = (typeof roomPrices !== 'undefined' && roomPrices[roomId]) ? roomPrices[roomId] : {};
             document.getElementById('modalRoomPrice').innerHTML = (data.price || []).map(function(p, idx) {
                 var dayLabel = (typeof t === 'function') ? t(dayKeys[idx] || '') : p[0];
-                return '<span class="modal-price-item">' + dayLabel + ' <strong>' + p[1] + '</strong></span>';
+                var convHtml = '';
+                if (typeof _convertPrice === 'function' && typeof currentLang !== 'undefined' && currentLang !== 'ko') {
+                    var krwNum = numPrices[priceKeys[idx]];
+                    if (krwNum) {
+                        var conv = _convertPrice(krwNum, currentLang);
+                        if (conv) convHtml = ' <span class="price-conv">(~' + conv + ')</span>';
+                    }
+                }
+                return '<span class="modal-price-item">' + dayLabel + ' <strong>' + p[1] + '</strong>' + convHtml + '</span>';
             }).join('');
             document.getElementById('modalBookBtn').onclick = function() { closeRoomModal(); openBookingCalendar(roomId); };
 
@@ -3455,7 +3465,7 @@
     function selectLangOption(el){setLanguage(el.dataset.code);document.getElementById("langDropdown").classList.remove("open");}
     document.addEventListener("click",function(){var d=document.getElementById("langDropdown");if(d)d.classList.remove("open");});
     </script>
-    <script src="translations.js?v=20260707"></script>
+    <script src="translations.js?v=20260707b"></script>
     <!-- 갤러리 라이트박스 -->
     <div class="gallery-overlay" id="roomGalleryOverlay" onclick="handleRoomGalleryOverlayClick(event)">
         <button class="gallery-close" onclick="closeRoomGallery()"><i class="fa-solid fa-xmark"></i></button>
