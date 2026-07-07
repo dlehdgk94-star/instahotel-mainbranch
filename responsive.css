@@ -461,13 +461,7 @@
     }
     #mob-book-panel.open {
         display: flex;
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        z-index: 9500;
-        border-radius: 16px 16px 0 0;
-        box-shadow: 0 -4px 24px rgba(0,0,0,0.18);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.10);
     }
 
     .mob-panel-row {
