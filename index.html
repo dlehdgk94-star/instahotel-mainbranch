@@ -733,7 +733,7 @@
         </div>
 
         <!-- 모바일 전용: 펼쳐지는 예약 패널 -->
-        <div id="mob-book-panel">
+        <div id="mob-book-panel" onclick="event.stopPropagation()">
             <div class="mob-panel-row" onclick="toggleCalendarPopup(event)">
                 <span class="mob-panel-label" id="mob-panel-nights"><i class="fa-regular fa-calendar"></i> 날짜 (1박)</span>
                 <div class="mob-panel-value">
@@ -2512,7 +2512,6 @@
 
         function openBookingCalendar(roomId, e) {
             if (e) e.stopPropagation();
-            if (Date.now() - _panelCloseTime < 350) return;
             if (roomId) selectedRoomId = roomId;
             if (window.innerWidth <= 768) {
                 var panel = document.getElementById('mob-book-panel');
@@ -2991,7 +2990,6 @@
                 syncMobPanel();
             }
         }
-        var _panelCloseTime = 0;
         function closeMobPanelIfOpen() {
             var panel = document.getElementById('mob-book-panel');
             var triggerBar = document.getElementById('mob-trigger-bar');
@@ -3001,7 +2999,6 @@
                 var bd = document.getElementById('mob-panel-backdrop');
                 if (bd) bd.classList.remove('open');
                 closeDropdowns(null);
-                _panelCloseTime = Date.now();
             }
         }
         function closeMobPanel() { closeMobPanelIfOpen(); }
@@ -3026,9 +3023,12 @@
             }
         }
         document.addEventListener('click', function(e) {
-            var wrapper = document.getElementById('booking-header');
-            if (!wrapper) return;
-            if (!wrapper.contains(e.target)) {
+            var header = document.getElementById('booking-header');
+            var panel  = document.getElementById('mob-book-panel');
+            if (!header) return;
+            var inHeader = header.contains(e.target);
+            var inPanel  = panel  && panel.contains(e.target);
+            if (!inHeader && !inPanel) {
                 if (document.querySelector('.booking-dropdown.active')) {
                     closeDropdowns(null);
                 } else {
