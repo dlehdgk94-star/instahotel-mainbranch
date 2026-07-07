@@ -67,6 +67,7 @@ const translations = {
     "price.weekday": "(일~목)",
     "price.fri": "(금)",
     "price.sat": "(토)",
+    "ways.title": "호텔 투숙을 즐기는 다양한 방법",
   },
   en: {
     "nav.hotel": "About Hotel",
@@ -121,6 +122,7 @@ const translations = {
     "price.weekday": "(Sun–Thu)",
     "price.fri": "(Fri)",
     "price.sat": "(Sat)",
+    "ways.title": "Ways to Enjoy Your Hotel Stay",
   },
   ja: {
     "nav.hotel": "ホテル紹介",
@@ -175,6 +177,7 @@ const translations = {
     "price.weekday": "(日〜木)",
     "price.fri": "(金)",
     "price.sat": "(土)",
+    "ways.title": "ホテル滞在をもっと楽しむ方法",
   },
   zh: {
     "nav.hotel": "酒店介绍",
@@ -229,6 +232,7 @@ const translations = {
     "price.weekday": "(周日~周四)",
     "price.fri": "(周五)",
     "price.sat": "(周六)",
+    "ways.title": "享受酒店住宿的多种方式",
   }
 };
 
