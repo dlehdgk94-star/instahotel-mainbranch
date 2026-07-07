@@ -226,6 +226,18 @@ const translations = {
     "gal.label.arboretum": "영흥수목원",
     "gal.label.starfield": "수원 스타필드",
     "gal.label.convenience": "편의점",
+    // nearby.html 전용
+    "nearby.hero.label": "호텔 인스타",
+    "nearby.hero.title": "주변 관광지 & 편의시설",
+    "nearby.section.sub": "호텔 근처의 다양한 명소와 편의시설을 확인하세요",
+    "nearby.desc.hwaseong": "유네스코 세계문화유산으로 지정된 조선시대 대표 성곽입니다. 정조대왕이 1796년에 완성한 화성은 독창적인 건축양식과 아름다운 풍경으로 수원을 찾는 관광객이 반드시 방문하는 대표 명소입니다.",
+    "nearby.desc.everland": "국내 최대 규모의 테마파크로 다양한 놀이기구, 동물원, 계절별 꽃 축제 등을 즐길 수 있습니다. 가족 단위 방문객에게 특히 인기 있으며, 사계절 내내 다양한 이벤트와 공연이 펼쳐집니다.",
+    "nearby.desc.caribbean": "에버랜드 내 위치한 국내 최대 규모의 워터파크입니다. 파도풀, 익스트림 슬라이드, 실내 스파 등 다양한 수상 어트랙션을 갖추고 있어 여름철 대표 인기 방문지입니다.",
+    "nearby.desc.lake_park": "수원시 영통구에 위치한 도심 속 아름다운 자연 호수공원입니다. 광교저수지와 원천저수지 주변에 조성된 넓은 산책로, 자전거 도로, 카페, 문화공연장을 갖추고 있어 사계절 내내 많은 시민과 관광객이 즐겨 찾는 힐링 공간입니다.",
+    "nearby.desc.folk_village": "조선시대의 전통 생활문화를 생생하게 체험할 수 있는 야외 민속박물관입니다. 초가집, 기와집 등 전통 가옥과 다양한 민속 공연을 관람하며 우리나라의 옛 생활 모습을 느낄 수 있습니다.",
+    "nearby.desc.arboretum": "수원시에 위치한 도심형 수목원으로 다양한 식물과 계절별 꽃을 감상할 수 있습니다. 자연 속 산책로를 걸으며 힐링하기 좋은 수원의 숨겨진 명소로, 가족 나들이와 여유로운 산책을 즐기기에 안성맞춤입니다.",
+    "nearby.desc.starfield": "수원에 위치한 대규모 복합쇼핑몰로 다양한 브랜드 매장과 맛집, 별마당도서관 등 문화·여가 공간이 한곳에 모여 있습니다. 쇼핑과 식사, 문화생활을 한 번에 즐길 수 있는 수원의 새로운 랜드마크입니다.",
+    "nearby.desc.convenience": "호텔 바로 인근에 24시간 편의점이 위치해 있어 간단한 먹거리, 음료, 생필품을 언제든 편리하게 구매하실 수 있습니다. 투숙 중 필요한 것들을 가까운 거리에서 손쉽게 해결하세요.",
   },
   en: {
     "nav.hotel": "About Hotel",
@@ -438,6 +450,18 @@ const translations = {
     "gal.label.arboretum": "Yeonghung Arboretum",
     "gal.label.starfield": "Starfield Suwon",
     "gal.label.convenience": "Convenience Store",
+    // nearby.html
+    "nearby.hero.label": "INSTA Hotel",
+    "nearby.hero.title": "Nearby Attractions & Facilities",
+    "nearby.section.sub": "Discover attractions and facilities near the hotel",
+    "nearby.desc.hwaseong": "A representative Joseon-era fortress designated as a UNESCO World Cultural Heritage site. Completed in 1796 by King Jeongjo, Hwaseong is celebrated for its unique architectural style and stunning scenery, making it a must-visit landmark for anyone traveling to Suwon.",
+    "nearby.desc.everland": "South Korea's largest theme park, offering a wide range of rides, a zoo, and seasonal flower festivals. Especially popular with families, Everland hosts diverse events and performances all year round.",
+    "nearby.desc.caribbean": "Located within Everland, Caribbean Bay is South Korea's largest water park. Featuring wave pools, extreme slides, and indoor spas, it is one of the most popular summer destinations in the country.",
+    "nearby.desc.lake_park": "A beautiful natural lake park in Yeongtong-gu, Suwon. Surrounding Gwanggyo and Woncheon Reservoirs, the park offers wide walking trails, cycling paths, cafés, and a cultural performance venue — a beloved healing retreat enjoyed by residents and tourists throughout all four seasons.",
+    "nearby.desc.folk_village": "An open-air folk museum where visitors can vividly experience traditional Joseon-era living culture. Explore thatched and tiled-roof houses, and enjoy folk performances that bring Korea's historic way of life to life.",
+    "nearby.desc.arboretum": "An urban arboretum in Suwon where visitors can admire diverse plants and seasonal flowers. A hidden gem perfect for a relaxing nature walk, it is an ideal spot for family outings and leisurely strolls.",
+    "nearby.desc.starfield": "A large mixed-use shopping mall in Suwon, bringing together diverse brand stores, restaurants, and cultural venues including the Star Library. A new Suwon landmark where you can enjoy shopping, dining, and cultural experiences all in one visit.",
+    "nearby.desc.convenience": "A 24-hour convenience store is located just steps from the hotel, making it easy to pick up snacks, beverages, and daily essentials at any time. Everything you need during your stay is just a short walk away.",
   },
   ja: {
     "nav.hotel": "ホテル紹介",
@@ -650,6 +674,18 @@ const translations = {
     "gal.label.arboretum": "栄興樹木園",
     "gal.label.starfield": "水原スターフィールド",
     "gal.label.convenience": "コンビニ",
+    // nearby.html
+    "nearby.hero.label": "INSTAホテル",
+    "nearby.hero.title": "周辺観光地 & 便利施設",
+    "nearby.section.sub": "ホテル近くの名所と便利施設をご確認ください",
+    "nearby.desc.hwaseong": "ユネスコ世界文化遺産に登録された朝鮮時代を代表する城郭です。正祖大王が1796年に完成させた華城は、独創的な建築様式と美しい風景で、水原を訪れる観光客が必ず立ち寄る名所として知られています。",
+    "nearby.desc.everland": "韓国最大規模のテーマパークで、様々なアトラクション、動物園、季節ごとの花祭りが楽しめます。特にファミリー層に人気で、四季を通じてさまざまなイベントやショーが開催されます。",
+    "nearby.desc.caribbean": "エバーランド内に位置する、韓国最大規模のウォーターパークです。ウェーブプール、エクストリームスライダー、室内スパなど多彩な水上アトラクションを完備し、夏の人気スポットとして多くの来場者を集めています。",
+    "nearby.desc.lake_park": "水原市永通区にある都市の中心に広がる美しい自然湖水公園です。光教貯水池と源泉貯水池の周辺に整備された広い遊歩道、サイクリングロード、カフェ、文化公演場が揃い、四季を通じて多くの市民と観光客が訪れるヒーリングスポットです。",
+    "nearby.desc.folk_village": "朝鮮時代の伝統的な生活文化をリアルに体験できる野外民俗博物館です。茅葺き屋根や瓦屋根の伝統家屋を見学し、様々な民俗公演を楽しみながら韓国の昔の生活文化を感じることができます。",
+    "nearby.desc.arboretum": "水原市に位置する都市型樹木園で、多様な植物や季節の花々を楽しめます。自然の中の散策路を歩きながらリフレッシュできる水原の穴場スポットで、ファミリーのお出かけや気ままな散歩にぴったりです。",
+    "nearby.desc.starfield": "水原に位置する大規模複合ショッピングモールで、様々なブランドショップ、グルメ、スターライブラリーなどの文化・余暇空間が一堂に集まっています。ショッピング・食事・文化体験を一度に楽しめる水原の新たなランドマークです。",
+    "nearby.desc.convenience": "ホテルのすぐ近くに24時間営業のコンビニがあり、軽食、飲み物、生活必需品をいつでも手軽にお買い求めいただけます。滞在中に必要なものはすぐ近くで簡単に解決できます。",
   },
   zh: {
     "nav.hotel": "酒店介绍",
@@ -862,6 +898,18 @@ const translations = {
     "gal.label.arboretum": "荣兴树木园",
     "gal.label.starfield": "水原星域购物中心",
     "gal.label.convenience": "便利店",
+    // nearby.html
+    "nearby.hero.label": "INSTA酒店",
+    "nearby.hero.title": "周边景点 & 便利设施",
+    "nearby.section.sub": "了解酒店附近的各大景点和便利设施",
+    "nearby.desc.hwaseong": "这是被联合国教科文组织列为世界文化遗产的朝鲜时代代表性城郭。由正祖大王于1796年建成的华城以其独特的建筑风格和优美景色闻名，是来访水原游客的必游之地。",
+    "nearby.desc.everland": "这是韩国规模最大的主题公园，设有丰富的游乐设施、动物园及各季节花卉节等活动，尤受家庭游客欢迎，全年举办各类活动与演出。",
+    "nearby.desc.caribbean": "位于爱宝乐园内，是韩国规模最大的水上乐园。配备波浪池、极限滑道、室内温泉等多种水上娱乐设施，是夏季最受欢迎的热门打卡地。",
+    "nearby.desc.lake_park": "坐落于水原市永通区的城市天然湖水公园。光教水库与源泉水库周边设有宽阔步行道、自行车道、咖啡厅及文化表演场所，四季皆有大批市民和游客前来休闲疗愈。",
+    "nearby.desc.folk_village": "这是一座可以生动体验朝鲜时代传统生活文化的露天民俗博物馆。游客可参观茅屋、瓦房等传统民居，观赏各类民俗表演，感受韩国古代生活风貌。",
+    "nearby.desc.arboretum": "位于水原市的城市植物园，可欣赏各类植物及四季鲜花。这里是水原的隐藏打卡地，沿自然步行道漫步，心旷神怡，非常适合家庭出游和悠闲散步。",
+    "nearby.desc.starfield": "这是位于水原的大型综合购物中心，汇聚各类品牌门店、餐厅以及"星空图书馆"等文化休闲空间。购物、用餐、文化体验一站搞定，是水原的全新地标。",
+    "nearby.desc.convenience": "酒店紧邻24小时便利店，随时可购买简餐、饮料及日常生活用品，十分方便。住宿期间所需物品，步行即可轻松解决。",
   }
 };
 
@@ -944,6 +992,9 @@ function setLanguage(lang) {
 
   // 갤러리 그리드 레이블 / 사진 수 갱신
   if (typeof syncGalleryLang === 'function') syncGalleryLang();
+
+  // 주변안내 탭·설명 갱신
+  if (typeof syncNearbyLang === 'function') syncNearbyLang();
 }
 
 function _updateRoomPrices(lang) {
