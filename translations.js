@@ -806,6 +806,7 @@ function setLanguage(lang) {
 
   // 날짜 선택 후 변경된 동적 텍스트(요금, 모바일 패널) 새로고침
   if (typeof updateRoomPrices === 'function') updateRoomPrices();
+  if (typeof updateDateUI     === 'function') updateDateUI();
   if (typeof syncMobPanel     === 'function') syncMobPanel();
 
   // 캘린더 월 제목 + 요일 헤더 갱신

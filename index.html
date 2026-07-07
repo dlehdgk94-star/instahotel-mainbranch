@@ -2594,15 +2594,24 @@
         let checkoutDate = _tomorrow;
         
         function formatDate(date) {
-            const days = ['일', '월', '화', '수', '목', '금', '토'];
-            return `${date.getMonth() + 1}월 ${date.getDate()}일, ${days[date.getDay()]}`;
+            var days = typeof calDayNames === 'function' ? calDayNames() : ['일','월','화','수','목','금','토'];
+            var m   = date.getMonth() + 1;
+            var d   = date.getDate();
+            var day = days[date.getDay()];
+            var lang = typeof currentLang !== 'undefined' ? currentLang : 'ko';
+            if (lang === 'en') {
+                var sm = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+                return sm[date.getMonth()] + ' ' + d + ', ' + day;
+            }
+            if (lang === 'ja' || lang === 'zh') return m + '月' + d + '日(' + day + ')';
+            return m + '월 ' + d + '일, ' + day;
         }
 
         function updateDateUI() {
             if (checkinDate) {
                 document.getElementById('checkin-date-text').innerText = formatDate(checkinDate);
             } else {
-                document.getElementById('checkin-date-text').innerText = '체크인 선택';
+                document.getElementById('checkin-date-text').innerText = typeof t === 'function' ? t('booking.date_select') : '날짜 선택';
             }
 
             if (checkoutDate) {
