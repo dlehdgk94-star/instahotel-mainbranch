@@ -2875,7 +2875,8 @@
                 siblings.forEach(function(el) { el.style.display = 'none'; });
                 var hint = document.createElement('span');
                 hint.className = 'fac-toggle-hint';
-                hint.textContent = '항목보기';
+                hint.setAttribute('data-i18n', 'fac.toggle_hint');
+                hint.textContent = typeof t === 'function' ? t('fac.toggle_hint') : '항목보기';
                 title.appendChild(hint);
                 title.addEventListener('click', function() {
                     var isCollapsing = !this.classList.contains('collapsed');
