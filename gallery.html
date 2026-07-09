@@ -417,7 +417,7 @@
                     var roomName=typeof getRoomName==='function'?getRoomName(selectedRoomId):(ROOM_NAMES_G[selectedRoomId]||'');
                     var nightTotal=typeof fmtNightTotal==='function'?fmtNightTotal(nights,total):(nights+'박 총 '+fmtWon(total)+'원');
                     el.textContent=(roomName?roomName+' · ':'')+nightTotal;
-                }
+                } else { el.textContent=typeof t==='function'?t('booking.min_price'):'최저 요금'; }
             } else { el.textContent=typeof t==='function'?t('booking.min_price'):'최저 요금'; document.getElementById('pricePopup').classList.remove('active'); }
         }
         function selectRoom(roomId){

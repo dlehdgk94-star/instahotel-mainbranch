@@ -735,6 +735,7 @@
             if (checkinDate && checkoutDate) {
                 populatePricePopup();
                 if (selectedRoomId) { updatePriceText(); }
+                else { el.textContent = typeof t === 'function' ? t('booking.min_price') : '최저 요금'; }
             } else {
                 el.textContent = typeof t === 'function' ? t('booking.min_price') : '최저 요금';
                 document.getElementById('pricePopup').classList.remove('active');
