@@ -471,7 +471,7 @@
         });
 
         // 저장된 언어를 모바일 드롭다운 활성 표시에 반영
-        var savedLang = (localStorage.getItem('siteLang') || 'ko').toUpperCase();
+        var savedLang = (sessionStorage.getItem('siteLang') || 'ko').toUpperCase();
         overlay.querySelectorAll('.mob-lang-option').forEach(function(o) {
             o.classList.toggle('active', o.getAttribute('data-code') === savedLang);
         });

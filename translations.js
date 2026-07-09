@@ -947,7 +947,7 @@ function t(key) {
 function setLanguage(lang) {
   if (!translations[lang]) return;
   currentLang = lang;
-  localStorage.setItem('siteLang', lang);
+  sessionStorage.setItem('siteLang', lang);
 
   // data-i18n 텍스트 교체
   document.querySelectorAll('[data-i18n]').forEach(function(el) {
@@ -1145,8 +1145,8 @@ function _syncBookingBarLang(lang) {
   if (mobGuests)    mobGuests.textContent    = fmtGuestCount(r, a);
 }
 
-// 페이지 로드 시 저장된 언어 적용
+// 페이지 로드 시 저장된 언어 적용 (sessionStorage: 탭을 닫으면 초기화 → 새 방문 시 항상 한국어)
 document.addEventListener('DOMContentLoaded', function() {
-  var saved = localStorage.getItem('siteLang') || 'ko';
+  var saved = sessionStorage.getItem('siteLang') || 'ko';
   setLanguage(saved);
 });
