@@ -11,9 +11,10 @@
         return false;
     }
 
-    function link(page, label) {
+    function link(page, label, i18nKey) {
         var cls = isActive(page) ? ' class="mob-active"' : '';
-        return '<li><a href="' + base + page + '"' + cls + '>' + label + '</a></li>';
+        var i18n = i18nKey ? ' data-i18n="' + i18nKey + '"' : '';
+        return '<li><a href="' + base + page + '"' + cls + i18n + '>' + label + '</a></li>';
     }
 
     var overlay = document.createElement('div');
@@ -25,10 +26,10 @@
                 '<a href="' + base + 'index.html"><img src="' + base + 'instalogo.png" alt="INSTA HOTEL"></a>' +
             '</div>' +
             '<ul class="mob-nav-links">' +
-                link('index.html', '호텔소개') +
-                link('rooms.html', '객실예약') +
-                link('gallery.html', '갤러리') +
-                link('nearby.html', '주변안내') +
+                link('index.html', '호텔소개', 'nav.hotel') +
+                link('rooms.html', '객실예약', 'nav.rooms') +
+                link('gallery.html', '갤러리', 'nav.gallery') +
+                link('nearby.html', '주변안내', 'nav.nearby') +
             '</ul>' +
             '<div class="mob-nav-lang">' +
                 '<button class="mob-lang-btn" onclick="toggleMobLangDropdown(event)">' +
@@ -57,15 +58,17 @@
 
     window.mobSelectLang = function(el) {
         var code = el.getAttribute('data-code');
-        overlay.querySelectorAll('.mob-lang-option').forEach(function(o){ o.classList.remove('active'); });
-        el.classList.add('active');
+        document.getElementById('mobLangDropdown').classList.remove('open');
+        if (typeof setLanguage === 'function') {
+            setLanguage(code.toLowerCase());
+        }
+        // setLanguage가 .lang-option / #langCode 업데이트를 담당하므로
+        // 모바일 드롭다운 활성 표시만 별도로 갱신
+        overlay.querySelectorAll('.mob-lang-option').forEach(function(o){
+            o.classList.toggle('active', o.getAttribute('data-code') === code);
+        });
         var mobCode = document.getElementById('mobLangCode');
         if (mobCode) mobCode.textContent = code;
-        var desktopCode = document.getElementById('langCode');
-        if (desktopCode) desktopCode.textContent = code;
-        var desktopOpts = document.querySelectorAll('.lang-option');
-        desktopOpts.forEach(function(o){ o.classList.toggle('active', o.getAttribute('data-code') === code); });
-        document.getElementById('mobLangDropdown').classList.remove('open');
     };
 
     function openNav() {
@@ -466,6 +469,14 @@
         document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape') closeNav();
         });
+
+        // 저장된 언어를 모바일 드롭다운 활성 표시에 반영
+        var savedLang = (localStorage.getItem('siteLang') || 'ko').toUpperCase();
+        overlay.querySelectorAll('.mob-lang-option').forEach(function(o) {
+            o.classList.toggle('active', o.getAttribute('data-code') === savedLang);
+        });
+        var mobCode = document.getElementById('mobLangCode');
+        if (mobCode) mobCode.textContent = savedLang;
     });
 
     // 후기 모달 폴백 - index.html에 이미 정의된 경우는 그대로 사용
