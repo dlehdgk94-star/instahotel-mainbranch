@@ -111,7 +111,7 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
-        .sub-header {1
+        .sub-header {11
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -435,6 +435,12 @@
         .room-card-sub { font-size: 13px; color: rgb(112,112,112); margin: 0; white-space: nowrap; }
         .room-card-price { display: flex; flex-direction: row; gap: 10px; align-items: center; flex-shrink: 0; }
         .room-card-price-item { font-size: 12px; color: rgb(112,112,112); white-space: nowrap; }
+        @media (max-width: 768px) {
+            .room-card-meta { flex-direction: column; align-items: flex-start; gap: 6px; }
+            .room-card-price { flex-wrap: wrap; gap: 6px 10px; flex-shrink: 1; }
+            .room-card-price-item { font-size: 11px; }
+            .room-card-sub { white-space: normal; }
+        }
         .room-card-price-item strong { font-size: 13px; font-weight: 600; color: rgb(28,28,28); }
         .room-price-notice { font-size: 11px; color: rgb(170,170,170); margin: 0; text-align: right; }
         .room-price-note { font-size: 10px; color: rgb(190,140,60); margin: 4px 0 0; font-style: italic; }
