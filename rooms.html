@@ -197,6 +197,10 @@
         .modal-room-price{ display:flex; gap:6px 12px; align-items:center; flex-shrink:0; flex-wrap:wrap; justify-content:flex-end; }
         .modal-price-item{ font-size:13px; color:rgb(112,112,112); white-space:nowrap; font-family:'Barlow',sans-serif; }
         .modal-price-item strong{ font-size:13px; font-weight:600; color:rgb(28,28,28); }
+        @media (max-width: 768px) {
+            .modal-sub-row{ flex-direction:column; align-items:flex-start; gap:8px; }
+            .modal-room-price{ flex-shrink:1; justify-content:flex-start; }
+        }
         .modal-divider{ border:none; border-top:1px solid #dedede; margin:14px 0 16px; }
         .modal-amenity-grid{ display:grid; grid-template-columns:1fr 1fr; gap:16px 20px; align-items:start; }
         .modal-amenity-col-title{ font-size:16px; font-weight:700; color:rgb(28,28,28); display:flex; align-items:center; gap:6px; margin-bottom:10px; font-family:'Barlow',sans-serif; }
@@ -212,6 +216,11 @@
         .fac-modal-label { padding:18px 20px 20px; display:flex; align-items:baseline; justify-content:space-between; gap:12px; }
         .fac-modal-label-title { font-size:16px; font-weight:700; color:rgb(28,28,28); letter-spacing:-0.3px; white-space:nowrap; }
         .fac-modal-label-sub { font-size:11px; color:rgb(140,140,140); text-align:right; line-height:1.6; white-space:pre-line; }
+        @media (max-width: 768px) {
+            .fac-modal-label { flex-direction:column; gap:6px; }
+            .fac-modal-label-title { white-space:normal; }
+            .fac-modal-label-sub { text-align:left; }
+        }
         .fac-modal-close { position:absolute; top:12px; right:14px; background:rgba(0,0,0,0.45); color:#fff; border:none; border-radius:50%; width:32px; height:32px; font-size:18px; cursor:pointer; display:flex; align-items:center; justify-content:center; }
         .fac-modal-img-wrap { position:relative; }
         .fac-modal-nav { position:absolute; top:50%; transform:translateY(-50%); background:rgba(255,255,255,0.85); border:none; border-radius:50%; width:36px; height:36px; font-size:14px; cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 8px rgba(0,0,0,0.2); }
