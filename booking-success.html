@@ -58,21 +58,42 @@
         .btn-primary:hover{ background:#333; }
         .btn-secondary{ flex:1; height:50px; background:#fff; color:rgb(28,28,28); border:1.5px solid rgb(28,28,28); border-radius:8px; font-size:15px; font-weight:600; cursor:pointer; font-family:'Barlow',sans-serif; transition:background 0.2s; }
         .btn-secondary:hover{ background:#f8f8f8; }
+
+        /* ── 언어 선택 ── */
+        .lang-selector{ position:relative; }
+        .lang-btn{ display:flex; align-items:center; gap:6px; background:none; border:1px solid #d0d0d0; border-radius:20px; padding:6px 12px; font-size:13px; font-weight:600; cursor:pointer; color:rgb(112,112,112); font-family:'Barlow',sans-serif; transition:border-color 0.2s,color 0.2s; }
+        .lang-btn:hover{ border-color:#aaa; color:rgb(28,28,28); }
+        .lang-btn .fa-globe{ font-size:13px; }
+        .lang-chevron{ font-size:9px; }
+        .lang-dropdown{ position:absolute; top:calc(100% + 10px); right:0; background:#fff; border-radius:10px; box-shadow:0 8px 28px rgba(0,0,0,0.13); padding:6px 0; min-width:110px; display:none; z-index:1500; }
+        .lang-dropdown.open{ display:block; }
+        .lang-option{ display:block; padding:10px 18px; font-size:13px; font-weight:500; color:rgb(112,112,112); cursor:pointer; white-space:nowrap; }
+        .lang-option:hover{ background:#f5f5f5; color:rgb(28,28,28); }
+        .lang-option.active{ color:rgb(28,28,28); font-weight:700; }
     </style>
     <link rel="stylesheet" href="responsive.css">
 </head>
 <body>
     <div class="top-util-bar">
         <div class="hamburger-menu"><span></span><span></span><span></span></div>
-        <button class="util-login-btn"><i class="fa-regular fa-user"></i> 회원가입 시 객실예약할 때 혜택</button>
+        <button class="util-login-btn" data-i18n="nav.util_benefit">공식 홈페이지 예약 시 최대 혜택</button>
     </div>
     <header class="top-header">
         <a href="index.html" class="logo"><img src="instalogo.png" alt="INSTA Hotel 로고"></a>
         <ul class="main-nav">
-            <li><a href="index.html">호텔소개</a></li>
-            <li><a href="rooms.html">객실예약</a></li>
-            <li><a href="gallery.html">갤러리</a></li>
-            <li><a href="nearby.html">주변안내</a></li>
+            <li><a href="index.html" data-i18n="nav.hotel">호텔소개</a></li>
+            <li><a href="rooms.html" data-i18n="nav.rooms">객실예약</a></li>
+            <li><a href="gallery.html" data-i18n="nav.gallery">갤러리</a></li>
+            <li><a href="nearby.html" data-i18n="nav.nearby">주변안내</a></li>
+            <li class="lang-selector" onclick="event.stopPropagation()">
+                <button class="lang-btn" onclick="toggleLangDropdown(event)"><i class="fa-solid fa-globe"></i><span id="langCode">KO</span><i class="fa-solid fa-chevron-down lang-chevron"></i></button>
+                <div class="lang-dropdown" id="langDropdown">
+                    <span class="lang-option active" data-code="KO" onclick="selectLangOption(this)">한국어</span>
+                    <span class="lang-option" data-code="EN" onclick="selectLangOption(this)">English</span>
+                    <span class="lang-option" data-code="JA" onclick="selectLangOption(this)">日本語</span>
+                    <span class="lang-option" data-code="ZH" onclick="selectLangOption(this)">中文</span>
+                </div>
+            </li>
         </ul>
     </header>
 
@@ -80,8 +101,8 @@
         <div class="success-card">
             <div class="success-top">
                 <div class="check-circle"><i class="fa-solid fa-check"></i></div>
-                <div class="success-title">결제가 완료되었습니다</div>
-                <div class="success-sub">예약 확인 이메일이 발송되었습니다.<br>즐거운 여행이 되시길 바랍니다.</div>
+                <div class="success-title" data-i18n="suc.title">결제가 완료되었습니다</div>
+                <div class="success-sub" data-i18n-html="suc.sub">예약 확인 이메일이 발송되었습니다.<br>즐거운 여행이 되시길 바랍니다.</div>
             </div>
             <div class="card-body" id="cardBody">
                 <!-- JS로 채워짐 -->
@@ -89,21 +110,51 @@
         </div>
     </div>
 
+    <script src="translations.js?v=20260710a"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
     <script>
+    /* ── 언어 미리 동기화 ── */
+    (function() {
+        var saved = sessionStorage.getItem('siteLang');
+        if (saved && typeof translations !== 'undefined' && translations[saved]) currentLang = saved;
+    })();
+
+    function _t(key) { return typeof t === 'function' ? t(key) : key; }
+
+    function fmtDate(d) {
+        var days = typeof calDayNames === 'function' ? calDayNames() : ['일','월','화','수','목','금','토'];
+        var m = d.getMonth() + 1, day = d.getDate(), wd = days[d.getDay()];
+        var lang = typeof currentLang !== 'undefined' ? currentLang : 'ko';
+        if (lang === 'en') { var mo = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']; return mo[d.getMonth()] + ' ' + day + ' (' + wd + ')'; }
+        if (lang === 'ja') return m + '月' + day + '日（' + wd + '）';
+        if (lang === 'zh') return m + '月' + day + '日（' + wd + '）';
+        return m + '월 ' + day + '일 (' + wd + ')';
+    }
+    function fmtNightsText(n) {
+        var lang = typeof currentLang !== 'undefined' ? currentLang : 'ko';
+        if (lang === 'en') return n + (n > 1 ? ' nights' : ' night');
+        if (lang === 'ja') return n + '泊';
+        if (lang === 'zh') return n + '晚';
+        return n + '박';
+    }
+    function fmtRoomGuest(rooms, adults) {
+        var lang = typeof currentLang !== 'undefined' ? currentLang : 'ko';
+        if (lang === 'en') return rooms + (rooms > 1 ? ' rooms' : ' room') + ' · ' + adults + (adults > 1 ? ' adults' : ' adult');
+        if (lang === 'ja') return rooms + '室 · 大人' + adults + '名';
+        if (lang === 'zh') return rooms + '间客房 · 成人' + adults + '人';
+        return rooms + '객실 · 성인 ' + adults + '인';
+    }
+    function fmtPriceDisplay(krw) {
+        var lang = typeof currentLang !== 'undefined' ? currentLang : 'ko';
+        if (lang !== 'ko' && typeof _convertPrice === 'function') return '₩' + krw.toLocaleString('ko-KR') + ' (~' + _convertPrice(krw, lang) + ')';
+        return krw.toLocaleString('ko-KR') + '원';
+    }
+
     /* ── Supabase 클라이언트 ── */
     const _sb = window.supabase.createClient(
         'https://lbhdujheuokkmiowobzu.supabase.co',
         'sb_publishable_2X3S_RgN_0ipbUtR-zAV6A_yIp1n5PC'
     );
-
-    const ROOM_NAMES = {
-        edelweiss:'이코노미 룸', aurora:'스탠다드 룸 (디자인 랜덤배정)', glorio:'디럭스 룸 (디자인 랜덤배정)',
-        envidion:'트윈 룸', special:'스페셜 룸', ruby:'루비 룸'
-    };
-    const DAYS = ['일','월','화','수','목','금','토'];
-    function fmtDate(d){ return (d.getMonth()+1)+'월 '+d.getDate()+'일 ('+DAYS[d.getDay()]+')'; }
-    function fmtWon(n){ return n.toLocaleString('ko-KR'); }
 
     const params   = new URLSearchParams(location.search);
     const payKey   = params.get('paymentKey')  || '';
@@ -114,54 +165,69 @@
     const g    = JSON.parse(localStorage.getItem('instaHotelGuest')   || '{}');
     const checkin  = b.checkin  ? new Date(b.checkin)  : null;
     const checkout = b.checkout ? new Date(b.checkout) : null;
-    const roomName = ROOM_NAMES[b.roomId] || b.roomName || '-';
     const total    = amount || b.totalPrice || 0;
 
-    document.getElementById('cardBody').innerHTML = `
-        <div class="order-num-box">
-            <span class="order-num-label">예약 번호</span>
-            <span class="order-num-value">${orderId}</span>
-        </div>
+    function renderSuccessCard() {
+        var roomName = typeof getRoomName === 'function' ? getRoomName(b.roomId) : (b.roomId || '-');
+        document.getElementById('cardBody').innerHTML = `
+            <div class="order-num-box">
+                <span class="order-num-label" data-i18n="suc.order_label">${_t('suc.order_label')}</span>
+                <span class="order-num-value">${orderId}</span>
+            </div>
 
-        <div class="section-title">예약 정보</div>
-        <div class="detail-row"><span class="detail-label">객실</span><span class="detail-value">${roomName}</span></div>
-        ${checkin  ? `<div class="detail-row"><span class="detail-label">체크인</span><span class="detail-value">${fmtDate(checkin)} 오후 3:00</span></div>` : ''}
-        ${checkout ? `<div class="detail-row"><span class="detail-label">체크아웃</span><span class="detail-value">${fmtDate(checkout)} 오후 12:00</span></div>` : ''}
-        ${b.nights ? `<div class="detail-row"><span class="detail-label">숙박</span><span class="detail-value">${b.nights}박</span></div>` : ''}
-        ${b.roomCount ? `<div class="detail-row"><span class="detail-label">객실 / 인원</span><span class="detail-value">${b.roomCount}객실 · 성인 ${b.adultCount}인</span></div>` : ''}
+            <div class="section-title" data-i18n="suc.sec_booking">${_t('suc.sec_booking')}</div>
+            <div class="detail-row"><span class="detail-label" data-i18n="suc.label.room">${_t('suc.label.room')}</span><span class="detail-value">${roomName}</span></div>
+            ${checkin  ? `<div class="detail-row"><span class="detail-label" data-i18n="bk.sum.checkin">${_t('bk.sum.checkin')}</span><span class="detail-value">${fmtDate(checkin)} ${_t('bk.sum.checkin_time')}</span></div>` : ''}
+            ${checkout ? `<div class="detail-row"><span class="detail-label" data-i18n="bk.sum.checkout">${_t('bk.sum.checkout')}</span><span class="detail-value">${fmtDate(checkout)} ${_t('bk.sum.checkout_time')}</span></div>` : ''}
+            ${b.nights ? `<div class="detail-row"><span class="detail-label" data-i18n="bk.sum.nights">${_t('bk.sum.nights')}</span><span class="detail-value">${fmtNightsText(b.nights)}</span></div>` : ''}
+            ${b.roomCount ? `<div class="detail-row"><span class="detail-label" data-i18n="bk.sum.room_guest">${_t('bk.sum.room_guest')}</span><span class="detail-value">${fmtRoomGuest(b.roomCount, b.adultCount)}</span></div>` : ''}
 
-        <hr class="divider">
+            <hr class="divider">
 
-        <div class="section-title">예약자 정보</div>
-        ${g.name  ? `<div class="detail-row"><span class="detail-label">이름</span><span class="detail-value">${g.name}</span></div>` : ''}
-        ${g.phone ? `<div class="detail-row"><span class="detail-label">연락처</span><span class="detail-value">${g.phone.replace(/(\d{3})(\d{3,4})(\d{4})/, '$1-$2-$3')}</span></div>` : ''}
-        ${g.email ? `<div class="detail-row"><span class="detail-label">이메일</span><span class="detail-value">${g.email}</span></div>` : ''}
-        ${g.country   ? `<div class="detail-row"><span class="detail-label">나라</span><span class="detail-value">${g.country}</span></div>` : ''}
-        ${g.instagram ? `<div class="detail-row"><span class="detail-label">인스타그램</span><span class="detail-value">${g.instagram}</span></div>` : ''}
+            <div class="section-title" data-i18n="suc.sec_guest">${_t('suc.sec_guest')}</div>
+            ${g.name  ? `<div class="detail-row"><span class="detail-label" data-i18n="bk.label.name">${_t('bk.label.name')}</span><span class="detail-value">${g.name}</span></div>` : ''}
+            ${g.phone ? `<div class="detail-row"><span class="detail-label" data-i18n="bk.label.phone">${_t('bk.label.phone')}</span><span class="detail-value">${g.phone.replace(/(\d{3})(\d{3,4})(\d{4})/, '$1-$2-$3')}</span></div>` : ''}
+            ${g.email ? `<div class="detail-row"><span class="detail-label" data-i18n="bk.label.email">${_t('bk.label.email')}</span><span class="detail-value">${g.email}</span></div>` : ''}
+            ${g.country   ? `<div class="detail-row"><span class="detail-label" data-i18n="bk.label.country">${_t('bk.label.country')}</span><span class="detail-value">${g.country}</span></div>` : ''}
+            ${g.instagram ? `<div class="detail-row"><span class="detail-label" data-i18n="suc.label.instagram">${_t('suc.label.instagram')}</span><span class="detail-value">${g.instagram}</span></div>` : ''}
 
-        <hr class="divider">
+            <hr class="divider">
 
-        <div class="total-row">
-            <span class="total-label">결제 금액</span>
-            <span class="total-amount">${fmtWon(total)}원</span>
-        </div>
+            <div class="total-row">
+                <span class="total-label" data-i18n="suc.total_label">${_t('suc.total_label')}</span>
+                <span class="total-amount">${fmtPriceDisplay(total)}</span>
+            </div>
 
-        <div class="notice-box">
-            <strong>체크인 안내</strong><br>
-            · 체크인: 오후 3:00 / 체크아웃: 오후 12:00<br>
-            · 체크인 시 신분증을 지참해 주세요.<br>
-            · 문의: <strong>+82 31-203-4301</strong> (09:00~22:00)
-        </div>
+            <div class="notice-box">
+                <strong data-i18n="suc.notice.title">${_t('suc.notice.title')}</strong><br>
+                <span data-i18n-html="suc.notice.body">${_t('suc.notice.body')}</span>
+            </div>
 
-        <div class="btn-group">
-            <button class="btn-secondary" onclick="location.href='rooms.html'">객실 둘러보기</button>
-            <button class="btn-primary" onclick="location.href='index.html'">홈으로</button>
-        </div>
-    `;
+            <div class="btn-group">
+                <button class="btn-secondary" onclick="location.href='rooms.html'" data-i18n="suc.btn.rooms">${_t('suc.btn.rooms')}</button>
+                <button class="btn-primary" onclick="location.href='index.html'" data-i18n="suc.btn.home">${_t('suc.btn.home')}</button>
+            </div>
+        `;
+    }
+    renderSuccessCard();
+
+    /* ── 언어 선택기 ── */
+    function toggleLangDropdown(e) { e.stopPropagation(); document.getElementById('langDropdown').classList.toggle('open'); }
+    function selectLangOption(el) { if (typeof setLanguage === 'function') setLanguage(el.dataset.code.toLowerCase()); document.getElementById('langDropdown').classList.remove('open'); }
+    document.addEventListener('click', function() { var dd = document.getElementById('langDropdown'); if (dd) dd.classList.remove('open'); });
+
+    /* ── DOMContentLoaded: 저장된 언어 동기화 ── */
+    document.addEventListener('DOMContentLoaded', function() {
+        var saved = (sessionStorage.getItem('siteLang') || 'ko').toUpperCase();
+        var langCode = document.getElementById('langCode');
+        if (langCode) langCode.textContent = saved;
+        document.querySelectorAll('.lang-option').forEach(function(o) { o.classList.toggle('active', o.getAttribute('data-code') === saved); });
+    });
 
     /* ── Supabase에 예약 저장 (중복 저장 방지: orderId로 체크) ── */
     (async function saveReservation() {
         if (!b.roomId && !g.name) return;
+        const roomNameKo = typeof getRoomName === 'function' ? getRoomName(b.roomId) : (b.roomId || '-');
 
         const { data: existing } = await _sb
             .from('reservations')
@@ -169,13 +235,13 @@
             .eq('order_id', orderId)
             .maybeSingle();
 
-        if (existing) return; // 이미 저장된 예약
+        if (existing) return;
 
         const { error } = await _sb.from('reservations').insert({
             order_id:       orderId,
             payment_key:    payKey || null,
             room_id:        b.roomId        || null,
-            room_name:      roomName,
+            room_name:      roomNameKo,
             checkin_date:   b.checkin  ? b.checkin.split('T')[0]  : null,
             checkout_date:  b.checkout ? b.checkout.split('T')[0] : null,
             nights:         b.nights        || null,

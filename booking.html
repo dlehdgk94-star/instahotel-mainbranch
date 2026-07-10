@@ -135,50 +135,132 @@
         .no-booking h2{ font-size:22px; font-weight:700; margin-bottom:14px; }
         .no-booking p{ font-size:14px; color:rgb(112,112,112); margin-bottom:28px; }
         .back-link{ display:inline-block; padding:14px 32px; background:rgb(28,28,28); color:#fff; border-radius:8px; font-size:15px; font-weight:700; cursor:pointer; }
+
+        /* ── 언어 선택 ── */
+        .lang-selector{ position:relative; }
+        .lang-btn{ display:flex; align-items:center; gap:6px; background:none; border:1px solid #d0d0d0; border-radius:20px; padding:6px 12px; font-size:13px; font-weight:600; cursor:pointer; color:rgb(112,112,112); font-family:'Barlow',sans-serif; transition:border-color 0.2s,color 0.2s; }
+        .lang-btn:hover{ border-color:#aaa; color:rgb(28,28,28); }
+        .lang-btn .fa-globe{ font-size:13px; }
+        .lang-chevron{ font-size:9px; }
+        .lang-dropdown{ position:absolute; top:calc(100% + 10px); right:0; background:#fff; border-radius:10px; box-shadow:0 8px 28px rgba(0,0,0,0.13); padding:6px 0; min-width:110px; display:none; z-index:1500; }
+        .lang-dropdown.open{ display:block; }
+        .lang-option{ display:block; padding:10px 18px; font-size:13px; font-weight:500; color:rgb(112,112,112); cursor:pointer; white-space:nowrap; }
+        .lang-option:hover{ background:#f5f5f5; color:rgb(28,28,28); }
+        .lang-option.active{ color:rgb(28,28,28); font-weight:700; }
     </style>
     <link rel="stylesheet" href="responsive.css">
 </head>
 <body>
     <div class="top-util-bar">
         <div class="hamburger-menu"><span></span><span></span><span></span></div>
-        <button class="util-login-btn"><i class="fa-regular fa-user"></i> 회원가입 시 객실예약할 때 혜택</button>
+        <button class="util-login-btn" data-i18n="nav.util_benefit">공식 홈페이지 예약 시 최대 혜택</button>
     </div>
     <header class="top-header">
         <a href="index.html" class="logo"><img src="instalogo.png" alt="INSTA Hotel 로고"></a>
         <ul class="main-nav">
-            <li><a href="index.html">호텔소개</a></li>
-            <li><a href="rooms.html">객실예약</a></li>
-            <li><a href="gallery.html">갤러리</a></li>
-            <li><a href="nearby.html">주변안내</a></li>
+            <li><a href="index.html" data-i18n="nav.hotel">호텔소개</a></li>
+            <li><a href="rooms.html" data-i18n="nav.rooms">객실예약</a></li>
+            <li><a href="gallery.html" data-i18n="nav.gallery">갤러리</a></li>
+            <li><a href="nearby.html" data-i18n="nav.nearby">주변안내</a></li>
+            <li class="lang-selector" onclick="event.stopPropagation()">
+                <button class="lang-btn" onclick="toggleLangDropdown(event)"><i class="fa-solid fa-globe"></i><span id="langCode">KO</span><i class="fa-solid fa-chevron-down lang-chevron"></i></button>
+                <div class="lang-dropdown" id="langDropdown">
+                    <span class="lang-option active" data-code="KO" onclick="selectLangOption(this)">한국어</span>
+                    <span class="lang-option" data-code="EN" onclick="selectLangOption(this)">English</span>
+                    <span class="lang-option" data-code="JA" onclick="selectLangOption(this)">日本語</span>
+                    <span class="lang-option" data-code="ZH" onclick="selectLangOption(this)">中文</span>
+                </div>
+            </li>
         </ul>
     </header>
 
     <div class="breadcrumb-bar">
         <nav class="breadcrumb">
-            <span onclick="history.back()">← 뒤로가기</span>
+            <span onclick="history.back()" data-i18n="bk.back">← 뒤로가기</span>
             <i class="fa-solid fa-chevron-right" style="font-size:10px;"></i>
-            <span onclick="location.href='rooms.html'">객실예약</span>
+            <span onclick="location.href='rooms.html'" data-i18n="nav.rooms">객실예약</span>
             <i class="fa-solid fa-chevron-right" style="font-size:10px;"></i>
-            <span class="current">예약 결제</span>
+            <span class="current" data-i18n="bk.current">예약 결제</span>
         </nav>
     </div>
 
     <div class="booking-page" id="bookingPage"></div>
 
+    <!-- 번역 -->
+    <script src="translations.js?v=20260710a"></script>
     <!-- 토스페이먼츠 SDK -->
     <script src="https://js.tosspayments.com/v1/payment"></script>
     <script>
-    /* ── 객실 정보 ── */
-    const ROOM_INFO = {
-        edelweiss: { name:'이코노미 룸', sub:'기준 2인 / 최대 2인 · 퀸 침대 1개',                       img:'images/rooms/edelweiss/1.png' },
-        aurora:    { name:'스탠다드 룸 (디자인 랜덤배정)', sub:'기준 2인 / 최대 2인 · 퀸 침대 1개',                       img:'images/rooms/aurora/1.png'    },
-        glorio:    { name:'디럭스 룸 (디자인 랜덤배정)',   sub:'기준 2인 / 최대 2인 · 퀸 침대 1개',                       img:'images/rooms/glorio/1.png'    },
-        envidion:  { name:'트윈 룸',     sub:'기준 2인 / 최대 3인 · 퀸 침대 1개 / 싱글 침대 1개',       img:'images/rooms/envidion/1.png'  },
-        special:   { name:'스페셜 룸',   sub:'기준 2인 / 최대 4인 · 퀸 침대 1개 / 싱글 침대 2개',       img:'images/rooms/special/1.png'   },
-        ruby:      { name:'루비 룸',     sub:'기준 2인 / 최대 2인 · 퀸 침대 1개 · 애견동반 가능',       img:'images/rooms/ruby/1.png'      }
+    /* ── 현재 언어를 sessionStorage에서 미리 동기화 ── */
+    (function() {
+        var saved = sessionStorage.getItem('siteLang');
+        if (saved && typeof translations !== 'undefined' && translations[saved]) {
+            currentLang = saved;
+        }
+    })();
+
+    /* ── 객실 이미지 경로 ── */
+    const ROOM_IMG = {
+        edelweiss: 'images/rooms/edelweiss/1.png',
+        aurora:    'images/rooms/aurora/1.png',
+        glorio:    'images/rooms/glorio/1.png',
+        envidion:  'images/rooms/envidion/1.png',
+        special:   'images/rooms/special/1.png',
+        ruby:      'images/rooms/ruby/1.png'
     };
-    const DAYS = ['일','월','화','수','목','금','토'];
-    function fmtDate(d){ return (d.getMonth()+1)+'월 '+d.getDate()+'일 ('+DAYS[d.getDay()]+')'; }
+
+    /* ── 언어별 날짜 포맷 ── */
+    function fmtDate(d) {
+        var days = typeof calDayNames === 'function' ? calDayNames() : ['일','월','화','수','목','금','토'];
+        var m = d.getMonth() + 1, day = d.getDate(), wd = days[d.getDay()];
+        var lang = typeof currentLang !== 'undefined' ? currentLang : 'ko';
+        if (lang === 'en') {
+            var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+            return months[d.getMonth()] + ' ' + day + ' (' + wd + ')';
+        }
+        if (lang === 'ja') return m + '月' + day + '日（' + wd + '）';
+        if (lang === 'zh') return m + '月' + day + '日（' + wd + '）';
+        return m + '월 ' + day + '일 (' + wd + ')';
+    }
+
+    /* ── 숙박 박수 텍스트 ── */
+    function fmtNightsText(n) {
+        var lang = typeof currentLang !== 'undefined' ? currentLang : 'ko';
+        if (lang === 'en') return n + (n > 1 ? ' nights' : ' night');
+        if (lang === 'ja') return n + '泊';
+        if (lang === 'zh') return n + '晚';
+        return n + '박';
+    }
+
+    /* ── 객실/인원 텍스트 ── */
+    function fmtRoomGuest(rooms, adults) {
+        var lang = typeof currentLang !== 'undefined' ? currentLang : 'ko';
+        if (lang === 'en') return rooms + (rooms > 1 ? ' rooms' : ' room') + ' · ' + adults + (adults > 1 ? ' adults' : ' adult');
+        if (lang === 'ja') return rooms + '室 · 大人' + adults + '名';
+        if (lang === 'zh') return rooms + '间客房 · 成人' + adults + '人';
+        return rooms + '객실 · 성인 ' + adults + '인';
+    }
+
+    /* ── 금액 표시 (KRW + 환산) ── */
+    function fmtPriceDisplay(krw) {
+        var lang = typeof currentLang !== 'undefined' ? currentLang : 'ko';
+        if (lang !== 'ko' && typeof _convertPrice === 'function') {
+            return '₩' + krw.toLocaleString('ko-KR') + ' (~' + _convertPrice(krw, lang) + ')';
+        }
+        return krw.toLocaleString('ko-KR') + '원';
+    }
+
+    /* ── 결제 버튼 텍스트 ── */
+    function fmtPayBtnText(krw) {
+        var lang = typeof currentLang !== 'undefined' ? currentLang : 'ko';
+        var won = krw.toLocaleString('ko-KR');
+        if (lang === 'en') return 'Pay ₩' + won;
+        if (lang === 'ja') return '₩' + won + ' を支払う';
+        if (lang === 'zh') return '支付 ₩' + won;
+        return won + '원 결제하기';
+    }
+
+    function _t(key) { return typeof t === 'function' ? t(key) : key; }
     function fmtWon(n){ return n.toLocaleString('ko-KR'); }
 
     /* ── localStorage 로드 ── */
@@ -188,44 +270,46 @@
     if (!raw) {
         wrap.innerHTML = `<div class="no-booking">
             <i class="fa-regular fa-calendar-xmark" style="font-size:52px;color:#ddd;display:block;margin-bottom:20px;"></i>
-            <h2>선택된 예약 정보가 없습니다</h2>
-            <p>객실 페이지에서 날짜와 객실을 선택한 후 예약하기를 눌러주세요.</p>
-            <a href="rooms.html" class="back-link">객실 보러가기</a></div>`;
+            <h2 data-i18n="bk.empty.title">${_t('bk.empty.title')}</h2>
+            <p data-i18n="bk.empty.desc">${_t('bk.empty.desc')}</p>
+            <a href="rooms.html" class="back-link" data-i18n="bk.empty.btn">${_t('bk.empty.btn')}</a></div>`;
     } else {
         const b = JSON.parse(raw);
-        const room = ROOM_INFO[b.roomId] || ROOM_INFO['edelweiss'];
         const checkin  = new Date(b.checkin);
         const checkout = new Date(b.checkout);
-        render(b, room, checkin, checkout);
+        render(b, checkin, checkout);
         initUI();
     }
 
-    function render(b, room, checkin, checkout) {
+    function render(b, checkin, checkout) {
+        var roomImg  = ROOM_IMG[b.roomId] || ROOM_IMG['edelweiss'];
+        var roomName = typeof getRoomName === 'function' ? getRoomName(b.roomId) : b.roomId;
+        var roomSub  = typeof getRoomSub  === 'function' ? getRoomSub(b.roomId)  : '';
         wrap.innerHTML = `
         <div class="booking-form-area">
 
           <!-- 1. 예약자 정보 -->
           <div class="form-section">
-            <div class="section-title"><div class="section-num">1</div>예약자 정보</div>
+            <div class="section-title"><div class="section-num">1</div><span data-i18n="bk.sec1">${_t('bk.sec1')}</span></div>
             <div class="form-row">
               <div class="form-group">
-                <label class="form-label">이름 <span class="req">*</span></label>
-                <input class="form-input" id="iName" type="text" placeholder="홍길동">
+                <label class="form-label"><span data-i18n="bk.label.name">${_t('bk.label.name')}</span> <span class="req">*</span></label>
+                <input class="form-input" id="iName" type="text" placeholder="${_t('bk.ph.name')}">
               </div>
               <div class="form-group">
-                <label class="form-label">연락처 <span class="req">*</span></label>
+                <label class="form-label"><span data-i18n="bk.label.phone">${_t('bk.label.phone')}</span> <span class="req">*</span></label>
                 <input class="form-input" id="iPhone" type="tel" placeholder="010-0000-0000">
               </div>
             </div>
             <div class="form-row">
               <div class="form-group">
-                <label class="form-label">이메일 <span class="req">*</span></label>
+                <label class="form-label"><span data-i18n="bk.label.email">${_t('bk.label.email')}</span> <span class="req">*</span></label>
                 <input class="form-input" id="iEmail" type="email" placeholder="example@email.com">
               </div>
               <div class="form-group">
-                <label class="form-label">나라 <span class="req">*</span></label>
+                <label class="form-label"><span data-i18n="bk.label.country">${_t('bk.label.country')}</span> <span class="req">*</span></label>
                 <select class="form-input" id="iCountry">
-                  <option value="">국가를 선택해 주세요</option>
+                  <option value="" data-i18n="bk.ph.country">${_t('bk.ph.country')}</option>
                   <option value="KR">대한민국</option>
                   <option value="US">미국 (United States)</option>
                   <option value="JP">일본 (Japan)</option>
@@ -248,11 +332,11 @@
             </div>
             <div class="form-row">
               <div class="form-group">
-                <label class="form-label">인스타그램 계정 <span class="opt">(선택)</span></label>
+                <label class="form-label"><span data-i18n="bk.label.instagram">${_t('bk.label.instagram')}</span> <span class="opt" data-i18n="bk.opt.optional">${_t('bk.opt.optional')}</span></label>
                 <input class="form-input" id="iInstagram" type="text" placeholder="@username">
               </div>
               <div class="form-group">
-                <label class="form-label">특별 요청사항 <span class="opt">(선택)</span></label>
+                <label class="form-label"><span data-i18n="bk.label.request">${_t('bk.label.request')}</span> <span class="opt" data-i18n="bk.opt.optional">${_t('bk.opt.optional')}</span></label>
                 <input class="form-input" id="iRequest" type="text" placeholder="">
               </div>
             </div>
@@ -260,12 +344,12 @@
 
           <!-- 2. 결제 수단 -->
           <div class="form-section">
-            <div class="section-title"><div class="section-num">2</div>결제 수단</div>
+            <div class="section-title"><div class="section-num">2</div><span data-i18n="bk.sec2">${_t('bk.sec2')}</span></div>
             <div class="pay-grid">
               <label class="pay-option selected" data-m="card">
                 <input type="radio" name="pm" value="card" checked>
                 <div class="pay-logo logo-card"><i class="fa-solid fa-credit-card" style="font-size:19px;"></i></div>
-                <span class="pay-name">신용 / 체크카드</span>
+                <span class="pay-name" data-i18n="bk.pay.card">${_t('bk.pay.card')}</span>
               </label>
               <label class="pay-option" data-m="paypal">
                 <input type="radio" name="pm" value="paypal">
@@ -277,42 +361,39 @@
 
           <!-- 3. 취소·환불 정책 -->
           <div class="form-section">
-            <div class="section-title"><div class="section-num">3</div>취소 · 환불 정책</div>
+            <div class="section-title"><div class="section-num">3</div><span data-i18n="bk.sec3">${_t('bk.sec3')}</span></div>
             <div class="policy-box" style="margin-bottom:12px;">
-              <div class="policy-title">체크인 · 체크아웃 시간</div>
-              <div class="policy-row"><span class="day">체크인</span><span>오후 3:00 (15:00)</span></div>
-              <div class="policy-row"><span class="day">체크아웃</span><span>오후 12:00 (정오)</span></div>
+              <div class="policy-title" data-i18n="bk.policy.checkinout">${_t('bk.policy.checkinout')}</div>
+              <div class="policy-row"><span class="day" data-i18n="bk.policy.checkin_day">${_t('bk.policy.checkin_day')}</span><span data-i18n="bk.policy.checkin_time">${_t('bk.policy.checkin_time')}</span></div>
+              <div class="policy-row"><span class="day" data-i18n="bk.policy.checkout_day">${_t('bk.policy.checkout_day')}</span><span data-i18n="bk.policy.checkout_time">${_t('bk.policy.checkout_time')}</span></div>
             </div>
             <div class="policy-box">
-              <div class="policy-title">체크인 기준 취소 수수료</div>
-              <div class="policy-row"><span class="day">3일 전까지</span><span>위약금 없음 (전액 환불)</span></div>
-              <div class="policy-row"><span class="day">2일 전</span><span>예약 금액의 50% 공제</span></div>
-              <div class="policy-row"><span class="day">1일 전 · 당일</span><span>100% 공제 (환불 불가)</span></div>
-              <div class="policy-note">
-                · 노쇼(No-show) 시 예약 금액 전액이 청구됩니다.<br>
-                · 성수기(7~8월, 연말연시)는 별도 정책이 적용될 수 있습니다.
-              </div>
+              <div class="policy-title" data-i18n="bk.policy.cancel_title">${_t('bk.policy.cancel_title')}</div>
+              <div class="policy-row"><span class="day" data-i18n="bk.policy.d3">${_t('bk.policy.d3')}</span><span data-i18n="bk.policy.d3_val">${_t('bk.policy.d3_val')}</span></div>
+              <div class="policy-row"><span class="day" data-i18n="bk.policy.d2">${_t('bk.policy.d2')}</span><span data-i18n="bk.policy.d2_val">${_t('bk.policy.d2_val')}</span></div>
+              <div class="policy-row"><span class="day" data-i18n="bk.policy.d1">${_t('bk.policy.d1')}</span><span data-i18n="bk.policy.d1_val">${_t('bk.policy.d1_val')}</span></div>
+              <div class="policy-note" data-i18n-html="bk.policy.note">${_t('bk.policy.note')}</div>
             </div>
           </div>
 
           <!-- 4. 약관 동의 -->
           <div class="form-section">
-            <div class="section-title"><div class="section-num">4</div>약관 동의</div>
+            <div class="section-title"><div class="section-num">4</div><span data-i18n="bk.sec4">${_t('bk.sec4')}</span></div>
             <div class="terms-all-row" onclick="toggleAll(this)">
               <div class="chk" id="chkAll"></div>
-              <span class="terms-all-text">전체 동의</span>
+              <span class="terms-all-text" data-i18n="bk.terms.all">${_t('bk.terms.all')}</span>
             </div>
             <div class="terms-row" onclick="toggleOne(this)">
               <div class="chk"></div>
-              <div class="terms-text">[필수] <strong>개인정보 수집·이용 동의</strong> — 예약 처리를 위해 이름, 연락처, 이메일을 수집합니다. <span class="terms-link" onclick="event.stopPropagation(); openPrivacyModal()">자세히 보기</span></div>
+              <div class="terms-text" data-i18n-html="bk.terms.privacy">${_t('bk.terms.privacy')}</div>
             </div>
             <div class="terms-row" onclick="toggleOne(this)">
               <div class="chk"></div>
-              <div class="terms-text">[필수] <strong>예약 조건 확인 및 결제 동의</strong> — 취소·환불 정책 및 결제 금액에 동의합니다.</div>
+              <div class="terms-text" data-i18n-html="bk.terms.payment">${_t('bk.terms.payment')}</div>
             </div>
             <div class="terms-row" onclick="toggleOne(this)">
               <div class="chk"></div>
-              <div class="terms-text">[선택] <strong>마케팅 정보 수신 동의</strong> — 이메일·SMS를 통한 호텔 혜택 및 프로모션 안내를 받겠습니다.</div>
+              <div class="terms-text" data-i18n-html="bk.terms.marketing">${_t('bk.terms.marketing')}</div>
             </div>
           </div>
 
@@ -321,31 +402,46 @@
         <!-- 예약 요약 -->
         <div class="booking-summary-area">
           <div class="summary-card">
-            <img class="summary-img" src="${room.img}" alt="${room.name}"
+            <img class="summary-img" src="${roomImg}" alt="${roomName}"
                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
             <div class="summary-img-placeholder" style="display:none;"><i class="fa-solid fa-image"></i></div>
             <div class="summary-body">
-              <div class="summary-room-name">${room.name}</div>
-              <div class="summary-room-sub">${room.sub}</div>
+              <div class="summary-room-name" id="sumRoomName">${roomName}</div>
+              <div class="summary-room-sub" id="sumRoomSub">${roomSub}</div>
               <hr class="summary-hr">
-              <div class="s-row"><span class="s-label">체크인</span><span class="s-value">${fmtDate(checkin)}<br>오후 3:00</span></div>
-              <div class="s-row"><span class="s-label">체크아웃</span><span class="s-value">${fmtDate(checkout)}<br>오후 12:00</span></div>
-              <div class="s-row"><span class="s-label">숙박</span><span class="s-value">${b.nights}박</span></div>
-              <div class="s-row"><span class="s-label">객실 / 인원</span><span class="s-value">${b.roomCount}객실 · 성인 ${b.adultCount}인</span></div>
-              <hr class="summary-hr">
-              <div class="s-row"><span class="s-label">객실 요금</span><span class="s-value">${fmtWon(b.totalPrice)}원</span></div>
-              <div class="summary-total">
-                <span class="summary-total-label">합계</span>
-                <span class="summary-total-price">${fmtWon(b.totalPrice)}원</span>
+              <div class="s-row">
+                <span class="s-label" data-i18n="bk.sum.checkin">${_t('bk.sum.checkin')}</span>
+                <span class="s-value"><span id="sumCheckinDate">${fmtDate(checkin)}</span><br><span data-i18n="bk.sum.checkin_time">${_t('bk.sum.checkin_time')}</span></span>
               </div>
-              <div class="tax-note">부가세 및 봉사료 포함</div>
+              <div class="s-row">
+                <span class="s-label" data-i18n="bk.sum.checkout">${_t('bk.sum.checkout')}</span>
+                <span class="s-value"><span id="sumCheckoutDate">${fmtDate(checkout)}</span><br><span data-i18n="bk.sum.checkout_time">${_t('bk.sum.checkout_time')}</span></span>
+              </div>
+              <div class="s-row">
+                <span class="s-label" data-i18n="bk.sum.nights">${_t('bk.sum.nights')}</span>
+                <span class="s-value" id="sumNights">${fmtNightsText(b.nights)}</span>
+              </div>
+              <div class="s-row">
+                <span class="s-label" data-i18n="bk.sum.room_guest">${_t('bk.sum.room_guest')}</span>
+                <span class="s-value" id="sumRoomGuest">${fmtRoomGuest(b.roomCount, b.adultCount)}</span>
+              </div>
+              <hr class="summary-hr">
+              <div class="s-row">
+                <span class="s-label" data-i18n="bk.sum.room_price">${_t('bk.sum.room_price')}</span>
+                <span class="s-value" id="sumRoomPrice">${fmtPriceDisplay(b.totalPrice)}</span>
+              </div>
+              <div class="summary-total">
+                <span class="summary-total-label" data-i18n="bk.sum.total">${_t('bk.sum.total')}</span>
+                <span class="summary-total-price" id="sumTotalPrice">${fmtPriceDisplay(b.totalPrice)}</span>
+              </div>
+              <div class="tax-note" data-i18n="bk.sum.tax">${_t('bk.sum.tax')}</div>
               <button class="pay-btn" id="payBtn" onclick="requestCardPayment()">
-                ${fmtWon(b.totalPrice)}원 결제하기
+                <span id="payBtnText">${fmtPayBtnText(b.totalPrice)}</span>
               </button>
               <div class="paypal-wrap" id="paypalWrap">
                 <div id="paypalBtnWrap"></div>
               </div>
-              <div class="secure-note"><i class="fa-solid fa-lock"></i> SSL 보안 암호화 결제</div>
+              <div class="secure-note"><i class="fa-solid fa-lock"></i> <span data-i18n="bk.sum.secure">${_t('bk.sum.secure')}</span></div>
             </div>
           </div>
         </div>`;
@@ -354,7 +450,6 @@
     /* ── UI 초기화 ── */
     function initUI() {
         const b = JSON.parse(localStorage.getItem('instaHotelBooking'));
-        const room = ROOM_INFO[b.roomId] || ROOM_INFO['edelweiss'];
 
         document.querySelectorAll('.pay-option').forEach(opt => {
             opt.addEventListener('click', function() {
@@ -365,7 +460,7 @@
                 if (this.dataset.m === 'paypal') {
                     document.getElementById('payBtn').style.display = 'none';
                     document.getElementById('paypalWrap').style.display = 'block';
-                    initPayPalButtons(b, room);
+                    initPayPalButtons(b);
                 } else {
                     document.getElementById('payBtn').style.display = 'block';
                     document.getElementById('paypalWrap').style.display = 'none';
@@ -396,13 +491,13 @@
         const phone = document.getElementById('iPhone').value.trim();
         const email = document.getElementById('iEmail').value.trim();
         const country = document.getElementById('iCountry').value;
-        if (!name)    { alert('이름을 입력해 주세요.');          document.getElementById('iName').focus();    return false; }
-        if (!phone)   { alert('연락처를 입력해 주세요.');         document.getElementById('iPhone').focus();   return false; }
-        if (!email || !email.includes('@')) { alert('올바른 이메일을 입력해 주세요.'); document.getElementById('iEmail').focus(); return false; }
-        if (!country) { alert('나라를 선택해 주세요.');           document.getElementById('iCountry').focus(); return false; }
+        if (!name)    { alert(_t('bk.alert.name'));    document.getElementById('iName').focus();    return false; }
+        if (!phone)   { alert(_t('bk.alert.phone'));   document.getElementById('iPhone').focus();   return false; }
+        if (!email || !email.includes('@')) { alert(_t('bk.alert.email')); document.getElementById('iEmail').focus(); return false; }
+        if (!country) { alert(_t('bk.alert.country')); document.getElementById('iCountry').focus(); return false; }
         const reqBoxes = document.querySelectorAll('.terms-row .chk');
         if (!reqBoxes[0].classList.contains('on') || !reqBoxes[1].classList.contains('on')) {
-            alert('[필수] 약관에 동의해 주세요.'); return false;
+            alert(_t('bk.alert.terms')); return false;
         }
         return true;
     }
@@ -429,7 +524,7 @@
         saveGuestInfo();
 
         const b    = JSON.parse(localStorage.getItem('instaHotelBooking'));
-        const room = ROOM_INFO[b.roomId] || ROOM_INFO['edelweiss'];
+        const roomName = typeof getRoomName === 'function' ? getRoomName(b.roomId) : b.roomId;
         const name  = document.getElementById('iName').value.trim();
         const email = document.getElementById('iEmail').value.trim();
         const phone = document.getElementById('iPhone').value.trim().replace(/-/g, '');
@@ -444,7 +539,7 @@
             await toss.requestPayment('카드', {
                 amount:              b.totalPrice,
                 orderId,
-                orderName:           room.name + ' ' + b.nights + '박',
+                orderName:           roomName + ' ' + fmtNightsText(b.nights),
                 customerName:        name,
                 customerEmail:       email,
                 customerMobilePhone: phone,
@@ -452,7 +547,7 @@
                 failUrl:    base + 'booking-fail.html',
             });
         } catch (err) {
-            if (err.code !== 'USER_CANCEL') alert('결제 중 오류가 발생했습니다.\n' + err.message);
+            if (err.code !== 'USER_CANCEL') alert(_t('bk.card.error') + '\n' + err.message);
         }
     }
 
@@ -472,7 +567,7 @@
         });
     }
 
-    async function initPayPalButtons(b, room) {
+    async function initPayPalButtons(b) {
         if (paypalRendered) return;
         const wrap = document.getElementById('paypalBtnWrap');
         wrap.innerHTML = '<div style="font-size:13px;color:#888;padding:8px 0;">PayPal 불러오는 중...</div>';
@@ -490,10 +585,11 @@
                     return actions.resolve();
                 },
                 createOrder: function(data, actions) {
+                    var pRoomName = typeof getRoomName === 'function' ? getRoomName(b.roomId) : b.roomId;
                     return actions.order.create({
                         purchase_units: [{
                             reference_id: makeOrderId(),
-                            description:  room.name + ' ' + b.nights + '박',
+                            description:  pRoomName + ' ' + fmtNightsText(b.nights),
                             amount: { currency_code:'KRW', value: String(b.totalPrice) }
                         }]
                     });
@@ -504,11 +600,11 @@
                         location.href = `booking-success.html?paymentKey=${data.orderID}&orderId=${orderId}&amount=${b.totalPrice}`;
                     });
                 },
-                onError: function() { alert('PayPal 결제 중 오류가 발생했습니다.'); },
+                onError: function() { alert(_t('bk.paypal.error')); },
                 onCancel: function() {}
             }).render('#paypalBtnWrap');
         } catch (e) {
-            wrap.innerHTML = '<p style="color:#e74c3c;font-size:13px;">PayPal을 불러오지 못했습니다. Client ID를 확인해 주세요.</p>';
+            wrap.innerHTML = '<p style="color:#e74c3c;font-size:13px;">' + _t('bk.paypal.error') + '</p>';
         }
     }
     function openPrivacyModal() {
@@ -519,39 +615,109 @@
         document.getElementById('privacyModal').classList.remove('open');
         document.body.style.overflow = '';
     }
+
+    /* ── 언어 변경 시 동적 텍스트 갱신 ── */
+    function syncBookingLang() {
+        var raw = localStorage.getItem('instaHotelBooking');
+        if (!raw) return;
+        var b = JSON.parse(raw);
+        var checkin  = new Date(b.checkin);
+        var checkout = new Date(b.checkout);
+
+        var el;
+        el = document.getElementById('sumRoomName');
+        if (el) el.textContent = typeof getRoomName === 'function' ? getRoomName(b.roomId) : el.textContent;
+
+        el = document.getElementById('sumRoomSub');
+        if (el) el.textContent = typeof getRoomSub === 'function' ? getRoomSub(b.roomId) : el.textContent;
+
+        el = document.getElementById('sumCheckinDate');
+        if (el) el.textContent = fmtDate(checkin);
+
+        el = document.getElementById('sumCheckoutDate');
+        if (el) el.textContent = fmtDate(checkout);
+
+        el = document.getElementById('sumNights');
+        if (el) el.textContent = fmtNightsText(b.nights);
+
+        el = document.getElementById('sumRoomGuest');
+        if (el) el.textContent = fmtRoomGuest(b.roomCount, b.adultCount);
+
+        el = document.getElementById('sumRoomPrice');
+        if (el) el.textContent = fmtPriceDisplay(b.totalPrice);
+
+        el = document.getElementById('sumTotalPrice');
+        if (el) el.textContent = fmtPriceDisplay(b.totalPrice);
+
+        el = document.getElementById('payBtnText');
+        if (el) el.textContent = fmtPayBtnText(b.totalPrice);
+
+        var iName = document.getElementById('iName');
+        if (iName && !iName.value) iName.placeholder = _t('bk.ph.name');
+
+        var iCountry = document.getElementById('iCountry');
+        if (iCountry) {
+            var defOpt = iCountry.querySelector('option[value=""]');
+            if (defOpt) defOpt.textContent = _t('bk.ph.country');
+        }
+    }
+
+    /* ── 언어 선택기 ── */
+    function toggleLangDropdown(e) {
+        e.stopPropagation();
+        document.getElementById('langDropdown').classList.toggle('open');
+    }
+    function selectLangOption(el) {
+        if (typeof setLanguage === 'function') setLanguage(el.dataset.code.toLowerCase());
+        document.getElementById('langDropdown').classList.remove('open');
+    }
+    document.addEventListener('click', function() {
+        var dd = document.getElementById('langDropdown');
+        if (dd) dd.classList.remove('open');
+    });
+
+    /* ── DOMContentLoaded: 저장된 언어 동기화 ── */
+    document.addEventListener('DOMContentLoaded', function() {
+        var saved = (sessionStorage.getItem('siteLang') || 'ko').toUpperCase();
+        var langCode = document.getElementById('langCode');
+        if (langCode) langCode.textContent = saved;
+        document.querySelectorAll('.lang-option').forEach(function(o) {
+            o.classList.toggle('active', o.getAttribute('data-code') === saved);
+        });
+    });
     </script>
 
     <!-- 개인정보 수집·이용 동의 모달 -->
     <div id="privacyModal" onclick="if(event.target===this) closePrivacyModal()">
       <div class="privacy-box">
         <div class="privacy-header">
-          <h3>개인정보 수집 및 이용 동의</h3>
+          <h3 data-i18n="bk.privacy.title">개인정보 수집 및 이용 동의</h3>
           <button class="privacy-close" onclick="closePrivacyModal()">✕</button>
         </div>
         <div class="privacy-body">
-          <h4>1. 개인정보의 수집·이용 목적</h4>
-          <ul>
+          <h4 data-i18n="bk.privacy.h1">1. 개인정보의 수집·이용 목적</h4>
+          <ul data-i18n-html="bk.privacy.b1">
             <li>예약 관리 및 본인 확인, 고객 서비스(CS) 대응, 부정이용 방지</li>
             <li>숙박 서비스 제공에 따른 계약 이행 및 정산</li>
           </ul>
 
-          <h4>2. 수집하는 개인정보 항목</h4>
-          <p>필수 항목: 이름, 연락처(휴대폰 번호), 이메일 주소</p>
+          <h4 data-i18n="bk.privacy.h2">2. 수집하는 개인정보 항목</h4>
+          <p data-i18n="bk.privacy.b2">필수 항목: 이름, 연락처(휴대폰 번호), 이메일 주소</p>
 
-          <h4>3. 개인정보의 보유 및 이용 기간</h4>
-          <p>이용 목적 달성 후 지체 없이 파기하는 것이 원칙입니다.</p>
-          <p>다만, 관계 법령(전자상거래법 등)에 따라 보존할 필요가 있는 경우 아래와 같이 일정 기간 보관합니다.</p>
-          <ul>
+          <h4 data-i18n="bk.privacy.h3">3. 개인정보의 보유 및 이용 기간</h4>
+          <p data-i18n="bk.privacy.b3a">이용 목적 달성 후 지체 없이 파기하는 것이 원칙입니다.</p>
+          <p data-i18n="bk.privacy.b3b">다만, 관계 법령(전자상거래법 등)에 따라 보존할 필요가 있는 경우 아래와 같이 일정 기간 보관합니다.</p>
+          <ul data-i18n-html="bk.privacy.b3li">
             <li>계약 또는 청약철회 등에 관한 기록: <strong>5년</strong></li>
             <li>대금결제 및 재화 등의 공급에 관한 기록: <strong>5년</strong></li>
             <li>소비자의 불만 또는 분쟁처리에 관한 기록: <strong>3년</strong></li>
           </ul>
 
-          <h4>4. 동의 거부 권리 및 불이익 안내</h4>
-          <p>귀하는 개인정보 수집 및 이용 동의를 거부할 권리가 있습니다. 다만, 본 동의는 예약 처리를 위한 필수적인 항목으로, 거부하실 경우 객실 예약 서비스 이용이 제한됩니다.</p>
+          <h4 data-i18n="bk.privacy.h4">4. 동의 거부 권리 및 불이익 안내</h4>
+          <p data-i18n="bk.privacy.b4">귀하는 개인정보 수집 및 이용 동의를 거부할 권리가 있습니다. 다만, 본 동의는 예약 처리를 위한 필수적인 항목으로, 거부하실 경우 객실 예약 서비스 이용이 제한됩니다.</p>
         </div>
         <div class="privacy-footer">
-          <button class="privacy-confirm-btn" onclick="closePrivacyModal()">확인</button>
+          <button class="privacy-confirm-btn" onclick="closePrivacyModal()" data-i18n="bk.privacy.confirm">확인</button>
         </div>
       </div>
     </div>
