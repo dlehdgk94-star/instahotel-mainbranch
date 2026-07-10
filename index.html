@@ -1210,9 +1210,29 @@
                     <div class="acc-content">
                         <ul>
                             <li><span data-i18n-html="loc.acc.other.1"><strong>지하철</strong> — 수인분당선 망포역 (호텔에서 도보 이동)</span></li>
-                            <li><span data-i18n-html="loc.acc.other.2"><strong>시내버스</strong> — 7-1 / 7-1A (동탄1차고지 ↔ 경기대정문 등) · 13-5 (동탄1차고지 ↔ 당수동) · 20-2 (망포역 ↔ 신영통현대아파트단지 순환) · 34 / 34-1 (수원동부차고지 ↔ 병점역/왕림리) · 62-1 (동탄 ↔ 성균관대역) · 92-1 (동탄차고지 ↔ 성균관대역) · 98 (이목동차고지 ↔ 반월동)</span></li>
+                            <li><span data-i18n-html="loc.acc.other.2"><strong>시내버스</strong> — 7-1 / 7-1A (동탄1차고지 ↔ 경기대정문 등) · 13-5 (동탄1차고지 ↔ 당수당) · 20-2 (망포역 ↔ 신영통현대아파트단지 순환) · 34 / 34-1 (수원동부차고지 ↔ 병점역/왕림리) · 62-1 (동탄 ↔ 성균관대역) · 92-1 (동탄차고지 ↔ 성균관대역) · 98 (이목동차고지 ↔ 반월동)</span></li>
                             <li><span data-i18n-html="loc.acc.other.3"><strong>시외버스</strong> — 1550-1 (한신대 ↔ 신논현역·강남역)</span></li>
                             <li><span data-i18n-html="loc.acc.other.4"><strong>자가용 주차</strong> — 투숙객 전용 주차장 무료 이용 가능 (사전 예약 불필요)</span></li>
+                        </ul>
+                    </div>
+
+                    <!-- 주요 비즈니스 -->
+                    <div class="acc-item" onclick="toggleAcc(this)">
+                        <div class="acc-left"><i class="fa-solid fa-briefcase"></i><span data-i18n="loc.acc.biz">주요 비즈니스</span></div>
+                        <i class="fa-solid fa-chevron-down acc-chevron"></i>
+                    </div>
+                    <div class="acc-content">
+                        <ul>
+                            <li><span data-i18n-html="loc.acc.biz.1"><strong>삼성디지털시티</strong> — 차량 약 8분<br>삼성전자 본사 및 연구시설이 위치한 글로벌 IT 비즈니스 중심지.</span></li>
+                            <li><span data-i18n-html="loc.acc.biz.2"><strong>삼성전자 기흥캠퍼스</strong> — 차량 약 10분<br>반도체 연구 및 생산시설로 국내외 비즈니스 출장객이 많이 방문하는 사업장.</span></li>
+                            <li><span data-i18n-html="loc.acc.biz.3"><strong>삼성전자 화성캠퍼스</strong> — 차량 약 6분<br>세계적인 반도체 생산시설로 국내외 기업과 협력사의 방문이 활발한 사업장.</span></li>
+                            <li><span data-i18n-html="loc.acc.biz.4"><strong>삼성전자 인재개발원</strong> — 차량 약 6분<br>국내외 임직원 교육과 연수가 진행되는 삼성전자 교육시설.</span></li>
+                            <li><span data-i18n-html="loc.acc.biz.5"><strong>삼성이노베이션뮤지엄(SIM)</strong> — 차량 약 9분<br>삼성전자의 기술과 혁신을 소개하는 전시관으로 국내외 방문객이 찾는 기업 문화 공간.</span></li>
+                            <li><span data-i18n-html="loc.acc.biz.6"><strong>수원컨벤션센터</strong> — 차량 약 15분<br>국제회의, 전시회, 박람회, 학회 등 다양한 MICE 행사가 개최되는 경기 남부 대표 컨벤션센터.</span></li>
+                            <li><span data-i18n-html="loc.acc.biz.7"><strong>수원메쎄</strong> — 차량 약 20분<br>전시회, 박람회, 산업행사 등 연중 다양한 행사가 개최되는 수도권 대표 전시장.</span></li>
+                            <li><span data-i18n-html="loc.acc.biz.8"><strong>광교테크노밸리</strong> — 차량 약 15분<br>IT·바이오 기업과 연구기관이 모여 있는 첨단산업단지.</span></li>
+                            <li><span data-i18n-html="loc.acc.biz.9"><strong>경희대학교 국제캠퍼스</strong> — 차량 약 7분<br>국제행사, 학회, 교육 프로그램 등 다양한 방문 수요가 있는 캠퍼스.</span></li>
+                            <li><span data-i18n-html="loc.acc.biz.10"><strong>아주대학교병원</strong> — 차량 약 15분<br>의료 방문과 보호자 숙박 수요가 많은 상급종합병원.</span></li>
                         </ul>
                     </div>
 
@@ -1288,6 +1308,26 @@
                             <li data-i18n-html="loc.modal.other.2"><strong>시내버스</strong> — 7-1 / 7-1A (동탄1차고지 ↔ 경기대정문 등) · 13-5 (동탄1차고지 ↔ 당수동) · 20-2 (망포역 ↔ 신영통현대아파트단지 순환) · 34 / 34-1 (수원동부차고지 ↔ 병점역/왕림리) · 62-1 (동탄 ↔ 성균관대역) · 92-1 (동탄차고지 ↔ 성균관대역) · 98 (이목동차고지 ↔ 반월동)</li>
                             <li data-i18n-html="loc.modal.other.3"><strong>시외버스</strong> — 1550-1 (한신대 ↔ 신논현역·강남역)</li>
                             <li data-i18n-html="loc.modal.other.4"><strong>주차</strong> — 투숙객 전용 주차장 무료 이용 (사전예약 불필요)</li>
+                        </ul>
+                    </div>
+
+                    <!-- 주요 비즈니스 -->
+                    <div class="loc-modal-acc-item" onclick="toggleLocAcc(this)">
+                        <div class="loc-modal-acc-left"><i class="fa-solid fa-briefcase"></i><span data-i18n="loc.acc.biz">주요 비즈니스</span></div>
+                        <i class="fa-solid fa-chevron-down loc-modal-acc-chevron"></i>
+                    </div>
+                    <div class="loc-modal-acc-content">
+                        <ul>
+                            <li data-i18n-html="loc.acc.biz.1"><strong>삼성디지털시티</strong> — 차량 약 8분<br>삼성전자 본사 및 연구시설이 위치한 글로벌 IT 비즈니스 중심지.</li>
+                            <li data-i18n-html="loc.acc.biz.2"><strong>삼성전자 기흥캠퍼스</strong> — 차량 약 10분<br>반도체 연구 및 생산시설로 국내외 비즈니스 출장객이 많이 방문하는 사업장.</li>
+                            <li data-i18n-html="loc.acc.biz.3"><strong>삼성전자 화성캠퍼스</strong> — 차량 약 6분<br>세계적인 반도체 생산시설로 국내외 기업과 협력사의 방문이 활발한 사업장.</li>
+                            <li data-i18n-html="loc.acc.biz.4"><strong>삼성전자 인재개발원</strong> — 차량 약 6분<br>국내외 임직원 교육과 연수가 진행되는 삼성전자 교육시설.</li>
+                            <li data-i18n-html="loc.acc.biz.5"><strong>삼성이노베이션뮤지엄(SIM)</strong> — 차량 약 9분<br>삼성전자의 기술과 혁신을 소개하는 전시관으로 국내외 방문객이 찾는 기업 문화 공간.</li>
+                            <li data-i18n-html="loc.acc.biz.6"><strong>수원컨벤션센터</strong> — 차량 약 15분<br>국제회의, 전시회, 박람회, 학회 등 다양한 MICE 행사가 개최되는 경기 남부 대표 컨벤션센터.</li>
+                            <li data-i18n-html="loc.acc.biz.7"><strong>수원메쎄</strong> — 차량 약 20분<br>전시회, 박람회, 산업행사 등 연중 다양한 행사가 개최되는 수도권 대표 전시장.</li>
+                            <li data-i18n-html="loc.acc.biz.8"><strong>광교테크노밸리</strong> — 차량 약 15분<br>IT·바이오 기업과 연구기관이 모여 있는 첨단산업단지.</li>
+                            <li data-i18n-html="loc.acc.biz.9"><strong>경희대학교 국제캠퍼스</strong> — 차량 약 7분<br>국제행사, 학회, 교육 프로그램 등 다양한 방문 수요가 있는 캠퍼스.</li>
+                            <li data-i18n-html="loc.acc.biz.10"><strong>아주대학교병원</strong> — 차량 약 15분<br>의료 방문과 보호자 숙박 수요가 많은 상급종합병원.</li>
                         </ul>
                     </div>
                 </div>
