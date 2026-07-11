@@ -51,8 +51,8 @@ const translations = {
     "room.economy.sub": "기준 2인 / 최대 2인 · 퀸 침대 1개",
     "room.standard.sub": "기준 2인 / 최대 2인 · 퀸 침대 1개",
     "room.deluxe.sub": "기준 2인 / 최대 2인 · 퀸 침대 1개",
-    "room.twin.sub": "기준 2인 / 최대 3인 무료 · 퀸 침대 1개 / 싱글 침대 1개",
-    "room.special.sub": "기준 2인 / 최대 4인 무료 · 퀸 침대 1개 / 싱글 침대 2개",
+    "room.twin.sub": "기준 2인 / 최대 3인까지 · 퀸 침대 1개 / 싱글 침대 1개",
+    "room.special.sub": "기준 2인 / 최대 4인까지 · 퀸 침대 1개 / 싱글 침대 2개",
     "room.ruby.sub": "기준 2인 / 최대 2인 · 퀸 침대 1개",
     // 시설 섹션
     "fac.title": "호텔 시설 및 서비스",
