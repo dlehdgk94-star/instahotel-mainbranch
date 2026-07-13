@@ -67,6 +67,45 @@
         .date-arrow{ font-size:13px; }
         .search-btn{ background-color:rgb(114,107,113); color:#fff; border:none; width:95px; height:40px; border-radius:22px; font-size:16px; font-weight:700; cursor:pointer; }
 
+        /* ── 데스크탑 전용: 섹션 순서 재배치 + 예약바 스타일 (index.html 동일) ── */
+        @media (min-width: 769px) {
+            body { display: flex; flex-direction: column; }
+            header.top-header    { order: 1; }
+            .hotel-ways-section  { order: 2; }
+            .rooms-section       { order: 3; }
+            .sticky-wrapper      { order: 4; position: static; background: rgb(244,244,244); box-shadow: none; }
+            .footer-section      { order: 5; }
+
+            .booking-bar { max-width: 1240px; margin: 0 auto; background: transparent; border: 1px solid #e5e5e5; padding: 0 30px; }
+            .booking-item:nth-child(1) { flex: 1 1 0; min-width: 0; padding-right: 0; }
+            .booking-item:nth-child(1) .booking-value { white-space: nowrap; }
+            #checkin-date-text, #checkout-date-text { white-space: nowrap; }
+            .booking-item:nth-child(2) { flex: 1 1 0; min-width: 0; padding-left: 60px; padding-right: 60px; }
+            .booking-item:nth-child(3) { flex: 1 1 0; min-width: 0; padding-left: 50px; padding-right: 0; }
+            .booking-item:last-child { flex: 0 0 auto; padding: 0 0 0 16px; }
+            .search-btn { width: 74px; height: 31px; font-size: 12px; border-radius: 17px; font-weight: 600; }
+            #guest-booking-item .booking-value,
+            .booking-item:nth-child(3) .booking-value { width: auto; min-width: 0; }
+
+            /* 핀 상태 */
+            .sticky-wrapper.booking-bar-pinned {
+                position: fixed !important;
+                left: 0 !important; right: 0 !important;
+                background: transparent !important;
+                box-shadow: none !important;
+                border: none !important;
+                transition: top 0.05s;
+            }
+            .sticky-wrapper.booking-bar-pinned .booking-bar {
+                background: #fff;
+                box-shadow: 0 4px 24px rgba(0,0,0,0.13);
+            }
+            .sticky-wrapper.booking-bar-pinned .booking-dropdown {
+                top: auto;
+                bottom: calc(100% + 20px);
+            }
+        }
+
         /* ── 드롭다운 ── */
         .booking-dropdown{ position:absolute; top:calc(100% + 20px); left:0; background:#fff; border-radius:15px; box-shadow:0 15px 40px rgba(0,0,0,0.15); padding:30px; z-index:2000; display:none; }
         .price-popup{ width:320px; padding:20px 24px; left:0; right:auto; }
@@ -125,9 +164,9 @@
         }
 
         /* ── 객실 리스트 섹션 ── */
-        .rooms-section{ background:#fff; padding:30px 0 80px; }
-        .rooms-section-header{ max-width:1240px; margin:0 auto 36px; padding:0 40px; }
-        .rooms-section-title{ font-size:22px; font-weight:700; color:rgb(28,28,28); }
+        .rooms-section{ background:rgb(244,244,244); padding:0 0 40px; }
+        .rooms-section-header{ max-width:1240px; margin:0 auto 28px; padding:28px 40px 0; }
+        .rooms-section-title{ font-size:29px; font-weight:300; color:rgb(28,28,28); margin:0; }
 
         .rooms-grid{ max-width:1240px; margin:0 auto; padding:0 40px; display:grid; grid-template-columns:repeat(2, 1fr); gap:32px 28px; }
 
@@ -182,9 +221,9 @@
         }
 
         /* ── 팝업 모달 ── */
-        .modal-overlay{ position:fixed; top:176px; left:0; right:0; bottom:0; background:rgba(0,0,0,0.75); z-index:9000; display:none; justify-content:center; align-items:flex-start; padding-top:12px; }
+        .modal-overlay{ position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.75); z-index:9000; display:none; justify-content:center; align-items:center; padding:20px; }
         .modal-overlay.open{ display:flex; }
-        .modal-box{ background:#fff; border-radius:10px; width:690px; height:760px; max-height:calc(100vh - 176px - 24px); overflow-y:auto; overflow-x:hidden; box-shadow:0 24px 64px rgba(0,0,0,0.35); scrollbar-width:none; -ms-overflow-style:none; }
+        .modal-box{ background:#fff; border-radius:10px; width:690px; max-height:calc(100vh - 40px); overflow-y:auto; overflow-x:hidden; box-shadow:0 24px 64px rgba(0,0,0,0.35); scrollbar-width:none; -ms-overflow-style:none; }
         .modal-box::-webkit-scrollbar{ display:none; }
 
         /* 헤더 */
@@ -193,19 +232,22 @@
         .modal-close{ width:28px; height:28px; background:rgba(255,255,255,0.15); border:none; border-radius:5px; font-size:13px; cursor:pointer; display:flex; align-items:center; justify-content:center; color:#fff; flex-shrink:0; }
         .modal-close:hover{ background:rgba(255,255,255,0.3); }
 
-        /* 슬라이더 - peek 효과 */
-        .modal-slider-outer{ position:relative; width:100%; height:420px; overflow:hidden; background:#c8c8c8; }
-        .modal-slider-track{ display:flex; height:100%; gap:10px; transition:transform 0.34s ease; }
-        .modal-slide{ height:100%; flex-shrink:0; }
+        /* 슬라이더 - fade 방식 */
+        .modal-slider-outer{ position:relative; width:100%; height:420px; overflow:hidden; background:#111; }
+        .modal-slider-track{ height:100%; position:relative; }
+        .modal-slide{ display:none; width:100%; height:100%; }
+        .modal-slide.m-active{ display:block; animation:mFadeIn 0.22s ease; }
+        @keyframes mFadeIn{ from{opacity:0;} to{opacity:1;} }
         .modal-slide img{ width:100%; height:100%; object-fit:cover; display:block; }
         .modal-slide-placeholder{ width:100%; height:100%; background:#d5d5d5; }
 
         /* 슬라이더 네비 */
         .modal-slider-nav{ position:absolute; bottom:14px; left:50%; transform:translateX(-50%); display:flex; align-items:center; gap:9px; }
-        .modal-slider-btn{ width:28px; height:28px; border-radius:50%; background:rgba(20,20,20,0.58); border:none; color:#fff; font-size:10px; cursor:pointer; display:flex; align-items:center; justify-content:center; }
+        .modal-slider-btn{ width:21px; height:21px; border-radius:50%; background:rgba(20,20,20,0.58); border:none; color:#fff; font-size:8px; cursor:pointer; display:flex; align-items:center; justify-content:center; position:absolute; top:50%; transform:translateY(-50%); z-index:2; }
         .modal-slider-btn:hover{ background:rgba(0,0,0,0.82); }
-        .modal-dot{ width:7px; height:7px; border-radius:50%; background:rgba(255,255,255,0.42); cursor:pointer; transition:background 0.2s; }
-        .modal-dot.active{ background:#fff; }
+        .modal-slider-prev{ left:4px; }
+        .modal-slider-next{ right:4px; }
+        .modal-slide-counter{ color:rgba(255,255,255,0.9); font-size:13px; font-weight:500; font-family:'Barlow',sans-serif; }
 
         /* 바디 */
         .modal-body{ padding:18px 20px 24px; background:#fff; }
@@ -252,20 +294,41 @@
         .fac-modal-counter { text-align:center; font-size:12px; color:rgb(112,112,112); padding:6px 0 0; }
 
         /* ── 갤러리 라이트박스 ── */
-        .gallery-overlay{ position:fixed; inset:0; background:rgba(18,18,18,0.96); z-index:10000; display:none; flex-direction:column; align-items:center; justify-content:center; gap:20px; }
+        .gallery-overlay{ position:fixed; inset:0; background:rgba(18,18,18,0.96); z-index:10000; display:none; align-items:center; justify-content:center; }
         .gallery-overlay.open{ display:flex; }
-        .gallery-close{ position:fixed; top:18px; right:22px; background:#fff; border:none; border-radius:5px; color:rgb(28,28,28); width:36px; height:36px; font-size:15px; cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 8px rgba(0,0,0,0.4); z-index:3; }
-        .gallery-close:hover{ background:#efefef; }
-        .gallery-stage{ position:relative; width:100%; overflow:hidden; flex-shrink:0; }
-        .gallery-track{ display:flex; gap:16px; will-change:transform; }
-        .gallery-slide{ flex-shrink:0; width:820px; min-width:820px; height:62vh; position:relative; opacity:0.5; transition:opacity 0.38s; }
-        .gallery-slide.g-active{ opacity:1; }
-        .gallery-slide img{ width:100%; height:100%; object-fit:contain; display:block; }
-        .gallery-nav{ position:absolute; top:50%; transform:translateY(-50%); background:rgba(255,255,255,0.9); border:none; border-radius:50%; color:rgb(28,28,28); width:28px; height:28px; font-size:11px; cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 10px rgba(0,0,0,0.35); z-index:2; }
+        .gallery-close{ position:absolute; top:0; right:calc(-40px - 1cm); background:rgba(255,255,255,0.92); border:none; border-radius:50%; color:rgb(28,28,28); width:40px; height:40px; font-size:16px; cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 8px rgba(0,0,0,0.4); z-index:3; }
+        .gallery-close:hover{ background:#fff; }
+        @media (max-width:768px){ .gallery-close{ position:fixed; top:14px; right:14px; } }
+        .gallery-stage{ position:relative; display:inline-flex; align-items:center; justify-content:center; }
+        .gallery-track{ display:inline-flex; align-items:center; justify-content:center; }
+        .gallery-slide{ display:none; align-items:center; justify-content:center; }
+        .gallery-slide.g-active{ display:inline-flex; animation:gFadeIn 0.22s ease; }
+        @keyframes gFadeIn{ from{opacity:0;} to{opacity:1;} }
+        .gallery-slide img{ max-width:88vw; max-height:82vh; object-fit:contain; display:block; }
+        .gallery-nav{ position:absolute; top:50%; transform:translateY(-50%); background:rgba(255,255,255,0.9); border:none; border-radius:50%; color:rgb(28,28,28); width:29px; height:29px; font-size:12px; cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 10px rgba(0,0,0,0.35); z-index:2; }
         .gallery-nav:hover{ background:#fff; }
-        .gallery-prev{ left:120px; }
-        .gallery-next{ right:120px; }
-        .gallery-counter{ color:rgba(255,255,255,0.7); font-size:13px; font-family:'Barlow',sans-serif; }
+        .gallery-prev{ left:-15px; }
+        .gallery-next{ right:-15px; }
+        .gallery-counter{ position:fixed; bottom:24px; left:50%; transform:translateX(-50%); color:rgba(255,255,255,0.75); font-size:13px; font-family:'Barlow',sans-serif; display:flex; flex-direction:column; align-items:center; gap:10px; }
+        .rg-top{ display:flex; align-items:center; gap:20px; white-space:nowrap; }
+        .rg-sep{ color:rgba(255,255,255,0.35); }
+        .rg-title{ color:rgba(255,255,255,0.9); font-weight:500; }
+        .rg-detail-btn{ background:none; border:none; color:rgba(255,255,255,0.75); font-size:13px; cursor:pointer; text-decoration:underline; text-underline-offset:3px; padding:0; font-family:inherit; }
+        .rg-detail-btn:hover{ color:#fff; }
+        .rg-book-btn{ background:rgb(58,154,180); color:#fff; border:none; border-radius:15px; padding:6px 14px; font-size:11px; font-weight:600; cursor:pointer; font-family:inherit; transition:background 0.2s; }
+        .rg-book-btn:hover{ background:rgb(44,132,156); }
+        @media (max-width:768px){
+            .gallery-overlay{ flex-direction:column; justify-content:center; }
+            .gallery-stage{ display:flex; width:100%; }
+            .gallery-track{ display:flex; width:100%; }
+            .gallery-slide{ width:100%; }
+            .gallery-slide.g-active{ display:flex; width:100%; }
+            .gallery-slide img{ width:100vw; max-width:100vw; max-height:65vh; }
+            .gallery-prev{ left:4px; }
+            .gallery-next{ right:4px; }
+            .gallery-counter{ position:relative; bottom:auto; left:auto; transform:none; margin-top:24px; text-align:center; }
+            .rg-detail-btn{ background:rgba(28,28,28,0.88); border-radius:24px; padding:12px 32px; text-decoration:none; color:#fff; font-size:14px; }
+        }
             /* ── 언어 선택 ── */
         .lang-selector{ position:relative; }
         .lang-btn{ display:flex; align-items:center; gap:6px; background:none; border:1px solid #d0d0d0; border-radius:20px; padding:6px 12px; font-size:13px; font-weight:600; cursor:pointer; color:rgb(112,112,112); font-family:'Barlow',sans-serif; transition:border-color 0.2s,color 0.2s; }
@@ -466,7 +529,7 @@
             <div class="room-card" id="edelweiss" data-room-id="edelweiss">
                 <div class="room-card-img-wrap">
                     <img src="images/rooms/edelweiss/1.jpg" alt="이코노미 룸" onerror="this.parentElement.style.background='#d4c9b8'">
-                    <div class="room-card-expand" onclick="event.stopPropagation();openGallery('edelweiss')"><i class="fa-solid fa-expand"></i></div>
+                    <div class="room-card-expand" onclick="openRoomGallery('edelweiss')"><i class="fa-solid fa-expand"></i></div>
                 </div>
                 <div class="room-card-body">
                     <div class="room-card-title-row">
@@ -487,7 +550,7 @@
                     </div>
                     <hr class="room-card-divider">
                     <div class="room-card-actions">
-                        <button class="room-card-detail" onclick="openModal('edelweiss')" data-i18n="room.detail">자세히 보기</button>
+                        <button class="room-card-detail" onclick="openRoomModal('edelweiss')" data-i18n="room.detail">자세히 보기</button>
                     </div>
                 </div>
             </div>
@@ -496,7 +559,7 @@
             <div class="room-card" id="aurora" data-room-id="aurora">
                 <div class="room-card-img-wrap">
                     <img src="images/rooms/aurora/1.jpg" alt="스탠다드 룸 (디자인 랜덤배정)" onerror="this.parentElement.style.background='#b8c8d4'">
-                    <div class="room-card-expand" onclick="event.stopPropagation();openGallery('aurora')"><i class="fa-solid fa-expand"></i></div>
+                    <div class="room-card-expand" onclick="openRoomGallery('aurora')"><i class="fa-solid fa-expand"></i></div>
                 </div>
                 <div class="room-card-body">
                     <div class="room-card-title-row">
@@ -517,7 +580,7 @@
                     </div>
                     <hr class="room-card-divider">
                     <div class="room-card-actions">
-                        <button class="room-card-detail" onclick="openModal('aurora')" data-i18n="room.detail">자세히 보기</button>
+                        <button class="room-card-detail" onclick="openRoomModal('aurora')" data-i18n="room.detail">자세히 보기</button>
                     </div>
                 </div>
             </div>
@@ -526,7 +589,7 @@
             <div class="room-card" id="glorio" data-room-id="glorio">
                 <div class="room-card-img-wrap">
                     <img src="images/rooms/glorio/1.jpg" alt="디럭스 룸 (디자인 랜덤배정)" onerror="this.parentElement.style.background='#c8d4b8'">
-                    <div class="room-card-expand" onclick="event.stopPropagation();openGallery('glorio')"><i class="fa-solid fa-expand"></i></div>
+                    <div class="room-card-expand" onclick="openRoomGallery('glorio')"><i class="fa-solid fa-expand"></i></div>
                 </div>
                 <div class="room-card-body">
                     <div class="room-card-title-row">
@@ -547,7 +610,7 @@
                     </div>
                     <hr class="room-card-divider">
                     <div class="room-card-actions">
-                        <button class="room-card-detail" onclick="openModal('glorio')" data-i18n="room.detail">자세히 보기</button>
+                        <button class="room-card-detail" onclick="openRoomModal('glorio')" data-i18n="room.detail">자세히 보기</button>
                     </div>
                 </div>
             </div>
@@ -556,7 +619,7 @@
             <div class="room-card" id="envidion" data-room-id="envidion">
                 <div class="room-card-img-wrap">
                     <img src="images/rooms/envidion/1.jpg" alt="트윈 룸" onerror="this.parentElement.style.background='#c8b8d4'">
-                    <div class="room-card-expand" onclick="event.stopPropagation();openGallery('envidion')"><i class="fa-solid fa-expand"></i></div>
+                    <div class="room-card-expand" onclick="openRoomGallery('envidion')"><i class="fa-solid fa-expand"></i></div>
                 </div>
                 <div class="room-card-body">
                     <div class="room-card-title-row">
@@ -577,7 +640,7 @@
                     </div>
                     <hr class="room-card-divider">
                     <div class="room-card-actions">
-                        <button class="room-card-detail" onclick="openModal('envidion')" data-i18n="room.detail">자세히 보기</button>
+                        <button class="room-card-detail" onclick="openRoomModal('envidion')" data-i18n="room.detail">자세히 보기</button>
                     </div>
                 </div>
             </div>
@@ -586,7 +649,7 @@
             <div class="room-card" id="special" data-room-id="special">
                 <div class="room-card-img-wrap">
                     <img src="images/rooms/special/1.jpg" alt="스페셜" onerror="this.parentElement.style.background='#d4d0b8'">
-                    <div class="room-card-expand" onclick="event.stopPropagation();openGallery('special')"><i class="fa-solid fa-expand"></i></div>
+                    <div class="room-card-expand" onclick="openRoomGallery('special')"><i class="fa-solid fa-expand"></i></div>
                 </div>
                 <div class="room-card-body">
                     <div class="room-card-title-row">
@@ -607,7 +670,7 @@
                     </div>
                     <hr class="room-card-divider">
                     <div class="room-card-actions">
-                        <button class="room-card-detail" onclick="openModal('special')" data-i18n="room.detail">자세히 보기</button>
+                        <button class="room-card-detail" onclick="openRoomModal('special')" data-i18n="room.detail">자세히 보기</button>
                     </div>
                 </div>
             </div>
@@ -616,7 +679,7 @@
             <div class="room-card" id="ruby" data-room-id="ruby">
                 <div class="room-card-img-wrap">
                     <img src="images/rooms/ruby/대표사진.png" alt="루비룸" onerror="this.parentElement.style.background='#d4b8b8'">
-                    <div class="room-card-expand" onclick="event.stopPropagation();openGallery('ruby')"><i class="fa-solid fa-expand"></i></div>
+                    <div class="room-card-expand" onclick="openRoomGallery('ruby')"><i class="fa-solid fa-expand"></i></div>
                 </div>
                 <div class="room-card-body">
                     <div class="room-card-title-row">
@@ -637,7 +700,7 @@
                     </div>
                     <hr class="room-card-divider">
                     <div class="room-card-actions">
-                        <button class="room-card-detail" onclick="openModal('ruby')" data-i18n="room.detail">자세히 보기</button>
+                        <button class="room-card-detail" onclick="openRoomModal('ruby')" data-i18n="room.detail">자세히 보기</button>
                     </div>
                 </div>
             </div>
@@ -647,34 +710,34 @@
 
     <!-- ── 팝업 모달 ── -->
     <!-- 갤러리 라이트박스 -->
-    <div class="gallery-overlay" id="galleryOverlay" onclick="handleGalleryOverlayClick(event)">
-        <button class="gallery-close" onclick="closeGallery()"><i class="fa-solid fa-xmark"></i></button>
-        <div class="gallery-stage" id="galleryStage">
-            <div class="gallery-track" id="galleryTrack"></div>
-            <button class="gallery-nav gallery-prev" onclick="galleryNav(-1)"><i class="fa-solid fa-chevron-left"></i></button>
-            <button class="gallery-nav gallery-next" onclick="galleryNav(1)"><i class="fa-solid fa-chevron-right"></i></button>
+    <div class="gallery-overlay" id="roomGalleryOverlay" onclick="handleRoomGalleryOverlayClick(event)">
+        <div class="gallery-stage" id="roomGalleryStage">
+            <button class="gallery-close" onclick="closeRoomGallery()"><i class="fa-solid fa-xmark"></i></button>
+            <div class="gallery-track" id="roomGalleryTrack"></div>
+            <button class="gallery-nav gallery-prev" onclick="roomGalleryNav(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="gallery-nav gallery-next" onclick="roomGalleryNav(1)"><i class="fa-solid fa-chevron-right"></i></button>
         </div>
-        <div class="gallery-counter" id="galleryCounter"></div>
+        <div class="gallery-counter" id="roomGalleryCounter"></div>
     </div>
 
-    <div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
+    <div class="modal-overlay" id="modalOverlay" onclick="handleModalOverlayClick(event)">
         <div class="modal-box" onclick="event.stopPropagation()">
             <div class="modal-header">
                 <span class="modal-title" id="modalTitle"></span>
-                <button class="modal-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+                <button class="modal-close" onclick="closeRoomModal()"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <div class="modal-slider-outer" id="modalSliderOuter">
                 <div class="modal-slider-track" id="modalSliderTrack"></div>
+                <button class="modal-slider-btn modal-slider-prev" id="modalPrevBtn" onclick="modalChangeSlide(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+                <button class="modal-slider-btn modal-slider-next" id="modalNextBtn" onclick="modalChangeSlide(1)"><i class="fa-solid fa-chevron-right"></i></button>
                 <div class="modal-slider-nav" id="modalSliderNav">
-                    <button class="modal-slider-btn" onclick="modalChangeSlide(-1)"><i class="fa-solid fa-chevron-left"></i></button>
-                    <div id="modalNavDots" style="display:flex;gap:7px;align-items:center;"></div>
-                    <button class="modal-slider-btn" onclick="modalChangeSlide(1)"><i class="fa-solid fa-chevron-right"></i></button>
+                    <span id="modalSlideCounter" class="modal-slide-counter"></span>
                 </div>
             </div>
             <div class="modal-body">
                 <div class="modal-top-row">
                     <p class="modal-room-title" id="modalRoomTitle"></p>
-                    <button class="modal-book-btn" id="modalBookBtn">요금 조회</button>
+                    <button class="modal-book-btn" id="modalBookBtn" data-i18n="room.book">예약하기</button>
                 </div>
                 <div class="modal-sub-row">
                     <p class="modal-room-sub" id="modalRoomSub"></p>
@@ -743,7 +806,8 @@
             const nights = Math.round((checkoutDate - checkinDate) / 86400000);
             const roomCount = guests ? guests.room : 1;
             const adultCount = guests ? guests.adult : 1;
-            listEl.innerHTML = ROOM_ORDER.map(function(id) {
+            var roomIds = window._bookingPinnedRoomId ? [window._bookingPinnedRoomId] : ROOM_ORDER;
+            listEl.innerHTML = roomIds.map(function(id) {
                 const room = ROOM_DATA[id]; if (!room) return '';
                 const pt = ROOM_PRICE_TABLE[id];
                 const available = pt && adultCount <= pt.maxGuests * roomCount;
@@ -850,7 +914,70 @@
         function updateGuest(type,dir){ guests[type]=Math.max(0,guests[type]+dir); if(guests.room<1) guests.room=1; if(guests.adult<1) guests.adult=1; document.getElementById('val-room').textContent=guests.room; document.getElementById('val-adult').textContent=guests.adult; var summary=typeof fmtGuestCount==='function'?fmtGuestCount(guests.room,guests.adult):guests.room+' 객실, '+guests.adult+' 성인'; document.getElementById('guest-summary-text').textContent=summary; updateRoomPrices(); }
 
         let selectedRoomId = null;
+        // 예약바 핀 전역 함수 (rooms.html용 - .sticky-wrapper 대상)
+        window._pinnedCard = null;
+        window._bookingPinnedRoomId = null;
+
+        function unpinBookingBar() {
+            var bar = document.querySelector('.sticky-wrapper');
+            if (bar) { bar.classList.remove('booking-bar-pinned'); bar.style.top = ''; }
+            window._pinnedCard = null;
+            window._bookingPinnedRoomId = null;
+            ['calendarPopup','guestPopup','pricePopup'].forEach(function(id){
+                var el = document.getElementById(id); if (el) el.classList.remove('active');
+            });
+        }
+
+        function pinBookingBarToRoom(roomId, openCalendar) {
+            var card = document.querySelector('.room-card[data-room-id="' + roomId + '"]');
+            if (!card) return;
+            pinBookingBarToCard(card, roomId, openCalendar ? function() {
+                openBookingCalendar(roomId);
+            } : null);
+        }
+
+        function pinBookingBarToCard(card, roomId, afterPinCallback) {
+            if (window.innerWidth < 769) return;
+            var bar = document.querySelector('.sticky-wrapper');
+            if (!bar) return;
+            var barHeight = bar.offsetHeight;
+            window._pinnedCard = card;
+            window._bookingPinnedRoomId = roomId || card.dataset.roomId || null;
+            var cardRect = card.getBoundingClientRect();
+            var cardAbsBottom = window.scrollY + cardRect.bottom;
+            var targetScroll = Math.max(0, cardAbsBottom - (window.innerHeight - barHeight));
+            window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+            setTimeout(function() {
+                var newRect = card.getBoundingClientRect();
+                bar.classList.add('booking-bar-pinned');
+                bar.style.top = newRect.bottom + 'px';
+                if (afterPinCallback) afterPinCallback();
+            }, 380);
+        }
+
+        window.addEventListener('scroll', function() {
+            if (!window._pinnedCard) return;
+            var bar = document.querySelector('.sticky-wrapper');
+            if (bar) bar.style.top = window._pinnedCard.getBoundingClientRect().bottom + 'px';
+        });
+
+        document.addEventListener('click', function(e) {
+            if (window.innerWidth < 769 || !window._pinnedCard) return;
+            if (!e.target.closest('.sticky-wrapper') && !e.target.closest('.room-card-book')) {
+                unpinBookingBar();
+            }
+        }, true);
+
         function openBookingCalendar(roomId) {
+            // 다른 객실 선택 시 날짜·요금 초기화
+            if (roomId && roomId !== selectedRoomId) {
+                checkinDate = null; checkoutDate = null;
+                datesUserSelected = false; _datesExplicitlySet = false;
+                updateDateUI(); renderCalendar();
+                var minPriceEl = document.getElementById('min-price-text');
+                if (minPriceEl) minPriceEl.textContent = '최저 요금';
+                document.getElementById('pricePopup').classList.remove('active');
+            }
             if (roomId) selectedRoomId = roomId;
             if (window.innerWidth <= 768) {
                 setTimeout(function() {
@@ -905,7 +1032,7 @@
                 wrap.style.cursor = 'pointer';
                 wrap.addEventListener('click', function(e) {
                     if (!e.target.closest('.room-card-expand')) {
-                        openGallery(wrap.closest('.room-card').dataset.roomId);
+                        openRoomGallery(wrap.closest('.room-card').dataset.roomId);
                     }
                 });
             });
@@ -917,6 +1044,19 @@
                     clone.classList.add('room-card-book-mobile');
                     actions.appendChild(clone);
                 }
+            });
+
+            // 데스크탑: 예약하기 클릭 시 예약바를 카드 바로 아래로 핀
+            document.querySelectorAll('.room-card-title-row .room-card-book').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    if (window.innerWidth < 769) return;
+                    var card = btn.closest('.room-card');
+                    if (window._pinnedCard === card) { unpinBookingBar(); return; }
+                    var roomId = card.dataset.roomId;
+                    pinBookingBarToCard(card, roomId, function() {
+                        openBookingCalendar(roomId);
+                    });
+                });
             });
         });
 
@@ -1084,45 +1224,35 @@
             }
         };
 
-        /* ── 모달 슬라이더 (peek 효과) ── */
-        const PEEK = 42;   // 좌우로 보이는 이전/다음 슬라이드 px
-        const SGAP = 10;   // 슬라이드 간 gap px
-        let modalSlideIdx = 0;
-        let modalSlideCount = 0;
-
-        function _slideW() {
-            return document.getElementById('modalSliderOuter').offsetWidth - PEEK * 2;
-        }
-
-        function _setTrack(animate) {
-            const track = document.getElementById('modalSliderTrack');
-            if (!animate) track.style.transition = 'none';
-            else track.style.transition = 'transform 0.34s ease';
-            const sw = _slideW();
-            const offset = PEEK - modalSlideIdx * (sw + SGAP);
-            track.style.transform = 'translateX(' + offset + 'px)';
-            document.querySelectorAll('#modalNavDots .modal-dot').forEach(function(d, i) {
-                d.classList.toggle('active', i === modalSlideIdx);
-            });
-        }
-
+        /* ── 모달 슬라이더 (fade 방식) ── */
+        let _mSlideIdx = 0;
+        let _mSlideCount = 0;
         var _openModalRoomId = null;
-        function openModal(roomId) {
-            const data = ROOM_DATA[roomId];
-            if (!data) return;
-            _openModalRoomId = roomId;
 
-            var roomName = typeof getRoomName === 'function' ? getRoomName(roomId) : data.title;
-            document.getElementById('modalTitle').textContent = roomName;
-            document.getElementById('modalRoomTitle').textContent = roomName;
-            document.getElementById('modalRoomSub').textContent = typeof getRoomSub === 'function' ? getRoomSub(roomId) : data.sub;
+        function _mSetTrack(animate) {
+            document.querySelectorAll('.modal-slide').forEach(function(s, i) {
+                s.classList.toggle('m-active', i === _mSlideIdx);
+            });
+            var counterEl = document.getElementById('modalSlideCounter');
+            if (counterEl) counterEl.textContent = (_mSlideIdx + 1) + ' / ' + _mSlideCount;
+        }
+
+        function openRoomModal(roomId) {
+            _openModalRoomId = roomId;
+            var data = ROOM_DATA[roomId];
+            if (!data) return;
+
+            var roomNameStr = typeof getRoomName === 'function' ? getRoomName(roomId) : data.title;
+            var roomSubStr  = typeof getRoomSub  === 'function' ? getRoomSub(roomId)  : data.sub;
+            document.getElementById('modalTitle').textContent     = roomNameStr;
+            document.getElementById('modalRoomTitle').textContent = roomNameStr;
+            document.getElementById('modalRoomSub').textContent   = roomSubStr;
 
             var dayKeys  = ['price.weekday', 'price.fri', 'price.sat'];
             var priceKeys = ['weekday', 'fri', 'sat'];
             var numPrices = (typeof roomPrices !== 'undefined' && roomPrices[roomId]) ? roomPrices[roomId] : {};
-            const priceEl = document.getElementById('modalRoomPrice');
-            priceEl.innerHTML = (data.price || []).map(function(p, idx) {
-                var dayLabel = typeof t === 'function' ? t(dayKeys[idx] || '') : '(' + p[0] + ')';
+            document.getElementById('modalRoomPrice').innerHTML = (data.price || []).map(function(p, idx) {
+                var dayLabel = typeof t === 'function' ? t(dayKeys[idx] || '') : p[0];
                 var convHtml = '';
                 if (typeof _convertPrice === 'function' && typeof currentLang !== 'undefined' && currentLang !== 'ko') {
                     var krwNum = numPrices[priceKeys[idx]];
@@ -1130,52 +1260,41 @@
                 }
                 return '<span class="modal-price-item">' + dayLabel + ' <strong>' + p[1] + '</strong>' + convHtml + '</span>';
             }).join('');
+            document.getElementById('modalBookBtn').onclick = function() { closeRoomModal(); openBookingCalendar(roomId); };
 
-            var bookBtn = document.getElementById('modalBookBtn');
-            if (bookBtn) { bookBtn.textContent = typeof t === 'function' ? t('room.book') : '요금 조회'; bookBtn.onclick = function(){ closeModal(); openBookingCalendar(roomId); }; }
-
-            // 슬라이더 빌드
-            const track = document.getElementById('modalSliderTrack');
-            const dotsEl = document.getElementById('modalNavDots');
+            var track = document.getElementById('modalSliderTrack');
             track.innerHTML = '';
-            dotsEl.innerHTML = '';
-            modalSlideIdx = 0;
-            modalSlideCount = data.images.length;
-
+            _mSlideIdx = 0;
+            _mSlideCount = data.images.length;
             data.images.forEach(function(src, i) {
-                const slide = document.createElement('div');
+                var slide = document.createElement('div');
                 slide.className = 'modal-slide';
-                const img = document.createElement('img');
-                img.src = src; img.alt = data.title;
-                img.onerror = function(){ slide.innerHTML = '<div class="modal-slide-placeholder"></div>'; };
+                var img = document.createElement('img');
+                img.src = src; img.alt = roomNameStr;
+                img.onerror = function() { slide.innerHTML = '<div class="modal-slide-placeholder"></div>'; };
                 slide.appendChild(img);
                 track.appendChild(slide);
-
-                const dot = document.createElement('span');
-                dot.className = 'modal-dot' + (i === 0 ? ' active' : '');
-                dot.onclick = (function(idx){ return function(){ modalGoTo(idx); }; })(i);
-                dotsEl.appendChild(dot);
             });
+            var hasMultiple = data.images.length > 1;
+            document.getElementById('modalSliderNav').style.display = hasMultiple ? 'flex' : 'none';
+            document.getElementById('modalPrevBtn').style.display = hasMultiple ? 'flex' : 'none';
+            document.getElementById('modalNextBtn').style.display = hasMultiple ? 'flex' : 'none';
 
-            // 네비 표시 여부
-            document.getElementById('modalSliderNav').style.display = data.images.length > 1 ? 'flex' : 'none';
-
-            // 어메니티 빌드
-            const grid = document.getElementById('modalAmenityGrid');
+            var grid = document.getElementById('modalAmenityGrid');
             grid.innerHTML = '';
             data.cols.forEach(function(col) {
-                const div = document.createElement('div');
+                var div = document.createElement('div');
                 div.style.borderTop = '1px solid #ececec';
                 div.style.paddingTop = '12px';
-                const titleEl = document.createElement('p');
+                var titleEl = document.createElement('p');
                 titleEl.className = 'modal-amenity-col-title';
                 var colLabel = typeof tFacCol === 'function' ? tFacCol(col.label) : col.label;
                 titleEl.innerHTML = '<i class="fa-solid ' + col.icon + '"></i> ' + colLabel;
                 div.appendChild(titleEl);
                 col.items.forEach(function(item) {
-                    const p = document.createElement('p');
-                    const entry = FAC_IMG_MAP[item];
-                    var displayItem = typeof tFacItem === 'function' ? tFacItem(item) : item;
+                    var p = document.createElement('p');
+                    var entry = FAC_IMG_MAP[item];
+                    var displayLabel = typeof tFacItem === 'function' ? tFacItem(item) : item;
                     if (entry) {
                         p.className = 'modal-amenity-item modal-amenity-item-click';
                         p.onclick = (function(korKey, e) {
@@ -1184,70 +1303,59 @@
                     } else {
                         p.className = 'modal-amenity-item';
                     }
-                    p.textContent = displayItem;
+                    p.textContent = displayLabel;
                     div.appendChild(p);
                 });
                 grid.appendChild(div);
             });
 
-            // 오버레이 열기
             document.getElementById('modalOverlay').classList.add('open');
             document.body.style.overflow = 'hidden';
-
-            // 슬라이드 폭 적용 (레이아웃 후)
-            requestAnimationFrame(function() {
-                const sw = _slideW();
-                document.querySelectorAll('.modal-slide').forEach(function(s) {
-                    s.style.width = sw + 'px';
-                    s.style.minWidth = sw + 'px';
-                });
-                track.style.transition = 'none';
-                track.style.transform = 'translateX(' + PEEK + 'px)';
-                requestAnimationFrame(function() {
-                    track.style.transition = 'transform 0.34s ease';
-                });
-            });
+            _mSetTrack(false);
         }
 
-        function closeModal() {
+        function closeRoomModal() {
+            _openModalRoomId = null;
             document.getElementById('modalOverlay').classList.remove('open');
             document.body.style.overflow = '';
-            _openModalRoomId = null;
-        }
-        window.openRoomModal = openModal;
-
-        function handleOverlayClick(e) {
-            if (e.target === document.getElementById('modalOverlay')) closeModal();
         }
 
-        /* ── 갤러리 라이트박스 (peek 슬라이더) ── */
-        var _galleryImages = [];
-        var _galleryIdx = 0;
-        var G_SLIDE_W = 820;
-        var G_GAP = 16;
+        function handleModalOverlayClick(e) {
+            if (e.target === document.getElementById('modalOverlay')) closeRoomModal();
+        }
 
-        function _setGalleryTrack(animate) {
-            var slideW = Math.min(G_SLIDE_W, window.innerWidth);
-            var track = document.getElementById('galleryTrack');
-            var peek = (window.innerWidth - slideW) / 2;
+        /* ── 갤러리 라이트박스 (fade 방식) ── */
+        var _rgImages = [];
+        var _rgIdx = 0;
+        var _rgRoomId = '';
+        var _rgRoomTitle = '';
+
+        function _setRoomGalleryTrack(animate) {
+            var track = document.getElementById('roomGalleryTrack');
             track.querySelectorAll('.gallery-slide').forEach(function(s, i) {
-                s.style.width = slideW + 'px';
-                s.style.minWidth = slideW + 'px';
-                s.classList.toggle('g-active', i === _galleryIdx);
+                s.classList.toggle('g-active', i === _rgIdx);
             });
-            track.style.transition = animate ? 'transform 0.38s ease' : 'none';
-            track.style.transform = 'translateX(' + (peek - _galleryIdx * (slideW + G_GAP)) + 'px)';
-            document.getElementById('galleryCounter').textContent = (_galleryIdx + 1) + ' / ' + _galleryImages.length;
+            track.style.transform = '';
+            document.getElementById('roomGalleryCounter').innerHTML =
+                '<div class="rg-top">' +
+                    '<span>' + (_rgIdx + 1) + ' / ' + _rgImages.length + '</span>' +
+                    '<span class="rg-sep">|</span>' +
+                    '<span class="rg-title">' + _rgRoomTitle + '</span>' +
+                    '<button class="rg-book-btn" onclick="closeRoomGallery();pinBookingBarToRoom(\'' + _rgRoomId + '\',true)">예약하기</button>' +
+                '</div>' +
+                '<button class="rg-detail-btn" onclick="closeRoomGallery();openRoomModal(\'' + _rgRoomId + '\')">객실 세부 정보 보기</button>';
         }
 
-        function openGallery(roomId) {
+        function openRoomGallery(roomId) {
             var data = ROOM_DATA[roomId];
             if (!data || !data.images.length) return;
-            _galleryImages = data.images;
-            _galleryIdx = 0;
-            var track = document.getElementById('galleryTrack');
+            _rgImages = data.images;
+            _rgIdx = 0;
+            _rgRoomId = roomId;
+            _rgRoomTitle = data.roomTitle || data.title || '';
+            var track = document.getElementById('roomGalleryTrack');
             track.innerHTML = '';
-            _galleryImages.forEach(function(src, i) {
+            _rgImages.forEach(function(src, i) {
                 var slide = document.createElement('div');
                 slide.className = 'gallery-slide' + (i === 0 ? ' g-active' : '');
                 var img = document.createElement('img');
@@ -1255,51 +1363,44 @@
                 slide.appendChild(img);
                 track.appendChild(slide);
             });
-            document.getElementById('galleryOverlay').classList.add('open');
+            document.getElementById('roomGalleryOverlay').classList.add('open');
             document.body.style.overflow = 'hidden';
-            _setGalleryTrack(false);
+            _setRoomGalleryTrack(false);
         }
 
-        function galleryNav(dir) {
-            var next = _galleryIdx + dir;
-            if (next < 0 || next >= _galleryImages.length) return;
-            _galleryIdx = next;
-            _setGalleryTrack(true);
+        function roomGalleryNav(dir) {
+            var next = _rgIdx + dir;
+            if (next < 0 || next >= _rgImages.length) return;
+            _rgIdx = next;
+            _setRoomGalleryTrack(true);
         }
 
-        function closeGallery() {
-            document.getElementById('galleryOverlay').classList.remove('open');
+        function closeRoomGallery() {
+            document.getElementById('roomGalleryOverlay').classList.remove('open');
             document.body.style.overflow = '';
         }
 
-        function handleGalleryOverlayClick(e) {
-            if (e.target === document.getElementById('galleryOverlay')) closeGallery();
+        function handleRoomGalleryOverlayClick(e) {
+            if (e.target === document.getElementById('roomGalleryOverlay')) closeRoomGallery();
         }
 
-        document.addEventListener('keydown', function(e) {
-            if (!document.getElementById('galleryOverlay').classList.contains('open')) return;
-            if (e.key === 'ArrowLeft') galleryNav(-1);
-            else if (e.key === 'ArrowRight') galleryNav(1);
-            else if (e.key === 'Escape') closeGallery();
-        });
-
         window.addEventListener('resize', function() {
-            if (document.getElementById('galleryOverlay').classList.contains('open')) {
-                _setGalleryTrack(false);
-            }
+            if (document.getElementById('roomGalleryOverlay').classList.contains('open')) _setRoomGalleryTrack(false);
         });
 
         function modalChangeSlide(dir) {
-            modalSlideIdx = Math.max(0, Math.min(modalSlideCount - 1, modalSlideIdx + dir));
-            _setTrack(true);
+            _mSlideIdx = Math.max(0, Math.min(_mSlideCount - 1, _mSlideIdx + dir));
+            _mSetTrack(true);
         }
 
-        function modalGoTo(idx) {
-            modalSlideIdx = idx;
-            _setTrack(true);
-        }
-
-        document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeModal(); });
+        document.addEventListener('keydown', function(e) {
+            if (document.getElementById('modalOverlay').classList.contains('open') && e.key === 'Escape') closeRoomModal();
+            if (document.getElementById('roomGalleryOverlay').classList.contains('open')) {
+                if (e.key === 'ArrowLeft') roomGalleryNav(-1);
+                else if (e.key === 'ArrowRight') roomGalleryNav(1);
+                else if (e.key === 'Escape') closeRoomGallery();
+            }
+        });
 
         /* ===== 호텔 투숙을 즐기는 다양한 방법 — 무한 마퀴 슬라이더 ===== */
         (function () {
