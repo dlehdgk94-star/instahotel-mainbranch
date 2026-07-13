@@ -151,12 +151,13 @@
             .rooms-banner-section   { order: 3; }
             .rooms-section          { order: 4; }
             #booking-header         { order: 5; position: static; box-shadow: none; background: rgb(244,244,244); border: none; }
-            #booking-header .booking-bar { max-width: 1240px; margin: 0 auto; padding: 0 40px; border: 1px solid #e5e5e5; }
-            #booking-header .booking-item:nth-child(1) { flex: 0 0 300px; }
-            #booking-header .booking-item:nth-child(2) { flex: 0 0 310px; }
-            #booking-header .booking-item:nth-child(3) { flex: 1 1 auto; padding-right: 20px; }
+            #booking-header .booking-bar { max-width: 1240px; margin: 0 auto; padding: 0 30px; border: 1px solid #e5e5e5; }
+            #booking-header .booking-item:nth-child(1) { flex: 1 1 0; min-width: 0; }
+            #booking-header .booking-item:nth-child(2) { flex: 1 1 0; min-width: 0; }
+            #booking-header .booking-item:nth-child(3) { flex: 1 1 0; min-width: 0; padding-right: 0; }
+            #booking-header .booking-item:last-child   { flex: 0 0 auto; padding: 0 0 0 16px; }
             #booking-header #guest-booking-item .booking-value,
-            #booking-header .booking-item:nth-child(3) .booking-value { width: 190px; }
+            #booking-header .booking-item:nth-child(3) .booking-value { width: auto; min-width: 0; }
             .intro-section          { order: 6; }
             .facilities-section     { order: 7; }
             .location-section       { order: 8; }
