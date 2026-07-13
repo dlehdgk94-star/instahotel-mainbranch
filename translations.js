@@ -48,9 +48,9 @@ const translations = {
     "room.special": "스페셜",
     "room.ruby": "루비룸 (애견동반)",
     // 객실 부가정보
-    "room.economy.sub": "기준 2인 / 최대 2인 · 퀸 침대 1개",
-    "room.standard.sub": "기준 2인 / 최대 2인 · 퀸 침대 1개",
-    "room.deluxe.sub": "기준 2인 / 최대 2인 · 퀸 침대 1개",
+    "room.economy.sub": "기준 2인 · 퀸 침대 1개",
+    "room.standard.sub": "기준 2인 · 퀸 침대 1개",
+    "room.deluxe.sub": "기준 2인 · 퀸 침대 1개",
     "room.twin.sub": "기준 2인 / 최대 3인까지 · 퀸 침대 1개 / 싱글 침대 1개",
     "room.special.sub": "기준 2인 / 최대 4인까지 · 퀸 침대 1개 / 싱글 침대 2개",
     "room.ruby.sub": "기준 2인 / 최대 2인 · 퀸 침대 1개",
