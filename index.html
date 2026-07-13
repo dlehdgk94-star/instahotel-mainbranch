@@ -143,6 +143,17 @@
         /* 모바일 전용 요소: 데스크톱에서 숨김 */
         @media (min-width: 769px) {
             #mob-trigger-bar, #mob-book-panel { display: none; }
+
+            /* 데스크탑 전용: 예약바를 객실 & 스테이 섹션 아래로 이동 */
+            body { display: flex; flex-direction: column; }
+            header.top-header       { order: 1; }
+            .hotel-ways-section     { order: 2; }
+            .intro-section          { order: 3; }
+            .rooms-section          { order: 4; }
+            #booking-header         { order: 5; position: static; box-shadow: none; border-top: 1px solid #e5e5e5; }
+            .facilities-section     { order: 6; }
+            .location-section       { order: 7; }
+            .footer-section         { order: 8; }
         }
 
         /* 예약 바 */
