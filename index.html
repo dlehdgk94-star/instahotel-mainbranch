@@ -148,12 +148,13 @@
             body { display: flex; flex-direction: column; }
             header.top-header       { order: 1; }
             .hotel-ways-section     { order: 2; }
-            .rooms-section          { order: 3; }
-            #booking-header         { order: 4; position: static; box-shadow: none; border-top: 1px solid #e5e5e5; }
-            .intro-section          { order: 5; }
-            .facilities-section     { order: 6; }
-            .location-section       { order: 7; }
-            .footer-section         { order: 8; }
+            .rooms-banner-section   { order: 3; }
+            .rooms-section          { order: 4; }
+            #booking-header         { order: 5; position: static; box-shadow: none; border-top: 1px solid #e5e5e5; }
+            .intro-section          { order: 6; }
+            .facilities-section     { order: 7; }
+            .location-section       { order: 8; }
+            .footer-section         { order: 9; }
         }
 
         /* 예약 바 */
@@ -492,6 +493,11 @@
 
         /* 호텔 투숙 방법 섹션 */
         .hotel-ways-section { background: #fff; padding: 30px 0; }
+        .rooms-banner-section { display: none; }
+        @media (min-width: 769px) {
+            .rooms-banner-section { display: flex; align-items: center; justify-content: center; height: 100px; background: #fff; }
+            .rooms-banner-text { font-size: 16px; color: rgb(112,112,112); font-weight: 500; text-align: center; }
+        }
         .hotel-ways-title { font-size: 29px; font-weight: 300; color: rgb(28,28,28); margin: 0; }
         .hotel-ways-section .promo-pkg-header { justify-content: center; margin-bottom: 32px; }
         .hotel-ways-section .promo-pkg-wrap { max-width: 100%; }
@@ -862,6 +868,10 @@
           </div>
         </template>
       </div>
+    </section>
+
+    <section class="rooms-banner-section">
+        <p class="rooms-banner-text">텍스트를 입력해 주세요.</p>
     </section>
 
     <section class="intro-section">
