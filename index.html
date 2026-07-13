@@ -572,7 +572,11 @@
         .gallery-nav:hover{ background:#fff; }
         .gallery-prev{ left:-22px; }
         .gallery-next{ right:-22px; }
-        .gallery-counter{ position:fixed; bottom:24px; left:50%; transform:translateX(-50%); color:rgba(255,255,255,0.75); font-size:13px; font-family:'Barlow',sans-serif; }
+        .gallery-counter{ position:fixed; bottom:24px; left:50%; transform:translateX(-50%); color:rgba(255,255,255,0.75); font-size:13px; font-family:'Barlow',sans-serif; display:flex; align-items:center; gap:10px; white-space:nowrap; }
+        .rg-sep{ color:rgba(255,255,255,0.35); }
+        .rg-title{ color:rgba(255,255,255,0.9); font-weight:500; }
+        .rg-detail-btn{ background:none; border:none; color:rgba(255,255,255,0.75); font-size:13px; cursor:pointer; text-decoration:underline; text-underline-offset:3px; padding:0; font-family:inherit; }
+        .rg-detail-btn:hover{ color:#fff; }
 
         /* ── 객실 팝업 모달 ── */
         .modal-overlay{ position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.75); z-index:9000; display:none; justify-content:center; align-items:center; padding:20px; }
@@ -3498,8 +3502,8 @@
         /* ── 갤러리 라이트박스 ── */
         var _rgImages = [];
         var _rgIdx = 0;
-        var RG_SLIDE_W = 820;
-        var RG_GAP = 16;
+        var _rgRoomId = '';
+        var _rgRoomTitle = '';
 
         function _setRoomGalleryTrack(animate) {
             var track = document.getElementById('roomGalleryTrack');
@@ -3507,7 +3511,12 @@
                 s.classList.toggle('g-active', i === _rgIdx);
             });
             track.style.transform = '';
-            document.getElementById('roomGalleryCounter').textContent = (_rgIdx + 1) + ' / ' + _rgImages.length;
+            document.getElementById('roomGalleryCounter').innerHTML =
+                '<span>' + (_rgIdx + 1) + ' / ' + _rgImages.length + '</span>' +
+                '<span class="rg-sep">|</span>' +
+                '<span class="rg-title">' + _rgRoomTitle + '</span>' +
+                '<span class="rg-sep">|</span>' +
+                '<button class="rg-detail-btn" onclick="closeRoomGallery();openRoomModal(\'' + _rgRoomId + '\')">객실 세부 정보 보기</button>';
         }
 
         function openRoomGallery(roomId) {
@@ -3515,6 +3524,8 @@
             if (!data || !data.images.length) return;
             _rgImages = data.images;
             _rgIdx = 0;
+            _rgRoomId = roomId;
+            _rgRoomTitle = data.roomTitle || data.title || '';
             var track = document.getElementById('roomGalleryTrack');
             track.innerHTML = '';
             _rgImages.forEach(function(src, i) {
