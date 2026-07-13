@@ -443,6 +443,8 @@
         .rooms-section { background: rgb(244,244,244); padding: 0 0 40px; scroll-margin-top: 208px; }
         .rooms-section-hd { max-width: 1240px; margin: 0 auto 28px; padding: 0 40px; }
         .rooms-section-title { font-size: 29px; font-weight: 300; color: rgb(28,28,28); margin: 0; }
+        .rooms-section-sub { display: none; }
+        @media (min-width: 769px) { .rooms-section-sub { display: block; font-size: 14px; color: rgb(112,112,112); margin: 8px 0 0; font-weight: 500; } }
         .rooms-grid { max-width: 1240px; margin: 0 auto; padding: 0 40px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px 28px; }
         .room-card { background: #fff; display: flex; flex-direction: column; }
         .room-card-img-wrap { position: relative; width: 100%; height: 300px; overflow: hidden; background: #e0e0e0; border-radius: 4px; }
@@ -877,6 +879,7 @@
     <section class="rooms-section" id="rooms-target">
         <div class="rooms-section-hd">
             <h2 class="rooms-section-title" data-i18n="rooms.title">객실 &amp; 스테이</h2>
+            <p class="rooms-section-sub">인스타 호텔 본점에서 소중한 추억을 만들어보세요.</p>
         </div>
         <div class="rooms-grid">
             <!-- 이코노미 룸 -->
