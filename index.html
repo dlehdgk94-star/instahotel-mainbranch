@@ -572,11 +572,24 @@
         .gallery-nav:hover{ background:#fff; }
         .gallery-prev{ left:-22px; }
         .gallery-next{ right:-22px; }
-        .gallery-counter{ position:fixed; bottom:24px; left:50%; transform:translateX(-50%); color:rgba(255,255,255,0.75); font-size:13px; font-family:'Barlow',sans-serif; display:flex; align-items:center; gap:20px; white-space:nowrap; }
+        .gallery-counter{ position:fixed; bottom:24px; left:50%; transform:translateX(-50%); color:rgba(255,255,255,0.75); font-size:13px; font-family:'Barlow',sans-serif; display:flex; flex-direction:column; align-items:center; gap:10px; }
+        .rg-top{ display:flex; align-items:center; gap:20px; white-space:nowrap; }
         .rg-sep{ color:rgba(255,255,255,0.35); }
         .rg-title{ color:rgba(255,255,255,0.9); font-weight:500; }
         .rg-detail-btn{ background:none; border:none; color:rgba(255,255,255,0.75); font-size:13px; cursor:pointer; text-decoration:underline; text-underline-offset:3px; padding:0; font-family:inherit; }
         .rg-detail-btn:hover{ color:#fff; }
+        @media (max-width:768px){
+            .gallery-overlay{ flex-direction:column; justify-content:center; }
+            .gallery-stage{ display:flex; width:100%; }
+            .gallery-track{ display:flex; width:100%; }
+            .gallery-slide{ width:100%; }
+            .gallery-slide.g-active{ display:flex; width:100%; }
+            .gallery-slide img{ width:100vw; max-width:100vw; max-height:65vh; }
+            .gallery-prev{ left:8px; }
+            .gallery-next{ right:8px; }
+            .gallery-counter{ position:relative; bottom:auto; left:auto; transform:none; margin-top:24px; text-align:center; }
+            .rg-detail-btn{ background:rgba(28,28,28,0.88); border-radius:24px; padding:12px 32px; text-decoration:none; color:#fff; font-size:14px; }
+        }
 
         /* ── 객실 팝업 모달 ── */
         .modal-overlay{ position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.75); z-index:9000; display:none; justify-content:center; align-items:center; padding:20px; }
@@ -3510,9 +3523,11 @@
             });
             track.style.transform = '';
             document.getElementById('roomGalleryCounter').innerHTML =
-                '<span>' + (_rgIdx + 1) + ' / ' + _rgImages.length + '</span>' +
-                '<span class="rg-sep">|</span>' +
-                '<span class="rg-title">' + _rgRoomTitle + '</span>' +
+                '<div class="rg-top">' +
+                    '<span>' + (_rgIdx + 1) + ' / ' + _rgImages.length + '</span>' +
+                    '<span class="rg-sep">|</span>' +
+                    '<span class="rg-title">' + _rgRoomTitle + '</span>' +
+                '</div>' +
                 '<button class="rg-detail-btn" onclick="closeRoomGallery();openRoomModal(\'' + _rgRoomId + '\')">객실 세부 정보 보기</button>';
         }
 
