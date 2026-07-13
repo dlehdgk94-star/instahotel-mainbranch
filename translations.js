@@ -35,7 +35,7 @@ const translations = {
     "rooms.title": "객실 & 스테이",
     // 객실카드
     "room.detail": "자세히 보기",
-    "room.book": "요금 조회",
+    "room.book": "예약하기",
     "room.notice": "공휴일·성수기 요금 별도 적용",
     "room.price_note": "실제 청구 금액은 결제 시점 환율에 따라 달라질 수 있습니다",
     // 객실명
