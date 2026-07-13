@@ -858,6 +858,11 @@
 /* ── 데스크탑에서 모바일 전용 주입 요소 숨김 ── */
 @media (min-width: 769px) {
     #mob-sticky-top, #mob-sub-bar, #mob-book-bar, #mob-sticky-spacer { display: none !important; }
+
+    /* 예약바 버튼: 결제하기 + 색상 변경 */
+    .search-btn { background-color: rgb(58,154,180) !important; font-size: 0 !important; }
+    .search-btn:hover { background-color: rgb(44,132,156) !important; }
+    .search-btn::after { content: '결제하기'; font-size: 12px; font-weight: 600; font-family: 'Barlow', sans-serif; }
 }
 
 /* ── 480px 이하 (소형 폰) ── */
