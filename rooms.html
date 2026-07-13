@@ -892,6 +892,14 @@
                 const target=document.querySelector(location.hash);
                 if(target){ setTimeout(function(){ target.scrollIntoView({behavior:'smooth',block:'center'}); }, 300); }
             }
+            document.querySelectorAll('.room-card-img-wrap').forEach(function(wrap) {
+                wrap.style.cursor = 'pointer';
+                wrap.addEventListener('click', function(e) {
+                    if (!e.target.closest('.room-card-expand')) {
+                        openGallery(wrap.closest('.room-card').dataset.roomId);
+                    }
+                });
+            });
         });
 
         /* ── 팝업 모달 데이터 ── */

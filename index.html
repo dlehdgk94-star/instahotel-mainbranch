@@ -2836,6 +2836,14 @@
         window.addEventListener('DOMContentLoaded', () => {
             renderCalendar();
             updateDateUI();
+            document.querySelectorAll('.room-card-img-wrap').forEach(function(wrap) {
+                wrap.style.cursor = 'pointer';
+                wrap.addEventListener('click', function(e) {
+                    if (!e.target.closest('.room-card-expand')) {
+                        openRoomGallery(wrap.closest('.room-card').dataset.roomId);
+                    }
+                });
+            });
         });
 
         // 투숙객 증감 로직
