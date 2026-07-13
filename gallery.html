@@ -684,7 +684,15 @@
         }
 
         function syncGalleryLang() {
-            renderGrid();
+            // 그리드 재생성 없이 라벨 텍스트만 업데이트 (깜빡임 방지)
+            document.querySelectorAll('.gal-item').forEach(function(div) {
+                var idx = parseInt(div.dataset.idx);
+                if (isNaN(idx) || !GALLERY_ITEMS[idx]) return;
+                var labelEl = div.querySelector('.gal-item-label');
+                if (!labelEl) return;
+                var labelKey = LABEL_KEY_MAP[GALLERY_ITEMS[idx].label];
+                labelEl.textContent = (labelKey && typeof t === 'function') ? t(labelKey) : GALLERY_ITEMS[idx].label;
+            });
             filterGallery(_currentFilter);
         }
 
