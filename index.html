@@ -156,15 +156,36 @@
             #booking-header .booking-item:nth-child(1) .booking-value { white-space: nowrap; }
             #booking-header #checkin-date-text, #booking-header #checkout-date-text { white-space: nowrap; }
             #booking-header .booking-item:nth-child(2) { flex: 1 1 0; min-width: 0; padding-left: 60px; padding-right: 60px; }
-            #booking-header .booking-item:nth-child(3) { flex: 1 1 0; min-width: 0; padding-right: 0; }
+            #booking-header .booking-item:nth-child(3) { flex: 1 1 0; min-width: 0; padding-left: 50px; padding-right: 0; }
             #booking-header .booking-item:last-child   { flex: 0 0 auto; padding: 0 0 0 16px; }
-            #booking-header .search-btn { width: 67px; height: 28px; font-size: 11px; border-radius: 15px; }
+            #booking-header .search-btn { width: 74px; height: 31px; font-size: 12px; border-radius: 17px; }
             #booking-header #guest-booking-item .booking-value,
             #booking-header .booking-item:nth-child(3) .booking-value { width: auto; min-width: 0; }
             .intro-section          { order: 6; }
             .facilities-section     { order: 7; }
             .location-section       { order: 8; }
             .footer-section         { order: 9; }
+
+            /* 예약하기 클릭 시 카드 아래에 고정 */
+            #booking-header.booking-bar-pinned {
+                position: fixed !important;
+                left: 0 !important;
+                right: 0 !important;
+                order: unset;
+                background: transparent !important;
+                box-shadow: none !important;
+                border: none !important;
+                transition: top 0.05s;
+            }
+            #booking-header.booking-bar-pinned .booking-bar {
+                background: #fff;
+                box-shadow: 0 4px 24px rgba(0,0,0,0.13);
+            }
+            #booking-header.booking-bar-pinned .booking-dropdown {
+                top: auto;
+                bottom: calc(100% + 20px);
+                animation: fadeInDown 0.2s ease-out;
+            }
         }
 
         /* 예약 바 */
@@ -246,6 +267,7 @@
         .dropdown-close { position: absolute; top: 20px; right: 20px; font-size: 16px; cursor: pointer; color: rgb(112,112,112); }
         .dropdown-close:hover { color: rgb(28, 28, 28); }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         /* 달력 팝업 동적 스타일 */
         .calendar-dropdown { width: 750px; left: -20px; }
@@ -340,7 +362,7 @@
 
         /* 기타 섹션 (기존 코드 유지) */
         .facilities-section { padding: 40px 40px; background-color: #fff; }
-        .fac-main-title { text-align: center; font-size: 40px; font-weight: 300; margin-bottom: 40px; color: rgb(28, 28, 28); letter-spacing: -1px; }
+        .fac-main-title { text-align: center; font-size: 28px; font-weight: 300; margin-bottom: 40px; color: rgb(28, 28, 28); letter-spacing: -1px; }
         .fac-tabs { margin-bottom: 25px; }
         .fac-tabs ul { display: flex; justify-content: center; gap: 40px; list-style: none; border-bottom: 1px solid #e0e0e0; }
         .fac-tabs li { font-size: 15px; font-weight: 700; color: rgb(112,112,112); padding-bottom: 15px; cursor: pointer; position: relative; }
@@ -886,7 +908,6 @@
     </section>
 
     <section class="intro-section">
-        <p class="intro-welcome" data-i18n="intro.welcome">인스타 호텔 본점에서 소중한 추억을 만들어보세요.</p>
         <h2 class="intro-title" data-i18n="intro.title">수원에서 만나는 감각적인 호텔 인스타 본점</h2>
         <p class="intro-desc">
             <span data-i18n="intro.desc.1">전통의 숨결과 현대적 에너지가 공존하는 도시 수원. 그 중심인 영통에 자리한 INSTA HOTEL은 단순한 숙박을 넘어, 머무름 자체가 특별한 경험이 되는 공간을 제안합니다.</span><span class="intro-more-dots">…</span><button class="intro-more-btn" data-i18n="intro.more" onclick="document.querySelector('.intro-desc-more').style.display='inline';document.querySelector('.intro-more-dots').style.display='none';this.style.display='none'">더보기</button><span class="intro-desc-more">
@@ -2916,6 +2937,62 @@
                     actions.appendChild(clone);
                 }
             });
+
+            // 데스크탑: 예약하기 클릭 시 예약바를 카드 바로 아래로 이동
+            var pinnedCard = null;
+
+            function updatePinnedBarPos() {
+                if (!pinnedCard) return;
+                var bar = document.getElementById('booking-header');
+                var rect = pinnedCard.getBoundingClientRect();
+                bar.style.top = rect.bottom + 'px';
+            }
+
+            function unpinBookingBar() {
+                var bar = document.getElementById('booking-header');
+                bar.classList.remove('booking-bar-pinned');
+                bar.style.top = '';
+                pinnedCard = null;
+            }
+
+            document.querySelectorAll('.room-card-title-row .room-card-book').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    if (window.innerWidth < 769) return;
+                    var card = btn.closest('.room-card');
+                    var bar = document.getElementById('booking-header');
+                    var barHeight = bar.offsetHeight;
+
+                    // 같은 카드 두 번 클릭 시 해제
+                    if (pinnedCard === card) { unpinBookingBar(); return; }
+
+                    pinnedCard = card;
+
+                    // 카드 바닥이 뷰포트의 (height - barHeight) 위치에 오도록 스크롤
+                    var cardRect = card.getBoundingClientRect();
+                    var cardAbsBottom = window.scrollY + cardRect.bottom;
+                    var targetScroll = cardAbsBottom - (window.innerHeight - barHeight);
+                    targetScroll = Math.max(0, targetScroll);
+
+                    window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+
+                    setTimeout(function() {
+                        var newRect = card.getBoundingClientRect();
+                        bar.classList.add('booking-bar-pinned');
+                        bar.style.top = newRect.bottom + 'px';
+                    }, 380);
+                });
+            });
+
+            // 스크롤 시 위치 업데이트
+            window.addEventListener('scroll', updatePinnedBarPos);
+
+            // 예약바·예약하기 버튼 외 클릭 시 해제
+            document.addEventListener('click', function(e) {
+                if (window.innerWidth < 769 || !pinnedCard) return;
+                if (!e.target.closest('#booking-header') && !e.target.closest('.room-card-book')) {
+                    unpinBookingBar();
+                }
+            }, true);
         });
 
         // 투숙객 증감 로직
