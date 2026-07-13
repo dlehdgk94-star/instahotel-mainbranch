@@ -34,8 +34,8 @@
     cursor: pointer;\
 }\
 .taxi-btn-icon {\
-    width: 56px;\
-    height: 56px;\
+    width: 44px;\
+    height: 44px;\
     display: flex;\
     align-items: center;\
     justify-content: center;\
