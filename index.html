@@ -639,6 +639,8 @@
         .rg-title{ color:rgba(255,255,255,0.9); font-weight:500; }
         .rg-detail-btn{ background:none; border:none; color:rgba(255,255,255,0.75); font-size:13px; cursor:pointer; text-decoration:underline; text-underline-offset:3px; padding:0; font-family:inherit; }
         .rg-detail-btn:hover{ color:#fff; }
+        .rg-book-btn{ background:rgb(58,154,180); color:#fff; border:none; border-radius:15px; padding:6px 14px; font-size:11px; font-weight:600; cursor:pointer; font-family:inherit; transition:background 0.2s; }
+        .rg-book-btn:hover{ background:rgb(44,132,156); }
         @media (max-width:768px){
             .gallery-overlay{ flex-direction:column; justify-content:center; }
             .gallery-stage{ display:flex; width:100%; }
@@ -2685,6 +2687,18 @@
 
         function openBookingCalendar(roomId, e) {
             if (e) e.stopPropagation();
+            // 다른 객실 선택 시 날짜·요금 초기화
+            if (roomId && roomId !== selectedRoomId) {
+                checkinDate = null;
+                checkoutDate = null;
+                datesUserSelected = false;
+                _datesExplicitlySet = false;
+                updateDateUI();
+                renderCalendar();
+                var minPriceEl = document.getElementById('min-price-text');
+                if (minPriceEl) minPriceEl.textContent = '최저 요금선택';
+                document.getElementById('pricePopup').classList.remove('active');
+            }
             if (roomId) selectedRoomId = roomId;
             if (window.innerWidth <= 768) {
                 var panel = document.getElementById('mob-book-panel');
@@ -2940,61 +2954,74 @@
             });
 
             // 데스크탑: 예약하기 클릭 시 예약바를 카드 바로 아래로 이동
-            var pinnedCard = null;
-
-            function updatePinnedBarPos() {
-                if (!pinnedCard) return;
-                var bar = document.getElementById('booking-header');
-                var rect = pinnedCard.getBoundingClientRect();
-                bar.style.top = rect.bottom + 'px';
-            }
-
-            function unpinBookingBar() {
-                var bar = document.getElementById('booking-header');
-                bar.classList.remove('booking-bar-pinned');
-                bar.style.top = '';
-                pinnedCard = null;
-            }
-
             document.querySelectorAll('.room-card-title-row .room-card-book').forEach(function(btn) {
                 btn.addEventListener('click', function() {
                     if (window.innerWidth < 769) return;
                     var card = btn.closest('.room-card');
-                    var bar = document.getElementById('booking-header');
-                    var barHeight = bar.offsetHeight;
-
-                    // 같은 카드 두 번 클릭 시 해제
-                    if (pinnedCard === card) { unpinBookingBar(); return; }
-
-                    pinnedCard = card;
-
-                    // 카드 바닥이 뷰포트의 (height - barHeight) 위치에 오도록 스크롤
-                    var cardRect = card.getBoundingClientRect();
-                    var cardAbsBottom = window.scrollY + cardRect.bottom;
-                    var targetScroll = cardAbsBottom - (window.innerHeight - barHeight);
-                    targetScroll = Math.max(0, targetScroll);
-
-                    window.scrollTo({ top: targetScroll, behavior: 'smooth' });
-
-                    setTimeout(function() {
-                        var newRect = card.getBoundingClientRect();
-                        bar.classList.add('booking-bar-pinned');
-                        bar.style.top = newRect.bottom + 'px';
-                    }, 380);
+                    if (window._pinnedCard === card) { unpinBookingBar(); return; }
+                    pinBookingBarToCard(card, card.dataset.roomId);
                 });
             });
 
             // 스크롤 시 위치 업데이트
-            window.addEventListener('scroll', updatePinnedBarPos);
+            window.addEventListener('scroll', function() {
+                if (!window._pinnedCard) return;
+                var bar = document.getElementById('booking-header');
+                var rect = window._pinnedCard.getBoundingClientRect();
+                bar.style.top = rect.bottom + 'px';
+            });
 
             // 예약바·예약하기 버튼 외 클릭 시 해제
             document.addEventListener('click', function(e) {
-                if (window.innerWidth < 769 || !pinnedCard) return;
-                if (!e.target.closest('#booking-header') && !e.target.closest('.room-card-book')) {
+                if (window.innerWidth < 769 || !window._pinnedCard) return;
+                if (!e.target.closest('#booking-header') && !e.target.closest('.room-card-book') && !e.target.closest('.rg-book-btn')) {
                     unpinBookingBar();
                 }
             }, true);
         });
+
+        // 예약바 핀 전역 함수
+        window._pinnedCard = null;
+        window._bookingPinnedRoomId = null;
+
+        function unpinBookingBar() {
+            var bar = document.getElementById('booking-header');
+            bar.classList.remove('booking-bar-pinned');
+            bar.style.top = '';
+            window._pinnedCard = null;
+            window._bookingPinnedRoomId = null;
+            // 열려 있는 드롭다운 모두 닫기
+            ['calendarPopup','guestPopup','pricePopup'].forEach(function(id){
+                var el = document.getElementById(id);
+                if (el) el.classList.remove('active');
+            });
+        }
+
+        function pinBookingBarToCard(card, roomId, afterPinCallback) {
+            if (window.innerWidth < 769) return;
+            var bar = document.getElementById('booking-header');
+            var barHeight = bar.offsetHeight;
+            window._pinnedCard = card;
+            window._bookingPinnedRoomId = roomId || card.dataset.roomId || null;
+            var cardRect = card.getBoundingClientRect();
+            var cardAbsBottom = window.scrollY + cardRect.bottom;
+            var targetScroll = Math.max(0, cardAbsBottom - (window.innerHeight - barHeight));
+            window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+            setTimeout(function() {
+                var newRect = card.getBoundingClientRect();
+                bar.classList.add('booking-bar-pinned');
+                bar.style.top = newRect.bottom + 'px';
+                if (afterPinCallback) afterPinCallback();
+            }, 380);
+        }
+
+        function pinBookingBarToRoom(roomId, openCalendar) {
+            var card = document.querySelector('.room-card[data-room-id="' + roomId + '"]');
+            if (!card) return;
+            pinBookingBarToCard(card, roomId, openCalendar ? function() {
+                openBookingCalendar(roomId, null);
+            } : null);
+        }
 
         // 투숙객 증감 로직
         let guests = { room: 1, adult: 1, child: 0 };
@@ -3032,7 +3059,9 @@
             var listEl=document.getElementById('pricePopupList'); if(!listEl) return;
             var nights=Math.round((checkoutDate-checkinDate)/86400000);
             var roomCount=guests?guests.room:1, adultCount=guests?guests.adult:1;
-            listEl.innerHTML=ROOM_ORDER_I.map(function(id){
+            // 특정 객실 카드에서 예약하기를 클릭한 경우 해당 객실만 표시
+            var roomIds = window._bookingPinnedRoomId ? [window._bookingPinnedRoomId] : ROOM_ORDER_I;
+            listEl.innerHTML=roomIds.map(function(id){
                 var pt=ROOM_PRICE_TABLE_I[id]; var title=getRoomName(id);
                 var available=pt&&adultCount<=pt.maxGuests*roomCount;
                 var total=0; for(var i=0;i<nights;i++){ var nd=new Date(checkinDate); nd.setDate(nd.getDate()+i); total+=getNightRateI(id,nd); } total*=roomCount;
@@ -3648,6 +3677,7 @@
                     '<span>' + (_rgIdx + 1) + ' / ' + _rgImages.length + '</span>' +
                     '<span class="rg-sep">|</span>' +
                     '<span class="rg-title">' + _rgRoomTitle + '</span>' +
+                    '<button class="rg-book-btn" onclick="closeRoomGallery();pinBookingBarToRoom(\'' + _rgRoomId + '\',true)">예약하기</button>' +
                 '</div>' +
                 '<button class="rg-detail-btn" onclick="closeRoomGallery();openRoomModal(\'' + _rgRoomId + '\')">객실 세부 정보 보기</button>';
         }
