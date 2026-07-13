@@ -234,7 +234,7 @@ const translations = {
     "gal.label.everland": "에버랜드",
     "gal.label.caribbean": "케리비안베이",
     "gal.label.lake_park": "광교호수공원",
-    "gal.label.folk_village": "민속촌",
+    "gal.label.folk_village": "한국민속촌",
     "gal.label.arboretum": "영흥수목원",
     "gal.label.starfield": "수원 스타필드",
     "gal.label.convenience": "편의점",
