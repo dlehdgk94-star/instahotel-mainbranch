@@ -620,8 +620,9 @@
         /* ── 갤러리 라이트박스 ── */
         .gallery-overlay{ position:fixed; inset:0; background:rgba(18,18,18,0.96); z-index:10000; display:none; align-items:center; justify-content:center; }
         .gallery-overlay.open{ display:flex; }
-        .gallery-close{ position:fixed; top:18px; right:22px; background:rgba(255,255,255,0.92); border:none; border-radius:50%; color:rgb(28,28,28); width:40px; height:40px; font-size:16px; cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 8px rgba(0,0,0,0.4); z-index:3; }
+        .gallery-close{ position:absolute; top:0; right:calc(-40px - 1cm); background:rgba(255,255,255,0.92); border:none; border-radius:50%; color:rgb(28,28,28); width:40px; height:40px; font-size:16px; cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 8px rgba(0,0,0,0.4); z-index:3; }
         .gallery-close:hover{ background:#fff; }
+        @media (max-width:768px){ .gallery-close{ position:fixed; top:14px; right:14px; } }
         .gallery-stage{ position:relative; display:inline-flex; align-items:center; justify-content:center; }
         .gallery-track{ display:inline-flex; align-items:center; justify-content:center; }
         .gallery-slide{ display:none; align-items:center; justify-content:center; }
@@ -3701,8 +3702,8 @@
     <script src="translations.js?v=20260710a"></script>
     <!-- 갤러리 라이트박스 -->
     <div class="gallery-overlay" id="roomGalleryOverlay" onclick="handleRoomGalleryOverlayClick(event)">
-        <button class="gallery-close" onclick="closeRoomGallery()"><i class="fa-solid fa-xmark"></i></button>
         <div class="gallery-stage" id="roomGalleryStage">
+            <button class="gallery-close" onclick="closeRoomGallery()"><i class="fa-solid fa-xmark"></i></button>
             <div class="gallery-track" id="roomGalleryTrack"></div>
             <button class="gallery-nav gallery-prev" onclick="roomGalleryNav(-1)"><i class="fa-solid fa-chevron-left"></i></button>
             <button class="gallery-nav gallery-next" onclick="roomGalleryNav(1)"><i class="fa-solid fa-chevron-right"></i></button>
