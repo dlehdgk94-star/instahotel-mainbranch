@@ -6,12 +6,12 @@
     var html = '\
 <div id="taxi-btns-wrap">\
     <a id="taxi-btn-kakao" class="taxi-btn-item" href="https://t.kakao.com" target="_blank" rel="noopener" aria-label="카카오T 택시">\
-        <span class="taxi-btn-label">카카오<br>T택시</span>\
-        <div class="taxi-btn-circle">' + kakaoSvg + '</div>\
+        <div class="taxi-btn-icon">' + kakaoSvg + '</div>\
+        <span class="taxi-btn-label">카카오 택시</span>\
     </a>\
     <a id="taxi-btn-uber" class="taxi-btn-item" href="https://www.uber.com/global/ko/cities/seoul/" target="_blank" rel="noopener" aria-label="우버">\
+        <div class="taxi-btn-icon">' + uberSvg + '</div>\
         <span class="taxi-btn-label">우버</span>\
-        <div class="taxi-btn-circle">' + uberSvg + '</div>\
     </a>\
 </div>\
 <style>\
@@ -33,6 +33,18 @@
     text-decoration: none;\
     cursor: pointer;\
 }\
+.taxi-btn-icon {\
+    width: 56px;\
+    height: 56px;\
+    display: flex;\
+    align-items: center;\
+    justify-content: center;\
+    overflow: hidden;\
+    transition: transform 0.2s;\
+    flex-shrink: 0;\
+}\
+.taxi-btn-item:hover .taxi-btn-icon { transform: scale(1.08); }\
+.taxi-btn-icon svg { width: 100%; height: 100%; display: block; }\
 .taxi-btn-label {\
     font-size: 13px;\
     font-weight: 700;\
@@ -42,22 +54,8 @@
     user-select: none;\
     text-align: center;\
     line-height: 1.5;\
+    white-space: nowrap;\
 }\
-.taxi-btn-circle {\
-    width: 56px;\
-    height: 56px;\
-    border-radius: 50%;\
-    background: #fff;\
-    box-shadow: 0 4px 20px rgba(0,0,0,0.18);\
-    display: flex;\
-    align-items: center;\
-    justify-content: center;\
-    overflow: hidden;\
-    transition: transform 0.2s, box-shadow 0.2s;\
-    flex-shrink: 0;\
-}\
-.taxi-btn-item:hover .taxi-btn-circle { transform: scale(1.08); box-shadow: 0 6px 24px rgba(0,0,0,0.22); }\
-.taxi-btn-circle svg { width: 76%; height: 76%; display: block; }\
 @media (max-width: 768px) {\
     #taxi-btns-wrap { display: none; }\
 }\
