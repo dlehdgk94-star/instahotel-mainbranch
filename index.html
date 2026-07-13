@@ -612,8 +612,7 @@
         .modal-slider-btn:hover{ background:rgba(0,0,0,0.82); }
         .modal-slider-prev{ left:12px; }
         .modal-slider-next{ right:12px; }
-        .modal-dot{ width:7px; height:7px; border-radius:50%; background:rgba(255,255,255,0.42); cursor:pointer; transition:background 0.2s; }
-        .modal-dot.active{ background:#fff; }
+        .modal-slide-counter{ color:rgba(255,255,255,0.9); font-size:13px; font-weight:500; font-family:'Barlow',sans-serif; }
         .modal-body{ padding:18px 20px 24px; background:#fff; }
         .modal-top-row{ display:flex; justify-content:space-between; align-items:flex-start; gap:14px; margin-bottom:5px; }
         .modal-room-title{ font-size:18px; font-weight:700; color:rgb(28,28,28); font-family:'Barlow',sans-serif; line-height:1.3; }
@@ -3353,9 +3352,8 @@
             document.querySelectorAll('.modal-slide').forEach(function(s, i) {
                 s.classList.toggle('m-active', i === _mSlideIdx);
             });
-            document.querySelectorAll('#modalNavDots .modal-dot').forEach(function(d, i) {
-                d.classList.toggle('active', i === _mSlideIdx);
-            });
+            var counterEl = document.getElementById('modalSlideCounter');
+            if (counterEl) counterEl.textContent = (_mSlideIdx + 1) + ' / ' + _mSlideCount;
         }
 
         const FAC_IMG_MAP = {
@@ -3429,9 +3427,7 @@
             document.getElementById('modalBookBtn').onclick = function() { closeRoomModal(); openBookingCalendar(roomId); };
 
             var track = document.getElementById('modalSliderTrack');
-            var dotsEl = document.getElementById('modalNavDots');
             track.innerHTML = '';
-            dotsEl.innerHTML = '';
             _mSlideIdx = 0;
             _mSlideCount = data.images.length;
             data.images.forEach(function(src, i) {
@@ -3442,10 +3438,6 @@
                 img.onerror = function() { slide.innerHTML = '<div class="modal-slide-placeholder"></div>'; };
                 slide.appendChild(img);
                 track.appendChild(slide);
-                var dot = document.createElement('span');
-                dot.className = 'modal-dot' + (i === 0 ? ' active' : '');
-                dot.onclick = (function(idx) { return function() { _mSlideIdx = idx; _mSetTrack(true); }; })(i);
-                dotsEl.appendChild(dot);
             });
             var hasMultiple = data.images.length > 1;
             document.getElementById('modalSliderNav').style.display = hasMultiple ? 'flex' : 'none';
@@ -3602,7 +3594,7 @@
                 <button class="modal-slider-btn modal-slider-prev" id="modalPrevBtn" onclick="modalChangeSlide(-1)"><i class="fa-solid fa-chevron-left"></i></button>
                 <button class="modal-slider-btn modal-slider-next" id="modalNextBtn" onclick="modalChangeSlide(1)"><i class="fa-solid fa-chevron-right"></i></button>
                 <div class="modal-slider-nav" id="modalSliderNav">
-                    <div id="modalNavDots" style="display:flex;gap:7px;align-items:center;"></div>
+                    <span id="modalSlideCounter" class="modal-slide-counter"></span>
                 </div>
             </div>
             <div class="modal-body">
