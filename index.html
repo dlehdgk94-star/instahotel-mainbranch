@@ -595,8 +595,10 @@
         .modal-slide img{ width:100%; height:100%; object-fit:cover; display:block; }
         .modal-slide-placeholder{ width:100%; height:100%; background:#d5d5d5; }
         .modal-slider-nav{ position:absolute; bottom:14px; left:50%; transform:translateX(-50%); display:flex; align-items:center; gap:9px; }
-        .modal-slider-btn{ width:28px; height:28px; border-radius:50%; background:rgba(20,20,20,0.58); border:none; color:#fff; font-size:10px; cursor:pointer; display:flex; align-items:center; justify-content:center; }
+        .modal-slider-btn{ width:32px; height:32px; border-radius:50%; background:rgba(20,20,20,0.58); border:none; color:#fff; font-size:12px; cursor:pointer; display:flex; align-items:center; justify-content:center; position:absolute; top:50%; transform:translateY(-50%); z-index:2; }
         .modal-slider-btn:hover{ background:rgba(0,0,0,0.82); }
+        .modal-slider-prev{ left:12px; }
+        .modal-slider-next{ right:12px; }
         .modal-dot{ width:7px; height:7px; border-radius:50%; background:rgba(255,255,255,0.42); cursor:pointer; transition:background 0.2s; }
         .modal-dot.active{ background:#fff; }
         .modal-body{ padding:18px 20px 24px; background:#fff; }
@@ -3432,7 +3434,10 @@
                 dot.onclick = (function(idx) { return function() { _mSlideIdx = idx; _mSetTrack(true); }; })(i);
                 dotsEl.appendChild(dot);
             });
-            document.getElementById('modalSliderNav').style.display = data.images.length > 1 ? 'flex' : 'none';
+            var hasMultiple = data.images.length > 1;
+            document.getElementById('modalSliderNav').style.display = hasMultiple ? 'flex' : 'none';
+            document.getElementById('modalPrevBtn').style.display = hasMultiple ? 'flex' : 'none';
+            document.getElementById('modalNextBtn').style.display = hasMultiple ? 'flex' : 'none';
 
             var grid = document.getElementById('modalAmenityGrid');
             grid.innerHTML = '';
@@ -3579,10 +3584,10 @@
             </div>
             <div class="modal-slider-outer" id="modalSliderOuter">
                 <div class="modal-slider-track" id="modalSliderTrack"></div>
+                <button class="modal-slider-btn modal-slider-prev" id="modalPrevBtn" onclick="modalChangeSlide(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+                <button class="modal-slider-btn modal-slider-next" id="modalNextBtn" onclick="modalChangeSlide(1)"><i class="fa-solid fa-chevron-right"></i></button>
                 <div class="modal-slider-nav" id="modalSliderNav">
-                    <button class="modal-slider-btn" onclick="modalChangeSlide(-1)"><i class="fa-solid fa-chevron-left"></i></button>
                     <div id="modalNavDots" style="display:flex;gap:7px;align-items:center;"></div>
-                    <button class="modal-slider-btn" onclick="modalChangeSlide(1)"><i class="fa-solid fa-chevron-right"></i></button>
                 </div>
             </div>
             <div class="modal-body">
