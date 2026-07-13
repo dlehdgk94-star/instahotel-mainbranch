@@ -558,20 +558,21 @@
         .lang-option.active{ color:rgb(28,28,28); font-weight:700; }
 
         /* ── 갤러리 라이트박스 ── */
-        .gallery-overlay{ position:fixed; inset:0; background:rgba(18,18,18,0.96); z-index:10000; display:none; flex-direction:column; align-items:center; justify-content:center; gap:20px; }
+        .gallery-overlay{ position:fixed; inset:0; background:rgba(18,18,18,0.96); z-index:10000; display:none; align-items:center; justify-content:center; }
         .gallery-overlay.open{ display:flex; }
-        .gallery-close{ position:fixed; top:18px; right:22px; background:#fff; border:none; border-radius:5px; color:rgb(28,28,28); width:36px; height:36px; font-size:15px; cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 8px rgba(0,0,0,0.4); z-index:3; }
-        .gallery-close:hover{ background:#efefef; }
-        .gallery-stage{ position:relative; width:100%; overflow:hidden; flex-shrink:0; }
-        .gallery-track{ display:flex; gap:16px; will-change:transform; }
-        .gallery-slide{ flex-shrink:0; width:820px; min-width:820px; height:62vh; position:relative; opacity:0.5; transition:opacity 0.38s; }
-        .gallery-slide.g-active{ opacity:1; }
-        .gallery-slide img{ width:100%; height:100%; object-fit:contain; display:block; }
-        .gallery-nav{ position:absolute; top:50%; transform:translateY(-50%); background:rgba(255,255,255,0.9); border:none; border-radius:50%; color:rgb(28,28,28); width:42px; height:42px; font-size:16px; cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 10px rgba(0,0,0,0.35); z-index:2; }
+        .gallery-close{ position:fixed; top:18px; right:22px; background:rgba(255,255,255,0.92); border:none; border-radius:50%; color:rgb(28,28,28); width:40px; height:40px; font-size:16px; cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 8px rgba(0,0,0,0.4); z-index:3; }
+        .gallery-close:hover{ background:#fff; }
+        .gallery-stage{ position:relative; width:100%; height:100%; display:flex; align-items:center; justify-content:center; }
+        .gallery-track{ display:flex; align-items:center; justify-content:center; width:100%; height:100%; }
+        .gallery-slide{ display:none; align-items:center; justify-content:center; }
+        .gallery-slide.g-active{ display:flex; animation:gFadeIn 0.22s ease; }
+        @keyframes gFadeIn{ from{opacity:0;} to{opacity:1;} }
+        .gallery-slide img{ max-width:88vw; max-height:82vh; object-fit:contain; display:block; }
+        .gallery-nav{ position:fixed; top:50%; transform:translateY(-50%); background:rgba(255,255,255,0.9); border:none; border-radius:50%; color:rgb(28,28,28); width:44px; height:44px; font-size:18px; cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 10px rgba(0,0,0,0.35); z-index:2; }
         .gallery-nav:hover{ background:#fff; }
-        .gallery-prev{ left:120px; }
-        .gallery-next{ right:120px; }
-        .gallery-counter{ color:rgba(255,255,255,0.7); font-size:13px; font-family:'Barlow',sans-serif; }
+        .gallery-prev{ left:20px; }
+        .gallery-next{ right:20px; }
+        .gallery-counter{ position:fixed; bottom:24px; left:50%; transform:translateX(-50%); color:rgba(255,255,255,0.75); font-size:13px; font-family:'Barlow',sans-serif; }
 
         /* ── 객실 팝업 모달 ── */
         .modal-overlay{ position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.75); z-index:9000; display:none; justify-content:center; align-items:center; padding:20px; }
@@ -3501,16 +3502,11 @@
         var RG_GAP = 16;
 
         function _setRoomGalleryTrack(animate) {
-            var slideW = Math.min(RG_SLIDE_W, window.innerWidth);
             var track = document.getElementById('roomGalleryTrack');
-            var peek = (window.innerWidth - slideW) / 2;
             track.querySelectorAll('.gallery-slide').forEach(function(s, i) {
-                s.style.width = slideW + 'px';
-                s.style.minWidth = slideW + 'px';
                 s.classList.toggle('g-active', i === _rgIdx);
             });
-            track.style.transition = animate ? 'transform 0.38s ease' : 'none';
-            track.style.transform = 'translateX(' + (peek - _rgIdx * (slideW + RG_GAP)) + 'px)';
+            track.style.transform = '';
             document.getElementById('roomGalleryCounter').textContent = (_rgIdx + 1) + ' / ' + _rgImages.length;
         }
 
