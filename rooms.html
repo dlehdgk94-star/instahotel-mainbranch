@@ -1329,6 +1329,7 @@
         var _rgIdx = 0;
         var _rgRoomId = '';
         var _rgRoomTitle = '';
+        var _rgHistoryPushed = false;
 
         function _setRoomGalleryTrack(animate) {
             var track = document.getElementById('roomGalleryTrack');
@@ -1366,6 +1367,8 @@
             document.getElementById('roomGalleryOverlay').classList.add('open');
             document.body.style.overflow = 'hidden';
             _setRoomGalleryTrack(false);
+            history.pushState({ rgOpen: true }, '');
+            _rgHistoryPushed = true;
         }
 
         function roomGalleryNav(dir) {
@@ -1378,11 +1381,23 @@
         function closeRoomGallery() {
             document.getElementById('roomGalleryOverlay').classList.remove('open');
             document.body.style.overflow = '';
+            if (_rgHistoryPushed) {
+                _rgHistoryPushed = false;
+                history.back();
+            }
         }
 
         function handleRoomGalleryOverlayClick(e) {
             if (e.target === document.getElementById('roomGalleryOverlay')) closeRoomGallery();
         }
+
+        window.addEventListener('popstate', function(e) {
+            if (document.getElementById('roomGalleryOverlay').classList.contains('open')) {
+                _rgHistoryPushed = false;
+                document.getElementById('roomGalleryOverlay').classList.remove('open');
+                document.body.style.overflow = '';
+            }
+        });
 
         window.addEventListener('resize', function() {
             if (document.getElementById('roomGalleryOverlay').classList.contains('open')) _setRoomGalleryTrack(false);
