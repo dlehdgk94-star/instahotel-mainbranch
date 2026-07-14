@@ -74,16 +74,28 @@
     function openNav() {
         overlay.classList.add('open');
         document.body.style.overflow = 'hidden';
+        var taxiBtns = document.getElementById('taxi-btns-wrap');
+        if (taxiBtns) taxiBtns.style.display = 'none';
     }
     function closeNav() {
         overlay.classList.remove('open');
         document.body.style.overflow = '';
+        var taxiBtns = document.getElementById('taxi-btns-wrap');
+        if (taxiBtns) taxiBtns.style.display = '';
     }
 
     var isIndexPage = /index\.html$|\/insta-hotel-html\/?$|\/[^/]*$/.test(path) && !isSubfolder && !/rooms\.html|gallery\.html|nearby\.html|booking/.test(path);
 
     document.addEventListener('DOMContentLoaded', function () {
         document.body.appendChild(overlay);
+
+        // 현재 언어로 nav 항목 번역 적용 (translations.js가 먼저 실행된 경우 대비)
+        if (typeof currentLang !== 'undefined' && typeof t === 'function') {
+            overlay.querySelectorAll('[data-i18n]').forEach(function(el) {
+                var val = t(el.getAttribute('data-i18n'));
+                if (val) el.textContent = val;
+            });
+        }
 
         // index.html 외 모든 페이지: sticky 래퍼 + 서브헤더 + 예약하기 버튼 주입 (모바일 전용)
         if (!isIndexPage && window.innerWidth <= 768) {
