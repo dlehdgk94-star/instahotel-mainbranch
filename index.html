@@ -521,6 +521,7 @@
             .room-card-meta { grid-column: 1; grid-row: 2; align-self: auto; }
             .room-card-actions { grid-column: 1; grid-row: 3; display: flex; justify-content: space-between; align-items: center; padding-top: 10px; border-top: 1px solid #ececec; }
             .room-card-book-mobile { display: inline-flex !important; }
+            .rooms-section { scroll-margin-top: 60px; }
         }
 
         /* 호텔 투숙 방법 섹션 */
@@ -843,7 +844,7 @@
 
         <!-- 모바일 전용: 예약하기 트리거 버튼 -->
         <div id="mob-trigger-bar">
-            <button id="mob-book-trigger" onclick="toggleMobPanel(event)" data-i18n="mob.book_trigger">예약하기</button>
+            <button id="mob-book-trigger" onclick="document.getElementById('rooms-target').scrollIntoView({behavior:'smooth',block:'start'})" data-i18n="mob.book_trigger">예약하기</button>
         </div>
 
         <!-- 모바일 전용: 펼쳐지는 예약 패널 (sticky-wrapper 안에서 상단 펼침) -->
