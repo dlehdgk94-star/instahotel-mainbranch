@@ -31,7 +31,8 @@
     align-items: center;\
     gap: 5px;\
     text-decoration: none;\
-    cursor: pointer;\
+    cursor: default;\
+    pointer-events: none;\
 }\
 .taxi-btn-icon {\
     width: 44px;\
