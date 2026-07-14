@@ -839,7 +839,8 @@
             const nights = Math.round((checkoutDate - checkinDate) / 86400000);
             const roomCount = guests ? guests.room : 1;
             const adultCount = guests ? guests.adult : 1;
-            var roomIds = window._bookingPinnedRoomId ? [window._bookingPinnedRoomId] : (window.innerWidth <= 768 && selectedRoomId ? [selectedRoomId] : ROOM_ORDER);
+            var _mobRoom = selectedRoomId || _mobPreSelectedRoomId;
+            var roomIds = window._bookingPinnedRoomId ? [window._bookingPinnedRoomId] : (window.innerWidth <= 768 && _mobRoom ? [_mobRoom] : ROOM_ORDER);
             listEl.innerHTML = roomIds.map(function(id) {
                 const room = ROOM_DATA[id]; if (!room) return '';
                 const pt = ROOM_PRICE_TABLE[id];
@@ -991,6 +992,7 @@
                     var triggerBar = document.getElementById('mob-trigger-bar');
                     if (panel) panel.classList.remove('open');
                     if (triggerBar) triggerBar.style.display = '';
+                    _mobPreSelectedRoomId = null;
                     document.removeEventListener('pointerdown', _mobPanelCloseHandler);
                     _mobPanelCloseHandler = null;
                 }
@@ -1018,6 +1020,7 @@
         function updateGuest(type,dir){ guests[type]=Math.max(0,guests[type]+dir); if(guests.room<1) guests.room=1; if(guests.adult<1) guests.adult=1; document.getElementById('val-room').textContent=guests.room; document.getElementById('val-adult').textContent=guests.adult; var summary=typeof fmtGuestCount==='function'?fmtGuestCount(guests.room,guests.adult):guests.room+' 객실, '+guests.adult+' 성인'; document.getElementById('guest-summary-text').textContent=summary; updateRoomPrices(); syncMobPanel(); }
 
         let selectedRoomId = null;
+        var _mobPreSelectedRoomId = null;
         // 예약바 핀 전역 함수 (rooms.html용 - .sticky-wrapper 대상)
         window._pinnedCard = null;
         window._bookingPinnedRoomId = null;
@@ -1082,7 +1085,7 @@
                 if (minPriceEl) minPriceEl.textContent = '최저 요금';
                 document.getElementById('pricePopup').classList.remove('active');
             }
-            if (roomId) selectedRoomId = roomId;
+            if (roomId) { selectedRoomId = roomId; _mobPreSelectedRoomId = roomId; }
             if (window.innerWidth <= 768) {
                 setTimeout(function() {
                     var panel = document.getElementById('mob-book-panel');
