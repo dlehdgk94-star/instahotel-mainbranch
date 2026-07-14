@@ -3693,7 +3693,7 @@
                 '<div class="rg-top">' +
                     '<span>' + (_rgIdx + 1) + ' / ' + _rgImages.length + '</span>' +
                     '<span class="rg-sep">|</span>' +
-                    '<span class="rg-title">' + _rgRoomTitle + '</span>' +
+                    '<span class="rg-title">' + getRoomName(_rgRoomId) + '</span>' +
                     '<button class="rg-book-btn" onclick="closeRoomGallery();pinBookingBarToRoom(\'' + _rgRoomId + '\',true)">' + t('room.book') + '</button>' +
                 '</div>' +
                 '<button class="rg-detail-btn" onclick="closeRoomGallery();openRoomModal(\'' + _rgRoomId + '\')">' + t('rg.detail_btn') + '</button>';
