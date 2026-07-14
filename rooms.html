@@ -964,6 +964,18 @@
                     pp.textContent = (rn ? rn + ' · ' : '') + ts;
                 } else { pp.textContent = typeof t === 'function' ? t('booking.price_select') : '최저 요금선택'; }
             }
+            var cb = document.querySelector('.mob-panel-confirm');
+            if (cb) {
+                if (selectedRoomId) {
+                    cb.setAttribute('data-i18n', 'booking.btn.desktop');
+                    cb.textContent = typeof t === 'function' ? t('booking.btn.desktop') : '결제하기';
+                    cb.classList.add('room-selected');
+                } else {
+                    cb.setAttribute('data-i18n', 'mob.confirm');
+                    cb.textContent = typeof t === 'function' ? t('mob.confirm') : '예약하기';
+                    cb.classList.remove('room-selected');
+                }
+            }
         }
         var _mobPanelCloseHandler = null;
         function _registerMobPanelCloseHandler() {

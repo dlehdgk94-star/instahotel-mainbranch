@@ -3339,6 +3339,18 @@
                     pp.innerText = getRoomName(selectedRoomId) + ' · ' + fmtNightTotal(n, tot);
                 } else { pp.innerText = t('booking.price_select'); }
             }
+            var cb = document.querySelector('.mob-panel-confirm');
+            if (cb) {
+                if (selectedRoomId) {
+                    cb.setAttribute('data-i18n', 'booking.btn.desktop');
+                    cb.textContent = t('booking.btn.desktop');
+                    cb.classList.add('room-selected');
+                } else {
+                    cb.setAttribute('data-i18n', 'mob.confirm');
+                    cb.textContent = t('mob.confirm');
+                    cb.classList.remove('room-selected');
+                }
+            }
         }
         document.addEventListener('click', function(e) {
             var header = document.getElementById('booking-header');

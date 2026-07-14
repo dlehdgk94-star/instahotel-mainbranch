@@ -502,6 +502,8 @@
         -webkit-tap-highlight-color: transparent;
     }
     .mob-panel-confirm:active { opacity: 0.85; }
+    .mob-panel-confirm.room-selected { background: rgb(58,154,180); color: #fff; }
+    .mob-panel-confirm.room-selected:active { opacity: 0.85; }
 
     /* 기존 예약바 — 수직 스택 (이 블록은 이제 사용 안 함, 하단 .booking-item 스타일만 유지) */
     .booking-bar-unused {
