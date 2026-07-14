@@ -1082,7 +1082,7 @@
                 datesUserSelected = false; _datesExplicitlySet = false;
                 updateDateUI(); renderCalendar();
                 var minPriceEl = document.getElementById('min-price-text');
-                if (minPriceEl) minPriceEl.textContent = '최저 요금';
+                if (minPriceEl) minPriceEl.textContent = typeof t === 'function' ? t('booking.min_price') : '최저 요금';
                 document.getElementById('pricePopup').classList.remove('active');
             }
             if (roomId) { selectedRoomId = roomId; _mobPreSelectedRoomId = roomId; }
@@ -1453,10 +1453,10 @@
                 '<div class="rg-top">' +
                     '<span>' + (_rgIdx + 1) + ' / ' + _rgImages.length + '</span>' +
                     '<span class="rg-sep">|</span>' +
-                    '<span class="rg-title">' + _rgRoomTitle + '</span>' +
-                    '<button class="rg-book-btn" onclick="closeRoomGallery();pinBookingBarToRoom(\'' + _rgRoomId + '\',true)">예약하기</button>' +
+                    '<span class="rg-title">' + (typeof getRoomName === 'function' ? getRoomName(_rgRoomId) : _rgRoomTitle) + '</span>' +
+                    '<button class="rg-book-btn" onclick="closeRoomGallery();pinBookingBarToRoom(\'' + _rgRoomId + '\',true)">' + (typeof t === 'function' ? t('room.book') : '예약하기') + '</button>' +
                 '</div>' +
-                '<button class="rg-detail-btn" onclick="closeRoomGallery();openRoomModal(\'' + _rgRoomId + '\')">객실 세부 정보 보기</button>';
+                '<button class="rg-detail-btn" onclick="closeRoomGallery();openRoomModal(\'' + _rgRoomId + '\')">' + (typeof t === 'function' ? t('rg.detail_btn') : '객실 세부 정보 보기') + '</button>';
         }
 
         function openRoomGallery(roomId) {
