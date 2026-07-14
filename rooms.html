@@ -490,7 +490,7 @@
 
         <!-- 모바일 전용: 예약하기 트리거 바 -->
         <div id="mob-trigger-bar">
-            <button id="mob-book-trigger" onclick="toggleMobPanel(event)" data-i18n="booking.btn">예약하기</button>
+            <button id="mob-book-trigger" onclick="document.getElementById('rooms-list').scrollIntoView({behavior:'smooth',block:'start'})" data-i18n="booking.btn">예약하기</button>
         </div>
         <!-- 모바일 전용: 펼쳐지는 예약 패널 -->
         <div id="mob-book-panel">
