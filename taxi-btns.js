@@ -65,6 +65,7 @@
     flex-shrink: 0;\
 }\
 .taxi-btn-item:hover .taxi-btn-icon { transform: scale(1.08); }\
+#taxi-btn-coupang .taxi-btn-icon { border: 1.5px solid #c8c8c8; border-radius: 10px; }\
 .taxi-btn-icon svg { width: 100%; height: 100%; display: block; }\
 .taxi-btn-label {\
     font-size: 11px;\
