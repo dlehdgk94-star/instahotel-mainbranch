@@ -7,11 +7,11 @@
 <div id="taxi-btns-wrap">\
     <a id="taxi-btn-kakao" class="taxi-btn-item" href="https://t.kakao.com" target="_blank" rel="noopener" aria-label="카카오T 택시">\
         <div class="taxi-btn-icon">' + kakaoSvg + '</div>\
-        <span class="taxi-btn-label">카카오 택시</span>\
+        <span class="taxi-btn-label" data-i18n="taxi.kakao">' + (typeof t==='function'?t('taxi.kakao'):'카카오 택시') + '</span>\
     </a>\
     <a id="taxi-btn-uber" class="taxi-btn-item" href="https://www.uber.com/global/ko/cities/seoul/" target="_blank" rel="noopener" aria-label="우버">\
         <div class="taxi-btn-icon">' + uberSvg + '</div>\
-        <span class="taxi-btn-label">우버</span>\
+        <span class="taxi-btn-label" data-i18n="taxi.uber">' + (typeof t==='function'?t('taxi.uber'):'우버') + '</span>\
     </a>\
 </div>\
 <style>\
