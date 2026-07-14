@@ -85,6 +85,7 @@
     }
 
     var isIndexPage = /index\.html$|\/insta-hotel-html\/?$|\/[^/]*$/.test(path) && !isSubfolder && !/rooms\.html|gallery\.html|nearby\.html|booking/.test(path);
+    var isGalleryOrNearby = /gallery\.html$|nearby\.html$/.test(path);
 
     document.addEventListener('DOMContentLoaded', function () {
         document.body.appendChild(overlay);
@@ -97,8 +98,8 @@
             });
         }
 
-        // index.html 외 모든 페이지: sticky 래퍼 + 서브헤더 + 예약하기 버튼 주입 (모바일 전용)
-        if (!isIndexPage && window.innerWidth <= 768) {
+        // index.html 외 모든 페이지(갤러리/주변안내 제외): sticky 래퍼 + 서브헤더 + 예약하기 버튼 주입 (모바일 전용)
+        if (!isIndexPage && !isGalleryOrNearby && window.innerWidth <= 768) {
             // rooms.html 등 기존 sticky-wrapper를 모바일에서 JS로 직접 숨김
             var existingSticky = document.querySelector('.sticky-wrapper');
             if (existingSticky && window.innerWidth <= 768) {
