@@ -1027,7 +1027,7 @@
             if (window.innerWidth < 769) return;
             var bar = document.querySelector('.sticky-wrapper');
             if (!bar) return;
-            var barHeight = bar.offsetHeight;
+            var barHeight = bar.offsetHeight || 112;
             window._pinnedCard = card;
             window._bookingPinnedRoomId = roomId || card.dataset.roomId || null;
             var cardRect = card.getBoundingClientRect();
