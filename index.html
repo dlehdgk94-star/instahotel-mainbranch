@@ -150,17 +150,13 @@
             .hotel-ways-section     { order: 2; }
             .rooms-banner-section   { order: 3; }
             .rooms-section          { order: 4; }
-            #booking-header         { order: 5; position: static; box-shadow: none; background: rgb(244,244,244); border: none; }
-            #booking-header .booking-bar { max-width: 1240px; margin: 0 auto; padding: 0 30px; border: 1px solid #e5e5e5; }
-            #booking-header .booking-item:nth-child(1) { flex: 1 1 0; min-width: 0; }
+            #booking-header         { order: 5; position: static; box-shadow: none; background: rgb(244,244,244); border: none; display: none; }
+            #booking-header .booking-bar { max-width: 1240px; margin: 0 auto; padding: 0 30px; border: 1px solid #adadad; }
+            #booking-header .booking-item:nth-child(1) { flex: 0 0 62%; min-width: 0; border-right: 1px solid #adadad; }
             #booking-header .booking-item:nth-child(1) .booking-value { white-space: nowrap; }
             #booking-header #checkin-date-text, #booking-header #checkout-date-text { white-space: nowrap; }
-            #booking-header .booking-item:nth-child(2) { flex: 1 1 0; min-width: 0; padding-left: 60px; padding-right: 60px; }
-            #booking-header .booking-item:nth-child(3) { flex: 1 1 0; min-width: 0; padding-left: 50px; padding-right: 0; }
-            #booking-header .booking-item:last-child   { flex: 0 0 auto; padding: 0 0 0 16px; }
-            #booking-header .search-btn { width: 74px; height: 31px; font-size: 12px; border-radius: 17px; }
-            #booking-header #guest-booking-item .booking-value,
-            #booking-header .booking-item:nth-child(3) .booking-value { width: auto; min-width: 0; }
+            #booking-header .booking-item:nth-child(2) { flex: 1 1 0; min-width: 0; padding-left: 80px; }
+            #price-booking-item, #price-booking-item ~ .booking-item { display: none !important; }
             .intro-section          { order: 6; }
             .intro-welcome          { display: none; }
             .facilities-section     { order: 7; }
@@ -169,6 +165,7 @@
 
             /* 예약하기 클릭 시 카드 아래에 고정 */
             #booking-header.booking-bar-pinned {
+                display: block !important;
                 position: fixed !important;
                 left: 0 !important;
                 right: 0 !important;
@@ -2682,10 +2679,25 @@
         }
         function guestDone(e) {
             closeDropdowns(e);
-            setTimeout(function(){
-                populatePricePopup();
-                document.getElementById('pricePopup').classList.add('active');
-            }, 200);
+            if(checkinDate && checkoutDate) {
+                setTimeout(function(){ goToBooking(); }, 200);
+            }
+        }
+        function goToBooking() {
+            if (!checkinDate || !checkoutDate || !selectedRoomId) return;
+            var nights = Math.round((checkoutDate - checkinDate) / 86400000);
+            var roomCount = guests ? guests.room : 1;
+            var adultCount = guests ? guests.adult : 1;
+            var total = 0;
+            for (var i = 0; i < nights; i++) { var d = new Date(checkinDate); d.setDate(d.getDate()+i); total += getNightRateI(selectedRoomId, d); }
+            total *= roomCount;
+            var roomName = ROOM_NAMES_I[selectedRoomId] || selectedRoomId;
+            localStorage.setItem('instaHotelBooking', JSON.stringify({
+                roomId: selectedRoomId, roomName: roomName,
+                checkin: checkinDate.toISOString(), checkout: checkoutDate.toISOString(),
+                nights: nights, roomCount: roomCount, adultCount: adultCount, totalPrice: total
+            }));
+            window.location.href = 'booking.html';
         }
 
         function openBookingCalendar(roomId, e) {
@@ -2963,7 +2975,10 @@
                     if (window.innerWidth < 769) return;
                     var card = btn.closest('.room-card');
                     if (window._pinnedCard === card) { unpinBookingBar(); return; }
-                    pinBookingBarToCard(card, card.dataset.roomId);
+                    var roomId = card.dataset.roomId;
+                    pinBookingBarToCard(card, roomId, function() {
+                        openBookingCalendar(roomId);
+                    });
                 });
             });
 
@@ -3004,7 +3019,7 @@
         function pinBookingBarToCard(card, roomId, afterPinCallback) {
             if (window.innerWidth < 769) return;
             var bar = document.getElementById('booking-header');
-            var barHeight = bar.offsetHeight;
+            var barHeight = bar.offsetHeight || 112;
             window._pinnedCard = card;
             window._bookingPinnedRoomId = roomId || card.dataset.roomId || null;
             var cardRect = card.getBoundingClientRect();
