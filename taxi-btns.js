@@ -17,26 +17,22 @@
 
     var html = '\
 <div id="taxi-btns-wrap">\
-    <div class="taxi-row">\
-        <a id="taxi-btn-kakao" class="taxi-btn-item" href="https://t.kakao.com" target="_blank" rel="noopener" aria-label="카카오T 택시">\
-            <div class="taxi-btn-icon">' + kakaoSvg + '</div>\
-            <span class="taxi-btn-label" data-i18n="taxi.kakao">' + (typeof t==='function'?t('taxi.kakao'):'카카오 택시') + '</span>\
-        </a>\
-        <a id="taxi-btn-baemin" class="taxi-btn-item" href="https://baemin.com" target="_blank" rel="noopener" aria-label="배달의민족">\
-            <div class="taxi-btn-icon"><img src="' + base + 'images/baemin.svg" alt="배민" style="width:100%;height:100%;object-fit:contain;display:block;"></div>\
-            <span class="taxi-btn-label">배달의민족</span>\
-        </a>\
-    </div>\
-    <div class="taxi-row">\
-        <a id="taxi-btn-uber" class="taxi-btn-item" href="https://www.uber.com/global/ko/cities/seoul/" target="_blank" rel="noopener" aria-label="우버">\
-            <div class="taxi-btn-icon">' + uberSvg + '</div>\
-            <span class="taxi-btn-label" data-i18n="taxi.uber">' + (typeof t==='function'?t('taxi.uber'):'우버') + '</span>\
-        </a>\
-        <a id="taxi-btn-coupang" class="taxi-btn-item" href="https://eats.coupang.com" target="_blank" rel="noopener" aria-label="쿠팡이츠">\
-            <div class="taxi-btn-icon"><img src="' + base + 'images/coupang-eats1.svg" alt="쿠팡이츠" style="width:100%;height:100%;object-fit:contain;display:block;"></div>\
-            <span class="taxi-btn-label">쿠팡이츠</span>\
-        </a>\
-    </div>\
+    <a id="taxi-btn-kakao" class="taxi-btn-item" href="https://t.kakao.com" target="_blank" rel="noopener" aria-label="카카오T 택시">\
+        <div class="taxi-btn-icon">' + kakaoSvg + '</div>\
+        <span class="taxi-btn-label" data-i18n="taxi.kakao">' + (typeof t==='function'?t('taxi.kakao'):'카카오 택시') + '</span>\
+    </a>\
+    <a id="taxi-btn-uber" class="taxi-btn-item" href="https://www.uber.com/global/ko/cities/seoul/" target="_blank" rel="noopener" aria-label="우버">\
+        <div class="taxi-btn-icon">' + uberSvg + '</div>\
+        <span class="taxi-btn-label" data-i18n="taxi.uber">' + (typeof t==='function'?t('taxi.uber'):'우버') + '</span>\
+    </a>\
+    <a id="taxi-btn-baemin" class="taxi-btn-item" href="https://baemin.com" target="_blank" rel="noopener" aria-label="배달의민족">\
+        <div class="taxi-btn-icon"><img src="' + base + 'images/baemin.svg" alt="배민" style="width:100%;height:100%;object-fit:contain;display:block;"></div>\
+        <span class="taxi-btn-label">배달의민족</span>\
+    </a>\
+    <a id="taxi-btn-coupang" class="taxi-btn-item" href="https://eats.coupang.com" target="_blank" rel="noopener" aria-label="쿠팡이츠">\
+        <div class="taxi-btn-icon"><img src="' + base + 'images/coupang-eats1.svg" alt="쿠팡이츠" style="width:100%;height:100%;object-fit:contain;display:block;"></div>\
+        <span class="taxi-btn-label">쿠팡이츠</span>\
+    </a>\
 </div>\
 <style>\
 #taxi-btns-wrap {\
@@ -44,16 +40,9 @@
     bottom: 24px;\
     left: 24px;\
     z-index: 99000;\
-    display: flex;\
-    flex-direction: column;\
-    align-items: flex-start;\
-    gap: 14px;\
-}\
-.taxi-row {\
-    display: flex;\
-    flex-direction: row;\
-    align-items: flex-end;\
-    gap: 12px;\
+    display: grid;\
+    grid-template-columns: 56px 56px;\
+    gap: 14px 12px;\
 }\
 .taxi-btn-item {\
     display: flex;\
@@ -63,6 +52,7 @@
     text-decoration: none;\
     cursor: default;\
     pointer-events: none;\
+    width: 56px;\
 }\
 .taxi-btn-icon {\
     width: 44px;\
@@ -77,14 +67,14 @@
 .taxi-btn-item:hover .taxi-btn-icon { transform: scale(1.08); }\
 .taxi-btn-icon svg { width: 100%; height: 100%; display: block; }\
 .taxi-btn-label {\
-    font-size: 13px;\
+    font-size: 11px;\
     font-weight: 700;\
     color: rgb(58, 154, 180);\
     font-family: "Barlow", sans-serif;\
     letter-spacing: 0.2px;\
     user-select: none;\
     text-align: center;\
-    line-height: 1.5;\
+    line-height: 1.4;\
     white-space: nowrap;\
 }\
 @media (max-width: 768px) {\
