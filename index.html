@@ -863,15 +863,8 @@
                     <i class="fa-solid fa-chevron-down" style="font-size:12px;color:#aaa;margin-left:auto;"></i>
                 </div>
             </div>
-            <div class="mob-panel-row" onclick="togglePricePopup(event)">
-                <span class="mob-panel-label" data-i18n="booking.price_label">객실선택 & 특별요금</span>
-                <div class="mob-panel-value">
-                    <span id="mob-panel-price" data-i18n="booking.price_select">최저 요금선택</span>
-                    <i class="fa-solid fa-chevron-down" style="font-size:12px;color:#aaa;margin-left:auto;"></i>
-                </div>
-            </div>
             <div style="padding:12px 16px 16px;">
-                <button class="mob-panel-confirm" onclick="handleBookingBtn()" data-i18n="mob.confirm">예약하기</button>
+                <button class="mob-panel-confirm room-selected" onclick="handleBookingBtn()" data-i18n="booking.btn.desktop">결제하기</button>
             </div>
         </div>
 
@@ -2738,10 +2731,7 @@
                 openBookingCalendar(); return;
             }
             if (!selectedRoomId) {
-                alert('객실을 선택해 주세요.');
-                document.getElementById('pricePopup').classList.add('active');
-                populatePricePopup();
-                return;
+                selectedRoomId = window._bookingPinnedRoomId || 'edelweiss';
             }
             var nights = Math.round((checkoutDate - checkinDate) / 86400000);
             var roomCount = guests ? guests.room : 1;
@@ -3344,27 +3334,6 @@
             if (co) co.innerText = checkoutDate ? formatDate(checkoutDate) : (checkinDate ? t('booking.checkout_select') : '');
             var pg = document.getElementById('mob-panel-guests');
             if (pg) pg.innerText = fmtGuestCount(guests.room, guests.adult);
-            var pp = document.getElementById('mob-panel-price');
-            if (pp) {
-                if (selectedRoomId && checkinDate && checkoutDate) {
-                    var n = Math.round((checkoutDate - checkinDate) / 86400000);
-                    var rc = guests.room, tot = 0;
-                    for (var i = 0; i < n; i++) { var d = new Date(checkinDate); d.setDate(d.getDate()+i); tot += getNightRateI(selectedRoomId, d); } tot *= rc;
-                    pp.innerText = getRoomName(selectedRoomId) + ' · ' + fmtNightTotal(n, tot);
-                } else { pp.innerText = t('booking.price_select'); }
-            }
-            var cb = document.querySelector('.mob-panel-confirm');
-            if (cb) {
-                if (selectedRoomId) {
-                    cb.setAttribute('data-i18n', 'booking.btn.desktop');
-                    cb.textContent = t('booking.btn.desktop');
-                    cb.classList.add('room-selected');
-                } else {
-                    cb.setAttribute('data-i18n', 'mob.confirm');
-                    cb.textContent = t('mob.confirm');
-                    cb.classList.remove('room-selected');
-                }
-            }
         }
         document.addEventListener('click', function(e) {
             var header = document.getElementById('booking-header');
