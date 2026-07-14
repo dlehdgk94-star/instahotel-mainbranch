@@ -2909,7 +2909,6 @@
                 datesUserSelected = false;
                 const el = document.getElementById('min-price-text');
                 if (el) el.textContent = t('booking.price_select');
-                selectedRoomId = null;
                 if (typeof syncMobPanel === 'function') syncMobPanel();
                 document.getElementById('pricePopup').classList.remove('active');
             }
@@ -2925,7 +2924,6 @@
                     datesUserSelected = false;
                     const el = document.getElementById('min-price-text');
                     if (el) el.textContent = t('booking.price_select');
-                    selectedRoomId = null;
                     if (typeof syncMobPanel === 'function') syncMobPanel();
                     document.getElementById('pricePopup').classList.remove('active');
                 }
