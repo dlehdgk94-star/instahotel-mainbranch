@@ -33,7 +33,7 @@
             <span class="taxi-btn-label" data-i18n="taxi.uber">' + (typeof t==='function'?t('taxi.uber'):'우버') + '</span>\
         </a>\
         <a id="taxi-btn-coupang" class="taxi-btn-item" href="https://eats.coupang.com" target="_blank" rel="noopener" aria-label="쿠팡이츠">\
-            <div class="taxi-btn-icon"><img src="' + base + 'images/coupang-eats.svg" alt="쿠팡이츠" style="width:100%;height:100%;object-fit:contain;display:block;"></div>\
+            <div class="taxi-btn-icon"><img src="' + base + 'images/coupang-eats1.svg" alt="쿠팡이츠" style="width:100%;height:100%;object-fit:contain;display:block;"></div>\
             <span class="taxi-btn-label">쿠팡이츠</span>\
         </a>\
     </div>\
