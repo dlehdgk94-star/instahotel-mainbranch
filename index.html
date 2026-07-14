@@ -2702,6 +2702,7 @@
             }
             if (roomId) selectedRoomId = roomId;
             if (window.innerWidth <= 768) {
+                window._bookingPinnedRoomId = roomId || null;
                 var panel = document.getElementById('mob-book-panel');
                 var triggerBar = document.getElementById('mob-trigger-bar');
                 if (panel && !panel.classList.contains('open')) {
