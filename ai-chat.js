@@ -260,6 +260,9 @@
 
     document.addEventListener('DOMContentLoaded', function () {
         document.body.insertAdjacentHTML('beforeend', html);
+        if (typeof setLanguage === 'function' && typeof currentLang !== 'undefined') {
+            setLanguage(currentLang);
+        }
     });
 
     // ── 전역 함수 ──
