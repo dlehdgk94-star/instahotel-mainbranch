@@ -857,7 +857,7 @@
 
 /* ── 데스크탑에서 모바일 전용 주입 요소 숨김 ── */
 @media (min-width: 769px) {
-    #mob-sticky-top, #mob-sub-bar, #mob-book-bar, #mob-sticky-spacer { display: none !important; }
+    #mob-sticky-top, #mob-sub-bar, #mob-book-bar, #mob-sticky-spacer, #mob-trigger-bar, #mob-book-panel { display: none !important; }
 
     /* 예약바 버튼: 색상 변경 */
     .search-btn { background-color: rgb(58,154,180) !important; }
