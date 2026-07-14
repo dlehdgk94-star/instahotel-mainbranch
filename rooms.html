@@ -839,7 +839,7 @@
             const nights = Math.round((checkoutDate - checkinDate) / 86400000);
             const roomCount = guests ? guests.room : 1;
             const adultCount = guests ? guests.adult : 1;
-            var roomIds = window._bookingPinnedRoomId ? [window._bookingPinnedRoomId] : ROOM_ORDER;
+            var roomIds = window._bookingPinnedRoomId ? [window._bookingPinnedRoomId] : (window.innerWidth <= 768 && selectedRoomId ? [selectedRoomId] : ROOM_ORDER);
             listEl.innerHTML = roomIds.map(function(id) {
                 const room = ROOM_DATA[id]; if (!room) return '';
                 const pt = ROOM_PRICE_TABLE[id];
