@@ -51,18 +51,17 @@
         .sticky-wrapper{ position:-webkit-sticky; position:sticky; top:0; z-index:1000; background:#FAFAFA; box-shadow:0 4px 15px rgba(0,0,0,0.1); }
 
         .booking-bar{ display:flex; justify-content:space-between; align-items:center; height:112px; padding:0 30px; background:#fff; border-bottom:1px solid #e5e5e5; position:relative; }
-        .booking-item{ display:flex; flex-direction:column; justify-content:center; gap:18px; height:100%; padding:0 178px; position:relative; }
+        .booking-item{ display:flex; flex-direction:column; justify-content:center; gap:18px; height:100%; padding:0 60px; position:relative; }
         .booking-item:first-child{ padding-left:0; }
-        .booking-item:nth-child(1){ flex:0 0 478px; padding-right:0; }
-        .booking-item:nth-child(2){ flex:0 0 626px; }
-        .booking-item:nth-child(3){ flex:1 1 auto; padding-right:118px; }
-        .booking-item:nth-child(-n+2)::after{ content:''; position:absolute; right:0; top:50%; transform:translateY(-50%); height:65px; border-right:1px dashed #1C1C1C; }
-        .booking-item:last-child{ flex:0 0 116px; align-items:flex-start; padding:0 20px 0 0; }
+        .booking-item:nth-child(1){ flex:1 1 0; padding-right:0; }
+        .booking-item:nth-child(2){ flex:1 1 0; padding-left:60px; }
+        .booking-item:first-child::after{ content:''; position:absolute; right:0; top:50%; transform:translateY(-50%); height:65px; border-right:1px dashed #1C1C1C; }
+        #price-booking-item, #price-booking-item ~ .booking-item{ display:none !important; }
         .booking-label{ font-size:12px; font-weight:700; color:rgb(112,112,112); display:flex; align-items:center; gap:7px; }
         .booking-label i{ font-size:16px; color:rgb(28,28,28); }
         .booking-value{ font-size:16px; font-weight:500; color:rgb(28,28,28); display:flex; align-items:center; cursor:pointer; gap:10px; }
         #date-booking-item .booking-value{ gap:30px; }
-        #guest-booking-item .booking-value{ width:270px; justify-content:space-between; }
+        #guest-booking-item .booking-value{ justify-content:space-between; }
         .booking-value .fa-chevron-down{ font-size:14px; }
         .date-arrow{ font-size:13px; }
         .search-btn{ background-color:rgb(114,107,113); color:#fff; border:none; width:95px; height:40px; border-radius:22px; font-size:16px; font-weight:700; cursor:pointer; }
@@ -80,12 +79,8 @@
             .booking-item:nth-child(1) { flex: 1 1 0; min-width: 0; padding-right: 0; }
             .booking-item:nth-child(1) .booking-value { white-space: nowrap; }
             #checkin-date-text, #checkout-date-text { white-space: nowrap; }
-            .booking-item:nth-child(2) { flex: 1 1 0; min-width: 0; padding-left: 60px; padding-right: 60px; }
-            .booking-item:nth-child(3) { flex: 1 1 0; min-width: 0; padding-left: 50px; padding-right: 0; }
-            .booking-item:last-child { flex: 0 0 auto; padding: 0 0 0 16px; }
-            .search-btn { width: 74px; height: 31px; font-size: 12px; border-radius: 17px; font-weight: 600; }
-            #guest-booking-item .booking-value,
-            .booking-item:nth-child(3) .booking-value { width: auto; min-width: 0; }
+            .booking-item:nth-child(2) { flex: 1 1 0; min-width: 0; padding-left: 60px; padding-right: 0; }
+            #guest-booking-item .booking-value { width: auto; min-width: 0; }
 
             /* 핀 상태 */
             .sticky-wrapper.booking-bar-pinned {
@@ -509,15 +504,8 @@
                     <i class="fa-solid fa-chevron-down" style="font-size:12px;color:#aaa;margin-left:auto;"></i>
                 </div>
             </div>
-            <div class="mob-panel-row" onclick="togglePricePopup(event)">
-                <span class="mob-panel-label" data-i18n="booking.price_label">객실선택 &amp; 특별요금</span>
-                <div class="mob-panel-value">
-                    <span id="mob-panel-price">최저 요금선택</span>
-                    <i class="fa-solid fa-chevron-down" style="font-size:12px;color:#aaa;margin-left:auto;"></i>
-                </div>
-            </div>
             <div style="padding:12px 16px 16px;">
-                <button class="mob-panel-confirm" onclick="handleBookingBtn()" data-i18n="booking.btn">예약하기</button>
+                <button class="mob-panel-confirm" onclick="goToBooking()" data-i18n="booking.btn">예약하기</button>
             </div>
         </div>
     </div>
@@ -943,7 +931,19 @@
         function togglePricePopup(e){ e.stopPropagation(); populatePricePopup(); document.getElementById('pricePopup').classList.toggle('active'); }
         function closeDropdowns(e){ document.getElementById('calendarPopup').classList.remove('active'); document.getElementById('guestPopup').classList.remove('active'); if(!datesUserSelected) document.getElementById('pricePopup').classList.remove('active'); }
         function calendarDone(e){ if(e) e.stopPropagation(); document.getElementById('calendarPopup').classList.remove('active'); document.getElementById('pricePopup').classList.remove('active'); if(checkinDate&&checkoutDate){ setTimeout(function(){ document.getElementById('guestPopup').classList.add('active'); },150); } }
-        function guestDone(e){ closeDropdowns(e); setTimeout(function(){ populatePricePopup(); document.getElementById('pricePopup').classList.add('active'); },200); }
+        function guestDone(e){ closeDropdowns(e); if(checkinDate&&checkoutDate){ setTimeout(function(){ goToBooking(); },200); } }
+        function goToBooking(){
+            if(!checkinDate||!checkoutDate){ document.getElementById('guestPopup').classList.remove('active'); document.getElementById('calendarPopup').classList.add('active'); return; }
+            const nights=Math.round((checkoutDate-checkinDate)/86400000);
+            const roomCount=guests?guests.room:1;
+            const adultCount=guests?guests.adult:1;
+            const effectiveRoomId=selectedRoomId||_mobPreSelectedRoomId||null;
+            let total=0;
+            if(effectiveRoomId&&typeof getNightRate==='function'){ for(let i=0;i<nights;i++){ const d=new Date(checkinDate); d.setDate(d.getDate()+i); total+=getNightRate(effectiveRoomId,d); } total*=roomCount; }
+            const roomName=effectiveRoomId&&ROOM_DATA&&ROOM_DATA[effectiveRoomId]?ROOM_DATA[effectiveRoomId].roomTitle:'';
+            localStorage.setItem('instaHotelBooking',JSON.stringify({roomId:effectiveRoomId,roomName:roomName,checkin:checkinDate.toISOString(),checkout:checkoutDate.toISOString(),nights:nights,roomCount:roomCount,adultCount:adultCount,totalPrice:total}));
+            window.location.href='booking.html';
+        }
 
         function syncMobPanel() {
             var nights = checkinDate && checkoutDate ? Math.round((checkoutDate - checkinDate) / 86400000) : 1;
@@ -956,27 +956,6 @@
             if (co) co.textContent = checkoutDate ? fmtDate(checkoutDate) : (checkinDate ? (typeof t === 'function' ? t('booking.checkout_select') : '체크아웃 선택') : '');
             var pg = document.getElementById('mob-panel-guests');
             if (pg) pg.textContent = typeof fmtGuestCount === 'function' ? fmtGuestCount(guests.room, guests.adult) : guests.room + ' 객실, ' + guests.adult + ' 성인';
-            var pp = document.getElementById('mob-panel-price');
-            if (pp) {
-                if (selectedRoomId && checkinDate && checkoutDate) {
-                    var n = Math.round((checkoutDate - checkinDate) / 86400000);
-                    var rn = typeof getRoomName === 'function' ? getRoomName(selectedRoomId) : '';
-                    var ts = typeof fmtNightTotal === 'function' ? fmtNightTotal(n, calcRoomTotal(selectedRoomId)) : n + '박 총 ' + fmtWon(calcRoomTotal(selectedRoomId)) + '원';
-                    pp.textContent = (rn ? rn + ' · ' : '') + ts;
-                } else { pp.textContent = typeof t === 'function' ? t('booking.price_select') : '최저 요금선택'; }
-            }
-            var cb = document.querySelector('.mob-panel-confirm');
-            if (cb) {
-                if (selectedRoomId) {
-                    cb.setAttribute('data-i18n', 'booking.btn.desktop');
-                    cb.textContent = typeof t === 'function' ? t('booking.btn.desktop') : '결제하기';
-                    cb.classList.add('room-selected');
-                } else {
-                    cb.setAttribute('data-i18n', 'mob.confirm');
-                    cb.textContent = typeof t === 'function' ? t('mob.confirm') : '예약하기';
-                    cb.classList.remove('room-selected');
-                }
-            }
         }
         var _mobPanelCloseHandler = null;
         function _registerMobPanelCloseHandler() {
