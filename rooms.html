@@ -1454,7 +1454,7 @@
                     '<span>' + (_rgIdx + 1) + ' / ' + _rgImages.length + '</span>' +
                     '<span class="rg-sep">|</span>' +
                     '<span class="rg-title">' + (typeof getRoomName === 'function' ? getRoomName(_rgRoomId) : _rgRoomTitle) + '</span>' +
-                    '<button class="rg-book-btn" onclick="closeRoomGallery();pinBookingBarToRoom(\'' + _rgRoomId + '\',true)">' + (typeof t === 'function' ? t('room.book') : '예약하기') + '</button>' +
+                    '<button class="rg-book-btn" onclick="closeRoomGallery();if(window.innerWidth<=768){openBookingCalendar(\'' + _rgRoomId + '\');}else{pinBookingBarToRoom(\'' + _rgRoomId + '\',true);}">' + (typeof t === 'function' ? t('room.book') : '예약하기') + '</button>' +
                 '</div>' +
                 '<button class="rg-detail-btn" onclick="closeRoomGallery();openRoomModal(\'' + _rgRoomId + '\')">' + (typeof t === 'function' ? t('rg.detail_btn') : '객실 세부 정보 보기') + '</button>';
         }
