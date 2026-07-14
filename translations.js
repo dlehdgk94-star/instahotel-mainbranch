@@ -1423,19 +1423,9 @@ function _updateRoomPrices(lang) {
       }
     });
 
-    // 환율 안내 문구
+    // 환율 안내 문구 제거
     var priceNote = card.querySelector('.room-price-note');
-    if (lang === 'ko') {
-      if (priceNote) priceNote.remove();
-    } else {
-      if (!priceNote) {
-        priceNote = document.createElement('p');
-        priceNote.className = 'room-price-note';
-        var meta = card.querySelector('.room-card-meta');
-        if (meta) meta.appendChild(priceNote);
-      }
-      priceNote.textContent = t('room.price_note');
-    }
+    if (priceNote) priceNote.remove();
   });
 }
 
