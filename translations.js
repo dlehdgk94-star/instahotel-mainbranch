@@ -1371,11 +1371,16 @@ function setLanguage(lang) {
   // 예약바 동적 텍스트 동기화
   _syncBookingBarLang(lang);
 
-  // 언어 버튼 표시 업데이트
+  // 언어 버튼 표시 업데이트 (데스크탑 + 모바일 햄버거)
   var langCode = document.getElementById('langCode');
   if (langCode) langCode.textContent = lang.toUpperCase();
   document.querySelectorAll('.lang-option').forEach(function(opt) {
     opt.classList.toggle('active', opt.dataset.code === lang.toUpperCase());
+  });
+  var mobLangCode = document.getElementById('mobLangCode');
+  if (mobLangCode) mobLangCode.textContent = lang.toUpperCase();
+  document.querySelectorAll('.mob-lang-option').forEach(function(opt) {
+    opt.classList.toggle('active', opt.getAttribute('data-code') === lang.toUpperCase());
   });
 
   // html lang 속성
