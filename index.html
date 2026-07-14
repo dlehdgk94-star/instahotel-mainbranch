@@ -3303,6 +3303,14 @@
                     document.removeEventListener('pointerdown', _mobPanelCloseHandler);
                     _mobPanelCloseHandler = null;
                 }
+                // 선택 정보 초기화
+                selectedRoomId = null;
+                window._bookingPinnedRoomId = null;
+                checkinDate = null;
+                checkoutDate = null;
+                datesUserSelected = false;
+                _datesExplicitlySet = false;
+                syncMobPanel();
             }
         }
         function closeMobPanel() { closeMobPanelIfOpen(); }
