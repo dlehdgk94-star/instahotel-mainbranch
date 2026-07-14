@@ -623,7 +623,7 @@
         .gallery-overlay.open{ display:flex; }
         .gallery-close{ position:absolute; top:0; right:calc(-40px - 1cm); background:rgba(255,255,255,0.92); border:none; border-radius:50%; color:rgb(28,28,28); width:40px; height:40px; font-size:16px; cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 8px rgba(0,0,0,0.4); z-index:3; }
         .gallery-close:hover{ background:#fff; }
-        @media (max-width:768px){ .gallery-close{ position:fixed; top:14px; right:14px; } }
+        @media (max-width:768px){ .gallery-close{ position:fixed; top:64px; right:14px; } }
         .gallery-stage{ position:relative; display:inline-flex; align-items:center; justify-content:center; }
         .gallery-track{ display:inline-flex; align-items:center; justify-content:center; }
         .gallery-slide{ display:none; align-items:center; justify-content:center; }
@@ -3020,6 +3020,10 @@
         function pinBookingBarToRoom(roomId, openCalendar) {
             var card = document.querySelector('.room-card[data-room-id="' + roomId + '"]');
             if (!card) return;
+            if (window.innerWidth < 769) {
+                if (openCalendar) openBookingCalendar(roomId, null);
+                return;
+            }
             pinBookingBarToCard(card, roomId, openCalendar ? function() {
                 openBookingCalendar(roomId, null);
             } : null);
