@@ -3,16 +3,40 @@
 
     var uberSvg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%"/><path fill="#fff" d="M119.8,303.6c17.6,0,31.3-13.6,31.3-33.8V191.3h19.1V318.6H151.3V306.8a45.9,45.9,0,0,1-33.6,14c-27.3,0-48.2-19.8-48.2-49.8V191.4H88.6v78.5c0,20.5,13.4,33.7,31.2,33.7m64.6-112.3h18.4v46.4a46.11,46.11,0,0,1,32.9-13.8,48.45,48.45,0,0,1,0,96.9A46.52,46.52,0,0,1,202.6,307v11.6H184.4V191.3Zm50,113.2a32.2,32.2,0,1,0-32-32.4v.2a32,32,0,0,0,31.8,32.2h.2M339.3,224c26.7,0,46.4,20.5,46.4,48.2v6H310.3A31.09,31.09,0,0,0,341,304.6c10.7,0,19.8-4.4,26.7-13.6l13.3,9.8c-9.3,12.4-23.1,19.8-40,19.8-27.8,0-49.3-20.7-49.3-48.4-.1-26.2,20.5-48.2,47.6-48.2m-28.8,39.6H367c-3.1-14.2-14.5-23.6-28.2-23.6-13.5,0-25,9.5-28.3,23.6m124.4-21.4c-12,0-20.7,9.3-20.7,23.6v52.7H395.8V225.8H414v11.5c4.5-7.5,12-12.2,22.2-12.2h6.4v17.1Z"/></svg>';
 
+    function getBase() {
+        var scripts = document.getElementsByTagName('script');
+        for (var i = 0; i < scripts.length; i++) {
+            if (scripts[i].src && scripts[i].src.indexOf('taxi-btns.js') !== -1) {
+                return scripts[i].src.replace('taxi-btns.js', '');
+            }
+        }
+        return '';
+    }
+
+    var base = getBase();
+
     var html = '\
 <div id="taxi-btns-wrap">\
-    <a id="taxi-btn-kakao" class="taxi-btn-item" href="https://t.kakao.com" target="_blank" rel="noopener" aria-label="카카오T 택시">\
-        <div class="taxi-btn-icon">' + kakaoSvg + '</div>\
-        <span class="taxi-btn-label" data-i18n="taxi.kakao">' + (typeof t==='function'?t('taxi.kakao'):'카카오 택시') + '</span>\
-    </a>\
-    <a id="taxi-btn-uber" class="taxi-btn-item" href="https://www.uber.com/global/ko/cities/seoul/" target="_blank" rel="noopener" aria-label="우버">\
-        <div class="taxi-btn-icon">' + uberSvg + '</div>\
-        <span class="taxi-btn-label" data-i18n="taxi.uber">' + (typeof t==='function'?t('taxi.uber'):'우버') + '</span>\
-    </a>\
+    <div class="taxi-row">\
+        <a id="taxi-btn-kakao" class="taxi-btn-item" href="https://t.kakao.com" target="_blank" rel="noopener" aria-label="카카오T 택시">\
+            <div class="taxi-btn-icon">' + kakaoSvg + '</div>\
+            <span class="taxi-btn-label" data-i18n="taxi.kakao">' + (typeof t==='function'?t('taxi.kakao'):'카카오 택시') + '</span>\
+        </a>\
+        <a id="taxi-btn-baemin" class="taxi-btn-item" href="https://baemin.com" target="_blank" rel="noopener" aria-label="배달의민족">\
+            <div class="taxi-btn-icon"><img src="' + base + 'images/baemin.svg" alt="배민" style="width:100%;height:100%;object-fit:contain;display:block;"></div>\
+            <span class="taxi-btn-label">배달의민족</span>\
+        </a>\
+    </div>\
+    <div class="taxi-row">\
+        <a id="taxi-btn-uber" class="taxi-btn-item" href="https://www.uber.com/global/ko/cities/seoul/" target="_blank" rel="noopener" aria-label="우버">\
+            <div class="taxi-btn-icon">' + uberSvg + '</div>\
+            <span class="taxi-btn-label" data-i18n="taxi.uber">' + (typeof t==='function'?t('taxi.uber'):'우버') + '</span>\
+        </a>\
+        <a id="taxi-btn-coupang" class="taxi-btn-item" href="https://eats.coupang.com" target="_blank" rel="noopener" aria-label="쿠팡이츠">\
+            <div class="taxi-btn-icon"><img src="' + base + 'images/coupang-eats.svg" alt="쿠팡이츠" style="width:100%;height:100%;object-fit:contain;display:block;"></div>\
+            <span class="taxi-btn-label">쿠팡이츠</span>\
+        </a>\
+    </div>\
 </div>\
 <style>\
 #taxi-btns-wrap {\
@@ -22,8 +46,14 @@
     z-index: 99000;\
     display: flex;\
     flex-direction: column;\
-    align-items: center;\
+    align-items: flex-start;\
     gap: 14px;\
+}\
+.taxi-row {\
+    display: flex;\
+    flex-direction: row;\
+    align-items: flex-end;\
+    gap: 12px;\
 }\
 .taxi-btn-item {\
     display: flex;\
